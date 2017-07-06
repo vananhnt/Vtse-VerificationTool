@@ -1,4 +1,4 @@
-package core;
+package cfg.nodes;
 
 import org.eclipse.cdt.core.dom.ast.ASTNodeProperty;
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;

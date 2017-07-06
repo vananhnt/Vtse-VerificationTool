@@ -1,4 +1,4 @@
-package core;
+package cfg.nodes;
 // node is 1 incommingNode and 1 outGoingNode;
 
 import org.eclipse.cdt.core.dom.ast.IASTNode;
