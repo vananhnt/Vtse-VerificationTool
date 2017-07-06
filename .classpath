@@ -4,5 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="libs/eclipse-equinox-common-3.5.0.jar"/>
 	<classpathentry kind="lib" path="libs/org.eclipse.cdt.core_5.6.0.201402142303.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.cdt.codan.core.cxx_1.0.0.201109151620.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.cdt.codan.core_2.0.0.201109151620.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
