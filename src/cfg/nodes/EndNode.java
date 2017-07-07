@@ -5,5 +5,7 @@ public class EndNode extends CFGNode{
 		super();
 	}
 	
-	
+	public EndNode( CFGNode node){
+		super(node);
+	}
 }

@@ -7,7 +7,9 @@ import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
 import cfg.nodes.CFGNode;
+import cfg.nodes.DecisionNode;
 import cfg.nodes.EndNode;
+import cfg.nodes.IfBeginNode;
 
 public class ControlFlowGraph {
 	private CFGNode start;
@@ -28,22 +30,43 @@ public class ControlFlowGraph {
 	}	
 	
 	// build subGraph
-	public CFGNode createSubGraph( CFGNode prev, IASTStatement body){
+	private CFGNode createSubGraph(IASTStatement body){
 		// TODO
 		return null;
 	}
-	
-	private CFGNode createIfNode( CFGNode prev, IASTIfStatement body){
+/*
+ * if statement is "then" create IfBeginNode
+ * Input: prev, end and this statement's body
+ * Output: CFGNode If with body is built;	
+ */
+	private CFGNode createIf( IASTIfStatement body){	
 		//TODO
+		//create beginNode and EndNode
+		IfBeginNode ifNode = new IfBeginNode();	
+		EndNode end = new EndNode();
+		// create decision 
+		DecisionNode dec = new DecisionNode();
+		dec.setPrev(ifNode);
+		dec.setCondition(body.getConditionExpression());
+			// create branches then/else
+		CFGNode then = createSubGraph( body.getThenClause());
+		CFGNode els = createSubGraph(body.getThenClause());
+		dec.setThenNode(then);
+		dec.setElseNode(els);
+		
+		
+		//connect
+		ifNode.setNext( dec);
+		
 		return null;
 	}
 	
-	private CFGNode createForNode( CFGNode prev, IASTForStatement body){
+	private CFGNode createFor( CFGNode prev, IASTForStatement body){
 		//TODO 
 		return null;
 	}
 
-	private CFGNode createWhileNode( CFGNode prev, IASTWhileStatement body){
+	private CFGNode createWhile( CFGNode prev, IASTWhileStatement body){
 		//TODO
 		return null;
 	}

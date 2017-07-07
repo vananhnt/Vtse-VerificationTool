@@ -79,6 +79,8 @@ public class Parser {
 		IScannerInfo info = new ScannerInfo(new HashMap<String, String>(), includePaths);
 		IASTTranslationUnit translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, includeFile, null, 0, log);
 
+		printTree(translationUnit, 1);
+		
 		IASTDeclaration[] declarations = translationUnit.getDeclarations();
 		for( IASTDeclaration d : declarations){	
 			

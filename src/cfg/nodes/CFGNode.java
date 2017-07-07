@@ -24,6 +24,12 @@ public class CFGNode {
 		this.prev = prev;
 		this.next = next;		
 	}
+	
+	public CFGNode(CFGNode node){
+		this.prev = node.getPrev();
+		this.next = node.getNext();
+		this.data = node.getData();
+	}
 
 // get set
 	public CFGNode getNext() {
