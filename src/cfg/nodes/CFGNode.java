@@ -13,7 +13,18 @@ import org.eclipse.cdt.core.parser.IToken;
 public abstract class CFGNode {	
 	private CFGNode prev;
 	private CFGNode next;
+	
+	public CFGNode(){
+		this.prev = null;
+		this.next = null;
+	}
+	
+	public CFGNode( CFGNode prev, CFGNode next){
+		this.prev = prev;
+		this.next = next;		
+	}
 
+// get set
 	public CFGNode getNext() {
 		return next;
 	}

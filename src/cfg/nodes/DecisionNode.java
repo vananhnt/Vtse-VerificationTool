@@ -7,6 +7,21 @@ public class DecisionNode extends CFGNode{
 	private CFGNode thenNode;
 	private EndConditionNode endNode;
 	// elseNode is next
+	
+	public DecisionNode(){
+		super();
+		this.condition = null;
+		this.thenNode = null;
+		this.endNode = null;
+	}
+	
+	public DecisionNode( CPPASTExpressionStatement condition, CFGNode then, CFGNode elseN, EndConditionNode end){
+		this.setNext(elseN);
+		this.condition = condition;
+		this.thenNode = then;
+		this.endNode = end;
+	}
+	
 	public CPPASTExpressionStatement getCondition() {
 		return condition;
 	}
