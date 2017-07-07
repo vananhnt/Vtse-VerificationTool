@@ -1,11 +1,19 @@
 package cfg.build;
 
 import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDoStatement;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
+import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
+
+import cfg.nodes.CFGNode;
+import cfg.nodes.DecisionNode;
+import cfg.nodes.EndNode;
+import cfg.nodes.IfBeginNode;
+import cfg.nodes.PlainNode;
 
 public class ControlFlowGraphBuilder {
 	
@@ -27,14 +35,30 @@ public class ControlFlowGraphBuilder {
 			return createIf((IASTIfStatement) body);
 		} else if (body instanceof IASTForStatement) {
 			return createFor((IASTForStatement) body);
+		} else if (body instanceof IASTDoStatement) {
+			return creatDo((IASTDoStatement) body);
+		} else if (body instanceof IASTWhileStatement) {
+			return createWhile((IASTWhileStatement) body);
 		} else if (body instanceof IASTReturnStatement) {
 			System.out.println("return");
+		} else {
+			PlainNode plainNode = new PlainNode(body);
+			return new ControlFlowGraph(plainNode, plainNode);
 		}
 		return null;
 	}
 
+	private ControlFlowGraph createWhile(IASTWhileStatement body) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private ControlFlowGraph creatDo(IASTDoStatement body) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private ControlFlowGraph createIf(IASTIfStatement body) {
-		System.out.println("IfStatement");
 		return null;
 	}
 

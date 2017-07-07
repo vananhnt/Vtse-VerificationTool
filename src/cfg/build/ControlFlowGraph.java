@@ -22,6 +22,10 @@ public class ControlFlowGraph {
 		this.exit.setNext(null);
 		this.hasLoop = false;
 	}
+	public ControlFlowGraph(CFGNode _start, CFGNode _exit) {
+		this.start = _start;
+		this.exit = (EndNode)_exit;
+	}
 	
 	// build big graph
 	public ControlFlowGraph build( IASTFunctionDefinition def){
