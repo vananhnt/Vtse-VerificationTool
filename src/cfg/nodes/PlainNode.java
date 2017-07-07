@@ -13,8 +13,8 @@ public class PlainNode extends CFGNode{
 	public PlainNode(CFGNode prev, CFGNode next){
 		super(prev, next);
 	}	
-	public PlainNode (IASTStatement statement) {
-		
+	public PlainNode (IASTStatement st) {
+		statement = st;
 	}
 
 	public IASTStatement getStatement() {

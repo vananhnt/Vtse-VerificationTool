@@ -9,10 +9,7 @@ import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
-import cfg.nodes.CFGNode;
-import cfg.nodes.DecisionNode;
 import cfg.nodes.EndNode;
-import cfg.nodes.IfBeginNode;
 import cfg.nodes.PlainNode;
 
 public class ControlFlowGraphBuilder {
@@ -24,7 +21,6 @@ public class ControlFlowGraphBuilder {
 	public ControlFlowGraph build (IASTFunctionDefinition def) {
 		return createSubGraph(def.getBody());
 	}
-
 	private ControlFlowGraph createSubGraph(IASTStatement body) {
 		if (body instanceof IASTCompoundStatement) {
 			IASTCompoundStatement comp = (IASTCompoundStatement) body;
@@ -40,9 +36,10 @@ public class ControlFlowGraphBuilder {
 		} else if (body instanceof IASTWhileStatement) {
 			return createWhile((IASTWhileStatement) body);
 		} else if (body instanceof IASTReturnStatement) {
-			System.out.println("return");
+			System.out.println("return");		
 		} else {
 			PlainNode plainNode = new PlainNode(body);
+		    System.out.println(plainNode.getStatement()); 
 			return new ControlFlowGraph(plainNode, plainNode);
 		}
 		return null;
@@ -59,6 +56,7 @@ public class ControlFlowGraphBuilder {
 	}
 
 	private ControlFlowGraph createIf(IASTIfStatement body) {
+		System.out.println("IfStatement");
 		return null;
 	}
 
@@ -73,8 +71,8 @@ public class ControlFlowGraphBuilder {
 	public static void  main(String[] args) {
 		IASTFunctionDefinition func = (new ASTGenerator("./test.c")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
-		
-		
+		String cfg_status = (cfg == null) ? "null" : "not null";
+		System.out.println(cfg_status);
 
 	}
 }

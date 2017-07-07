@@ -14,17 +14,17 @@ import cfg.nodes.IfBeginNode;
 
 public class ControlFlowGraph {
 	private CFGNode start;
-	private EndNode exit;
-	private Boolean hasLoop;
+	private CFGNode exit;
+//	private Boolean hasLoop;
 	
 	public ControlFlowGraph(){
 		this.start.setPrev(null);
 		this.exit.setNext(null);
-		this.hasLoop = false;
+	//	this.hasLoop = false;
 	}
 	public ControlFlowGraph(CFGNode _start, CFGNode _exit) {
 		this.start = _start;
-		this.exit = (EndNode)_exit;
+		this.exit = _exit;
 	}
 	
 	// build big graph
@@ -91,24 +91,24 @@ public class ControlFlowGraph {
 	}
 
 
-	public EndNode getExit() {
+	public CFGNode getExit() {
 		return exit;
 	}
 
 
-	public void setExit(EndNode exit) {
+	public void setExit(CFGNode exit) {
 		this.exit = exit;
 	}
 
 
-	public Boolean getHasLoop() {
-		return hasLoop;
-	}
-
-
-	public void setHasLoop(Boolean hasLoop) {
-		this.hasLoop = hasLoop;
-	}
+//	public Boolean getHasLoop() {
+//		return hasLoop;
+//	}
+//
+//
+//	public void setHasLoop(Boolean hasLoop) {
+//		this.hasLoop = hasLoop;
+//	}
 	
 	
 	//public 
