@@ -9,6 +9,7 @@ import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 import cfg.nodes.CFGNode;
 import cfg.nodes.DecisionNode;
 import cfg.nodes.EndNode;
+import cfg.nodes.ForBeginNode;
 import cfg.nodes.IfBeginNode;
 
 public class ControlFlowGraph {
@@ -40,30 +41,35 @@ public class ControlFlowGraph {
  * Output: CFGNode If with body is built;	
  */
 	private CFGNode createIf( IASTIfStatement body){	
-		//TODO
+		//TODO Testing
 		//create beginNode and EndNode
-		IfBeginNode ifNode = new IfBeginNode();	
+		IfBeginNode ifBegin = new IfBeginNode();	
 		EndNode end = new EndNode();
 		// create decision 
 		DecisionNode dec = new DecisionNode();
-		dec.setPrev(ifNode);
+		dec.setPrev(ifBegin);
 		dec.setCondition(body.getConditionExpression());
 			// create branches then/else
 		CFGNode then = createSubGraph( body.getThenClause());
+		then.setNext(end);
 		CFGNode els = createSubGraph(body.getThenClause());
+		els.setNext(end);
 		dec.setThenNode(then);
-		dec.setElseNode(els);
-		
-		
+		dec.setElseNode(els);		
 		//connect
-		ifNode.setNext( dec);
+		ifBegin.setNext( dec);
 		
-		return null;
+		return new CFGNode(ifBegin, end);
 	}
 	
 	private CFGNode createFor( CFGNode prev, IASTForStatement body){
 		//TODO 
-		return null;
+		// create begin and end Nodes
+		ForBeginNode forBegin = new ForBeginNode();
+		EndNode end = new EndNode();
+		
+		
+		return new CFGNode(forBegin, end);
 	}
 
 	private CFGNode createWhile( CFGNode prev, IASTWhileStatement body){
