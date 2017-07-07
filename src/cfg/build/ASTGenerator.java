@@ -2,8 +2,12 @@ package cfg.build;
 
 import java.util.HashMap;
 
+import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
+import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.parser.DefaultLogService;
@@ -14,13 +18,20 @@ import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Get IASTFunctionDefinition 
+ * IASTFunctionDefiniton func = (new ASTGenerator(filelocation)).getFunction(index);
+ * filelocation: String
+ * index: int
+ * @author va
+ *
+ */
 public class ASTGenerator {
-	private String filelocation;
+
 	private IASTTranslationUnit translationUnit;
-//	private IASTFunctionDefinition  functionDef;
 	
 	public ASTGenerator(String filelocation) {
-		FileContent fileContent = FileContent.createForExternalFileLocation(getFilelocation());
+		FileContent fileContent = FileContent.createForExternalFileLocation(filelocation);
 		IncludeFileContentProvider includeFile = IncludeFileContentProvider.getEmptyFilesProvider();
 		IParserLogService log = new DefaultLogService(); 
 		String[] includePaths = new String[0];
@@ -41,27 +52,54 @@ public class ASTGenerator {
 	public void setTranslationUnit(IASTTranslationUnit translationUnit) {
 		this.translationUnit = translationUnit;
 	}
-	public String getFilelocation() {
-		return filelocation;
-	}
-	public void setFilelocation(String filelocation) {
-		this.filelocation = filelocation;
-	}
+	
 	/*
 	 * functionDef 
+	 * chỉ lấy function đầu tiên
+	 * chưa xét trường hợp cho chọn các func khác nhau 
 	 */
 	IASTFunctionDefinition getFunction(int index) {
-		int count = 0;
+//		int count = 0;
 		IASTFunctionDefinition funcDef = null;
 		IASTDeclaration[] declarations = translationUnit.getDeclarations();
 		for(IASTDeclaration d : declarations){	
 			if (d instanceof IASTFunctionDefinition) {
-				count ++;
-				funcDef = (count == index) ? (IASTFunctionDefinition) d : null;
+//				funcDef = (count == index) ? (IASTFunctionDefinition) d : null;
+//				count ++;
+				funcDef = (IASTFunctionDefinition) d;
+				break;
 			}	
 		}
 		return funcDef;
 	}
+	
+	public void print() {
+		IASTDeclaration[] iter = translationUnit.getDeclarations();
+		for (IASTDeclaration i:iter) {
+			printTree(i, 0);
+		}		
+	}
+	private static void printTree(IASTNode node, int index) {
+		IASTNode[] children = node.getChildren();
+		boolean printContents = true;
+		if ((node instanceof IASTTranslationUnit)) {
+			printContents = false;
+		}
+		String offset = "";
+		try {
+			offset = node.getSyntax() != null ? " (offset: " + node.getFileLocation().getNodeOffset() + "," + node.getFileLocation().getNodeLength() + ")" : "";
+			printContents = node.getFileLocation().getNodeLength() < 30;
+		} catch (ExpansionOverlapsBoundaryException e) {
+			e.printStackTrace();
+		} catch (UnsupportedOperationException e) {
+			offset = "UnsupportedOperationException";
+		}
+		//System.out.println(String.format(new StringBuilder("%1$").append(index * 2).append("s").toString(), new Object[] { "-" }) + node.getClass().getSimpleName() + offset + " -> " + (printContents ? node.getRawSignature().replaceAll("\n", " \\ ") : node.getRawSignature().subSequence(0, 5)));
+		System.out.println(node.getRawSignature());
+		for (IASTNode iastNode : children)
+			printTree(iastNode, index + 2);
+	}
+
 	
 	
 }
