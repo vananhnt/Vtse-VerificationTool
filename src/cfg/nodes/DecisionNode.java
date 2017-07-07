@@ -8,7 +8,7 @@ import org.eclipse.cdt.internal.core.util.ToStringSorter;
 public class DecisionNode extends CFGNode{
 	private IASTExpression condition;
 	private CFGNode thenNode;
-	private EndConditionNode endNode;
+	private EndNode endNode;
 	// elseNode is next
 	
 	public DecisionNode(){
@@ -18,7 +18,7 @@ public class DecisionNode extends CFGNode{
 		this.endNode = null;
 	}
 	
-	public DecisionNode( CFGNode prev, EndConditionNode next){
+	public DecisionNode( CFGNode prev, EndNode next){
 		this.setPrev(prev);
 		this.endNode = next;
 	}
@@ -57,13 +57,13 @@ public class DecisionNode extends CFGNode{
 	}
 	
 	
-	public EndConditionNode getEndNode() {
+	public EndNode getEndNode() {
 		return endNode;
 	}
-	public void setEndNode(EndConditionNode endNode) {
-		this.endNode = endNode;
-	}
 	
+	public void setEndNode( CFGNode endNode){
+		this.endNode = new EndNode( endNode);
+	}
 	public String toString(){
 		
 		 // TODO
