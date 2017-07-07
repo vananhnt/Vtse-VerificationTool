@@ -10,7 +10,7 @@ import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.IASTNode.CopyStyle;
 import org.eclipse.cdt.core.parser.IToken;
 // Node is ansestor of all Node in cfg
-public abstract class CFGNode {	
+public class CFGNode {	
 	private CFGNode prev;
 	private CFGNode next;
 	
