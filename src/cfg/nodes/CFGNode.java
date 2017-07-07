@@ -13,6 +13,7 @@ import org.eclipse.cdt.core.parser.IToken;
 public class CFGNode {	
 	private CFGNode prev;
 	private CFGNode next;
+	private IASTNode data;
 	
 	public CFGNode(){
 		this.prev = null;
@@ -39,6 +40,14 @@ public class CFGNode {
 
 	public void setPrev(CFGNode prev) {
 		this.prev = prev;
+	}
+
+	public IASTNode getData() {
+		return data;
+	}
+
+	public void setData(IASTNode data) {
+		this.data = data;
 	}
 	
 	
