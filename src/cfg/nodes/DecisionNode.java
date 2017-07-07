@@ -1,6 +1,7 @@
 package cfg.nodes;
 
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTExpressionStatement;
+import org.eclipse.cdt.internal.core.util.ToStringSorter;
 
 public class DecisionNode extends CFGNode{
 	private CPPASTExpressionStatement condition;
@@ -15,12 +16,12 @@ public class DecisionNode extends CFGNode{
 		this.endNode = null;
 	}
 	
-	public DecisionNode( CPPASTExpressionStatement condition, CFGNode then, CFGNode elseN, EndConditionNode end){
-		this.setNext(elseN);
-		this.condition = condition;
-		this.thenNode = then;
-		this.endNode = end;
+	public DecisionNode( CFGNode prev, EndConditionNode next){
+		this.setPrev(prev);
+		this.endNode = next;
 	}
+	
+	
 	
 	public CPPASTExpressionStatement getCondition() {
 		return condition;
@@ -39,6 +40,12 @@ public class DecisionNode extends CFGNode{
 	}
 	public void setEndNode(EndConditionNode endNode) {
 		this.endNode = endNode;
+	}
+	
+	public String toString(){
+		
+		 // TODO
+		return null;
 	}
 		
 }
