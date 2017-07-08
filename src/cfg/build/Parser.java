@@ -67,10 +67,13 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarationStatement;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDeclarator;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 
+import cfg.nodes.CFGNode;
+import cfg.nodes.DecisionNode;
+
 
 public class Parser {
 	public static void  main(String[] args) throws Exception {
-		String fileLocation =  "./test.c";
+		String fileLocation =  "./bai1.cpp";
 		int count = 0;
 		FileContent fileContent = FileContent.createForExternalFileLocation(fileLocation);
 		IncludeFileContentProvider includeFile = IncludeFileContentProvider.getEmptyFilesProvider();
@@ -79,13 +82,40 @@ public class Parser {
 		IScannerInfo info = new ScannerInfo(new HashMap<String, String>(), includePaths);
 		IASTTranslationUnit translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, includeFile, null, 0, log);
 
-		printTree(translationUnit, 1);
+		//printTree(translationUnit, 1);
 		
 		IASTDeclaration[] declarations = translationUnit.getDeclarations();
 		for( IASTDeclaration d : declarations){	
 			
 			if ( d instanceof IASTFunctionDefinition){
 				IASTFunctionDefinition funcDef = (IASTFunctionDefinition) d;
+				IASTStatement body = ((IASTFunctionDefinition) d).getBody();
+				for ( IASTNode run : body.getChildren()){
+					ControlFlowGraph test = new ControlFlowGraph();
+					if ( run instanceof IASTIfStatement){
+						
+						ControlFlowGraph result = test.createIf(( IASTIfStatement)run);
+						
+						//CFGNode begin = result.getStart();
+						DecisionNode node = (DecisionNode) result.getStart().getNext();					
+//						System.out.println(node.getCondition().getRawSignature());
+//						System.out.println(node.getThenNode());
+//						System.out.println(((IASTIfStatement) run).getThenClause());
+//						if  (((IASTIfStatement) run).getThenClause()   instanceof IASTCompoundStatement){
+//							System.out.println("^0^");
+//						}
+						
+						
+						
+					}
+					
+					if (run instanceof IASTStatement){						
+						//System.out.println(run + "  " + run.getRawSignature());
+						ControlFlowGraph result = test.createSubGraph((IASTStatement)run);
+						if (result != null)
+							System.out.println(result.getStart() + "... " + result.getStart().getNext());
+					}
+				}
 				
 			}	
 			

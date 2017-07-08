@@ -1,8 +1,6 @@
 package cfg.nodes;
 
-import java.util.Collection;
-
-import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTStatement;
 
 /* node begin the statements if/ for/ while....
  * contain  1 decision 1 loop 1 break and common emplements;
@@ -24,6 +22,9 @@ public class BeginNode extends CFGNode{
 	}
 	public void setInitialization(PlainNode initialization) {
 		this.init = initialization;
+	}
+	public void setInit( IASTStatement state){
+		init.setData(state);
 	}
 	public DecisionNode getDecision() {
 		return decision;

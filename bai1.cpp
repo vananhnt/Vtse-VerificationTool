@@ -6,12 +6,13 @@
 using namespace std;
 
 int main(){
-    ofstream out("rev.txt");
-    string str;
-    getline(cin, str);
+		int a = 0;
+		if (  a == 2){
+			a = a + 1;
+		}
 
-    for (int i = str.length() -1 ; i>=0; i-- )
-        out << str[i];
-    out.close();
+		a = a - 10;
+
+		for (int i=0; i<10 ; i++);
 return 0;
 }
