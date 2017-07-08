@@ -1,8 +1,15 @@
 package cfg.build;
 
+import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
+import org.eclipse.cdt.core.dom.ast.IASTContinueStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
+import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
+import org.eclipse.cdt.core.dom.ast.IASTNullStatement;
+import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
@@ -11,6 +18,7 @@ import cfg.nodes.DecisionNode;
 import cfg.nodes.EndNode;
 import cfg.nodes.ForBeginNode;
 import cfg.nodes.IfBeginNode;
+import cfg.nodes.PlainNode;
 
 public class ControlFlowGraph {
 	private CFGNode start;
@@ -18,13 +26,25 @@ public class ControlFlowGraph {
 //	private Boolean hasLoop;
 	
 	public ControlFlowGraph(){
-		this.start.setPrev(null);
-		this.exit.setNext(null);
+		this.start = null;
+		this.exit = null;
 	//	this.hasLoop = false;
 	}
 	public ControlFlowGraph(CFGNode _start, CFGNode _exit) {
 		this.start = _start;
 		this.exit = _exit;
+	}
+	
+	public ControlFlowGraph( CFGNode begin, EndNode end, Boolean loop){
+		this.start = begin;
+		this.exit = end;
+		this.hasLoop = loop;
+	}
+	
+	public ControlFlowGraph( CFGNode begin, CFGNode end, Boolean loop){
+		this.start = begin;
+		this.exit = new EndNode(end);
+		this.hasLoop = loop;
 	}
 	
 	// build big graph
@@ -34,9 +54,30 @@ public class ControlFlowGraph {
 		return null;
 	}	
 	
-	// build subGraph
-	private CFGNode createSubGraph(IASTStatement body){
-		// TODO
+	// build subGraph	
+	public ControlFlowGraph createSubGraph(IASTStatement body) {
+		if (body instanceof IASTCompoundStatement) {
+			IASTCompoundStatement comp = (IASTCompoundStatement) body;
+			for (IASTStatement statement : comp.getStatements()) {
+				// where is connector 
+				
+						createSubGraph(statement);
+				
+				
+			}
+		} else if (body instanceof IASTIfStatement) {
+			return createIf((IASTIfStatement) body);
+		} else if (body instanceof IASTForStatement) {
+			return createFor((IASTForStatement) body);		
+		} else if (body instanceof IASTReturnStatement) {
+			System.out.println("return");
+		}else if ( body instanceof IASTExpressionStatement ||  body instanceof IASTNullStatement || body instanceof IASTDeclarationStatement){
+			PlainNode node = new PlainNode();
+			node.setData(body);	
+			return new ControlFlowGraph(node, node, false);
+		}
+		
+		
 		return null;
 	}
 /*
@@ -44,7 +85,7 @@ public class ControlFlowGraph {
  * Input: prev, end and this statement's body
  * Output: CFGNode If with body is built;	
  */
-	private CFGNode createIf( IASTIfStatement body){	
+	public ControlFlowGraph createIf( IASTIfStatement body){	
 		//TODO Testing
 		//create beginNode and EndNode
 		IfBeginNode ifBegin = new IfBeginNode();	
@@ -54,26 +95,39 @@ public class ControlFlowGraph {
 		dec.setPrev(ifBegin);
 		dec.setCondition(body.getConditionExpression());
 			// create branches then/else
-		CFGNode then = createSubGraph( body.getThenClause());
-		then.setNext(end);
-		CFGNode els = createSubGraph(body.getThenClause());
-		els.setNext(end);
-		dec.setThenNode(then);
-		dec.setElseNode(els);		
+		ControlFlowGraph then = createSubGraph( body.getThenClause());
+		if ( then != null){ 		
+			then.setExit(end);
+			dec.setThenNode(then.getStart());
+		}
+		ControlFlowGraph els = createSubGraph(body.getThenClause());
+		if ( then != null){
+			els.setExit(end);
+			dec.setElseNode(els.getStart());
+		}	
+
 		//connect
 		ifBegin.setNext( dec);
 		
-		return new CFGNode(ifBegin, end);
+		return new ControlFlowGraph(ifBegin, end, false);
 	}
 	
-	private CFGNode createFor( CFGNode prev, IASTForStatement body){
-		//TODO 
+	private ControlFlowGraph createFor( IASTForStatement body){
+		//TODO	
+		
 		// create begin and end Nodes
 		ForBeginNode forBegin = new ForBeginNode();
 		EndNode end = new EndNode();
+		// create initialize
+		forBegin.setInit( body.getInitializerStatement());
+		//create Decision
+		DecisionNode dec = new DecisionNode();
+		dec.setPrev(forBegin);
+		dec.setCondition( body.getConditionExpression());
+			//create body 
 		
 		
-		return new CFGNode(forBegin, end);
+		return new ControlFlowGraph(forBegin, end, true);
 	}
 
 	private CFGNode createWhile( CFGNode prev, IASTWhileStatement body){
