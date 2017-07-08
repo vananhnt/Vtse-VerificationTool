@@ -23,29 +23,15 @@ import cfg.nodes.PlainNode;
 public class ControlFlowGraph {
 	private CFGNode start;
 	private CFGNode exit;
-//	private Boolean hasLoop;
+
 	
-	public ControlFlowGraph(){
-		this.start = null;
-		this.exit = null;
-	//	this.hasLoop = false;
-	}
-	public ControlFlowGraph(CFGNode _start, CFGNode _exit) {
-		this.start = _start;
-		this.exit = _exit;
+	public ControlFlowGraph(){		
 	}
 	
-	public ControlFlowGraph( CFGNode begin, EndNode end, Boolean loop){
-		this.start = begin;
-		this.exit = end;
-		this.hasLoop = loop;
-	}
-	
-	public ControlFlowGraph( CFGNode begin, CFGNode end, Boolean loop){
-		this.start = begin;
-		this.exit = new EndNode(end);
-		this.hasLoop = loop;
-	}
+	public ControlFlowGraph(CFGNode start, CFGNode exit) {
+		this.start = start;
+		this.exit = exit;
+	}		
 	
 	// build big graph
 	public ControlFlowGraph build( IASTFunctionDefinition def){
@@ -60,7 +46,7 @@ public class ControlFlowGraph {
 			IASTCompoundStatement comp = (IASTCompoundStatement) body;
 			for (IASTStatement statement : comp.getStatements()) {
 				// where is connector 
-				
+				 
 						createSubGraph(statement);
 				
 				
@@ -74,7 +60,7 @@ public class ControlFlowGraph {
 		}else if ( body instanceof IASTExpressionStatement ||  body instanceof IASTNullStatement || body instanceof IASTDeclarationStatement){
 			PlainNode node = new PlainNode();
 			node.setData(body);	
-			return new ControlFlowGraph(node, node, false);
+			return new ControlFlowGraph(node, node);
 		}
 		
 		
@@ -109,7 +95,7 @@ public class ControlFlowGraph {
 		//connect
 		ifBegin.setNext( dec);
 		
-		return new ControlFlowGraph(ifBegin, end, false);
+		return new ControlFlowGraph(ifBegin, end);
 	}
 	
 	private ControlFlowGraph createFor( IASTForStatement body){
@@ -127,7 +113,7 @@ public class ControlFlowGraph {
 			//create body 
 		
 		
-		return new ControlFlowGraph(forBegin, end, true);
+		return new ControlFlowGraph(forBegin, end);
 	}
 
 	private CFGNode createWhile( CFGNode prev, IASTWhileStatement body){
