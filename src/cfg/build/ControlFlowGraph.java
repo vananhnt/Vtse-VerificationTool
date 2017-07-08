@@ -36,7 +36,7 @@ public class ControlFlowGraph {
 		this.exit = exit;
 	}		
 	
-	private void concat(ControlFlowGraph other) {
+	public void concat(ControlFlowGraph other) {
 		if (start == null) {
 			start = other.start;
 			exit = other.exit;

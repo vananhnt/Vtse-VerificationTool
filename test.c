@@ -8,7 +8,7 @@ void test() {
 	a = a + 2;
 	int b;
 	b = a;
-	if (  a == 2){
+	if (a == 2) {
 		b = a + 1;
 	}
 	for (int i=0; i<10; i++){
@@ -18,6 +18,12 @@ void test() {
 		}
 		a = 0;
 	}
+	while (a > 0) {
+		a --;
+	}
+	do {
+		a ++;
+	} while (a < 10);
 
 }
 

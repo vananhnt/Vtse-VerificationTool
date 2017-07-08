@@ -9,9 +9,19 @@ import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
+import cfg.node.CFGNode;
+import cfg.node.DecisionNode;
+import cfg.node.EmptyNode;
+import cfg.node.EndConditionNode;
 import cfg.node.EndingNode;
+import cfg.node.ForBeginningNode;
+import cfg.node.IfBeginningNode;
+import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 
+/*
+ * @va
+ */
 public class ControlFlowGraphBuilder {
 	
 	/*
@@ -20,59 +30,147 @@ public class ControlFlowGraphBuilder {
 	
 	public ControlFlowGraph build (IASTFunctionDefinition def) {
 		return createSubGraph(def.getBody());
-	}
-	private ControlFlowGraph createSubGraph(IASTStatement body) {
-		if (body instanceof IASTCompoundStatement) {
-			IASTCompoundStatement comp = (IASTCompoundStatement) body;
-			for (IASTStatement statement : comp.getStatements()) {
-				createSubGraph(statement);
+	}	
+	
+	//Fixed: them kiem tra (subCFG != null)
+	private ControlFlowGraph createSubGraph(IASTStatement statement) {
+		ControlFlowGraph cfg = new ControlFlowGraph();
+		if (statement instanceof IASTCompoundStatement) {
+			IASTCompoundStatement comp = (IASTCompoundStatement) statement;
+			for (IASTStatement stmt : comp.getStatements()) {
+				ControlFlowGraph subCFG = createSubGraph(stmt);
+				if (subCFG != null) cfg.concat(subCFG);
 			}
-		} else if (body instanceof IASTIfStatement) {
-			return createIf((IASTIfStatement) body);
-		} else if (body instanceof IASTForStatement) {
-			return createFor((IASTForStatement) body);
-		} else if (body instanceof IASTDoStatement) {
-			return creatDo((IASTDoStatement) body);
-		} else if (body instanceof IASTWhileStatement) {
-			return createWhile((IASTWhileStatement) body);
-		} else if (body instanceof IASTReturnStatement) {
+		} else if (statement instanceof IASTIfStatement) {
+			cfg = createIf((IASTIfStatement) statement);
+		} else if (statement instanceof IASTForStatement) {
+			cfg = createFor((IASTForStatement) statement);
+		} else if (statement instanceof IASTDoStatement) {
+			cfg = creatDo((IASTDoStatement) statement);
+		} else if (statement instanceof IASTWhileStatement) {
+			cfg = createWhile((IASTWhileStatement) statement);
+		} else if (statement instanceof IASTReturnStatement) {
 			System.out.println("return");		
 		} else {
-			PlainNode plainNode = new PlainNode(body);
-		    System.out.println(plainNode.getStatement()); 
-			return new ControlFlowGraph(plainNode, plainNode);
+			PlainNode plainNode = new PlainNode(statement);
+			cfg = new ControlFlowGraph(plainNode, plainNode);
 		}
-		return null;
+		return cfg;
 	}
 
-	private ControlFlowGraph createWhile(IASTWhileStatement body) {
-		// TODO Auto-generated method stub
-		return null;
+	private ControlFlowGraph createWhile(IASTWhileStatement whileStatement) {
+		ForBeginningNode beginWhileNode = new ForBeginningNode();
+		DecisionNode decisionNode = new DecisionNode();
+		decisionNode.setCondition(whileStatement.getCondition());
+		beginWhileNode.setNext(decisionNode);	
+		
+		//then branch	
+		ControlFlowGraph thenClause = createSubGraph(whileStatement.getBody());
+		decisionNode.setThenNode(thenClause.getStart());
+		IterationNode iterationNode = new IterationNode ();
+		thenClause.getExit().setNext(iterationNode);
+		//		iterationNode.setNext(decisionNode);
+		//		khi in can xet truong hop iterationNode rieng
+
+		//else branch
+		decisionNode.setElseNode(new EmptyNode());
+		EndConditionNode end = new EndConditionNode();
+		decisionNode.getElseNode().setNext(end);
+		
+		return new ControlFlowGraph(beginWhileNode, end);
 	}
 
-	private ControlFlowGraph creatDo(IASTDoStatement body) {
-		// TODO Auto-generated method stub
-		return null;
+	private ControlFlowGraph creatDo(IASTDoStatement doStatement) {
+		ForBeginningNode beginDoNode = new ForBeginningNode();
+		DecisionNode decisionNode = new DecisionNode();
+		decisionNode.setCondition(doStatement.getCondition());
+		beginDoNode.setNext(decisionNode);
+		
+		//then branch	
+		ControlFlowGraph thenClause = createSubGraph(doStatement.getBody());
+		decisionNode.setThenNode(thenClause.getStart());
+		IterationNode iterationNode = new IterationNode ();
+		thenClause.getExit().setNext(iterationNode);
+		//		iterationNode.setNext(decisionNode);
+		//		khi in can xet truong hop iterationNode rieng
+		
+		//else branch
+		decisionNode.setElseNode(new EmptyNode());
+		EndConditionNode end = new EndConditionNode();
+		decisionNode.getElseNode().setNext(end);
+		
+		return new ControlFlowGraph(beginDoNode, end);
 	}
 
-	private ControlFlowGraph createIf(IASTIfStatement body) {
-		System.out.println("IfStatement");
-		return null;
+	private ControlFlowGraph createIf(IASTIfStatement ifStatement) {
+		IfBeginningNode beginIfNode = new IfBeginningNode();
+		DecisionNode decisionNode = new DecisionNode();
+		EndConditionNode end = new EndConditionNode();
+		decisionNode.setCondition(ifStatement.getConditionExpression());
+		beginIfNode.setNext(decisionNode);
+		
+		//creates branches
+		ControlFlowGraph thenClause = createSubGraph(ifStatement.getThenClause());
+		ControlFlowGraph elseClause = createSubGraph(ifStatement.getElseClause());
+		
+		decisionNode.setThenNode(thenClause.getStart());
+		decisionNode.setElseNode(elseClause.getStart());
+		
+		thenClause.getExit().setNext(end);
+		elseClause.getExit().setNext(end);
+		
+		return new ControlFlowGraph(beginIfNode, end);
 	}
 
-	private ControlFlowGraph createFor(IASTForStatement body) {
-		System.out.println("ForStatement");
-		return null;
+	private ControlFlowGraph createFor(IASTForStatement forStatement) {
+		ForBeginningNode bgForNode = new ForBeginningNode();
+		PlainNode init = new PlainNode(forStatement.getInitializerStatement());
+		bgForNode.setNext(init);
+		
+		DecisionNode decisionNode = new DecisionNode();
+		decisionNode.setCondition(forStatement.getConditionExpression());
+		init.setNext(decisionNode);
+		
+		//then branch
+		ControlFlowGraph thenClause = createSubGraph(forStatement.getBody());
+		decisionNode.setThenNode(thenClause.getStart());
+		IterationNode iterationNode = new IterationNode (forStatement.getIterationExpression());
+		thenClause.getExit().setNext(iterationNode);
+		//		iterationNode.setNext(decisionNode);
+		//		khi in can xet truong hop iterationNode rieng
+		
+		//else branch
+		decisionNode.setElseNode(new EmptyNode());
+		EndConditionNode end = new EndConditionNode();
+		decisionNode.getElseNode().setNext(end);
+		
+		return new ControlFlowGraph(bgForNode, end);
 	}
-	
-	/*/
+	/*
 	 * main: print the graph
 	 */
+	public static void print(CFGNode start) {
+		CFGNode iter = start;
+		if (iter == null) return;
+		if (iter instanceof DecisionNode) {
+			iter.printNode();
+			print(((DecisionNode) iter).getThenNode());
+			print(((DecisionNode) iter).getElseNode());
+		} 
+		else if (iter instanceof IterationNode) {
+			return;
+		}
+		else {
+			iter.printNode();
+			print(iter.getNext());
+		}
+		
+	}
+	
 	public static void  main(String[] args) {
 		IASTFunctionDefinition func = (new ASTGenerator("./test.c")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
-		String cfg_status = (cfg == null) ? "null" : "not null";
-		System.out.println(cfg_status);
-
+		print(cfg.getStart());
+		
 	}
 }
