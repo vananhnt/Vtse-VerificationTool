@@ -1,5 +1,5 @@
 package cfg.nodes;
-
+// abstact ....  ko chua du lieu
 import org.eclipse.cdt.core.dom.ast.ASTNodeProperty;
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
@@ -9,15 +9,12 @@ import org.eclipse.cdt.core.dom.ast.IASTNodeLocation;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.IASTNode.CopyStyle;
 import org.eclipse.cdt.core.parser.IToken;
-// Node is ansestor of all Node in cfg
-public class CFGNode {	
+// Node is parent of all Node in cfg
+public abstract class CFGNode {	
 	private CFGNode prev;
-	private CFGNode next;
-	private IASTNode data;
+	private CFGNode next;	
 	
-	public CFGNode(){
-		this.prev = null;
-		this.next = null;
+	public CFGNode(){		
 	}
 	
 	public CFGNode( CFGNode prev, CFGNode next){
@@ -26,9 +23,9 @@ public class CFGNode {
 	}
 	
 	public CFGNode(CFGNode node){
-		this.prev = node.getPrev();
-		this.next = node.getNext();
-		this.data = node.getData();
+		this.prev = node.prev;
+		this.next = node.next;
+	
 	}
 
 // get set
@@ -46,16 +43,5 @@ public class CFGNode {
 
 	public void setPrev(CFGNode prev) {
 		this.prev = prev;
-	}
-
-	public IASTNode getData() {
-		return data;
-	}
-
-	public void setData(IASTNode data) {
-		this.data = data;
-	}
-	
-	
-	
+	}		
 }

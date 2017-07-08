@@ -9,7 +9,7 @@ import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
-import cfg.nodes.EndNode;
+import cfg.nodes.EndingNode;
 import cfg.nodes.PlainNode;
 
 public class ControlFlowGraphBuilder {

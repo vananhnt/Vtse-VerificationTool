@@ -8,22 +8,17 @@ import org.eclipse.cdt.internal.core.util.ToStringSorter;
 public class DecisionNode extends CFGNode{
 	private IASTExpression condition;
 	private CFGNode thenNode;
-	private EndNode endNode;
+	private EndingNode endNode;
 	// elseNode is next
 	
 	public DecisionNode(){
-		super();
-		this.condition = null;
-		this.thenNode = null;
-		this.endNode = null;
+		super();		
 	}
 	
-	public DecisionNode( CFGNode prev, EndNode next){
+	public DecisionNode( CFGNode prev, EndingNode next){
 		this.setPrev(prev);
 		this.endNode = next;
-	}
-	
-	
+	}	
 	
 	public IASTExpression getCondition() {
 		return condition;
@@ -39,30 +34,24 @@ public class DecisionNode extends CFGNode{
 	public void setThenNode(CFGNode thenNode) {
 		this.thenNode = thenNode;
 	}
-	public void setThenNode( IASTStatement statement){
-		this.thenNode.setData( statement);
-	}
+	
 	
 // set ELSE NODE with Input is CFGNode  or  IASTStatement	
 	public void setElseNode( CFGNode elseNode){
 		this.setNext(elseNode);
 	}
-	public void setElseNode( IASTStatement statement){
-		CFGNode node = this.getNext();
-		node.setData(statement);
-		this.setNext(node);
-	}
+	
 	public CFGNode getElseNode(){
 		return this.getNext();
 	}
 	
 	
-	public EndNode getEndNode() {
+	public EndingNode getEndNode() {
 		return endNode;
 	}
 	
 	public void setEndNode( CFGNode endNode){
-		this.endNode = new EndNode( endNode);
+		this.endNode = new EndingNode( endNode);
 	}
 	public String toString(){
 		
