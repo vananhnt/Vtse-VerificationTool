@@ -1,4 +1,4 @@
-package cfg.nodes;
+package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
@@ -8,16 +8,16 @@ import org.eclipse.cdt.internal.core.util.ToStringSorter;
 public class DecisionNode extends CFGNode{
 	private IASTExpression condition;
 	private CFGNode thenNode;
-	private EndingNode endNode;
+	
 	// elseNode is next
 	
 	public DecisionNode(){
 		super();		
 	}
 	
-	public DecisionNode( CFGNode prev, EndingNode next){
+	public DecisionNode( CFGNode prev){
 		this.setPrev(prev);
-		this.endNode = next;
+		
 	}	
 	
 	public IASTExpression getCondition() {
@@ -45,18 +45,9 @@ public class DecisionNode extends CFGNode{
 		return this.getNext();
 	}
 	
-	
-	public EndingNode getEndNode() {
-		return endNode;
-	}
-	
-	public void setEndNode( CFGNode endNode){
-		this.endNode = new EndingNode( endNode);
-	}
-	public String toString(){
+	public void printNode(){
+		System.out.println(" with Condition ( " + condition.getRawSignature() + " )" );	
 		
-		 // TODO
-		return null;
 	}
-		
+				
 }

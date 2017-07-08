@@ -16,12 +16,12 @@ import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
-import cfg.nodes.CFGNode;
-import cfg.nodes.DecisionNode;
-import cfg.nodes.EndingNode;
-import cfg.nodes.ForBeginningNode;
-import cfg.nodes.IfBeginningNode;
-import cfg.nodes.PlainNode;
+import cfg.node.CFGNode;
+import cfg.node.DecisionNode;
+import cfg.node.EndingNode;
+import cfg.node.ForBeginningNode;
+import cfg.node.IfBeginningNode;
+import cfg.node.PlainNode;
 
 public class ControlFlowGraph {
 	private CFGNode start;
@@ -30,9 +30,7 @@ public class ControlFlowGraph {
 	
 	public ControlFlowGraph(){		
 	}
-	public ControlFlowGraph build (IASTFunctionDefinition def) {
-		return createSubGraph(def.getBody());
-	}
+	
 	public ControlFlowGraph(CFGNode start, CFGNode exit) {
 		this.start = start;
 		this.exit = exit;
@@ -50,7 +48,9 @@ public class ControlFlowGraph {
 	}
 	
 	// build big graph
-	
+	public ControlFlowGraph build (IASTFunctionDefinition def) {
+		return createSubGraph(def.getBody());
+	}
 	// build subGraph	
 	public ControlFlowGraph createSubGraph(IASTStatement statement) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
@@ -83,21 +83,21 @@ public class ControlFlowGraph {
 		//create beginNode and EndNode
 		IfBeginningNode ifBegin = new IfBeginningNode();		
 		EndingNode end = new EndingNode();
+	
 		// create decision 
 		DecisionNode dec = new DecisionNode();
 		dec.setPrev(ifBegin);
 		dec.setCondition(ifStatement.getConditionExpression());
 			// create branches then/else
-		ControlFlowGraph thenClause = createSubGraph( ifStatement.getThenClause());
-		if ( thenClause != null){ 		
-			thenClause.setExit(end);
-			dec.setThenNode(thenClause.getStart());
-		}
-		ControlFlowGraph elseClause = createSubGraph(ifStatement.getElseClause());
-		if ( thenClause != null){
-			elseClause.setExit(end);
-			dec.setElseNode(elseClause.getStart());
-		}
+		ControlFlowGraph thenClause = createSubGraph( ifStatement.getThenClause());				
+		thenClause.setExit(end);
+		dec.setThenNode(thenClause.getStart());
+		
+		
+		ControlFlowGraph elseClause = createSubGraph(ifStatement.getElseClause());		
+		elseClause.setExit(end);
+		dec.setElseNode(elseClause.getStart());
+		
 		//connect
 		ifBegin.setNext( dec);
 		
@@ -144,35 +144,40 @@ public class ControlFlowGraph {
 
 	public void setExit(CFGNode exit) {
 		this.exit = exit;
+	}	
+	
+	public void printGraph( CFGNode start){		
+		if (start == null ){
+			
+			return;
+		}
+		CFGNode run = start;
+		run.printNode();
+			
+		if (run instanceof DecisionNode){
+			CFGNode save = run;
+			System.out.println(" THEN CLAUSE ");
+			run = ((DecisionNode) run).getThenNode();
+			printGraph(run);
+				
+			System.out.println(" ELSE CLAUSE " );
+			run = ((DecisionNode) save).getElseNode();
+			printGraph(run);
+				
+		} else{
+			if ( run instanceof EndingNode){
+				System.out.println( "????" + run);
+			}
+			run = run.getNext();
+			printGraph(run);
+		}
+			
+		
 	}
-
-
-//	public Boolean getHasLoop() {
-//		return hasLoop;
-//	}
-//
-//
-//	public void setHasLoop(Boolean hasLoop) {
-//		this.hasLoop = hasLoop;
-//	}
-	
-	
 	public static void  main(String[] args) {
 		IASTFunctionDefinition func = (new ASTGenerator("./bai1.cpp")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraph()).build(func);
 		CFGNode start = cfg.getStart();
-		if (start == null) {
-			System.out.println("null roi");
-		}
-		else {
-			CFGNode next = start;
-			while(next != cfg.getExit()) {
-				System.out.println(next);
-				next = next.getNext();
-			}
-			
-			System.out.println(next);
-		}
-		
+		cfg.printGraph(start);		
 	}
 }

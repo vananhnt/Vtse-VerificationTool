@@ -1,4 +1,4 @@
-package cfg.nodes;
+package cfg.node;
 // node exit all of statements
 public class EndingNode extends CFGNode {
 	public EndingNode(){

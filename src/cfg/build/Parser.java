@@ -67,8 +67,8 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarationStatement;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDeclarator;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 
-import cfg.nodes.CFGNode;
-import cfg.nodes.DecisionNode;
+import cfg.node.CFGNode;
+import cfg.node.DecisionNode;
 
 
 public class Parser {

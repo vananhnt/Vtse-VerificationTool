@@ -1,4 +1,4 @@
-package cfg.nodes;
+package cfg.node;
 // abstact ....  ko chua du lieu
 import org.eclipse.cdt.core.dom.ast.ASTNodeProperty;
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
@@ -28,8 +28,7 @@ public abstract class CFGNode {
 	
 	}
 
-// get set
-	public CFGNode getNext() {
+		public CFGNode getNext() {
 		return next;
 	}
 
@@ -43,5 +42,12 @@ public abstract class CFGNode {
 
 	public void setPrev(CFGNode prev) {
 		this.prev = prev;
-	}		
+	}	
+// print
+		
+	public void printNode(){	
+		System.out.println(">.< " + this.getClass());
+		
+	}
+
 }

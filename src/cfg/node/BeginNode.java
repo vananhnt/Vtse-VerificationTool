@@ -1,4 +1,4 @@
-package cfg.nodes;
+package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 // begin Node ko chua du lieu
@@ -6,5 +6,6 @@ import org.eclipse.cdt.core.dom.ast.IASTStatement;
  * don't contain data * 
  */
 public class BeginNode extends CFGNode{	
+	
 	
 }

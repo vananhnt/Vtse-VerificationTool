@@ -1,4 +1,4 @@
-package cfg.nodes;
+package cfg.node;
 
 public class IfBeginningNode extends BeginNode{
 	
