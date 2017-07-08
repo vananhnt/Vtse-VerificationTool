@@ -1,6 +1,6 @@
 package cfg.build;
 /*
- * nguyen thi thuy
+ * nguyen thi thuy 97
  */
 
 import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
@@ -30,49 +30,53 @@ public class ControlFlowGraph {
 	
 	public ControlFlowGraph(){		
 	}
-	
+	public ControlFlowGraph build (IASTFunctionDefinition def) {
+		return createSubGraph(def.getBody());
+	}
 	public ControlFlowGraph(CFGNode start, CFGNode exit) {
 		this.start = start;
 		this.exit = exit;
 	}		
 	
+	private void concat(ControlFlowGraph other) {
+		if (start == null) {
+			start = other.start;
+			exit = other.exit;
+		}
+		else {
+			exit.setNext(other.start);
+			exit = other.exit;
+		}
+	}
+	
 	// build big graph
-	public ControlFlowGraph build( IASTFunctionDefinition def){
-		// TODO
-		
-		return null;
-	}	
 	
 	// build subGraph	
-	public ControlFlowGraph createSubGraph(IASTStatement body) {
-		if (body instanceof IASTCompoundStatement) {
-			IASTCompoundStatement comp = (IASTCompoundStatement) body;
-			for (IASTStatement statement : comp.getStatements()) {
-				// where is connector 
-				 
-						createSubGraph(statement);
-				
-				
+	public ControlFlowGraph createSubGraph(IASTStatement statement) {
+		ControlFlowGraph cfg = new ControlFlowGraph();
+		if (statement instanceof IASTCompoundStatement) {
+			IASTCompoundStatement comp = (IASTCompoundStatement) statement;
+			for (IASTStatement stmt : comp.getStatements()) {
+				ControlFlowGraph subCFG = createSubGraph(stmt);
+				cfg.concat(subCFG);
 			}
-		} else if (body instanceof IASTIfStatement) {
-			return createIf((IASTIfStatement) body);
-		} else if (body instanceof IASTForStatement) {
-			return createFor((IASTForStatement) body);		
-		} else if (body instanceof IASTReturnStatement) {
+		} else if (statement instanceof IASTIfStatement) {
+			 cfg = createIf((IASTIfStatement) statement);
+		} else if (statement instanceof IASTForStatement) {
+			cfg =  createFor((IASTForStatement) statement);		
+		} else if (statement instanceof IASTReturnStatement) {
 			System.out.println("return");
-		}else if ( body instanceof IASTExpressionStatement ||  body instanceof IASTNullStatement || body instanceof IASTDeclarationStatement){
+		} else {
 			PlainNode node = new PlainNode();
-			node.setStatement(body);	
-			return new ControlFlowGraph(node, node);
+			node.setStatement(statement);	
+			cfg = new ControlFlowGraph(node, node);
 		}
-		
-		
-		return null;
+		return cfg;
 	}
 /*
  * if statement is "then" create IfBeginNode
- * Input: prev, end and this statement's body
- * Output: CFGNode If with body is built;	
+ * Input: prev, end and this statement's statement
+ * Output: CFGNode If with statement is built;	
  */
 	public ControlFlowGraph createIf( IASTIfStatement ifStatement){	
 		//TODO Testing
@@ -112,13 +116,13 @@ public class ControlFlowGraph {
 		DecisionNode dec = new DecisionNode();
 		dec.setPrev(forBegin);
 		dec.setCondition( forStatement.getConditionExpression());
-			//create body 
+			//create statement 
 		
 		
 		return new ControlFlowGraph(forBegin, end);
 	}
 
-	private CFGNode createWhile( CFGNode prev, IASTWhileStatement body){
+	private CFGNode createWhile( CFGNode prev, IASTWhileStatement statement){
 		//TODO
 		return null;
 	}
@@ -153,5 +157,22 @@ public class ControlFlowGraph {
 //	}
 	
 	
-	//public 
+	public static void  main(String[] args) {
+		IASTFunctionDefinition func = (new ASTGenerator("./bai1.cpp")).getFunction(0);
+		ControlFlowGraph cfg = (new ControlFlowGraph()).build(func);
+		CFGNode start = cfg.getStart();
+		if (start == null) {
+			System.out.println("null roi");
+		}
+		else {
+			CFGNode next = start;
+			while(next != cfg.getExit()) {
+				System.out.println(next);
+				next = next.getNext();
+			}
+			
+			System.out.println(next);
+		}
+		
+	}
 }

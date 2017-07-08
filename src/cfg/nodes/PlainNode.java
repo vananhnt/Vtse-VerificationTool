@@ -24,4 +24,8 @@ public class PlainNode extends CFGNode{
 	public void setStatement(IASTStatement statement) {
 		this.statement = statement;
 	}
+	
+	public String toString() {
+		return statement.getRawSignature();
+	}
 }
