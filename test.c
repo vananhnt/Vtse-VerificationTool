@@ -43,6 +43,7 @@ void testSwitch() {
 	  break;
 	default:
 	  /* Code */
+		c = 50;
 	  break;
 	}
 }
