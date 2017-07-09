@@ -2,9 +2,7 @@ package cfg.build;
 
 import java.util.HashMap;
 
-import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
@@ -80,18 +78,10 @@ public class ASTGenerator {
 	}
 	private static void printTree(IASTNode node, int index) {
 		IASTNode[] children = node.getChildren();
-		boolean printContents = true;
 		if ((node instanceof IASTTranslationUnit)) {
-			printContents = false;
 		}
-		String offset = "";
 		try {
-			offset = node.getSyntax() != null ? " (offset: " + node.getFileLocation().getNodeOffset() + "," + node.getFileLocation().getNodeLength() + ")" : "";
-			printContents = node.getFileLocation().getNodeLength() < 30;
-		} catch (ExpansionOverlapsBoundaryException e) {
-			e.printStackTrace();
 		} catch (UnsupportedOperationException e) {
-			offset = "UnsupportedOperationException";
 		}
 		//System.out.println(String.format(new StringBuilder("%1$").append(index * 2).append("s").toString(), new Object[] { "-" }) + node.getClass().getSimpleName() + offset + " -> " + (printContents ? node.getRawSignature().replaceAll("\n", " \\ ") : node.getRawSignature().subSequence(0, 5)));
 		System.out.println(node.getRawSignature());

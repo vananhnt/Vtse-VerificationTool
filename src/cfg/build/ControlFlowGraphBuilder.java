@@ -1,28 +1,18 @@
 package cfg.build;
 
-import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
-import org.eclipse.cdt.core.dom.ast.IASTBinaryTypeIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCaseStatement;
-import org.eclipse.cdt.core.dom.ast.IASTCastExpression;
 import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
-import org.eclipse.cdt.core.dom.ast.IASTConditionalExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDefaultStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDoStatement;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
-import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSwitchStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
-import org.eclipse.cdt.internal.core.dom.parser.ASTNode;
-import org.eclipse.cdt.internal.core.dom.parser.AbstractGNUSourceCodeParser.BinaryOperator;
-import org.eclipse.cdt.internal.core.dom.parser.c.CNodeFactory;
-import org.eclipse.cdt.internal.core.dom.parser.c.GNUCSourceParser;
-
 import cfg.node.BeginWhileNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
@@ -32,6 +22,7 @@ import cfg.node.ForBeginningNode;
 import cfg.node.IfBeginningNode;
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
+import cfg.node.ReturnNode;
 
 /**
  * @author va
@@ -73,15 +64,14 @@ public class ControlFlowGraphBuilder {
 		} else if (statement instanceof IASTSwitchStatement) {
 			cfg = createSwitch((IASTSwitchStatement) statement);
 		} else if (statement instanceof IASTReturnStatement) {
-			System.out.println("return");		
+			ReturnNode returnNode = new ReturnNode(statement);	
+			cfg = new ControlFlowGraph(returnNode, returnNode);
 		} else {
 			PlainNode plainNode = new PlainNode(statement);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
 		}
 		return cfg;
 	}
-	
-	
 	
 
 	/**
@@ -223,10 +213,7 @@ public class ControlFlowGraphBuilder {
 //					caseSt.getExpression());
 		IASTExpression compare = caseSt.getExpression();
 		return compare;
-		
-		
 	}
-	
 	
 	
 	/**
@@ -308,7 +295,8 @@ public class ControlFlowGraphBuilder {
 	public static void  main(String[] args) {
 		IASTFunctionDefinition func = (new ASTGenerator("./test.c")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
-		print(cfg.getStart());
-		
+		//print(cfg.getStart());
+		UnfoldCFG unfoldCfg = new UnfoldCFG();
+		unfoldCfg.generate(cfg);
 	}
 }
