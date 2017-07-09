@@ -6,26 +6,12 @@
 using namespace std;
 
 int main(){
-
-		if ( a==0 ){
-				a = 1;
-				a = 5000;
-				if ( a == 10 ){
-					a = 1;
-				}else{
-					a = 9999;
-				}
-			} else{
-				a = 10;
-
-			}
 		int a = 0;
-		a = a - 10;
-		a = 10 - a;
+		for (int i=0; i< 10; i++){
+			a = i;
 
+		}
 
-
-		int b = 0;
-
+		a =0;
 
 }
