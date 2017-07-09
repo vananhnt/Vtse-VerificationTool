@@ -87,39 +87,8 @@ public class Parser {
 		IASTDeclaration[] declarations = translationUnit.getDeclarations();
 		for( IASTDeclaration d : declarations){	
 			
-			if ( d instanceof IASTFunctionDefinition){
-				IASTFunctionDefinition funcDef = (IASTFunctionDefinition) d;
-				IASTStatement body = ((IASTFunctionDefinition) d).getBody();
-				for ( IASTNode run : body.getChildren()){
-					ControlFlowGraph test = new ControlFlowGraph();
-					if ( run instanceof IASTIfStatement){
-						
-						ControlFlowGraph result = test.createIf(( IASTIfStatement)run);
-						
-						//CFGNode begin = result.getStart();
-						DecisionNode node = (DecisionNode) result.getStart().getNext();					
-//						System.out.println(node.getCondition().getRawSignature());
-//						System.out.println(node.getThenNode());
-//						System.out.println(((IASTIfStatement) run).getThenClause());
-//						if  (((IASTIfStatement) run).getThenClause()   instanceof IASTCompoundStatement){
-//							System.out.println("^0^");
-//						}
-						
-						
-						
-					}
-					
-					if (run instanceof IASTStatement){						
-						//System.out.println(run + "  " + run.getRawSignature());
-						ControlFlowGraph result = test.createSubGraph((IASTStatement)run);
-						if (result != null)
-							System.out.println(result.getStart() + "... " + result.getStart().getNext());
-					}
-				}
-				
-			}	
-			
 		}
+			
 	}
 	
 	private static void printTree(IASTNode node, int index) {
