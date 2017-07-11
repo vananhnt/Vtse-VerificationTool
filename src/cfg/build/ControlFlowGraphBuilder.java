@@ -39,7 +39,11 @@ public class ControlFlowGraphBuilder {
 		return createSubGraph(def.getBody());
 	}	
 	
-	
+	public ControlFlowGraph add(ControlFlowGraph cfg, CFGNode other) {
+		cfg.getExit().setNext(other);
+		return cfg;
+		
+	}
 	/**
 	 * @param statement
 	 * @return cfg chứa 2 node đầu và cuối 
@@ -97,6 +101,7 @@ public class ControlFlowGraphBuilder {
 		//else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(end);
+		decisionNode.setNext(end);
 		
 		return new ControlFlowGraph(beginWhileNode, end);
 	}
@@ -148,6 +153,7 @@ public class ControlFlowGraphBuilder {
 		
 		decisionNode.setThenNode(thenClause.getStart());
 		decisionNode.setElseNode(elseClause.getStart());
+		decisionNode.setNext(endNode);
 	
 		thenClause.getExit().setNext(endNode);
 		elseClause.getExit().setNext(endNode);
@@ -257,6 +263,7 @@ public class ControlFlowGraphBuilder {
 				} 
 			}
 		}
+		
 		return new ControlFlowGraph(beginSwitchNode, endNode);
 	}
 	
@@ -279,7 +286,11 @@ public class ControlFlowGraphBuilder {
 			}
 		} 
 		else if (iter instanceof IterationNode) {
+			System.out.println(iter.getClass().toString());
 			return;
+		} else if (iter instanceof EmptyNode) {
+			System.out.println(iter.getClass().toString());
+			print(iter.getNext());	
 		}
 		else {
 				iter.printNode();
@@ -296,7 +307,9 @@ public class ControlFlowGraphBuilder {
 		IASTFunctionDefinition func = (new ASTGenerator("./test.c")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
 		//print(cfg.getStart());
-		UnfoldCFG unfoldCfg = new UnfoldCFG();
-		unfoldCfg.generate(cfg);
-	}
+		UnfoldCFG graph = new UnfoldCFG(cfg);
+		graph.generate(cfg);
+		
+		
+ 	}
 }

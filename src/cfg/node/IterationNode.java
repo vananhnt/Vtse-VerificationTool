@@ -5,12 +5,16 @@ import org.eclipse.cdt.core.dom.ast.IASTExpression;
  * @va
  */
 public class IterationNode extends CFGNode {
+
 	private IASTExpression iterationExpression;
 	
-	public IterationNode() {}
+	public IterationNode() {
+	}
 
 	public IterationNode(IASTExpression iterExpression) {
-		setIterationExpression(iterExpression);
+		iterationExpression = iterExpression;
+		
+		
 	}
 	public IASTExpression getIterationExpression() {
 		return iterationExpression;
@@ -27,4 +31,6 @@ public class IterationNode extends CFGNode {
 			System.out.println(iterationExpression);
 		}
 	}
+
+
 }

@@ -185,10 +185,6 @@ public class ControlFlowGraph {
 		return exit;
 	}
 
-
-	public void setExit(CFGNode exit) {
-		this.exit = exit;
-	}	
 	
 	/*
 	 * main: print the graph
