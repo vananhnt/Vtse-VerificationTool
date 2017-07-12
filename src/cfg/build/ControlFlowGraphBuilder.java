@@ -1,5 +1,9 @@
 package cfg.build;
 
+import java.beans.Expression;
+
+import org.eclipse.cdt.codan.core.model.cfg.INodeFactory;
+import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCaseStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
@@ -13,6 +17,8 @@ import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSwitchStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
+import org.eclipse.cdt.internal.core.dom.rewrite.astwriter.ExpressionWriter;
+
 import cfg.node.BeginWhileNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
@@ -214,12 +220,16 @@ public class ControlFlowGraphBuilder {
 	 * @return
 	 */
 	private IASTExpression createCondition(IASTSwitchStatement switchSt, IASTCaseStatement caseSt) {
-//		IASTExpression compare = (new CNodeFactory()).newBinaryExpression(IASTBinaryExpression.op_assign, 
-//					switchSt.getControllerExpression(),
-//					caseSt.getExpression());
-		IASTExpression compare = caseSt.getExpression();
-		return compare;
+		org.eclipse.cdt.core.dom.ast.INodeFactory nodeFactory = switchSt.getTranslationUnit().getASTNodeFactory();
+		IASTExpression operand1 = switchSt.getControllerExpression().copy();
+		IASTExpression operand2 = caseSt.getExpression().copy();
+		IASTExpression condition 
+					= nodeFactory.newBinaryExpression(IASTBinaryExpression.op_equals, 
+						 operand1, operand2);
+		
+		return condition;
 	}
+
 	
 	
 	/**

@@ -8,9 +8,9 @@ void test() {
 	a = a + 2;
 	int b;
 	b = a;
-//	if (a == 2) {
-//		b = a + 1;
-//	}
+	if (a == 2) {
+		b = a + 1;
+	}
 //	for (int i=0; i<10; i++){
 //		a = a + 1;
 //		if ( i == 1){
@@ -22,7 +22,7 @@ void test() {
 		a --;
 		b = a + 10;
 	}
-//
+
 //	do {
 //		a ++;
 //	} while (a < 10);
