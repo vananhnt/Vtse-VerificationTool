@@ -290,7 +290,7 @@ public class ControlFlowGraphBuilder {
 			if (((DecisionNode) iter).getCondition() == null) {
 				System.out.println("decision is not set yet");
 			} else {
-				iter.printNode();
+			
 				print(((DecisionNode) iter).getThenNode());
 				print(((DecisionNode) iter).getElseNode());
 			}

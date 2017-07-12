@@ -99,7 +99,7 @@ public class ControlFlowGraph {
 		decisionNode.setElseNode(new EmptyNode());
 		EndConditionNode end = new EndConditionNode();
 		decisionNode.getElseNode().setNext(end);
-		
+		beginWhileNode.setEndNode(end);
 		return new ControlFlowGraph(beginWhileNode, end);
 	}
 
@@ -121,7 +121,7 @@ public class ControlFlowGraph {
 		decisionNode.setElseNode(new EmptyNode());
 		EndConditionNode end = new EndConditionNode();
 		decisionNode.getElseNode().setNext(end);
-		
+		beginDoNode.setEndNode(end);
 		return new ControlFlowGraph(beginDoNode, end);
 	}
 
@@ -166,7 +166,7 @@ public class ControlFlowGraph {
 		decisionNode.setElseNode(new EmptyNode());
 		EndConditionNode end = new EndConditionNode();
 		decisionNode.getElseNode().setNext(end);
-		
+		bgForNode.setEndNode(end);
 		return new ControlFlowGraph(bgForNode, end);
 	}
 	

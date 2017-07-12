@@ -32,9 +32,7 @@ public class UnfoldControlFlowGraph extends ControlFlowGraph{
 			System.out.println(count);
 			if (count % nLoop == 0){
 				EndConditionNode end = findClose( iter.getNext());
-				iter.setNext(end);
-				ucfg(iter.getNext(), nLoop, count);
-			
+				iter.setNext(end);							
 			}
 			ucfg(iter.getNext(), nLoop, count);		
 		}else {
@@ -56,7 +54,7 @@ public class UnfoldControlFlowGraph extends ControlFlowGraph{
 	}
 	
 	public static void main(String[] args) {
-		int nLoop = 10;
+		int nLoop = 2;
 		IASTFunctionDefinition func = (new ASTGenerator("./bai1.cpp")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraph()).build(func);		
 				
