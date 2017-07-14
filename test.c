@@ -7,11 +7,11 @@ void test() {
 	int a = 0;
 	a = a + 2;
 	int b;
-//	b = a;
+	b = a;
 //	if (a == 2) {
 //		b = a + 1;
 //	} else {
-//		a = 10;
+//		b = 10;
 //	}
 //	for (int i = 0; i < 10; i ++){
 //		a = a + 1;

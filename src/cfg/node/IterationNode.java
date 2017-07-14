@@ -26,6 +26,8 @@ public class IterationNode extends CFGNode {
 		System.out.print("IterationNode: ");
 		if (iterationExpression != null) {
 			System.out.println(iterationExpression.getRawSignature());
+		} else {
+			System.out.println();
 		}
 	}
 

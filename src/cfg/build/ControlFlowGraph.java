@@ -1,8 +1,8 @@
 package cfg.build;
 /*
  * nguyen thi thuy 97
- * @va: Note to Thuy: da them ham addNode va sua printGraph
- * De in cfg chi can: cfg.printGraph()
+ * @vananh: Note to Thuy: Da them ham addNode va sua printGraph
+ * 						  De in cfg chi can: cfg.printGraph()
  */
 
 import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
@@ -61,7 +61,9 @@ public class ControlFlowGraph {
 			exit = node;
 		}
 	}
-	
+	public void setExit(CFGNode node) {
+		exit = node;
+	}
 	public ControlFlowGraph copy() {
 		return this;
 	}
@@ -82,10 +84,12 @@ public class ControlFlowGraph {
 		return exit;
 	}
 
+	
 	public void printGraph() {
 		if (this != null)
 			print(start, exit, 0);
 	}
+	
 	
 	private void printSpace(int level) {
 		for (int i = 0; i < level; i++) {
@@ -105,11 +109,13 @@ public class ControlFlowGraph {
 			iter.printNode();
 			printSpace(level);
 			System.out.println("Then Clause: ");
-			print(((DecisionNode) iter).getThenNode(), exit, level + 10);
-			
+			if (((DecisionNode) iter).getThenNode() != null) {
+				print(((DecisionNode) iter).getThenNode(), exit, level + 10);
+			}
 			printSpace(level);
 			System.out.println("Else Clause: ");
-			print(((DecisionNode) iter).getElseNode(), exit,  level + 10);		
+			if (((DecisionNode) iter).getElseNode() != null)
+				print(((DecisionNode) iter).getElseNode(), exit,  level + 10);		
 		} 
 		else if (iter instanceof IterationNode) {
 			iter.printNode();

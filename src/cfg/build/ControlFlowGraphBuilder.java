@@ -88,14 +88,14 @@ public class ControlFlowGraphBuilder {
 		IterationNode iterationNode = new IterationNode ();
 		//iterationNode.setIterationExpression(whileStatement.getCondition());
 		ControlFlowGraph thenClause = createSubGraph(whileStatement.getBody());
-		
+		//decisionNode.setNext(thenClause.getExit());
 		decisionNode.setCondition(whileStatement.getCondition());
 		beginWhileNode.setNext(decisionNode);	
 		
 		//then branch	
 		decisionNode.setThenNode(thenClause.getStart());
 		thenClause.getExit().setNext(iterationNode);
-		iterationNode.setNext(decisionNode);
+		//iterationNode.setNext(decisionNode);
 		//iterationNode.setPrev(thenClause.getExit());
 		//khi in can xet truong hop iterationNode rieng
 
@@ -194,7 +194,6 @@ public class ControlFlowGraphBuilder {
 		return new ControlFlowGraph(bgForNode, endNode);
 	}
 	
-
 	/**
 	 * @param subCfg
 	 * @param statements
@@ -267,7 +266,36 @@ public class ControlFlowGraphBuilder {
 		
 		return new ControlFlowGraph(beginSwitchNode, endNode);
 	}
-	
+	/**
+	 * @param start: node đầu của cfg
+	 *	In ra ControlFlowGraph 
+	 */
+	public static void print(CFGNode start) {
+		CFGNode iter = start;
+		if (iter == null) {
+			return;
+		}
+		if (iter instanceof DecisionNode) {
+			if (((DecisionNode) iter).getCondition() == null) {
+				System.out.println("decision is not set yet");
+			} else {
+				iter.printNode();
+				print(((DecisionNode) iter).getThenNode());
+				print(((DecisionNode) iter).getElseNode());
+			}
+		} 
+		else if (iter instanceof IterationNode) {
+			System.out.println(iter.getClass().toString());
+			return;
+		} else if (iter instanceof EmptyNode) {
+			System.out.println(iter.getClass().toString());
+			print(iter.getNext());	
+		}
+		else {
+				iter.printNode();
+				print(iter.getNext());	
+		}
+}
 	/**
 	 * @param args
 	 * In cfg
@@ -279,7 +307,6 @@ public class ControlFlowGraphBuilder {
 		System.out.println("==========================");
 		UnfoldCFG graph = new UnfoldCFG(cfg);
 		graph.generate(cfg);
-		
 		
  	}
 }
