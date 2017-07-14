@@ -27,8 +27,10 @@ public abstract class CFGNode {
 		this.next = node.next;
 	
 	}
-
-		public CFGNode getNext() {
+	public CFGNode copy() {
+		return this;
+	}
+	public CFGNode getNext() {
 		return next;
 	}
 
@@ -46,8 +48,7 @@ public abstract class CFGNode {
 // print
 		
 	public void printNode(){	
-		System.out.println(">.< " + this.getClass());
-		
+		if (this != null) System.out.println(this.getClass());
 	}
 
 }

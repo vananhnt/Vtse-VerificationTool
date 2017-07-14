@@ -6,7 +6,7 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
-import cfg.node.ForBeginningNode;
+import cfg.node.BeginForNode;
 import cfg.node.IterationNode;
 
 public class UnfoldControlFlowGraph extends ControlFlowGraph{
@@ -24,7 +24,7 @@ public class UnfoldControlFlowGraph extends ControlFlowGraph{
 			iter.printNode();
 			ucfg(((DecisionNode) iter).getThenNode(), nLoop, count);
 			ucfg(((DecisionNode) iter).getElseNode(), nLoop, count);
-		} else if ( iter instanceof ForBeginningNode){
+		} else if ( iter instanceof BeginForNode){
 			iter.printNode();
 			ucfg(iter.getNext(), nLoop, 0);		
 		} else if (iter instanceof IterationNode){ 
@@ -32,7 +32,9 @@ public class UnfoldControlFlowGraph extends ControlFlowGraph{
 			System.out.println(count);
 			if (count % nLoop == 0){
 				EndConditionNode end = findClose( iter.getNext());
-				iter.setNext(end);							
+				iter.setNext(end);
+				ucfg(iter.getNext(), nLoop, count);
+			
 			}
 			ucfg(iter.getNext(), nLoop, count);		
 		}else {
@@ -54,7 +56,7 @@ public class UnfoldControlFlowGraph extends ControlFlowGraph{
 	}
 	
 	public static void main(String[] args) {
-		int nLoop = 2;
+		int nLoop = 10;
 		IASTFunctionDefinition func = (new ASTGenerator("./bai1.cpp")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraph()).build(func);		
 				

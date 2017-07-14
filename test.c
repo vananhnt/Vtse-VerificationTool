@@ -7,16 +7,20 @@ void test() {
 	int a = 0;
 	a = a + 2;
 	int b;
-	b = a;
-	if (a == 2) {
-		b = a + 1;
-	}
-//	for (int i=0; i<10; i++){
+//	b = a;
+//	if (a == 2) {
+//		b = a + 1;
+//	} else {
+//		a = 10;
+//	}
+//	for (int i = 0; i < 10; i ++){
 //		a = a + 1;
-//		if ( i == 1){
+//		if (i == 1) {
 //			break;
+//		} else {
+//			a = 0;
 //		}
-//		a = 0;
+//		a = a + 10;
 //	}
 	while (a > 0) {
 		a --;

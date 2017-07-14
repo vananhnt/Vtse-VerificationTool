@@ -1,18 +1,14 @@
 package cfg.build;
 
-import org.eclipse.cdt.core.dom.ast.IASTConditionalExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
 
-import cfg.node.BeginNode;
 import cfg.node.BeginWhileNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
-import cfg.node.EndingNode;
-import cfg.node.ForBeginningNode;
-import cfg.node.IfBeginningNode;
+import cfg.node.BeginForNode;
+import cfg.node.BeginIfNode;
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 
@@ -22,101 +18,109 @@ import cfg.node.PlainNode;
  * sap dc r 
  */
 public class UnfoldCFG {
-	private int nLoops = 3;
+	private int nLoops = 4;
 	
 	private CFGNode start;
-
 	
 	public UnfoldCFG(ControlFlowGraph other) {
 		start = null;
-	
 	}
 	
-	public void generate(ControlFlowGraph _cfg) {
-		start = iterateNode(_cfg.getStart());
-		(new ControlFlowGraphBuilder()).print(start);
-	}
+	public void generate(ControlFlowGraph otherCfg) {
+		copyGraph(otherCfg.getStart(), otherCfg.getExit()).printGraph();		
+	}	
 	
-	private CFGNode unfold(CFGNode node, int loop) {
-		if (loop == nLoops) node = null;
-		else {
-			node.setNext(unfold((subGraph((IterationNode) node)).getStart(), loop++));
-		}
-		return node;
-	}
-	 
-	/**
-	 * @param node
-	 * @return
-	 * test method
-	 */
-	private ControlFlowGraph subGraph(IterationNode node) {
+	private ControlFlowGraph unfold(CFGNode node) {
 		DecisionNode currentDecisionNode = (DecisionNode) node.getNext();
 		IASTExpression conditionExpression = currentDecisionNode.getCondition();
+		
 		EndConditionNode endNode = new EndConditionNode();
-		DecisionNode prevCondition = new DecisionNode();
-		prevCondition.setCondition(conditionExpression);
-		node.setNext(prevCondition); 
-		for (int i = 0; i < nLoops - 1; i++) {	
-			DecisionNode condition = new DecisionNode();
-			condition.setCondition(conditionExpression);
+		CFGNode beginNode = new BeginIfNode();
+		CFGNode lastNode = endNode;
+		CFGNode elseNode = new EmptyNode();
+		
+		return new ControlFlowGraph(lastNode, endNode);
+	}		
+	
+	private ControlFlowGraph copyGraph(CFGNode start, CFGNode exit) {
+		CFGNode newStart = start;
+		CFGNode newExit = exit;
+		CFGNode tempNode;
+		if (start == exit || start == null) {
+			return null;
+	
+		} else if (start instanceof BeginWhileNode) {
+			newStart = new BeginWhileNode();
+			newStart.setNext(iterateNode(start.getNext()));
+		} 
+		
+		else if (start instanceof IterationNode) {
+			newStart = new IterationNode();
 			
-			prevCondition.setNext(condition);
-			prevCondition = condition;
+		} else if (start instanceof DecisionNode) {
+			//newStart = new DecisionNode();
+			//tempNode = (DecisionNode) start;
+			newStart = new EmptyNode();
+			newStart.setNext(iterateNode(start.getNext()));
+		} else if (start instanceof PlainNode) {
+			newStart = new PlainNode(((PlainNode) start).getStatement());
+			newStart.setNext(iterateNode(start.getNext()));
+		
+		} else if (start instanceof EndConditionNode) {
+			newStart = new EndConditionNode();
+			newStart.setNext(iterateNode(start.getNext()));
+		
+		} else if (start instanceof BeginIfNode) {
+			newStart = new BeginIfNode();
+			newStart.setNext(iterateNode(start.getNext()));
+		
+		} else if (start instanceof BeginForNode) {
+			newStart = new BeginForNode();
+			newStart.setNext(iterateNode(start.getNext()));
+		
+		} else {
+			newStart = new EmptyNode();
+			newStart.setNext(iterateNode(start.getNext()));
 		}
-		prevCondition.setNext(endNode);
-		return new ControlFlowGraph(node.getNext(), endNode);
+		return new ControlFlowGraph(newStart, newExit);
 	}
 	
-	
-	/**
-	 * @param node
-	 * @return
-	 * subGraph thu nghiem / loi
-	 */
-	private ControlFlowGraph subGraph1(IterationNode node) {
-		//ControlFlowGraph tempGraph = new ControlFlowGraph();
-		DecisionNode currentDecisionNode = (DecisionNode) node.getNext();
-		IASTExpression conditionExpression = currentDecisionNode.getCondition();
-		EndConditionNode endNode = new EndConditionNode();
-		
-		CFGNode thenNode = currentDecisionNode.getThenNode();
-		CFGNode elseNode = currentDecisionNode.getElseNode();
-		CFGNode lastNode = node;
-		
-		for (int i = 0; i < nLoops; i++) {
-			
-			DecisionNode condition = new DecisionNode();
-
-			condition.setCondition(conditionExpression);
-			condition.setThenNode(thenNode);
-			condition.setElseNode(elseNode);
-			
-			condition.getThenNode().toString();
-
-			System.out.println("1");
-		}
-		lastNode = endNode;
-		return new ControlFlowGraph(node.getNext(), endNode);
-		
-	}
 	
 	private CFGNode iterateNode(CFGNode node) {
+		CFGNode newNode = null;
 		if (node == null) {
-			node = null;	
-		} else if (node instanceof IterationNode) {
-				node = iterateNode(subGraph((IterationNode) node).getStart());
-			//	(new ControlFlowGraphBuilder()).print(subGraph((IterationNode) node).getStart());
-				
-			
+			return null;
+		} else if (node instanceof BeginWhileNode) {
+			newNode = new BeginWhileNode();
+			newNode.setNext(iterateNode(node.getNext()));
+		} 
+		else if (node instanceof IterationNode) {
+		//	node.setNext(iterateNode(subGraph(node).getStart()));			
 		} else if (node instanceof DecisionNode) {
-			((DecisionNode) node).setThenNode(iterateNode(((DecisionNode) node).getThenNode()));
-			((DecisionNode) node).setElseNode(iterateNode(((DecisionNode) node).getElseNode())); 
+			newNode = new DecisionNode();
+			((DecisionNode) newNode).setCondition(((DecisionNode) node).getCondition());
+			((DecisionNode) newNode).setThenNode(iterateNode(((DecisionNode) node).getThenNode()));
+			((DecisionNode) newNode).setElseNode(iterateNode(((DecisionNode) node).getElseNode())); 
+		
+		} else if (node instanceof PlainNode) {
+			 newNode = new PlainNode(((PlainNode) node).getStatement());
+			 newNode.setNext(iterateNode(node.getNext()));
+		
+		} else if (node instanceof EndConditionNode) {
+			 newNode = new EndConditionNode();
+			 newNode.setNext(iterateNode(node.getNext()));
+		
+		} else if (node instanceof BeginIfNode) {
+			 newNode = new BeginIfNode();
+			 newNode.setNext(iterateNode(node.getNext()));
+		
+		} else {
+			newNode = new EmptyNode();
+			newNode.setNext(iterateNode(node.getNext()));
 		}
-		 else {
-			 node.setNext(iterateNode(node.getNext()));	
-		}
-		return node;
+		
+		return newNode;
 	}
+	
 
 }
