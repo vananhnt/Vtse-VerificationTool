@@ -1,10 +1,12 @@
 package cfg.node;
 
-public class EndConditionNode extends EndingNode {
+public class EndConditionNode extends EndNode {
 	public EndConditionNode (){
-		super();
 	}
-	public EndConditionNode( CFGNode node){
+	public EndConditionNode(CFGNode node){
 		super(node);
+	}
+	public void printNode() {
+		System.out.println("EndConditionNode");
 	}
 }

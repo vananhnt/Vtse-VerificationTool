@@ -10,8 +10,10 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+
 import cfg.node.ForBeginningNode;
 import cfg.node.IfBeginningNode;
+
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 
@@ -217,15 +219,6 @@ public class UnfoldControlFlowGraph extends ControlFlowGraph{
 	public void print(CFGNode start) {
 		CFGNode iter = start;
 		if (iter == null) return;
-		if (iter instanceof BeginNode){
-			if (iter != null){
-				iter.printNode();
-				print( iter.getNext());
-				if (((BeginNode) iter).getEndNode() != null){
-					
-				
-					print(((BeginNode) iter).getEndNode().getNext());
-				}
 			}
 		} else if (iter instanceof DecisionNode) {
 			
@@ -254,6 +247,7 @@ public class UnfoldControlFlowGraph extends ControlFlowGraph{
 	}
 	
 	public static void main(String[] args) {
+
 		int nLoop = 3;
 		IASTFunctionDefinition func = (new ASTGenerator("./bai1.cpp")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraph()).build(func);		

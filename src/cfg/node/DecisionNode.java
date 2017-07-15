@@ -7,17 +7,15 @@ import org.eclipse.cdt.internal.core.util.ToStringSorter;
 
 public class DecisionNode extends CFGNode{
 	private IASTExpression condition;
+	
 	private CFGNode thenNode;
+	private CFGNode elseNode;
+	// elseNode is not next
 	
-	// elseNode is next
+	public DecisionNode(){}
 	
-	public DecisionNode(){
-		super();		
-	}
-	
-	public DecisionNode( CFGNode prev){
-		this.setPrev(prev);
-		
+	public DecisionNode(CFGNode prev){
+		this.setPrev(prev);	
 	}	
 	
 	public IASTExpression getCondition() {
@@ -31,22 +29,22 @@ public class DecisionNode extends CFGNode{
 	public CFGNode getThenNode() {
 		return thenNode;
 	}	
-	public void setThenNode(CFGNode thenNode) {
-		this.thenNode = thenNode;
+	
+	public void setThenNode(CFGNode other) {
+		thenNode = other;
 	}
 	
-	
 // set ELSE NODE with Input is CFGNode  or  IASTStatement	
-	public void setElseNode( CFGNode elseNode){
-		this.setNext(elseNode);
+	public void setElseNode(CFGNode other){
+		elseNode = other;
 	}
 	
 	public CFGNode getElseNode(){
-		return this.getNext();
+		return elseNode;
 	}
 	
 	public void printNode(){
-		System.out.println(" with Condition ( " + condition.getRawSignature() + " )" );	
+		System.out.println("with Condition: " + condition.getRawSignature());	
 		
 	}
 				

@@ -1,0 +1,104 @@
+package cfg.build;
+
+import org.eclipse.cdt.core.dom.ast.IASTExpression;
+
+import cfg.node.BeginWhileNode;
+import cfg.node.CFGNode;
+import cfg.node.DecisionNode;
+import cfg.node.EmptyNode;
+import cfg.node.EndConditionNode;
+import cfg.node.BeginIfNode;
+import cfg.node.IterationNode;
+import cfg.node.PlainNode;
+
+
+/**
+ * @author va
+ * sap dc r 
+ */
+public class UnfoldCFG {
+	private int nLoops = 4;
+	
+	private CFGNode start;
+	
+	public UnfoldCFG(ControlFlowGraph other) {
+		start = null;
+	}
+	
+	public void generate(ControlFlowGraph _cfg) {
+		start = iterateNode(_cfg.getStart());
+		(new ControlFlowGraphBuilder()).print(start);
+	}	
+	 
+	private CFGNode copyThen(CFGNode node) {
+		 if (node instanceof IterationNode) {
+			node = null;
+		} else {
+			node.setNext(iterateNode(node.getNext()));
+		}
+		return node;
+	}
+	
+	private CFGNode findExit(CFGNode node) {
+		CFGNode iter = null;
+		for (iter = node; iter.getNext()!= null; iter = iter.getNext()) {
+			if (iter.getNext() instanceof IterationNode) {
+			}
+			else iter = iter.getNext();	
+		}
+		return iter;
+	}
+	
+	private ControlFlowGraph unfold(CFGNode node) {
+		DecisionNode currentDecisionNode = (DecisionNode) node.getNext();
+		IASTExpression conditionExpression = currentDecisionNode.getCondition();
+		
+		EndConditionNode endNode = new EndConditionNode();
+		
+		CFGNode beginNode = new IfBeginningNode();
+		CFGNode lastNode = endNode;
+		CFGNode temp = copyThen(currentDecisionNode.getThenNode());
+		
+		ControlFlowGraph thenClause = new ControlFlowGraph(new EmptyNode(), new EmptyNode());
+		CFGNode elseNode = new EmptyNode();
+		//(new ControlFlowGraphBuilder()).print(temp);
+		for (int i = 0; i < nLoops; i++) {
+			
+			DecisionNode condition = new DecisionNode();
+			condition.setCondition(conditionExpression);
+			condition.setElseNode(elseNode);
+		
+			condition.setThenNode(temp);
+			condition.getElseNode().setNext(endNode);
+			
+
+			findExit(temp).setNext(lastNode);
+			//condition.setNext(thenClause.getExit());
+			//thenClause.getExit().setNext(lastNode);
+			lastNode = condition;		
+			
+		}
+		
+		return new ControlFlowGraph(lastNode, endNode);
+	}		
+	
+	
+	private CFGNode iterateNode(CFGNode node) {
+		if (node == null) {
+			 node = null;
+		} else if (node instanceof BeginWhileNode) {
+			node.setNext((iterateNode(unfold(node).getStart())));		
+		} 
+		else if (node instanceof IterationNode) {
+			//node.setNext(iterateNode(node.getNext()));			
+		} else if (node instanceof DecisionNode) {
+			((DecisionNode) node).setThenNode(iterateNode(((DecisionNode) node).getThenNode()));
+			((DecisionNode) node).setElseNode(iterateNode(((DecisionNode) node).getElseNode())); 
+		}
+		 else {
+			 node.setNext(iterateNode(node.getNext()));	
+		}
+		return node;
+	}
+
+}

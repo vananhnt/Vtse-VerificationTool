@@ -28,8 +28,8 @@ public class PlainNode extends CFGNode{
 	public void printNode(){
 		
 		if (statement != null){
-			System.out.println(this.getClass());
-			System.out.println( "       ^.^ " + statement.getRawSignature());
+			System.out.print("PlainNode: ");
+			System.out.println(statement.getRawSignature());
 		}
 		
 	}

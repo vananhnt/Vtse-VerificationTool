@@ -7,11 +7,11 @@ using namespace std;
 
 int main(){
 
+
 		int b = 111;
 		for (int i = 0; i<9; i++){
 			for (int j = 0; j < 3; j++){
 				b = 1234566;
 			}
-
 		}
 }
