@@ -1,41 +1,47 @@
 package cfg.node;
 // node is 1 incommingNode and 1 outGoingNode;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 
-public class PlainNode extends CFGNode{
-	private IASTStatement statement;
+public class PlainNode extends CFGNode implements Serializable {
+	private String statement;
 	
 	public PlainNode(){
 		super();		
 	}
 	
-	public PlainNode(CFGNode prev, CFGNode next){
-		super(prev, next);
-	}	
-	public PlainNode (IASTStatement st) {
+	public PlainNode (String st) {
 		statement = st;
 	}
 
-	public IASTStatement getStatement() {
+	public String getStatement() {
 		return statement;
 	}
 
-	public void setStatement(IASTStatement statement) {
+	public void setStatement(String statement) {
 		this.statement = statement;
+	}
+	
+	public PlainNode deepCopy(Map<CFGNode, CFGNode> isomorphism) {
+		PlainNode copy = (PlainNode) isomorphism.get(this);
+		if (copy == null) {
+			copy = new PlainNode();
+			isomorphism.put(this, copy);
+			copy.statement = this.deepCopy(isomorphism).statement;
+		}
+		return copy;
 	}
 	
 	public void printNode(){
 		
 		if (statement != null){
 			System.out.print("PlainNode: ");
-			System.out.println(statement.getRawSignature());
+			System.out.println(statement);
 		}
 		
 	}
 	
-//	public String toString() {
-//		
-//		return this.getClass() + " -> " + statement.getRawSignature();
-//	}
 }

@@ -1,5 +1,9 @@
 package cfg.build;
 
+import java.io.Serializable;
+
+import org.eclipse.cdt.codan.core.model.cfg.INodeFactory;
+import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCaseStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
@@ -13,22 +17,25 @@ import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSwitchStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
+
+import cfg.node.BeginForNode;
+import cfg.node.BeginIfNode;
 import cfg.node.BeginWhileNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
-import cfg.node.BeginForNode;
-import cfg.node.BeginIfNode;
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 import cfg.node.ReturnNode;
+import cfg.utils.ExpressionHelper;
+import cfg.utils.ObjectCloner;
 
 /**
  * @author va
  */
 
-public class ControlFlowGraphBuilder {
+public class ControlFlowGraphBuilder implements Serializable {
 	
 	/**
 	 * @param def: một hàm
@@ -70,13 +77,13 @@ public class ControlFlowGraphBuilder {
 			ReturnNode returnNode = new ReturnNode(statement);	
 			cfg = new ControlFlowGraph(returnNode, returnNode);
 		} else {
-			PlainNode plainNode = new PlainNode(statement);
+			PlainNode plainNode = new PlainNode(ExpressionHelper.toString(statement));
 			cfg = new ControlFlowGraph(plainNode, plainNode);
+			
 		}
 		return cfg;
 	}
 	
-
 	/**
 	 * @param whileStatement
 	 * @return node đầu và cuối của khối lệnh while 
@@ -87,6 +94,7 @@ public class ControlFlowGraphBuilder {
 		EndConditionNode end = new EndConditionNode();
 		IterationNode iterationNode = new IterationNode ();
 		//iterationNode.setIterationExpression(whileStatement.getCondition());
+	
 		ControlFlowGraph thenClause = createSubGraph(whileStatement.getBody());
 		//decisionNode.setNext(thenClause.getExit());
 		decisionNode.setCondition(whileStatement.getCondition());
@@ -95,14 +103,13 @@ public class ControlFlowGraphBuilder {
 		//then branch	
 		decisionNode.setThenNode(thenClause.getStart());
 		thenClause.getExit().setNext(iterationNode);
-		//iterationNode.setNext(decisionNode);
-		//iterationNode.setPrev(thenClause.getExit());
 		//khi in can xet truong hop iterationNode rieng
 
 		//else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(end);
-		decisionNode.setNext(end);
+		
+		beginWhileNode.setEndNode(end);
 		
 		return new ControlFlowGraph(beginWhileNode, end);
 		}
@@ -125,17 +132,17 @@ public class ControlFlowGraphBuilder {
 		//then branch	
 		decisionNode.setThenNode(thenClause.getStart());
 		thenClause.getExit().setNext(iterationNode);
-		iterationNode.setNext(decisionNode);
+		//iterationNode.setNext(decisionNode);
 		//khi in can xet truong hop iterationNode rieng
 		
 		//else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(end);
 		
+		beginDoNode.setEndNode(end);
 		return new ControlFlowGraph(beginDoNode, end);
 	}
 
-	
 	/**
 	 * @param ifStatement
 	 * @return node đầu cuối của khối lệnh If 
@@ -158,6 +165,7 @@ public class ControlFlowGraphBuilder {
 	
 		thenClause.getExit().setNext(endNode);
 		elseClause.getExit().setNext(endNode);
+		beginIfNode.setEndNode(endNode);
 		
 		return new ControlFlowGraph(beginIfNode, endNode);
 	}
@@ -174,7 +182,7 @@ public class ControlFlowGraphBuilder {
 		EndConditionNode endNode = new EndConditionNode();
 		DecisionNode decisionNode = new DecisionNode();
 		IterationNode iterationNode = new IterationNode (forStatement.getIterationExpression());
-		PlainNode init = new PlainNode(forStatement.getInitializerStatement());
+		PlainNode init = new PlainNode(ExpressionHelper.toString(forStatement.getInitializerStatement()));
 		ControlFlowGraph thenClause = createSubGraph(forStatement.getBody());
 		
 		bgForNode.setNext(init);	
@@ -184,12 +192,13 @@ public class ControlFlowGraphBuilder {
 		//then branch
 		decisionNode.setThenNode(thenClause.getStart());
 		thenClause.getExit().setNext(iterationNode);
-		iterationNode.setNext(decisionNode);
+		//iterationNode.setNext(decisionNode);
 		//khi in can xet truong hop iterationNode rieng
 		
 		//else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(endNode);
+		bgForNode.setEndNode(endNode);
 		
 		return new ControlFlowGraph(bgForNode, endNode);
 	}
@@ -213,12 +222,15 @@ public class ControlFlowGraphBuilder {
 	 * @param caseSt
 	 * @return
 	 */
+	
 	private IASTExpression createCondition(IASTSwitchStatement switchSt, IASTCaseStatement caseSt) {
-//		IASTExpression compare = (new CNodeFactory()).newBinaryExpression(IASTBinaryExpression.op_assign, 
-//					switchSt.getControllerExpression(),
-//					caseSt.getExpression());
-		IASTExpression compare = caseSt.getExpression();
-		return compare;
+		INodeFactory nodeFactory = (INodeFactory) switchSt.getTranslationUnit().getASTNodeFactory();
+		IASTExpression operand1 = switchSt.getControllerExpression().copy();
+		IASTExpression operand2 = caseSt.getExpression().copy();
+		IASTExpression condition 
+					= ((org.eclipse.cdt.core.dom.ast.INodeFactory) nodeFactory).newBinaryExpression(IASTBinaryExpression.op_equals, 
+								 operand1, operand2);
+		return condition;
 	}
 	
 	
@@ -293,20 +305,21 @@ public class ControlFlowGraphBuilder {
 		}
 		else {
 				iter.printNode();
-				print(iter.getNext());	
+				if (iter.getNext() != null) print(iter.getNext());	
 		}
 }
 	/**
 	 * @param args
 	 * In cfg
+	 * @throws Exception 
 	 */
-	public static void  main(String[] args) {
-		IASTFunctionDefinition func = (new ASTGenerator("./test.c")).getFunction(0);
+	public static void  main(String[] args) throws Exception {
+		IASTFunctionDefinition func = (new ASTGenerator("./bai1.cpp")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
-		cfg.printGraph();
+		//cfg.printDebug();
 		System.out.println("==========================");
-		UnfoldCFG graph = new UnfoldCFG(cfg);
-		graph.generate(cfg);
-		
+		//ControlFlowGraph newGraph = (ControlFlowGraph) ObjectCloner.deepCopy(cfg);
+		ControlFlowGraph newNode = (ControlFlowGraph) ObjectCloner.deepCopy(cfg);
+		newNode.printGraph();
  	}
 }

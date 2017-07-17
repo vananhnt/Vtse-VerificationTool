@@ -1,35 +1,29 @@
 package cfg.node;
-// abstact ....  ko chua du lieu
-import org.eclipse.cdt.core.dom.ast.ASTNodeProperty;
-import org.eclipse.cdt.core.dom.ast.ASTVisitor;
-import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
-import org.eclipse.cdt.core.dom.ast.IASTFileLocation;
-import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTNodeLocation;
-import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
-import org.eclipse.cdt.core.dom.ast.IASTNode.CopyStyle;
-import org.eclipse.cdt.core.parser.IToken;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Map;
 // Node is parent of all Node in cfg
-public abstract class CFGNode {	
-	private CFGNode prev;
+public class CFGNode implements Serializable{	
 	private CFGNode next;	
-	
+	private boolean vistited;
 	public CFGNode(){		
 	}
 	
-	public CFGNode( CFGNode prev, CFGNode next){
-		this.prev = prev;
+	public CFGNode(CFGNode next){
+		this.vistited = false;
 		this.next = next;		
 	}
 	
-	public CFGNode(CFGNode node){
-		this.prev = node.prev;
-		this.next = node.next;
+	public CFGNode deepCopy(Map<CFGNode, CFGNode> isomorphism) {
+		CFGNode copy = isomorphism.get(this);
+		if (copy == null) {
+			copy = new CFGNode();
+			isomorphism.put(this, copy);
+			copy.next = this.deepCopy(isomorphism);
+		}
+		return copy;
+	}
 	
-	}
-	public CFGNode copy() {
-		return this;
-	}
 	public CFGNode getNext() {
 		return next;
 	}
@@ -38,17 +32,23 @@ public abstract class CFGNode {
 		this.next = next;
 	}
 
-	public CFGNode getPrev() {
-		return prev;
+	public ArrayList<CFGNode> adjacent() {
+		ArrayList<CFGNode> adj = new ArrayList<>();
+		adj.add(next);
+		return adj;
 	}
-
-	public void setPrev(CFGNode prev) {
-		this.prev = prev;
-	}	
 // print
 		
 	public void printNode(){	
 		if (this != null) System.out.println(this.getClass());
+	}
+
+	public boolean isVistited() {
+		return vistited;
+	}
+
+	public void setVistited(boolean vistited) {
+		this.vistited = vistited;
 	}
 
 }

@@ -1,5 +1,6 @@
 package cfg.build;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
@@ -55,7 +56,7 @@ public class ASTGenerator {
 	 * chỉ lấy function đầu tiên
 	 * chưa xét trường hợp cho chọn các func khác nhau 
 	 */
-	IASTFunctionDefinition getFunction(int index) {
+	public IASTFunctionDefinition getFunction(int index) {
 //		int count = 0;
 		IASTFunctionDefinition funcDef = null;
 		IASTDeclaration[] declarations = translationUnit.getDeclarations();

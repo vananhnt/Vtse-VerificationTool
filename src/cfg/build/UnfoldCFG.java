@@ -1,6 +1,8 @@
 package cfg.build;
 
-import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import java.util.LinkedList;
+
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.node.BeginForNode;
 import cfg.node.BeginIfNode;
@@ -11,6 +13,7 @@ import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
+import cfg.utils.ObjectCloner;
 
 
 /**
@@ -18,160 +21,142 @@ import cfg.node.PlainNode;
  * sap dc r 
  */
 public class UnfoldCFG {
-	private int nLoops = 4;
+	private int nLoops = 2;
 	
 	private CFGNode start;
-	private CFGNode exit;
 	
-	public UnfoldCFG(ControlFlowGraph other) {
-		start = null;
-		exit = null;
+	public UnfoldCFG() {}
+	
+	public UnfoldCFG(ControlFlowGraph cfg) {
+		generate(cfg);
 	}
 	
 	public void generate(ControlFlowGraph otherCfg) {
-		start = iterateNode(otherCfg.getStart());
-	//	(new ControlFlowGraphBuilder()).print(start);
+		try {
+			start = iterateNode(otherCfg.getStart());
+			} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}	
-	private CFGNode findExit(CFGNode node) {
-		CFGNode iter = node;
-		while (!(iter.getNext() instanceof IterationNode)) {
+	
+	/**
+	 * @param start
+	 * @return
+	 */
+	private CFGNode findExit(CFGNode start) {
+		CFGNode iter = start;
+		while (!(iter instanceof IterationNode)) {
 			iter = iter.getNext();
 		}
 		return iter;
 	}
-	private ControlFlowGraph unfold(CFGNode node) {
-		DecisionNode currentDecisionNode = (DecisionNode) node.getNext();
-		IASTExpression conditionExpression = currentDecisionNode.getCondition().copy();
-		
-		EndConditionNode endNode = new EndConditionNode();
-		BeginWhileNode beginNode = new BeginWhileNode();
-		CFGNode thenNode = currentDecisionNode.getThenNode();
-		CFGNode elseNode = currentDecisionNode.getElseNode();
-		CFGNode exitThenNode = findExit(currentDecisionNode.getThenNode());
+	
+	
+	private ControlFlowGraph unfoldWhile(CFGNode start, CFGNode exit) throws Exception {
+		DecisionNode currentCondition = (DecisionNode) start.getNext();
+		String conditionExpression = currentCondition.getCondition();
+		EndConditionNode endNode = (EndConditionNode) ((BeginWhileNode) start).getEndNode();
 		CFGNode lastNode = endNode;
+		ControlFlowGraph thenClause = new ControlFlowGraph(currentCondition.getThenNode(), 
+					findExit(currentCondition.getThenNode())); 
+		ControlFlowGraph copyThen;
 		
-		//exitThenNode.printNode();
-		ControlFlowGraph thenClause = new ControlFlowGraph();
-		thenClause  = copyGraph(thenNode, exitThenNode);
+		thenClause.setStart(iterateNode(thenClause.getStart()));
 		//thenClause.printGraph();
-		ControlFlowGraph newClause = copyGraph(thenNode, exitThenNode);
-		//thenClause = (new ControlFlowGraph(new EmptyNode(), new EmptyNode()));
-	
-		newClause.getExit().setNext(thenClause.getStart());
-		newClause.setExit(thenClause.getExit());
-		newClause.printGraph();
 		
-		return new ControlFlowGraph(new EmptyNode(), new EmptyNode());
-	}		
-
-	private ControlFlowGraph copyGraph(CFGNode start, CFGNode exit) {
-		CFGNode newStart = start;
-		if (start == exit) {
-			//return null;
-		} else if (start instanceof BeginWhileNode) {
-			newStart = new BeginWhileNode();	
-			newStart.setNext(copyGraph(start.getNext(), exit).getStart());
-			//newStart.setNext(unfold(start).getStart());
-		} 
-		else if (start instanceof IterationNode) {
-			newStart = new IterationNode();
-			newStart.setNext(unfold(start).getStart());
+		for (int i = 0; i < nLoops; i++) {
+			DecisionNode condition = new DecisionNode();
+			condition.setCondition(conditionExpression);
+			condition.setElseNode(new EmptyNode());
+			condition.getElseNode().setNext(endNode);
 			
-		} else if (start instanceof DecisionNode) {
-			newStart = new DecisionNode();
-			((DecisionNode) newStart).setCondition(((DecisionNode) start).getCondition());
-			((DecisionNode) newStart).setThenNode(copyGraph(((DecisionNode) start)
-																.getThenNode(), exit).getStart());
-			((DecisionNode) newStart).setElseNode(copyGraph(((DecisionNode) start)
-																.getElseNode(), exit).getStart());
-		
-		} else if (start instanceof PlainNode) {
-			newStart = new PlainNode(((PlainNode) start).getStatement());
-			newStart.setNext(copyGraph(start.getNext(), exit).getStart());	
-		
-		} else if (start instanceof EndConditionNode) {
-			newStart = new EndConditionNode();
-			newStart.setNext(copyGraph(start.getNext(), exit).getStart());
-				
-		} else if (start instanceof BeginIfNode) {
-			newStart = new BeginIfNode();
-			newStart.setNext(copyGraph(start.getNext(), exit).getStart());
-		
-		} else if (start instanceof BeginForNode) {
-			newStart = new BeginForNode();
-			newStart.setNext(copyGraph(start.getNext(), exit).getStart());
-		
-		} else {
-			newStart = new EmptyNode();
-			newStart.setNext(copyGraph(start.getNext(), exit).getStart());	
+			copyThen = new ControlFlowGraph();
+			copyThen = (ControlFlowGraph) ObjectCloner.deepCopy(thenClause);
+			
+			condition.setThenNode(copyThen.getStart());
+			copyThen.getExit().setNext(lastNode);
+			lastNode = condition;
 		}
-		return new ControlFlowGraph(newStart, exit);
+		CFGNode beginNode = new BeginWhileNode();
+		beginNode.setNext(lastNode);
+	 	//new ControlFlowGraph(beginNode.getNext(), endNode).printGraph();
+		return new ControlFlowGraph(beginNode.getNext(), endNode);
 	}
 	
-	private ControlFlowGraph unfoldCfg(CFGNode start, CFGNode exit) {
-		
-		CFGNode newStart = start;
-		CFGNode tempNode;
-		//ControlFlowGraph cfg = new ControlFlowGraph(start, exit);
-		
-		if (start == exit) {
-			//return null;
-		} else if (start instanceof BeginWhileNode) {
-			newStart = new BeginWhileNode();	
-			newStart.setNext(unfoldCfg(start.getNext(), exit).getStart());
-			//newStart.setNext(unfold(start).getStart());
-		} 
-		else if (start instanceof IterationNode) {
-			newStart = new IterationNode();
-			newStart.setNext(unfold(start).getStart());
-			
-		} else if (start instanceof DecisionNode) {
-			newStart = new DecisionNode();
-			((DecisionNode) newStart).setCondition(((DecisionNode) start).getCondition());
-			((DecisionNode) newStart).setThenNode(unfoldCfg(((DecisionNode) start).getThenNode(), exit).getStart());
-			((DecisionNode) newStart).setElseNode(unfoldCfg(((DecisionNode) start).getElseNode(), exit).getStart());
-			
-		} else if (start instanceof PlainNode) {
-			newStart = new PlainNode(((PlainNode) start).getStatement());
-			newStart.setNext(unfoldCfg(start.getNext(), exit).getStart());	
-		
-		} else if (start instanceof EndConditionNode) {
-			newStart = new EndConditionNode();
-			newStart.setNext(unfoldCfg(start.getNext(), exit).getStart());
-				
-		} else if (start instanceof BeginIfNode) {
-			newStart = new BeginIfNode();
-			newStart.setNext(unfoldCfg(start.getNext(), exit).getStart());
-		
-		} else if (start instanceof BeginForNode) {
-			newStart = new BeginForNode();
-			newStart.setNext(unfoldCfg(start.getNext(), exit).getStart());
-		
-		} else {
-			newStart = new EmptyNode();
-			newStart.setNext(unfoldCfg(start.getNext(), exit).getStart());	
-		}
-		return new ControlFlowGraph(newStart, exit);
-	}
+	private ControlFlowGraph unfoldFor(CFGNode start, CFGNode exit) throws Exception {
+		PlainNode initNode = (PlainNode) start.getNext();
 	
-	private CFGNode iterateNode(CFGNode node) {
+		DecisionNode currentCondition = (DecisionNode) initNode.getNext();
+		String conditionExpression = currentCondition.getCondition();
+		EndConditionNode endNode = (EndConditionNode) ((BeginForNode) start).getEndNode();
+		CFGNode lastNode = endNode;
+		ControlFlowGraph thenClause = new ControlFlowGraph(currentCondition.getThenNode(), 
+					findExit(currentCondition.getThenNode())); 
+		ControlFlowGraph copyThen;
+		
+		thenClause.setStart(iterateNode(thenClause.getStart()));
+		//thenClause.printGraph();
+		
+		for (int i = 0; i < nLoops; i++) {
+			DecisionNode condition = new DecisionNode();
+			condition.setCondition(conditionExpression);
+			condition.setElseNode(new EmptyNode());
+			condition.getElseNode().setNext(endNode);
+			
+			copyThen = new ControlFlowGraph();
+			copyThen = (ControlFlowGraph) ObjectCloner.deepCopy(thenClause);
+			
+			condition.setThenNode(copyThen.getStart());
+			copyThen.getExit().setNext(lastNode);
+			lastNode = condition;
+		}
+		CFGNode beginNode = new BeginForNode();
+		initNode.setNext(lastNode);
+		beginNode.setNext(initNode);
+	 	//new ControlFlowGraph(beginNode.getNext(), endNode).printGraph();
+		return new ControlFlowGraph(beginNode.getNext(), endNode);
+	} 
+	
+	private CFGNode iterateNode(CFGNode node) throws Exception {
 		if (node == null) {
-			node = null;	
+			return null;
+		
 		} else if (node instanceof BeginWhileNode) {
-		//	node.setNext(iterateNode(unfold(node).getStart()));
-			unfold(node).printGraph();
-		} else if (node instanceof IterationNode) {
-			//node = iterateNode(unfold(node).getStart());
-			node = null;
-		} else if (node instanceof DecisionNode) {
-			((DecisionNode) node).setThenNode(iterateNode(((DecisionNode) node).getThenNode()));
-			((DecisionNode) node).setElseNode(iterateNode(((DecisionNode) node).getElseNode())); 
-		}
-		 else {
-			 node.setNext(iterateNode(node.getNext()));	
+			ControlFlowGraph whileGraph = unfoldWhile(node, ((BeginWhileNode) node).getEndNode());
+			node.setNext(whileGraph.getStart());
+			whileGraph.getExit().setNext(iterateNode(((BeginWhileNode) node).getEndNode().getNext()));
+			
+		} else if (node instanceof PlainNode) {
+			node.setNext(iterateNode(node.getNext()));	
+	
+		} else if (node instanceof BeginIfNode) {
+			node.setNext(iterateNode(node.getNext()));	
+			
+		} else if (node instanceof BeginForNode) {
+			ControlFlowGraph forGraph = unfoldFor(node, ((BeginForNode) node).getEndNode());
+			node.setNext(forGraph.getStart());
+			forGraph.getExit().setNext(iterateNode(((BeginForNode) node).getEndNode().getNext()));
+	
+		} else if (node instanceof EmptyNode) {
+			node.setNext(iterateNode(node.getNext()));				
+		
+		} else if (node instanceof EndConditionNode) {
+			node.setNext(iterateNode(node.getNext()));		
 		}
 		return node;
-	}
+}
+
+	public static void  main(String[] args) {
+		IASTFunctionDefinition func = (new ASTGenerator("./test.c")).getFunction(0);
+		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
+		//cfg.printGraph();
+		UnfoldCFG newCfg = new UnfoldCFG();
+		newCfg.generate(cfg);
+		
+ 	}
 	
 
 }
+

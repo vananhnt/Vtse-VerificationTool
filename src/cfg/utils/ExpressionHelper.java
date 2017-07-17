@@ -1,10 +1,10 @@
 package cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
-import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
 public class ExpressionHelper {
@@ -20,15 +20,17 @@ public class ExpressionHelper {
 		if (expression instanceof IASTLiteralExpression) {
 			return expression.toString();
 		}
-		
+		if (expression instanceof IASTStatement) {
+			return expression.getRawSignature();
+		}
 		return null;
 	}
+	
 	
 	public static String toStringBinaryExpression(IASTBinaryExpression binaryExpression) {
 		String operand1 = toString(binaryExpression.getOperand1());
 		String operand2 = toString(binaryExpression.getOperand2());
 		String operator = getCorrespondBinaryOperator(binaryExpression.getOperator());
-		
 		String expression = String.format("(%s %s %s)", operand1, operator, operand2);
 		return expression;
 	}
@@ -58,4 +60,6 @@ public class ExpressionHelper {
 		
 		return "@";
 	}
+	
+
 }
