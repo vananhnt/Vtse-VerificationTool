@@ -1,6 +1,5 @@
 package cfg.build;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;

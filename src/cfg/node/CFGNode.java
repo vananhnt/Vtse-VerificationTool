@@ -1,9 +1,7 @@
 package cfg.node;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
-// Node is parent of all Node in cfg
-public class CFGNode implements Serializable{	
+
+public class CFGNode {	
 	private CFGNode next;	
 	private boolean vistited;
 	public CFGNode(){		
@@ -13,17 +11,7 @@ public class CFGNode implements Serializable{
 		this.vistited = false;
 		this.next = next;		
 	}
-	
-	public CFGNode deepCopy(Map<CFGNode, CFGNode> isomorphism) {
-		CFGNode copy = isomorphism.get(this);
-		if (copy == null) {
-			copy = new CFGNode();
-			isomorphism.put(this, copy);
-			copy.next = this.deepCopy(isomorphism);
-		}
-		return copy;
-	}
-	
+
 	public CFGNode getNext() {
 		return next;
 	}
@@ -37,7 +25,6 @@ public class CFGNode implements Serializable{
 		adj.add(next);
 		return adj;
 	}
-// print
 		
 	public void printNode(){	
 		if (this != null) System.out.println(this.getClass());

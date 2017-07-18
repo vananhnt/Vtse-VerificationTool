@@ -3,6 +3,7 @@ package cfg.node;
 import java.io.Serializable;
 import java.util.Map;
 
+@SuppressWarnings("serial")
 public class EmptyNode extends CFGNode implements Serializable{
 	
 	public EmptyNode deepCopy(Map<CFGNode, CFGNode> isomorphism) {

@@ -1,7 +1,5 @@
 package cfg.build;
 
-import java.io.Serializable;
-
 import org.eclipse.cdt.codan.core.model.cfg.INodeFactory;
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
@@ -28,14 +26,12 @@ import cfg.node.EndConditionNode;
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 import cfg.node.ReturnNode;
-import cfg.utils.ExpressionHelper;
-import cfg.utils.ObjectCloner;
 
 /**
  * @author va
  */
 
-public class ControlFlowGraphBuilder implements Serializable {
+public class ControlFlowGraphBuilder {
 	
 	/**
 	 * @param def: một hàm
@@ -77,7 +73,7 @@ public class ControlFlowGraphBuilder implements Serializable {
 			ReturnNode returnNode = new ReturnNode(statement);	
 			cfg = new ControlFlowGraph(returnNode, returnNode);
 		} else {
-			PlainNode plainNode = new PlainNode(ExpressionHelper.toString(statement));
+			PlainNode plainNode = new PlainNode(statement);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
 			
 		}
@@ -161,7 +157,6 @@ public class ControlFlowGraphBuilder implements Serializable {
 		
 		decisionNode.setThenNode(thenClause.getStart());
 		decisionNode.setElseNode(elseClause.getStart());
-		decisionNode.setNext(endNode);
 	
 		thenClause.getExit().setNext(endNode);
 		elseClause.getExit().setNext(endNode);
@@ -182,7 +177,7 @@ public class ControlFlowGraphBuilder implements Serializable {
 		EndConditionNode endNode = new EndConditionNode();
 		DecisionNode decisionNode = new DecisionNode();
 		IterationNode iterationNode = new IterationNode (forStatement.getIterationExpression());
-		PlainNode init = new PlainNode(ExpressionHelper.toString(forStatement.getInitializerStatement()));
+		PlainNode init = new PlainNode(forStatement.getInitializerStatement());
 		ControlFlowGraph thenClause = createSubGraph(forStatement.getBody());
 		
 		bgForNode.setNext(init);	
@@ -233,7 +228,6 @@ public class ControlFlowGraphBuilder implements Serializable {
 		return condition;
 	}
 	
-	
 	/**
 	 * @param switchStatement
 	 * @return
@@ -278,36 +272,7 @@ public class ControlFlowGraphBuilder implements Serializable {
 		
 		return new ControlFlowGraph(beginSwitchNode, endNode);
 	}
-	/**
-	 * @param start: node đầu của cfg
-	 *	In ra ControlFlowGraph 
-	 */
-	public static void print(CFGNode start) {
-		CFGNode iter = start;
-		if (iter == null) {
-			return;
-		}
-		if (iter instanceof DecisionNode) {
-			if (((DecisionNode) iter).getCondition() == null) {
-				System.out.println("decision is not set yet");
-			} else {
-				iter.printNode();
-				print(((DecisionNode) iter).getThenNode());
-				print(((DecisionNode) iter).getElseNode());
-			}
-		} 
-		else if (iter instanceof IterationNode) {
-			System.out.println(iter.getClass().toString());
-			return;
-		} else if (iter instanceof EmptyNode) {
-			System.out.println(iter.getClass().toString());
-			print(iter.getNext());	
-		}
-		else {
-				iter.printNode();
-				if (iter.getNext() != null) print(iter.getNext());	
-		}
-}
+
 	/**
 	 * @param args
 	 * In cfg
@@ -316,10 +281,8 @@ public class ControlFlowGraphBuilder implements Serializable {
 	public static void  main(String[] args) throws Exception {
 		IASTFunctionDefinition func = (new ASTGenerator("./bai1.cpp")).getFunction(0);
 		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
-		//cfg.printDebug();
-		System.out.println("==========================");
-		//ControlFlowGraph newGraph = (ControlFlowGraph) ObjectCloner.deepCopy(cfg);
-		ControlFlowGraph newNode = (ControlFlowGraph) ObjectCloner.deepCopy(cfg);
-		newNode.printGraph();
- 	}
+		cfg.unfold().printGraph();
+		//((ControlFlowGraph) Cloner.clone(cfg)).printGraph();
+		
+	}
 }

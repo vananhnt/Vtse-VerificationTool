@@ -26,7 +26,6 @@ public class ExpressionHelper {
 		return null;
 	}
 	
-	
 	public static String toStringBinaryExpression(IASTBinaryExpression binaryExpression) {
 		String operand1 = toString(binaryExpression.getOperand1());
 		String operand2 = toString(binaryExpression.getOperand2());
@@ -61,5 +60,5 @@ public class ExpressionHelper {
 		return "@";
 	}
 	
-
+	
 }

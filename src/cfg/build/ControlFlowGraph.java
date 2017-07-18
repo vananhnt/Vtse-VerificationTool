@@ -1,14 +1,6 @@
 package cfg.build;
-/*
- * nguyen thi thuy 97
- * @vananh: Note to Thuy: Da them ham addNode va sua printGraph
- * 						  De in cfg chi can: cfg.printGraph()
- */
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
-import java.util.Map;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
@@ -19,7 +11,8 @@ import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
 import cfg.node.IterationNode;
 
-public class ControlFlowGraph implements Serializable {
+
+public class ControlFlowGraph {
 	private CFGNode start;
 	private CFGNode exit;
 
@@ -39,8 +32,7 @@ public class ControlFlowGraph implements Serializable {
 			exit.setNext(other.start);
 			exit = other.exit;
 		}
-	}
-	
+	}	
 
 	public void setExit(CFGNode node) {
 		exit = node;
@@ -62,7 +54,9 @@ public class ControlFlowGraph implements Serializable {
 		return exit;
 	}
 	
-
+	public void DFS() {
+		DFSHelper(start);	
+	}
 	
 	private void DFSHelper(CFGNode node) {
 		node.setVistited(true);
@@ -76,17 +70,18 @@ public class ControlFlowGraph implements Serializable {
 		}
 	}
 	
-	public void DFS() {
-		DFSHelper(start);	
-	}
-	
+	/**
+	 * Ham printGraph de in cfg
+	 */
 	public void printGraph() {
 		if (this != null)
 			print(start, 0);
 	}
+	
 	public static void printGraph(CFGNode start) {
 			print(start, 0);
 	}
+	
 	public void printDebug(){
 		printDebug(start);
 	}
@@ -96,11 +91,9 @@ public class ControlFlowGraph implements Serializable {
 			System.out.print(" ");
 		}
 	}
-	
-	
+		
 	private static void print(CFGNode start, int level) {
 		CFGNode iter = start;
-		
 		printSpace(level);
 		if (iter == null) {
 			return;
@@ -113,7 +106,7 @@ public class ControlFlowGraph implements Serializable {
 			}
 			//printSpace(level);
 			System.out.println("Else Clause: ");
-			if (((DecisionNode) iter).getElseNode() != null)
+			//if (((DecisionNode) iter).getElseNode() != null)
 				print(((DecisionNode) iter).getElseNode(),  level + 7);		
 		} 
 		else if (iter instanceof IterationNode) {
@@ -157,4 +150,13 @@ public class ControlFlowGraph implements Serializable {
 	
 	}
 	
+	/**
+	 * Dung de unfold graph
+	 * @return
+	 */
+	public ControlFlowGraph unfold() {
+		UnfoldCFG unfoldCfg = new UnfoldCFG(this);
+		return new ControlFlowGraph(unfoldCfg.getStart(), unfoldCfg.getExit());
+	}
+
 }

@@ -1,14 +1,13 @@
 package cfg.node;
 
-import java.io.Serializable;
-import java.util.Map;
-
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 /*
  * @va
  */
-public class IterationNode extends CFGNode implements Serializable {
-	private String iterationExpression;
+
+
+public class IterationNode extends CFGNode {
+	private IASTExpression iterationExpression;
 	
 	public IterationNode() {
 	}
@@ -18,28 +17,20 @@ public class IterationNode extends CFGNode implements Serializable {
 	} 
 	
 	public IterationNode(IASTExpression iterExpression) {
-		iterationExpression = iterExpression.getRawSignature();
+		iterationExpression = iterExpression;
 	}
 	
-	public String getIterationExpression() {
+	public IASTExpression getIterationExpression() {
 		return iterationExpression;
 	}
 	public void setIterationExpression(IASTExpression iterationExpression) {
-		this.iterationExpression = iterationExpression.getRawSignature();
+		this.iterationExpression = iterationExpression;
 	}
-	public IterationNode deepCopy(Map<CFGNode, CFGNode> isomorphism) {
-		IterationNode copy = (IterationNode) isomorphism.get(this);
-		if (copy == null) {
-			copy = new IterationNode();
-			isomorphism.put(this, copy);
-			copy.setNext(this.deepCopy(isomorphism).getNext());
-		}
-		return copy;
-	}
+
 	public void printNode() {
 		System.out.print("IterationNode: ");
 		if (iterationExpression != null) {
-			System.out.println(iterationExpression);
+			System.out.println(iterationExpression.getRawSignature());
 		} else {
 			System.out.println();
 		}

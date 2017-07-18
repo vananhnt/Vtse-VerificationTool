@@ -1,9 +1,8 @@
 package cfg.node;
 
-import java.io.Serializable;
-
 // node exit all of statements
-public class EndNode extends CFGNode implements Serializable{
+@SuppressWarnings("serial")
+public class EndNode extends CFGNode {
 	public EndNode(){}
 	
 	public EndNode( CFGNode node){
