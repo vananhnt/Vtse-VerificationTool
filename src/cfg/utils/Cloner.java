@@ -3,7 +3,9 @@ package cfg.utils;
 import org.objenesis.strategy.StdInstantiatorStrategy;
 
 import com.esotericsoftware.kryo.Kryo;
-
+/**
+ * @author va
+ */
 public class Cloner  {
 	@SuppressWarnings("deprecation")
 	public static <T> T clone(T object) {
@@ -16,7 +18,7 @@ public class Cloner  {
 			return kryo.copy(object);
 		}
 		finally {
-			// for improving performance
+			
 			kryo = null;
 		}
 	}

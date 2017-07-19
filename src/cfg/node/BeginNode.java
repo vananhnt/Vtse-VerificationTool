@@ -1,13 +1,12 @@
 package cfg.node;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 // begin Node ko chua du lieu
 /* node begin the statements if/ for/ while....
  * don't contain data * 
  */
-@SuppressWarnings("serial")
-public class BeginNode extends CFGNode implements Serializable{	
+
+public class BeginNode extends CFGNode {	
 	private CFGNode endNode;
 
 	public CFGNode getEndNode() {
@@ -20,6 +19,7 @@ public class BeginNode extends CFGNode implements Serializable{
 		adj.add(endNode);
 		return adj;
 	}
+	
 	public void setEndNode(CFGNode endNode) {
 		this.endNode = endNode;
 	}

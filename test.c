@@ -3,20 +3,25 @@
 
 const int MAX=3;
 
-void test() {
-	int a = 0;
-	a = a + 2;
-	int b;
-
-	for (int i = 0; i < 10; i ++) {
-		if (i == 9) {
-			break;
-		} else {
-			a++;
-		}
-	}
-}
-
+//void test() {
+//	int a = 0;
+//	a = a + 2;
+//	int b;
+//
+//	if (a = 10) {
+//		for (int i = 0; i < n; i++) {
+//			b = 10;
+//		}
+//	} else if(a = 20) {
+//		b = 20;
+//	} else {
+//		a = 10;
+//		for (int j = 10; j < n; j++) {
+//			c = 20;
+//		}
+//	}
+//}
+//
 //void testSwitch() {
 //	int a = 10;
 //	int b = 10;
@@ -38,7 +43,7 @@ void test() {
 //	}
 //}
 
-int sum( int i) {
+int sum(int i, int j) {
 	int resulf = i++;
 	return  resulf;
 }

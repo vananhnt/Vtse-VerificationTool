@@ -1,9 +1,6 @@
 package cfg.node;
 
-import java.io.Serializable;
-
-@SuppressWarnings("serial")
-public class BeginIfNode extends BeginNode implements Serializable{
+public class BeginIfNode extends BeginNode{
 	
 	public BeginIfNode(){
 

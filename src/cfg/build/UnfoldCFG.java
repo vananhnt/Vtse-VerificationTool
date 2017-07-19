@@ -1,7 +1,6 @@
 package cfg.build;
 
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.node.BeginForNode;
 import cfg.node.BeginIfNode;
@@ -17,6 +16,7 @@ import cfg.utils.Cloner;
 
 /**
  * @author va
+ * De unfold: (new UnfodCFG(ControlFlowGraph)).getGraph()
  * 
  */
 
@@ -104,7 +104,7 @@ public class UnfoldCFG {
 			condition.getElseNode().setNext(endNode);
 			
 			copyThen = new ControlFlowGraph();
-			copyThen = (ControlFlowGraph) Cloner.clone(thenClause);
+			copyThen = Cloner.clone(thenClause);
 			
 			condition.setThenNode(copyThen.getStart());
 			copyThen.getExit().setNext(lastNode);
@@ -144,7 +144,7 @@ public class UnfoldCFG {
 			condition.getElseNode().setNext(endNode);
 			
 			copyThen = new ControlFlowGraph();
-			copyThen = (ControlFlowGraph) Cloner.clone(thenClause);
+			copyThen = Cloner.clone(thenClause);
 			
 			condition.setThenNode(copyThen.getStart());
 			copyThen.getExit().setNext(lastNode);
@@ -180,6 +180,7 @@ public class UnfoldCFG {
 			node.setNext(condition);
 			condition.setThenNode(iterateNode(condition.getThenNode()));
 			condition.setElseNode(iterateNode(condition.getElseNode()));
+	
 		} else if (node instanceof BeginForNode) {
 			ControlFlowGraph forGraph = unfoldFor(node, ((BeginForNode) node).getEndNode());
 			node.setNext(forGraph.getStart());
@@ -198,14 +199,9 @@ public class UnfoldCFG {
 		ControlFlowGraph.printGraph(start);
 	}
 	
-	public static void  main(String[] args) {
-		IASTFunctionDefinition func = (new ASTGenerator("./test.c")).getFunction(0);
-		ControlFlowGraph cfg = (new ControlFlowGraphBuilder()).build(func);
-		//cfg.printGraph();
-		UnfoldCFG unfoldCfg = new UnfoldCFG(cfg);
-		unfoldCfg.printGraph();
-	
- 	}
+	public ControlFlowGraph getGraph() {
+		return new ControlFlowGraph(start, exit);
+	}
 
 }
 

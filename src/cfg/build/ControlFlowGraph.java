@@ -106,7 +106,7 @@ public class ControlFlowGraph {
 			}
 			//printSpace(level);
 			System.out.println("Else Clause: ");
-			//if (((DecisionNode) iter).getElseNode() != null)
+			if (((DecisionNode) iter).getElseNode() != null)
 				print(((DecisionNode) iter).getElseNode(),  level + 7);		
 		} 
 		else if (iter instanceof IterationNode) {

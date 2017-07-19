@@ -76,6 +76,7 @@ public class ASTGenerator {
 			printTree(i, 0);
 		}		
 	}
+
 	private static void printTree(IASTNode node, int index) {
 		IASTNode[] children = node.getChildren();
 		if ((node instanceof IASTTranslationUnit)) {

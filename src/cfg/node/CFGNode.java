@@ -1,7 +1,8 @@
 package cfg.node;
+
 import java.util.ArrayList;
 
-public class CFGNode {	
+public abstract class CFGNode {	
 	private CFGNode next;	
 	private boolean vistited;
 	public CFGNode(){		

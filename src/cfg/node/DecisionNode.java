@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 
+import cfg.utils.ExpressionHelper;
+
 public class DecisionNode extends CFGNode {
 	private IASTExpression condition;
 	private CFGNode thenNode;
@@ -46,7 +48,7 @@ public class DecisionNode extends CFGNode {
 	}
 	public void printNode(){
 		if (condition != null)
-		System.out.println("with Condition " + condition.getRawSignature());	
+		System.out.println("with Condition " + ExpressionHelper.toString(condition));	
 	}
 				
 }
