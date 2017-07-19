@@ -5,10 +5,11 @@
 #include <cstring>
 using namespace std;
 
-int main(){
+int main( int b){
 
-		int b = 111;
-		for (int i = 0; i<9; i++){
+
+		b = 11;
+		for (int i = 0; i<b; i = i + 1){
 			for (int j = 0; j < 3; j++){
 				b = 1234566;
 			}
