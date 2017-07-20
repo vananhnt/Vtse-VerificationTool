@@ -19,7 +19,7 @@ public class VtseCFG extends ControlFlowGraph {
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
 		vm = new VariableManager();
-		vm = vm.build(func);
+		vm.build(func);
 	}
 	public VariableManager getVm() {
 		return vm;
