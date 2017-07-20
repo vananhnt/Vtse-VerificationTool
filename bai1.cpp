@@ -5,13 +5,17 @@
 #include <cstring>
 using namespace std;
 
-int main( int b){
-
-
+int test( int b, char c){
+		tong = 0;
+		bool check = false;
 		b = 11;
-		for (int i = 0; i<b; i = i + 1){
+		tong = ++b;
+		for (int i = 0; i != b; i = i + 1){
 			for (int j = 0; j < 3; j++){
 				b = 1234566;
+				check = true;
 			}
 		}
+		double real = b + c;
+		return (tong + b);
 }
