@@ -4,7 +4,6 @@ import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
 public class ExpressionHelper {
@@ -19,9 +18,6 @@ public class ExpressionHelper {
 		}
 		if (expression instanceof IASTLiteralExpression) {
 			return expression.toString();
-		}
-		if (expression instanceof IASTStatement) {
-			return expression.getRawSignature();
 		}
 		return null;
 	}

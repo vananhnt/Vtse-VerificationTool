@@ -13,15 +13,27 @@ import cfg.node.IterationNode;
 
 
 public class ControlFlowGraph {
-	private CFGNode start;
-	private CFGNode exit;
-
+	protected CFGNode start;
+	protected CFGNode exit;
+	
+	
 	public ControlFlowGraph(){}
 	
+	public ControlFlowGraph(IASTFunctionDefinition def) {
+		ControlFlowGraph cfg = build(def);
+		start = cfg.getStart();
+		exit = cfg.getExit();
+	
+	}
 	public ControlFlowGraph(CFGNode start, CFGNode exit) {
 		this.start = start;
 		this.exit = exit;
 	}		
+	
+	
+	public void setExit(CFGNode node) {
+		exit = node;
+	}
 	
 	public void concat(ControlFlowGraph other) {
 		if (start == null) {
@@ -32,10 +44,6 @@ public class ControlFlowGraph {
 			exit.setNext(other.start);
 			exit = other.exit;
 		}
-	}	
-
-	public void setExit(CFGNode node) {
-		exit = node;
 	}
 	
 	public ControlFlowGraph build (IASTFunctionDefinition def) {
@@ -60,7 +68,7 @@ public class ControlFlowGraph {
 	
 	private void DFSHelper(CFGNode node) {
 		node.setVistited(true);
-		node.printNode();
+		//node.printNode();
 		ArrayList<CFGNode> adj = node.adjacent();
 		for (CFGNode iter : adj) {
 			if (iter == null) return;
@@ -68,6 +76,15 @@ public class ControlFlowGraph {
 				DFSHelper(iter);
 			} 
 		}
+	}
+
+	/**
+	 * Dung de unfold graph
+	 * @return
+	 */
+	public ControlFlowGraph unfold() {
+		UnfoldCFG unfoldCfg = new UnfoldCFG(this);
+		return new ControlFlowGraph(unfoldCfg.getStart(), unfoldCfg.getExit());
 	}
 	
 	/**
@@ -148,15 +165,6 @@ public class ControlFlowGraph {
 			}
 		}		
 	
-	}
-	
-	/**
-	 * Dung de unfold graph
-	 * @return
-	 */
-	public ControlFlowGraph unfold() {
-		UnfoldCFG unfoldCfg = new UnfoldCFG(this);
-		return new ControlFlowGraph(unfoldCfg.getStart(), unfoldCfg.getExit());
 	}
 
 }

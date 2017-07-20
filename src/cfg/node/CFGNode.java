@@ -3,7 +3,7 @@ package cfg.node;
 import java.util.ArrayList;
 
 public abstract class CFGNode {	
-	private CFGNode next;	
+	protected CFGNode next;	
 	private boolean vistited;
 	public CFGNode(){		
 	}
@@ -34,7 +34,11 @@ public abstract class CFGNode {
 	public boolean isVistited() {
 		return vistited;
 	}
-
+	public String getFormula() {
+		return null;
+		
+	}
+	
 	public void setVistited(boolean vistited) {
 		this.vistited = vistited;
 	}

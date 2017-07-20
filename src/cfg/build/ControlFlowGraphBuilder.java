@@ -89,7 +89,7 @@ public class ControlFlowGraphBuilder {
 
 		ControlFlowGraph thenClause = createSubGraph(whileStatement.getBody());
 		// decisionNode.setNext(thenClause.getExit());
-		decisionNode.setCondition(whileStatement.getCondition());
+		decisionNode.setCondition(whileStatement.getCondition().copy());
 		beginWhileNode.setNext(decisionNode);
 
 		// then branch
@@ -100,7 +100,7 @@ public class ControlFlowGraphBuilder {
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(end);
-
+		decisionNode.setEndNode(end);
 		beginWhileNode.setEndNode(end);
 
 		return new ControlFlowGraph(beginWhileNode, end);
@@ -118,7 +118,7 @@ public class ControlFlowGraphBuilder {
 		IterationNode iterationNode = new IterationNode();
 		ControlFlowGraph thenClause = createSubGraph(doStatement.getBody());
 
-		decisionNode.setCondition(doStatement.getCondition());
+		decisionNode.setCondition(doStatement.getCondition().copy());
 		beginDoNode.setNext(decisionNode);
 
 		// then branch
@@ -130,7 +130,7 @@ public class ControlFlowGraphBuilder {
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(end);
-
+		decisionNode.setEndNode(end);
 		beginDoNode.setEndNode(end);
 		return new ControlFlowGraph(beginDoNode, end);
 	}
@@ -148,12 +148,13 @@ public class ControlFlowGraphBuilder {
 		ControlFlowGraph thenClause = createSubGraph(ifStatement.getThenClause());
 		ControlFlowGraph elseClause = createSubGraph(ifStatement.getElseClause());
 
-		decisionNode.setCondition(ifStatement.getConditionExpression());
+		decisionNode.setCondition(ifStatement.getConditionExpression().copy());
 		beginIfNode.setNext(decisionNode);
 
 		decisionNode.setThenNode(thenClause.getStart());
 		decisionNode.setElseNode(elseClause.getStart());
-
+		decisionNode.setEndNode(endNode);
+		
 		thenClause.getExit().setNext(endNode);
 		elseClause.getExit().setNext(endNode);
 		beginIfNode.setEndNode(endNode);
@@ -171,7 +172,7 @@ public class ControlFlowGraphBuilder {
 		EndConditionNode endNode = new EndConditionNode();
 		DecisionNode decisionNode = new DecisionNode();
 		IterationNode iterationNode = new IterationNode(forStatement.getIterationExpression());
-		PlainNode init = new PlainNode(forStatement.getInitializerStatement());
+		PlainNode init = new PlainNode(forStatement.getInitializerStatement().copy());
 		ControlFlowGraph thenClause = createSubGraph(forStatement.getBody());
 
 		bgForNode.setNext(init);
@@ -183,10 +184,11 @@ public class ControlFlowGraphBuilder {
 		thenClause.getExit().setNext(iterationNode);
 		// iterationNode.setNext(decisionNode);
 		// khi in can xet truong hop iterationNode rieng
-
+		
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(endNode);
+		decisionNode.setEndNode(endNode);
 		bgForNode.setEndNode(endNode);
 
 		return new ControlFlowGraph(bgForNode, endNode);
@@ -246,7 +248,7 @@ public class ControlFlowGraphBuilder {
 				} else if (statements[i] instanceof IASTCaseStatement) {
 					// Xu ly khoi case
 					condition = new DecisionNode();
-					condition.setCondition(createCondition(switchStatement, (IASTCaseStatement) statements[i]));
+					condition.setCondition(createCondition(switchStatement, (IASTCaseStatement) statements[i]).copy());
 
 					thenClause = new ControlFlowGraph();
 					linkCfg(thenClause, statements, i, endCase);
@@ -254,9 +256,10 @@ public class ControlFlowGraphBuilder {
 
 					condition.setElseNode(lastNode);
 					condition.setThenNode(thenClause.getStart());
-
+					condition.setEndNode(endNode);
 					lastNode = condition;
 					beginSwitchNode.setNext(condition);
+				
 				} else if (statements[i] instanceof IASTBreakStatement) {
 					endCase = i;
 				}

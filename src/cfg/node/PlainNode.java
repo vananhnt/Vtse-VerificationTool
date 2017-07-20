@@ -3,6 +3,10 @@ package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 
+import cfg.utils.FormulaCreater;
+import cfg.utils.Index;
+import cfg.utils.VariableManager;
+
 public class PlainNode extends CFGNode {
 	private IASTStatement statement;
 	
@@ -21,12 +25,19 @@ public class PlainNode extends CFGNode {
 	public void setStatement(IASTStatement statement) {
 		this.statement = statement;
 	}
-	
+	public void index(VariableManager vm) {
+		Index.index(statement, vm);
+	}
+	public String getFormula() {
+		return FormulaCreater.createFormula(statement);
+		
+	}
 	public void printNode(){
 		
 		if (statement != null){
 			System.out.print("PlainNode: ");
 			System.out.println(statement.getRawSignature());
+			
 		}
 		
 	}
