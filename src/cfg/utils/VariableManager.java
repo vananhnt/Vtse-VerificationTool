@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
+import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
@@ -62,6 +63,10 @@ public class VariableManager {
 		}
 		return false;
 	}
+	
+	public int getSize(){
+		return this.variableList.size();
+	}
 /*
  * return List parameters  form function	
  */
@@ -96,11 +101,19 @@ public class VariableManager {
 		// find init
 		IASTNode[] children = node.getChildren();		
 		if ( node instanceof IASTSimpleDeclaration ){
+			int init = -1;
 			String type = ((IASTSimpleDeclaration) node).getDeclSpecifier().getRawSignature();
 			IASTDeclarator[] declarations = ((IASTSimpleDeclaration) node).getDeclarators();
 			String name = declarations[0].getName().getRawSignature();
+			
+			IASTNode[] body = declarations[0].getChildren();			
+			for ( IASTNode iter : body){
+				if (iter instanceof IASTEqualsInitializer){
+					init = 0;
+				}
+			}
 				// add
-			Variable var = new Variable(type, name);			
+			Variable var = new Variable(type, name, init);			
 			list.add(var);						
 		}
 		// return

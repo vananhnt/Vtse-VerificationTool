@@ -52,7 +52,9 @@ public class VtseCFG extends ControlFlowGraph {
 				node = node.getNext();
 			}
 		}
-		node.index(vm);
+		if ( node == exit){
+			node.index(vm);
+		}
 	}	
 	
 	

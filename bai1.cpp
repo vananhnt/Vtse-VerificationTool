@@ -5,18 +5,24 @@
 #include <cstring>
 using namespace std;
 
-int test( int b, char c){
+int test( int b, int c){
 
-		bool check = false;
-		int tong;
-		tong = 10;
-		for (int i = 0; i != b; i = i + 1){
-			for (int j = 0; j < 3; j++){
-				b = 1234566;
-				c = "t"
-				check = true;
-			}
+
+	for (int i=0; i<2; i = i + 1){
+		for (int j=0; j<3; j = j + 1){
+			c = i + j;
 		}
-		double real = b + c;
-		return (tong + b);
+	}
+
+	if( b == c){
+			b = 111;
+			c = 444;
+		} else if ( b < c) {
+			c = 222;
+
+		} else{
+			c = b;
+			c = 333;
+		}
+	return b + c;
 }

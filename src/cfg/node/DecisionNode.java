@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 
+import cfg.utils.Cloner;
 import cfg.utils.ExpressionHelper;
 import cfg.utils.FormulaCreater;
 import cfg.utils.Index;
+import cfg.utils.Variable;
 import cfg.utils.VariableManager;
 
 public class DecisionNode extends CFGNode {
@@ -14,6 +16,8 @@ public class DecisionNode extends CFGNode {
 	private CFGNode thenNode;
 	private CFGNode endNode;
 	
+	private VariableManager thenVM;
+	private VariableManager elseVM;
 	// elseNode is next
 	
 	public DecisionNode(){}
@@ -90,13 +94,66 @@ public class DecisionNode extends CFGNode {
 	public CFGNode getEndNode() {
 		return endNode;
 	}
-
-	public void index(VariableManager vm) {
-		Index.index(condition, vm);
-	}
-
+	
 	public void setEndNode(CFGNode endNode) {
 		this.endNode = endNode;
 	}
-				
+			
+//TODO
+	public void index(VariableManager vm) {
+		condition = (IASTExpression) Index.index(condition, vm);
+		
+
+		// then clause
+		thenVM = Cloner.clone(vm);
+		CFGNode run = this.getThenNode();
+		while ( (run != null) && (run != this.endNode)){
+			run.index(thenVM);
+			if (run instanceof DecisionNode){
+				run = ((DecisionNode) run).getEndNode();
+			} else{
+				run = run.getNext();
+			}
+		}
+		
+		// else clause
+		elseVM = Cloner.clone(vm);
+		run = this.getElseNode();
+		while ( (run != null) && (run != this.endNode)){
+			run.index(elseVM);
+			if (run instanceof DecisionNode){
+				run = ((DecisionNode) run).getEndNode();
+			} else{
+				run = run.getNext();
+			}
+		}
+
+		// sync
+		vm.setVariableList(sync().getVariableList());
+		
+	}
+	
+	private VariableManager sync(){
+		int size = thenVM.getSize();
+		Variable thenVar;
+		Variable elseVar;
+		
+		for (int i = 0; i < size; i++) {
+			thenVar = thenVM.getVariable(i);
+			elseVar = elseVM.getVariable(i);
+		
+			if (thenVar.getIndex() < elseVar.getIndex()) {
+				thenVar.setIndex(elseVar.getIndex());
+			
+			}
+			else if (elseVar.getIndex() < thenVar.getIndex()) {
+				elseVar.setIndex(thenVar.getIndex());
+			}
+		}
+		
+		// set VM
+		return elseVM;
+	}
+	
+		
 }

@@ -1,10 +1,16 @@
 package cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
+import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
+import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
+import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
 public class ExpressionHelper {
@@ -23,10 +29,31 @@ public class ExpressionHelper {
 		if (node instanceof IASTExpressionStatement) {
 			return toString(((IASTExpressionStatement) node).getExpression());
 		}
-		return null;
+		if (node instanceof IASTDeclarationStatement){
+			return toStringDeclarationStatement((IASTDeclarationStatement) node);
+		}
+		if (node instanceof IASTEqualsInitializer){
+			return " = " + toString(node.getChildren()[0]);
+		}
+		if (node instanceof IASTReturnStatement){
+			return "return " + toString( node.getChildren()[0]);
+		}
+		return ".";
 	}
 	
-	
+	public static String toStringDeclarationStatement( IASTDeclarationStatement declStatement){
+		String statement= "";
+		for (IASTNode run : declStatement.getDeclaration().getChildren()){
+			if (run instanceof IASTDeclarator){
+				statement += ((IASTDeclarator) run).getName() + " ";
+				IASTEqualsInitializer init = (IASTEqualsInitializer) ((IASTDeclarator) run).getInitializer();
+				statement += toString(init);
+			} else{
+				statement += run.toString() + " ";
+			}
+		}
+		return statement;		
+	}
 	public static String toStringBinaryExpression(IASTBinaryExpression binaryExpression) {
 		String operand1 = toString(binaryExpression.getOperand1());
 		String operand2 = toString(binaryExpression.getOperand2());

@@ -6,8 +6,11 @@ import java.util.function.Function;
 
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.parser.DefaultLogService;
@@ -28,7 +31,7 @@ import cfg.utils.VariableManager;
 public class Parser {
 	public static void  main(String[] args) throws Exception {
 		String fileLocation =  "./bai1.cpp";
-		int count = 0;
+		
 		FileContent fileContent = FileContent.createForExternalFileLocation(fileLocation);
 		IncludeFileContentProvider includeFile = IncludeFileContentProvider.getEmptyFilesProvider();
 		IParserLogService log = new DefaultLogService(); 
@@ -36,18 +39,14 @@ public class Parser {
 		IScannerInfo info = new ScannerInfo(new HashMap<String, String>(), includePaths);
 		IASTTranslationUnit translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, includeFile, null, 0, log);
 
-		IASTDeclaration[] declarations = translationUnit.getDeclarations();
+		
 		ASTGenerator ast = new ASTGenerator(fileLocation);
-		IASTFunctionDefinition func = ast.getFunction(0);
+		IASTFunctionDefinition func = ast.getFunction(0);	
 		
 		VtseCFG cfg = new VtseCFG(func);
-		cfg.DFS();
-		
-		// test variable manager			
-//		VariableManager vm = new VariableManager(func);
-//		Variable var = vm.getVariable("i");
-//		System.out.println( var.getVariableWithIndex());
-
+		cfg.unfold();
+		cfg.index();
+		cfg.printGraph();		
 		//printTree(func, 1);
 		}
 	

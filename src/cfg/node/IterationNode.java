@@ -1,6 +1,10 @@
 package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
+
+import cfg.utils.ExpressionHelper;
+import cfg.utils.Index;
+import cfg.utils.VariableManager;
 /*
  * @va
  */
@@ -27,10 +31,14 @@ public class IterationNode extends CFGNode {
 		this.iterationExpression = iterationExpression;
 	}
 
+	public void index( VariableManager vm){
+		this.iterationExpression = (IASTExpression) Index.index(iterationExpression, vm);
+		//System.out.println( "--" + iterationExpression.);
+	}
 	public void printNode() {
 		System.out.print("IterationNode: ");
 		if (iterationExpression != null) {
-			System.out.println(iterationExpression.getRawSignature());
+			System.out.println(ExpressionHelper.toString(iterationExpression));
 		} else {
 			System.out.println();
 		}
