@@ -1,6 +1,7 @@
 package cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
+import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
@@ -8,19 +9,23 @@ import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
 public class ExpressionHelper {
 	
-	public static String toString(IASTNode expression) {
-		if (expression instanceof IASTBinaryExpression) {
-			return toStringBinaryExpression((IASTBinaryExpression) expression);
+	public static String toString(IASTNode node) {
+		if (node instanceof IASTBinaryExpression) {
+			return toStringBinaryExpression((IASTBinaryExpression) node);
 		}
-		if (expression instanceof IASTIdExpression) {
-			IASTIdExpression idExpression = (IASTIdExpression) expression;
+		if (node instanceof IASTIdExpression) {
+			IASTIdExpression idExpression = (IASTIdExpression) node;
 			return idExpression.getName().toString();
 		}
-		if (expression instanceof IASTLiteralExpression) {
-			return expression.toString();
+		if (node instanceof IASTLiteralExpression) {
+			return node.toString();
+		} 
+		if (node instanceof IASTExpressionStatement) {
+			return toString(((IASTExpressionStatement) node).getExpression());
 		}
 		return null;
 	}
+	
 	
 	public static String toStringBinaryExpression(IASTBinaryExpression binaryExpression) {
 		String operand1 = toString(binaryExpression.getOperand1());

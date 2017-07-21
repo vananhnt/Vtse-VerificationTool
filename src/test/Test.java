@@ -4,7 +4,6 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
-import cfg.utils.Variable;
 
 /**
  * @author va
@@ -12,7 +11,7 @@ import cfg.utils.Variable;
  */
 public class Test {
 	public static void  main(String[] args) {
-		ASTGenerator ast = new ASTGenerator("./test.c");
+		ASTGenerator ast = new ASTGenerator();
 		IASTFunctionDefinition func = ast.getFunction(0);
 		//ast.print();
 	
@@ -24,8 +23,7 @@ public class Test {
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
 		VtseCFG cfg = new VtseCFG(func);
-		cfg.unfold();
-		//cfg.printGraph();
-		System.out.println(cfg.createFormular());
+		cfg.index();
+		cfg.printGraph();
 	}
 }

@@ -2,6 +2,8 @@ package cfg.node;
 
 import java.util.ArrayList;
 
+import cfg.utils.VariableManager;
+
 public abstract class CFGNode {	
 	protected CFGNode next;	
 	private boolean vistited;
@@ -29,6 +31,9 @@ public abstract class CFGNode {
 		
 	public void printNode(){	
 		if (this != null) System.out.println(this.getClass());
+	}
+
+	public void index(VariableManager vm) {
 	}
 
 	public boolean isVistited() {

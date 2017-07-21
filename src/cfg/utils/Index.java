@@ -10,64 +10,86 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
+import cfg.build.ASTGenerator;
+
 /**
  * @author va
  *
  */
 public class Index {
-	public static void index(IASTNode node, VariableManager vm) {
+	private static CPPNodeFactory factory = (CPPNodeFactory) (new ASTGenerator()).getTranslationUnit() .getASTNodeFactory(); 
+	
+	public static IASTNode index(IASTNode node, VariableManager vm) {
 		if (node instanceof IASTDeclarationStatement) {
-			indexDeclarationStatement((IASTDeclarationStatement) node, vm); //cau lenh khoi tao
+			node = indexDeclarationStatement((IASTDeclarationStatement) node, vm); //cau lenh khoi tao
 			
 		} else if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
-			indexExpressionStatement((IASTExpressionStatement) node, vm);
+			node = indexExpressionStatement((IASTExpressionStatement) node, vm);
 		
 		} else if (node instanceof IASTBinaryExpression) { //phep gan va so sanh
-			indexIASTBinaryExpression(( IASTBinaryExpression) node, vm);
+			node = indexIASTBinaryExpression(( IASTBinaryExpression) node, vm);
 		
 		} else if (node instanceof IASTUnaryExpression) { // i++
-			indexUranyExpression((IASTUnaryExpression) node, vm);
+			node = indexUranyExpression((IASTUnaryExpression) node, vm);
 	
 		} else if (node instanceof IASTIdExpression) { //bien (khong tinh trong phep khoi tao)
 			node = indexIdExpression((IASTIdExpression) node, vm);
 		}
-		
-	}
-
-	private static IASTIdExpression indexIdExpression(IASTIdExpression node, VariableManager vm) {		
-		String name = node.getRawSignature();
-		if ( vm.isHas(name)){
-			Variable var = vm.getVariable(name);		
-			CPPNodeFactory factory = (CPPNodeFactory) node.getTranslationUnit().getASTNodeFactory();
-			IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
-			IASTIdExpression newExp = node.copy();				
-			newExp.setName(nameId);
-			System.out.println();
-			System.out.println("=.=" + name + ".." +  newExp.toString());
-		}
 		return node;
 	}
 
-	private static void indexUranyExpression(IASTUnaryExpression node, VariableManager vm) {
-		IASTExpression operand = node.getOperand();
-		index(operand, vm);
+	private static IASTNode indexIdExpression(IASTIdExpression node, VariableManager vm) {		
+		String name = ExpressionHelper.toString(node);
+		Variable var = vm.getVariable(name);	
+		IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
+		IASTIdExpression newExp = factory.newIdExpression(nameId);	
+		return newExp;
+	}
+	
+	private static IASTNode indexVariable(IASTIdExpression node, VariableManager vm) {
+		String name = ExpressionHelper.toString(node);
+		Variable var = vm.getVariable(name);	
+		var.increase();
+		IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
+		IASTIdExpression newNode = factory.newIdExpression(nameId);	
+		return newNode;
+	}
+	private static IASTNode indexUranyExpression(IASTUnaryExpression node, VariableManager vm) {
+		return null;
 	}
 
-	private static void indexIASTBinaryExpression(IASTBinaryExpression node, VariableManager vm) {
-		IASTExpression left = node.getOperand1();
-		index(left,vm);
+	/**
+	 * Đánh chỉ số cho Binary Ex bao gồm cả so sánh và gán 
+	 * @param node
+	 * @param vm
+	 * @return
+	 */
+	private static IASTNode indexIASTBinaryExpression(IASTBinaryExpression node, VariableManager vm) {
+		boolean isAssignment = (node.getOperator() == IASTBinaryExpression.op_assign);
+		if  (isAssignment)  { // nếu là gán tăng chỉ số bên trái 
+			IASTExpression right = (IASTExpression) index(node.getOperand2().copy() , vm);
+			IASTExpression left = (IASTExpression) indexVariable((IASTIdExpression) node.getOperand1().copy(), vm);
+			IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), left, right);
+			return newNode;
+		}
+		else { //nếu là so sánh chỉ đánh chỉ số cũ 
+			IASTExpression left = node.getOperand1().copy();
+			IASTExpression right = node.getOperand2().copy();
+			IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), (IASTExpression) index(left, vm), (IASTExpression) index(right , vm));
+			return newNode;	
+		}
+	}
+
+	private static IASTNode indexExpressionStatement(IASTExpressionStatement node, VariableManager vm) {
+		IASTExpression expression = node.getExpression().copy();
+		IASTExpressionStatement newNode = factory.newExpressionStatement((IASTExpression) index(expression, vm));		
+		return  newNode;
 		
 	}
 
-	private static void indexExpressionStatement(IASTExpressionStatement node, VariableManager vm) {
-		// TODO Auto-generated method stub
-		index(node.getExpression(), vm);
-		
-	}
-
-	private static void indexDeclarationStatement(IASTDeclarationStatement node, VariableManager vm) {
-		// TODO Auto-generated method stub
-		//System.out.println(node.toString());
-		
+	private static IASTNode indexDeclarationStatement(IASTDeclarationStatement node, VariableManager vm) {
+		//Chưa làm
+		//Còn cả index DecisionNode cũng chưa làm 
+		return null;
 	}
 }

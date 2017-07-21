@@ -3,25 +3,17 @@
 
 const int MAX=3;
 
-//void test() {
-//	int a = 0;
-//	a = a + 2;
-//	int b;
-//
-//	if (a = 10) {
-//		for (int i = 0; i < n; i++) {
-//			b = 10;
-//		}
-//	} else if(a = 20) {
-//		b = 20;
-//	} else {
-//		a = 10;
-//		for (int j = 10; j < n; j++) {
-//			c = 20;
-//		}
-//	}
-//}
-//
+void test() {
+	int a = 0;
+	a = a + 2;
+	int b;
+	if (a < 10) {
+		b = 2;
+	}
+	b = 10;
+	a = a + b;
+}
+
 void testSwitch() {
 	int a = 10;
 	int b = 10;

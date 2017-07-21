@@ -7,15 +7,13 @@ import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTPointerOperator;
 
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 
 /**
- * moi xet truong hop cho co plainNode
  * @author va
- *
+ * Chưa test 
  */
 public class FormulaCreater {
 	public static String LOGIC_AND = "and";

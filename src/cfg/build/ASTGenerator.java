@@ -2,16 +2,10 @@ package cfg.build;
 
 import java.util.HashMap;
 
-import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
-import org.eclipse.cdt.core.dom.ast.IASTBinaryTypeIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
-import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
-import org.eclipse.cdt.core.dom.ast.IASTTypeIdExpression;
-import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.parser.DefaultLogService;
 import org.eclipse.cdt.core.parser.FileContent;
@@ -19,11 +13,7 @@ import org.eclipse.cdt.core.parser.IParserLogService;
 import org.eclipse.cdt.core.parser.IScannerInfo;
 import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
-import org.eclipse.cdt.internal.core.dom.parser.IASTAmbiguousExpression;
-import org.eclipse.cdt.internal.core.dom.rewrite.astwriter.DeclaratorWriter;
 import org.eclipse.core.runtime.CoreException;
-
-import cfg.utils.ExpressionHelper;
 
 /**
  * Get IASTFunctionDefinition 
@@ -36,6 +26,21 @@ import cfg.utils.ExpressionHelper;
 public class ASTGenerator {
 
 	private IASTTranslationUnit translationUnit;
+	private String filelocation = "./test.c";
+	
+	public ASTGenerator() {
+		FileContent fileContent = FileContent.createForExternalFileLocation(filelocation);
+		IncludeFileContentProvider includeFile = IncludeFileContentProvider.getEmptyFilesProvider();
+		IParserLogService log = new DefaultLogService(); 
+		String[] includePaths = new String[0];
+		IScannerInfo info = new ScannerInfo(new HashMap<String, String>(), includePaths);
+		try {
+			translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, includeFile, null, 0, log);
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}  
 	
 	public ASTGenerator(String filelocation) {
 		FileContent fileContent = FileContent.createForExternalFileLocation(filelocation);
@@ -50,6 +55,7 @@ public class ASTGenerator {
 			e.printStackTrace();
 		}
 	}
+	
 	/*
 	 * getters & setters
 	 */
@@ -57,9 +63,11 @@ public class ASTGenerator {
 		return translationUnit;
 	}
 	public void setTranslationUnit(IASTTranslationUnit translationUnit) {
-		this.translationUnit = translationUnit;
+		translationUnit = translationUnit;
 	}
-	
+	public void setFileLocation(String fileName) {
+		filelocation = fileName;
+	}
 	/*
 	 * functionDef 
 	 * chỉ lấy function đầu tiên
@@ -86,7 +94,7 @@ public class ASTGenerator {
 			printTree(i, 0);
 		}		
 	}
-
+	
 	private static void printTree(IASTNode node, int index) {
 		IASTNode[] children = node.getChildren();
 		

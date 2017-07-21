@@ -6,6 +6,8 @@ import org.eclipse.cdt.core.dom.ast.IASTExpression;
 
 import cfg.utils.ExpressionHelper;
 import cfg.utils.FormulaCreater;
+import cfg.utils.Index;
+import cfg.utils.VariableManager;
 
 public class DecisionNode extends CFGNode {
 	private IASTExpression condition;
@@ -81,8 +83,7 @@ public class DecisionNode extends CFGNode {
 	}
 	public void printNode(){
 		if (condition != null)
-		System.out.println("with Condition " + ExpressionHelper.toString(condition) + " " + 
-				condition.getClass().getSimpleName());	
+		System.out.println("with Condition " + ExpressionHelper.toString(condition));	
 	}
 
 
@@ -90,6 +91,9 @@ public class DecisionNode extends CFGNode {
 		return endNode;
 	}
 
+	public void index(VariableManager vm) {
+		Index.index(condition, vm);
+	}
 
 	public void setEndNode(CFGNode endNode) {
 		this.endNode = endNode;
