@@ -18,7 +18,7 @@ public class Index {
 	public static void index(IASTNode node, VariableManager vm) {
 		if (node instanceof IASTDeclarationStatement) {
 			indexDeclarationStatement((IASTDeclarationStatement) node, vm); //cau lenh khoi tao
-	
+			
 		} else if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
 			indexExpressionStatement((IASTExpressionStatement) node, vm);
 		
@@ -29,14 +29,23 @@ public class Index {
 			indexUranyExpression((IASTUnaryExpression) node, vm);
 	
 		} else if (node instanceof IASTIdExpression) { //bien (khong tinh trong phep khoi tao)
-			indexIdExpression((IASTIdExpression) node, vm);
+			node = indexIdExpression((IASTIdExpression) node, vm);
 		}
 		
 	}
 
-	private static void indexIdExpression(IASTIdExpression node, VariableManager vm) {
-		System.out.println(node.toString());
-
+	private static IASTIdExpression indexIdExpression(IASTIdExpression node, VariableManager vm) {		
+		String name = node.getRawSignature();
+		if ( vm.isHas(name)){
+			Variable var = vm.getVariable(name);		
+			CPPNodeFactory factory = (CPPNodeFactory) node.getTranslationUnit().getASTNodeFactory();
+			IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
+			IASTIdExpression newExp = node.copy();				
+			newExp.setName(nameId);
+			System.out.println();
+			System.out.println("=.=" + name + ".." +  newExp.toString());
+		}
+		return node;
 	}
 
 	private static void indexUranyExpression(IASTUnaryExpression node, VariableManager vm) {
@@ -45,20 +54,20 @@ public class Index {
 	}
 
 	private static void indexIASTBinaryExpression(IASTBinaryExpression node, VariableManager vm) {
-		System.out.println(node.toString());
+		IASTExpression left = node.getOperand1();
+		index(left,vm);
 		
 	}
 
 	private static void indexExpressionStatement(IASTExpressionStatement node, VariableManager vm) {
 		// TODO Auto-generated method stub
 		index(node.getExpression(), vm);
-		System.out.println(node.toString());
 		
 	}
 
 	private static void indexDeclarationStatement(IASTDeclarationStatement node, VariableManager vm) {
 		// TODO Auto-generated method stub
-		System.out.println(node.toString());
+		//System.out.println(node.toString());
 		
 	}
 }

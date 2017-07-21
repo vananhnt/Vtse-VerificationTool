@@ -2,17 +2,15 @@ package cfg.utils;
 
 import java.util.ArrayList;
 
+
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
 
 public class VariableManager {
 	private ArrayList<Variable> variableList;
@@ -111,26 +109,34 @@ public class VariableManager {
 			Variable var = new Variable("return", result.getRawSignature());
 			list.add(var);
 		}
-		//toan cuc
-		if ( (node instanceof IASTIdExpression) && !(this.isHas(node.getRawSignature()))){
-			System.out.println( node.getRawSignature());
-			//System.out.println( this.isHas(node.getRawSignature()));
-			printList();
-			
-		}
 		for ( IASTNode run : children){
 			getLocalVar(run, list);
 		}		
 		return list;
 	}
+/*
+ * add bien toan cuc 
+ */
 	
+//	public void getGloble( IASTNode node){
+//		IASTNode[] children = node.getChildren();
+//		if (node instanceof IASTIdExpression && !(isHas(node.getRawSignature()))){
+//			String name = node.getRawSignature();
+//			Variable var = new Variable();
+//			this.variableList.add(var);
+//		}
+//		
+//		for ( IASTNode run : children){
+//			getGloble(run);
+//		}
+//	}
 	
 	public void printList(){
 		if ( this.variableList == null){
 			System.out.println("NULL");
 		} 
 		for (Variable var : this.variableList){
-			System.out.println( var.toString());
+			System.out.println( var.getVariableWithIndex());
 		}
 	}
 	/**
@@ -148,8 +154,7 @@ public class VariableManager {
 		}
 		for ( Variable var : localVars){
 			this.variableList.add(var);
-		}
-		
+		}		
 		
 	}
 }

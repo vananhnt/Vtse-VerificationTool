@@ -3,6 +3,7 @@ package cfg.build;
 import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 
 import cfg.node.CFGNode;
 import cfg.node.PlainNode;
@@ -18,8 +19,7 @@ public class VtseCFG extends ControlFlowGraph {
 	}
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
-		vm = new VariableManager();
-		vm.build(func);
+		vm = new VariableManager(func);
 	}
 	public VariableManager getVm() {
 		return vm;
@@ -46,7 +46,8 @@ public class VtseCFG extends ControlFlowGraph {
 	private void DFSHelper(CFGNode node) {
 		node.setVistited(true);
 		if (node instanceof PlainNode) {
-			System.out.println(((PlainNode) node).getFormula());
+			((PlainNode) node).index(vm);
+			//node.printNode();
 		}
 		
 		ArrayList<CFGNode> adj = node.adjacent();
