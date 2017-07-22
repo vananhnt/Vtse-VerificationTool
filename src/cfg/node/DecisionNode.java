@@ -1,4 +1,5 @@
 package cfg.node;
+// build endOfThen  endOofElse =.=
 
 import java.util.ArrayList;
 
@@ -141,17 +142,33 @@ public class DecisionNode extends CFGNode {
 		int size = thenVM.getSize();
 		Variable thenVar;
 		Variable elseVar;
+		String leftHand;
+		String rightHand;
+		SyncNode syncNode;
 		
 		for (int i = 0; i < size; i++) {
 			thenVar = thenVM.getVariable(i);
-			elseVar = elseVM.getVariable(i);
-		
-			if (thenVar.getIndex() < elseVar.getIndex()) {
-				thenVar.setIndex(elseVar.getIndex());
+			elseVar = elseVM.getVariable(i);	
 			
+			if (thenVar.getIndex() < elseVar.getIndex()) {
+				leftHand = thenVar.getVariableWithIndex();
+				thenVar.setIndex(elseVar.getIndex());
+				rightHand = thenVar.getVariableWithIndex();				
+				syncNode = new SyncNode(leftHand, rightHand);
+				
+				this.endOfThen.setNext(syncNode);
+				syncNode.setNext(endNode);
+				setEndOfThen(syncNode);
 			}
 			else if (elseVar.getIndex() < thenVar.getIndex()) {
+				leftHand = elseVar.getVariableWithIndex();
 				elseVar.setIndex(thenVar.getIndex());
+				rightHand = elseVar.getVariableWithIndex();
+				syncNode = new SyncNode(leftHand, rightHand);
+				
+				this.endOfElse.setNext(syncNode);
+				syncNode.setNext(endNode);
+				setEndOfElse(syncNode);
 			}
 		}
 		

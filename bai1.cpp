@@ -7,22 +7,10 @@ using namespace std;
 
 int test( int b, int c){
 
-
-	for (int i=0; i<2; i++){
-		for (int j=10; j<3; --j){
-			c = i + j;
-		}
-	}
-
 	if( b == c){
-			b = 111;
-			c = 444;
-		} else if ( b < c) {
-			c = 222;
-
-		} else{
-			c = b;
-			c = 333;
-		}
+		b = 1;
+	} else{
+		c = 2;
+	}
 	return b + c;
 }
