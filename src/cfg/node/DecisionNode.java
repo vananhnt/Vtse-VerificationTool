@@ -85,12 +85,16 @@ public class DecisionNode extends CFGNode {
 		adj.add(this.getElseNode());
 		return adj;
 	}
+
 	public void printNode(){
 		if (condition != null)
 		System.out.println("with Condition " + ExpressionHelper.toString(condition));	
 	}
 
-
+	public String toString() {
+		return ExpressionHelper.toString(condition);
+	}
+	
 	public CFGNode getEndNode() {
 		return endNode;
 	}
@@ -99,7 +103,7 @@ public class DecisionNode extends CFGNode {
 		this.endNode = endNode;
 	}
 			
-//TODO
+
 	public void index(VariableManager vm) {
 		condition = (IASTExpression) Index.index(condition, vm);
 		

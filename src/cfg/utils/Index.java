@@ -1,26 +1,22 @@
 package cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
-import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
-import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
-import org.eclipse.cdt.core.dom.ast.IASTInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
+import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 import cfg.build.ASTGenerator;
-import cfg.node.DecisionNode;
 
 /**
  * @author va
@@ -71,26 +67,43 @@ public class Index {
 		return newNode;
 	}
 	
-	private static IASTNode indexUranyExpression(IASTUnaryExpression node, VariableManager vm) {
-		//TODO
-		return null;
+	private static int changeOperator(int unaryOp) {
+		int binaryOp = 0;
+		if (unaryOp == IASTUnaryExpression.op_postFixDecr || unaryOp ==  IASTUnaryExpression.op_prefixDecr) {
+			binaryOp = IASTBinaryExpression.op_minus;
+		} else if (unaryOp == IASTUnaryExpression.op_postFixIncr || unaryOp ==  IASTUnaryExpression.op_prefixIncr) {
+			binaryOp = IASTBinaryExpression.op_plus;
+		}
+		return binaryOp;
 	}
 
-	/**
-	 * Ä�Ă¡nh chá»‰ sá»‘ cho Binary Ex bao gá»“m cáº£ so sĂ¡nh vĂ  gĂ¡n 
+	private static IASTExpression changeUnarytoBinary(IASTUnaryExpression node) {
+		IASTExpression operand = ((IASTUnaryExpression)node).getOperand().copy();
+		int operator = changeOperator(node.getOperator());
+		IASTLiteralExpression number = factory.newLiteralExpression(IASTLiteralExpression.lk_integer_constant, "1");
+		IASTExpression right = factory.newBinaryExpression(operator, operand, number);
+		IASTExpression expression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, operand, right);
+		return expression;		
+	}
+
+	private static IASTNode indexUranyExpression(IASTUnaryExpression node, VariableManager vm) {
+		return index(changeUnarytoBinary(node), vm);
+	}
+		
+	/** 
 	 * @param node
 	 * @param vm
 	 * @return
 	 */
 	private static IASTNode indexIASTBinaryExpression(IASTBinaryExpression node, VariableManager vm) {
 		boolean isAssignment = (node.getOperator() == IASTBinaryExpression.op_assign);
-		if  (isAssignment)  { // náº¿u lĂ  gĂ¡n tÄƒng chá»‰ sá»‘ bĂªn trĂ¡i 
+		if  (isAssignment)  { //neu la phep gan
 			IASTExpression right = (IASTExpression) index(node.getOperand2().copy() , vm);
 			IASTExpression left = (IASTExpression) indexVariable((IASTIdExpression) node.getOperand1().copy(), vm);
 			IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), left, right);
 			return newNode;
 		}
-		else { //náº¿u lĂ  so sĂ¡nh chá»‰ Ä‘Ă¡nh chá»‰ sá»‘ cÅ© 
+		else { //neu la phep so sanh
 			IASTExpression left = node.getOperand1().copy();
 			IASTExpression right = node.getOperand2().copy();
 			IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), (IASTExpression) index(left, vm), (IASTExpression) index(right , vm));
@@ -104,24 +117,20 @@ public class Index {
 		return  newNode;
 		
 	}
-/*
- * 
- */
+
 	private static IASTNode indexDeclarationStatement(IASTDeclarationStatement node, VariableManager vm) {
-		//ChÆ°a lĂ m			
+					
 		String name = "";
 		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) node.getDeclaration().copy();
 		for (IASTNode run : simpleDecl.getChildren()){
 			if ( run instanceof IASTDeclarator){
-				
 				int reset = -1;
 				IASTEqualsInitializer init = (IASTEqualsInitializer) (((IASTDeclarator) run).getInitializer());
 				if (init != null){				
 					IASTInitializerClause initClause = (IASTInitializerClause) index(init.getChildren()[0], vm);					
 					init.setInitializerClause(initClause);
 					reset = 0;
-				}
-				
+				}		
 				IASTName nameDecl = ((IASTDeclarator) run).getName();
 				name = nameDecl.toString();					
 				Variable var = vm.getVariable(name);				

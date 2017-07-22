@@ -7,9 +7,13 @@ void test() {
 	int a = 0;
 	a = a + 2;
 	int b;
-	if (a < 10) {
-		b = 2;
+	if (b < 2) {
+		a = 10;
 	}
+	for (int i = 10; i < 0; i++) {
+		b = 3;
+	}
+	b ++;
 	b = 10;
 	a = a + b;
 }

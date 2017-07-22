@@ -1,16 +1,10 @@
 
 package test;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Function;
 
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
-import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
-import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.parser.DefaultLogService;
@@ -20,12 +14,9 @@ import org.eclipse.cdt.core.parser.IScannerInfo;
 import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
-import org.eclipse.cdt.internal.core.model.FunctionDeclaration;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
-import cfg.utils.Variable;
-import cfg.utils.VariableManager;
 
 
 public class Parser {
@@ -37,6 +28,7 @@ public class Parser {
 		IParserLogService log = new DefaultLogService(); 
 		String[] includePaths = new String[0];
 		IScannerInfo info = new ScannerInfo(new HashMap<String, String>(), includePaths);
+		@SuppressWarnings("unused")
 		IASTTranslationUnit translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, includeFile, null, 0, log);
 
 		
@@ -50,6 +42,7 @@ public class Parser {
 		//printTree(func, 1);
 		}
 	
+	@SuppressWarnings("unused")
 	private static void printTree(IASTNode node, int index) {
 		IASTNode[] children = node.getChildren();
 

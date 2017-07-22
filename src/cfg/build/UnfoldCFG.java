@@ -180,7 +180,7 @@ public class UnfoldCFG {
 			node.setNext(condition);
 			condition.setThenNode(iterateNode(condition.getThenNode()));
 			condition.setElseNode(iterateNode(condition.getElseNode()));
-	
+			((BeginIfNode) node).getEndNode().setNext(iterateNode(((BeginIfNode) node).getEndNode().getNext()));
 		} else if (node instanceof BeginForNode) {
 			ControlFlowGraph forGraph = unfoldFor(node, ((BeginForNode) node).getEndNode());
 			node.setNext(forGraph.getStart());

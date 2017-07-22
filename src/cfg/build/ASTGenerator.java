@@ -63,7 +63,7 @@ public class ASTGenerator {
 		return translationUnit;
 	}
 	public void setTranslationUnit(IASTTranslationUnit translationUnit) {
-		translationUnit = translationUnit;
+		this.translationUnit = translationUnit;
 	}
 	public void setFileLocation(String fileName) {
 		filelocation = fileName;

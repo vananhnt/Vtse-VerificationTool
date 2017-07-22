@@ -35,6 +35,9 @@ public class IterationNode extends CFGNode {
 		this.iterationExpression = (IASTExpression) Index.index(iterationExpression, vm);
 		//System.out.println( "--" + iterationExpression.);
 	}
+	public String toString() {
+		return ExpressionHelper.toString(iterationExpression);
+	}
 	public void printNode() {
 		System.out.print("IterationNode: ");
 		if (iterationExpression != null) {

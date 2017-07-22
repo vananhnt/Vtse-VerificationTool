@@ -1,5 +1,6 @@
 package cfg.node;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import cfg.utils.VariableManager;
@@ -32,7 +33,9 @@ public abstract class CFGNode {
 	public void printNode(){	
 		if (this != null) System.out.println(this.getClass());
 	}
-
+	public String toString() {
+		return "";
+	}
 	public void index(VariableManager vm) {
 	}
 
@@ -40,10 +43,11 @@ public abstract class CFGNode {
 		return vistited;
 	}
 	public String getFormula() {
-		return null;
-		
+		return null;	
 	}
-	
+	public void printFormular(PrintStream ps) {
+		ps.println(getFormula());
+	}
 	public void setVistited(boolean vistited) {
 		this.vistited = vistited;
 	}

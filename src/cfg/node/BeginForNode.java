@@ -9,4 +9,5 @@ public class BeginForNode extends BeginNode implements Serializable{
 	public void printNode() {
 		System.out.println("BeginForNode ");
 	}
+	
 }

@@ -9,8 +9,6 @@ import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
-import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
-import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
 public class ExpressionHelper {
@@ -19,26 +17,46 @@ public class ExpressionHelper {
 		if (node instanceof IASTBinaryExpression) {
 			return toStringBinaryExpression((IASTBinaryExpression) node);
 		}
-		if (node instanceof IASTIdExpression) {
+		else if (node instanceof IASTIdExpression) {
 			IASTIdExpression idExpression = (IASTIdExpression) node;
 			return idExpression.getName().toString();
 		}
-		if (node instanceof IASTLiteralExpression) {
+		else if (node instanceof IASTLiteralExpression) {
 			return node.toString();
 		} 
-		if (node instanceof IASTExpressionStatement) {
+		else if (node instanceof IASTExpressionStatement) {
 			return toString(((IASTExpressionStatement) node).getExpression());
 		}
-		if (node instanceof IASTDeclarationStatement){
+		else if (node instanceof IASTUnaryExpression) {
+			return toStringUnaryExpression((IASTUnaryExpression) node); //se chuyen ve dang binary khi index
+		}
+		else if (node instanceof IASTDeclarationStatement){
 			return toStringDeclarationStatement((IASTDeclarationStatement) node);
 		}
-		if (node instanceof IASTEqualsInitializer){
+		else if (node instanceof IASTEqualsInitializer){
 			return " = " + toString(node.getChildren()[0]);
 		}
-		if (node instanceof IASTReturnStatement){
+		else if (node instanceof IASTReturnStatement){
 			return "return " + toString( node.getChildren()[0]);
 		}
+		
 		return ".";
+	}
+	
+	public static String toStringUnaryExpression(IASTUnaryExpression unaryExpression){
+		String operand = toString(unaryExpression.getOperand());
+		int operator = unaryExpression.getOperator();
+		String expression = ""; 
+		if (operator == IASTUnaryExpression.op_postFixDecr) {
+			expression = String.format("%s %s", operand, "--");
+		} else if (operator == IASTUnaryExpression.op_postFixIncr) {
+			expression = String.format("%s %s", operand, "++");
+		} else if  (operator == IASTUnaryExpression.op_prefixIncr) {
+			expression = String.format("%s %s", "++", operand);
+		} else if (operator == IASTUnaryExpression.op_prefixDecr) {
+			expression = String.format("%s %s", "--", operand);
+		}
+		return expression;
 	}
 	
 	public static String toStringDeclarationStatement( IASTDeclarationStatement declStatement){
@@ -84,7 +102,10 @@ public class ExpressionHelper {
 		if (operatorInt == IASTUnaryExpression.op_plus) return "+";
 		if (operatorInt == IASTUnaryExpression.op_minus) return "-";
 		if (operatorInt == IASTUnaryExpression.op_not) return "not";
-		
+		if (operatorInt == IASTUnaryExpression.op_postFixDecr) return "--";
+		if (operatorInt == IASTUnaryExpression.op_postFixIncr) return "++";
+		if (operatorInt == IASTUnaryExpression.op_prefixIncr) return "++";
+		if (operatorInt == IASTUnaryExpression.op_prefixDecr) return "--";
 		return "@";
 	}
 	

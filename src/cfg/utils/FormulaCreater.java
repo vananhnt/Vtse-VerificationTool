@@ -35,6 +35,7 @@ public class FormulaCreater {
 				}
 				else {
 					constraint = wrapInfix(LOGIC_AND, temp, constraint);
+					//constraint = wrapPrefix(LOGIC_AND, temp, constraint);
 				}
 			}
 			if (node instanceof DecisionNode) {
@@ -48,7 +49,7 @@ public class FormulaCreater {
 	}
 	public static String createFormula(IASTNode node) {
 		if (node instanceof IASTDeclarationStatement) {
-			
+			//TODO
 		} else if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
 			return infixExpressionStatement((IASTExpressionStatement) node);
 		} else if (node instanceof IASTBinaryExpression) { //phep gan va so sanh
@@ -63,7 +64,7 @@ public class FormulaCreater {
 	}
 	
 	private static String infixBinaryExpression(IASTBinaryExpression node) {
-		// TODO Auto-generated method stub
+	
 		IASTExpression op1 = node.getOperand1();
 		IASTExpression op2 = node.getOperand2();
 		String operand = ExpressionHelper.getCorrespondBinaryOperator(node.getOperator());
@@ -73,10 +74,11 @@ public class FormulaCreater {
 	}
 	
 	private static String infixExpressionStatement(IASTExpressionStatement node) {
-		// TODO Auto-generated method stub
 		return createFormula(node.getExpression());
 	}
-	
+	public static String wrapPrefix(String operand, String left, String right) {
+		return "(" + operand + " " + left + " " + right + ")";
+	}
 	public static String createFormula(String operator, String operand) {
 		return "(" + operator + " " + operand + ")";
 	}

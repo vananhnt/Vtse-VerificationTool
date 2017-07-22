@@ -1,11 +1,15 @@
 package cfg.build;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
+import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
+import cfg.node.EndConditionNode;
+import cfg.node.PlainNode;
 import cfg.utils.FormulaCreater;
 import cfg.utils.VariableManager;
 
@@ -42,6 +46,10 @@ public class VtseCFG extends ControlFlowGraph {
 	public String createFormular() {
 		return FormulaCreater.create(start, exit); 
 	}
+	public void printFormular(PrintStream ps) {
+		ps.print(createFormular());
+	}
+	
 	public void index() {
 		CFGNode node = start;
 		while (node != null && node != exit) {
@@ -67,6 +75,52 @@ public class VtseCFG extends ControlFlowGraph {
 			if (!iter.isVistited()){
 				DFSHelper(iter);
 			} 
+		}
+	}
+	
+	public void printMeta() { //Da unfold
+		printMeta(System.out, start, exit, " ");
+	}
+	
+	private static void printMeta(PrintStream printStream,CFGNode node, CFGNode end, String nSpaces) {
+		if (node == null) {
+			return;
+		} else if (node == end) {
+			if (node.toString() != "") {
+				printStream.println(nSpaces + node.toString());	
+			}	
+		}
+		else if (node instanceof PlainNode) {
+			if (node.toString() != null) {
+				printStream.println(nSpaces + node.toString());	
+				//System.err.println("node: " + node);
+				//System.err.println("constraint: " + node.toString());
+			}		
+			printMeta(printStream, node.getNext(), end, nSpaces);	// 4 spaces
+		}
+		else if (node instanceof BeginNode) {
+			BeginNode begin = (BeginNode) node;
+			printMeta(printStream, begin.getNext(), end, nSpaces);
+			printMeta(printStream, begin.getEndNode().getNext(), end, nSpaces);	
+		}
+		else if (node instanceof DecisionNode) {
+			DecisionNode cn = (DecisionNode) node;
+			printStream.println(nSpaces + "if ( " + cn.toString() + " ) {");
+			printMeta(printStream, cn.getThenNode(), cn.getEndNode() , nSpaces + "    ");	// 4 spaces
+			printStream.println(nSpaces + "}");
+			printStream.println(nSpaces + "else {");
+			printMeta(printStream, cn.getElseNode(), cn.getEndNode(), nSpaces + "    ");	// 4 spaces
+			printStream.println(nSpaces + "}");
+			printMeta(printStream, cn.getEndNode(), end, nSpaces + "");	// 4 spaces
+		} else if (node instanceof EndConditionNode) {
+			return;
+		}
+		else {
+			String constraint = node.toString();
+			if (constraint != null && constraint != "") {
+				printStream.println(nSpaces + constraint);	
+			}
+			printMeta(printStream , node.getNext(), end, nSpaces);
 		}
 	}
 }

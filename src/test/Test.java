@@ -23,7 +23,9 @@ public class Test {
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
 		VtseCFG cfg = new VtseCFG(func);
-		cfg.index();
+		//cfg.index();
+		//cfg.unfold();
 		cfg.printGraph();
+		//cfg.printFormular(System.out);
 	}
 }
