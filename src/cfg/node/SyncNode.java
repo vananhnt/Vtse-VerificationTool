@@ -44,4 +44,8 @@ public class SyncNode extends CFGNode {
 		return String.format("(= %s %s)", leftHand, rightHand);
 	}
 
+	public void printNode(){
+		System.out.println( this.leftHand + " = " + this.rightHand);
+	}
+	
 }

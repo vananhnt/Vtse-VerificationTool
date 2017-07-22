@@ -16,6 +16,8 @@ public class DecisionNode extends CFGNode {
 	private CFGNode thenNode;
 	private CFGNode endNode;
 	
+	private CFGNode endOfThen;
+	private CFGNode endOfElse;
 	private VariableManager thenVM;
 	private VariableManager elseVM;
 	// elseNode is next
@@ -101,12 +103,10 @@ public class DecisionNode extends CFGNode {
 	
 	public void setEndNode(CFGNode endNode) {
 		this.endNode = endNode;
-	}
-			
+	}			
 
 	public void index(VariableManager vm) {
 		condition = (IASTExpression) Index.index(condition, vm);
-		
 
 		// then clause
 		thenVM = Cloner.clone(vm);
@@ -157,6 +157,26 @@ public class DecisionNode extends CFGNode {
 		
 		// set VM
 		return elseVM;
+	}
+
+
+	public CFGNode getEndOfElse() {
+		return endOfElse;
+	}
+
+
+	public void setEndOfElse(CFGNode endOfElse) {
+		this.endOfElse = endOfElse;
+	}
+
+
+	public CFGNode getEndOfThen() {
+		return endOfThen;
+	}
+
+
+	public void setEndOfThen(CFGNode endOfThen) {
+		this.endOfThen = endOfThen;
 	}
 	
 		
