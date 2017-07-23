@@ -78,8 +78,12 @@ public class Index {
 	}
 
 	private static IASTExpression changeUnarytoBinary(IASTUnaryExpression node) {
-		IASTExpression operand = ((IASTUnaryExpression)node).getOperand().copy();
-		int operator = changeOperator(node.getOperator());
+		IASTExpression operand = ((IASTUnaryExpression)node).getOperand().copy();		
+		int operator = changeOperator(node.getOperator());		
+		if (operator == 0){
+			return node.getOperand();			
+		}
+		
 		IASTLiteralExpression number = factory.newLiteralExpression(IASTLiteralExpression.lk_integer_constant, "1");
 		IASTExpression right = factory.newBinaryExpression(operator, operand, number);
 		IASTExpression expression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, operand, right);
@@ -145,7 +149,8 @@ public class Index {
 	}
 	
 	private static IASTNode indexReturnStatement( IASTReturnStatement returnState, VariableManager vm){			
-		IASTExpression exp = (IASTExpression) index(returnState.getChildren()[0], vm);
+		
+		IASTExpression exp = (IASTExpression) index(returnState.getChildren()[0], vm);		
 		IASTReturnStatement newReturn = factory.newReturnStatement(exp);
 		//return (IASTStatement)index(returnState.getChildren()[0], vm);
 		return newReturn;

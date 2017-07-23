@@ -21,24 +21,20 @@ import cfg.build.VtseCFG;
 
 public class Parser {
 	public static void  main(String[] args) throws Exception {
-		String fileLocation =  "./bai1.cpp";
-		
-		FileContent fileContent = FileContent.createForExternalFileLocation(fileLocation);
-		IncludeFileContentProvider includeFile = IncludeFileContentProvider.getEmptyFilesProvider();
-		IParserLogService log = new DefaultLogService(); 
-		String[] includePaths = new String[0];
-		IScannerInfo info = new ScannerInfo(new HashMap<String, String>(), includePaths);
-		@SuppressWarnings("unused")
-		IASTTranslationUnit translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, includeFile, null, 0, log);
-
-		
+		String fileLocation =  "./TestInput.c";		
 		ASTGenerator ast = new ASTGenerator(fileLocation);
-		IASTFunctionDefinition func = ast.getFunction(0);	
 		
-		VtseCFG cfg = new VtseCFG(func);
-		cfg.unfold();
-		cfg.index();
-		cfg.printGraph();		
+		for (IASTNode run : ast.getTranslationUnit().getDeclarations()){
+			VtseCFG cfg = new VtseCFG((IASTFunctionDefinition) run);
+			cfg.unfold();
+			cfg.index();
+			cfg.printMeta();
+			//cfg.printFormular(System.out);
+			System.out.print("\n~ 0.o ~\n");
+		}
+		//IASTFunctionDefinition func = ast.getFunction(0);	
+		
+		
 		//printTree(func, 1);
 		}
 	
