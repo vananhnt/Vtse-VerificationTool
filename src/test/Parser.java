@@ -16,6 +16,7 @@ import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 
 import cfg.build.ASTGenerator;
+import cfg.build.SMTInput;
 import cfg.build.VtseCFG;
 
 
@@ -28,9 +29,14 @@ public class Parser {
 			VtseCFG cfg = new VtseCFG((IASTFunctionDefinition) run);
 			cfg.unfold();
 			cfg.index();
+			//cfg.printGraph();
 			cfg.printMeta();
-			//cfg.printFormular(System.out);
+			cfg.printFormular(System.out);
+			
+			SMTInput input = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
+			input.printInput();
 			System.out.print("\n~ 0.o ~\n");
+			break;
 		}
 		//IASTFunctionDefinition func = ast.getFunction(0);	
 		

@@ -2,7 +2,22 @@
 #include<stdio.h>
 #include<math.h>
 	float f(float x){
-	  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
+		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
+	}
+
+	float fp(float x){
+	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
+	}
+	int max (int a, int b) {
+		int max;
+		if (a > b) {
+			max = a;
+		}
+		else {
+			b = 1;
+			max = b;
+		}
+		return max;
 	}
 
 	float sum(int n) {
@@ -14,13 +29,8 @@
 
 		return sum;
 	}
-
-
-
-	float fp(float x){
-	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
-	}
 	
+
 	float foo36(float IN){
 	  float f_IN = IN - (IN*IN*IN)/6 + (IN*IN*IN*IN*IN)/120 + (IN*IN*IN*IN*IN*IN*IN)/5040;
 	  float fp_IN = 1 - (IN*IN)/2 + (IN*IN*IN*IN)/24 + (IN*IN*IN*IN*IN*IN)/720;
@@ -67,18 +77,8 @@ int fo(int flag, int n){
 		return fac;
 	}
 
-	int max (int a, int b) {
-		int max;
-		if (a > b) {
-			max = a;
-		}
-		else {
-			max = b;
-		}
-		
-		return max;
-	}
 	
+
 	int sqr (int a) {
 		return a * a;
 	}

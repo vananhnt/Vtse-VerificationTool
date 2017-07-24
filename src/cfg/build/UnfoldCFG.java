@@ -108,6 +108,10 @@ public class UnfoldCFG {
 			
 			condition.setThenNode(copyThen.getStart());
 			copyThen.getExit().setNext(lastNode);
+			
+				//TODO change
+			condition.setEndOfThen(copyThen.getExit());
+			condition.setEndOfElse(condition.getElseNode());
 			lastNode = condition;
 		}
 		CFGNode beginNode = new BeginWhileNode();
@@ -148,6 +152,9 @@ public class UnfoldCFG {
 			
 			condition.setThenNode(copyThen.getStart());
 			copyThen.getExit().setNext(lastNode);
+				//TODO change
+			condition.setEndOfThen(copyThen.getExit());
+			condition.setEndOfElse(condition.getElseNode());
 			lastNode = condition;
 		}
 		CFGNode beginNode = new BeginForNode();

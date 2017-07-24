@@ -95,14 +95,18 @@ public class ControlFlowGraphBuilder {
 		// then branch
 		decisionNode.setThenNode(thenClause.getStart());
 		thenClause.getExit().setNext(iterationNode);
+			//TODO change
+		decisionNode.setEndOfThen(iterationNode);
 		// khi in can xet truong hop iterationNode rieng
 
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
-		decisionNode.getElseNode().setNext(end);
+		decisionNode.getElseNode().setNext(end);		
 		decisionNode.setEndNode(end);
 		beginWhileNode.setEndNode(end);
-
+			//TODO change
+		decisionNode.setEndOfElse(decisionNode.getElseNode());
+		
 		return new ControlFlowGraph(beginWhileNode, end);
 	}
 
@@ -126,12 +130,15 @@ public class ControlFlowGraphBuilder {
 		thenClause.getExit().setNext(iterationNode);
 		// iterationNode.setNext(decisionNode);
 		// khi in can xet truong hop iterationNode rieng
-
+			//TODO change
+		decisionNode.setEndOfThen(iterationNode);
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(end);
 		decisionNode.setEndNode(end);
 		beginDoNode.setEndNode(end);
+			//TODO change
+		decisionNode.setEndOfElse(decisionNode.getElseNode());
 		return new ControlFlowGraph(beginDoNode, end);
 	}
 
@@ -158,7 +165,9 @@ public class ControlFlowGraphBuilder {
 		thenClause.getExit().setNext(endNode);
 		elseClause.getExit().setNext(endNode);
 		beginIfNode.setEndNode(endNode);
-
+			//TODO change
+		decisionNode.setEndOfThen(thenClause.getExit());
+		decisionNode.setEndOfElse(elseClause.getExit());
 		return new ControlFlowGraph(beginIfNode, endNode);
 	}
 
@@ -184,13 +193,15 @@ public class ControlFlowGraphBuilder {
 		thenClause.getExit().setNext(iterationNode);
 		// iterationNode.setNext(decisionNode);
 		// khi in can xet truong hop iterationNode rieng
-		
+			//TODO change
+		decisionNode.setEndOfThen(iterationNode);
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(endNode);
 		decisionNode.setEndNode(endNode);
 		bgForNode.setEndNode(endNode);
-
+			//TODO change
+		decisionNode.setEndOfElse(decisionNode.getElseNode());
 		return new ControlFlowGraph(bgForNode, endNode);
 	}
 

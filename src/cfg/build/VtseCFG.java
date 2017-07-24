@@ -10,6 +10,7 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EndConditionNode;
 import cfg.node.PlainNode;
+import cfg.node.SyncNode;
 import cfg.utils.FormulaCreater;
 import cfg.utils.VariableManager;
 
@@ -97,6 +98,10 @@ public class VtseCFG extends ControlFlowGraph {
 				//System.err.println("constraint: " + node.toString());
 			}		
 			printMeta(printStream, node.getNext(), end, nSpaces);	// 4 spaces
+		}
+		else if (node instanceof SyncNode){
+			printStream.println(nSpaces + node.toString());
+			printMeta(printStream, node.getNext(), end, nSpaces);
 		}
 		else if (node instanceof BeginNode) {
 			BeginNode begin = (BeginNode) node;

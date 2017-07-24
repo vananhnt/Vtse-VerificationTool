@@ -41,11 +41,15 @@ public class SyncNode extends CFGNode {
 
 	@Override
 	public String getFormula() {
-		return String.format("(= %s %s)", leftHand, rightHand);
+		return String.format(leftHand, "(= %s %s)", rightHand);
+		
 	}
 
 	public void printNode(){
-		System.out.println( this.leftHand + " = " + this.rightHand);
+		System.out.println( "SyncNode: " + this.leftHand + " = " + this.rightHand);
 	}
 	
+	public String toString(){
+		return "(" + leftHand + " = " + rightHand + ")";
+	}
 }

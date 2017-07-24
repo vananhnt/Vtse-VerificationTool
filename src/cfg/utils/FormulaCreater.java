@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
@@ -28,7 +29,7 @@ public class FormulaCreater {
 		CFGNode node = start.getNext();
 		while (node != null && node != exit) {
 	
-			temp = node.getFormula();
+			temp = node.getFormula();			
 			if (temp != null) {
 				if (constraint == null) {
 					constraint = temp;
@@ -58,6 +59,8 @@ public class FormulaCreater {
 			return ExpressionHelper.toString(node);
 		} else if (node instanceof IASTLiteralExpression) {
 			return ExpressionHelper.toString(node);
+		} else if ( node instanceof IASTReturnStatement){
+			return infixReturnStatement((IASTReturnStatement) node);
 		}
 		return null;
 		
@@ -73,6 +76,11 @@ public class FormulaCreater {
 		return wrapInfix(operand, opStr1, opStr2);
 	}
 	
+	private static String infixReturnStatement(IASTReturnStatement node){
+		//TODO
+		return "(= return " + createFormula(node.getReturnValue()) + ")";
+		
+	}
 	private static String infixExpressionStatement(IASTExpressionStatement node) {
 		return createFormula(node.getExpression());
 	}
@@ -84,6 +92,6 @@ public class FormulaCreater {
 	}
 	
 	public static String wrapInfix(String operand, String left, String right) {
-		return "(" + left + " " + operand + " " + right + ")";
+		return "(" + operand + " " + left + " " + right + ")";
 	}
 }
