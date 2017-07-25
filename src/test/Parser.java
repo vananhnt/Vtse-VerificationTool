@@ -21,12 +21,7 @@ public class Parser {
 			cfg.index();
 			//cfg.printGraph();
 			cfg.printMeta();
-			cfg.printFormular(System.out);
-			
-			SMTInput input = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
-			input.printInput();
-			System.out.print("\n~ 0.o ~\n");
-			break;
+			cfg.printFormular(System.out);			
 		}
 		//IASTFunctionDefinition func = ast.getFunction(0);	
 		

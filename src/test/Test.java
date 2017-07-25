@@ -16,7 +16,7 @@ public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
 		ASTGenerator ast = new ASTGenerator("./TestInput.c");
 		IASTFunctionDefinition func = ast.getFunction(0);
-		ast.print();
+		//ast.print();
 	
 		//*Parameters:
 		//DeclSpecifier : kieu tra ve cua ham
@@ -26,15 +26,18 @@ public class Test {
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
 		VtseCFG cfg = new VtseCFG(func);
-		cfg.index();
+	
 		cfg.unfold();
+		cfg.index();
+		cfg.printMeta();
+		//cfg.getExit().printNode();
 		//cfg.printGraph();
-		//cfg.printFormular(System.out);
+		cfg.printFormular(System.out);
 		//cfg.getVm().printList();
-		PrintStream out = new PrintStream("smt.txt");
+		//PrintStream out = new PrintStream("smt.txt");
 		
 		//PrintStream out = System.out;
-		cfg.printSMTFormula(out);
+		//cfg.printSMTFormula(out);
 		
 	}
 }

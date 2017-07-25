@@ -108,7 +108,8 @@ public class DecisionNode extends CFGNode {
 
 	public void index(VariableManager vm) {
 		condition = (IASTExpression) Index.index(condition, vm);
-
+		endNode.printNode();
+		
 		// then clause
 		thenVM = Cloner.clone(vm);
 		CFGNode run = this.getThenNode();
@@ -192,5 +193,7 @@ public class DecisionNode extends CFGNode {
 		this.endOfThen = endOfThen;
 	}
 	
+	public static void main(String[] args) {
 		
+	}
 }
