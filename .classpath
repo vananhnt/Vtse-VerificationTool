@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="libs/org.eclipse.cdt.codan.core_2.0.0.201109151620.jar"/>
 	<classpathentry kind="lib" path="libs/kryo-4.0.0.jar"/>
 	<classpathentry kind="lib" path="libs/kryo-2.21.jar"/>
+	<classpathentry kind="lib" path="libs/jxl.jar"/>
+	<classpathentry kind="lib" path="libs/rsyntaxtextarea.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
