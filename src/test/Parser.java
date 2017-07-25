@@ -21,7 +21,7 @@ public class Parser {
 			cfg.index();
 			//cfg.printGraph();
 			cfg.printMeta();
-			cfg.printFormular(System.out);			
+			//cfg.printFormular(System.out);			
 		}
 		//IASTFunctionDefinition func = ast.getFunction(0);	
 		

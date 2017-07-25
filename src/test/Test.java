@@ -26,18 +26,20 @@ public class Test {
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
 		VtseCFG cfg = new VtseCFG(func);
-	
+		
 		cfg.unfold();
-		cfg.index();
-		cfg.printMeta();
+		//cfg.index();
+		System.out.println(cfg.getVm().getVariable("return"));
+		//cfg.printMeta();
 		//cfg.getExit().printNode();
 		//cfg.printGraph();
-		cfg.printFormular(System.out);
+		//cfg.printFormular(System.out);
 		//cfg.getVm().printList();
 		//PrintStream out = new PrintStream("smt.txt");
 		
 		//PrintStream out = System.out;
 		//cfg.printSMTFormula(out);
-		
+		System.out.println( cfg.getNameFunction());
+		System.out.println( cfg.getTypeFunction());
 	}
 }

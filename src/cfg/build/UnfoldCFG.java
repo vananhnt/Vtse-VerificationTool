@@ -32,6 +32,13 @@ public class UnfoldCFG {
 		generate(cfg);
 	}
 	
+	public int getLoop(){
+		return nLoops;
+	}
+	
+	public void setLoop(int loop){
+		this.nLoops = loop;
+	}
 	public CFGNode getExit() {
 		return exit;
 	}

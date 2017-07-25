@@ -42,7 +42,7 @@ public class FormulaCreater {
 				}
 				else {
 //					constraint = wrapInfix(LOGIC_AND, temp, constraint);
-					constraint = wrapPrefix(LOGIC_AND, temp, constraint);
+					constraint = wrapPrefix(LOGIC_AND, constraint, temp);
 				}
 			}
 			if (node == exit) break;

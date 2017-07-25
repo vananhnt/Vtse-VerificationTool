@@ -27,6 +27,7 @@ public class VtseCFG extends ControlFlowGraph {
 	}
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
+		this.func = func;
 		vm = new VariableManager(func);
 		returnType = getReturnType();
 	}
@@ -63,6 +64,15 @@ public class VtseCFG extends ControlFlowGraph {
 		ps.print(createFormular());
 	}
 	
+	public String getNameFunction(){
+		if (func == null) return null;		
+		return this.func.getDeclarator().getName().toString();
+	}
+	
+	public String getTypeFunction(){
+		if (func == null) return null;
+		return this.func.getDeclSpecifier().toString();
+	}
 	public void index() {
 		CFGNode node = start;
 		while (node != null && node != exit) {
