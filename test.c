@@ -7,6 +7,9 @@ int test() {
 	int a = 0;
 	a = a + 2;
 	int b = a + 3;
+	if (a < 10) {
+		b = 10;
+	}
 	return b;
 }
 

@@ -14,9 +14,9 @@ import cfg.build.VtseCFG;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator();
+		ASTGenerator ast = new ASTGenerator("./TestInput.c");
 		IASTFunctionDefinition func = ast.getFunction(0);
-		//ast.print();
+		ast.print();
 	
 		//*Parameters:
 		//DeclSpecifier : kieu tra ve cua ham
@@ -32,8 +32,9 @@ public class Test {
 		//cfg.printFormular(System.out);
 		//cfg.getVm().printList();
 		PrintStream out = new PrintStream("smt.txt");
-		cfg.printSMTFormual(out);
-
-		//Node de nhac thuy : index sai o decisionNode
+		
+		//PrintStream out = System.out;
+		cfg.printSMTFormula(out);
+		
 	}
 }
