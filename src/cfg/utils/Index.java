@@ -1,6 +1,7 @@
 package cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
+import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
@@ -123,8 +124,12 @@ public class Index {
 
 	private static IASTNode indexDeclarationStatement(IASTDeclarationStatement node, VariableManager vm) {		
 		String name = "";
+		String type = null;
 		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) node.getDeclaration().copy();
 		for (IASTNode run : simpleDecl.getChildren()){
+			if (run instanceof IASTDeclSpecifier) {
+				type = run.toString();
+			}
 			if (run instanceof IASTDeclarator){
 				int reset = -1;
 				IASTEqualsInitializer init = (IASTEqualsInitializer) (((IASTDeclarator) run).getInitializer());
@@ -133,20 +138,22 @@ public class Index {
 					init.setInitializerClause(initClause);
 					reset = 0;
 				}		
-				IASTName nameDecl = ((IASTDeclarator) run).getName();
-				name = nameDecl.toString();					
+				IASTName nameVar = ((IASTDeclarator) run).getName();
+				name = nameVar.toString();					
+				
 				Variable var = vm.getVariable(name);				
 				if (var == null) return node;
 				var.setIndex(reset);
 				IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
 				((IASTDeclarator) run).setName(nameId);					
 			}
-		}		
+		}
+	
 		IASTDeclarationStatement newNode = factory.newDeclarationStatement(simpleDecl);			
 		return newNode;
 	}
 	
-	private static IASTNode indexReturnStatement( IASTReturnStatement returnState, VariableManager vm){			
+	private static IASTNode indexReturnStatement(IASTReturnStatement returnState, VariableManager vm){			
 		return null; //da xu ly return statement o returnNode
 	}
 }

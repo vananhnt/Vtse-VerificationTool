@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
@@ -27,7 +28,14 @@ public class VtseCFG extends ControlFlowGraph {
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
 		vm = new VariableManager(func);
-		returnType = vm.getVariable("return").getType();
+		returnType = getReturnType();
+	}
+	private String getReturnType() {
+		if (func != null) {
+			IASTNode type = func.getDeclSpecifier();
+			return type.toString();
+		}
+		return "unIdentify";
 	}
 	public VariableManager getVm() {
 		return vm;
@@ -65,7 +73,7 @@ public class VtseCFG extends ControlFlowGraph {
 				node = node.getNext();
 			}
 		}
-		if ( node == exit){
+		if (node == exit){
 			node.index(vm);
 		}
 	}	
@@ -88,7 +96,7 @@ public class VtseCFG extends ControlFlowGraph {
 	}
 	
 	
-	public void printSMTFormual(PrintStream printStream) {
+	public void printSMTFormula(PrintStream printStream) {
 		
 		int lastIndex;
 		// (declare-fun a_0 () Int)
@@ -100,21 +108,31 @@ public class VtseCFG extends ControlFlowGraph {
 			}
 		}
 		
-		if (!returnType.equals("void")) {
-			printStream.println("(declare-fun return () " + 
-							SMTTypeConvertion.getSMTType(returnType)+ ")");
-		}
+//		if (!returnType.equals("void")) {
+//			printStream.println("(declare-fun return () " + 
+//							SMTTypeConvertion.getSMTType(returnType)+ ")");
+//		}
 		
-		CFGNode node = start.getNext();
-		String f;
-		
-		while (node != exit) {
-			f = node.getFormula();
-			if (f != null) {
-				printStream.println("(assert " + f + ")");
-			}
-			node = node.getNext();
+//		CFGNode node = start.getNext();
+//		String f = null;
+//		
+//		while (node != exit && node != null) {
+//			f = node.getFormula();
+//			if (f != null) {
+//				printStream.println("(assert " + f + ")");
+//			}
+//			if (node instanceof DecisionNode) {
+//				node = ((DecisionNode) node).getEndNode();
+//			} else {
+//				node = node.getNext();
+//			}
+//		
+//		}
+		String f = FormulaCreater.create(start, exit); 
+		if (f != null) {
+			printStream.println("(assert " + f + ")");
 		}
+	
 	}
 	
 	private static void printMeta(PrintStream printStream,CFGNode node, CFGNode end, String nSpaces) {

@@ -38,10 +38,12 @@ public class SyncNode extends CFGNode {
 	public String getPrefixConstraint() {
 		return String.format("(= %s %s)", leftHand, rightHand);
 	}
-
+	
 	@Override
 	public String getFormula() {
-		return String.format(leftHand, "(= %s %s)", rightHand);
+		if (leftHand != null && rightHand != null) 
+		return String.format("(= %s %s)", leftHand, rightHand);
+		else return null;
 		
 	}
 

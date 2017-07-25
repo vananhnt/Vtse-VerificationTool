@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
@@ -101,6 +102,7 @@ public class ASTGenerator {
 		for (int i = 0; i < index; i++) {
 			System.out.print(" ");
 		}
+	
 		System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);

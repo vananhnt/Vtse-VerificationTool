@@ -82,7 +82,7 @@ public class FormulaCreater {
 			return ExpressionHelper.toString(node);
 //		} else if (node instanceof IASTReturnStatement){
 //			return prefixReturnStatement((IASTReturnStatement) node); //da xu ly return o ReturnNode
-		}
+		} 
 		return null;
 	}
 	
@@ -94,7 +94,12 @@ public class FormulaCreater {
 		IASTNode[] nodes1 = declaration.getChildren();
 		String left = null;
 		String right = null;
+		//String type = null;
+		String formula = null;
 		for (IASTNode iter1 : nodes1) {
+//			if (iter1 instanceof IASTSimpleDeclSpecifier) {
+//				type = iter1.toString();
+//			}
 			if (iter1 instanceof IASTDeclarator) {
 				nodes2 = iter1.getChildren();
 				//kiem tra co la phep gan?
@@ -103,31 +108,34 @@ public class FormulaCreater {
 						isAssign = true;
 					}	
 				}
-				
-			}
+				if (isAssign) {
+					for (IASTNode iter : nodes2) {
+						if (iter instanceof IASTName) {
+							left = ((IASTName) iter).toString();
+						}
+						if (iter instanceof IASTEqualsInitializer) {
+							right = createFormula(iter.getChildren()[0]);
+						}
+					}
+					if (formula == null) {
+						formula = wrapPrefix("=", left, right);	
+					} else {
+						formula = wrapPrefix(LOGIC_AND, formula,  wrapPrefix("=", left, right)); 
+					}
+			}		
 		}
-		if (isAssign) {
-			for (IASTNode iter : nodes2) {
-				if (iter instanceof IASTName) {
-					left = ((IASTName) iter).toString();
-				}
-				if (iter instanceof IASTEqualsInitializer) {
-					right = createFormula(iter.getChildren()[0]);
-				}
-			}
 		}
-		//System.out.println(wrapInfix("=", left, right));
-		return wrapPrefix("=", left, right);
-
+	
+		return formula;
 	}
+	
 	private static String infixDeclarationStatement(IASTDeclarationStatement node) {
 //		node.getDeclaration()
 		boolean isAssign = false;
 		IASTNode[] nodes2 = null; 
 		IASTDeclaration declaration = node.getDeclaration();
 		IASTNode[] nodes1 = declaration.getChildren();
-		String left = null;
-		String right = null;
+		
 		for (IASTNode iter1 : nodes1) {
 			if (iter1 instanceof IASTDeclarator) {
 				nodes2 = iter1.getChildren();
@@ -142,6 +150,8 @@ public class FormulaCreater {
 		}
 		
 		if (isAssign) {
+			String left = null;
+			String right = null;
 			for (IASTNode iter : nodes2) {
 				if (iter instanceof IASTName) {
 					left = ((IASTName) iter).toString();
@@ -150,9 +160,10 @@ public class FormulaCreater {
 					right = createFormula(iter.getChildren()[0]);
 				}
 			}
+			return wrapInfix("=", left, right);
 		}
-		//System.out.println(wrapInfix("=", left, right));
-		return wrapInfix("=", left, right);
+		return null;
+		
 	}
 	
 	private static String prefixExpressionStatement(IASTExpressionStatement node) {
@@ -194,7 +205,7 @@ public class FormulaCreater {
 	}
 	
 	public static void main(String[] args) {
-		ASTGenerator ast = new ASTGenerator();
+		ASTGenerator ast = new ASTGenerator("./TestInput.c");
 		IASTFunctionDefinition func = ast.getFunction(0);
 		VtseCFG cfg = new VtseCFG(func);
 		cfg.index();

@@ -68,13 +68,40 @@ public class ControlFlowGraphBuilder {
 		} else if (statement instanceof IASTReturnStatement) {
 			ReturnNode returnNode = new ReturnNode(statement);
 			cfg = new ControlFlowGraph(returnNode, returnNode);
-		} else {
+		} 
+		else  {
 			PlainNode plainNode = new PlainNode(statement);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
 
 		}
 		return cfg;
 	}
+
+//	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement) {
+//		CPPNodeFactory factory = (CPPNodeFactory) statement.getTranslationUnit().getASTNodeFactory();
+//		IASTSimpleDeclSpecifier typeVar = null;
+//		IASTDeclaration declaration = statement.getDeclaration();
+//		IASTNode[] nodes = declaration.getChildren();
+//		ControlFlowGraph cfg = new ControlFlowGraph();
+//		IASTDeclarator newDeclarator; 
+//		IASTDeclarationStatement newDeclStatement = null;
+//		IASTDeclaration newDeclaration;
+//		
+//		for (IASTNode node : nodes) {
+//			if (node instanceof IASTSimpleDeclSpecifier) {
+//				typeVar = ((IASTSimpleDeclSpecifier) node).copy();
+//			}
+//			if (node instanceof IASTDeclarator) {
+//				newDeclarator = ((IASTDeclarator) node).copy();
+//				newDeclaration = factory.newSimpleDeclaration(typeVar);
+//				
+//				newDeclStatement = factory.newDeclarationStatement(newDeclaration);
+//				System.err.println(ExpressionHelper.toString(newDeclStatement));
+//				
+//			}
+//		}
+//		return null;
+//	}
 
 	/**
 	 * @param whileStatement

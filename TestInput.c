@@ -1,61 +1,64 @@
 // TEST INPUT
 #include<stdio.h>
 #include<math.h>
-	float f(float x){
-		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
-	}
+//	float f(float x){
+//		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
+//	}
 
-	float fp(float x){
-	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
-	}
-	int max (int a, int b) {
-		int max;
-		if (a > b) {
-			max = a;
-		}
-		else {
-			b = 1;
-			max = b;
-		}
-		return max;
-	}
+//	float fp(float x){
+//	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
+//	}
 
-	float sum(int n) {
-		int sum = 0;
+//int max (int a, int b) {
+//		int max;
+//		if (a > b) {
+//			max = a;
+//		}
+//		else {
+//			b = 1;
+//			max = b;
+//		}
+//		return max;
+//	}
 
-		for (int i = 0; i <= n; i++) {
-			sum = ((sum + i) + 2) * (i+1) / i;
-		}
 
-		return sum;
-	}
+//	float sum(int n) {
+//		int sum = 0;
+//
+//		for (int i = 0; i <= n; i++) {
+//			sum = ((sum + i) + 2) * (i+1) / i;
+//		}
+//
+//		return sum;
+//	}
 	
 
-	float foo36(float IN){
-	  float f_IN = IN - (IN*IN*IN)/6 + (IN*IN*IN*IN*IN)/120 + (IN*IN*IN*IN*IN*IN*IN)/5040;
-	  float fp_IN = 1 - (IN*IN)/2 + (IN*IN*IN*IN)/24 + (IN*IN*IN*IN*IN*IN)/720;
-	  
-	  float x = IN - f_IN / fp_IN;	// x = IN - f(IN)/fp(IN)
-	  
-	  float f_x1 = x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
-	  float fp_x1 = 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
-
-	  x = x - f_x1/fp_x1;		// x = x - f(x) / fp(x)
-	  
-	  float f_x2 = x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
-	  float fp_x2 = 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
-
-	  x = x - f_x2/fp_x2;		// // x = x - f(x) / fp(x)
-
-	  return x;
-	}
+//	float foo36(float IN){
+//	  float f_IN = IN - (IN*IN*IN)/6 + (IN*IN*IN*IN*IN)/120 + (IN*IN*IN*IN*IN*IN*IN)/5040;
+//	  float fp_IN = 1 - (IN*IN)/2 + (IN*IN*IN*IN)/24 + (IN*IN*IN*IN*IN*IN)/720;
+//
+//	  float x = IN - f_IN / fp_IN;	// x = IN - f(IN)/fp(IN)
+//
+//	  float f_x1 = x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
+//	  float fp_x1 = 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
+//
+//	  x = x - f_x1/fp_x1;		// x = x - f(x) / fp(x)
+//
+//	  float f_x2 = x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
+//	  float fp_x2 = 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
+//
+//	  x = x - f_x2/fp_x2;		// // x = x - f(x) / fp(x)
+//
+//	  return x;
+//	}
 
 int fo(int flag, int n){
 		int k = 1;
 		if(flag > 0) 
 			k = n*n;
 		
-		int i = 0, j = 0;
+		int i = 0;
+		int j = 0;
 
 		while(i <= n) {
 			i++;
@@ -76,8 +79,6 @@ int fo(int flag, int n){
 		
 		return fac;
 	}
-
-	
 
 	int sqr (int a) {
 		return a * a;
@@ -107,8 +108,6 @@ int fo(int flag, int n){
 		return abs;
 	}
 	
-
-
 //	public static void main(String[] args) {
 //		float x = foo36(0.125);
 //		System.out.println("x = " + x);
