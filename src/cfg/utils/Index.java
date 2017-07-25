@@ -118,16 +118,14 @@ public class Index {
 	private static IASTNode indexExpressionStatement(IASTExpressionStatement node, VariableManager vm) {
 		IASTExpression expression = node.getExpression().copy();
 		IASTExpressionStatement newNode = factory.newExpressionStatement((IASTExpression) index(expression, vm));		
-		return  newNode;
-		
+		return  newNode;	
 	}
 
-	private static IASTNode indexDeclarationStatement(IASTDeclarationStatement node, VariableManager vm) {
-					
+	private static IASTNode indexDeclarationStatement(IASTDeclarationStatement node, VariableManager vm) {		
 		String name = "";
 		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) node.getDeclaration().copy();
 		for (IASTNode run : simpleDecl.getChildren()){
-			if ( run instanceof IASTDeclarator){
+			if (run instanceof IASTDeclarator){
 				int reset = -1;
 				IASTEqualsInitializer init = (IASTEqualsInitializer) (((IASTDeclarator) run).getInitializer());
 				if (init != null){				
@@ -149,10 +147,6 @@ public class Index {
 	}
 	
 	private static IASTNode indexReturnStatement( IASTReturnStatement returnState, VariableManager vm){			
-		
-		IASTExpression exp = (IASTExpression) index(returnState.getChildren()[0], vm);		
-		IASTReturnStatement newReturn = factory.newReturnStatement(exp);
-		//return (IASTStatement)index(returnState.getChildren()[0], vm);
-		return newReturn;
+		return null; //da xu ly return statement o returnNode
 	}
 }

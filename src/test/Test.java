@@ -1,5 +1,8 @@
 package test;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.build.ASTGenerator;
@@ -10,7 +13,7 @@ import cfg.build.VtseCFG;
  *
  */
 public class Test {
-	public static void  main(String[] args) {
+	public static void  main(String[] args) throws FileNotFoundException {
 		ASTGenerator ast = new ASTGenerator();
 		IASTFunctionDefinition func = ast.getFunction(0);
 		//ast.print();
@@ -23,9 +26,14 @@ public class Test {
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
 		VtseCFG cfg = new VtseCFG(func);
-		//cfg.index();
-		//cfg.unfold();
-		cfg.printGraph();
+		cfg.index();
+		cfg.unfold();
+		//cfg.printGraph();
 		//cfg.printFormular(System.out);
+		//cfg.getVm().printList();
+		PrintStream out = new PrintStream("smt.txt");
+		cfg.printSMTFormual(out);
+
+		//Node de nhac thuy : index sai o decisionNode
 	}
 }

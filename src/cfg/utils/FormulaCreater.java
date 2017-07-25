@@ -1,14 +1,20 @@
 package cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
+import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
+import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
+import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 
+import cfg.build.ASTGenerator;
+import cfg.build.VtseCFG;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 
@@ -35,8 +41,8 @@ public class FormulaCreater {
 					constraint = temp;
 				}
 				else {
-					constraint = wrapInfix(LOGIC_AND, temp, constraint);
-					//constraint = wrapPrefix(LOGIC_AND, temp, constraint);
+//					constraint = wrapInfix(LOGIC_AND, temp, constraint);
+					constraint = wrapPrefix(LOGIC_AND, temp, constraint);
 				}
 			}
 			if (node instanceof DecisionNode) {
@@ -48,9 +54,9 @@ public class FormulaCreater {
 		}
 		return constraint;
 	}
-	public static String createFormula(IASTNode node) {
+	public static String createInfixFormula(IASTNode node) {
 		if (node instanceof IASTDeclarationStatement) {
-			//TODO
+			return infixDeclarationStatement((IASTDeclarationStatement) node);
 		} else if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
 			return infixExpressionStatement((IASTExpressionStatement) node);
 		} else if (node instanceof IASTBinaryExpression) { //phep gan va so sanh
@@ -59,15 +65,110 @@ public class FormulaCreater {
 			return ExpressionHelper.toString(node);
 		} else if (node instanceof IASTLiteralExpression) {
 			return ExpressionHelper.toString(node);
-		} else if ( node instanceof IASTReturnStatement){
-			return infixReturnStatement((IASTReturnStatement) node);
 		}
 		return null;
+	}
+	
+	public static String createFormula(IASTNode node) {
+		if (node instanceof IASTDeclarationStatement) {
+			return prefixDeclarationStatement((IASTDeclarationStatement) node);
+		} else if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
+			return prefixExpressionStatement((IASTExpressionStatement) node);
+		} else if (node instanceof IASTBinaryExpression) { //phep gan va so sanh
+			return prefixBinaryExpression((IASTBinaryExpression) node);
+		} else if (node instanceof IASTIdExpression) { //bien (khong tinh trong phep khoi tao)
+			return ExpressionHelper.toString(node);
+		} else if (node instanceof IASTLiteralExpression) {
+			return ExpressionHelper.toString(node);
+//		} else if (node instanceof IASTReturnStatement){
+//			return prefixReturnStatement((IASTReturnStatement) node); //da xu ly return o ReturnNode
+		}
+		return null;
+	}
+	
+	
+	private static String prefixDeclarationStatement(IASTDeclarationStatement node) {
+		boolean isAssign = false;
+		IASTNode[] nodes2 = null; 
+		IASTDeclaration declaration = node.getDeclaration();
+		IASTNode[] nodes1 = declaration.getChildren();
+		String left = null;
+		String right = null;
+		for (IASTNode iter1 : nodes1) {
+			if (iter1 instanceof IASTDeclarator) {
+				nodes2 = iter1.getChildren();
+				//kiem tra co la phep gan?
+				for (IASTNode iter2 : nodes2) {
+					if (iter2 instanceof IASTEqualsInitializer) {
+						isAssign = true;
+					}	
+				}
+				
+			}
+		}
+		if (isAssign) {
+			for (IASTNode iter : nodes2) {
+				if (iter instanceof IASTName) {
+					left = ((IASTName) iter).toString();
+				}
+				if (iter instanceof IASTEqualsInitializer) {
+					right = createFormula(iter.getChildren()[0]);
+				}
+			}
+		}
+		//System.out.println(wrapInfix("=", left, right));
+		return wrapPrefix("=", left, right);
+
+	}
+	private static String infixDeclarationStatement(IASTDeclarationStatement node) {
+//		node.getDeclaration()
+		boolean isAssign = false;
+		IASTNode[] nodes2 = null; 
+		IASTDeclaration declaration = node.getDeclaration();
+		IASTNode[] nodes1 = declaration.getChildren();
+		String left = null;
+		String right = null;
+		for (IASTNode iter1 : nodes1) {
+			if (iter1 instanceof IASTDeclarator) {
+				nodes2 = iter1.getChildren();
+				//kiem tra co la phep gan?
+				for (IASTNode iter2 : nodes2) {
+					if (iter2 instanceof IASTEqualsInitializer) {
+						isAssign = true;
+					}	
+				}
+				
+			}
+		}
 		
+		if (isAssign) {
+			for (IASTNode iter : nodes2) {
+				if (iter instanceof IASTName) {
+					left = ((IASTName) iter).toString();
+				}
+				if (iter instanceof IASTEqualsInitializer) {
+					right = createFormula(iter.getChildren()[0]);
+				}
+			}
+		}
+		//System.out.println(wrapInfix("=", left, right));
+		return wrapInfix("=", left, right);
+	}
+	
+	private static String prefixExpressionStatement(IASTExpressionStatement node) {
+		return createFormula(node.getExpression());
+	}
+	
+	private static String prefixBinaryExpression(IASTBinaryExpression node) {
+		IASTExpression op1 = node.getOperand1();
+		IASTExpression op2 = node.getOperand2();
+		String operand = ExpressionHelper.getCorrespondBinaryOperator(node.getOperator());
+		String opStr1 = createFormula(op1);
+		String opStr2 = createFormula(op2);
+		return wrapPrefix(operand, opStr1, opStr2);
 	}
 	
 	private static String infixBinaryExpression(IASTBinaryExpression node) {
-	
 		IASTExpression op1 = node.getOperand1();
 		IASTExpression op2 = node.getOperand2();
 		String operand = ExpressionHelper.getCorrespondBinaryOperator(node.getOperator());
@@ -76,22 +177,28 @@ public class FormulaCreater {
 		return wrapInfix(operand, opStr1, opStr2);
 	}
 	
-	private static String infixReturnStatement(IASTReturnStatement node){
-		//TODO
-		return "(= return " + createFormula(node.getReturnValue()) + ")";
-		
-	}
 	private static String infixExpressionStatement(IASTExpressionStatement node) {
 		return createFormula(node.getExpression());
 	}
+	
 	public static String wrapPrefix(String operand, String left, String right) {
 		return "(" + operand + " " + left + " " + right + ")";
 	}
+	
 	public static String createFormula(String operator, String operand) {
 		return "(" + operator + " " + operand + ")";
 	}
 	
 	public static String wrapInfix(String operand, String left, String right) {
-		return "(" + operand + " " + left + " " + right + ")";
+		return "(" + left + " " + operand + " " + right + ")";
+	}
+	
+	public static void main(String[] args) {
+		ASTGenerator ast = new ASTGenerator();
+		IASTFunctionDefinition func = ast.getFunction(0);
+		VtseCFG cfg = new VtseCFG(func);
+		cfg.index();
+		cfg.unfold();
+		System.out.println(create(cfg.getStart(), cfg.getExit()));
 	}
 }

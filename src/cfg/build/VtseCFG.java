@@ -12,11 +12,14 @@ import cfg.node.EndConditionNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
 import cfg.utils.FormulaCreater;
+import cfg.utils.Variable;
 import cfg.utils.VariableManager;
+import solver.SMTTypeConvertion;
 
 public class VtseCFG extends ControlFlowGraph {
 	private IASTFunctionDefinition func;
 	private VariableManager vm;
+	private String returnType;
 	
 	public VtseCFG() {
 		vm = new VariableManager();
@@ -24,6 +27,7 @@ public class VtseCFG extends ControlFlowGraph {
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
 		vm = new VariableManager(func);
+		returnType = vm.getVariable("return").getType();
 	}
 	public VariableManager getVm() {
 		return vm;
@@ -81,6 +85,36 @@ public class VtseCFG extends ControlFlowGraph {
 	
 	public void printMeta() { //Da unfold
 		printMeta(System.out, start, exit, " ");
+	}
+	
+	
+	public void printSMTFormual(PrintStream printStream) {
+		
+		int lastIndex;
+		// (declare-fun a_0 () Int)
+		for (Variable var: vm.getVariableList()) {
+			lastIndex = var.getIndex();
+			for (int i = 0; i <= lastIndex; i++) {
+				printStream.println("(declare-fun " + var.getName() + "_" + i + 
+										" () "+ SMTTypeConvertion.getSMTType(var.getType()) +")");
+			}
+		}
+		
+		if (!returnType.equals("void")) {
+			printStream.println("(declare-fun return () " + 
+							SMTTypeConvertion.getSMTType(returnType)+ ")");
+		}
+		
+		CFGNode node = start.getNext();
+		String f;
+		
+		while (node != exit) {
+			f = node.getFormula();
+			if (f != null) {
+				printStream.println("(assert " + f + ")");
+			}
+			node = node.getNext();
+		}
 	}
 	
 	private static void printMeta(PrintStream printStream,CFGNode node, CFGNode end, String nSpaces) {

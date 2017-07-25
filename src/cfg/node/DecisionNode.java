@@ -64,19 +64,19 @@ public class DecisionNode extends CFGNode {
 			return null;
 		}	
 		else if (thenFormula == null) {
-			formula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, elseFormula);
+			formula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, elseFormula);
 		}
 		else if (elseFormula == null) {
-			formula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+			formula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
 		}
 		else {
-			thenFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
-			elseFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, notConditionStr, elseFormula);
-//			thenFormula = FormulaCreater.wrapPrefix(FormulaCreater.LOGIC_AND, conditionStr, thenFormula);
-//			elseFormula = FormulaCreater.wrapPrefix(FormulaCreater.LOGIC_AND, notConditionStr, elseFormula);
+//			thenFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+//			elseFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, notConditionStr, elseFormula);
+			thenFormula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+			elseFormula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, notConditionStr, elseFormula);
 			
-			formula = FormulaCreater.wrapInfix(FormulaCreater.LOGIC_AND, thenFormula, elseFormula);
-//			formula = FormulaCreater.wrapPrefix(FormulaCreater.LOGIC_OR, thenFormula, elseFormula);
+//			formula = FormulaCreater.wrapInfix(FormulaCreater.LOGIC_AND, thenFormula, elseFormula);
+			formula = FormulaCreater.wrapPrefix(FormulaCreater.LOGIC_AND, thenFormula, elseFormula);
 		}
 		return formula;
 		
@@ -176,21 +176,17 @@ public class DecisionNode extends CFGNode {
 		return elseVM;
 	}
 
-
 	public CFGNode getEndOfElse() {
 		return endOfElse;
 	}
-
 
 	public void setEndOfElse(CFGNode endOfElse) {
 		this.endOfElse = endOfElse;
 	}
 
-
 	public CFGNode getEndOfThen() {
 		return endOfThen;
 	}
-
 
 	public void setEndOfThen(CFGNode endOfThen) {
 		this.endOfThen = endOfThen;

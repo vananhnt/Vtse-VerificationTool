@@ -1,0 +1,7 @@
+(declare-fun a_0 () Int)
+(declare-fun a_1 () Int)
+(declare-fun b_0 () Int)
+(declare-fun return_0 () Int)
+(declare-fun return () Int)
+(assert (= a_1 (+ a_0 2)))
+(assert (= b_0 (+ a_1 3)))

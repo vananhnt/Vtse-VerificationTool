@@ -1,5 +1,4 @@
-package cfg.build;
-
+package solver;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,7 +17,7 @@ public class SMTInput {
 		
 	}
 	
-	public SMTInput( ArrayList<Variable> varList, String formula){
+	public SMTInput(ArrayList<Variable> varList, String formula){
 		this.variableList = varList;
 		this.formula = formula;		
 	}
@@ -67,9 +66,7 @@ public class SMTInput {
 //			System.out.println("(assert " + s + ")");
 //		}
 			
-		
-		System.out.println("(assert " + formula + ")");
-		
+		System.out.println("(assert " + formula + ")");	
 	}
 	
 	public void printInputToOutputStream(OutputStream os) 
@@ -92,12 +89,9 @@ public class SMTInput {
 				out.append("(declare-fun return () " + smtType + ")\n");
 			}
 		}
-		
-		
-		
+			
 		out.append("(assert " + formula + ")\n");
-		
-		
+	
 		for (String s: constraints) {
 			out.append("(assert " + s + ")\n");
 		}

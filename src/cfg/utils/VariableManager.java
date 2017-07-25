@@ -2,20 +2,18 @@ package cfg.utils;
 
 import java.util.ArrayList;
 
-
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
-import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 
 public class VariableManager {
 	private ArrayList<Variable> variableList;
 
+	
 	public VariableManager(){
 		this.variableList = new ArrayList<>();
 	}
@@ -55,7 +53,7 @@ public class VariableManager {
 	}
 	
 	public boolean isHas(String name){
-		if ( this.variableList == null)	return false;
+		if (this.variableList == null)	return false;
 		for (Variable var : this.variableList){
 			if(name.equals(var.getName())){
 				return true;
@@ -67,9 +65,42 @@ public class VariableManager {
 	public int getSize(){
 		return this.variableList.size();
 	}
-/*
- * return List parameters  form function	
- */
+	
+	public void printList() {
+		if (this.variableList == null) {
+			System.out.println("NULL");
+		} 
+		for (Variable var : this.variableList) {
+			System.out.println(var.getVariableWithIndex());
+		}
+	}
+	/**
+	 * Node: chi so cua them bien khi bat dau func la 0
+	 * Xet params, localVirable, return 
+	 * @param func
+	 * @return
+	 */
+	public void build(IASTFunctionDefinition func) {		
+		ArrayList<Variable> params = getParameters(func);
+		ArrayList<Variable> localVars = new ArrayList<>();
+		localVars = getLocalVar(func, localVars);
+		for (Variable param : params) {
+			this.variableList.add(param);
+		}
+		for (Variable var : localVars) {
+			this.variableList.add(var);
+		}		
+		this.variableList.add(getReturn(func));
+	}
+	
+	private Variable getReturn(IASTFunctionDefinition func) {
+		IASTNode typeFunction = func.getDeclSpecifier();
+		Variable var = new Variable(typeFunction.getRawSignature(), "return");
+		return var;
+	} 
+	/*
+	 * return List parameters  from function	
+	 */
 	private ArrayList<Variable> getParameters(IASTFunctionDefinition func) {
 		ArrayList<Variable> params = new ArrayList<>();
 		IASTNode[] nodes = func.getDeclarator().getChildren();
@@ -88,26 +119,25 @@ public class VariableManager {
 						params.add(var);
 					}
 				}
-
 			}
 		}
 		return params;
 	}
 
-/*
- * return List local Variables form function
- */
-	public ArrayList<Variable> getLocalVar( IASTNode node, ArrayList<Variable> list){
+	/*
+	 * return List local Variables form function
+	 */
+	private ArrayList<Variable> getLocalVar(IASTNode node, ArrayList<Variable> list){
 		// find init
 		IASTNode[] children = node.getChildren();		
-		if ( node instanceof IASTSimpleDeclaration ){
+		if (node instanceof IASTSimpleDeclaration){
 			int init = -1;
 			String type = ((IASTSimpleDeclaration) node).getDeclSpecifier().getRawSignature();
 			IASTDeclarator[] declarations = ((IASTSimpleDeclaration) node).getDeclarators();
 			String name = declarations[0].getName().getRawSignature();
 			
 			IASTNode[] body = declarations[0].getChildren();			
-			for ( IASTNode iter : body){
+			for (IASTNode iter : body){
 				if (iter instanceof IASTEqualsInitializer){
 					init = 0;
 				}
@@ -117,16 +147,13 @@ public class VariableManager {
 			list.add(var);						
 		}
 		// return
-		if( node instanceof IASTReturnStatement){
-			IASTExpression result = ((IASTReturnStatement) node).getReturnValue();
-			Variable var = new Variable("return", result.getRawSignature());
-			list.add(var);
-		}
-		for ( IASTNode run : children){
+
+		for (IASTNode run : children) {
 			getLocalVar(run, list);
 		}		
 		return list;
 	}
+	
 /*
  * add bien toan cuc 
  */
@@ -144,30 +171,5 @@ public class VariableManager {
 //		}
 //	}
 	
-	public void printList(){
-		if ( this.variableList == null){
-			System.out.println("NULL");
-		} 
-		for (Variable var : this.variableList){
-			System.out.println( var.getVariableWithIndex());
-		}
-	}
-	/**
-	 * Node: chi so cua them bien khi bat dau func la 0
-	 * Xet params, localVirable, return 
-	 * @param func
-	 * @return
-	 */
-	public void build(IASTFunctionDefinition func) {		
-		ArrayList<Variable> params = getParameters(func);
-		ArrayList<Variable> localVars = new ArrayList<>();
-		localVars = getLocalVar(func, localVars);
-		for (Variable param : params) {
-			this.variableList.add(param);
-		}
-		for ( Variable var : localVars){
-			this.variableList.add(var);
-		}		
-		
-	}
+	
 }

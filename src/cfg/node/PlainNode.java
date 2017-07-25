@@ -26,14 +26,13 @@ public class PlainNode extends CFGNode {
 		this.statement = statement;
 	}
 
-	
 	public void index(VariableManager vm) {
 		statement = (IASTStatement) Index.index(statement, vm);
 	}
 	public String getFormula() {
 		return FormulaCreater.createFormula(statement);
-		
 	}
+
 	public String toString() {
 		return ExpressionHelper.toString(statement);
 	}
