@@ -7,10 +7,9 @@ using namespace std;
 
 int test( int b, int c){
 
-	if( b == c){
-		b = 1;
-	} else{
-		c = 2;
+	for (int i=0; i<10; i++){
+		b = i + b;
 	}
+
 	return b + c;
 }

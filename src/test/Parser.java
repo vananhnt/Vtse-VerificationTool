@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
+import cfg.utils.Variable;
 import solver.SMTInput;
 
 
@@ -17,29 +19,26 @@ public class Parser {
 		String fileLocation =  "./TestInput.c";		
 		ASTGenerator ast = new ASTGenerator(fileLocation);
 		ArrayList<IASTFunctionDefinition> funcList = ast.getListFunction();
+		
+		IASTFunctionDefinition func = ast.getFunction(0);
+		
 		for (IASTNode iter : funcList){
 			VtseCFG cfg = new VtseCFG((IASTFunctionDefinition) iter);
 			System.out.println(cfg.getNameFunction());
-			cfg.unfold();
-			cfg.index();
-			System.out.println(cfg.createFormular());
+			for ( Variable var :cfg.getInitVariables()){
+				System.out.println(var.getType() + " : " + var.getName() );
+			}
+
+//			cfg.unfold();
+//			cfg.index();
+//			System.out.println(cfg.createFormular());
+//			cfg.getVm().getVariableList();
 //			cfg.printGraph();
 //			cfg.printMeta();
 			
-		}
+		}		
 		
-//		for (IASTNode run : ast.getTranslationUnit().getDeclarations()){
-//			VtseCFG cfg = new VtseCFG((IASTFunctionDefinition) run);
-//			cfg.unfold();
-//			cfg.index();
-//			//cfg.printGraph();
-//			cfg.printMeta();
-//			//cfg.printFormular(System.out);			
-//		}
-//		//IASTFunctionDefinition func = ast.getFunction(0);	
-		
-		
-		//printTree(func, 1);
+	//printTree(func, 1);
 		}
 	
 	@SuppressWarnings("unused")
