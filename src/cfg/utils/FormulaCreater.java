@@ -33,7 +33,7 @@ public class FormulaCreater {
 		String constraint = start.getFormula();
 		String temp;
 		CFGNode node = start.getNext();
-		while (node != null && node != exit) {
+		while (node != null) {
 	
 			temp = node.getFormula();			
 			if (temp != null) {
@@ -42,9 +42,10 @@ public class FormulaCreater {
 				}
 				else {
 //					constraint = wrapInfix(LOGIC_AND, temp, constraint);
-					constraint = wrapPrefix(LOGIC_AND, temp, constraint);
+					constraint = wrapPrefix(LOGIC_AND, constraint, temp);
 				}
 			}
+			if (node == exit) break;
 			if (node instanceof DecisionNode) {
 				node = ((DecisionNode) node).getEndNode();
 			} else {
@@ -52,6 +53,7 @@ public class FormulaCreater {
 			}
 			
 		}
+		
 		return constraint;
 	}
 	public static String createInfixFormula(IASTNode node) {

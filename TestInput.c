@@ -1,6 +1,9 @@
 // TEST INPUT
 #include<stdio.h>
 #include<math.h>
+//void set(int n){
+//	n = 0;
+//}
 //	float f(float x){
 //		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
 //	}
@@ -54,9 +57,9 @@
 
 int fo(int flag, int n){
 		int k = 1;
-		if(flag > 0) 
+		if(flag > 0)
 			k = n*n;
-		
+
 		int i = 0;
 		int j = 0;
 
@@ -70,19 +73,19 @@ int fo(int flag, int n){
 		return z;
 	}
 
-	int factorial(int n) {
-		int fac = 1;
-		
-		for (int i = 2; i <= n; i++) {
-			fac = fac * i;
-		}
-		
-		return fac;
-	}
-
-	int sqr (int a) {
-		return a * a;
-	}
+//	int factorial(int n) {
+//		int fac = 1;
+//
+//		for (int i = 2; i <= n; i++) {
+//			fac = fac * i;
+//		}
+//
+//		return fac;
+//	}
+//
+//	int sqr (int a) {
+//		return a * a;
+//	}
 	
 	double foo(double a, double b) {
 		double result;

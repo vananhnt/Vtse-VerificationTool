@@ -32,6 +32,13 @@ public class UnfoldCFG {
 		generate(cfg);
 	}
 	
+	public int getLoop(){
+		return nLoops;
+	}
+	
+	public void setLoop(int loop){
+		this.nLoops = loop;
+	}
 	public CFGNode getExit() {
 		return exit;
 	}
@@ -112,11 +119,13 @@ public class UnfoldCFG {
 				//TODO change
 			condition.setEndOfThen(copyThen.getExit());
 			condition.setEndOfElse(condition.getElseNode());
+			condition.setEndNode(endNode);
+			
 			lastNode = condition;
 		}
 		CFGNode beginNode = new BeginWhileNode();
 		beginNode.setNext(lastNode);
-	
+		
 		return new ControlFlowGraph(beginNode.getNext(), endNode);
 	}
 	
@@ -155,6 +164,8 @@ public class UnfoldCFG {
 				//TODO change
 			condition.setEndOfThen(copyThen.getExit());
 			condition.setEndOfElse(condition.getElseNode());
+			condition.setEndNode(endNode);
+			
 			lastNode = condition;
 		}
 		CFGNode beginNode = new BeginForNode();
@@ -188,6 +199,7 @@ public class UnfoldCFG {
 			condition.setThenNode(iterateNode(condition.getThenNode()));
 			condition.setElseNode(iterateNode(condition.getElseNode()));
 			((BeginIfNode) node).getEndNode().setNext(iterateNode(((BeginIfNode) node).getEndNode().getNext()));
+		
 		} else if (node instanceof BeginForNode) {
 			ControlFlowGraph forGraph = unfoldFor(node, ((BeginForNode) node).getEndNode());
 			node.setNext(forGraph.getStart());
