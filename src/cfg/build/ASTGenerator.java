@@ -1,5 +1,6 @@
 package cfg.build;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
@@ -69,10 +70,21 @@ public class ASTGenerator {
 	public void setFileLocation(String fileName) {
 		filelocation = fileName;
 	}
+	
+	public ArrayList<IASTFunctionDefinition> getListFunction(){
+		if (this.translationUnit == null) return null;
+		ArrayList<IASTFunctionDefinition> funcList = new ArrayList<>();
+		for (IASTNode run : this.translationUnit.getDeclarations()){
+			if (run instanceof IASTFunctionDefinition){
+				funcList.add((IASTFunctionDefinition) run);
+			}
+		}
+		return funcList;
+	}
 	/*
 	 * functionDef 
-	 * chỉ lấy function đầu tiên
-	 * chưa xét trường hợp cho chọn các func khác nhau 
+	 * chá»‰ láº¥y function Ä‘áº§u tiĂªn
+	 * chÆ°a xĂ©t trÆ°á»�ng há»£p cho chá»�n cĂ¡c func khĂ¡c nhau 
 	 */
 	public IASTFunctionDefinition getFunction(int index) {
 //		int count = 0;
