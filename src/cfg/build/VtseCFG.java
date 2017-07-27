@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
@@ -69,6 +70,20 @@ public class VtseCFG extends ControlFlowGraph {
 		return this.func.getDeclarator().getName().toString();
 	}
 	
+	public ArrayList<Variable> getInitVariables(){
+		if (this.func == null) return null;
+		ArrayList<Variable> varList = new ArrayList<>();
+		//TODO this.func.get
+		for (IASTNode iter : this.func.getDeclarator().getChildren()){
+			if (iter instanceof IASTParameterDeclaration){
+				String type = ((IASTParameterDeclaration) iter).getDeclSpecifier().toString();
+				String name = ((IASTParameterDeclaration) iter).getDeclarator().getName().toString();
+				Variable var = new Variable(type, name);
+				varList.add(var);
+			}
+		}
+		return varList;		
+	}
 	public String getTypeFunction(){
 		if (func == null) return null;
 		return this.func.getDeclSpecifier().toString();
