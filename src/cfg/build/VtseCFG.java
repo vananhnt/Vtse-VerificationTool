@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 
+import app.solver.SMTTypeConvertion;
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
@@ -16,7 +17,6 @@ import cfg.node.SyncNode;
 import cfg.utils.FormulaCreater;
 import cfg.utils.Variable;
 import cfg.utils.VariableManager;
-import solver.SMTTypeConvertion;
 
 public class VtseCFG extends ControlFlowGraph {
 	private IASTFunctionDefinition func;

@@ -2,10 +2,12 @@ package app.verification;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.callback.LanguageCallback;
 
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.internal.core.model.FunctionDeclaration;
 
 import app.verification.report.VerificationReport;
@@ -16,6 +18,7 @@ import jxl.write.biff.RowsExceededException;
 
 public class FileVerification {
 	
+	public static final String C_TAG = ".c";
 	public static final String CPP_TAG = ".cpp";
 	public static final String PP_FILE_TAG = ".xml";
 	
@@ -52,28 +55,32 @@ public class FileVerification {
 		
 	}
 	
-	public void verify(String fileLocation) 
+	public void verify(File file) 
 			throws RowsExceededException, WriteException, IOException {
-		if (fileLocation == null) {
+		if (file == null) {
 			System.out.println("file is null");
 			return;
 		}
 		
+		String filePath = file.getAbsolutePath();
 		
-		String PPPathFile = null;
-//		int index = javaPathFile.lastIndexOf(CPP_TAG);
-		if (index < 0) {
+		System.out.println(filePath);
+		
+		String CPPFilename = getCFilename(file);
+		String PPPathFile;
+		
+		if (CPPFilename == null) {
+			System.out.println("not cpp file");
 			return;
 		}
 		else {
-//			PPPathFile = javaPathFile.substring(0, index);
-			PPPathFile += PP_FILE_TAG;
+			PPPathFile = CPPFilename + PP_FILE_TAG;
 		}
 		
-		ASTGenerator ast = new ASTGenerator(fileLocation);
+		ASTGenerator ast = new ASTGenerator(filePath);
 		
 		
-		List<CtMethod> listMethod = launcherSpoon.getMethods();
+		ArrayList<IASTFunctionDefinition> listFunction = ast.getListFunction();
 		
 		FunctionVerification mv = new FunctionVerification();
 		
@@ -94,15 +101,16 @@ public class FileVerification {
 		for (AssertionMethod am: listAssertion) {
 			System.err.println("hello");
 			System.err.println("am: " + am.getMethodName());
-			for (FunctionDeclaration method: listFunction) {
-				System.err.println("method name: " + method.getSimpleName());
-				if (method.getSimpleName().equals(am.getMethodName())) {
+			for (IASTFunctionDefinition function: listFunction) {
+				String functionName = getFunctionName(function);
+				System.err.println("function name: " + functionName);
+				if (functionName.equals(am.getMethodName())) {
 					try {
 						long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-						System.err.println("method: " + method.getSimpleName());
-						report = mv.verify(method, am.getPreCondition(), am.getPostCondition());
+						System.err.println("function: " + functionName);
+						report = mv.verify(function, am.getPreCondition(), am.getPostCondition());
 						long end = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-						ExportExcel.add(report.getMethodName(), report.getPreCondition(), report.getPostCondition(), 
+						ExportExcel.add(report.getFunctionName(), report.getPreCondition(), report.getPostCondition(), 
 								report.getStatus(), String.valueOf((double) (report.getSolverTime()/1000.0) + (double) (report.getGenerateConstraintTime()/1000.0)),
 								"unknown", report.getCounterEx());
 						report.print();
@@ -116,7 +124,32 @@ public class FileVerification {
 		}
 		
 	}
-
+	
+	private String getCFilename(File file) {
+		String filename = file.getAbsolutePath();
+		int index = filename.lastIndexOf(CPP_TAG);
+		if (index >= 0) {
+			filename = filename.substring(0, index);
+		}
+		else {
+			index = filename.lastIndexOf(C_TAG);
+			if (index >= 0) {
+				filename = filename.substring(0, index);
+			}
+			else {
+				filename = null;
+			}
+		}
+		
+		return filename;
+	}
+	
+	private String getFunctionName(IASTFunctionDefinition function) {
+		if (function == null) 
+			return null;		
+		return 
+			function.getDeclarator().getName().toString();
+	}
 	
 //	public void verify(File file) throws RowsExceededException, WriteException, IOException {
 //		if (file == null) {

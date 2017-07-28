@@ -21,6 +21,7 @@ public class ExportExcel {
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
 		ExportExcel ee = new ExportExcel();
 		
+		ExportExcel.init();
 		ee.write();
 	}
 	
@@ -42,7 +43,17 @@ public class ExportExcel {
 	public static void add(String function, String pre, String post, String status, String cputime, String memU, String counterEx) throws RowsExceededException, WriteException{
 		 WritableCellFormat cellFormat = new WritableCellFormat();
 	     cellFormat.setAlignment(Alignment.LEFT);
-	     cellFormat.setWrap(true);;
+	     cellFormat.setWrap(true);
+	     
+	    if (sheet == null) {
+	    	try {
+				ExportExcel.init();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
+	    
+	    System.err.println(sheet);
 		sheet.addCell(new Label(0, k, String.valueOf(id++)));
 		sheet.addCell(new Label(1, k, function));
 		sheet.addCell(new Label(2, k, pre));

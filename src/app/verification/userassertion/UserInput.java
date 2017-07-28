@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cfg.utils.Variable;
-import app.utils.Helper;
 import app.utils.InfixToPrefix;
+import cfg.utils.Variable;
+
+
 
 public class UserInput {
 	String input;
@@ -69,11 +70,11 @@ public class UserInput {
 			}
 			
 		}
-		
+	
 		String old;
 		String replacement;
 		for (Variable v: parameters) {
-			if (!v.getName().equals("return")) {
+			//if (!v.getName().equals("return")) {
 				old = " " + v.getName() + " ";
 				replacement = " " + v.getName() + "_0" + " ";
 				assertion = assertion.replaceAll(old, replacement);
@@ -81,7 +82,7 @@ public class UserInput {
 				old = String.format(" %s\\)", v.getName());
 				replacement = String.format(" %s_0\\)", v.getName());
 				assertion = assertion.replaceAll(old, replacement);
-			}
+			//}
 		}
 	}
 	
@@ -180,9 +181,10 @@ public class UserInput {
     //    input = "return * return > (a+b)/2";
         input = "a != b";
         
-        input = "-a * b";
-        
-        input = "!(a < b)";
+//        input = "-a * b";	// error
+//        
+//        input = "!(a < b)";	// error
+        input = "return < (a + b)";
         
         List<Variable> parameters = new ArrayList<>();
         parameters.add(new Variable("double", "return"));

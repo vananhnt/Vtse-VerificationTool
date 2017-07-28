@@ -8,11 +8,10 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 
+import app.solver.SMTInput;
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
 import cfg.utils.Variable;
-import solver.SMTInput;
-
 
 public class Parser {
 	public static void  main(String[] args) throws Exception {

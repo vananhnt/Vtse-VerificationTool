@@ -15,6 +15,7 @@ import app.verification.report.Report;
 import app.verification.report.VerificationReport;
 import app.verification.userassertion.UserInput;
 import cfg.build.VtseCFG;
+import cfg.utils.Variable;
 
 public class FunctionVerification {
 	
@@ -42,28 +43,27 @@ public class FunctionVerification {
 	 * @return	verification report
 	 * @throws IOException 
 	 */
-	public VerificationReport verify(FunctionDeclaration function, String preCondition, String postCondition) 
+	public VerificationReport verify(IASTFunctionDefinition function, String preCondition, String postCondition) 
 			throws IOException {
 		
 		long begin = System.currentTimeMillis();
 		
-		VtseCFG cfg = new VtseCFG((IASTFunctionDefinition) run);
+		VtseCFG cfg = new VtseCFG(function);
 		cfg.unfold();
 		cfg.index();
 		//cfg.printGraph();
 		cfg.printMeta();
 		cfg.printFormular(System.out);
 		
-		SMTInput input = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
-		input.printInput();
-		System.out.print("\n~ 0.o ~\n");
-		break;
+		SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
 		
 		String constraintTemp;
 
 		List<String> constraints = new ArrayList<>();
 		UserInput userInput = new UserInput();
-		userInput.setParameter(cfg.getParameters());
+		ArrayList<Variable> params = cfg.getInitVariables();
+		params.add(cfg.getVm().getVariable("return"));
+		userInput.setParameter(params);
 		
 		// add pre-condition
 		if (preCondition != null && !preCondition.equals("")) {
@@ -76,11 +76,11 @@ public class FunctionVerification {
 		constraintTemp = "(not " + constraintTemp + ")";
 		constraints.add(constraintTemp);
 		
-		smtInput.setConstraints(constraints);
+		smtInput.setConstrainst(constraints);
 		
 		long end = System.currentTimeMillis();
 		
-		String functionName = function.getSimpleName();
+		String functionName = cfg.getNameFunction();
 		String path = SMTINPUT_DIR + functionName + ".smt";
 		FileOutputStream fo = new FileOutputStream(new File(path));
 	    smtInput.printInputToOutputStream(fo);
@@ -89,9 +89,9 @@ public class FunctionVerification {
 	    
 	    result.forEach(System.out::println);
 	    Report report = new Report();
-	    report.setListParameter(cfg.getParameters());
+	    report.setListParameter(cfg.getInitVariables());
 	    VerificationReport verReport = report.generateReport(result);
-	    verReport.setfunctionName(function.getSimpleName());
+	    verReport.setFunctionName(cfg.getNameFunction());
 	    verReport.setGenerateConstraintTime((int)(end-begin));
 	    verReport.setPreCondition(preCondition);
 	    verReport.setPostCondition(postCondition);

@@ -91,6 +91,9 @@ public class Report {
 		List<DefineFun> paramtersDefineFun = new ArrayList<>();
 		int i;
 		for (Variable v: listParameter) {
+			if (v.getName().equals("return"))
+				continue;
+			
 	    	String varName = v.getName() + "_0"; 
 	    	
 	    	i = begin;
@@ -116,7 +119,7 @@ public class Report {
 		
 	    i = begin;
     	while (i <= end) {
-    		if (result.get(i).indexOf("return") >= 0) {
+    		if (result.get(i).indexOf("return_0") >= 0) {
     			String valueStr = "";
     			i++;
     			while (i <= end && !result.get(i).contains("define-fun")) {

@@ -14,7 +14,7 @@ public class VerificationReport {
 	public static final String TIMEOUT = "timeout";
 	public static final String UNKNOWN = "unknown";
 	
-	private String methodName;
+	private String functionName;
 	private String preCondition;
 	private String postCondition;
 	private String status;
@@ -26,17 +26,17 @@ public class VerificationReport {
 	
 	
 	/**
-	 * @return the methodName
+	 * @return the functionName
 	 */
-	public String getMethodName() {
-		return methodName;
+	public String getFunctionName() {
+		return functionName;
 	}
 
 	/**
-	 * @param methodName the methodName to set
+	 * @param functionName the functionName to set
 	 */
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
 	}
 
 	/**

@@ -1,3 +1,5 @@
 /bin/
 /test.c
 /.settings
+/smt/
+/*.xls

@@ -6,46 +6,46 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
+import java.util.List;
 
 import cfg.utils.Variable;
 
 public class SMTInput {
-	public SMTInput() {
+	private List<Variable> variableList;
+	private String formula;
+	private List<String> constraints;
+	public SMTInput(){
 		
 	}
 	
-	public SMTInput(List<String> formula, List<Variable> listVariables) {
-		this.formula = formula;
-		this.listVariables = listVariables;
+	public SMTInput(List<Variable> varList, String formula){
+		this.variableList = varList;
+		this.formula = formula;		
 	}
 	
-	public List<String> getConstraints() {
-		return constraints;
+	public List<Variable> getVariableList() {
+		return variableList;
 	}
-	
-	public List<Variable> getListVariables() {
-		return listVariables;
+	public void setVariableList(List<Variable> variableList) {
+		this.variableList = variableList;
 	}
-	
-	public List<String> getFormula() {
+	public String getFormula() {
 		return formula;
 	}
-	
-	public void setConstraints(List<String> constraints) {
-		this.constraints = constraints;
-	}
-	
-	public void setListVariables(List<Variable> list) {
-		this.listVariables = list;
-	}
-	
-	public void setFormula(List<String> formula) {
+	public void setFormula(String formula) {
 		this.formula = formula;
 	}
-	
+
+	public List<String> getConstrain() {
+		return constraints;
+	}
+
+	public void setConstrainst(List<String> constrainst) {
+		this.constraints = constrainst;
+	}
 	public void printInput() {
 		System.err.println("print");
-		for (Variable v: listVariables) {
+		for (Variable v: variableList) {
 			String smtType = getSMTType(v.getType());
 			if (v.hasInitialized()) {
 				
@@ -63,20 +63,18 @@ public class SMTInput {
 			}
 			
 		}
-		for (String s: constraints) {
-			System.out.println("(assert " + s + ")");
-		}
+//		for (String s: constraints) {
+//			System.out.println("(assert " + s + ")");
+//		}
 			
-		for (String s: formula) {
-			System.out.println("(assert " + s + ")");
-		}
+		System.out.println("(assert " + formula + ")");	
 	}
 	
 	public void printInputToOutputStream(OutputStream os) 
 						throws IOException {
 		Writer out = new BufferedWriter(new OutputStreamWriter(os));
 		String smtType;
-		for (Variable v: listVariables) {
+		for (Variable v: variableList) {
 			smtType = getSMTType(v.getType());
 			if (v.hasInitialized()) {
 				
@@ -92,14 +90,13 @@ public class SMTInput {
 				out.append("(declare-fun return () " + smtType + ")\n");
 			}
 		}
+			
+		out.append("(assert " + formula + ")\n");
 		
-		
-		for (String s: formula) {
-			out.append("(assert " + s + ")\n");
-		}
-		
-		for (String s: constraints) {
-			out.append("(assert " + s + ")\n");
+		if (constraints != null) {
+			for (String s: constraints) {
+				out.append("(assert " + s + ")\n");
+			}
 		}
 		
 		out.append("(check-sat)\n");
@@ -126,8 +123,5 @@ public class SMTInput {
 		String declaration = "(declare-fun " + value + " () " + type + ")";
 		return declaration;
 	}
-	
-	public List<String> formula;
-	public List<Variable> listVariables;
-	public List<String> constraints;
+
 }
