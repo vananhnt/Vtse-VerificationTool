@@ -26,7 +26,7 @@ public class ExportExcel {
 	}
 	
 	public static void init() throws IOException, RowsExceededException, WriteException{
-		workbook = Workbook.createWorkbook(new File("abc1.xls"));
+		workbook = Workbook.createWorkbook(new File("report.xls"));
 		sheet = workbook.createSheet("floats-cdfpl", 0);
 		
 		sheet.addCell(new Label(5, 0, "Ket qua thuc nghiem")); // add a String to cell A1

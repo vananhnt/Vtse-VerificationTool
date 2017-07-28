@@ -99,8 +99,8 @@ public class FileVerification {
 		
 		int id = 1;
 		for (AssertionMethod am: listAssertion) {
-			System.err.println("hello");
-			System.err.println("am: " + am.getMethodName());
+			System.err.println("***Verification report:");
+			System.err.println("-Method name: " + am.getMethodName());
 			for (IASTFunctionDefinition function: listFunction) {
 				String functionName = getFunctionName(function);
 				System.err.println("function name: " + functionName);
