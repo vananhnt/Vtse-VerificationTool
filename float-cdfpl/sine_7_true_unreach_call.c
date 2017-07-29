@@ -1,5 +1,5 @@
 
-	public float sine_7_true_unreach_call(float IN)
+	 float sine_7_true_unreach_call(float IN)
 	{
 
 		float x = IN;
