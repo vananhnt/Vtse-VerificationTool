@@ -1,6 +1,6 @@
 //sine 2
 
-	public float sine_2_false_unreach_call(float IN)
+	 float sine_2_false_unreach_call(float IN)
 	{
 
 		float x = IN;
