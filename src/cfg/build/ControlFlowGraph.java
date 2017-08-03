@@ -23,13 +23,12 @@ public class ControlFlowGraph {
 		ControlFlowGraph cfg = build(def);
 		start = cfg.getStart();
 		exit = cfg.getExit();
-	
 	}
+	
 	public ControlFlowGraph(CFGNode start, CFGNode exit) {
 		this.start = start;
 		this.exit = exit;
 	}		
-	
 	
 	public void setExit(CFGNode node) {
 		exit = node;
@@ -49,7 +48,7 @@ public class ControlFlowGraph {
 	public ControlFlowGraph build (IASTFunctionDefinition def) {
 		return (new ControlFlowGraphBuilder()).build(def);
 	}
-
+	
 	public CFGNode getStart() {
 		return start;
 	}

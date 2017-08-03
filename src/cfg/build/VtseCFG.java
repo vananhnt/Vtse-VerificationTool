@@ -32,6 +32,8 @@ public class VtseCFG extends ControlFlowGraph {
 		vm = new VariableManager(func);
 		returnType = getReturnType();
 	}
+	
+	
 	private String getReturnType() {
 		if (func != null) {
 			IASTNode type = func.getDeclSpecifier();

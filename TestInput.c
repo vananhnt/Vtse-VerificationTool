@@ -8,21 +8,25 @@
 //		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
 //	}
 
-//	float fp(float x){
+//float fp(float x){
 //	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
 //	}
 
-//int max (int a, int b) {
-//		int max;
-//		if (a > b) {
-//			max = a;
-//		}
-//		else {
-//			b = 1;
-//			max = b;
-//		}
-//		return max;
-//	}
+void print() {
+	b = 10;
+}
+int max (int a, int b) {
+		int max;
+		print();
+		if (a > b) {
+			max = a;
+		}
+		else {
+			b = 1;
+			max = fp(3, b);
+		}
+		return max;
+	}
 
 
 //	float sum(int n) {
@@ -55,23 +59,23 @@
 //	  return x;
 //	}
 
-int fo(int flag, int n){
-		int k = 1;
-		if(flag > 0)
-			k = n*n;
-
-		int i = 0;
-		int j = 0;
-
-		while(i <= n) {
-			i++;
-			j = j + i;
-		}
-
-		int z = k + i + j;
-
-		return z;
-	}
+//int fo(int flag, int n){
+//		int k = 1;
+//		if(flag > 0)
+//			k = n*n;
+//
+//		int i = 0;
+//		int j = 0;
+//
+//		while(i <= n) {
+//			i++;
+//			j = j + i;
+//		}
+//
+//		int z = k + i + j;
+//
+//		return z;
+//	}
 
 //	int factorial(int n) {
 //		int fac = 1;
@@ -87,29 +91,29 @@ int fo(int flag, int n){
 //		return a * a;
 //	}
 	
-	double foo(double a, double b) {
-		double result;
-		double c = 3 / (b - 3);
-		if (a > b) {
-			result = a / (b - 2);
-			a += 1;
-		} else {
-			result = a + b;
-			a += 1;
-		}
-			
-		return result;
-	}
-	
-	
-	double abs(double x) {
-		double abs = x;
-		if (x < 0) {
-			abs = -x;
-		}
-		
-		return abs;
-	}
+//	double foo(double a, double b) {
+//		double result;
+//		double c = 3 / (b - 3);
+//		if (a > b) {
+//			result = a / (b - 2);
+//			a += 1;
+//		} else {
+//			result = a + b;
+//			a += 1;
+//		}
+//
+//		return result;
+//	}
+//
+//
+//	double abs(double x) {
+//		double abs = x;
+//		if (x < 0) {
+//			abs = -x;
+//		}
+//
+//		return abs;
+//	}
 	
 //	public static void main(String[] args) {
 //		float x = foo36(0.125);

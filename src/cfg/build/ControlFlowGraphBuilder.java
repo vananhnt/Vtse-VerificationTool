@@ -1,5 +1,7 @@
 package cfg.build;
 
+import java.util.ArrayList;
+
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCaseStatement;
@@ -32,12 +34,14 @@ import cfg.node.ReturnNode;
  */
 
 public class ControlFlowGraphBuilder {
-
-	/**
-	 * @param def:
-	 *            một hàm
+	
+	/** @param def:
+	 *  một hàm
 	 * @return một cfg chứa 2 node đầu và cuối
 	 */
+	
+	public ControlFlowGraphBuilder(){}
+	
 	public ControlFlowGraph build(IASTFunctionDefinition def) {
 		return createSubGraph(def.getBody());
 	}
@@ -67,42 +71,15 @@ public class ControlFlowGraphBuilder {
 			cfg = createSwitch((IASTSwitchStatement) statement);
 		} else if (statement instanceof IASTReturnStatement) {
 			ReturnNode returnNode = new ReturnNode(statement);
-			cfg = new ControlFlowGraph(returnNode, returnNode);
+			cfg = new ControlFlowGraph(returnNode, returnNode);	
 		} 
 		else  {
 			PlainNode plainNode = new PlainNode(statement);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
-
 		}
 		return cfg;
 	}
-
-//	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement) {
-//		CPPNodeFactory factory = (CPPNodeFactory) statement.getTranslationUnit().getASTNodeFactory();
-//		IASTSimpleDeclSpecifier typeVar = null;
-//		IASTDeclaration declaration = statement.getDeclaration();
-//		IASTNode[] nodes = declaration.getChildren();
-//		ControlFlowGraph cfg = new ControlFlowGraph();
-//		IASTDeclarator newDeclarator; 
-//		IASTDeclarationStatement newDeclStatement = null;
-//		IASTDeclaration newDeclaration;
-//		
-//		for (IASTNode node : nodes) {
-//			if (node instanceof IASTSimpleDeclSpecifier) {
-//				typeVar = ((IASTSimpleDeclSpecifier) node).copy();
-//			}
-//			if (node instanceof IASTDeclarator) {
-//				newDeclarator = ((IASTDeclarator) node).copy();
-//				newDeclaration = factory.newSimpleDeclaration(typeVar);
-//				
-//				newDeclStatement = factory.newDeclarationStatement(newDeclaration);
-//				System.err.println(ExpressionHelper.toString(newDeclStatement));
-//				
-//			}
-//		}
-//		return null;
-//	}
-
+	
 	/**
 	 * @param whileStatement
 	 * @return node đầu và cuối của khối lệnh while
@@ -306,5 +283,30 @@ public class ControlFlowGraphBuilder {
 		beginSwitchNode.setEndNode(endNode);
 		return new ControlFlowGraph(beginSwitchNode, endNode);
 	}
-
+//	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement) {
+//	CPPNodeFactory factory = (CPPNodeFactory) statement.getTranslationUnit().getASTNodeFactory();
+//	IASTSimpleDeclSpecifier typeVar = null;
+//	IASTDeclaration declaration = statement.getDeclaration();
+//	IASTNode[] nodes = declaration.getChildren();
+//	ControlFlowGraph cfg = new ControlFlowGraph();
+//	IASTDeclarator newDeclarator; 
+//	IASTDeclarationStatement newDeclStatement = null;
+//	IASTDeclaration newDeclaration;
+//	
+//	for (IASTNode node : nodes) {
+//		if (node instanceof IASTSimpleDeclSpecifier) {
+//			typeVar = ((IASTSimpleDeclSpecifier) node).copy();
+//		}
+//		if (node instanceof IASTDeclarator) {
+//			newDeclarator = ((IASTDeclarator) node).copy();
+//			newDeclaration = factory.newSimpleDeclaration(typeVar);
+//			
+//			newDeclStatement = factory.newDeclarationStatement(newDeclaration);
+//			System.err.println(ExpressionHelper.toString(newDeclStatement));
+//			
+//		}
+//	}
+//	return null;
+//}
+	
 }

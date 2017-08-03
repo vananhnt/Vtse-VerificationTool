@@ -5,7 +5,9 @@ import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
+import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
@@ -39,10 +41,27 @@ public class ExpressionHelper {
 		else if (node instanceof IASTReturnStatement){
 			return "return " + toString( node.getChildren()[0]);
 		}
-		
+		else if (node instanceof IASTFunctionCallExpression) {
+			return toStringFunctionCallExpression((IASTFunctionCallExpression) node);
+		}
 		return ".";
 	}
 	
+	private static String toStringFunctionCallExpression(IASTFunctionCallExpression node) {
+		String expression = node.getFunctionNameExpression().toString() + "(" ;
+		IASTNode[] params = node.getChildren();
+		//params[0] la ten function
+	
+		for (int i = 1; i < params.length; i++) {
+			if (i > 1) {
+				expression += ", "; 
+			}
+			expression += toString(params[i]);
+		}
+		expression += ")";
+		return expression;
+	}
+
 	public static String toStringUnaryExpression(IASTUnaryExpression unaryExpression){
 		String operand = toString(unaryExpression.getOperand());
 		int operator = unaryExpression.getOperator();
