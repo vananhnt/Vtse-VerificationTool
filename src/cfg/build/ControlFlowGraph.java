@@ -13,6 +13,7 @@ import cfg.node.IterationNode;
 
 
 public class ControlFlowGraph {
+	protected IASTFunctionDefinition func;
 	protected CFGNode start;
 	protected CFGNode exit;
 	
@@ -23,12 +24,14 @@ public class ControlFlowGraph {
 		ControlFlowGraph cfg = build(def);
 		start = cfg.getStart();
 		exit = cfg.getExit();
-	}
+		func = def;
 	
+	}
 	public ControlFlowGraph(CFGNode start, CFGNode exit) {
 		this.start = start;
 		this.exit = exit;
 	}		
+	
 	
 	public void setExit(CFGNode node) {
 		exit = node;
@@ -48,7 +51,7 @@ public class ControlFlowGraph {
 	public ControlFlowGraph build (IASTFunctionDefinition def) {
 		return (new ControlFlowGraphBuilder()).build(def);
 	}
-	
+
 	public CFGNode getStart() {
 		return start;
 	}

@@ -4,15 +4,18 @@ package cfg.node;
 import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.utils.Cloner;
 import cfg.utils.ExpressionHelper;
 import cfg.utils.FormulaCreater;
 import cfg.utils.Index;
 import cfg.utils.Variable;
+import cfg.utils.VariableHelper;
 import cfg.utils.VariableManager;
 
 public class DecisionNode extends CFGNode {
+	
 	private IASTExpression condition;
 	private CFGNode thenNode;
 	private CFGNode endNode;
@@ -32,6 +35,10 @@ public class DecisionNode extends CFGNode {
 	
 	public void setCondition(IASTExpression iastExpression) {
 		this.condition = iastExpression;
+		
+	}
+	public void setCondition(IASTExpression iastExpression, IASTFunctionDefinition func) {
+		changeName(iastExpression, func);
 	}
 	
 //	set THEN NODE with Input is CFGNode  or  IASTStatement		
@@ -136,6 +143,10 @@ public class DecisionNode extends CFGNode {
 		// sync
 		vm.setVariableList(sync().getVariableList());
 		
+	}
+	
+	private void changeName(IASTExpression expression, IASTFunctionDefinition func) {
+		condition = (IASTExpression) VariableHelper.changeName(expression, func);
 	}
 	
 	private VariableManager sync(){

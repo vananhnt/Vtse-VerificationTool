@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
@@ -17,16 +18,16 @@ import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.core.runtime.CoreException;
 
 /**
- * new ASTGenerator()
- * new ASTGenerator(filelocation)
- * getListFunction() : ArrayList<IASTFunctionDefinition>
- * print() 			 : void
+ * Get IASTFunctionDefinition 
+ * IASTFunctionDefiniton func = (new ASTGenerator(filelocation)).getFunction(index);
+ * filelocation: String
+ * index: int
  * @author va
+ *
  */
 public class ASTGenerator {
 
 	private IASTTranslationUnit translationUnit;
-	private ArrayList<IASTFunctionDefinition> funcList = new ArrayList<>();
 	private String filelocation = "./test.c";
 	
 	public ASTGenerator() {
@@ -37,7 +38,6 @@ public class ASTGenerator {
 		IScannerInfo info = new ScannerInfo(new HashMap<String, String>(), includePaths);
 		try {
 			translationUnit = GPPLanguage.getDefault().getASTTranslationUnit(fileContent, info, includeFile, null, 0, log);
-			buildFunctionList(filelocation);
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,9 +57,7 @@ public class ASTGenerator {
 			e.printStackTrace();
 		}
 	}
-	private void buildFunctionList(String filelocation) {
-		funcList = getListFunction();
-	}
+	
 	/*
 	 * getters & setters
 	 */
@@ -83,22 +81,12 @@ public class ASTGenerator {
 		}
 		return funcList;
 	}
-
-	public String getFuncName(IASTFunctionDefinition func) {
-		return func.getDeclarator().getName().toString();
-	}
 	
-	public IASTFunctionDefinition getFunction(String name) {
-		String funcName;
-		for (IASTFunctionDefinition func: funcList) {
-			funcName = getFuncName(func);
-			if (name == funcName) return func;
-		}
-		return null;
-	}
 	
-	/**
-	 * chi lay duoc function dau tien (de Test)
+	/*
+	 * functionDef 
+	 * chá»‰ láº¥y function Ä‘áº§u tiĂªn
+	 * chÆ°a xĂ©t trÆ°á»�ng há»£p cho chá»�n cĂ¡c func khĂ¡c nhau 
 	 */
 	public IASTFunctionDefinition getFunction(int index) {
 //		int count = 0;
@@ -133,7 +121,7 @@ public class ASTGenerator {
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);
 	}
-	
+
 	
 	
 }

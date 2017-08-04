@@ -12,32 +12,28 @@
 //	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
 //	}
 
-void print() {
-	b = 10;
-}
-int max (int a, int b) {
-		int max;
-		print();
-		if (a > b) {
-			max = a;
-		}
-		else {
-			b = 1;
-			max = fp(3, b);
-		}
-		return max;
-	}
-
-
-//	float sum(int n) {
-//		int sum = 0;
-//
-//		for (int i = 0; i <= n; i++) {
-//			sum = ((sum + i) + 2) * (i+1) / i;
+//int max (int a, int b) {
+//		int max;
+//		if (a > b) {
+//			max = a;
 //		}
-//
-//		return sum;
+//		else {
+//			b = 1;
+//			max = fp(b);
+//		}
+//		return max;
 //	}
+
+
+	float sum(int n) {
+		int sum = n;
+		int a = sum + n;
+		for (int i = 0; i <= n; i++) {
+			sum = ((sum + i) + 2) * (i+1) / i;
+		}
+
+		return sum;
+	}
 	
 
 //	float foo36(float IN){
@@ -114,7 +110,7 @@ int max (int a, int b) {
 //
 //		return abs;
 //	}
-	
+//
 //	public static void main(String[] args) {
 //		float x = foo36(0.125);
 //		System.out.println("x = " + x);

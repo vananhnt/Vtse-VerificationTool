@@ -2,6 +2,7 @@ package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
@@ -17,6 +18,9 @@ public class ReturnNode extends PlainNode
 {
 	public ReturnNode(IASTStatement statement) {
 		super(changeSyntax((IASTReturnStatement) statement));
+	}
+	public ReturnNode(IASTStatement statement, IASTFunctionDefinition def) {
+		super(changeSyntax((IASTReturnStatement) statement), def);
 	}
 	
 	private static IASTStatement changeSyntax(IASTReturnStatement statement) {

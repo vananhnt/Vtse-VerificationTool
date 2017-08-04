@@ -46,7 +46,7 @@ public class VariableManager {
 	}
 	
 	public void addVariable(String type, String name, String funcName, int index) {
-		Variable var = new Variable(type, name, funcName, index);
+		Variable var = new Variable(type, name + "_" + funcName, index);
 		variableList.add(var);
 	}
 	
@@ -108,7 +108,7 @@ public class VariableManager {
 	
 	private Variable getReturn(IASTFunctionDefinition func) {
 		IASTNode typeFunction = func.getDeclSpecifier();
-		Variable var = new Variable(typeFunction.getRawSignature(), "return", func.getDeclarator().getName().toString());
+		Variable var = new Variable(typeFunction.getRawSignature(), "return" + "_" + func.getDeclarator().getName().toString());
 		return var;
 	} 
 	/*
@@ -128,7 +128,7 @@ public class VariableManager {
 					if (paramDecls[i] instanceof IASTSimpleDeclSpecifier 
 					 && paramDecls[i + 1] instanceof IASTDeclarator) {
 						Variable var = new Variable(paramDecls[i].getRawSignature(),
-									   				paramDecls[i + 1].getRawSignature(),
+									   				paramDecls[i + 1].getRawSignature() + "_" +
 									   				func.getDeclarator().getName().toString(), 0);
 						params.add(var);
 					}
@@ -165,7 +165,7 @@ public class VariableManager {
 				}
 			}
 				// add
-			var = new Variable(type, name, funcName, init);			
+			var = new Variable(type, name + "_" + funcName, init);			
 			list.add(var);						
 		}
 		// return

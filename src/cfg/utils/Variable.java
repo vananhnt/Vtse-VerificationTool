@@ -10,22 +10,15 @@ public class Variable {
 
 	private String type; 
 	private String name;
-	private String funcName;
+	
 	private int index = -1; //mac dinh -1
 	
 	public Variable() {}
 	
-	public Variable(String type, String name, String funcName) {
-		this.type = type;
-		this.funcName = funcName;
-		this.name = name;
-	}
-	
-	public Variable(String type, String name, String funcName, int index) {
+	public Variable(String type, String name, int index) {
 		this.type = type;
 		this.name = name;
-		this.index = index;
-		this.funcName = funcName;
+		this.index = index;	
 	}
 	
 	public Variable(String type, String name){
@@ -37,7 +30,7 @@ public class Variable {
 		name = other.name;
 		type = other.type;
 		index = other.index;
-		funcName = other.funcName;
+		
 	}
 	
 	public String getType() {
@@ -64,7 +57,7 @@ public class Variable {
 	}
 	
 	public String getVariableWithIndex() {
-		return name + "_" + funcName +"_" + index;
+		return name + "_" + index;
 	}
 	
 	public Variable clone() {

@@ -19,11 +19,8 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 
 /**
- * tao ra prefix formula
- * static create(CFGNode start, CFGNode exit) : String //tao formula ca cfg
- * static createFormula(IASTNode node) : String  	   //tao formula tung node
- * static createInfixFormula(IASTNode node) : String   // de test
  * @author va
+ * Chưa test 
  */
 public class FormulaCreater {
 	public static String LOGIC_AND = "and";

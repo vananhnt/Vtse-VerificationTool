@@ -7,34 +7,33 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
+import cfg.utils.Variable;
 
 /**
  * @author va
- * loi sua sau: chua index -> return printGraph mat bien
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
 		ASTGenerator ast = new ASTGenerator("./TestInput.c");
-		ArrayList<IASTFunctionDefinition> funcList = ast.getListFunction();
 		
-		VtseCFG cfg;
-		
-		
+		//ast.print();
+	
 		//*Parameters:
 		//DeclSpecifier : kieu tra ve cua ham
 		//Declarator : ten cua ham, vd: test(), sum(int i)
 		//declarator.getName: ten, vd: test, sum
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
+		
+		
+		ArrayList<IASTFunctionDefinition> funcList = ast.getListFunction();
 		for (IASTFunctionDefinition func : funcList) {
-			cfg = new VtseCFG(func);
-			System.out.println(cfg.getNameFunction());
+			VtseCFG cfg = new VtseCFG(func);
 			cfg.unfold();
 			cfg.index();
-			cfg.printGraph();
-//			System.out.println();
+			cfg.printMeta();
+			System.out.println();
 		}
 		
-
 	}
 }

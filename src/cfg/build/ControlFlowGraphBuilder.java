@@ -1,18 +1,25 @@
 package cfg.build;
 
-import java.util.ArrayList;
-
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCaseStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTDefaultStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDoStatement;
+import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
+import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
+import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
+import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSwitchStatement;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
@@ -31,19 +38,27 @@ import cfg.node.ReturnNode;
 
 /**
  * @author va
+ + build(def) : ControlFlowGraph 
+ //Them tham so func de them ten ham vao bien
+ - createSubGraph(statement, /func) :ControlFlowGraph
+ - createIf(ifStatement, /func) : ControlFlowGraph
+ - createWhile(whileStatement, /func) : ControlFlowGraph
+ - createDo(doStatement, /func) : ControlFlowGraph
+ - createFor(forStatement, /func) : ControlFlowGraph
+ - createSwitch(switchStatement, /func) : ControlFlowGraph
+ - createDeclarationStatement(declStatement, /func) : ControlFlowGraph
  */
 
 public class ControlFlowGraphBuilder {
-	
-	/** @param def:
-	 *  một hàm
+
+	/**
+	 * @param def:
+	 *            một hàm
 	 * @return một cfg chứa 2 node đầu và cuối
 	 */
-	
-	public ControlFlowGraphBuilder(){}
-	
 	public ControlFlowGraph build(IASTFunctionDefinition def) {
-		return createSubGraph(def.getBody());
+//		return createSubGraph(def.getBody());
+		return createSubGraph(def.getBody(), def);
 	}
 
 	/**
@@ -71,15 +86,106 @@ public class ControlFlowGraphBuilder {
 			cfg = createSwitch((IASTSwitchStatement) statement);
 		} else if (statement instanceof IASTReturnStatement) {
 			ReturnNode returnNode = new ReturnNode(statement);
-			cfg = new ControlFlowGraph(returnNode, returnNode);	
-		} 
-		else  {
+			cfg = new ControlFlowGraph(returnNode, returnNode);
+		} else if (statement instanceof IASTDeclarationStatement) {
+			cfg = createDeclaration((IASTDeclarationStatement) statement);
+		} else {
 			PlainNode plainNode = new PlainNode(statement);
+			cfg = new ControlFlowGraph(plainNode, plainNode);
+
+		}
+		return cfg;
+	}
+
+	private ControlFlowGraph createSubGraph(IASTStatement statement, IASTFunctionDefinition def) {
+		ControlFlowGraph cfg = new ControlFlowGraph();
+		ControlFlowGraph subCFG;
+		if (statement instanceof IASTCompoundStatement) {
+			IASTCompoundStatement comp = (IASTCompoundStatement) statement;
+			for (IASTStatement stmt : comp.getStatements()) {
+				subCFG = createSubGraph(stmt, def);
+				if (subCFG != null)
+					cfg.concat(subCFG);
+			}
+		} else if (statement instanceof IASTIfStatement) {
+			cfg = createIf((IASTIfStatement) statement, def);
+		} else if (statement instanceof IASTForStatement) {
+			cfg = createFor((IASTForStatement) statement, def);
+		} else if (statement instanceof IASTDoStatement) {
+			cfg = creatDo((IASTDoStatement) statement, def);
+		} else if (statement instanceof IASTWhileStatement) {
+			cfg = createWhile((IASTWhileStatement) statement, def);
+		} else if (statement instanceof IASTSwitchStatement) {
+			cfg = createSwitch((IASTSwitchStatement) statement, def);
+		} else if (statement instanceof IASTReturnStatement) {
+			ReturnNode returnNode = new ReturnNode(statement, def);
+			cfg = new ControlFlowGraph(returnNode, returnNode);
+		} else if (statement instanceof IASTDeclarationStatement) {
+			cfg = createDeclaration((IASTDeclarationStatement) statement, def);
+		} else {
+			PlainNode plainNode = new PlainNode(statement, def);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
 		}
 		return cfg;
 	}
+
+	/**
+	 * @param statement, func
+	 * @return
+	 * Tach ra lenh khoi tao thanh cac node noi nhau
+	 * Vd: int sum = 0, a = b + c;
+	 * => int sum; sum = 0; int a; a = b + c;
+	 */
+	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement, IASTFunctionDefinition func) {
+		ControlFlowGraph cfg = new ControlFlowGraph();
+		IASTEqualsInitializer init;
+		IASTName nameVar;
+		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
+		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) statement.getDeclaration().copy();
+		
+		IASTDeclSpecifier type = simpleDecl.getDeclSpecifier().copy();
+		IASTDeclarator[] declarators = simpleDecl.getDeclarators();
+		IASTBinaryExpression binaryExpression;
+		IASTExpression newExpression;
+		IASTDeclarator newDeclarator;
+		IASTDeclarationStatement newDeclStatement;
+		IASTExpressionStatement newExprStatement;
+		IASTInitializerClause newInit;
+		IASTExpression rightInitClause;
+		IASTIdExpression newId;
+		IASTSimpleDeclaration newDeclaration = null;
+		CFGNode node;
+
+		for (IASTDeclarator decl : declarators) {
+			nameVar = decl.getName().copy();
+			init = (IASTEqualsInitializer) decl.getInitializer().copy();
+			
+			newDeclarator = factory.newDeclarator(nameVar);
+			newDeclaration = factory.newSimpleDeclaration(type);
+			newDeclaration.addDeclarator(newDeclarator);
+			newDeclStatement = factory.newDeclarationStatement(newDeclaration);
+			node = new PlainNode(newDeclStatement, func);
+			cfg.concat(new ControlFlowGraph(node, node));
+			
+			if (init != null) {
+				newDeclarator = factory.newDeclarator(nameVar);
+				rightInitClause = (IASTExpression) init.getChildren()[0].copy();
+				newId = factory.newIdExpression(nameVar).copy();
+				newExpression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, newId, rightInitClause);
+				newExprStatement = (IASTExpressionStatement) factory.newExpressionStatement(newExpression);
+				node = new PlainNode(newExprStatement, func);
+				cfg.concat(new ControlFlowGraph(node, node));
+			} 
+
+		}
+		return cfg;
+	}
 	
+	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * @param whileStatement
 	 * @return node đầu và cuối của khối lệnh while
@@ -99,18 +205,48 @@ public class ControlFlowGraphBuilder {
 		// then branch
 		decisionNode.setThenNode(thenClause.getStart());
 		thenClause.getExit().setNext(iterationNode);
-			//TODO change
+		// TODO change
 		decisionNode.setEndOfThen(iterationNode);
 		// khi in can xet truong hop iterationNode rieng
 
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
-		decisionNode.getElseNode().setNext(end);		
+		decisionNode.getElseNode().setNext(end);
 		decisionNode.setEndNode(end);
 		beginWhileNode.setEndNode(end);
-			//TODO change
+		// TODO change
 		decisionNode.setEndOfElse(decisionNode.getElseNode());
-		
+
+		return new ControlFlowGraph(beginWhileNode, end);
+	}
+
+	private ControlFlowGraph createWhile(IASTWhileStatement whileStatement, IASTFunctionDefinition func) {
+		BeginWhileNode beginWhileNode = new BeginWhileNode();
+		DecisionNode decisionNode = new DecisionNode();
+		EndConditionNode end = new EndConditionNode();
+		IterationNode iterationNode = new IterationNode();
+		// iterationNode.setIterationExpression(whileStatement.getCondition());
+
+		ControlFlowGraph thenClause = createSubGraph(whileStatement.getBody(), func);
+		// decisionNode.setNext(thenClause.getExit());
+		decisionNode.setCondition(whileStatement.getCondition().copy(), func);
+		beginWhileNode.setNext(decisionNode);
+
+		// then branch
+		decisionNode.setThenNode(thenClause.getStart());
+		thenClause.getExit().setNext(iterationNode);
+		// TODO change
+		decisionNode.setEndOfThen(iterationNode);
+		// khi in can xet truong hop iterationNode rieng
+
+		// else branch
+		decisionNode.setElseNode(new EmptyNode());
+		decisionNode.getElseNode().setNext(end);
+		decisionNode.setEndNode(end);
+		beginWhileNode.setEndNode(end);
+		// TODO change
+		decisionNode.setEndOfElse(decisionNode.getElseNode());
+
 		return new ControlFlowGraph(beginWhileNode, end);
 	}
 
@@ -134,14 +270,42 @@ public class ControlFlowGraphBuilder {
 		thenClause.getExit().setNext(iterationNode);
 		// iterationNode.setNext(decisionNode);
 		// khi in can xet truong hop iterationNode rieng
-			//TODO change
+		// TODO change
 		decisionNode.setEndOfThen(iterationNode);
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(end);
 		decisionNode.setEndNode(end);
 		beginDoNode.setEndNode(end);
-			//TODO change
+		// TODO change
+		decisionNode.setEndOfElse(decisionNode.getElseNode());
+		return new ControlFlowGraph(beginDoNode, end);
+	}
+
+	private ControlFlowGraph creatDo(IASTDoStatement doStatement, IASTFunctionDefinition func) {
+		BeginWhileNode beginDoNode = new BeginWhileNode();
+		DecisionNode decisionNode = new DecisionNode();
+
+		EndConditionNode end = new EndConditionNode();
+		IterationNode iterationNode = new IterationNode();
+		ControlFlowGraph thenClause = createSubGraph(doStatement.getBody(), func);
+
+		decisionNode.setCondition(doStatement.getCondition().copy(), func);
+		beginDoNode.setNext(decisionNode);
+
+		// then branch
+		decisionNode.setThenNode(thenClause.getStart());
+		thenClause.getExit().setNext(iterationNode);
+		// iterationNode.setNext(decisionNode);
+		// khi in can xet truong hop iterationNode rieng
+		// TODO change
+		decisionNode.setEndOfThen(iterationNode);
+		// else branch
+		decisionNode.setElseNode(new EmptyNode());
+		decisionNode.getElseNode().setNext(end);
+		decisionNode.setEndNode(end);
+		beginDoNode.setEndNode(end);
+		// TODO change
 		decisionNode.setEndOfElse(decisionNode.getElseNode());
 		return new ControlFlowGraph(beginDoNode, end);
 	}
@@ -165,11 +329,36 @@ public class ControlFlowGraphBuilder {
 		decisionNode.setThenNode(thenClause.getStart());
 		decisionNode.setElseNode(elseClause.getStart());
 		decisionNode.setEndNode(endNode);
-		
+
 		thenClause.getExit().setNext(endNode);
 		elseClause.getExit().setNext(endNode);
 		beginIfNode.setEndNode(endNode);
-			//TODO change
+		// TODO change
+		decisionNode.setEndOfThen(thenClause.getExit());
+		decisionNode.setEndOfElse(elseClause.getExit());
+		return new ControlFlowGraph(beginIfNode, endNode);
+	}
+
+	private ControlFlowGraph createIf(IASTIfStatement ifStatement, IASTFunctionDefinition func) {
+		BeginIfNode beginIfNode = new BeginIfNode();
+		DecisionNode decisionNode = new DecisionNode();
+		EndConditionNode endNode = new EndConditionNode();
+
+		// creates branches
+		ControlFlowGraph thenClause = createSubGraph(ifStatement.getThenClause(), func);
+		ControlFlowGraph elseClause = createSubGraph(ifStatement.getElseClause(), func);
+
+		decisionNode.setCondition(ifStatement.getConditionExpression().copy(), func);
+		beginIfNode.setNext(decisionNode);
+
+		decisionNode.setThenNode(thenClause.getStart());
+		decisionNode.setElseNode(elseClause.getStart());
+		decisionNode.setEndNode(endNode);
+
+		thenClause.getExit().setNext(endNode);
+		elseClause.getExit().setNext(endNode);
+		beginIfNode.setEndNode(endNode);
+		// TODO change
 		decisionNode.setEndOfThen(thenClause.getExit());
 		decisionNode.setEndOfElse(elseClause.getExit());
 		return new ControlFlowGraph(beginIfNode, endNode);
@@ -197,14 +386,43 @@ public class ControlFlowGraphBuilder {
 		thenClause.getExit().setNext(iterationNode);
 		// iterationNode.setNext(decisionNode);
 		// khi in can xet truong hop iterationNode rieng
-			//TODO change
+		// TODO change
 		decisionNode.setEndOfThen(iterationNode);
 		// else branch
 		decisionNode.setElseNode(new EmptyNode());
 		decisionNode.getElseNode().setNext(endNode);
 		decisionNode.setEndNode(endNode);
 		bgForNode.setEndNode(endNode);
-			//TODO change
+		// TODO change
+		decisionNode.setEndOfElse(decisionNode.getElseNode());
+		return new ControlFlowGraph(bgForNode, endNode);
+	}
+
+	private ControlFlowGraph createFor(IASTForStatement forStatement, IASTFunctionDefinition func) {
+		BeginForNode bgForNode = new BeginForNode();
+		EndConditionNode endNode = new EndConditionNode();
+		DecisionNode decisionNode = new DecisionNode();
+		IterationNode iterationNode = new IterationNode(forStatement.getIterationExpression(), func);
+		PlainNode init = new PlainNode(forStatement.getInitializerStatement().copy(), func);
+		ControlFlowGraph thenClause = createSubGraph(forStatement.getBody(), func);
+
+		bgForNode.setNext(init);
+		decisionNode.setCondition(forStatement.getConditionExpression(), func);
+		init.setNext(decisionNode);
+
+		// then branch
+		decisionNode.setThenNode(thenClause.getStart());
+		thenClause.getExit().setNext(iterationNode);
+		// iterationNode.setNext(decisionNode);
+		// khi in can xet truong hop iterationNode rieng
+		// TODO change
+		decisionNode.setEndOfThen(iterationNode);
+		// else branch
+		decisionNode.setElseNode(new EmptyNode());
+		decisionNode.getElseNode().setNext(endNode);
+		decisionNode.setEndNode(endNode);
+		bgForNode.setEndNode(endNode);
+		// TODO change
 		decisionNode.setEndOfElse(decisionNode.getElseNode());
 		return new ControlFlowGraph(bgForNode, endNode);
 	}
@@ -219,6 +437,15 @@ public class ControlFlowGraphBuilder {
 		for (int j = start + 1; j < end; j++) {
 			if (!(statements[j] instanceof IASTBreakStatement)) {
 				subCfg.concat(createSubGraph(statements[j]));
+			}
+		}
+	}
+
+	private void linkCfg(ControlFlowGraph subCfg, IASTStatement[] statements, int start, int end,
+			IASTFunctionDefinition func) {
+		for (int j = start + 1; j < end; j++) {
+			if (!(statements[j] instanceof IASTBreakStatement)) {
+				subCfg.concat(createSubGraph(statements[j], func));
 			}
 		}
 	}
@@ -274,7 +501,7 @@ public class ControlFlowGraphBuilder {
 					condition.setEndNode(endNode);
 					lastNode = condition;
 					beginSwitchNode.setNext(condition);
-				
+
 				} else if (statements[i] instanceof IASTBreakStatement) {
 					endCase = i;
 				}
@@ -283,30 +510,48 @@ public class ControlFlowGraphBuilder {
 		beginSwitchNode.setEndNode(endNode);
 		return new ControlFlowGraph(beginSwitchNode, endNode);
 	}
-//	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement) {
-//	CPPNodeFactory factory = (CPPNodeFactory) statement.getTranslationUnit().getASTNodeFactory();
-//	IASTSimpleDeclSpecifier typeVar = null;
-//	IASTDeclaration declaration = statement.getDeclaration();
-//	IASTNode[] nodes = declaration.getChildren();
-//	ControlFlowGraph cfg = new ControlFlowGraph();
-//	IASTDeclarator newDeclarator; 
-//	IASTDeclarationStatement newDeclStatement = null;
-//	IASTDeclaration newDeclaration;
-//	
-//	for (IASTNode node : nodes) {
-//		if (node instanceof IASTSimpleDeclSpecifier) {
-//			typeVar = ((IASTSimpleDeclSpecifier) node).copy();
-//		}
-//		if (node instanceof IASTDeclarator) {
-//			newDeclarator = ((IASTDeclarator) node).copy();
-//			newDeclaration = factory.newSimpleDeclaration(typeVar);
-//			
-//			newDeclStatement = factory.newDeclarationStatement(newDeclaration);
-//			System.err.println(ExpressionHelper.toString(newDeclStatement));
-//			
-//		}
-//	}
-//	return null;
-//}
-	
+
+	private ControlFlowGraph createSwitch(IASTSwitchStatement switchStatement, IASTFunctionDefinition func) {
+		BeginIfNode beginSwitchNode = new BeginIfNode();
+		EndConditionNode endNode = new EndConditionNode();
+		CFGNode lastNode = endNode; // dung de noi cfg
+		DecisionNode condition;
+		ControlFlowGraph thenClause;
+		int endCase = 0;
+
+		if (switchStatement.getBody() instanceof IASTCompoundStatement) {
+			IASTStatement[] statements = ((IASTCompoundStatement) switchStatement.getBody()).getStatements();
+			for (int i = statements.length - 1; i >= 0; i--) {
+				if (statements[i] instanceof IASTDefaultStatement) {
+					// Xu ly khoi default
+					ControlFlowGraph subCfg = createSubGraph(statements[i + 1], func);
+					linkCfg(subCfg, statements, i + 1, statements.length);
+					subCfg.getExit().setNext(lastNode);
+					lastNode = subCfg.getStart();
+
+				} else if (statements[i] instanceof IASTCaseStatement) {
+					// Xu ly khoi case
+					condition = new DecisionNode();
+					condition.setCondition(createCondition(switchStatement, (IASTCaseStatement) statements[i]).copy(),
+							func);
+
+					thenClause = new ControlFlowGraph();
+					linkCfg(thenClause, statements, i, endCase);
+					thenClause.getExit().setNext(endNode);
+
+					condition.setElseNode(lastNode);
+					condition.setThenNode(thenClause.getStart());
+					condition.setEndNode(endNode);
+					lastNode = condition;
+					beginSwitchNode.setNext(condition);
+
+				} else if (statements[i] instanceof IASTBreakStatement) {
+					endCase = i;
+				}
+			}
+		}
+		beginSwitchNode.setEndNode(endNode);
+		return new ControlFlowGraph(beginSwitchNode, endNode);
+	}
+
 }
