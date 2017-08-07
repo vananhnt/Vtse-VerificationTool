@@ -12,6 +12,7 @@ import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EndConditionNode;
+import cfg.node.FunctionCallNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
 import cfg.utils.FormulaCreater;
@@ -32,6 +33,7 @@ public class VtseCFG extends ControlFlowGraph {
 		vm = new VariableManager(func);
 		returnType = getReturnType();
 	}
+	
 	private String getReturnType() {
 		if (func != null) {
 			IASTNode type = func.getDeclSpecifier();
@@ -103,7 +105,6 @@ public class VtseCFG extends ControlFlowGraph {
 		}
 	}	
 	
-	
 	private void DFSHelper(CFGNode node) {
 		node.setVistited(true);
 		node.printNode();
@@ -119,7 +120,6 @@ public class VtseCFG extends ControlFlowGraph {
 	public void printMeta() { //Da unfold
 		printMeta(System.out, start, exit, " ");
 	}
-	
 	
 	public void printSMTFormula(PrintStream printStream) {
 		
@@ -205,4 +205,5 @@ public class VtseCFG extends ControlFlowGraph {
 			printMeta(printStream , node.getNext(), end, nSpaces);
 		}
 	}
+
 }

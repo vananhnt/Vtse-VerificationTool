@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
@@ -27,7 +28,7 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
  */
 public class VariableHelper {
 
-	public static IASTNode changeName(IASTNode node, IASTFunctionDefinition func) {
+	public static IASTNode changeVariableName(IASTNode node, IASTFunctionDefinition func) {
 		if (node instanceof IASTBinaryExpression) {
 			node = changeBinaryExpression((IASTBinaryExpression) node, func);
 		}
@@ -46,7 +47,33 @@ public class VariableHelper {
 		else if (node instanceof IASTReturnStatement){
 			node = changeReturnStatement((IASTReturnStatement) node, func);
 		}
+		else if (node instanceof IASTFunctionCallExpression) {
+			node = changeFunctionCallExpression ((IASTFunctionCallExpression) node, func);
+		}
+		
 		return node;
+	}
+
+	public static IASTNode changeFunctionCallExpression(IASTFunctionCallExpression node, IASTFunctionDefinition func) {
+		IASTIdExpression newId;
+		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
+//		IASTNode[] children = node.getChildren();
+//		String currentName = ((IASTIdExpression) children[0]).getName().toString();
+//		String params = "";
+//		if (children.length > 0) {
+//			for (int i = 1; i < children.length; i++) {
+//				params += "_" + ExpressionHelper.toString(children[i]);
+//			}
+//		}
+		String currentName = node.getFunctionNameExpression().toString();
+		String params = "";
+		for (IASTNode param : node.getArguments()) {
+			params += "_" + param.toString();
+		}
+		IASTName newName = factory.newName((currentName + params).toCharArray());
+		newId = factory.newIdExpression(newName);
+		
+		return newId;
 	}
 
 	/**
@@ -54,7 +81,7 @@ public class VariableHelper {
 	 * sua expression statement
 	 */
 	private static IASTNode changeExpressionStatement(IASTExpressionStatement node, IASTFunctionDefinition func) {
-		IASTExpression expression = (IASTExpression) changeName(node.getExpression().copy(), func);
+		IASTExpression expression = (IASTExpression) changeVariableName(node.getExpression().copy(), func);
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 		IASTStatement newStatement = factory.newExpressionStatement(expression);
 		//System.err.println("Test: " + ExpressionHelper.toString(newStatement));
@@ -111,7 +138,7 @@ public class VariableHelper {
 	private static IASTNode changeUnaryExpression(IASTUnaryExpression node, IASTFunctionDefinition func) {
 		IASTExpression expression = node.getOperand().copy();
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
-		IASTUnaryExpression newUnary = factory.newUnaryExpression(node.getOperator(), (IASTExpression) changeName(expression, func));
+		IASTUnaryExpression newUnary = factory.newUnaryExpression(node.getOperator(), (IASTExpression) changeVariableName(expression, func));
 		return newUnary;
 	}
 	
@@ -124,7 +151,7 @@ public class VariableHelper {
 		IASTExpression right = node.getOperand2().copy();
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 		IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), 
-				(IASTExpression) changeName(left, func), (IASTExpression) changeName(right, func));
+				(IASTExpression) changeVariableName(left, func), (IASTExpression) changeVariableName(right, func));
 		return newNode;	
 	
 	}

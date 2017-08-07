@@ -27,7 +27,7 @@ public class IterationNode extends CFGNode {
 	}
 	
 	public IterationNode(IASTExpression iterExpression, IASTFunctionDefinition func) {
-		iterationExpression = (IASTExpression) VariableHelper.changeName(iterationExpression, func);
+		iterationExpression = (IASTExpression) VariableHelper.changeVariableName(iterationExpression, func);
 	} 
 	
 	public IASTExpression getIterationExpression() {
@@ -38,7 +38,7 @@ public class IterationNode extends CFGNode {
 	}
 	
 	public void setIterationExpression(IASTExpression iterationExpression, IASTFunctionDefinition func) {
-		this.iterationExpression = (IASTExpression) VariableHelper.changeName(iterationExpression, func);
+		this.iterationExpression = (IASTExpression) VariableHelper.changeVariableName(iterationExpression, func);
 	}
 	
 	public void index( VariableManager vm){

@@ -8,10 +8,16 @@
 //		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
 //	}
 
-//float fp(float x){
-//	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
-//	}
+float fp(float x, float y){
+	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
+	}
 
+float main() {
+	int a = 3;
+	a = fp(a, 4) + fp(a, 6);
+
+	return a;
+}
 //int max (int a, int b) {
 //		int max;
 //		if (a > b) {
@@ -25,15 +31,15 @@
 //	}
 
 
-	float sum(int n) {
-		int sum = n;
-		int a = sum + n;
-		for (int i = 0; i <= n; i++) {
-			sum = ((sum + i) + 2) * (i+1) / i;
-		}
-
-		return sum;
-	}
+//	float sum(int n) {
+//		int sum = n;
+//		int a = sum + n;
+//		for (int i = 0; i <= n; i++) {
+//			sum = ((sum + i) + 2) * (i+1) / i;
+//		}
+//
+//		return sum;
+//	}
 	
 
 //	float foo36(float IN){

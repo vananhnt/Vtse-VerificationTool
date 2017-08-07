@@ -146,7 +146,7 @@ public class DecisionNode extends CFGNode {
 	}
 	
 	private void changeName(IASTExpression expression, IASTFunctionDefinition func) {
-		condition = (IASTExpression) VariableHelper.changeName(expression, func);
+		condition = (IASTExpression) VariableHelper.changeVariableName(expression, func);
 	}
 	
 	private VariableManager sync(){

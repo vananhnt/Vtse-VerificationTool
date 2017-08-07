@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.CoreException;
  */
 public class ASTGenerator {
 
-	private IASTTranslationUnit translationUnit;
+	private static IASTTranslationUnit translationUnit;
 	private String filelocation = "./test.c";
 	
 	public ASTGenerator() {
@@ -65,16 +65,28 @@ public class ASTGenerator {
 		return translationUnit;
 	}
 	public void setTranslationUnit(IASTTranslationUnit translationUnit) {
-		this.translationUnit = translationUnit;
+		translationUnit = translationUnit;
 	}
 	public void setFileLocation(String fileName) {
 		filelocation = fileName;
 	}
 	
-	public ArrayList<IASTFunctionDefinition> getListFunction(){
-		if (this.translationUnit == null) return null;
+	public static IASTFunctionDefinition getFunction(String name) {
+		String funcName = null;
+		ArrayList<IASTFunctionDefinition> funcList = getListFunction();
+		for (IASTFunctionDefinition func : funcList) {
+			funcName = func.getDeclarator().getName().toString();
+			if (name.equals(funcName)) {
+				return func;
+			}
+		}
+		return null;
+	}
+	
+	public static ArrayList<IASTFunctionDefinition> getListFunction(){
+		if (translationUnit == null) return null;
 		ArrayList<IASTFunctionDefinition> funcList = new ArrayList<>();
-		for (IASTNode run : this.translationUnit.getDeclarations()){
+		for (IASTNode run : translationUnit.getDeclarations()){
 			if (run instanceof IASTFunctionDefinition){
 				funcList.add((IASTFunctionDefinition) run);
 			}

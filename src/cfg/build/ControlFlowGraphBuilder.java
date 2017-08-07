@@ -13,11 +13,13 @@ import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
 import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
 import org.eclipse.cdt.core.dom.ast.IASTName;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
@@ -32,6 +34,7 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.FunctionCallNode;
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 import cfg.node.ReturnNode;
@@ -50,12 +53,14 @@ import cfg.node.ReturnNode;
  */
 
 public class ControlFlowGraphBuilder {
-
+	
 	/**
 	 * @param def:
 	 *            một hàm
 	 * @return một cfg chứa 2 node đầu và cuối
 	 */
+	public ControlFlowGraphBuilder() {}
+	
 	public ControlFlowGraph build(IASTFunctionDefinition def) {
 //		return createSubGraph(def.getBody());
 		return createSubGraph(def.getBody(), def);
@@ -96,7 +101,7 @@ public class ControlFlowGraphBuilder {
 		}
 		return cfg;
 	}
-
+	
 	private ControlFlowGraph createSubGraph(IASTStatement statement, IASTFunctionDefinition def) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
 		ControlFlowGraph subCFG;
@@ -104,7 +109,7 @@ public class ControlFlowGraphBuilder {
 			IASTCompoundStatement comp = (IASTCompoundStatement) statement;
 			for (IASTStatement stmt : comp.getStatements()) {
 				subCFG = createSubGraph(stmt, def);
-				if (subCFG != null)
+				if (subCFG != null && cfg != null)
 					cfg.concat(subCFG);
 			}
 		} else if (statement instanceof IASTIfStatement) {
@@ -122,13 +127,76 @@ public class ControlFlowGraphBuilder {
 			cfg = new ControlFlowGraph(returnNode, returnNode);
 		} else if (statement instanceof IASTDeclarationStatement) {
 			cfg = createDeclaration((IASTDeclarationStatement) statement, def);
-		} else {
-			PlainNode plainNode = new PlainNode(statement, def);
+		} else if (statement instanceof IASTExpressionStatement) {
+			cfg = createExpressionStatement((IASTExpressionStatement) statement, def);
+		}
+		return cfg;
+	}
+	private boolean hasCallExpression(IASTNode statement) {
+		boolean result = false;
+		IASTNode[] nodes = statement.getChildren();
+		for (IASTNode node : nodes) {
+			if (node instanceof IASTFunctionCallExpression) {
+				result = true;
+				return result;
+			} else {
+				result = hasCallExpression(node);
+			}
+		}
+	return result;
+	}	
+	
+
+	private ControlFlowGraph createExpressionStatement(IASTExpressionStatement statement, IASTFunctionDefinition def) {
+		CFGNode plainNode;
+		IASTExpression expression = statement.getExpression();
+		ControlFlowGraph cfg = null;
+		//IASTNode[] nodes = statement.getChildren();
+		IASTStatement newStatement;
+		if (!hasCallExpression(statement)) {
+			plainNode = new PlainNode(statement, def);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
+		} else {
+			
+			cfg = createFuncCallGraph(statement, def);
+			plainNode = new PlainNode(statement, def);
+			cfg.concat(new ControlFlowGraph(plainNode, plainNode));
 		}
 		return cfg;
 	}
 
+	private ControlFlowGraph createFuncCallGraph(IASTNode node, IASTFunctionDefinition def) {
+		ControlFlowGraph cfg = new ControlFlowGraph();
+		if (node instanceof IASTExpressionStatement) {
+			cfg = createFuncCallGraph(((IASTExpressionStatement) node).getExpression(), def);
+		} if (node instanceof IASTBinaryExpression) {	
+			cfg = createFuncCallBinary((IASTBinaryExpression) node, def);
+		} if (node instanceof IASTFunctionCallExpression) {
+			FunctionCallNode callNode = new FunctionCallNode();
+			callNode.setFunctionCall((IASTFunctionCallExpression) node);
+			cfg = new ControlFlowGraph(callNode, callNode);
+		}
+		return cfg;
+	}
+	
+	private ControlFlowGraph createFuncCallBinary(IASTBinaryExpression node, IASTFunctionDefinition def) {
+		ControlFlowGraph cfg_left = new ControlFlowGraph();
+		ControlFlowGraph cfg_right = new ControlFlowGraph();
+		cfg_left = createFuncCallGraph(node.getOperand1(), def);
+		cfg_right = createFuncCallGraph(node.getOperand2(), def);
+		if (cfg_left == null) {
+			System.err.println("null cfg");
+			return cfg_right;
+		} else if (cfg_right == null) {
+			System.err.println("null cfg");
+			return cfg_left;
+		} else {
+			cfg_left.concat(cfg_right);
+			return cfg_left;
+		}
+		
+	
+	}
 	/**
 	 * @param statement, func
 	 * @return
@@ -554,4 +622,5 @@ public class ControlFlowGraphBuilder {
 		return new ControlFlowGraph(beginSwitchNode, endNode);
 	}
 
+	
 }

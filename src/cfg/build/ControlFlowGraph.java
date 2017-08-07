@@ -25,8 +25,10 @@ public class ControlFlowGraph {
 		start = cfg.getStart();
 		exit = cfg.getExit();
 		func = def;
+		
 	
 	}
+	
 	public ControlFlowGraph(CFGNode start, CFGNode exit) {
 		this.start = start;
 		this.exit = exit;

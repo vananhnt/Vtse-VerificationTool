@@ -25,13 +25,14 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		
+
 		ArrayList<IASTFunctionDefinition> funcList = ast.getListFunction();
 		for (IASTFunctionDefinition func : funcList) {
 			VtseCFG cfg = new VtseCFG(func);
 			cfg.unfold();
 			cfg.index();
-			cfg.printMeta();
+			//cfg.printFormular(System.out);
+			cfg.printGraph();
 			System.out.println();
 		}
 		
