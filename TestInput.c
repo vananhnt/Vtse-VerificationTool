@@ -9,15 +9,20 @@
 //	}
 
 float fp(float x, float y){
-	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
+		y = x + 2 - 3;
+	  return y - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
 	}
 
 float main() {
 	int a = 3;
+	int b;
 	a = fp(a, 4) + fp(a, 6);
-
-	return a;
+	for (int i = 0; i < a; i++) {
+		b = b + a;
+	}
+	return b;
 }
+
 //int max (int a, int b) {
 //		int max;
 //		if (a > b) {

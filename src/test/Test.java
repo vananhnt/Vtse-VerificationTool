@@ -14,7 +14,6 @@ import cfg.utils.Variable;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./TestInput.c");
 		
 		//ast.print();
 	
@@ -24,17 +23,17 @@ public class Test {
 		//declarator.getName: ten, vd: test, sum
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
+	
+		ASTGenerator ast = new ASTGenerator("./TestInput.c");
+		VtseCFG total = new VtseCFG(ast.getListFunction().get(1), ast);
+		total.unfold();
+		total.index();
+		total.printGraph();
+		total.printFormular(System.out);
 		
-
-		ArrayList<IASTFunctionDefinition> funcList = ast.getListFunction();
-		for (IASTFunctionDefinition func : funcList) {
-			VtseCFG cfg = new VtseCFG(func);
-			cfg.unfold();
-			cfg.index();
-			//cfg.printFormular(System.out);
-			cfg.printGraph();
-			System.out.println();
-		}
-		
+		/*
+		 * Xu li th b += a
+		 * IterationNode
+		 */
 	}
 }

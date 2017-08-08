@@ -1,7 +1,5 @@
 package cfg.node;
 
-import java.util.ArrayList;
-
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
@@ -11,9 +9,6 @@ import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import cfg.utils.ExpressionHelper;
-import cfg.utils.FunctionHelper;
-import cfg.utils.IASTVariable;
 
 /**
  * @author va

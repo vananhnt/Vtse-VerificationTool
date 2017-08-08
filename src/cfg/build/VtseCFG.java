@@ -16,11 +16,12 @@ import cfg.node.FunctionCallNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
 import cfg.utils.FormulaCreater;
+import cfg.utils.FunctionHelper;
 import cfg.utils.Variable;
 import cfg.utils.VariableManager;
 
 public class VtseCFG extends ControlFlowGraph {
-	private IASTFunctionDefinition func;
+
 	private VariableManager vm;
 	private String returnType;
 	
@@ -29,8 +30,13 @@ public class VtseCFG extends ControlFlowGraph {
 	}
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
-		this.func = func;
 		vm = new VariableManager(func);
+		returnType = getReturnType();
+	}
+	
+	public VtseCFG(IASTFunctionDefinition func, ASTGenerator ast) {
+		super(func, ast);
+		vm = FunctionHelper.getVM(ast.getListFunction());
 		returnType = getReturnType();
 	}
 	
@@ -90,6 +96,7 @@ public class VtseCFG extends ControlFlowGraph {
 		if (func == null) return null;
 		return this.func.getDeclSpecifier().toString();
 	}
+	
 	public void index() {
 		CFGNode node = start;
 		while (node != null && node != exit) {

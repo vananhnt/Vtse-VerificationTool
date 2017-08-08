@@ -10,6 +10,8 @@ import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 
+import cfg.build.ASTGenerator;
+
 /**
  * new VariableManager()
  * new VariableManager(IASTFunctionDefinition func)
@@ -36,7 +38,13 @@ public class VariableManager {
 	public ArrayList<Variable> getVariableList() {
 		return variableList;
 	}
-
+	
+	public void concat(VariableManager otherVM ) {
+		ArrayList<Variable> otherList = otherVM.getVariableList();
+		for (Variable var : otherList) {
+			this.getVariableList().add(var);
+		}
+	}
 	public void setVariableList(ArrayList<Variable> variableList) {
 		this.variableList = variableList;
 	}
@@ -85,13 +93,14 @@ public class VariableManager {
 			System.out.println(var.getVariableWithIndex());
 		}
 	}
+	
 	/**
 	 * Node: chi so cua them bien khi bat dau func la 0
 	 * Xet params, localVirable, return 
 	 * @param func
 	 * @return
 	 */
-	public void build(IASTFunctionDefinition func) {		
+	void build(IASTFunctionDefinition func) {		
 		ArrayList<Variable> params = getParameters(func);
 		ArrayList<Variable> localVars = new ArrayList<>();
 		String funcName = func.getDeclarator().getName().toString();

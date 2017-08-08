@@ -44,7 +44,7 @@ public class ExpressionHelper {
 		else if (node instanceof IASTFunctionCallExpression) {
 			return toStringFunctionCallExpression((IASTFunctionCallExpression) node);
 		}
-		return ".";
+		return " ";
 	}
 	
 	private static String toStringFunctionCallExpression(IASTFunctionCallExpression node) {

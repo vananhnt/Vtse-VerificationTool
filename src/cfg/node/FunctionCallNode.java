@@ -20,11 +20,11 @@ public class FunctionCallNode extends CFGNode {
 	}
 	public void printNode() {
 		System.out.println("FuncCallNode: " + ExpressionHelper.toString(funcCall));
-		System.out.println("  - " + ExpressionHelper.toString(funcCall.getFunctionNameExpression()));
-		System.out.println("  - " + funcCall.getExpressionType().toString());
-		for (IASTInitializerClause node: funcCall.getArguments()) {
-			System.out.println("  - " + node.getRawSignature());
-		}
+//		System.out.println("  - " + ExpressionHelper.toString(funcCall.getFunctionNameExpression()));
+//		System.out.println("  - " + funcCall.getExpressionType().toString());
+//		for (IASTInitializerClause node: funcCall.getArguments()) {
+//			System.out.println("  - " + node.getRawSignature());
+//		}
 	}
 	
 	public String getFormula() {

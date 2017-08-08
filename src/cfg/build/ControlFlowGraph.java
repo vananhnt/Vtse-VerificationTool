@@ -25,8 +25,6 @@ public class ControlFlowGraph {
 		start = cfg.getStart();
 		exit = cfg.getExit();
 		func = def;
-		
-	
 	}
 	
 	public ControlFlowGraph(CFGNode start, CFGNode exit) {
@@ -34,6 +32,16 @@ public class ControlFlowGraph {
 		this.exit = exit;
 	}		
 	
+	public ControlFlowGraph(IASTFunctionDefinition def, ASTGenerator ast) {
+		ControlFlowGraph cfg = build(def, ast);
+		start = cfg.getStart();
+		exit = cfg.getExit();
+		func = def;
+	}
+	public String getNameFunction(){
+		if (func == null) return null;		
+		return this.func.getDeclarator().getName().toString();
+	}
 	
 	public void setExit(CFGNode node) {
 		exit = node;
@@ -53,7 +61,12 @@ public class ControlFlowGraph {
 	public ControlFlowGraph build (IASTFunctionDefinition def) {
 		return (new ControlFlowGraphBuilder()).build(def);
 	}
-
+	
+	public ControlFlowGraph build (IASTFunctionDefinition def, ASTGenerator ast) {
+		MultiFunctionCFGBuilder multicfg = new MultiFunctionCFGBuilder(ast);
+		return multicfg.build(def);
+	}
+	
 	public CFGNode getStart() {
 		return start;
 	}
