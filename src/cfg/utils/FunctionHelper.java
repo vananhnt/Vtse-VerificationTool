@@ -36,6 +36,10 @@ public class FunctionHelper {
 			}
 		return vm;
 	}
+	/**
+	 * @param func
+	 * Lay tham so cua ham func
+	 */
 	public static ArrayList<IASTVariable> getParameters(IASTFunctionDefinition func) {
 		ArrayList<IASTVariable> params = new ArrayList<>();
 		IASTNode[] nodes = func.getDeclarator().getChildren();

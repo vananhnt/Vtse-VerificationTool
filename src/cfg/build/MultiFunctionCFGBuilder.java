@@ -30,7 +30,8 @@ import cfg.utils.VariableHelper;
 
 /**
  * @author va
- * chua xet th goi ham trog return va condition
+ * chua xet th goi ham trog condition
+ * (new MultiFunctionCFGBuilder(ast)).build(func);
  */
 
 public class MultiFunctionCFGBuilder {
@@ -41,6 +42,12 @@ public class MultiFunctionCFGBuilder {
 		this.ast = ast;
 
 	}
+	public ControlFlowGraph build(IASTFunctionDefinition func) {
+		ControlFlowGraph prvCfg = getVtseCFG(func);
+		CFGNode newStart = iterateNode(prvCfg.getStart(), prvCfg.exit, func);
+		return prvCfg;	
+	}
+	
 	private ArrayList<ControlFlowGraph> createList() {
 		ArrayList<ControlFlowGraph> list = new ArrayList<>();
 		ControlFlowGraph cfg;
@@ -69,12 +76,11 @@ public class MultiFunctionCFGBuilder {
 //		return node;
 //	}
 	
-	public ControlFlowGraph build(IASTFunctionDefinition func) {
-		ControlFlowGraph prvCfg = getVtseCFG(func);
-		CFGNode newStart = iterateNode(prvCfg.getStart(), prvCfg.exit, func);
-		return prvCfg;	
-	}
 	
+	/**
+	 * @param node, end, func
+	 * Ham duyet cfg va xu ly FunctionCallNode
+	 */
 	private CFGNode iterateNode(CFGNode node, CFGNode end, IASTFunctionDefinition func) {
 		if ( node == null) {
 			node = null;
@@ -129,7 +135,11 @@ public class MultiFunctionCFGBuilder {
 		
 		return cfg;
 	}
-	
+	/**
+	 * @param callExpression
+	 * @param currentFunc
+	 * Tra ve cac Node xu ly tham so cua ham
+	 */
 	private ControlFlowGraph createArguments(IASTFunctionCallExpression callExpression, IASTFunctionDefinition currentFunc) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
 		String funcName = callExpression.getFunctionNameExpression().toString();
@@ -140,6 +150,10 @@ public class MultiFunctionCFGBuilder {
 		IASTInitializerClause[] arguments = callExpression.getArguments();
 		IASTBinaryExpression expression;
 		IASTExpressionStatement statement;
+		IASTExpression right;
+		IASTName leftName;
+		IASTIdExpression left;
+		String leftNameStr;
 //		CFGNode declNode;
 //		IASTDeclarationStatement declStatement;
 //		IASTDeclarator declarator;
@@ -148,10 +162,10 @@ public class MultiFunctionCFGBuilder {
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 		
 		for (int i = 0; i < arguments.length ; i++) {
-			String leftNameStr = params.get(i).getName().toString();
+			leftNameStr = params.get(i).getName().toString();
 			leftNameStr += "_" + funcName;
-			IASTName leftName = factory.newName(leftNameStr.toCharArray());
-			IASTIdExpression left = factory.newIdExpression(leftName);
+			leftName = factory.newName(leftNameStr.toCharArray());
+			left = factory.newIdExpression(leftName);
 //			IASTDeclSpecifier type = params.get(i).getType().copy();
 //			declarator = factory.newDeclarator(leftName);
 //			declaration = factory.newSimpleDeclaration(type);
@@ -163,7 +177,7 @@ public class MultiFunctionCFGBuilder {
 //			IASTName rightName = factory.newName((arguments[i].getRawSignature().toCharArray()));
 //			IASTIdExpression right = factory.newIdExpression(rightName);
 			
-			IASTExpression right = (IASTExpression) VariableHelper.changeVariableName((IASTExpression) arguments[i].copy(), currentFunc);
+			right = (IASTExpression) VariableHelper.changeVariableName((IASTExpression) arguments[i].copy(), currentFunc);
 			expression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, left, right);
 			statement = factory.newExpressionStatement(expression);
 			plainNode = new PlainNode(statement);

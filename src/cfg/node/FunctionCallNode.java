@@ -18,6 +18,7 @@ public class FunctionCallNode extends CFGNode {
 	public void setFunctionCall(IASTFunctionCallExpression funcCall) {
 		this.funcCall = funcCall;
 	}
+	
 	public void printNode() {
 		System.out.println("FuncCallNode: " + ExpressionHelper.toString(funcCall));
 //		System.out.println("  - " + ExpressionHelper.toString(funcCall.getFunctionNameExpression()));

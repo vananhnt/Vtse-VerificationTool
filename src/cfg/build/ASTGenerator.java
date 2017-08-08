@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
 import org.eclipse.cdt.core.dom.ast.IASTInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
@@ -16,6 +17,8 @@ import org.eclipse.cdt.core.parser.IScannerInfo;
 import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.core.runtime.CoreException;
+
+import cfg.utils.FunctionHelper;
 
 /**
  * Get IASTFunctionDefinition 
@@ -82,7 +85,9 @@ public class ASTGenerator {
 		}
 		return null;
 	}
-	
+	public static IASTFunctionDefinition getMain() {
+		return FunctionHelper.getFunction(getListFunction(), "main");
+	}
 	public static ArrayList<IASTFunctionDefinition> getListFunction(){
 		if (translationUnit == null) return null;
 		ArrayList<IASTFunctionDefinition> funcList = new ArrayList<>();
@@ -128,7 +133,7 @@ public class ASTGenerator {
 		for (int i = 0; i < index; i++) {
 			System.out.print(" ");
 		}
-	
+		
 		System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);

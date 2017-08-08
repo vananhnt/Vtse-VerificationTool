@@ -8,10 +8,20 @@
 //		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
 //	}
 
+
+
 float fp(float x, float y){
-		y = x + 2 - 3;
+	  y = x + 2 - 3;
 	  return y - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
 	}
+
+float min(float a, float b) {
+	if (a > b) {
+		return b;
+	} else {
+		return a;
+	}
+}
 
 float main() {
 	int a = 3;
@@ -20,7 +30,7 @@ float main() {
 	for (int i = 0; i < a; i++) {
 		b = b + a;
 	}
-	return b;
+	return min(a, b);
 }
 
 //int max (int a, int b) {
