@@ -20,14 +20,16 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 	
-		ASTGenerator ast = new ASTGenerator("./test.c");
+		ASTGenerator ast = new ASTGenerator("./testInput.c");
 		//ast.print();
 		//VtseCFG total = new VtseCFG(ast.getMain());
-		VtseCFG total = new VtseCFG(ast.getMain(), ast);
+		VtseCFG total = new VtseCFG(ast.getFunction("main"), ast);
 		total.unfold();
 		total.index();
 		total.printGraph();
-		total.printSMTFormula(System.out);
+		//total.getVm().printList();
+		
+		//total.printSMTFormula(System.out);
 		/*
 		 * Xu li th b += a
 		 * IterationNode

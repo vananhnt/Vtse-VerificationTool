@@ -33,6 +33,7 @@ public class Variable {
 		
 	}
 	
+	//public void reset(){
 	public String getType() {
 		return type;
 	}

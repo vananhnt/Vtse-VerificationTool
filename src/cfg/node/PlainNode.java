@@ -1,6 +1,7 @@
 package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
@@ -37,8 +38,14 @@ public class PlainNode extends CFGNode {
 	}
 
 	public void index(VariableManager vm) {
-		statement = (IASTStatement) Index.index(statement, vm);
+		if ((this.getNext() instanceof DecisionNode)){
+			statement = (IASTStatement) Index.resetIndex((IASTDeclarationStatement) statement, vm);
+		} else{
+			statement = (IASTStatement) Index.index(statement, vm);
+		}
 	}
+	
+	
 	public String getFormula() {
 		return FormulaCreater.createFormula(statement);
 	}

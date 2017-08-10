@@ -38,11 +38,21 @@ public class VariableManager {
 	public ArrayList<Variable> getVariableList() {
 		return variableList;
 	}
-	
+	//TODO
+/*
+ * note...
+ * neu co khoi tao trong ham con
+ * va bien thuoc loai declaration 
+ */
 	public void concat(VariableManager otherVM ) {
 		ArrayList<Variable> otherList = otherVM.getVariableList();
 		for (Variable var : otherList) {
-			this.getVariableList().add(var);
+			if (!(isHas(var.getName()))){
+				this.getVariableList().add(var);
+			} else if (isHas(var.getName()) && (var.getIndex() == -1)) {
+				//System.out.println(var.getName());
+				var.setIndex(-2);
+			}
 		}
 	}
 	public void setVariableList(ArrayList<Variable> variableList) {
@@ -103,6 +113,7 @@ public class VariableManager {
 	void build(IASTFunctionDefinition func) {		
 		ArrayList<Variable> params = getParameters(func);
 		ArrayList<Variable> localVars = new ArrayList<>();
+		
 		String funcName = func.getDeclarator().getName().toString();
 		
 		localVars = getLocalVar(func, funcName, localVars);
@@ -168,11 +179,11 @@ public class VariableManager {
 			name = declarations[0].getName().getRawSignature();
 			
 			body = declarations[0].getChildren();			
-			for (IASTNode iter : body){
-				if (iter instanceof IASTEqualsInitializer){
-					init = 0;
-				}
-			}
+//			for (IASTNode iter : body){
+//				if (iter instanceof IASTEqualsInitializer){
+//					init = 0;
+//				}
+//			}
 				// add
 			var = new Variable(type, name + "_" + funcName, init);			
 			list.add(var);						

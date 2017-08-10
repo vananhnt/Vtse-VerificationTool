@@ -157,7 +157,11 @@ public class VariableHelper {
 	}
 	
 	private static String getFunctionName(IASTFunctionDefinition func) {
-		return func.getDeclarator().getName().toString();
+		String res = func.getDeclarator().getName().toString();
+//		for (IASTVariable node: FunctionHelper.getParameters(func)) {
+//			res += "_" + node.getName().toString();
+//		}
+		return res;
 	}
 
 	/**

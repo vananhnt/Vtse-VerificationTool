@@ -21,9 +21,7 @@ import cfg.utils.Variable;
 import cfg.utils.VariableManager;
 
 public class VtseCFG extends ControlFlowGraph {
-
 	private VariableManager vm;
-	private String returnType;
 	
 	public VtseCFG() {
 		vm = new VariableManager();
@@ -31,13 +29,13 @@ public class VtseCFG extends ControlFlowGraph {
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
 		vm = new VariableManager(func);
-		returnType = getReturnType();
+		
 	}
 	
 	public VtseCFG(IASTFunctionDefinition func, ASTGenerator ast) {
 		super(func, ast);
 		vm = FunctionHelper.getVM(ast.getListFunction());
-		returnType = getReturnType();
+		
 	}
 	
 	private String getReturnType() {

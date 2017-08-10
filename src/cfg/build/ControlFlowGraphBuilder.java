@@ -282,13 +282,13 @@ public class ControlFlowGraphBuilder {
 //				cfg.concat(new ControlFlowGraph(node, node));
 //			
 			} else { //dang: int b;
-				newDeclarator = factory.newDeclarator(nameVar);
-				newId = factory.newIdExpression(nameVar).copy();
-				rightInitClause = factory.newLiteralExpression(IASTLiteralExpression.lk_float_constant, "0");
-				newExpression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, newId, rightInitClause);
-				newExprStatement = (IASTExpressionStatement) factory.newExpressionStatement(newExpression);
-				node = new PlainNode(newExprStatement, func);
-				cfg.concat(new ControlFlowGraph(node, node));
+				//newDeclarator = factory.newDeclarator(nameVar);
+				//newId = factory.newIdExpression(nameVar).copy();
+				//rightInitClause = factory.newLiteralExpression(IASTLiteralExpression.lk_float_constant, "0");
+				//newExpression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, newId, rightInitClause);
+				//newExprStatement = (IASTExpressionStatement) factory.newExpressionStatement(newExpression);
+				//node = new PlainNode(newExprStatement, func);
+				//cfg.concat(new ControlFlowGraph(node, node));
 			}
 			
 		}

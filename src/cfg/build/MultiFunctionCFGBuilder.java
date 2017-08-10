@@ -13,6 +13,7 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
 import org.eclipse.cdt.core.dom.ast.IASTName;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
@@ -42,6 +43,7 @@ public class MultiFunctionCFGBuilder {
 		this.ast = ast;
 
 	}
+	
 	public ControlFlowGraph build(IASTFunctionDefinition func) {
 		ControlFlowGraph prvCfg = getVtseCFG(func);
 		CFGNode newStart = iterateNode(prvCfg.getStart(), prvCfg.exit, func);
@@ -154,6 +156,7 @@ public class MultiFunctionCFGBuilder {
 		IASTName leftName;
 		IASTIdExpression left;
 		String leftNameStr;
+		String offset = "";
 //		CFGNode declNode;
 //		IASTDeclarationStatement declStatement;
 //		IASTDeclarator declarator;
@@ -162,8 +165,13 @@ public class MultiFunctionCFGBuilder {
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 		
 		for (int i = 0; i < arguments.length ; i++) {
-			leftNameStr = params.get(i).getName().toString();
+			leftNameStr = params.get(i).getName().toString();			
 			leftNameStr += "_" + funcName;
+			offset = "";
+//			for (IASTNode node : arguments) {
+//				offset += "_" +  node.toString();
+//			}
+			leftNameStr += offset;
 			leftName = factory.newName(leftNameStr.toCharArray());
 			left = factory.newIdExpression(leftName);
 //			IASTDeclSpecifier type = params.get(i).getType().copy();

@@ -36,6 +36,7 @@ public class FunctionHelper {
 			}
 		return vm;
 	}
+	
 	/**
 	 * @param func
 	 * Lay tham so cua ham func
