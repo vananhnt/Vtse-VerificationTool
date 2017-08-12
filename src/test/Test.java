@@ -30,16 +30,6 @@ public class Test {
 		cfg.unfold();
 		//cfg.index();
 		System.out.println(cfg.getVm().getVariable("return"));
-		//cfg.printMeta();
-		//cfg.getExit().printNode();
-		//cfg.printGraph();
-		//cfg.printFormular(System.out);
-		//cfg.getVm().printList();
-		//PrintStream out = new PrintStream("smt.txt");
 		
-		//PrintStream out = System.out;
-		//cfg.printSMTFormula(out);
-		System.out.println( cfg.getNameFunction());
-		System.out.println( cfg.getTypeFunction());
 	}
 }
