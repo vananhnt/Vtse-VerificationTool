@@ -28,11 +28,6 @@ public class Test {
 		total.index();
 		total.printGraph();
 		//total.getVm().printList();
-		
-		//total.printSMTFormula(System.out);
-		/*
-		 * Xu li th b += a
-		 * IterationNode
-		 */
+	
 	}
 }
