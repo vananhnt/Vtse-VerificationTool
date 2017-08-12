@@ -1,30 +1,39 @@
 package cfg.utils;
 
+/**
+  * new Variable(type, name, nameFunc)
+  * new Variable(type, name, nameFunc, index)
+  * Variable(other)
+  * getVariableWithIndex()
+  */
 public class Variable {
-	
+
 	private String type; 
 	private String name;
+	
 	private int index = -1; //mac dinh -1
 	
 	public Variable() {}
 	
-	public Variable(String type, String name) {
-		this.type = type;
-		this.name = name;
-	}
-	
 	public Variable(String type, String name, int index) {
 		this.type = type;
 		this.name = name;
-		this.index = index;
+		this.index = index;	
+	}
+	
+	public Variable(String type, String name){
+		this.type = type;
+		this.name = name;
 	}
 	
 	public Variable(Variable other) {
 		name = other.name;
 		type = other.type;
 		index = other.index;
+		
 	}
 	
+	//public void reset(){
 	public String getType() {
 		return type;
 	}

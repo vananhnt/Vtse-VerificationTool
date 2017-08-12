@@ -1,16 +1,27 @@
 // TEST INPUT
 #include<stdio.h>
 #include<math.h>
-//void set(int n){
-//	n = 0;
-//}
+
 //	float f(float x){
 //		  return x - (x*x*x)/6 + (x*x*x*x*x)/120 + (x*x*x*x*x*x*x)/5040;
 //	}
 
-//	float fp(float x){
-//	  return 1 - (x*x)/2 + (x*x*x*x)/24 + (x*x*x*x*x*x)/720;
-//	}
+
+float min(float a, float b) {
+	int c;
+	if (a > b) {
+		return b;
+	} else {
+		return c;
+	}
+}
+
+float main() {
+	int a = 3;
+	int b;
+
+	return min(a, b) + min (3, 4);
+}
 
 //int max (int a, int b) {
 //		int max;
@@ -19,21 +30,20 @@
 //		}
 //		else {
 //			b = 1;
-//			max = b;
+//			max = fp(b);
 //		}
 //		return max;
 //	}
 
 
-//	float sum(int n) {
-//		int sum = 0;
-//
-//		for (int i = 0; i <= n; i++) {
-//			sum = ((sum + i) + 2) * (i+1) / i;
-//		}
-//
-//		return sum;
-//	}
+	float sum(int n) {
+		int tong = 0;
+		for (int i=0; i<2; i++){
+			for (int j=0; j<3; j++){
+				tong = i + j;
+		}
+		return tong;
+	}
 	
 
 //	float foo36(float IN){
@@ -55,23 +65,23 @@
 //	  return x;
 //	}
 
-int fo(int flag, int n){
-		int k = 1;
-		if(flag > 0)
-			k = n*n;
-
-		int i = 0;
-		int j = 0;
-
-		while(i <= n) {
-			i++;
-			j = j + i;
-		}
-
-		int z = k + i + j;
-
-		return z;
-	}
+//int fo(int flag, int n){
+//		int k = 1;
+//		if(flag > 0)
+//			k = n*n;
+//
+//		int i = 0;
+//		int j = 0;
+//
+//		while(i <= n) {
+//			i++;
+//			j = j + i;
+//		}
+//
+//		int z = k + i + j;
+//
+//		return z;
+//	}
 
 //	int factorial(int n) {
 //		int fac = 1;
@@ -87,30 +97,30 @@ int fo(int flag, int n){
 //		return a * a;
 //	}
 	
-	double foo(double a, double b) {
-		double result;
-		double c = 3 / (b - 3);
-		if (a > b) {
-			result = a / (b - 2);
-			a += 1;
-		} else {
-			result = a + b;
-			a += 1;
-		}
-			
-		return result;
-	}
-	
-	
-	double abs(double x) {
-		double abs = x;
-		if (x < 0) {
-			abs = -x;
-		}
-		
-		return abs;
-	}
-	
+//	double foo(double a, double b) {
+//		double result;
+//		double c = 3 / (b - 3);
+//		if (a > b) {
+//			result = a / (b - 2);
+//			a += 1;
+//		} else {
+//			result = a + b;
+//			a += 1;
+//		}
+//
+//		return result;
+//	}
+//
+//
+//	double abs(double x) {
+//		double abs = x;
+//		if (x < 0) {
+//			abs = -x;
+//		}
+//
+//		return abs;
+//	}
+//
 //	public static void main(String[] args) {
 //		float x = foo36(0.125);
 //		System.out.println("x = " + x);

@@ -12,26 +12,32 @@ import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EndConditionNode;
+import cfg.node.FunctionCallNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
 import cfg.utils.FormulaCreater;
+import cfg.utils.FunctionHelper;
 import cfg.utils.Variable;
 import cfg.utils.VariableManager;
 
 public class VtseCFG extends ControlFlowGraph {
-	private IASTFunctionDefinition func;
 	private VariableManager vm;
-	private String returnType;
 	
 	public VtseCFG() {
 		vm = new VariableManager();
 	}
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
-		this.func = func;
 		vm = new VariableManager(func);
-		returnType = getReturnType();
+		
 	}
+	
+	public VtseCFG(IASTFunctionDefinition func, ASTGenerator ast) {
+		super(func, ast);
+		vm = FunctionHelper.getVM(ast.getListFunction());
+		
+	}
+	
 	private String getReturnType() {
 		if (func != null) {
 			IASTNode type = func.getDeclSpecifier();
@@ -88,6 +94,7 @@ public class VtseCFG extends ControlFlowGraph {
 		if (func == null) return null;
 		return this.func.getDeclSpecifier().toString();
 	}
+	
 	public void index() {
 		CFGNode node = start;
 		while (node != null && node != exit) {
@@ -102,7 +109,6 @@ public class VtseCFG extends ControlFlowGraph {
 			node.index(vm);
 		}
 	}	
-	
 	
 	private void DFSHelper(CFGNode node) {
 		node.setVistited(true);
@@ -119,7 +125,6 @@ public class VtseCFG extends ControlFlowGraph {
 	public void printMeta() { //Da unfold
 		printMeta(System.out, start, exit, " ");
 	}
-	
 	
 	public void printSMTFormula(PrintStream printStream) {
 		
@@ -205,4 +210,5 @@ public class VtseCFG extends ControlFlowGraph {
 			printMeta(printStream , node.getNext(), end, nSpaces);
 		}
 	}
+
 }

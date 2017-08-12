@@ -1,22 +1,17 @@
 package test;
 
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
-
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
 
 /**
  * @author va
- *
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./TestInput.c");
-		IASTFunctionDefinition func = ast.getFunction(0);
-		//ast.print();
+		
+	
 	
 		//*Parameters:
 		//DeclSpecifier : kieu tra ve cua ham
@@ -24,12 +19,15 @@ public class Test {
 		//declarator.getName: ten, vd: test, sum
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
-		
-		VtseCFG cfg = new VtseCFG(func);
-		
-		cfg.unfold();
-		//cfg.index();
-		System.out.println(cfg.getVm().getVariable("return"));
-		
+	
+		ASTGenerator ast = new ASTGenerator("./testInput.c");
+		//ast.print();
+		//VtseCFG total = new VtseCFG(ast.getMain());
+		VtseCFG total = new VtseCFG(ast.getFunction("main"), ast);
+		total.unfold();
+		total.index();
+		total.printGraph();
+		//total.getVm().printList();
+	
 	}
 }
