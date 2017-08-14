@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
@@ -17,6 +16,8 @@ import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.core.runtime.CoreException;
 
+import cfg.utils.FunctionHelper;
+
 /**
  * Get IASTFunctionDefinition 
  * IASTFunctionDefiniton func = (new ASTGenerator(filelocation)).getFunction(index);
@@ -27,7 +28,7 @@ import org.eclipse.core.runtime.CoreException;
  */
 public class ASTGenerator {
 
-	private IASTTranslationUnit translationUnit;
+	private static IASTTranslationUnit translationUnit;
 	private String filelocation = "./test.c";
 	
 	public ASTGenerator() {
@@ -71,10 +72,10 @@ public class ASTGenerator {
 		filelocation = fileName;
 	}
 	
-	public ArrayList<IASTFunctionDefinition> getListFunction(){
-		if (this.translationUnit == null) return null;
+	public static ArrayList<IASTFunctionDefinition> getListFunction(){
+		if (translationUnit == null) return null;
 		ArrayList<IASTFunctionDefinition> funcList = new ArrayList<>();
-		for (IASTNode run : this.translationUnit.getDeclarations()){
+		for (IASTNode run : translationUnit.getDeclarations()){
 			if (run instanceof IASTFunctionDefinition){
 				funcList.add((IASTFunctionDefinition) run);
 			}
@@ -85,8 +86,6 @@ public class ASTGenerator {
 	
 	/*
 	 * functionDef 
-	 * chá»‰ láº¥y function Ä‘áº§u tiĂªn
-	 * chÆ°a xĂ©t trÆ°á»�ng há»£p cho chá»�n cĂ¡c func khĂ¡c nhau 
 	 */
 	public IASTFunctionDefinition getFunction(int index) {
 //		int count = 0;
@@ -101,6 +100,20 @@ public class ASTGenerator {
 			}	
 		}
 		return funcDef;
+	}
+	public static IASTFunctionDefinition getFunction(String name) {
+		String funcName = null;
+		ArrayList<IASTFunctionDefinition> funcList = getListFunction();
+		for (IASTFunctionDefinition func : funcList) {
+			funcName = func.getDeclarator().getName().toString();
+			if (name.equals(funcName)) {
+				return func;
+			}
+		}
+		return null;
+	}
+	public static IASTFunctionDefinition getMain() {
+		return FunctionHelper.getFunction(getListFunction(), "main");
 	}
 	
 	public void print() {

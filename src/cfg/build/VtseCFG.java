@@ -15,11 +15,12 @@ import cfg.node.EndConditionNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
 import cfg.utils.FormulaCreater;
+import cfg.utils.FunctionHelper;
 import cfg.utils.Variable;
 import cfg.utils.VariableManager;
 
 public class VtseCFG extends ControlFlowGraph {
-	private IASTFunctionDefinition func;
+	//private IASTFunctionDefinition func;
 	private VariableManager vm;
 	private String returnType;
 	
@@ -32,12 +33,17 @@ public class VtseCFG extends ControlFlowGraph {
 		vm = new VariableManager(func);
 		returnType = getReturnType();
 	}
+	
 	private String getReturnType() {
 		if (func != null) {
 			IASTNode type = func.getDeclSpecifier();
 			return type.toString();
 		}
 		return "unIdentify";
+	}
+	public VtseCFG(IASTFunctionDefinition func, ASTGenerator ast) {
+		super(func, ast);
+		vm = FunctionHelper.getVM(ast.getListFunction());	
 	}
 	public VariableManager getVm() {
 		return vm;
@@ -67,7 +73,7 @@ public class VtseCFG extends ControlFlowGraph {
 	
 	public String getNameFunction(){
 		if (func == null) return null;		
-		return this.func.getDeclarator().getName().toString();
+		return func.getDeclarator().getName().toString();
 	}
 	
 	public ArrayList<Variable> getInitVariables(){
@@ -84,10 +90,16 @@ public class VtseCFG extends ControlFlowGraph {
 		}
 		return varList;		
 	}
+	
+	public Variable getReturn() {
+		return this.getVm().getVariable("return_" + getNameFunction());
+	}
+	
 	public String getTypeFunction(){
 		if (func == null) return null;
 		return this.func.getDeclSpecifier().toString();
 	}
+	
 	public void index() {
 		CFGNode node = start;
 		while (node != null && node != exit) {

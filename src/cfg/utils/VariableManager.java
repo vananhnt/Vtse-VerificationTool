@@ -7,28 +7,69 @@ import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 
+import cfg.build.ASTGenerator;
+
+/**
+ * new VariableManager()
+ * new VariableManager(IASTFunctionDefinition func)
+ * build(IASTFunctionDefinition func): void
+ * getVariableList() : ArrayList<Variable>
+ * getVariable(int index) : Variable
+ * getVariable(String name) : Variable
+ * addVariable(Variable var) : void
+ * addVariable(String type, String name, String funcName, int index) : void
+ * @author va
+ *
+ */
 public class VariableManager {
 	private ArrayList<Variable> variableList;
 
-	
 	public VariableManager(){
 		this.variableList = new ArrayList<>();
 	}
 	
-	public VariableManager( IASTFunctionDefinition func){
+	public VariableManager(IASTFunctionDefinition func){
 		this.variableList = new ArrayList<>();
 		build(func);
 	}
 	public ArrayList<Variable> getVariableList() {
 		return variableList;
 	}
-
+	//TODO
+/*
+ * note...
+ * neu co khoi tao trong ham con
+ * va bien thuoc loai declaration 
+ */
+	public void concat(VariableManager otherVM ) {
+		ArrayList<Variable> otherList = otherVM.getVariableList();
+		for (Variable var : otherList) {
+			if (!(isHas(var.getName()))){
+				this.getVariableList().add(var);
+			} else if (isHas(var.getName()) && (var.getIndex() == -1)) {
+				//System.out.println(var.getName());
+				var.setIndex(-2);
+			}
+		}
+	}
 	public void setVariableList(ArrayList<Variable> variableList) {
 		this.variableList = variableList;
+	}
+	
+	public void addVariable(Variable var) {
+		variableList.add(var);
+	}
+	
+	public void addVariable(String type, String name, String funcName, int index) {
+		Variable var = new Variable(type, name + "_" + funcName, index);
+		variableList.add(var);
+	}
+	
+	public Variable getVariable(int index) {
+		return variableList.get(index);
 	}
 	
 	public Variable getVariable(String name) {
@@ -39,19 +80,6 @@ public class VariableManager {
 		}
 		return null;
 	} 
-	
-	public void addVariable(Variable var) {
-		variableList.add(var);
-	}
-	
-	public void addVariable(String type, String name, int index) {
-		Variable var = new Variable(type, name, index);
-		variableList.add(var);
-	}
-	
-	public Variable getVariable(int index) {
-		return variableList.get(index);
-	}
 	
 	public boolean isHas(String name){
 		if (this.variableList == null)	return false;
@@ -72,19 +100,24 @@ public class VariableManager {
 			System.out.println("NULL");
 		} 
 		for (Variable var : this.variableList) {
-			System.out.println(var.getVariableWithIndex());
+			//System.out.println(var.getVariableWithIndex());
+			System.out.println(var.getName());
 		}
 	}
+	
 	/**
 	 * Node: chi so cua them bien khi bat dau func la 0
 	 * Xet params, localVirable, return 
 	 * @param func
 	 * @return
 	 */
-	public void build(IASTFunctionDefinition func) {		
+	void build(IASTFunctionDefinition func) {		
 		ArrayList<Variable> params = getParameters(func);
 		ArrayList<Variable> localVars = new ArrayList<>();
-		localVars = getLocalVar(func, localVars);
+		
+		String funcName = func.getDeclarator().getName().toString();
+		
+		localVars = getLocalVar(func, funcName, localVars);
 		for (Variable param : params) {
 			this.variableList.add(param);
 		}
@@ -96,7 +129,7 @@ public class VariableManager {
 	
 	private Variable getReturn(IASTFunctionDefinition func) {
 		IASTNode typeFunction = func.getDeclSpecifier();
-		Variable var = new Variable(typeFunction.getRawSignature(), "return");
+		Variable var = new Variable(typeFunction.getRawSignature(), "return" + "_" + func.getDeclarator().getName().toString());
 		return var;
 	} 
 	/*
@@ -116,7 +149,8 @@ public class VariableManager {
 					if (paramDecls[i] instanceof IASTSimpleDeclSpecifier 
 					 && paramDecls[i + 1] instanceof IASTDeclarator) {
 						Variable var = new Variable(paramDecls[i].getRawSignature(),
-									   				paramDecls[i + 1].getRawSignature(), 0);
+									   				paramDecls[i + 1].getRawSignature() + "_" +
+									   				func.getDeclarator().getName().toString(), 0);
 						params.add(var);
 					}
 				}
@@ -126,31 +160,39 @@ public class VariableManager {
 	}
 
 	/*
-	 * return List local Variables form function
+	 * return List local Variables from function
 	 */
-	private ArrayList<Variable> getLocalVar(IASTNode node, ArrayList<Variable> list){
+	private ArrayList<Variable> getLocalVar(IASTNode node, String funcName, ArrayList<Variable> list){
 		// find init
 		IASTNode[] children = node.getChildren();		
+		String type;
+		String name;
+		IASTNode[] body; 
+		Variable var;
+		
+		IASTDeclarator[] declarations;
+		
 		if (node instanceof IASTSimpleDeclaration){
 			int init = -1;
-			String type = ((IASTSimpleDeclaration) node).getDeclSpecifier().getRawSignature();
-			IASTDeclarator[] declarations = ((IASTSimpleDeclaration) node).getDeclarators();
-			String name = declarations[0].getName().getRawSignature();
+			 type = ((IASTSimpleDeclaration) node).getDeclSpecifier().getRawSignature();
 			
-			IASTNode[] body = declarations[0].getChildren();			
-			for (IASTNode iter : body){
-				if (iter instanceof IASTEqualsInitializer){
-					init = 0;
-				}
-			}
+			declarations = ((IASTSimpleDeclaration) node).getDeclarators();
+			name = declarations[0].getName().getRawSignature();
+			
+			body = declarations[0].getChildren();			
+//			for (IASTNode iter : body){
+//				if (iter instanceof IASTEqualsInitializer){
+//					init = 0;
+//				}
+//			}
 				// add
-			Variable var = new Variable(type, name, init);			
+			var = new Variable(type, name + "_" + funcName, init);			
 			list.add(var);						
 		}
 		// return
 		
 		for (IASTNode run : children) {
-			getLocalVar(run, list);
+			getLocalVar(run, funcName, list);
 		}		
 		return list;
 	}

@@ -1,44 +1,22 @@
-#include<stdio.h>
-#include<math.h>
-
-const int MAX=3;
-
-int test() {
-	int a = 0;
-	a = a + 2;
-	int b = a + 3;
-	if (a < 10) {
-		b = 10;
-	}
-	return b;
+float f(float x)
+{
+  return x - (x*x*x)/6.0f + (x*x*x*x*x)/120.0f + (x*x*x*x*x*x*x)/5040.0f;
 }
 
-void testSwitch() {
-	int a = 10;
-	int b = 10;
-	int c = 20;
-
-	switch (a) {
-	case b:
-	  /* Code */
-		c = 30;
-	  break;
-	case c:
-	  /* Code */
-		c = 40;
-	  break;
-	default:
-	  /* Code */
-		c = 50;
-	  break;
-	}
+float fp(float x)
+{
+  return 1 - (x*x)/2.0f + (x*x*x*x)/24.0f + (x*x*x*x*x*x)/720.0f;
 }
-
-int sum(int i, int j) {
-
-
+int main() {
+  	float IN = 1;
+	float ITERATIONS = 3;
+  	float x = IN - f(IN)/fp(IN);
+	
+	if (ITERATIONS > 1) {
+		x = x - f(x)/fp(x);
+		if (ITERATIONS > 2) {
+		x = x - f(x)/fp(x);
+		}
+		}
+	return 0;
 }
-
-
-
-

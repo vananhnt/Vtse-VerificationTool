@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
@@ -28,9 +29,11 @@ public class FormulaCreater {
 	public static String NEGATIVE = "not";
 	public static String BINARY_CONNECTIVE = "=>";
 	public static String EQUALITY = "=";
-	
+
+
 	public static String create(CFGNode start, CFGNode exit) {
 		String constraint = start.getFormula();
+		
 		String temp;
 		CFGNode node = start.getNext();
 		while (node != null) {
@@ -56,6 +59,7 @@ public class FormulaCreater {
 		
 		return constraint;
 	}
+	
 	public static String createInfixFormula(IASTNode node) {
 		if (node instanceof IASTDeclarationStatement) {
 			return infixDeclarationStatement((IASTDeclarationStatement) node);
@@ -84,10 +88,9 @@ public class FormulaCreater {
 			return ExpressionHelper.toString(node);
 //		} else if (node instanceof IASTReturnStatement){
 //			return prefixReturnStatement((IASTReturnStatement) node); //da xu ly return o ReturnNode
-		} 
+		}
 		return null;
 	}
-	
 	
 	private static String prefixDeclarationStatement(IASTDeclarationStatement node) {
 		boolean isAssign = false;
@@ -213,5 +216,9 @@ public class FormulaCreater {
 		cfg.index();
 		cfg.unfold();
 		System.out.println(create(cfg.getStart(), cfg.getExit()));
+	}
+	public static String createFuncCallFormula(IASTFunctionCallExpression funcCall, ASTGenerator ast) {
+		
+		return null;
 	}
 }

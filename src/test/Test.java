@@ -1,9 +1,6 @@
 package test;
 
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
-
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
@@ -14,8 +11,8 @@ import cfg.build.VtseCFG;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./TestInput.c");
-		IASTFunctionDefinition func = ast.getFunction(0);
+		ASTGenerator ast = new ASTGenerator("./test.c");
+	
 		//ast.print();
 	
 		//*Parameters:
@@ -25,21 +22,14 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(func);
+		VtseCFG cfg = new VtseCFG(ast.getMain(), ast);
 		
 		cfg.unfold();
-		//cfg.index();
-		System.out.println(cfg.getVm().getVariable("return"));
-		//cfg.printMeta();
-		//cfg.getExit().printNode();
-		//cfg.printGraph();
+		cfg.index();
+		cfg.printGraph();
 		//cfg.printFormular(System.out);
-		//cfg.getVm().printList();
-		//PrintStream out = new PrintStream("smt.txt");
-		
-		//PrintStream out = System.out;
-		//cfg.printSMTFormula(out);
-		System.out.println( cfg.getNameFunction());
-		System.out.println( cfg.getTypeFunction());
+		//System.out.println("return_" + cfg.getNameFunction());
+		//System.out.println(cfg.getVm().getVariable("return_" + cfg.getNameFunction()).toString());
+		cfg.getVm().printList();
 	}
 }
