@@ -1,6 +1,8 @@
 package test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
@@ -30,6 +32,8 @@ public class Test {
 		//cfg.printFormular(System.out);
 		//System.out.println("return_" + cfg.getNameFunction());
 		//System.out.println(cfg.getVm().getVariable("return_" + cfg.getNameFunction()).toString());
-		cfg.getVm().printList();
+		//cfg.getVm().printList();
+		PrintStream out = new PrintStream(new File("./smt.txt"));
+		cfg.printSMTFormula(out);
 	}
 }

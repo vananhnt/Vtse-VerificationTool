@@ -70,6 +70,7 @@ public class VariableHelper {
 		for (IASTNode param : node.getArguments()) {
 			params += "_" + param.toString();
 		}
+	
 		IASTName newName = factory.newName((currentName + params).toCharArray());
 		newId = factory.newIdExpression(newName);
 		

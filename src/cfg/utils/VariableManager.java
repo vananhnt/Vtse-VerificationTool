@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
@@ -51,7 +52,7 @@ public class VariableManager {
 				this.getVariableList().add(var);
 			} else if (isHas(var.getName()) && (var.getIndex() == -1)) {
 				//System.out.println(var.getName());
-				var.setIndex(-2);
+				//var.setIndex(-2);
 			}
 		}
 	}
@@ -130,6 +131,7 @@ public class VariableManager {
 	private Variable getReturn(IASTFunctionDefinition func) {
 		IASTNode typeFunction = func.getDeclSpecifier();
 		Variable var = new Variable(typeFunction.getRawSignature(), "return" + "_" + func.getDeclarator().getName().toString());
+	
 		return var;
 	} 
 	/*
@@ -189,6 +191,16 @@ public class VariableManager {
 			var = new Variable(type, name + "_" + funcName, init);			
 			list.add(var);						
 		}
+		if (node instanceof IASTFunctionCallExpression) {
+			IASTFunctionCallExpression call = (IASTFunctionCallExpression) node;
+			String callName = call.getFunctionNameExpression().toString();
+			String params = "";
+			for (IASTNode param : call.getArguments()) {
+				params += "_" + param.toString();
+			}
+			var = new Variable(call.getExpressionType().toString(), callName + params, -1);
+			list.add(var);
+		}
 		// return
 		
 		for (IASTNode run : children) {
@@ -196,6 +208,7 @@ public class VariableManager {
 		}		
 		return list;
 	}
+	
 	
 /*
  * add bien toan cuc 

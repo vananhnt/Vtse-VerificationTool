@@ -183,7 +183,7 @@ public class Index {
 				name = nameVar.toString();					
 				
 				Variable var = vm.getVariable(name);
-				if (var!= null) var.increase();
+				var.increase();
 				if (var == null) return statement;				
 				IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
 				((IASTDeclarator) run).setName(nameId);					
