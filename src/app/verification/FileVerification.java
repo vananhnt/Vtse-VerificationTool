@@ -108,7 +108,7 @@ public class FileVerification {
 					try {
 						long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 						System.err.println("function: " + functionName);
-						report = mv.verify(function, am.getPreCondition(), am.getPostCondition());
+						report = mv.verify(ast,function, am.getPreCondition(), am.getPostCondition());
 						long end = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 						ExportExcel.add(report.getFunctionName(), report.getPreCondition(), report.getPostCondition(), 
 								report.getStatus(), String.valueOf((double) (report.getSolverTime()/1000.0) + (double) (report.getGenerateConstraintTime()/1000.0)),

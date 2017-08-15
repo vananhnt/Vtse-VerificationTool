@@ -55,7 +55,7 @@ public class Index {
 	private static IASTNode indexIdExpression(IASTIdExpression node, VariableManager vm) {		
 		String name = ExpressionHelper.toString(node);
 		Variable var = vm.getVariable(name);	
-		if (var == null) return node;
+		if (var == null) return node;		
 		IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
 		IASTIdExpression newExp = factory.newIdExpression(nameId);	
 		return newExp;
@@ -66,7 +66,7 @@ public class Index {
 	private static IASTNode indexVariable(IASTIdExpression node, VariableManager vm) {
 		String name = ExpressionHelper.toString(node);
 		Variable var = vm.getVariable(name);
-		if (var == null) return node;
+		if (var == null || (var.getIndex() == -3)) return node;
 		var.increase();
 		IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
 		IASTIdExpression newNode = factory.newIdExpression(nameId);	

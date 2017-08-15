@@ -139,10 +139,15 @@ public class VtseCFG extends ControlFlowGraph {
 		// (declare-fun a_0 () Int)
 		for (Variable var: vm.getVariableList()) {
 			lastIndex = var.getIndex();
+			if (lastIndex == -3) {
+				printStream.println("(declare-fun " + var.getName() + 
+						" () "+ SMTTypeConvertion.getSMTType(var.getType()) +")");
+			}
 			for (int i = 0; i <= lastIndex; i++) {
 				printStream.println("(declare-fun " + var.getName() + "_" + i + 
 										" () "+ SMTTypeConvertion.getSMTType(var.getType()) +")");
 			}
+			
 		}
 		
 //		if (!returnType.equals("void")) {

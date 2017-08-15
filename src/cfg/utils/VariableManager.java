@@ -198,7 +198,7 @@ public class VariableManager {
 			for (IASTNode param : call.getArguments()) {
 				params += "_" + param.toString();
 			}
-			var = new Variable(call.getExpressionType().toString(), callName + params, -1);
+			var = new Variable(call.getExpressionType().toString(), callName + params, -3);
 			list.add(var);
 		}
 		// return

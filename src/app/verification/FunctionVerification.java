@@ -118,17 +118,18 @@ public class FunctionVerification {
 		List<String> constraints = new ArrayList<>();
 		UserInput userInput = new UserInput();
 		ArrayList<Variable> params = cfg.getInitVariables();
-		params.add(cfg.getReturn());
+		params.add(new Variable(cfg.getTypeFunction(), "return"));
 		userInput.setParameter(params);
 		
 		// add pre-condition
 		if (preCondition != null && !preCondition.equals("")) {
-			constraintTemp = userInput.createUserAssertion(preCondition);
+			constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
 			constraints.add(constraintTemp);
 		}
 		
 		// add user's assertion
-		constraintTemp = userInput.createUserAssertion(postCondition);
+		constraintTemp = userInput.createUserAssertion(postCondition,cfg.getNameFunction());
+		System.err.println(constraintTemp);
 		constraintTemp = "(not " + constraintTemp + ")";
 		constraints.add(constraintTemp);
 		

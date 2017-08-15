@@ -47,8 +47,9 @@ public class Variable {
 	public void increase() {
 		index++;
 	}
-	
+	// -3 danh dau bien nhan gia tri tra ve cua ham
 	public String getVariableWithIndex() {
+		if (index == -3) return name;
 		return name + "_" + index;
 	}
 	

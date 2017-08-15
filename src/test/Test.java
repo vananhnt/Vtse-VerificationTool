@@ -13,7 +13,7 @@ import cfg.build.VtseCFG;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./test.c");
+		ASTGenerator ast = new ASTGenerator("./float-cdfpl/newton_1_1_true_unreach_call.c");
 	
 		//ast.print();
 	
@@ -24,7 +24,7 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(ast.getMain(), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 		
 		cfg.unfold();
 		cfg.index();
@@ -34,6 +34,7 @@ public class Test {
 		//System.out.println(cfg.getVm().getVariable("return_" + cfg.getNameFunction()).toString());
 		//cfg.getVm().printList();
 		PrintStream out = new PrintStream(new File("./smt.txt"));
+		
 		cfg.printSMTFormula(out);
 	}
 }

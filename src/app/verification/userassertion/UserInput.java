@@ -50,6 +50,28 @@ public class UserInput {
 		
         return assertion;
 	}
+	public String createUserAssertion(String input, String funcName) {
+		
+		this.input = input;
+		
+		preProcess();
+		
+		String prefix = InfixToPrefix.infixToPrefix(this.input);
+		
+		mathElements = prefix.split(" ");
+		
+		for (String str: mathElements) {
+			System.out.println("str: " + str);
+		}
+		
+		addParenthesis();
+		
+		addIndexForParameter(funcName);
+		
+		postReplace();
+		
+        return assertion;
+	}
 
 	
 	public UserInput setParameter(List<Variable> parameters) {
@@ -81,6 +103,34 @@ public class UserInput {
 				
 				old = String.format(" %s\\)", v.getName());
 				replacement = String.format(" %s_0\\)", v.getName());
+				assertion = assertion.replaceAll(old, replacement);
+			//}
+		}
+	}
+	private void addIndexForParameter(String funcName) {
+		if (mathElements == null || parameters == null)
+			return;
+		int length = mathElements.length;
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < parameters.size(); j++) {
+				if (parameters.get(j).getName().equals(mathElements[i]) &&
+						!mathElements[i].equalsIgnoreCase("return") ) {
+					mathElements[i] = mathElements[i] + "_" + funcName + "_0";
+				}
+			}
+			
+		}
+	
+		String old;
+		String replacement;
+		for (Variable v: parameters) {
+			//if (!v.getName().equals("return")) {
+				old = " " + v.getName() + " ";
+				replacement = " " + v.getName() + "_" + funcName+ "_0" + " ";
+				assertion = assertion.replaceAll(old, replacement);
+				
+				old = String.format(" %s\\)", v.getName());
+				replacement = String.format(" %s_0\\)", v.getName()+ "_" + funcName);
 				assertion = assertion.replaceAll(old, replacement);
 			//}
 		}
@@ -202,7 +252,7 @@ public class UserInput {
         String output;
         UserInput theTrans = new UserInput(input);
         theTrans.setParameter(parameters);
-        output = theTrans.createUserAssertion(input); 
+        output = theTrans.createUserAssertion(input, "main"); 
         System.out.println("prefix is " + output + '\n');
     }
 	
