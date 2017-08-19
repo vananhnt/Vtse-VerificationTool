@@ -13,7 +13,7 @@ import cfg.build.VtseCFG;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./test.c");
+		ASTGenerator ast = new ASTGenerator("./bai1.cpp");
 	
 		//ast.print();
 	

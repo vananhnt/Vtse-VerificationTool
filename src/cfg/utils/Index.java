@@ -25,8 +25,8 @@ import cfg.build.ASTGenerator;
  *
  */
 public class Index {
-	private static CPPNodeFactory factory = (CPPNodeFactory) (new ASTGenerator()).getTranslationUnit() .getASTNodeFactory(); 
-	
+	//private static CPPNodeFactory factory = (CPPNodeFactory) (new ASTGenerator()).getTranslationUnit() .getASTNodeFactory(); 
+	private static CPPNodeFactory factory = new CPPNodeFactory();
 	public static IASTNode index(IASTNode node, VariableManager vm) {
 		if (node instanceof IASTDeclarationStatement) {
 			node = indexDeclarationStatement((IASTDeclarationStatement) node, vm); //cau lenh khoi tao
