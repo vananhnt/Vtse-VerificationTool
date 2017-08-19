@@ -13,6 +13,7 @@ public class Report {
 	private List<Variable> listParameter;
 	private VerificationReport report;
 	private List<String> result; // result of running solver
+	private String functionName;
 	
 	/**
 	 * @return the listParameter
@@ -119,7 +120,7 @@ public class Report {
 		
 	    i = begin;
     	while (i <= end) {
-    		if (result.get(i).indexOf("return_0") >= 0) {
+    		if (result.get(i).indexOf("return_" + functionName + "_0") >= 0) {
     			String valueStr = "";
     			i++;
     			while (i <= end && !result.get(i).contains("define-fun")) {
@@ -212,5 +213,9 @@ public class Report {
 		report.setListParameter(listParameter);
 		VerificationReport verificationReport= report.generateReport(list);
 		verificationReport.print();
+	}
+
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
 	}
 }

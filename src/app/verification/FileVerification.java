@@ -94,11 +94,11 @@ public class FileVerification {
 			System.err.println("-Method name: " + am.getMethodName());
 			for (IASTFunctionDefinition function: listFunction) {
 				String functionName = getFunctionName(function);
-				System.err.println("function name: " + functionName);
+//				System.err.println("function name: " + functionName);
 				if (functionName.equals(am.getMethodName())) {
 					try {
 						long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-						System.err.println("function: " + functionName);
+//						System.err.println("function: " + functionName);
 						report = mv.verify(ast,function, am.getPreCondition(), am.getPostCondition());
 						if (report != null) {
 							reportList.add(report);

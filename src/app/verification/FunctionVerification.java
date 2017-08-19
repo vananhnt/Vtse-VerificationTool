@@ -125,6 +125,7 @@ public class FunctionVerification {
 		if (preCondition != null && !preCondition.equals("")) {
 			constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
 			constraints.add(constraintTemp);
+			System.err.println(constraintTemp);
 		}
 		
 		// add user's assertion
@@ -147,6 +148,7 @@ public class FunctionVerification {
 	    result.forEach(System.out::println);
 	    Report report = new Report();
 	    report.setListParameter(cfg.getInitVariables());
+	    report.setFunctionName(cfg.getNameFunction());
 	    VerificationReport verReport = report.generateReport(result);
 	    verReport.setFunctionName(cfg.getNameFunction());
 	    verReport.setGenerateConstraintTime((int)(end-begin));

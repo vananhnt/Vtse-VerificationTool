@@ -17,8 +17,11 @@ public class TestVerification {
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
 		FileVerification fv = new FileVerification();
 		
-		List<VerificationReport> reportList = fv.verify(new File("float-cdfpl/newton_1_2_true_unreach_call.c"));
+		List<VerificationReport> reportList = fv.verify(new File("float-cdfpl/newton_1_4_false_unreach_call.c"));
 		
+		for (VerificationReport report: reportList) {
+			System.err.println(report.getCounterEx());
+		}
 		
 //		File file = new File("TestSpoon.java");
 //		

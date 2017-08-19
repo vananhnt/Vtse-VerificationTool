@@ -38,13 +38,15 @@ public class UserInput {
 		
 		mathElements = prefix.split(" ");
 		
-		for (String str: mathElements) {
-			System.out.println("str: " + str);
-		}
+//		for (String str: mathElements) {
+//			System.out.println("str: " + str);
+//		}
+		
+		addIndexForParameter();
 		
 		addParenthesis();
 		
-		addIndexForParameter();
+		replaceParameters();
 		
 		postReplace();
 		
@@ -60,13 +62,15 @@ public class UserInput {
 		
 		mathElements = prefix.split(" ");
 		
-		for (String str: mathElements) {
-			System.out.println("str: " + str);
-		}
+//		for (String str: mathElements) {
+//			System.out.println("str: " + str);
+//		}
+		
+		addIndexForParameter(funcName);
 		
 		addParenthesis();
 		
-		addIndexForParameter(funcName);
+		replaceParameters(funcName);
 		
 		postReplace();
 		
@@ -92,7 +96,22 @@ public class UserInput {
 			}
 			
 		}
+	}
+	private void addIndexForParameter(String funcName) {
+		if (mathElements == null || parameters == null)
+			return;
+		int length = mathElements.length;
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < parameters.size(); j++) {
+				if (parameters.get(j).getName().equals(mathElements[i] + "_" + funcName) &&
+						!mathElements[i].equalsIgnoreCase("return") ) {
+					mathElements[i] = mathElements[i] + "_" + funcName + "_0";
+				}
+			}
+		}
+	}
 	
+	private void replaceParameters() {
 		String old;
 		String replacement;
 		for (Variable v: parameters) {
@@ -107,30 +126,18 @@ public class UserInput {
 			//}
 		}
 	}
-	private void addIndexForParameter(String funcName) {
-		if (mathElements == null || parameters == null)
-			return;
-		int length = mathElements.length;
-		for (int i = 0; i < length; i++) {
-			for (int j = 0; j < parameters.size(); j++) {
-				if (parameters.get(j).getName().equals(mathElements[i]) &&
-						!mathElements[i].equalsIgnoreCase("return") ) {
-					mathElements[i] = mathElements[i] + "_" + funcName + "_0";
-				}
-			}
-			
-		}
 	
+	private void replaceParameters(String functionName) {
 		String old;
 		String replacement;
 		for (Variable v: parameters) {
 			//if (!v.getName().equals("return")) {
 				old = " " + v.getName() + " ";
-				replacement = " " + v.getName() + "_" + funcName+ "_0" + " ";
+				replacement = " " + v.getName() + "_" + functionName + "_0" + " ";
 				assertion = assertion.replaceAll(old, replacement);
 				
 				old = String.format(" %s\\)", v.getName());
-				replacement = String.format(" %s_0\\)", v.getName()+ "_" + funcName);
+				replacement = String.format(" %s_0\\)", v.getName() + "_" + functionName);
 				assertion = assertion.replaceAll(old, replacement);
 			//}
 		}
@@ -201,7 +208,7 @@ public class UserInput {
 		}
 		
 		assertion = mathElements[0];
-		System.out.println("assertion: " + assertion);
+//		System.out.println("assertion: " + assertion);
 	}
 	
 	private String getType(String operand) {
@@ -209,7 +216,7 @@ public class UserInput {
 			return "";
 		
 		String type = "";
-		System.out.println("operand: " + operand);
+//		System.out.println("operand: " + operand);
 		
 		for (int i = 0; i < parameters.size(); i++) {
 			if ( parameters.get(i).getName().equals(operand) ) {
