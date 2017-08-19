@@ -17,10 +17,15 @@ public class ExportExcel {
 	static WritableWorkbook workbook = null;
 	static WritableSheet sheet = null;
 	
+	public ExportExcel() throws IOException {
+		workbook = Workbook.createWorkbook(new File("VTSE Report.xls"));
+		sheet = workbook.createSheet("floats-cdfpl", 0);
+	}
+	
 	//TODO constructor for new export
-	ExportExcel(String fileName) throws IOException {
+	public ExportExcel(String fileName) throws IOException {
 		if (fileName.equals("")) {
-			fileName = "VTSE Export";
+			fileName = "VTSE Export.xls";
 		}
 		workbook = Workbook.createWorkbook(new File(fileName));
 		sheet = workbook.createSheet("floats-cdfpl", 0);
@@ -35,7 +40,7 @@ public class ExportExcel {
 	 * @throws RowsExceededException
 	 * @throws WriteException
 	 */
-	public static void writeExcel(ArrayList<VerificationReport> listOfRows) 
+	public void writeExcel(ArrayList<VerificationReport> listOfRows) 
 			throws IOException, RowsExceededException, WriteException{
 		
 		try {
@@ -70,14 +75,14 @@ public class ExportExcel {
 				memoryUsage = "unknown";
 				counterEx = row.getCounterEx();
 				
-				sheet.addCell(new Label(0, k, String.valueOf(numberOfRow++)));
-				sheet.addCell(new Label(1, k, function));
-				sheet.addCell(new Label(2, k, preCondition));
-				sheet.addCell(new Label(3, k, postCondition));
-				sheet.addCell(new Label(4, k, status));
-				sheet.addCell(new Label(5, k, String.valueOf(cpuTime)));
-				sheet.addCell(new Label(6, k, memoryUsage));
-				sheet.addCell(new Label(7, k, counterEx, cellFormat));
+				sheet.addCell(new Label(0, numberOfRow, String.valueOf(numberOfRow++)));
+				sheet.addCell(new Label(1, numberOfRow, function));
+				sheet.addCell(new Label(2, numberOfRow, preCondition));
+				sheet.addCell(new Label(3, numberOfRow, postCondition));
+				sheet.addCell(new Label(4, numberOfRow, status));
+				sheet.addCell(new Label(5, numberOfRow, String.valueOf(cpuTime)));
+				sheet.addCell(new Label(6, numberOfRow, memoryUsage));
+				sheet.addCell(new Label(7, numberOfRow, counterEx, cellFormat));
 				numberOfRow++;
 //		
 			

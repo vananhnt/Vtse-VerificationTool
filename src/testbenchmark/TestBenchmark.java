@@ -21,10 +21,10 @@ public class TestBenchmark {
 			System.exit(1);
 		}
 		
-		ExportExcel.init();
+		ExportExcel exportExcel = new ExportExcel();
 		File file = new File(args[0]);
 		FileVerification fv = new FileVerification();
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
-		ExportExcel.write();
+		exportExcel.writeExcel(reportList);
 	}
 }
