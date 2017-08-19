@@ -2,32 +2,23 @@ package test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.activation.MimeType;
 import javax.activation.MimetypesFileTypeMap;
 
 import app.verification.ExportExcel;
 import app.verification.FileVerification;
+import app.verification.report.VerificationReport;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 public class TestVerification {
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
 		FileVerification fv = new FileVerification();
-		ExportExcel.init();
-		try {
-			fv.verify(new File("float-cdfpl/newton_1_2_true_unreach_call.c"));
-		} catch (RowsExceededException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (WriteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ExportExcel.write();
+		
+		List<VerificationReport> reportList = fv.verify(new File("float-cdfpl/newton_1_2_true_unreach_call.c"));
+		
 		
 //		File file = new File("TestSpoon.java");
 //		

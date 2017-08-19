@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.callback.LanguageCallback;
-
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.internal.core.model.FunctionDeclaration;
-
 import app.verification.report.VerificationReport;
 import app.verification.userassertion.AssertionMethod;
 import cfg.build.ASTGenerator;
@@ -26,40 +22,36 @@ public class FileVerification {
 		
 	}
 	
-	public void verifyDirectory(File directory) throws WriteException, IOException {
+	public List<VerificationReport> verifyDirectory(File directory) throws WriteException, IOException {
+		List<VerificationReport> reportList = new ArrayList<>();
+		List<VerificationReport> reports;
 		
 		if (directory == null) {
-			return;
+			return reportList;
 		}
 		else if (directory.isDirectory()) {
 			File[] files = directory.listFiles();
 			
 			for (File f: files) {
-				verifyDirectory(f);
+				reports = verifyDirectory(f);
+				reportList.addAll(reports);
 			}
 		}
 		else {
-			try {
-				verify(directory);
-			} catch (RowsExceededException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (WriteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			reports = verify(directory);
+			reportList.addAll(reports);
 		}
 		
+		return reportList;
 	}
 	
-	public void verify(File file) 
-			throws RowsExceededException, WriteException, IOException {
+	public List<VerificationReport> verify(File file) {
+		
+		List<VerificationReport> reportList = new ArrayList<>();
+		
 		if (file == null) {
 			System.out.println("file is null");
-			return;
+			return reportList;
 		}
 		
 		String filePath = file.getAbsolutePath();
@@ -71,7 +63,7 @@ public class FileVerification {
 		
 		if (CPPFilename == null) {
 			System.out.println("not cpp file");
-			return;
+			return reportList;
 		}
 		else {
 			PPPathFile = CPPFilename + PP_FILE_TAG;
@@ -90,14 +82,13 @@ public class FileVerification {
 		File PPFile = new File(PPPathFile);
 		if (!PPFile.exists()) {
 			System.err.println("file is not exist: " + PPPathFile);
-			return;
+			return null;
 		}
 		
 		List<AssertionMethod> listAssertion = AssertionMethod.getUserAssertions(PPFile);
 		
 		VerificationReport report;
 		
-		int id = 1;
 		for (AssertionMethod am: listAssertion) {
 			System.err.println("***Verification report:");
 			System.err.println("-Method name: " + am.getMethodName());
@@ -109,12 +100,10 @@ public class FileVerification {
 						long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 						System.err.println("function: " + functionName);
 						report = mv.verify(ast,function, am.getPreCondition(), am.getPostCondition());
+						if (report != null) {
+							reportList.add(report);
+						}
 						long end = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-						ExportExcel.add(report.getFunctionName(), report.getPreCondition(), report.getPostCondition(), 
-								report.getStatus(), String.valueOf((double) (report.getSolverTime()/1000.0) + (double) (report.getGenerateConstraintTime()/1000.0)),
-								"unknown", report.getCounterEx());
-						report.print();
-						id++;
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -122,6 +111,8 @@ public class FileVerification {
 			}
 			
 		}
+		
+		return reportList;
 		
 	}
 	
