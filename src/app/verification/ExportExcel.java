@@ -3,6 +3,8 @@ package app.verification;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import app.verification.report.VerificationReport;
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -35,12 +37,12 @@ public class ExportExcel {
 	
 	/**
 	 * new export excel for each row in excel file
-	 * @param listOfRows
+	 * @param reportList
 	 * @throws IOException
 	 * @throws RowsExceededException
 	 * @throws WriteException
 	 */
-	public void writeExcel(ArrayList<VerificationReport> listOfRows) 
+	public void writeExcel(List<VerificationReport> reportList) 
 			throws IOException, RowsExceededException, WriteException{
 		
 		try {
@@ -58,7 +60,7 @@ public class ExportExcel {
 			sheet.addCell(new Label(6, 3, "memUsage (MB)"));
 			
 			//TODO: add element to excel export
-			for(VerificationReport row: listOfRows) {
+			for(VerificationReport row: reportList) {
 			
 				String function = null, preCondition = null, postCondition = null;
 				String status = null, memoryUsage = null, counterEx = null;

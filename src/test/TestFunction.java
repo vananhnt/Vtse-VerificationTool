@@ -12,6 +12,7 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import app.solver.SMTInput;
 import app.verification.FunctionVerification;
+import app.verification.report.VerificationReport;
 import app.verification.userassertion.UserInput;
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
@@ -24,7 +25,8 @@ public class TestFunction {
 		
 		FunctionVerification functionVerification = new FunctionVerification();
 		try {
-			functionVerification.verify(function, "", "");
+			VerificationReport report = functionVerification.verify(function, "", "");
+			System.out.println(report.getCounterEx());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
