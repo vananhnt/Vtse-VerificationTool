@@ -99,9 +99,9 @@ public class ControlFlowGraph {
 	 * Dung de unfold graph
 	 * @return
 	 */
-	public ControlFlowGraph unfold() {
-		UnfoldCFG unfoldCfg = new UnfoldCFG(this);
-		return new ControlFlowGraph(unfoldCfg.getStart(), unfoldCfg.getExit());
+	public void unfold() {
+		UnfoldCFG unfoldCfg = new UnfoldCFG();
+		unfoldCfg.generate(this);
 	}
 	
 	/**
