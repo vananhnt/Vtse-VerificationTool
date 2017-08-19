@@ -55,7 +55,7 @@ public class UnfoldCFG {
 		this.start = start;
 	}
 
-	private void generate(ControlFlowGraph otherCfg) {
+	public void generate(ControlFlowGraph otherCfg) {
 		try {
 			start = iterateNode(otherCfg.getStart());
 			} catch (Exception e) {

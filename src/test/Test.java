@@ -13,7 +13,7 @@ import cfg.build.VtseCFG;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./float-cdfpl/newton_1_1_true_unreach_call.c");
+		ASTGenerator ast = new ASTGenerator("./test.c");
 	
 		//ast.print();
 	
@@ -29,7 +29,7 @@ public class Test {
 		cfg.unfold();
 		cfg.index();
 		cfg.printGraph();
-		//cfg.printFormular(System.out);
+		cfg.printFormular(System.out);
 		//System.out.println("return_" + cfg.getNameFunction());
 		//System.out.println(cfg.getVm().getVariable("return_" + cfg.getNameFunction()).toString());
 		//cfg.getVm().printList();
