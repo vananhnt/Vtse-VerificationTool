@@ -1,5 +1,5 @@
 
-int main(float IN)
+int square_8_true_unreach_call(float IN)
 {
   float x = IN;
   
