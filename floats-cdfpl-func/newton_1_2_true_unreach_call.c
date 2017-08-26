@@ -8,7 +8,7 @@ float fp(float x)
   return 1 - (x*x)/2.0 + (x*x*x*x)/24.0 + (x*x*x*x*x*x)/720.0;
 }
 
-int newton_1_2_true_unreach_call(float IN)
+double newton_1_2_true_unreach_call(float IN)
 {
   float ITERATIONS = 1;
   float x = IN - f(IN)/fp(IN);
@@ -18,5 +18,5 @@ int newton_1_2_true_unreach_call(float IN)
       x = x - f(x)/fp(x);
     }
   }
-  return 0;
+  return x;
 }

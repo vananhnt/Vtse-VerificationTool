@@ -22,7 +22,7 @@ public class TestBenchmark {
 		}
 		
 		ExportExcel exportExcel = new ExportExcel();
-		File file = new File(args[0]);
+		File file = new File("./floats-cdfpl-func");
 		FileVerification fv = new FileVerification();
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

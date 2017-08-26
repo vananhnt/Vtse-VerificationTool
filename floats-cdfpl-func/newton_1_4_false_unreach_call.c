@@ -8,15 +8,15 @@ float fp(float x)
   return 1 - (x*x)/2.0 + (x*x*x*x)/24.0 + (x*x*x*x*x*x)/720.0;
 }
 
-int newton_1_4_false_unreach_call(float IN)
+double newton_1_4_false_unreach_call(float IN)
 {
-
-  float x = IN - f(IN)/fp(IN);
-  if (ITERATIONS > 1) {
-    x = x - f(x)/fp(x);
-    if (ITERATIONS > 2) {
-      x = x - f(x)/fp(x);
-    }
-  }
-  return 0;
+	 float ITERATIONS = 1;
+	  float x = IN - f(IN)/fp(IN);
+	  if (ITERATIONS > 1) {
+	    x = x - f(x)/fp(x);
+	    if (ITERATIONS > 2) {
+	      x = x - f(x)/fp(x);
+	    }
+	  }
+	  return x;
 }
