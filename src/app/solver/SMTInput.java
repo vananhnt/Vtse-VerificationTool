@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.List;
 
@@ -76,6 +77,10 @@ public class SMTInput {
 		String smtType;
 		for (Variable v: variableList) {
 			smtType = getSMTType(v.getType());
+			// TODO changed
+//			if (v.getIndex() == -3){
+//				out.append("(declare-fun " + v.getName() +  " () " + smtType + ")\n");
+//			}
 			if (v.hasInitialized()) {
 				
 				System.out.println("v: " + v);

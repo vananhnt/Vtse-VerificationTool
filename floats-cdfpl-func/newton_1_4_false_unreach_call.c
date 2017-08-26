@@ -10,7 +10,7 @@ float fp(float x)
 
 int newton_1_4_false_unreach_call(float IN)
 {
-  float ITERATIONS = 1;
+
   float x = IN - f(IN)/fp(IN);
   if (ITERATIONS > 1) {
     x = x - f(x)/fp(x);

@@ -25,7 +25,7 @@ public class TestFunction {
 		
 		FunctionVerification functionVerification = new FunctionVerification();
 		try {
-			VerificationReport report = functionVerification.verify(function, "", "");
+			VerificationReport report = functionVerification.verify(ast, function, "", "");
 			System.out.println(report.getCounterEx());
 		} catch (IOException e) {
 			e.printStackTrace();

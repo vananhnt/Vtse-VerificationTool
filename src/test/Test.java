@@ -6,6 +6,7 @@ import java.io.PrintStream;
 
 import cfg.build.ASTGenerator;
 import cfg.build.VtseCFG;
+import cfg.utils.Variable;
 
 /**
  * @author va
@@ -13,7 +14,7 @@ import cfg.build.VtseCFG;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./bai1.cpp");
+		ASTGenerator ast = new ASTGenerator("./floats-cdfpl-func/newton_1_4_false_unreach_call.c");
 	
 		//ast.print();
 	
@@ -24,17 +25,19 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction("newton_1_4_false_unreach_call"), ast);
 		
 		cfg.unfold();
 		cfg.index();
 		cfg.printGraph();
-		cfg.printFormular(System.out);
+		//cfg.printSMTFormula(System.out);
+		//cfg.printFormular(System.out);
+		//cfg.getVm().printList();
 		//System.out.println("return_" + cfg.getNameFunction());
 		//System.out.println(cfg.getVm().getVariable("return_" + cfg.getNameFunction()).toString());
 		//cfg.getVm().printList();
-		PrintStream out = new PrintStream(new File("./smt.txt"));
+		//PrintStream out = new PrintStream(new File("./smt.txt"));
 		
-		cfg.printSMTFormula(out);
+	//	cfg.printSMTFormula(out);
 	}
 }

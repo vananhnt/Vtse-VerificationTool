@@ -138,8 +138,12 @@ public class FunctionVerification {
 		
 		long end = System.currentTimeMillis();
 		
-		String functionName = cfg.getNameFunction();
+		String functionName = cfg.getNameFunction();		
 		String path = SMTINPUT_DIR + functionName + ".smt";
+		
+		System.err.println("    0.o   " + path);
+		
+		
 		FileOutputStream fo = new FileOutputStream(new File(path));
 	    smtInput.printInputToOutputStream(fo);
 	    
