@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-import cfg.build.ASTGenerator;
+import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import cfg.utils.Variable;
 
@@ -14,7 +14,7 @@ import cfg.utils.Variable;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTGenerator ast = new ASTGenerator("./floats-cdfpl-func/sine_1_false_unreach_call.c");
+		ASTFactory ast = new ASTFactory("./testFunc.cpp");
 	
 		//ast.print();
 	
@@ -25,12 +25,15 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(ast.getFunction("sine_1_false_unreach_call"), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
 		
 		cfg.unfold();
 		cfg.index();
-		//cfg.printGraph();
-		cfg.printSMTFormula(System.out);
+		cfg.printGraph();
+		cfg.printMeta();
+		
+		//cfg.printSMTFormula(System.out);
+		//cfg.getVm().printList();
 		//cfg.printFormular(System.out);
 		//cfg.getVm().printList();
 		//System.out.println("return_" + cfg.getNameFunction());

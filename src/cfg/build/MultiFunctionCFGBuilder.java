@@ -36,10 +36,10 @@ import cfg.utils.VariableHelper;
  */
 
 public class MultiFunctionCFGBuilder {
-	private ASTGenerator ast;
+	private ASTFactory ast;
 
 	public MultiFunctionCFGBuilder() {}
-	public MultiFunctionCFGBuilder(ASTGenerator ast) {
+	public MultiFunctionCFGBuilder(ASTFactory ast) {
 		this.ast = ast;
 
 	}

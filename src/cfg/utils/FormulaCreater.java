@@ -14,7 +14,7 @@ import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 
-import cfg.build.ASTGenerator;
+import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
@@ -210,14 +210,14 @@ public class FormulaCreater {
 	}
 	
 	public static void main(String[] args) {
-		ASTGenerator ast = new ASTGenerator("./TestInput.c");
+		ASTFactory ast = new ASTFactory("./TestInput.c");
 		IASTFunctionDefinition func = ast.getFunction(0);
 		VtseCFG cfg = new VtseCFG(func);
 		cfg.index();
 		cfg.unfold();
 		System.out.println(create(cfg.getStart(), cfg.getExit()));
 	}
-	public static String createFuncCallFormula(IASTFunctionCallExpression funcCall, ASTGenerator ast) {
+	public static String createFuncCallFormula(IASTFunctionCallExpression funcCall, ASTFactory ast) {
 		
 		return null;
 	}

@@ -8,7 +8,7 @@ import java.util.List;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import app.verification.report.VerificationReport;
 import app.verification.userassertion.AssertionMethod;
-import cfg.build.ASTGenerator;
+import cfg.build.ASTFactory;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
@@ -69,7 +69,7 @@ public class FileVerification {
 			PPPathFile = CPPFilename + PP_FILE_TAG;
 		}
 		
-		ASTGenerator ast = new ASTGenerator(filePath);
+		ASTFactory ast = new ASTFactory(filePath);
 		
 		
 		ArrayList<IASTFunctionDefinition> listFunction = ast.getListFunction();

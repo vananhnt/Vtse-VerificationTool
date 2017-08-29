@@ -26,12 +26,12 @@ import cfg.utils.FunctionHelper;
  * @author va
  *
  */
-public class ASTGenerator {
+public class ASTFactory {
 
 	private static IASTTranslationUnit translationUnit;
 	private String filelocation = "./test.c";
 	
-	public ASTGenerator() {
+	public ASTFactory() {
 		FileContent fileContent = FileContent.createForExternalFileLocation(filelocation);
 		IncludeFileContentProvider includeFile = IncludeFileContentProvider.getEmptyFilesProvider();
 		IParserLogService log = new DefaultLogService(); 
@@ -45,7 +45,7 @@ public class ASTGenerator {
 		}
 	}  
 	
-	public ASTGenerator(String filelocation) {
+	public ASTFactory(String filelocation) {
 		FileContent fileContent = FileContent.createForExternalFileLocation(filelocation);
 		IncludeFileContentProvider includeFile = IncludeFileContentProvider.getEmptyFilesProvider();
 		IParserLogService log = new DefaultLogService(); 

@@ -2,6 +2,7 @@ package cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
+import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
@@ -18,7 +19,7 @@ import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import cfg.build.ASTGenerator;
+import cfg.build.ASTFactory;
 
 /**
  * @author va
@@ -82,7 +83,11 @@ public class Index {
 		}
 		return binaryOp;
 	}
-
+	/**
+	 * chuyen doi cac toan tu dac biet
+	 * @param node
+	 * @return
+	 */
 	private static IASTExpression changeUnarytoBinary(IASTUnaryExpression node) {
 		IASTExpression operand = ((IASTUnaryExpression)node).getOperand().copy();		
 		int operator = changeOperator(node.getOperator());		
@@ -103,7 +108,7 @@ public class Index {
 	/** 
 	 * @param node
 	 * @param vm
-	 * @return
+	 * @return bieu thuc don da duoc danh chi so
 	 */
 	private static IASTNode indexIASTBinaryExpression(IASTBinaryExpression node, VariableManager vm) {
 		boolean isAssignment = (node.getOperator() == IASTBinaryExpression.op_assign);
@@ -127,9 +132,12 @@ public class Index {
 		return  newNode;	
 	}
 
-/*
- * neu khoi tao trong for
- */
+	/**
+	 * danh chi so danh rieng cho khoi tao trong for
+	 * @param node
+	 * @param vm
+	 * @return node moi
+	 */
 	public static IASTNode resetIndex(IASTDeclarationStatement node, VariableManager vm) {		
 		String name = "";
 		String type = null;
@@ -161,18 +169,22 @@ public class Index {
 		return newNode;
 	}
 	
-/*
- *  note...
- *  neu co khoi tao moi tang index
- */
+	/**
+	 * danh chi so cho cau lenh khoi tao
+	 * @param statement
+	 * @param vm
+	 * @return
+	 */
 	private static IASTNode indexDeclarationStatement(IASTDeclarationStatement statement, VariableManager vm) {		
 		String name = "";
 		String type = null;
 		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) statement.getDeclaration().copy();
 		for (IASTNode run : simpleDecl.getChildren()){
+			// type
 			if (run instanceof IASTDeclSpecifier) {
 				type = run.toString();
 			}
+			
 			if (run instanceof IASTDeclarator){				
 				IASTEqualsInitializer init = (IASTEqualsInitializer) (((IASTDeclarator) run).getInitializer());
 				if (init != null){				
@@ -181,15 +193,17 @@ public class Index {
 				}		
 				IASTName nameVar = ((IASTDeclarator) run).getName();
 				name = nameVar.toString();					
-				
 				Variable var = vm.getVariable(name);
-				var.increase();
+					
+				// xu ly rieng cho bien cuc bo duoc khoi tao trong ham con
+				if (var.getIsDuplicated() == true){
+					var.increase();
+				}
 				if (var == null) return statement;				
 				IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
 				((IASTDeclarator) run).setName(nameId);					
 			}
-		}
-	
+		}	
 		IASTDeclarationStatement newNode = factory.newDeclarationStatement(simpleDecl);			
 		return newNode;
 	}

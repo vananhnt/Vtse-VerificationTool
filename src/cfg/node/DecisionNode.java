@@ -157,7 +157,7 @@ public class DecisionNode extends CFGNode {
 			thenVar = thenVM.getVariable(i);
 			elseVar = elseVM.getVariable(i);	
 			
-			if (thenVar.getIndex() < elseVar.getIndex()) {
+			if (thenVar.getIndex() < elseVar.getIndex() ) {
 				rightHand = thenVar.getVariableWithIndex();
 				thenVar.setIndex(elseVar.getIndex());
 				leftHand = thenVar.getVariableWithIndex();				

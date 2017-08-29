@@ -14,7 +14,7 @@ import app.solver.Z3Runner;
 import app.verification.report.Report;
 import app.verification.report.VerificationReport;
 import app.verification.userassertion.UserInput;
-import cfg.build.ASTGenerator;
+import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import cfg.utils.Variable;
 
@@ -99,7 +99,7 @@ public class FunctionVerification {
 		
 		return verReport;
 	}
-	public VerificationReport verify(ASTGenerator ast, IASTFunctionDefinition function, String preCondition, String postCondition) 
+	public VerificationReport verify(ASTFactory ast, IASTFunctionDefinition function, String preCondition, String postCondition) 
 			throws IOException {
 		
 		long begin = System.currentTimeMillis();

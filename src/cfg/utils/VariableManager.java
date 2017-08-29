@@ -11,20 +11,20 @@ import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 
-import cfg.build.ASTGenerator;
+import cfg.build.ASTFactory;
 
-/**
- * new VariableManager()
- * new VariableManager(IASTFunctionDefinition func)
- * build(IASTFunctionDefinition func): void
- * getVariableList() : ArrayList<Variable>
- * getVariable(int index) : Variable
- * getVariable(String name) : Variable
- * addVariable(Variable var) : void
- * addVariable(String type, String name, String funcName, int index) : void
- * @author va
- *
- */
+	/**
+	 * new VariableManager()
+	 * new VariableManager(IASTFunctionDefinition func)
+	 * build(IASTFunctionDefinition func): void
+	 * getVariableList() : ArrayList<Variable>
+	 * getVariable(int index) : Variable
+	 * getVariable(String name) : Variable
+	 * addVariable(Variable var) : void
+	 * addVariable(String type, String name, String funcName, int index) : void
+	 * @author va
+	 *
+	 */
 public class VariableManager {
 	private ArrayList<Variable> variableList;
 
@@ -36,26 +36,29 @@ public class VariableManager {
 		this.variableList = new ArrayList<>();
 		build(func);
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Variable> getVariableList() {
 		return variableList;
 	}
-	//TODO
-/*
- * note...
- * neu co khoi tao trong ham con
- * va bien thuoc loai declaration 
- */
+	/**
+	 * them bien moi vao day VariableManager 
+	 * luu y neu da co trong danh sach => danh dau isDuplicated == true;
+	 * @param otherVM
+	 */
 	public void concat(VariableManager otherVM ) {
 		ArrayList<Variable> otherList = otherVM.getVariableList();
 		for (Variable var : otherList) {
 			if (!(isHas(var.getName()))){
 				this.getVariableList().add(var);
-			} else if (isHas(var.getName()) && (var.getIndex() == -1)) {
-				//System.out.println(var.getName());
-				//var.setIndex(-2);
+			} else {
+				var.setIsDuplicated(true);
 			}
 		}
 	}
+	
 	public void setVariableList(ArrayList<Variable> variableList) {
 		this.variableList = variableList;
 	}
@@ -81,7 +84,11 @@ public class VariableManager {
 		}
 		return null;
 	} 
-	
+	/**
+	 * kiem tra xem bien truyen vao da co trong danh sach chua?	
+	 * @param name
+	 * @return true/ false
+	 */
 	public boolean isHas(String name){
 		if (this.variableList == null)	return false;
 		for (Variable var : this.variableList){
@@ -107,10 +114,8 @@ public class VariableManager {
 	}
 	
 	/**
-	 * Node: chi so cua them bien khi bat dau func la 0
-	 * Xet params, localVirable, return 
-	 * @param func
-	 * @return
+	 * tao variableList voi dau vao
+	 * @param a function
 	 */
 	void build(IASTFunctionDefinition func) {		
 		ArrayList<Variable> params = getParameters(func);
@@ -134,8 +139,10 @@ public class VariableManager {
 	
 		return var;
 	} 
-	/*
-	 * return List parameters  from function	
+	/**
+	 * tra ve danh sach tham so truyen vao ham
+	 * @param function
+	 * @return List Variable
 	 */
 	private ArrayList<Variable> getParameters(IASTFunctionDefinition func) {
 		ArrayList<Variable> params = new ArrayList<>();
@@ -161,8 +168,12 @@ public class VariableManager {
 		return params;
 	}
 
-	/*
-	 * return List local Variables from function
+	/**
+	 * 
+	 * @param node
+	 * @param funcName
+	 * @param list
+	 * @return danh sach bien dia phuong trong ham
 	 */
 	private ArrayList<Variable> getLocalVar(IASTNode node, String funcName, ArrayList<Variable> list){
 		// find init
@@ -182,12 +193,6 @@ public class VariableManager {
 			name = declarations[0].getName().getRawSignature();
 			
 			body = declarations[0].getChildren();			
-//			for (IASTNode iter : body){
-//				if (iter instanceof IASTEqualsInitializer){
-//					init = 0;
-//				}
-//			}
-				// add
 			var = new Variable(type, name + "_" + funcName, init);			
 			list.add(var);						
 		}

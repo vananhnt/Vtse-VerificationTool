@@ -14,13 +14,13 @@ import app.solver.SMTInput;
 import app.verification.FunctionVerification;
 import app.verification.report.VerificationReport;
 import app.verification.userassertion.UserInput;
-import cfg.build.ASTGenerator;
+import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import cfg.utils.Variable;
 
 public class TestFunction {
 	public static void main(String[] args) {
-		ASTGenerator ast = new ASTGenerator("./TestInput.c");
+		ASTFactory ast = new ASTFactory("./TestInput.c");
 		IASTFunctionDefinition function = ast.getFunction(0);
 		
 		FunctionVerification functionVerification = new FunctionVerification();

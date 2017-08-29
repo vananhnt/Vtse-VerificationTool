@@ -5,26 +5,36 @@ public class Variable {
 	private String type; 
 	private String name;
 	private int index = -1; //mac dinh -1
+	private boolean isDuplicated;
 	
 	public Variable() {}
 	
 	public Variable(String type, String name) {
 		this.type = type;
 		this.name = name;
+		this.isDuplicated = false;
 	}
 	
 	public Variable(String type, String name, int index) {
 		this.type = type;
 		this.name = name;
 		this.index = index;
+		this.isDuplicated = false;
 	}
 	
 	public Variable(Variable other) {
 		name = other.name;
 		type = other.type;
 		index = other.index;
+		isDuplicated = other.isDuplicated;
 	}
 	
+	public boolean getIsDuplicated(){
+		return isDuplicated;
+	}
+	public void setIsDuplicated(boolean restart){
+		this.isDuplicated = restart;
+	}
 	public String getType() {
 		return type;
 	}

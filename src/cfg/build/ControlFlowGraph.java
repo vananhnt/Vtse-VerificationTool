@@ -32,7 +32,7 @@ public class ControlFlowGraph {
 		this.exit = exit;
 	}		
 	
-	public ControlFlowGraph(IASTFunctionDefinition def, ASTGenerator ast) {
+	public ControlFlowGraph(IASTFunctionDefinition def, ASTFactory ast) {
 		ControlFlowGraph cfg = build(def, ast);
 		start = cfg.getStart();
 		exit = cfg.getExit();
@@ -62,7 +62,7 @@ public class ControlFlowGraph {
 		return (new ControlFlowGraphBuilder()).build(def);
 	}
 	
-	public ControlFlowGraph build (IASTFunctionDefinition def, ASTGenerator ast) {
+	public ControlFlowGraph build (IASTFunctionDefinition def, ASTFactory ast) {
 		MultiFunctionCFGBuilder multicfg = new MultiFunctionCFGBuilder(ast);
 		return multicfg.build(def);
 	}

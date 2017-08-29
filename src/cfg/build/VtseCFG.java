@@ -19,21 +19,23 @@ import cfg.utils.FunctionHelper;
 import cfg.utils.Variable;
 import cfg.utils.VariableManager;
 
-public class VtseCFG extends ControlFlowGraph {
-	//private IASTFunctionDefinition func;
+public class VtseCFG extends ControlFlowGraph {	
 	private VariableManager vm;
 	private String returnType;
 	
 	public VtseCFG() {
 		vm = new VariableManager();
 	}
+	
 	public VtseCFG(IASTFunctionDefinition func) {
 		super(func);
 		this.func = func;
 		vm = new VariableManager(func);
 		returnType = getReturnType();
 	}
-	
+	/**
+	 * @return kieu tra ve cua ham 
+	 */
 	private String getReturnType() {
 		if (func != null) {
 			IASTNode type = func.getDeclSpecifier();
@@ -41,7 +43,8 @@ public class VtseCFG extends ControlFlowGraph {
 		}
 		return "unIdentify";
 	}
-	public VtseCFG(IASTFunctionDefinition func, ASTGenerator ast) {
+	
+	public VtseCFG(IASTFunctionDefinition func, ASTFactory ast) {
 		super(func, ast);
 		vm = FunctionHelper.getVM(ast.getListFunction());	
 	}
@@ -75,7 +78,9 @@ public class VtseCFG extends ControlFlowGraph {
 		if (func == null) return null;		
 		return func.getDeclarator().getName().toString();
 	}
-	
+	/**
+	 * @return tham so dau vao cua ham
+	 */
 	public ArrayList<Variable> getInitVariables(){
 		if (this.func == null) return null;
 		ArrayList<Variable> varList = new ArrayList<>();
@@ -133,8 +138,7 @@ public class VtseCFG extends ControlFlowGraph {
 	}
 	
 	
-	public void printSMTFormula(PrintStream printStream) {
-		
+	public void printSMTFormula(PrintStream printStream) {		
 		int lastIndex;
 		// (declare-fun a_0 () Int)
 		for (Variable var: vm.getVariableList()) {
