@@ -48,11 +48,12 @@ public class ControlFlowGraph {
 	}
 	
 	public void concat(ControlFlowGraph other) {
-		if (start == null) {
+		if (start == null || exit == null) {
 			start = other.start;
 			exit = other.exit;
-		}
+		} 
 		else {
+			
 			exit.setNext(other.start);
 			exit = other.exit;
 		}

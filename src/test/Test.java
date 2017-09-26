@@ -25,7 +25,7 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction("transmit1"), ast);
 		
 		cfg.unfold();
 		cfg.index();
