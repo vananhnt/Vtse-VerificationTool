@@ -1,5 +1,8 @@
 package cfg.build;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCaseStatement;
@@ -19,6 +22,7 @@ import org.eclipse.cdt.core.dom.ast.IASTGotoStatement;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
 import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
+import org.eclipse.cdt.core.dom.ast.IASTLabelStatement;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
@@ -37,9 +41,12 @@ import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
 import cfg.node.FunctionCallNode;
+import cfg.node.GotoNode;
 import cfg.node.IterationNode;
+import cfg.node.LabelNode;
 import cfg.node.PlainNode;
 import cfg.node.ReturnNode;
+import cfg.node.UndefinedNode;
 import cfg.utils.astnode.ASTNodeFactory;
 
 /**
@@ -56,7 +63,8 @@ import cfg.utils.astnode.ASTNodeFactory;
  */
 
 public class ControlFlowGraphBuilder {
-
+	private ArrayList<GotoNode> gotoList = new ArrayList<>();
+	
 	public ControlFlowGraphBuilder() {}
 	
 	public ControlFlowGraph build(IASTFunctionDefinition def) {
@@ -96,7 +104,6 @@ public class ControlFlowGraphBuilder {
 		} else {
 			PlainNode plainNode = new PlainNode(statement);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
-
 		}
 		return cfg;
 	}
@@ -106,10 +113,17 @@ public class ControlFlowGraphBuilder {
 		ControlFlowGraph subCFG;
 		if (statement instanceof IASTCompoundStatement) {
 			IASTCompoundStatement comp = (IASTCompoundStatement) statement;
-			for (IASTStatement stmt : comp.getStatements()) {
-				subCFG = createSubGraph(stmt, def);
-				if (subCFG != null && cfg != null)
-					cfg.concat(subCFG);
+			//Xet truong hop compound rong
+			IASTStatement[] stmts = comp.getStatements();
+			if (stmts.length == 0) {
+				EmptyNode empty = new EmptyNode();
+				cfg = new ControlFlowGraph(empty, empty);
+			} else {
+				for (IASTStatement stmt : comp.getStatements()) {
+					subCFG = createSubGraph(stmt, def);
+					if (subCFG != null && cfg != null)
+						cfg.concat(subCFG);
+				}	
 			}
 		} else if (statement instanceof IASTIfStatement) {
 			cfg = createIf((IASTIfStatement) statement, def);
@@ -128,11 +142,40 @@ public class ControlFlowGraphBuilder {
 		} else if (statement instanceof IASTExpressionStatement) {
 			cfg = createExpressionStatement((IASTExpressionStatement) statement, def);
 		} else if (statement instanceof IASTGotoStatement) {
-			EmptyNode newNode = new EmptyNode();
-			cfg = (new ControlFlowGraph(newNode, newNode));
+			GotoNode newNode = new GotoNode((IASTGotoStatement) statement);
+			cfg = new ControlFlowGraph(newNode, newNode);
+			gotoList.add(newNode);
+		} else if (statement instanceof IASTLabelStatement) {
+			cfg = createGotoGraph((IASTLabelStatement) statement, def);
+		} else {
+			UndefinedNode undefined = new UndefinedNode(statement);
+			cfg = new ControlFlowGraph(undefined, undefined);
 		}
 		return cfg;
 	}
+	
+	
+	private ControlFlowGraph createGotoGraph(IASTLabelStatement statement, IASTFunctionDefinition def) {
+		ControlFlowGraph cfg = null;
+		LabelNode labelNode = new LabelNode(statement);
+		for (GotoNode go : gotoList) {
+			if (go.getLabelName().toString().equals(statement.getName().toString())) {
+				go.setNext(labelNode);
+				gotoList.remove(go);
+				break;
+			}
+		}
+		IASTStatement nested = statement.getNestedStatement();
+		ControlFlowGraph sub = createSubGraph(nested, def);
+		if (sub != null) {
+			labelNode.setNext(sub.getStart());
+			cfg = new ControlFlowGraph(labelNode, sub.getExit());
+		} else {
+			cfg = new ControlFlowGraph(labelNode, labelNode);
+		}
+		return cfg;
+	}
+
 	private ControlFlowGraph createReturnStatement(IASTReturnStatement statement, IASTFunctionDefinition def) {
 		CFGNode returnNode;
 		ControlFlowGraph cfg = null;

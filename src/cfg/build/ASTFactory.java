@@ -3,8 +3,11 @@ package cfg.build;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
+import org.eclipse.cdt.core.dom.ast.IASTLabelStatement;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
@@ -130,6 +133,12 @@ public class ASTFactory {
 			System.out.print(" ");
 		}
 	
+//		if (node instanceof IASTLabelStatement) {
+//			System.out.println(node.getRawSignature());
+//			IASTLabelStatement testNode = (IASTLabelStatement) node;
+//			String str = testNode.getNestedStatement().getRawSignature();
+//			System.out.println(str);
+//		}
 		System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);

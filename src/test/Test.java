@@ -28,9 +28,9 @@ public class Test {
 		VtseCFG cfg = new VtseCFG(ast.getFunction("transmit1"), ast);
 		
 		cfg.unfold();
-		cfg.index();
+		//cfg.index();
 		cfg.printGraph();
-		cfg.printMeta();
+		//cfg.printMeta();
 		
 		//cfg.printSMTFormula(System.out);
 		//cfg.getVm().printList();
