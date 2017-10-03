@@ -9,7 +9,6 @@ public class UnaryToBinaryExpression {
 	private void properStatement(IASTUnaryExpression unaryExpression) {
 		INodeFactory nodeFactory = unaryExpression.getTranslationUnit().getASTNodeFactory();
 		
-		
 		int unaryOperator = unaryExpression.getOperator();
 		IASTExpression operand = unaryExpression.getOperand();
 		int binaryOperator = unaryToBinaryOperator(unaryOperator);

@@ -9,7 +9,7 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 import cfg.utils.ExpressionHelper;
 import cfg.utils.Index;
-import cfg.utils.VariableHelper;
+import cfg.utils.ExpressionModifier;
 import cfg.utils.VariableManager;
 /*
  * @va
@@ -32,7 +32,7 @@ public class IterationNode extends CFGNode {
 	
 	public IterationNode(IASTExpression iterExpression, IASTFunctionDefinition func) {
 //		iterationExpression = (IASTExpression) VariableHelper.changeVariableName(iterationExpression, func);
-		iterationExpression = (IASTExpression) VariableHelper.changeVariableName(
+		iterationExpression = (IASTExpression) ExpressionModifier.changeVariableName(
 				changeUnarytoBinary((IASTUnaryExpression) iterExpression, func), func);
 	} 
 	private static IASTExpression changeUnarytoBinary(IASTUnaryExpression node, IASTFunctionDefinition func) {
@@ -66,7 +66,7 @@ public class IterationNode extends CFGNode {
 	}
 	
 	public void setIterationExpression(IASTExpression iterationExpression, IASTFunctionDefinition func) {
-		this.iterationExpression = (IASTExpression) VariableHelper.changeVariableName(iterationExpression, func);
+		this.iterationExpression = (IASTExpression) ExpressionModifier.changeVariableName(iterationExpression, func);
 	}
 	
 	public void index( VariableManager vm){

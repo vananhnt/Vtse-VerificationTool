@@ -9,6 +9,7 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndNode;
 import cfg.node.IterationNode;
 
 
@@ -38,6 +39,7 @@ public class ControlFlowGraph {
 		exit = cfg.getExit();
 		func = def;
 	}
+	
 	public String getNameFunction(){
 		if (func == null) return null;		
 		return func.getDeclarator().getName().toString();
@@ -53,7 +55,6 @@ public class ControlFlowGraph {
 			exit = other.exit;
 		} 
 		else {
-			
 			exit.setNext(other.start);
 			exit = other.exit;
 		}
@@ -117,6 +118,14 @@ public class ControlFlowGraph {
 			print(start, 0);
 	}
 	
+	public void printBoundary() {
+		System.out.print("StartNode: ");
+		start.printNode();
+		System.out.print("ExitNode: ");
+		if (exit != null) {
+			exit.printNode();
+		} else System.out.println(exit);
+	}
 	public void printDebug(){
 		printDebug(start);
 	}
@@ -131,6 +140,7 @@ public class ControlFlowGraph {
 		CFGNode iter = start;
 		printSpace(level);
 		if (iter == null) {
+			//System.out.println(iter);
 			return;
 		} else if (iter instanceof DecisionNode) {
 			iter.printNode();

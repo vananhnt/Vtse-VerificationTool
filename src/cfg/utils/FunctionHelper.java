@@ -24,6 +24,11 @@ public class FunctionHelper {
 		}
 		return null;
 	}
+	public static String getFunctionType (IASTFunctionDefinition func) {
+		return func.getDeclSpecifier().toString();
+		
+		
+	}
 	//Lay Vm cua tat ca cac ham
 	public static VariableManager getVM(ArrayList<IASTFunctionDefinition> funcList) {
 			VariableManager vm = new VariableManager();

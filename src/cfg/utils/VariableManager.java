@@ -10,6 +10,7 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import cfg.build.ASTFactory;
 
@@ -117,6 +118,9 @@ public class VariableManager {
 	 * tao variableList voi dau vao
 	 * @param a function
 	 */
+	void buildGlobal(IASTTranslationUnit ast) {
+		
+	}
 	void build(IASTFunctionDefinition func) {		
 		ArrayList<Variable> params = getParameters(func);
 		ArrayList<Variable> localVars = new ArrayList<>();
@@ -140,7 +144,7 @@ public class VariableManager {
 		return var;
 	} 
 	/**
-	 * tra ve danh sach tham so truyen vao ham
+	 * tra ve danh sach tham so truyen vao ham (neu co)
 	 * @param function
 	 * @return List Variable
 	 */
@@ -196,15 +200,22 @@ public class VariableManager {
 			var = new Variable(type, name + "_" + funcName, init);			
 			list.add(var);						
 		}
+		//neu co chua loi goi ham
 		if (node instanceof IASTFunctionCallExpression) {
-			IASTFunctionCallExpression call = (IASTFunctionCallExpression) node;
-			String callName = call.getFunctionNameExpression().toString();
-			String params = "";
-			for (IASTNode param : call.getArguments()) {
-				params += "_" + param.toString();
+			if (!((IASTFunctionCallExpression) node).getExpressionType().equals(null)) {
+				IASTFunctionCallExpression call = (IASTFunctionCallExpression) node;
+				String callName = call.getFunctionNameExpression().toString();
+				String params = "";
+				if (call.getArguments().length > 0) {
+					for (IASTNode param : call.getArguments()) {
+						params += "_" + param.toString();
+					}
+					var = new Variable(call.getExpressionType().toString(), callName + params, 0);
+					list.add(var);
 			}
-			var = new Variable(call.getExpressionType().toString(), callName + params, 0);
-			list.add(var);
+			
+			}
+			
 		}
 		// return
 		

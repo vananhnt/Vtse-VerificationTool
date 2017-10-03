@@ -1,6 +1,5 @@
 package cfg.build;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
@@ -47,6 +46,7 @@ import cfg.node.LabelNode;
 import cfg.node.PlainNode;
 import cfg.node.ReturnNode;
 import cfg.node.UndefinedNode;
+import cfg.utils.FunctionHelper;
 import cfg.utils.astnode.ASTNodeFactory;
 
 /**
@@ -136,7 +136,14 @@ public class ControlFlowGraphBuilder {
 		} else if (statement instanceof IASTSwitchStatement) {
 			cfg = createSwitch((IASTSwitchStatement) statement, def);
 		} else if (statement instanceof IASTReturnStatement) {
-			cfg = createReturnStatement((IASTReturnStatement) statement, def);
+			//Neu ham void -> khong co return statement -> khong can tao ReturnNode
+			//Hien tai dang de la EmptyNode neu return statement la void
+			if (!FunctionHelper.getFunctionType(def).equals("void")) {
+				cfg = createReturnStatement((IASTReturnStatement) statement, def);
+			} else {
+				EmptyNode emptyNode = new EmptyNode();
+				cfg = new ControlFlowGraph(emptyNode, emptyNode);
+			}
 		} else if (statement instanceof IASTDeclarationStatement) {
 			cfg = createDeclaration((IASTDeclarationStatement) statement, def);
 		} else if (statement instanceof IASTExpressionStatement) {
@@ -181,19 +188,45 @@ public class ControlFlowGraphBuilder {
 		ControlFlowGraph cfg = null;
 		//IASTNode[] nodes = statement.getChildren();
 		IASTStatement newStatement;
+		
 		if (!hasCallExpression(statement)) {
 			returnNode = new ReturnNode(statement, def);
 			cfg = new ControlFlowGraph(returnNode, returnNode);
-		
 		} else {
-			cfg = createFuncCallGraph(statement, def);
-			returnNode = new ReturnNode(statement, def);
-			cfg.concat(new ControlFlowGraph(returnNode, returnNode));
+			//Cac truong hop return; (Da xu ly o tren -> khong can thiet)
+			if (statement.getReturnArgument() == null) {
+				EmptyNode emptyNode = new EmptyNode();
+				cfg = new ControlFlowGraph(emptyNode, emptyNode);
+			}	
+			else {
+			//Cac truong hop co gia tri return	
+				cfg = createFuncCallGraph(statement, def);
+				returnNode = new ReturnNode(statement, def);
+				cfg.concat(new ControlFlowGraph(returnNode, returnNode));
+			}
 		}
 		return cfg;
 		
 	}
-
+/**
+ * Kiem tra co loi goi ham trong cau lenh? Loi goi ham la void hay co gia tri tra ve 
+ * @param statement
+ * @return
+ */
+	private boolean isVoidCall(IASTNode statement) {
+		boolean result = false;
+		IASTNode[] nodes = statement.getChildren();
+		for (IASTNode node : nodes) {
+			if (node instanceof IASTFunctionCallExpression) {
+				if (((IASTFunctionCallExpression) node).getExpressionType().toString().equals("void")) 
+					return true;
+			} else {
+				result = hasCallExpression(node);
+			}
+		}
+	return result;
+	}
+	
 	private boolean hasCallExpression(IASTNode statement) {
 		boolean result = false;
 		IASTNode[] nodes = statement.getChildren();
@@ -208,21 +241,29 @@ public class ControlFlowGraphBuilder {
 	return result;
 	}	
 	
-
+/**
+ * Voi loi goi ham co gia tri tra ve -> chuyen loi goi ham thanh 1 bien 
+ * Voi loi goi ham void -> noi luon
+ * @param: expressionStatement, functionDef
+ */
 	private ControlFlowGraph createExpressionStatement(IASTExpressionStatement statement, IASTFunctionDefinition def) {
 		CFGNode plainNode;
 		
 		ControlFlowGraph cfg = null;
 		//IASTNode[] nodes = statement.getChildren();
 		IASTStatement newStatement;
+		
 		if (!hasCallExpression(statement)) {
 			plainNode = new PlainNode(statement, def);
 			cfg = new ControlFlowGraph(plainNode, plainNode);
 		} else {
-			
+			//Tao ra node moi co chua loi goi ham la 1 bien
 			cfg = createFuncCallGraph(statement, def);
-			plainNode = new PlainNode(statement, def);
-			cfg.concat(new ControlFlowGraph(plainNode, plainNode));
+			//Neu khong la ham void, tao ra node moi co
+			if (!isVoidCall(statement)) {
+				plainNode = new PlainNode(statement, def);
+				cfg.concat(new ControlFlowGraph(plainNode, plainNode));
+			}	
 		}
 		return cfg;
 	}
@@ -251,8 +292,7 @@ public class ControlFlowGraphBuilder {
 	}
 	
 	private ControlFlowGraph createFuncCallDecl(IASTDeclarationStatement node, IASTFunctionDefinition def) {
-		ControlFlowGraph decl_cfg = new ControlFlowGraph();
-		
+		//Da xu ly Declaration -> khong can?
 		return null;
 	}
 
@@ -272,8 +312,6 @@ public class ControlFlowGraphBuilder {
 			cfg_left.concat(cfg_right);
 			return cfg_left;
 		}
-		
-	
 	}
 	/**
 	 * @param statement, func

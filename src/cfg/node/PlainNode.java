@@ -8,7 +8,7 @@ import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import cfg.utils.ExpressionHelper;
 import cfg.utils.FormulaCreater;
 import cfg.utils.Index;
-import cfg.utils.VariableHelper;
+import cfg.utils.ExpressionModifier;
 import cfg.utils.VariableManager;
 
 public class PlainNode extends CFGNode {
@@ -29,7 +29,7 @@ public class PlainNode extends CFGNode {
 	}
 	
 	private IASTStatement changeName(IASTStatement statement, IASTFunctionDefinition func) {
-		return (IASTStatement) VariableHelper.changeVariableName(statement, func);
+		return (IASTStatement) ExpressionModifier.changeVariableName(statement, func);
 	}
 	public IASTStatement getStatement() {
 		return statement;
@@ -53,7 +53,7 @@ public class PlainNode extends CFGNode {
 		if (statement != null){
 			System.out.print("PlainNode: ");
 			System.out.println(ExpressionHelper.toString(statement));
-		}
+		} else System.out.println(this);
 		
 	}
 	public boolean isFunctionCall() {

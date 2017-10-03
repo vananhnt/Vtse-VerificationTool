@@ -20,13 +20,15 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
+import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
 import cfg.node.FunctionCallNode;
 import cfg.node.IterationNode;
 import cfg.node.PlainNode;
+import cfg.node.UndefinedNode;
 import cfg.utils.FunctionHelper;
 import cfg.utils.IASTVariable;
-import cfg.utils.VariableHelper;
+import cfg.utils.ExpressionModifier;
 
 
 /**
@@ -39,6 +41,7 @@ public class MultiFunctionCFGBuilder {
 	private ASTFactory ast;
 
 	public MultiFunctionCFGBuilder() {}
+	
 	public MultiFunctionCFGBuilder(ASTFactory ast) {
 		this.ast = ast;
 
@@ -99,7 +102,8 @@ public class MultiFunctionCFGBuilder {
 			
 			if (functionGraph != null) {
 				CFGNode pause = node.getNext();
-				node = functionGraph.getStart();
+				//todo
+				node = iterateNode(functionGraph.getStart(), end, func);
 				functionGraph.getExit().setNext(iterateNode(pause, end, func));
 			}	
 		} else {
@@ -116,31 +120,43 @@ public class MultiFunctionCFGBuilder {
 		String funcName = callExpression.getFunctionNameExpression().toString();
 		//System.out.println(funcName);
 		IASTFunctionDefinition func = FunctionHelper.getFunction(ast.getListFunction(), funcName);
+		
+		if (func == null) {
+			System.err.println("Not found function");
+			UndefinedNode undef = new UndefinedNode();
+			cfg = new ControlFlowGraph(undef, undef);
+			return cfg;
+		}
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 		//Cho tham so = params	
 			cfg.concat(createArguments(callExpression, currentFunc));
 		
 		//Noi voi than cua ham duoc goi
 			cfg.concat(new ControlFlowGraph(func));
+			//ControlFlowGraph tmp = new ControlFlowGraph(func);
+			
+		//Neu xoa dong duoi testBenchmark chay bt 
+//		if (callExpression.getExpressionType().toString().equals("void")) {
+//			EmptyNode plainNode = new EmptyNode(); 
+//			cfg.concat(new ControlFlowGraph(plainNode, plainNode));
+//			return cfg;
+//		}
 		
 		//Tao ra node: ham duoc goi = return	
-		IASTIdExpression left = (IASTIdExpression) VariableHelper.changeFunctionCallExpression(callExpression, func);
-		
+		IASTIdExpression left = (IASTIdExpression) ExpressionModifier.changeFunctionCallExpression(callExpression, func);
 		IASTName nameRight = factory.newName(("return_" + funcName).toCharArray());
 		IASTIdExpression right = factory.newIdExpression(nameRight);
-		
 		IASTBinaryExpression binaryExp = factory.newBinaryExpression(IASTBinaryExpression.op_assign, left, right);
 		IASTExpressionStatement statement = factory.newExpressionStatement(binaryExp);
+		
 		CFGNode plainNode = new PlainNode(statement); //tao ra plainNode khong co ten ham dang sau
 		cfg.concat(new ControlFlowGraph(plainNode, plainNode));
-	
-		
 		return cfg;
 	}
 	/**
 	 * @param callExpression
 	 * @param currentFunc
-	 * Tra ve cac Node xu ly tham so cua ham
+	 * Tra ve cac Node xu ly tham so cua ham (neu co)
 	 */
 	private ControlFlowGraph createArguments(IASTFunctionCallExpression callExpression, IASTFunctionDefinition currentFunc) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
@@ -185,7 +201,7 @@ public class MultiFunctionCFGBuilder {
 //			IASTName rightName = factory.newName((arguments[i].getRawSignature().toCharArray()));
 //			IASTIdExpression right = factory.newIdExpression(rightName);
 			
-			right = (IASTExpression) VariableHelper.changeVariableName((IASTExpression) arguments[i].copy(), currentFunc);
+			right = (IASTExpression) ExpressionModifier.changeVariableName((IASTExpression) arguments[i].copy(), currentFunc);
 			expression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, left, right);
 			statement = factory.newExpressionStatement(expression);
 			plainNode = new PlainNode(statement);

@@ -16,10 +16,10 @@ import jxl.write.biff.RowsExceededException;
 public class TestBenchmark {
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
 		
-		if (args.length < 1) {
-			System.out.println("Nothing to do");
-			System.exit(1);
-		}
+//		if (args.length < 1) {
+//			System.out.println("Nothing to do");
+//			System.exit(1);
+//		}
 		
 		ExportExcel exportExcel = new ExportExcel();
 		File file = new File("./floats-cdfpl-func");

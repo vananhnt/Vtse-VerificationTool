@@ -26,11 +26,14 @@ public class ReturnNode extends PlainNode
 		CPPNodeFactory factory = (CPPNodeFactory) statement.getTranslationUnit().getASTNodeFactory();
 		IASTName name = factory.newName("return".toCharArray());
 		IASTIdExpression left = factory.newIdExpression(name).copy();
+		
 		IASTExpression right = statement.getReturnValue().copy();
 		IASTBinaryExpression expression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, left, right);
 		IASTStatement binaryStatement = factory.newExpressionStatement(expression);
 		return binaryStatement;
 	}
+	
+	
 //	private static IASTStatement changeSyntax(IASTReturnStatement statement, IASTFunctionDefinition def) {
 //	CPPNodeFactory factory = (CPPNodeFactory) statement.getTranslationUnit().getASTNodeFactory();
 //	String newName = def.getDeclarator().getName().toString();

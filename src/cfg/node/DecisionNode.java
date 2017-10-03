@@ -11,7 +11,7 @@ import cfg.utils.ExpressionHelper;
 import cfg.utils.FormulaCreater;
 import cfg.utils.Index;
 import cfg.utils.Variable;
-import cfg.utils.VariableHelper;
+import cfg.utils.ExpressionModifier;
 import cfg.utils.VariableManager;
 
 public class DecisionNode extends CFGNode {
@@ -39,7 +39,7 @@ public class DecisionNode extends CFGNode {
 		changeName(iastExpression, func);
 	}
 	private void changeName(IASTExpression expression, IASTFunctionDefinition func) {
-		condition = (IASTExpression) VariableHelper.changeVariableName(expression, func);
+		condition = (IASTExpression) ExpressionModifier.changeVariableName(expression, func);
 }
 //	set THEN NODE with Input is CFGNode  or  IASTStatement		
 	public CFGNode getThenNode() {

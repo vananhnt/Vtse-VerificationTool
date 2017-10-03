@@ -22,11 +22,12 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 /**
  * @author va
- * Them ten ham vao bien + chuan hoa cau lenh
+ * Them ten ham vao bien + Chuan hoa cau lenh
  * static changeName(node, func) : IASTNode
  * Note: muon thay doi IASTNode trong CDT phai tao node moi
  */
-public class VariableHelper {
+
+public class ExpressionModifier {
 
 	public static IASTNode changeVariableName(IASTNode node, IASTFunctionDefinition func) {
 		if (node instanceof IASTBinaryExpression) {
@@ -53,7 +54,11 @@ public class VariableHelper {
 		
 		return node;
 	}
-
+/**
+ * @param node
+ * @param func
+ * @return
+ */
 	public static IASTNode changeFunctionCallExpression(IASTFunctionCallExpression node, IASTFunctionDefinition func) {
 		IASTIdExpression newId;
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
@@ -67,6 +72,7 @@ public class VariableHelper {
 //		}
 		String currentName = node.getFunctionNameExpression().toString();
 		String params = "";
+		
 		for (IASTNode param : node.getArguments()) {
 			params += "_" + param.toString();
 		}
@@ -151,8 +157,17 @@ public class VariableHelper {
 		IASTExpression left = node.getOperand1().copy();
 		IASTExpression right = node.getOperand2().copy();
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
-		IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), 
-				(IASTExpression) changeVariableName(left, func), (IASTExpression) changeVariableName(right, func));
+		IASTBinaryExpression newNode = null;
+		IASTBinaryExpression subBinary;
+		int operator = node.getOperator();
+		
+		if (ExpressionHelper.checkUnary(operator)) {
+			subBinary = factory.newBinaryExpression(ExpressionHelper.switchUnaryBinaryOperator(operator), left, right);
+			newNode = factory.newBinaryExpression(IASTBinaryExpression.op_assign, (IASTExpression) changeVariableName(left, func), (IASTExpression) changeVariableName(subBinary, func));
+		} else {
+			newNode = factory.newBinaryExpression(operator, 
+					(IASTExpression) changeVariableName(left, func), (IASTExpression) changeVariableName(right, func));
+		}
 		return newNode;	
 	
 	}

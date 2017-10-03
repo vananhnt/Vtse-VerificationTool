@@ -102,23 +102,50 @@ public class ExpressionHelper {
 	}
 	
 	public static String getCorrespondBinaryOperator(int operatorInt) {
-		if (operatorInt == IASTBinaryExpression.op_assign) return "=";
-		if (operatorInt == IASTBinaryExpression.op_plus) return "+";
-		if (operatorInt == IASTBinaryExpression.op_minus) return "-";
-		if (operatorInt == IASTBinaryExpression.op_multiply) return "*";
-		if (operatorInt == IASTBinaryExpression.op_divide) return "/";
-		if (operatorInt == IASTBinaryExpression.op_modulo) return "=";
-		if (operatorInt == IASTBinaryExpression.op_equals) return "==";
-		if (operatorInt == IASTBinaryExpression.op_greaterThan) return ">";
-		if (operatorInt == IASTBinaryExpression.op_greaterEqual) return ">=";
-		if (operatorInt == IASTBinaryExpression.op_lessThan) return "<";
-		if (operatorInt == IASTBinaryExpression.op_lessEqual) return "<=";
-		if (operatorInt == IASTBinaryExpression.op_logicalAnd) return "and";
-		if (operatorInt == IASTBinaryExpression.op_logicalOr) return "or";
+		switch (operatorInt) {
+		case (IASTBinaryExpression.op_assign): return "=";
+		case (IASTBinaryExpression.op_plus):  return "+";
+		case (IASTBinaryExpression.op_minus): return "-";
+		case (IASTBinaryExpression.op_multiply): return "*";
+		case (IASTBinaryExpression.op_divide): return "/";
+		case (IASTBinaryExpression.op_modulo): return "=";
+		case (IASTBinaryExpression.op_equals) : return "==";
+		case (IASTBinaryExpression.op_greaterThan): return ">";
+		case (IASTBinaryExpression.op_greaterEqual): return ">=";
+		case (IASTBinaryExpression.op_lessThan): return "<";
+		case (IASTBinaryExpression.op_lessEqual): return "<=";
+		case (IASTBinaryExpression.op_logicalAnd): return "and";
+		case (IASTBinaryExpression.op_logicalOr): return "or";
+		case (IASTBinaryExpression.op_plusAssign): return "+=";
+		case (IASTBinaryExpression.op_minusAssign): return "-=";
+		case (IASTBinaryExpression.op_multiplyAssign): return "*=";
+		case (IASTBinaryExpression.op_divideAssign): return "/=";
+		default: return "@";
+		}
 		
-		return "@";
 	}
-	
+	public static boolean checkUnary(int operatorInt) {
+		if (operatorInt == IASTBinaryExpression.op_plusAssign
+				|| operatorInt == IASTBinaryExpression.op_minusAssign
+				|| operatorInt == IASTBinaryExpression.op_multiplyAssign
+				|| operatorInt == IASTBinaryExpression.op_divideAssign ) {
+			return true;
+		}
+		return false;
+	}
+	public static int switchUnaryBinaryOperator(int operatorInt) {
+		switch(operatorInt) {
+			case (IASTBinaryExpression.op_plusAssign): 
+				return IASTBinaryExpression.op_plus;
+			case (IASTBinaryExpression.op_minusAssign): 
+				return IASTBinaryExpression.op_minus;
+			case (IASTBinaryExpression.op_multiplyAssign): 
+				return IASTBinaryExpression.op_multiply;
+			case (IASTBinaryExpression.op_divideAssign): 
+				return IASTBinaryExpression.op_divide;
+		}
+		return operatorInt;
+	}
 	public static String getCorrespondUnaryOperator(int operatorInt) {
 		if (operatorInt == IASTUnaryExpression.op_plus) return "+";
 		if (operatorInt == IASTUnaryExpression.op_minus) return "-";

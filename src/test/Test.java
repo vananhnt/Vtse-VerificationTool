@@ -15,8 +15,8 @@ import cfg.utils.Variable;
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
 		ASTFactory ast = new ASTFactory("./testFunc.cpp");
-	
-		//ast.print();
+		
+		ast.print();
 	
 		//*Parameters:
 		//DeclSpecifier : kieu tra ve cua ham
@@ -25,10 +25,11 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(ast.getFunction("transmit1"), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction("transmit3"), ast);
 		
-		cfg.unfold();
-		//cfg.index();
+		//cfg.printBoundary();
+//		cfg.unfold();
+		cfg.index();
 		cfg.printGraph();
 		//cfg.printMeta();
 		
