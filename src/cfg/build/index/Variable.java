@@ -1,4 +1,4 @@
-package cfg.utils;
+package cfg.build.index;
 
 public class Variable {
 	

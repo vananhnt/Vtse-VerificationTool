@@ -7,13 +7,10 @@ import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
+import cfg.build.index.Index;
+import cfg.build.index.VariableManager;
 import cfg.utils.ExpressionHelper;
-import cfg.utils.Index;
 import cfg.utils.ExpressionModifier;
-import cfg.utils.VariableManager;
-/*
- * @va
- */
 
 
 public class IterationNode extends CFGNode {

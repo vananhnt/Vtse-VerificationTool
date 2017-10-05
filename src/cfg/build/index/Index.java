@@ -1,4 +1,4 @@
-package cfg.utils;
+package cfg.build.index;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
@@ -20,6 +20,7 @@ import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 import cfg.build.ASTFactory;
+import cfg.utils.ExpressionHelper;
 
 /**
  * @author va
@@ -196,10 +197,12 @@ public class Index {
 				Variable var = vm.getVariable(name);
 					
 				// xu ly rieng cho bien cuc bo duoc khoi tao trong ham con
-				if (var.getIsDuplicated() == true){
+				if (var == null) return statement;	
+			
+				if (var.getIsDuplicated()){
 					var.increase();
 				}
-				if (var == null) return statement;				
+						
 				IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
 				((IASTDeclarator) run).setName(nameId);					
 			}

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import app.utils.PrefixToInfix;
-import cfg.utils.Variable;
+import cfg.build.index.Variable;
 
 
 public class Report {

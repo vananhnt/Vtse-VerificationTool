@@ -12,6 +12,9 @@ import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
+import cfg.build.index.IASTVariable;
+import cfg.build.index.VariableManager;
+
 public class FunctionHelper {
 	
 	public static IASTFunctionDefinition getFunction(ArrayList<IASTFunctionDefinition> funcList, String name) {

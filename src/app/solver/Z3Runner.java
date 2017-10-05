@@ -22,13 +22,13 @@ public class Z3Runner {
         if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
             try {
             	Process p = Runtime.getRuntime().exec("z3 -smt2 -st -T:1 " + filename);
-                System.out.println ("Tao lay duoc process roi");
+             
                 BufferedReader br = new BufferedReader( new InputStreamReader(p.getInputStream()));
                     while ((s = br.readLine()) != null)
                     {
-                        System.out.println("line: " + s);
+                        //System.out.println("line: " + s);
                         result.add(s);
-                        System.err.println(s);
+                        //System.err.println(s);
                     }
                     try {
         				p.waitFor();
@@ -36,9 +36,9 @@ public class Z3Runner {
         				// TODO Auto-generated catch block
         				e.printStackTrace();
         			}
-                    System.out.println ("exit: " + p.exitValue());
+                   // System.out.println ("exit: " + p.exitValue());
                     
-                    System.out.println("size: " + result.size());
+                    //System.out.println("size: " + result.size());
 
             } catch (Exception e) {}
         }

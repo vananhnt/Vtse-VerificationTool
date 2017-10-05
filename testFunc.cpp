@@ -53,6 +53,21 @@ int E_7  =    2;
 int E_8  =    2;
 int E_9  =    2;
 int E_10  =    2;
+int is_master_triggered(void) ;
+int is_transmit1_triggered(void) ;
+int is_transmit2_triggered(void) ;
+int is_transmit3_triggered(void) ;
+int is_transmit4_triggered(void) ;
+int is_transmit5_triggered(void) ;
+int is_transmit6_triggered(void) ;
+int is_transmit7_triggered(void) ;
+int is_transmit8_triggered(void) ;
+int is_transmit9_triggered(void) ;
+int is_transmit10_triggered(void) ;
+void immediate_notify(void) ;
+int token  ;
+int __NONDET  ;
+int local  ;
 
 int is_master_triggered(void)
 { int __retres1 ;
@@ -409,7 +424,7 @@ void transmit3(void)
     {
     token += 1;
     E_4 = 1;
-   // immediate_notify();
+    immediate_notify();
     E_4 = 2;
     }
   }

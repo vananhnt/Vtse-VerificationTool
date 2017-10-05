@@ -1,7 +1,9 @@
-package cfg.utils;
+package cfg.build.index;
 
 import java.util.ArrayList;
 
+import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
+import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
@@ -118,25 +120,49 @@ public class VariableManager {
 	 * tao variableList voi dau vao
 	 * @param a function
 	 */
-	void buildGlobal(IASTTranslationUnit ast) {
-		
-	}
-	void build(IASTFunctionDefinition func) {		
+	
+	public void build(IASTFunctionDefinition func) {		
 		ArrayList<Variable> params = getParameters(func);
 		ArrayList<Variable> localVars = new ArrayList<>();
+		ArrayList<Variable> globalVars = getGlobalVars(func);
 		
 		String funcName = func.getDeclarator().getName().toString();
 		
 		localVars = getLocalVar(func, funcName, localVars);
+		for (Variable var : globalVars) {
+			this.variableList.add(var);
+		}
 		for (Variable param : params) {
 			this.variableList.add(param);
 		}
 		for (Variable var : localVars) {
 			this.variableList.add(var);
-		}		
+		}
 		this.variableList.add(getReturn(func));
 	}
 	
+	/**
+	 * Lay cac bien global 
+	 * @param func
+	 * @return
+	 */
+	
+	private ArrayList<Variable> getGlobalVars(IASTFunctionDefinition func) {
+		ASTFactory ast = new ASTFactory(func.getTranslationUnit());
+		ArrayList<Variable>  variableList = new ArrayList<>();
+		ArrayList<IASTDeclaration> declarations = ast.getGlobarVarList();
+		for (IASTDeclaration declaration: declarations) {
+			IASTSimpleDeclaration simpDecl = (IASTSimpleDeclaration) declaration;
+			String type = simpDecl.getDeclSpecifier().toString();
+			//Chu y truong hop int a, b, c, ...;
+			for (IASTDeclarator declarator : simpDecl.getDeclarators()) {
+				String nameVar = declarator.getName().toString();
+				Variable var = new Variable(type, nameVar);
+				variableList.add(var);
+			}
+		}
+		return variableList;
+	}
 	private Variable getReturn(IASTFunctionDefinition func) {
 		IASTNode typeFunction = func.getDeclSpecifier();
 		Variable var = new Variable(typeFunction.getRawSignature(), "return" + "_" + func.getDeclarator().getName().toString());

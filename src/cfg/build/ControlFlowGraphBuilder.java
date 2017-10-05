@@ -76,15 +76,22 @@ public class ControlFlowGraphBuilder {
 	 * @param statement
 	 * @return cfg chua 2 not dau va cuoi
 	 */
-	@Deprecated
-	private ControlFlowGraph createSubGraph(IASTStatement statement) {
+	ControlFlowGraph createSubGraph(IASTStatement statement) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
+		ControlFlowGraph subCFG;
 		if (statement instanceof IASTCompoundStatement) {
 			IASTCompoundStatement comp = (IASTCompoundStatement) statement;
-			for (IASTStatement stmt : comp.getStatements()) {
-				ControlFlowGraph subCFG = createSubGraph(stmt);
-				if (subCFG != null)
-					cfg.concat(subCFG);
+			//Xet truong hop compound rong
+			IASTStatement[] stmts = comp.getStatements();
+			if (stmts.length == 0) {
+				EmptyNode empty = new EmptyNode();
+				cfg = new ControlFlowGraph(empty, empty);
+			} else {
+				for (IASTStatement stmt : comp.getStatements()) {
+					subCFG = createSubGraph(stmt);
+					if (subCFG != null && cfg != null)
+						cfg.concat(subCFG);
+				}	
 			}
 		} else if (statement instanceof IASTIfStatement) {
 			cfg = createIf((IASTIfStatement) statement);
@@ -108,7 +115,7 @@ public class ControlFlowGraphBuilder {
 		return cfg;
 	}
 	
-	private ControlFlowGraph createSubGraph(IASTStatement statement, IASTFunctionDefinition def) {
+	ControlFlowGraph createSubGraph(IASTStatement statement, IASTFunctionDefinition def) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
 		ControlFlowGraph subCFG;
 		if (statement instanceof IASTCompoundStatement) {
@@ -161,7 +168,6 @@ public class ControlFlowGraphBuilder {
 		return cfg;
 	}
 	
-	
 	private ControlFlowGraph createGotoGraph(IASTLabelStatement statement, IASTFunctionDefinition def) {
 		ControlFlowGraph cfg = null;
 		LabelNode labelNode = new LabelNode(statement);
@@ -208,24 +214,24 @@ public class ControlFlowGraphBuilder {
 		return cfg;
 		
 	}
-/**
- * Kiem tra co loi goi ham trong cau lenh? Loi goi ham la void hay co gia tri tra ve 
- * @param statement
- * @return
- */
-	private boolean isVoidCall(IASTNode statement) {
-		boolean result = false;
-		IASTNode[] nodes = statement.getChildren();
-		for (IASTNode node : nodes) {
-			if (node instanceof IASTFunctionCallExpression) {
-				if (((IASTFunctionCallExpression) node).getExpressionType().toString().equals("void")) 
-					return true;
-			} else {
-				result = hasCallExpression(node);
-			}
-		}
-	return result;
-	}
+
+	/**
+	 * Kiem tra co loi goi ham trong cau lenh? Loi goi ham la void hay co gia tri tra ve 
+	 * @param statement
+	 * @return
+	 */
+//	private boolean isVoidCall(IASTNode statement) {
+//		boolean result = false;
+//		IASTNode[] nodes = statement.getChildren();
+//		for (IASTNode node : nodes) {
+//			if (node instanceof IASTFunctionCallExpression) {
+//				
+//			} else {
+//				result = isVoidCall(node);
+//			}
+//		}
+//	return result;
+//	}
 	
 	private boolean hasCallExpression(IASTNode statement) {
 		boolean result = false;
@@ -241,11 +247,11 @@ public class ControlFlowGraphBuilder {
 	return result;
 	}	
 	
-/**
- * Voi loi goi ham co gia tri tra ve -> chuyen loi goi ham thanh 1 bien 
- * Voi loi goi ham void -> noi luon
- * @param: expressionStatement, functionDef
- */
+	/**
+	 * Voi loi goi ham co gia tri tra ve -> chuyen loi goi ham thanh 1 bien 
+	 * Voi loi goi ham void -> noi luon
+	 * @param: expressionStatement, functionDef
+	 */
 	private ControlFlowGraph createExpressionStatement(IASTExpressionStatement statement, IASTFunctionDefinition def) {
 		CFGNode plainNode;
 		
@@ -260,13 +266,14 @@ public class ControlFlowGraphBuilder {
 			//Tao ra node moi co chua loi goi ham la 1 bien
 			cfg = createFuncCallGraph(statement, def);
 			//Neu khong la ham void, tao ra node moi co
-			if (!isVoidCall(statement)) {
+			
 				plainNode = new PlainNode(statement, def);
 				cfg.concat(new ControlFlowGraph(plainNode, plainNode));
-			}	
+				
 		}
 		return cfg;
 	}
+	
 	/**
 	 * @param node, def
 	 * Tao ra subGraph chua loi goi ham
@@ -379,10 +386,65 @@ public class ControlFlowGraphBuilder {
 		}
 		return cfg;
 	}
-	@Deprecated
+	
 	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement) {
-		// TODO Auto-generated method stub
-		return null;
+		ControlFlowGraph cfg = new ControlFlowGraph();
+		ControlFlowGraph declCfg = new ControlFlowGraph();
+		IASTEqualsInitializer init;
+		IASTName nameVar;
+		CPPNodeFactory factory = new CPPNodeFactory();
+		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) statement.getDeclaration().copy();
+		
+		IASTDeclSpecifier type = simpleDecl.getDeclSpecifier().copy();
+		IASTDeclarator[] declarators = simpleDecl.getDeclarators();
+		IASTBinaryExpression binaryExpression;
+		IASTExpression newExpression;
+		
+		IASTDeclarator newDeclarator;
+		IASTDeclarationStatement newDeclStatement;
+		IASTExpressionStatement newExprStatement;
+		IASTInitializerClause newInit;
+		IASTExpression rightInitClause;
+		IASTIdExpression newId;
+		IASTSimpleDeclaration newDeclaration = null;
+		CFGNode node;
+		
+		for (IASTDeclarator decl : declarators) {
+			nameVar = decl.getName().copy();
+			init = (IASTEqualsInitializer) decl.getInitializer();
+			/*
+			newDeclarator = factory.newDeclarator(nameVar);
+			newDeclaration = factory.newSimpleDeclaration(type);
+			newDeclaration.addDeclarator(newDeclarator);
+			newDeclStatement = factory.newDeclarationStatement(newDeclaration);
+			*/
+			newDeclStatement = ASTNodeFactory.createDeclarationStatement(nameVar, type);
+			node = new PlainNode(newDeclStatement);
+			cfg.concat(new ControlFlowGraph(node, node));
+			//Neu nhu co dang: int b = 0; int b = f(x) + f(y);
+			if (init != null) {
+				newDeclarator = factory.newDeclarator(nameVar);
+				rightInitClause = (IASTExpression) init.getChildren()[0].copy();
+				newId = factory.newIdExpression(nameVar).copy();
+				newExpression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, newId, rightInitClause);
+				newExprStatement = (IASTExpressionStatement) factory.newExpressionStatement(newExpression);
+				
+				cfg.concat(createSubGraph(newExprStatement));
+//				node = new PlainNode(newExprStatement, func);
+//				cfg.concat(new ControlFlowGraph(node, node));
+//			
+			} else { //dang: int b;
+				//newDeclarator = factory.newDeclarator(nameVar);
+				//newId = factory.newIdExpression(nameVar).copy();
+				//rightInitClause = factory.newLiteralExpression(IASTLiteralExpression.lk_float_constant, "0");
+				//newExpression = factory.newBinaryExpression(IASTBinaryExpression.op_assign, newId, rightInitClause);
+				//newExprStatement = (IASTExpressionStatement) factory.newExpressionStatement(newExpression);
+				//node = new PlainNode(newExprStatement, func);
+				//cfg.concat(new ControlFlowGraph(node, node));
+			}
+			
+		}
+		return cfg;
 	}
 
 	/**
@@ -654,7 +716,6 @@ public class ControlFlowGraphBuilder {
 	 * @param start
 	 * @param end
 	 */
-	
 	private void linkCfg(ControlFlowGraph subCfg, IASTStatement[] statements, int start, int end) {
 		for (int j = start + 1; j < end; j++) {
 			if (!(statements[j] instanceof IASTBreakStatement)) {
@@ -677,7 +738,6 @@ public class ControlFlowGraphBuilder {
 	 * @param caseSt
 	 * @return
 	 */
-
 	private IASTExpression createCondition(IASTSwitchStatement switchSt, IASTCaseStatement caseSt) {
 		CPPNodeFactory nodeFactory = (CPPNodeFactory) switchSt.getTranslationUnit().getASTNodeFactory();
 		IASTExpression operand1 = switchSt.getControllerExpression().copy();
@@ -777,5 +837,4 @@ public class ControlFlowGraphBuilder {
 		return new ControlFlowGraph(beginSwitchNode, endNode);
 	}
 
-	
 }

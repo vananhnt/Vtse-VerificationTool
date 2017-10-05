@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.utils.InfixToPrefix;
-import cfg.utils.Variable;
+import cfg.build.index.Variable;
 
 
 
@@ -179,22 +179,22 @@ public class UserInput {
 				
 				if ( isInteger ) {
 					type = getType(mathElements[i+1]);
-					System.out.println("type 1: " + type);
+					//System.out.println("type 1: " + type);
 					if (type.equals("double") || type.equals("float")) {
-						System.out.println("hellow");
+						//System.out.println("hellow");
 						isInteger = false;
-						System.out.println("is integer 1 : " + isInteger);
+						//System.out.println("is integer 1 : " + isInteger);
 					}
 					type = getType(mathElements[i+2]);
-					System.out.println("type 2: " + type);
+					//System.out.println("type 2: " + type);
 					if (type.equals("double") || type.equals("float")) {
 						isInteger = false;
-						System.out.println("is integer 2: " + isInteger);
+						//System.out.println("is integer 2: " + isInteger);
 					}
 				}
 				
 				if (mathElements[i].equals("/") && isInteger) {
-					System.err.println("is integer: " + isInteger);
+					//System.err.println("is integer: " + isInteger);
 					mathElements[i] = "div";
 				}
 				

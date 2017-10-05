@@ -1,4 +1,4 @@
-package cfg.utils;
+package cfg.build.index;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
@@ -18,6 +18,7 @@ import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
+import cfg.utils.ExpressionHelper;
 
 /**
  * @author va

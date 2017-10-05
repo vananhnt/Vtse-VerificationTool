@@ -7,9 +7,10 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.security.GeneralSecurityException;
 import java.util.List;
-import java.util.List;
 
-import cfg.utils.Variable;
+import cfg.build.index.Variable;
+
+import java.util.List;
 
 public class SMTInput {
 	private List<Variable> variableList;

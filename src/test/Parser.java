@@ -11,7 +11,7 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 import app.solver.SMTInput;
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
-import cfg.utils.Variable;
+import cfg.build.index.Variable;
 
 public class Parser {
 	public static void  main(String[] args) throws Exception {

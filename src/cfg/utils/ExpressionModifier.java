@@ -1,5 +1,7 @@
 package cfg.utils;
 
+import java.util.ArrayList;
+
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
@@ -18,6 +20,8 @@ import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
+
+import cfg.build.ASTFactory;
 
 
 /**
@@ -54,6 +58,7 @@ public class ExpressionModifier {
 		
 		return node;
 	}
+
 /**
  * @param node
  * @param func
@@ -118,6 +123,10 @@ public class ExpressionModifier {
 		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) node.getDeclaration().copy();
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 		
+		ASTFactory ast = new ASTFactory(func.getTranslationUnit());
+		ArrayList<String> globarVar = ast.getGlobarVarStrList();
+		
+		
 		for (IASTNode run : simpleDecl.getChildren()){
 			if (run instanceof IASTDeclSpecifier) {
 				type = (IASTDeclSpecifier) run.copy();
@@ -128,7 +137,11 @@ public class ExpressionModifier {
 					//Da xu ly o CFGbuilder
 				}		
 				newNameVar = ((IASTDeclarator) run).getName().toString();
-				newNameVar += "_" + getFunctionName(func);
+				if (!globarVar.contains(newNameVar)) {
+					newNameVar += "_" + getFunctionName(func);
+						
+				}
+				//newNameVar += "_" + getFunctionName(func);
 				nameId = factory.newName(newNameVar.toCharArray());
 				((IASTDeclarator) run).setName(nameId);					
 			}
@@ -182,12 +195,21 @@ public class ExpressionModifier {
 
 	/**
 	 * @param node, func
-	 * sua bien
+	 * sua bien (them ten ham vao sau bien)
 	 */
+	
 	private static IASTNode changeIdExpression(IASTIdExpression node, IASTFunctionDefinition func) {
 		// TODO Auto-generated method stub
 		String currentName = node.getName().toString();
-		String newName = currentName + "_" + getFunctionName(func);
+		ASTFactory ast = new ASTFactory(func.getTranslationUnit());
+		ArrayList<String> globarVar = ast.getGlobarVarStrList();
+		String newName = null;
+		if (globarVar.contains(currentName)) newName = currentName;
+		else {
+			newName = currentName + "_" + getFunctionName(func);	
+
+		}
+		//newName = currentName + "_" + getFunctionName(func);
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 
 		IASTName nameId = factory.newName(newName.toCharArray());

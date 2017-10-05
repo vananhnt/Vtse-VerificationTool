@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
+import cfg.build.index.FormulaCreater;
+import cfg.build.index.Index;
+import cfg.build.index.Variable;
+import cfg.build.index.VariableManager;
 import cfg.utils.Cloner;
 import cfg.utils.ExpressionHelper;
-import cfg.utils.FormulaCreater;
-import cfg.utils.Index;
-import cfg.utils.Variable;
 import cfg.utils.ExpressionModifier;
-import cfg.utils.VariableManager;
 
 public class DecisionNode extends CFGNode {
 	private IASTExpression condition;

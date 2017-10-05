@@ -5,11 +5,11 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 
+import cfg.build.index.FormulaCreater;
+import cfg.build.index.Index;
+import cfg.build.index.VariableManager;
 import cfg.utils.ExpressionHelper;
-import cfg.utils.FormulaCreater;
-import cfg.utils.Index;
 import cfg.utils.ExpressionModifier;
-import cfg.utils.VariableManager;
 
 public class PlainNode extends CFGNode {
 	private IASTStatement statement;

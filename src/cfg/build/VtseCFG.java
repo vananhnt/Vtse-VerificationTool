@@ -8,16 +8,16 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 
 import app.solver.SMTTypeConvertion;
+import cfg.build.index.FormulaCreater;
+import cfg.build.index.Variable;
+import cfg.build.index.VariableManager;
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EndConditionNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
-import cfg.utils.FormulaCreater;
 import cfg.utils.FunctionHelper;
-import cfg.utils.Variable;
-import cfg.utils.VariableManager;
 
 public class VtseCFG extends ControlFlowGraph {	
 	private VariableManager vm;
