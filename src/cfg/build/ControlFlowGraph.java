@@ -144,6 +144,7 @@ public class ControlFlowGraph {
 			return;
 		} else if (iter instanceof DecisionNode) {
 			iter.printNode();
+			System.out.println(iter.getFormula());
 			printSpace(level);
 			System.out.println("Then Clause: ");
 			if (((DecisionNode) iter).getThenNode() != null) {
@@ -153,8 +154,11 @@ public class ControlFlowGraph {
 			System.out.println("Else Clause: ");
 			if (((DecisionNode) iter).getElseNode() != null)
 				print(((DecisionNode) iter).getElseNode(),  level + 7);		
-		} 
-		else if (iter instanceof IterationNode) {
+//		}  else if (iter instanceof GotoNode) {
+//			iter.printNode();
+//			printSpace(level);
+//			((GotoNode) iter).getLabelNode().printNode();
+		} else if (iter instanceof IterationNode) {
 			iter.printNode();
 			if (iter.getNext() != null) print(iter.getNext(), level);
 			else return;
@@ -168,7 +172,10 @@ public class ControlFlowGraph {
 			print(iter.getNext(), level);
 			((BeginNode) iter).getEndNode().printNode();
 			print(((BeginNode) iter).getEndNode().getNext(),  level);
-		} else {
+		} else if (iter instanceof EndNode) {
+			iter.printNode();
+		} 
+		else {
 			iter.printNode();
 			print(iter.getNext(), level);
 		}	
@@ -189,6 +196,7 @@ public class ControlFlowGraph {
 		} else {
 			if (iter != null){
 				iter.printNode();
+				System.out.println(iter.getFormula());
 				printDebug(iter.getNext());
 			}
 		}		

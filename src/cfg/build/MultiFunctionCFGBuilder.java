@@ -3,10 +3,8 @@ package cfg.build;
 import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
-import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
-import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
@@ -14,23 +12,19 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
 import org.eclipse.cdt.core.dom.ast.IASTName;
-import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 import cfg.build.index.IASTVariable;
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
-import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndNode;
 import cfg.node.FunctionCallNode;
-import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 import cfg.node.UndefinedNode;
-import cfg.utils.FunctionHelper;
 import cfg.utils.ExpressionModifier;
+import cfg.utils.FunctionHelper;
 
 
 /**
@@ -51,6 +45,9 @@ public class MultiFunctionCFGBuilder {
 	}
 	//Them cac cau lenh khoi tao toan cuc
 	public ControlFlowGraph build(IASTFunctionDefinition func) {
+		if (func == null) {
+			return null;
+		}
 		ControlFlowGraph prvCfg = new ControlFlowGraph(); 
 		CPPNodeFactory factory = new CPPNodeFactory();
 		ASTFactory ast = new ASTFactory(func.getTranslationUnit());
@@ -67,6 +64,7 @@ public class MultiFunctionCFGBuilder {
 		}
 		ControlFlowGraph mainFuncCfg = getVtseCFG(func);
 		prvCfg.concat(mainFuncCfg);
+	
 		CFGNode newStart = iterateNode(prvCfg.getStart(), prvCfg.exit, func);
 		return prvCfg;	
 	}
@@ -90,22 +88,13 @@ public class MultiFunctionCFGBuilder {
 		}
 		return null;
 	} 
-
-//	private CFGNode findEnd(CFGNode start) {
-//		CFGNode node = start;
-//		while (node.getNext() != null) {
-//			node = node.getNext();
-//		}
-//		return node;
-//	}
-	
 	
 	/**
 	 * @param node, end, func
 	 * Ham duyet cfg va xu ly FunctionCallNode
 	 */
 	private CFGNode iterateNode(CFGNode node, CFGNode end, IASTFunctionDefinition func) {
-		if ( node == null) {
+		if (node == null) {
 			node = null;
 		}  else if (node instanceof DecisionNode) {
 			((DecisionNode) node).setThenNode(iterateNode(((DecisionNode) node).getThenNode(), end, func));
@@ -124,21 +113,21 @@ public class MultiFunctionCFGBuilder {
 				node = iterateNode(functionGraph.getStart(), end, func);
 				functionGraph.getExit().setNext(iterateNode(pause, end, func));
 			}	
+		} else if (node instanceof EndNode) {
+			
 		} else {
 			node.setNext(iterateNode(node.getNext(), end, func));	
-		}	
-		
+		}		
 		return node;
 	}
 	
 	private boolean isVoid(IASTFunctionCallExpression callExpression) {
 		String funcName = callExpression.getFunctionNameExpression().toString();
-		//System.out.println(funcName);
 		IASTFunctionDefinition func = FunctionHelper.getFunction(ast.getListFunction(), funcName);
 		String type = FunctionHelper.getFunctionType(func);
 		return type.equals("void") ? true : false;
 	}
-	//dang test vs 2 ham fp va main
+
 	private ControlFlowGraph createFuncGraph(IASTFunctionCallExpression callExpression, IASTFunctionDefinition currentFunc) {
 		
 		ControlFlowGraph cfg = new ControlFlowGraph();
@@ -147,7 +136,7 @@ public class MultiFunctionCFGBuilder {
 		IASTFunctionDefinition func = FunctionHelper.getFunction(ast.getListFunction(), funcName);
 		
 		if (func == null) {
-			System.err.println("Not found function");
+			System.err.println("Not found function " + funcName);
 			UndefinedNode undef = new UndefinedNode();
 			cfg = new ControlFlowGraph(undef, undef);
 			return cfg;

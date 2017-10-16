@@ -1,5 +1,7 @@
 package cfg.build.index;
 
+import java.util.ArrayList;
+
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
@@ -60,20 +62,65 @@ public class FormulaCreater {
 		
 		return constraint;
 	}
-	
-	public static String createInfixFormula(IASTNode node) {
-		if (node instanceof IASTDeclarationStatement) {
-			return infixDeclarationStatement((IASTDeclarationStatement) node);
-		} else if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
-			return infixExpressionStatement((IASTExpressionStatement) node);
-		} else if (node instanceof IASTBinaryExpression) { //phep gan va so sanh
-			return infixBinaryExpression((IASTBinaryExpression) node);
-		} else if (node instanceof IASTIdExpression) { //bien (khong tinh trong phep khoi tao)
-			return ExpressionHelper.toString(node);
-		} else if (node instanceof IASTLiteralExpression) {
-			return ExpressionHelper.toString(node);
+	public static ArrayList<String> createListConstraint(CFGNode start, CFGNode exit) {
+		//String constraint = start.getFormula();
+		ArrayList<String> constraintList = new ArrayList<>();
+		String temp = null;
+		ArrayList<String> dectemps;
+		CFGNode node = start.getNext();
+		while (node != null) {
+			if (node instanceof DecisionNode) {
+				dectemps = ((DecisionNode) node).va_getFormula();
+				for (String dectemp : dectemps) {
+					constraintList.add(dectemp);
+				}
+			} else temp = node.getFormula();			
+			if (temp != null) {
+					constraintList.add(temp);
+//					constraint = wrapInfix(LOGIC_AND, temp, constraint);
+//					constraint = wrapPrefix(LOGIC_AND, constraint, temp);
+				
+			}
+			if (node == exit) break;
+			if (node instanceof DecisionNode) {
+				node = ((DecisionNode) node).getEndNode();
+			} else {
+				node = node.getNext();
+			}
+			
 		}
-		return null;
+		
+		return constraintList;
+
+	}
+	
+	public static String createInfix(CFGNode start, CFGNode exit) {
+		String constraint = start.getInfixFormula();
+		
+		String temp;
+		CFGNode node = start.getNext();
+		while (node != null) {
+	
+			temp = node.getInfixFormula();			
+			if (temp != null) {
+				if (constraint == null) {
+					constraint = temp;
+				}
+				else {
+					constraint = wrapInfix(LOGIC_AND, temp, constraint);
+//					constraint = wrapPrefix(LOGIC_AND, constraint, temp);
+				}
+			}
+			if (node == exit) break;
+			if (node instanceof DecisionNode) {
+				node = ((DecisionNode) node).getEndNode();
+			} else {
+				node = node.getNext();
+			}
+			
+		}
+		
+		return constraint;
 	}
 	
 	public static String createFormula(IASTNode node) {
@@ -89,6 +136,21 @@ public class FormulaCreater {
 			return ExpressionHelper.toString(node);
 //		} else if (node instanceof IASTReturnStatement){
 //			return prefixReturnStatement((IASTReturnStatement) node); //da xu ly return o ReturnNode
+		}
+		return null;
+	}
+	
+	public static String createInfixFormula(IASTNode node) {
+		if (node instanceof IASTDeclarationStatement) {
+			return infixDeclarationStatement((IASTDeclarationStatement) node);
+		} else if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
+			return infixExpressionStatement((IASTExpressionStatement) node);
+		} else if (node instanceof IASTBinaryExpression) { //phep gan va so sanh
+			return infixBinaryExpression((IASTBinaryExpression) node);
+		} else if (node instanceof IASTIdExpression) { //bien (khong tinh trong phep khoi tao)
+			return ExpressionHelper.toString(node);
+		} else if (node instanceof IASTLiteralExpression) {
+			return ExpressionHelper.toString(node);
 		}
 		return null;
 	}
@@ -154,7 +216,6 @@ public class FormulaCreater {
 				
 			}
 		}
-		
 		if (isAssign) {
 			String left = null;
 			String right = null;
@@ -163,7 +224,7 @@ public class FormulaCreater {
 					left = ((IASTName) iter).toString();
 				}
 				if (iter instanceof IASTEqualsInitializer) {
-					right = createFormula(iter.getChildren()[0]);
+					right = createInfixFormula(iter.getChildren()[0]);
 				}
 			}
 			return wrapInfix("=", left, right);
@@ -189,25 +250,27 @@ public class FormulaCreater {
 		IASTExpression op1 = node.getOperand1();
 		IASTExpression op2 = node.getOperand2();
 		String operand = ExpressionHelper.getCorrespondBinaryOperator(node.getOperator());
-		String opStr1 = createFormula(op1);
-		String opStr2 = createFormula(op2);
+		String opStr1 = createInfixFormula(op1);
+		String opStr2 = createInfixFormula(op2);
 		return wrapInfix(operand, opStr1, opStr2);
 	}
 	
 	private static String infixExpressionStatement(IASTExpressionStatement node) {
-		return createFormula(node.getExpression());
+		return createInfixFormula(node.getExpression());
+	}
+
+	public static String createFormula(String operator, String operand) {
+		return "(" + operator + " " + operand + ")";
+	}
+	public static String createInfixFormula (String operator, String operand) {
+		return "(" + operator + " " + operand + ")";
+	}
+	public static String wrapInfix(String operand, String left, String right) {
+		return "(" + left + " " + operand + " " + right + ")";
 	}
 	
 	public static String wrapPrefix(String operand, String left, String right) {
 		return "(" + operand + " " + left + " " + right + ")";
-	}
-	
-	public static String createFormula(String operator, String operand) {
-		return "(" + operator + " " + operand + ")";
-	}
-	
-	public static String wrapInfix(String operand, String left, String right) {
-		return "(" + left + " " + operand + " " + right + ")";
 	}
 	
 	public static void main(String[] args) {

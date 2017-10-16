@@ -1,7 +1,6 @@
 package app.verification.report;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import app.utils.PrefixToInfix;
@@ -39,6 +38,7 @@ public class Report {
 		String str;
 		String status = null;
 		int time = 0;
+		@SuppressWarnings("unused")
 		String model = "";
 		
 		int i = 0;

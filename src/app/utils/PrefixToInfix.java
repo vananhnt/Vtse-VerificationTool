@@ -2,10 +2,6 @@ package app.utils;
 
 import java.util.Stack;
 
-import javax.swing.JTextArea;
-
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-
 public class PrefixToInfix {
 	
 	public static Stack<String> stack;
@@ -14,6 +10,7 @@ public class PrefixToInfix {
 		stack = new Stack<>();
 	}
 	
+	@SuppressWarnings("unused")
 	public static String prefixToInfix(String prefix) {
 		String infix = "";
 		

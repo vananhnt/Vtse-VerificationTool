@@ -7,9 +7,9 @@ import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
-import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTNullStatement;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
@@ -44,7 +44,10 @@ public class ExpressionHelper {
 		else if (node instanceof IASTFunctionCallExpression) {
 			return toStringFunctionCallExpression((IASTFunctionCallExpression) node);
 		}
-		return " ";
+		else if (node == null) {
+			return "";
+		}
+		return "@";
 	}
 	
 	private static String toStringFunctionCallExpression(IASTFunctionCallExpression node) {
@@ -53,12 +56,11 @@ public class ExpressionHelper {
 		//params[0] la ten function
 	
 		for (int i = 1; i < params.length; i++) {
-			if (i > 1) {
+			if (i > 0) {
 				expression += "_"; 
 			}
 			expression += toString(params[i]);
 		}
-		
 		return expression;
 	}
 
@@ -93,6 +95,7 @@ public class ExpressionHelper {
 		}
 		return statement;		
 	}
+	
 	public static String toStringBinaryExpression(IASTBinaryExpression binaryExpression) {
 		String operand1 = toString(binaryExpression.getOperand1());
 		String operand2 = toString(binaryExpression.getOperand2());
@@ -109,7 +112,7 @@ public class ExpressionHelper {
 		case (IASTBinaryExpression.op_multiply): return "*";
 		case (IASTBinaryExpression.op_divide): return "/";
 		case (IASTBinaryExpression.op_modulo): return "=";
-		case (IASTBinaryExpression.op_equals) : return "==";
+		case (IASTBinaryExpression.op_equals) : return "=";
 		case (IASTBinaryExpression.op_greaterThan): return ">";
 		case (IASTBinaryExpression.op_greaterEqual): return ">=";
 		case (IASTBinaryExpression.op_lessThan): return "<";
@@ -120,6 +123,7 @@ public class ExpressionHelper {
 		case (IASTBinaryExpression.op_minusAssign): return "-=";
 		case (IASTBinaryExpression.op_multiplyAssign): return "*=";
 		case (IASTBinaryExpression.op_divideAssign): return "/=";
+		case (IASTBinaryExpression.op_notequals): return "distinct"; 
 		default: return "@";
 		}
 		
@@ -133,6 +137,7 @@ public class ExpressionHelper {
 		}
 		return false;
 	}
+
 	public static int switchUnaryBinaryOperator(int operatorInt) {
 		switch(operatorInt) {
 			case (IASTBinaryExpression.op_plusAssign): 

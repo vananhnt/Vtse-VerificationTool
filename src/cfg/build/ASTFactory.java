@@ -1,29 +1,16 @@
 package cfg.build;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
-import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTDeclarationListOwner;
-import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
-import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
-import org.eclipse.cdt.core.dom.ast.IASTInitializer;
-import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
-import org.eclipse.cdt.core.dom.ast.IASTInitializerExpression;
-import org.eclipse.cdt.core.dom.ast.IASTLabelStatement;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
-import org.eclipse.cdt.core.dom.ast.IASTTypeIdInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.parser.DefaultLogService;
 import org.eclipse.cdt.core.parser.FileContent;
@@ -31,10 +18,9 @@ import org.eclipse.cdt.core.parser.IParserLogService;
 import org.eclipse.cdt.core.parser.IScannerInfo;
 import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
-import org.eclipse.cdt.internal.core.dom.parser.IASTAmbiguousDeclarator;
 import org.eclipse.core.runtime.CoreException;
 
-import cfg.utils.ExpressionHelper;
+import cfg.utils.ErrorPrompt;
 import cfg.utils.FunctionHelper;
 
 /**
@@ -88,15 +74,15 @@ public class ASTFactory {
 	public IASTTranslationUnit getTranslationUnit() {
 		return translationUnit;
 	}
-	public void setTranslationUnit(IASTTranslationUnit translationUnit) {
-		this.translationUnit = translationUnit;
+	public void setTranslationUnit(IASTTranslationUnit tranUnit) {
+		translationUnit = tranUnit;
 	}
 	public void setFileLocation(String fileName) {
 		filelocation = fileName;
 	}
 	
 	
-	public static ArrayList<IASTFunctionDefinition> getListFunction(){
+	public ArrayList<IASTFunctionDefinition> getListFunction(){
 		if (translationUnit == null) return null;
 		ArrayList<IASTFunctionDefinition> funcList = new ArrayList<>();
 		for (IASTNode run : translationUnit.getDeclarations()){
@@ -106,9 +92,9 @@ public class ASTFactory {
 		}
 		return funcList;
 	}
-	public static ArrayList<String> getGlobarVarStrList() {
+	public ArrayList<String> getGlobarVarStrList() {
 		ArrayList<String> result = new ArrayList<>();
-		for (IASTDeclaration decl: getGlobarVarList()) {
+		for (IASTDeclaration decl: this.getGlobarVarList()) {
 			 IASTDeclarator[] declarators = ((IASTSimpleDeclaration) decl).getDeclarators();
 			 for (IASTDeclarator declarator : declarators) {
 				 String tmp = declarator.getName().toString();
@@ -118,7 +104,7 @@ public class ASTFactory {
 		return result;
 	}
 	
-	public static ArrayList<IASTDeclaration> getGlobarVarList() {
+	public ArrayList<IASTDeclaration> getGlobarVarList() {
 		if (translationUnit == null) return null;
 		ArrayList<IASTDeclaration> varList = new ArrayList<>();
 		for (IASTDeclaration run : translationUnit.getDeclarations()) {
@@ -151,19 +137,28 @@ public class ASTFactory {
 		}
 		return funcDef;
 	}
-	public static IASTFunctionDefinition getFunction(String name) {
+	public IASTFunctionDefinition getFunction(String name) {
 		String funcName = null;
+		ArrayList<String> funcNameList = new ArrayList<>();
 		ArrayList<IASTFunctionDefinition> funcList = getListFunction();
 		for (IASTFunctionDefinition func : funcList) {
 			funcName = func.getDeclarator().getName().toString();
+			funcNameList.add(funcName);
 			if (name.equals(funcName)) {
 				return func;
 			}
 		}
+		//Bao loi neu khong tim duoc function
+		System.out.println("- Function list: ");
+		for (String str : funcNameList) {
+			System.out.println("   ." + str);
+		}
+		ErrorPrompt.FunctionNotFound("<" + name + ">");
 		return null;
 	}
-	public static IASTFunctionDefinition getMain() {
-		return FunctionHelper.getFunction(getListFunction(), "main");
+	
+	public IASTFunctionDefinition getMain() {
+		return FunctionHelper.getFunction(this.getListFunction(), "main");
 	}
 	
 	public void print() {
@@ -177,10 +172,13 @@ public class ASTFactory {
 		IASTNode[] children = node.getChildren();
 		
 		for (int i = 0; i < index; i++) {
-			System.out.print(" ");
+			//System.out.print(" ");
 		}
-	
-		System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
+		if (node instanceof IASTFunctionCallExpression) {
+			System.out.println(((IASTFunctionCallExpression) node).getExpressionType().toString());
+			
+		}
+		//System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);
 	}

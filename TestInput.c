@@ -1,14 +1,13 @@
-int a = 10;
+int a = 11;
 
-int sum(int a, int b) {
-	return a + b;
+void sum () {
+	int x = 9;
+	if (x) {
+	}
+	a = a + 1;
 }
 
-int print(int x) {
-	a = sum (3, 5) + x;
-	return a;
-}
-
-int main (void) {
-	return print(a);
+int main () {
+	sum();
+	return 0;
 }

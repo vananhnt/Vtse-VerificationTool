@@ -2,19 +2,17 @@ package cfg.build.index;
 
 import java.util.ArrayList;
 
-import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
-import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import cfg.build.ASTFactory;
+import cfg.utils.FunctionHelper;
 
 	/**
 	 * new VariableManager()
@@ -28,6 +26,7 @@ import cfg.build.ASTFactory;
 	 * @author va
 	 *
 	 */
+
 public class VariableManager {
 	private ArrayList<Variable> variableList;
 
@@ -111,8 +110,8 @@ public class VariableManager {
 			System.out.println("NULL");
 		} 
 		for (Variable var : this.variableList) {
-			//System.out.println(var.getVariableWithIndex());
-			System.out.println(var.getName());
+			System.out.println(var.getVariableWithIndex());
+			//System.out.println(var.getName());
 		}
 	}
 	
@@ -138,7 +137,11 @@ public class VariableManager {
 		for (Variable var : localVars) {
 			this.variableList.add(var);
 		}
-		this.variableList.add(getReturn(func));
+		//Neu function khac void, them bien return
+		if (!(FunctionHelper.getFunctionType(func).equals("void"))) {
+			this.variableList.add(getReturn(func));
+		} 
+	
 	}
 	
 	/**
@@ -181,6 +184,9 @@ public class VariableManager {
 		IASTParameterDeclaration paramDecl = null; 
 		for (IASTNode node : nodes) {
 			if (node instanceof IASTParameterDeclaration) {
+				if (node.getRawSignature().equals("void")) {
+					return params;
+				}
 				paramDecl = (IASTParameterDeclaration) node;
 				
 				IASTNode[] paramDecls = paramDecl.getChildren();
@@ -210,7 +216,6 @@ public class VariableManager {
 		IASTNode[] children = node.getChildren();		
 		String type;
 		String name;
-		IASTNode[] body; 
 		Variable var;
 		
 		IASTDeclarator[] declarations;
@@ -222,26 +227,28 @@ public class VariableManager {
 			declarations = ((IASTSimpleDeclaration) node).getDeclarators();
 			name = declarations[0].getName().getRawSignature();
 			
-			body = declarations[0].getChildren();			
 			var = new Variable(type, name + "_" + funcName, init);			
 			list.add(var);						
 		}
-		//neu co chua loi goi ham
+		/*
+		 * Neu co chua loi goi ham, them vao bien co ten giong loi goi ham
+		 * Ex: a = sum(3); -> a = sum_3
+		 */
 		if (node instanceof IASTFunctionCallExpression) {
-			if (!((IASTFunctionCallExpression) node).getExpressionType().equals(null)) {
+			if (!((IASTFunctionCallExpression) node).getExpressionType().toString().equals("void")) {
+				//System.err.println(((IASTFunctionCallExpression) node).getExpressionType());		
 				IASTFunctionCallExpression call = (IASTFunctionCallExpression) node;
 				String callName = call.getFunctionNameExpression().toString();
 				String params = "";
 				if (call.getArguments().length > 0) {
-					for (IASTNode param : call.getArguments()) {
+					for (IASTNode param : FunctionHelper.getArguments(call)) {
 						params += "_" + param.toString();
 					}
-					var = new Variable(call.getExpressionType().toString(), callName + params, 0);
-					list.add(var);
+					
+				}
+				var = new Variable(call.getExpressionType().toString(), callName + params, 0);
+				list.add(var);	
 			}
-			
-			}
-			
 		}
 		// return
 		

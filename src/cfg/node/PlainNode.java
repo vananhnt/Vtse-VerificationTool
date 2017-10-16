@@ -25,7 +25,7 @@ public class PlainNode extends CFGNode {
 	
 	public PlainNode (IASTStatement statement, IASTFunctionDefinition func) {
 		this.statement = changeName(statement, func);
-		this.func = func;
+		this.setFunc(func);
 	}
 	
 	private IASTStatement changeName(IASTStatement statement, IASTFunctionDefinition func) {
@@ -44,6 +44,9 @@ public class PlainNode extends CFGNode {
 	}
 	public String getFormula() {
 		return FormulaCreater.createFormula(statement);
+	}
+	public String getInfixFormula() {
+		return FormulaCreater.createInfixFormula(statement);
 	}
 
 	public String toString() {
@@ -72,5 +75,13 @@ public class PlainNode extends CFGNode {
 			}
 		}
 	return result;
-}	
+}
+
+	public IASTFunctionDefinition getFunc() {
+		return func;
+	}
+
+	public void setFunc(IASTFunctionDefinition func) {
+		this.func = func;
+	}	
 }

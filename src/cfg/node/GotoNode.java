@@ -1,7 +1,6 @@
 package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTGotoStatement;
-import org.eclipse.cdt.core.dom.ast.IASTLabelStatement;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 
 public class GotoNode extends CFGNode {

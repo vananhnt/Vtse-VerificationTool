@@ -3,15 +3,9 @@ package test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.ArrayList;
-
-import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTNode;
 
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
-import cfg.build.index.Variable;
-import cfg.build.index.VariableManager;
 
 /**
  * @author va
@@ -19,9 +13,13 @@ import cfg.build.index.VariableManager;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-		ASTFactory ast = new ASTFactory("./testFunc.cpp");
-		
-//		ast.print();
+	//	ASTFactory ast = new ASTFactory("./kratos/bist_cell.c");
+		ASTFactory ast = new ASTFactory("./TestInput.c");
+
+//		for (IASTFunctionDefinition func : ast.getListFunction()) {
+//			System.out.println(FunctionHelper.getFunctionName(func));
+//		}
+		//ast.print();
 //		ArrayList<IASTDeclaration> nodes = ast.getGlobarVarList();
 //		for (IASTDeclaration node : nodes) {
 //			System.out.println(node.getRawSignature());
@@ -38,23 +36,27 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(ast.getFunction("transmit3"), ast);
-
+		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+		
 		//cfg.printBoundary();
 		//cfg.unfold();
 		cfg.index();
 		cfg.printGraph();
 		//cfg.printMeta();
-		
+		cfg.getVm().printList();
 		//cfg.printSMTFormula(System.out);
-		//cfg.getVm().printList();
-		//cfg.printFormular(System.out);
-		//cfg.getVm().printList();
+		//System.out.println();
+		//System.out.println(cfg.createInfixFormula());
+	
 		//System.out.println("return_" + cfg.getNameFunction());
 		//System.out.println(cfg.getVm().getVariable("return_" + cfg.getNameFunction()).toString());
-		//cfg.getVm().printList();
-		//PrintStream out = new PrintStream(new File("./smt.txt"));
 		
-	//	cfg.printSMTFormula(out);
+		PrintStream out = new PrintStream(new File("./smt.txt"));
+		//out.println(cfg.createInfixFormula());
+		//cfg.va_printFormular(System.out);
+		//cfg.printSMTFormula(out);
+		//cfg.printFormular(System.out);
+		
+		
 	}
 }

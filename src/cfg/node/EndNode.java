@@ -5,7 +5,8 @@ package cfg.node;
 public class EndNode extends CFGNode {
 	public EndNode(){}
 	
-	public EndNode( CFGNode node){
+	public EndNode(CFGNode node){
 		super(node);
 	}
+	
 }

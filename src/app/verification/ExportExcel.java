@@ -2,7 +2,6 @@ package app.verification;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import app.verification.report.VerificationReport;
@@ -46,7 +45,6 @@ public class ExportExcel {
 			throws IOException, RowsExceededException, WriteException{
 		
 		try {
-			int index = 1;
 			int numberOfRow = 4;
 			
 			//TODO: title of excel export

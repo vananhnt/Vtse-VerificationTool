@@ -1,22 +1,12 @@
 package test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
-import app.solver.SMTInput;
 import app.verification.FunctionVerification;
 import app.verification.report.VerificationReport;
-import app.verification.userassertion.UserInput;
 import cfg.build.ASTFactory;
-import cfg.build.VtseCFG;
-import cfg.build.index.Variable;
 
 public class TestFunction {
 	public static void main(String[] args) {

@@ -72,7 +72,7 @@ public class Variable {
 	}
 
 	public boolean hasInitialized() {
-		return index > -1;
+		return index >= -1;
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
@@ -29,8 +30,10 @@ public class FunctionHelper {
 	}
 	public static String getFunctionType (IASTFunctionDefinition func) {
 		return func.getDeclSpecifier().toString();
-		
-		
+			
+	}
+	public static String getFunctionName (IASTFunctionDefinition func) {
+		return func.getDeclarator().getName().getRawSignature();
 	}
 	//Lay Vm cua tat ca cac ham
 	public static VariableManager getVM(ArrayList<IASTFunctionDefinition> funcList) {
@@ -74,6 +77,16 @@ public class FunctionHelper {
 			}
 		}
 		return params;
+	}
+	
+	public static ArrayList<IASTNode> getArguments(IASTFunctionCallExpression funcCall) 	{
+		ArrayList<IASTNode> list = new ArrayList<>();
+		for (IASTNode arg : funcCall.getArguments()) {
+			if (!(arg.getRawSignature().equals("void"))) {
+				list.add(arg);
+			}	
+		}
+		return list;
 	}
 	
 //	public static ArrayList<IASTIdExpression> getParameters(IASTFunctionDefinition func) {

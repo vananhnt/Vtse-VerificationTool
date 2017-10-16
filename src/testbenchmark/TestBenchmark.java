@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.activation.MimeType;
-import javax.activation.MimetypesFileTypeMap;
-
 import app.verification.ExportExcel;
 import app.verification.FileVerification;
 import app.verification.report.VerificationReport;
@@ -22,7 +19,9 @@ public class TestBenchmark {
 //		}
 		
 		ExportExcel exportExcel = new ExportExcel();
-		File file = new File("./floats-cdfpl-func");
+		//File file = new File("./floats-cdfpl-func");
+		File file = new File("./kratos/bist_cell.c");
+		//File file = new File("./kratos/TestInput.c");
 		FileVerification fv = new FileVerification();
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

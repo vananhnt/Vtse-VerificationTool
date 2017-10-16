@@ -12,7 +12,6 @@ import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
-import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
@@ -77,10 +76,12 @@ public class ExpressionModifier {
 //		}
 		String currentName = node.getFunctionNameExpression().toString();
 		String params = "";
-		
-		for (IASTNode param : node.getArguments()) {
-			params += "_" + param.toString();
+		if (node.getArguments().length > 0) {
+			for (IASTNode param : node.getArguments()) {
+				params += "_" + param.toString();
+			}
 		}
+		
 	
 		IASTName newName = factory.newName((currentName + params).toCharArray());
 		newId = factory.newIdExpression(newName);
@@ -114,8 +115,6 @@ public class ExpressionModifier {
 	 * sua cau lenh khoi tao  (khong con phep gan vi da xu ly o CFGBuilder)
 	 */
 	private static IASTNode changeDeclarationStatement(IASTDeclarationStatement node, IASTFunctionDefinition func) {
-		IASTDeclSpecifier type = null;
-		IASTInitializerClause initClause; 
 		IASTEqualsInitializer init;
 		String newNameVar;
 		IASTName nameId;
@@ -129,7 +128,6 @@ public class ExpressionModifier {
 		
 		for (IASTNode run : simpleDecl.getChildren()){
 			if (run instanceof IASTDeclSpecifier) {
-				type = (IASTDeclSpecifier) run.copy();
 			}
 			if (run instanceof IASTDeclarator){
 				init = (IASTEqualsInitializer) (((IASTDeclarator) run).getInitializer());
@@ -166,6 +164,7 @@ public class ExpressionModifier {
 	 * @param node, func
 	 * sua Binary
 	 */
+	
 	private static  IASTNode changeBinaryExpression(IASTBinaryExpression node, IASTFunctionDefinition func) {
 		IASTExpression left = node.getOperand1().copy();
 		IASTExpression right = node.getOperand2().copy();

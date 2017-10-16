@@ -2,7 +2,6 @@ package cfg.build.index;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
-import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
@@ -15,11 +14,9 @@ import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import cfg.build.ASTFactory;
 import cfg.utils.ExpressionHelper;
 
 /**
@@ -141,11 +138,9 @@ public class Index {
 	 */
 	public static IASTNode resetIndex(IASTDeclarationStatement node, VariableManager vm) {		
 		String name = "";
-		String type = null;
 		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) node.getDeclaration().copy();
 		for (IASTNode run : simpleDecl.getChildren()){
 			if (run instanceof IASTDeclSpecifier) {
-				type = run.toString();
 			}
 			if (run instanceof IASTDeclarator){
 				int reset = -1;
@@ -178,12 +173,10 @@ public class Index {
 	 */
 	private static IASTNode indexDeclarationStatement(IASTDeclarationStatement statement, VariableManager vm) {		
 		String name = "";
-		String type = null;
 		IASTSimpleDeclaration simpleDecl = (IASTSimpleDeclaration) statement.getDeclaration().copy();
 		for (IASTNode run : simpleDecl.getChildren()){
 			// type
 			if (run instanceof IASTDeclSpecifier) {
-				type = run.toString();
 			}
 			
 			if (run instanceof IASTDeclarator){				

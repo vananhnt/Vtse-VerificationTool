@@ -21,6 +21,7 @@ import cfg.utils.FunctionHelper;
 
 public class VtseCFG extends ControlFlowGraph {	
 	private VariableManager vm;
+	@SuppressWarnings("unused")
 	private String returnType;
 	
 	public VtseCFG() {
@@ -69,6 +70,9 @@ public class VtseCFG extends ControlFlowGraph {
 	
 	public String createFormular() {
 		return FormulaCreater.create(start, exit); 
+	}
+	public String createInfixFormula() {
+		return FormulaCreater.createInfix(start, exit);
 	}
 	public void printFormular(PrintStream ps) {
 		ps.print(createFormular());
@@ -178,9 +182,32 @@ public class VtseCFG extends ControlFlowGraph {
 		if (f != null) {
 			printStream.println("(assert " + f + ")");
 		}
-	
 	}
 	
+	public void va_printFormular(PrintStream printStream) {
+		int lastIndex;
+//		for (Variable var: vm.getVariableList()) {
+//			lastIndex = var.getIndex();
+//			if (lastIndex == -3) {
+//				printStream.println("(declare-fun " + var.getName() + 
+//						" () "+ SMTTypeConvertion.getSMTType(var.getType()) +")");
+//			}
+//			for (int i = 0; i <= lastIndex; i++) {
+//				printStream.println("(declare-fun " + var.getName() + "_" + i + 
+//										" () "+ SMTTypeConvertion.getSMTType(var.getType()) +")");
+//			}
+//			
+//		}
+		ArrayList<String> f = FormulaCreater.createListConstraint(start, exit); 
+		if (f != null) {
+			//System.out.print(f.get(1));
+			for (String f_child : f) {
+				if (f_child.length() < 30)
+				printStream.println("(assert " + f_child + ")");
+			}
+			
+		}
+	}
 	private static void printMeta(PrintStream printStream,CFGNode node, CFGNode end, String nSpaces) {
 		if (node == null) {
 			return;

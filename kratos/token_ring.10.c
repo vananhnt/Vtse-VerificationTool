@@ -204,7 +204,7 @@ void transmit3(void)
   T3_ENTRY: ;
   {
   while (1) {
-    while_3_continue: /* CIL Label */ ;
+    while_3_continue: /* 	CIL Label */ ;
     t3_pc = 1;
     t3_st = 2;
 

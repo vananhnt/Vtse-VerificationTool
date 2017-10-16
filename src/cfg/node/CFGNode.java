@@ -45,8 +45,14 @@ public abstract class CFGNode {
 	public String getFormula() {
 		return null;	
 	}
+	public String getInfixFormula() {
+		return null;
+	}
 	public void printFormular(PrintStream ps) {
 		ps.println(getFormula());
+	}
+	public void printInfixFormular(PrintStream ps) {
+		ps.println(getInfixFormula());
 	}
 	public void setVistited(boolean vistited) {
 		this.vistited = vistited;

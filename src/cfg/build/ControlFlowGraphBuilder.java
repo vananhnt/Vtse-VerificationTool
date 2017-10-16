@@ -39,6 +39,7 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndNode;
 import cfg.node.FunctionCallNode;
 import cfg.node.GotoNode;
 import cfg.node.IterationNode;
@@ -68,8 +69,8 @@ public class ControlFlowGraphBuilder {
 	public ControlFlowGraphBuilder() {}
 	
 	public ControlFlowGraph build(IASTFunctionDefinition def) {
-//		return createSubGraph(def.getBody());
-		return createSubGraph(def.getBody(), def);
+		ControlFlowGraph cfg = createSubGraph(def.getBody(), def);
+		return cfg;
 	}
 
 	/**
@@ -161,8 +162,9 @@ public class ControlFlowGraphBuilder {
 			gotoList.add(newNode);
 		} else if (statement instanceof IASTLabelStatement) {
 			cfg = createGotoGraph((IASTLabelStatement) statement, def);
-		} else {
-			UndefinedNode undefined = new UndefinedNode(statement);
+		} 
+		else {
+ 			UndefinedNode undefined = new UndefinedNode(statement);
 			cfg = new ControlFlowGraph(undefined, undefined);
 		}
 		return cfg;
@@ -193,7 +195,6 @@ public class ControlFlowGraphBuilder {
 		CFGNode returnNode;
 		ControlFlowGraph cfg = null;
 		//IASTNode[] nodes = statement.getChildren();
-		IASTStatement newStatement;
 		
 		if (!hasCallExpression(statement)) {
 			returnNode = new ReturnNode(statement, def);
@@ -257,7 +258,6 @@ public class ControlFlowGraphBuilder {
 		
 		ControlFlowGraph cfg = null;
 		//IASTNode[] nodes = statement.getChildren();
-		IASTStatement newStatement;
 		
 		if (!hasCallExpression(statement)) {
 			plainNode = new PlainNode(statement, def);
@@ -265,11 +265,13 @@ public class ControlFlowGraphBuilder {
 		} else {
 			//Tao ra node moi co chua loi goi ham la 1 bien
 			cfg = createFuncCallGraph(statement, def);
-			//Neu khong la ham void, tao ra node moi co
-			
+
+			if (statement.getExpression().getChildren()[0] instanceof IASTIdExpression) {
+				//Kiem tra loi goi ham co la void khong, neu la void khong lam gi ca
+			} else {
 				plainNode = new PlainNode(statement, def);
 				cfg.concat(new ControlFlowGraph(plainNode, plainNode));
-				
+			}		
 		}
 		return cfg;
 	}
@@ -329,7 +331,7 @@ public class ControlFlowGraphBuilder {
 	 */
 	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement, IASTFunctionDefinition func) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
-		ControlFlowGraph declCfg = new ControlFlowGraph();
+		//ControlFlowGraph declCfg = new ControlFlowGraph();
 		IASTEqualsInitializer init;
 		IASTName nameVar;
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
@@ -387,6 +389,7 @@ public class ControlFlowGraphBuilder {
 		return cfg;
 	}
 	
+	@SuppressWarnings("unused")
 	private ControlFlowGraph createDeclaration(IASTDeclarationStatement statement) {
 		ControlFlowGraph cfg = new ControlFlowGraph();
 		ControlFlowGraph declCfg = new ControlFlowGraph();
