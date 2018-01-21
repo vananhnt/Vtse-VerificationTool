@@ -14,7 +14,7 @@ import cfg.build.VtseCFG;
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
 	//	ASTFactory ast = new ASTFactory("./kratos/bist_cell.c");
-		ASTFactory ast = new ASTFactory("./TestInput.c");
+		ASTFactory ast = new ASTFactory("./floats-cdfpl-func/newton_1_1_true_unreach_call.c");
 
 //		for (IASTFunctionDefinition func : ast.getListFunction()) {
 //			System.out.println(FunctionHelper.getFunctionName(func));
@@ -36,14 +36,14 @@ public class Test {
 		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
 		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
 		
-		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction("newton_1_1_true_unreach_call"), ast);
 		
 		//cfg.printBoundary();
 		//cfg.unfold();
-		cfg.index();
+		//cfg.index();
 		cfg.printGraph();
 		//cfg.printMeta();
-		cfg.getVm().printList();
+		//cfg.getVm().printList();
 		//cfg.printSMTFormula(System.out);
 		//System.out.println();
 		//System.out.println(cfg.createInfixFormula());
@@ -51,7 +51,7 @@ public class Test {
 		//System.out.println("return_" + cfg.getNameFunction());
 		//System.out.println(cfg.getVm().getVariable("return_" + cfg.getNameFunction()).toString());
 		
-		PrintStream out = new PrintStream(new File("./smt.txt"));
+		//PrintStream out = new PrintStream(new File("./smt.txt"));
 		//out.println(cfg.createInfixFormula());
 		//cfg.va_printFormular(System.out);
 		//cfg.printSMTFormula(out);

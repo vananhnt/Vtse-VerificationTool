@@ -165,6 +165,7 @@ public class ExpressionModifier {
 	 * sua Binary
 	 */
 	
+	
 	private static  IASTNode changeBinaryExpression(IASTBinaryExpression node, IASTFunctionDefinition func) {
 		IASTExpression left = node.getOperand1().copy();
 		IASTExpression right = node.getOperand2().copy();
@@ -183,7 +184,16 @@ public class ExpressionModifier {
 		return newNode;	
 	
 	}
+	/*
+	private static  IASTNode changeBinaryExpression(IASTBinaryExpression node, IASTFunctionDefinition func) {
+		IASTExpression left = node.getOperand1().copy();
+		IASTExpression right = node.getOperand2().copy();
+		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
+		IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), 
+				(IASTExpression) changeVariableName(left, func), (IASTExpression) changeVariableName(right, func));
+		return newNode;	
 	
+}*/
 	private static String getFunctionName(IASTFunctionDefinition func) {
 		String res = func.getDeclarator().getName().toString();
 //		for (IASTVariable node: FunctionHelper.getParameters(func)) {

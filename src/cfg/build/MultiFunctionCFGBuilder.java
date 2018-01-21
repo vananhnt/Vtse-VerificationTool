@@ -148,7 +148,7 @@ public class MultiFunctionCFGBuilder {
 		//Noi voi than cua ham duoc goi
 			cfg.concat(new ControlFlowGraph(func));
 		
-		//Tao ra node: ham duoc goi = return new khong phai void
+		//Tao ra node: ham duoc goi = return neu khong phai void
 		if (!isVoid(callExpression)) {
 			IASTIdExpression left = (IASTIdExpression) ExpressionModifier.changeFunctionCallExpression(callExpression, func);
 			IASTName nameRight = factory.newName(("return_" + funcName).toCharArray());

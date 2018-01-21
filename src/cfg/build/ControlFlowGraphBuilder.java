@@ -266,7 +266,7 @@ public class ControlFlowGraphBuilder {
 			//Tao ra node moi co chua loi goi ham la 1 bien
 			cfg = createFuncCallGraph(statement, def);
 
-			if (statement.getExpression().getChildren()[0] instanceof IASTIdExpression) {
+			if (!(statement.getExpression().getChildren()[0] instanceof IASTIdExpression)) {
 				//Kiem tra loi goi ham co la void khong, neu la void khong lam gi ca
 			} else {
 				plainNode = new PlainNode(statement, def);

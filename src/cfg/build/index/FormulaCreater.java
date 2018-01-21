@@ -15,6 +15,7 @@ import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
@@ -132,12 +133,14 @@ public class FormulaCreater {
 			return prefixBinaryExpression((IASTBinaryExpression) node);
 		} else if (node instanceof IASTIdExpression) { //bien (khong tinh trong phep khoi tao)
 			return ExpressionHelper.toString(node);
+		} else if (node instanceof IASTUnaryExpression) {
+			return prefixBinaryExpression((IASTBinaryExpression) ((IASTUnaryExpression) node).getOperand());
 		} else if (node instanceof IASTLiteralExpression) {
 			return ExpressionHelper.toString(node);
 //		} else if (node instanceof IASTReturnStatement){
 //			return prefixReturnStatement((IASTReturnStatement) node); //da xu ly return o ReturnNode
 		}
-		return null;
+		return node.getClass().getSimpleName();
 	}
 	
 	public static String createInfixFormula(IASTNode node) {
@@ -151,7 +154,7 @@ public class FormulaCreater {
 			return ExpressionHelper.toString(node);
 		} else if (node instanceof IASTLiteralExpression) {
 			return ExpressionHelper.toString(node);
-		}
+		} 
 		return null;
 	}
 	
