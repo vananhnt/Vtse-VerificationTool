@@ -13,30 +13,8 @@ import cfg.build.VtseCFG;
  */
 public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
-	//	ASTFactory ast = new ASTFactory("./kratos/bist_cell.c");
-		ASTFactory ast = new ASTFactory("./floats-cdfpl-func/newton_1_1_true_unreach_call.c");
-
-//		for (IASTFunctionDefinition func : ast.getListFunction()) {
-//			System.out.println(FunctionHelper.getFunctionName(func));
-//		}
-		//ast.print();
-//		ArrayList<IASTDeclaration> nodes = ast.getGlobarVarList();
-//		for (IASTDeclaration node : nodes) {
-//			System.out.println(node.getRawSignature());
-//		}
-		
-//		ArrayList<String> nodes = ast.getGlobarVarStrList();
-//		for (String node :nodes) {
-//			System.out.println(node);
-//		}
-		//*Parameters:
-		//DeclSpecifier : kieu tra ve cua ham
-		//Declarator : ten cua ham, vd: test(), sum(int i)
-		//declarator.getName: ten, vd: test, sum
-		//declarator.getChildren() -> CPPASTParameterDeclaration int i,..
-		//parameterDeclaration.getChildren -> Declarator : tham bien cua ham, vd: a, b, n, ...
-		
-		VtseCFG cfg = new VtseCFG(ast.getFunction("newton_1_1_true_unreach_call"), ast);
+		ASTFactory ast = new ASTFactory("./kratos/token_ring.10.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
 		
 		//cfg.printBoundary();
 		//cfg.unfold();

@@ -1,6 +1,6 @@
 <AssertionFile>
 	<AssertionMethod>
-		<Method>token_ring.10</Method>
+		<Method>main</Method>
 		<PreCondition>1 < 2</PreCondition>
 		<PostCondition>return < 1</PostCondition>
 	</AssertionMethod>

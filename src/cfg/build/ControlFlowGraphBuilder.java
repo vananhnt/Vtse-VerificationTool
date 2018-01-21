@@ -176,8 +176,7 @@ public class ControlFlowGraphBuilder {
 		for (GotoNode go : gotoList) {
 			if (go.getLabelName().toString().equals(statement.getName().toString())) {
 				go.setNext(labelNode);
-				gotoList.remove(go);
-				break;
+				
 			}
 		}
 		IASTStatement nested = statement.getNestedStatement();

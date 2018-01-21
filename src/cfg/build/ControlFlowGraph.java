@@ -10,6 +10,7 @@ import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
 import cfg.node.EndNode;
+import cfg.node.GotoNode;
 import cfg.node.IterationNode;
 
 
@@ -144,7 +145,7 @@ public class ControlFlowGraph {
 			return;
 		} else if (iter instanceof DecisionNode) {
 			iter.printNode();
-			System.out.println(iter.getFormula());
+			//System.out.println(iter.getFormula());
 			printSpace(level);
 			System.out.println("Then Clause: ");
 			if (((DecisionNode) iter).getThenNode() != null) {
@@ -154,10 +155,10 @@ public class ControlFlowGraph {
 			System.out.println("Else Clause: ");
 			if (((DecisionNode) iter).getElseNode() != null)
 				print(((DecisionNode) iter).getElseNode(),  level + 7);		
-//		}  else if (iter instanceof GotoNode) {
-//			iter.printNode();
-//			printSpace(level);
-//			((GotoNode) iter).getLabelNode().printNode();
+		}  else if (iter instanceof GotoNode) {
+			iter.printNode();
+			printSpace(level);
+			((GotoNode) iter).getLabelNode().printNode();
 		} else if (iter instanceof IterationNode) {
 			iter.printNode();
 			if (iter.getNext() != null) print(iter.getNext(), level);
