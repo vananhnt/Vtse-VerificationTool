@@ -409,7 +409,7 @@ void master()
   }
   M_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
 
     {
     token = __NONDET;
@@ -453,7 +453,7 @@ void transmit1()
   }
   T1_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
 
     t1_pc = 1;
     t1_st = 2;
@@ -489,7 +489,7 @@ void transmit2()
   }
   T2_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_2_continue: /* CIL Label */ ;
     t2_pc = 1;
     t2_st = 2;
@@ -524,7 +524,7 @@ void transmit3()
   }
   T3_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_3_continue: /* 	CIL Label */
     t3_pc = 1;
     t3_st = 2;
@@ -560,7 +560,7 @@ void transmit4()
   }
   T4_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_4_continue: /* CIL Label */ ;
     t4_pc = 1;
     t4_st = 2;
@@ -596,7 +596,7 @@ void transmit5()
   }
   T5_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_5_continue: /* CIL Label */ ;
     t5_pc = 1;
     t5_st = 2;
@@ -632,7 +632,7 @@ void transmit6()
   }
   T6_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_6_continue: /* CIL Label */ ;
     t6_pc = 1;
     t6_st = 2;
@@ -668,7 +668,7 @@ void transmit7()
   }
   T7_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_7_continue: /* CIL Label */ ;
     t7_pc = 1;
     t7_st = 2;
@@ -704,7 +704,7 @@ void transmit8()
   }
   T8_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_8_continue: /* CIL Label */ ;
     t8_pc = 1;
     t8_st = 2;
@@ -740,7 +740,7 @@ void transmit9()
   }
   T9_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_9_continue: /* CIL Label */ ;
     t9_pc = 1;
     t9_st = 2;
@@ -776,7 +776,7 @@ void transmit10()
   }
   T10_ENTRY:
   {
-  while (1) {
+  while (1 < 2) {
     while_10_continue: /* CIL Label */ ;
     t10_pc = 1;
     t10_st = 2;
@@ -940,7 +940,7 @@ void eval()
 
   {
   {
-  while (1) {
+  while (1 < 2) {
     while_11_continue: /* CIL Label */ ;
     {
     tmp = exists_runnable_thread();
@@ -1507,7 +1507,7 @@ void start_simulation()
   reset_delta_events();
   }
   {
-  while (1) {
+  while (1 < 2) {
     while_12_continue: /* CIL Label */ ;
     {
     kernel_st = 1;
@@ -1551,7 +1551,7 @@ void start_simulation()
 
 }
 }
-int token_ring.10()
+int token_ring_10()
 { int __retres1 ;
 
   {

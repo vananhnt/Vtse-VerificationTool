@@ -6,8 +6,10 @@ import java.util.List;
 
 import app.utils.InfixToPrefix;
 import cfg.build.index.Variable;
-
-
+/*
+ * @author: Ba Tu
+ * */
+ 
 
 public class UserInput {
 	String input;

@@ -70,22 +70,22 @@ int E_10  =    2;
 int E_11  =    2;
 int E_12  =    2;
 int E_13  =    2;
-int is_master_triggered(void) ;
-int is_transmit1_triggered(void) ;
-int is_transmit2_triggered(void) ;
-int is_transmit3_triggered(void) ;
-int is_transmit4_triggered(void) ;
-int is_transmit5_triggered(void) ;
-int is_transmit6_triggered(void) ;
-int is_transmit7_triggered(void) ;
-int is_transmit8_triggered(void) ;
-int is_transmit9_triggered(void) ;
-int is_transmit10_triggered(void) ;
-int is_transmit11_triggered(void) ;
-int is_transmit12_triggered(void) ;
-int is_transmit13_triggered(void) ;
-void immediate_notify(void) ;
-void master(void) 
+int is_master_triggered() ;
+int is_transmit1_triggered() ;
+int is_transmit2_triggered() ;
+int is_transmit3_triggered() ;
+int is_transmit4_triggered() ;
+int is_transmit5_triggered() ;
+int is_transmit6_triggered() ;
+int is_transmit7_triggered() ;
+int is_transmit8_triggered() ;
+int is_transmit9_triggered() ;
+int is_transmit10_triggered() ;
+int is_transmit11_triggered() ;
+int is_transmit12_triggered() ;
+int is_transmit13_triggered() ;
+void immediate_notify() ;
+void master()
 { 
 
   {
@@ -100,7 +100,7 @@ void master(void)
   }
   M_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_0_continue: /* CIL Label */ ;
     {
     E_1 = 1;
@@ -108,7 +108,7 @@ void master(void)
     E_1 = 2;
     }
     {
-    while (1) {
+    while (1 < 2) {
       while_1_continue: /* CIL Label */ ;
       m_pc = 1;
       m_st = 2;
@@ -123,10 +123,10 @@ void master(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit1(void) 
+void transmit1()
 { 
 
   {
@@ -141,7 +141,7 @@ void transmit1(void)
   }
   T1_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_2_continue: /* CIL Label */ ;
     t1_pc = 1;
     t1_st = 2;
@@ -158,10 +158,10 @@ void transmit1(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit2(void) 
+void transmit2()
 { 
 
   {
@@ -176,7 +176,7 @@ void transmit2(void)
   }
   T2_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_3_continue: /* CIL Label */ ;
     t2_pc = 1;
     t2_st = 2;
@@ -193,10 +193,10 @@ void transmit2(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit3(void) 
+void transmit3()
 { 
 
   {
@@ -211,7 +211,7 @@ void transmit3(void)
   }
   T3_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_4_continue: /* CIL Label */ ;
     t3_pc = 1;
     t3_st = 2;
@@ -228,10 +228,10 @@ void transmit3(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit4(void) 
+void transmit4()
 { 
 
   {
@@ -246,7 +246,7 @@ void transmit4(void)
   }
   T4_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_5_continue: /* CIL Label */ ;
     t4_pc = 1;
     t4_st = 2;
@@ -263,10 +263,10 @@ void transmit4(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit5(void) 
+void transmit5()
 { 
 
   {
@@ -281,7 +281,7 @@ void transmit5(void)
   }
   T5_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_6_continue: /* CIL Label */ ;
     t5_pc = 1;
     t5_st = 2;
@@ -298,10 +298,10 @@ void transmit5(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit6(void) 
+void transmit6()
 { 
 
   {
@@ -316,7 +316,7 @@ void transmit6(void)
   }
   T6_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_7_continue: /* CIL Label */ ;
     t6_pc = 1;
     t6_st = 2;
@@ -333,10 +333,10 @@ void transmit6(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit7(void) 
+void transmit7()
 { 
 
   {
@@ -351,7 +351,7 @@ void transmit7(void)
   }
   T7_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_8_continue: /* CIL Label */ ;
     t7_pc = 1;
     t7_st = 2;
@@ -368,10 +368,10 @@ void transmit7(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit8(void) 
+void transmit8()
 { 
 
   {
@@ -386,7 +386,7 @@ void transmit8(void)
   }
   T8_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_9_continue: /* CIL Label */ ;
     t8_pc = 1;
     t8_st = 2;
@@ -403,10 +403,10 @@ void transmit8(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit9(void) 
+void transmit9()
 { 
 
   {
@@ -421,7 +421,7 @@ void transmit9(void)
   }
   T9_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_10_continue: /* CIL Label */ ;
     t9_pc = 1;
     t9_st = 2;
@@ -438,10 +438,10 @@ void transmit9(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit10(void) 
+void transmit10()
 { 
 
   {
@@ -456,7 +456,7 @@ void transmit10(void)
   }
   T10_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_11_continue: /* CIL Label */ ;
     t10_pc = 1;
     t10_st = 2;
@@ -473,10 +473,10 @@ void transmit10(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit11(void) 
+void transmit11()
 { 
 
   {
@@ -491,7 +491,7 @@ void transmit11(void)
   }
   T11_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_12_continue: /* CIL Label */ ;
     t11_pc = 1;
     t11_st = 2;
@@ -508,10 +508,10 @@ void transmit11(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void transmit12(void) 
+void transmit12()
 { 
 
   {
@@ -526,7 +526,7 @@ void transmit12(void)
   }
   T12_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_13_continue: /* CIL Label */ ;
     t12_pc = 1;
     t12_st = 2;
@@ -543,11 +543,11 @@ void transmit12(void)
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
 
-void transmit13(void) 
+void transmit13()
 { 
 
   {
@@ -562,7 +562,7 @@ void transmit13(void)
   }
   T13_ENTRY: ;
   {
-  while (1) {
+  while (1 < 2) {
     while_14_continue: /* CIL Label */ ;
     t13_pc = 1;
     t13_st = 2;
@@ -570,17 +570,17 @@ void transmit13(void)
     goto return_label;
     T13_WAIT: 
     {
-    assert(0);
+
     }
   }
   while_14_break: /* CIL Label */ ;
   }
 
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-int is_master_triggered(void) 
+int is_master_triggered()
 { int __retres1 ;
 
   {
@@ -599,7 +599,7 @@ int is_master_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit1_triggered(void) 
+int is_transmit1_triggered()
 { int __retres1 ;
 
   {
@@ -618,7 +618,7 @@ int is_transmit1_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit2_triggered(void) 
+int is_transmit2_triggered()
 { int __retres1 ;
 
   {
@@ -637,7 +637,7 @@ int is_transmit2_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit3_triggered(void) 
+int is_transmit3_triggered()
 { int __retres1 ;
 
   {
@@ -656,7 +656,7 @@ int is_transmit3_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit4_triggered(void) 
+int is_transmit4_triggered()
 { int __retres1 ;
 
   {
@@ -675,7 +675,7 @@ int is_transmit4_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit5_triggered(void) 
+int is_transmit5_triggered()
 { int __retres1 ;
 
   {
@@ -694,7 +694,7 @@ int is_transmit5_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit6_triggered(void) 
+int is_transmit6_triggered()
 { int __retres1 ;
 
   {
@@ -713,7 +713,7 @@ int is_transmit6_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit7_triggered(void) 
+int is_transmit7_triggered()
 { int __retres1 ;
 
   {
@@ -732,7 +732,7 @@ int is_transmit7_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit8_triggered(void) 
+int is_transmit8_triggered()
 { int __retres1 ;
 
   {
@@ -751,7 +751,7 @@ int is_transmit8_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit9_triggered(void) 
+int is_transmit9_triggered()
 { int __retres1 ;
 
   {
@@ -770,7 +770,7 @@ int is_transmit9_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit10_triggered(void) 
+int is_transmit10_triggered()
 { int __retres1 ;
 
   {
@@ -789,7 +789,7 @@ int is_transmit10_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit11_triggered(void) 
+int is_transmit11_triggered()
 { int __retres1 ;
 
   {
@@ -808,7 +808,7 @@ int is_transmit11_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit12_triggered(void) 
+int is_transmit12_triggered()
 { int __retres1 ;
 
   {
@@ -827,7 +827,7 @@ int is_transmit12_triggered(void)
   return (__retres1);
 }
 }
-int is_transmit13_triggered(void) 
+int is_transmit13_triggered()
 { int __retres1 ;
 
   {
@@ -846,15 +846,15 @@ int is_transmit13_triggered(void)
   return (__retres1);
 }
 }
-void update_channels(void) 
+void update_channels()
 { 
 
   {
 
-  return;
+
 }
 }
-void init_threads(void) 
+void init_threads()
 { 
 
   {
@@ -929,10 +929,10 @@ void init_threads(void)
     t13_st = 2;
   }
 
-  return;
+
 }
 }
-int exists_runnable_thread(void) 
+int exists_runnable_thread()
 { int __retres1 ;
 
   {
@@ -1012,13 +1012,13 @@ int exists_runnable_thread(void)
   return (__retres1);
 }
 }
-void eval(void) 
+void eval()
 { int __NONDET ;
   int tmp ;
 
   {
   {
-  while (1) {
+  while (1 < 2) {
     while_15_continue: /* CIL Label */ ;
     {
     tmp = exists_runnable_thread();
@@ -1200,10 +1200,10 @@ void eval(void)
   while_15_break: /* CIL Label */ ;
   }
 
-  return;
+
 }
 }
-void fire_delta_events(void) 
+void fire_delta_events()
 { 
 
   {
@@ -1343,10 +1343,10 @@ void fire_delta_events(void)
 
   }
 
-  return;
+
 }
 }
-void reset_delta_events(void) 
+void reset_delta_events()
 { 
 
   {
@@ -1486,10 +1486,10 @@ void reset_delta_events(void)
 
   }
 
-  return;
+
 }
 }
-void activate_threads(void) 
+void activate_threads()
 { int tmp ;
   int tmp___0 ;
   int tmp___1 ;
@@ -1619,10 +1619,10 @@ void activate_threads(void)
 
   }
 
-  return;
+
 }
 }
-void immediate_notify(void) 
+void immediate_notify()
 { 
 
   {
@@ -1630,19 +1630,19 @@ void immediate_notify(void)
   activate_threads();
   }
 
-  return;
+
 }
 }
-void fire_time_events(void) 
+void fire_time_events()
 { 
 
   {
   M_E = 1;
 
-  return;
+
 }
 }
-void reset_time_events(void) 
+void reset_time_events()
 { 
 
   {
@@ -1782,10 +1782,10 @@ void reset_time_events(void)
 
   }
 
-  return;
+
 }
 }
-void init_model(void) 
+void init_model()
 { 
 
   {
@@ -1804,10 +1804,10 @@ void init_model(void)
   t12_i = 1;
   t13_i = 1;
 
-  return;
+
 }
 }
-int stop_simulation(void) 
+int stop_simulation()
 { int tmp ;
   int __retres2 ;
 
@@ -1826,7 +1826,7 @@ int stop_simulation(void)
   return (__retres2);
 }
 }
-void start_simulation(void) 
+void start_simulation()
 { int kernel_st ;
   int tmp ;
   int tmp___0 ;
@@ -1841,7 +1841,7 @@ void start_simulation(void)
   reset_delta_events();
   }
   {
-  while (1) {
+  while (1 < 2) {
     while_16_continue: /* CIL Label */ ;
     {
     kernel_st = 1;
@@ -1882,10 +1882,10 @@ void start_simulation(void)
   while_16_break: /* CIL Label */ ;
   }
 
-  return;
+
 }
 }
-int main(void) 
+int transmitter_13()
 { int __retres1 ;
 
   {

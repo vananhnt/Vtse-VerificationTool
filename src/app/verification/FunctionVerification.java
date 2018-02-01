@@ -108,8 +108,8 @@ public class FunctionVerification {
 		cfg.unfold();
 		cfg.index();
 		//cfg.printGraph();
-		cfg.printMeta();
-		cfg.printFormular(System.out);
+		//cfg.printMeta();
+		//cfg.printFormular(System.out);
 		
 		SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
 		

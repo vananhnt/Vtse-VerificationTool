@@ -42,6 +42,7 @@ public class SMTInput {
 	public void setConstrainst(List<String> constrainst) {
 		this.constraints = constrainst;
 	}
+	
 	public void printInput() {
 		System.err.println("print");
 		for (Variable v: variableList) {
@@ -80,7 +81,7 @@ public class SMTInput {
 
 		if (v.hasInitialized()) {
 				
-				System.out.println("v: " + v);
+				//System.out.println("v: " + v);
 				if (v.getIndex() < 0)
 					out.append("(declare-fun " + v.getVariableWithIndex() + " () " + smtType + ")\n");
 				else {

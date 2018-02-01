@@ -11,12 +11,12 @@ void update_fifo_q()
 { 
 
   {
-  if ((int )q_free == 0) {
+  if (q_free == 0) {
     q_write_ev = 0;
   } else {
 
   }
-  if ((int )q_free == 1) {
+  if (q_free == 1) {
     q_read_ev = 0;
   } else {
 
@@ -24,7 +24,7 @@ void update_fifo_q()
   q_ev = 0;
   q_req_up = 0;
 
-  return;
+
 }
 }
 int p_num_write  ;
@@ -37,12 +37,12 @@ int c_last_read  ;
 int c_dr_st  ;
 int c_dr_pc  ;
 int c_dr_i  ;
-int is_do_write_p_triggered(void) 
+int is_do_write_p_triggered()
 { int __retres1 ;
 
   {
-  if ((int )p_dw_pc == 1) {
-    if ((int )fast_clk_edge == 1) {
+  if (p_dw_pc == 1) {
+    if (fast_clk_edge == 1) {
       __retres1 = 1;
       goto return_label;
     } else {
@@ -51,8 +51,8 @@ int is_do_write_p_triggered(void)
   } else {
 
   }
-  if ((int )p_dw_pc == 2) {
-    if ((int )q_read_ev == 1) {
+  if (p_dw_pc == 2) {
+    if (q_read_ev == 1) {
       __retres1 = 1;
       goto return_label;
     } else {
@@ -66,12 +66,12 @@ int is_do_write_p_triggered(void)
   return (__retres1);
 }
 }
-int is_do_read_c_triggered(void) 
+int is_do_read_c_triggered()
 { int __retres1 ;
 
   {
-  if ((int )c_dr_pc == 1) {
-    if ((int )slow_clk_edge == 1) {
+  if (c_dr_pc == 1) {
+    if (slow_clk_edge == 1) {
       __retres1 = 1;
       goto return_label;
     } else {
@@ -80,8 +80,8 @@ int is_do_read_c_triggered(void)
   } else {
 
   }
-  if ((int )c_dr_pc == 2) {
-    if ((int )q_write_ev == 1) {
+  if (c_dr_pc == 2) {
+    if (q_write_ev == 1) {
       __retres1 = 1;
       goto return_label;
     } else {
@@ -95,7 +95,7 @@ int is_do_read_c_triggered(void)
   return (__retres1);
 }
 }
-void immediate_notify_threads(void) 
+void immediate_notify_threads()
 { int tmp ;
   int tmp___0 ;
 
@@ -117,21 +117,21 @@ void immediate_notify_threads(void)
 
   }
 
-  return;
+
 }
 }
-void do_write_p(void) 
+void do_write_p()
 { 
   int __NONDET;
 
   {
-  if ((int )p_dw_pc == 0) {
+  if (p_dw_pc == 0) {
     goto DW_ENTRY;
   } else {
-    if ((int )p_dw_pc == 1) {
+    if (p_dw_pc == 1) {
       goto DW_WAIT;
     } else {
-      if ((int )p_dw_pc == 2) {
+      if (p_dw_pc == 2) {
         goto DW_WAIT_READ;
       } else {
 
@@ -140,14 +140,14 @@ void do_write_p(void)
   }
   DW_ENTRY: 
   {
-  while (1) {
+  while (1 < 2) {
     while_0_continue: /* CIL Label */ ;
     p_dw_st = 2;
     p_dw_pc = 1;
 
     goto return_label;
     DW_WAIT: 
-    if ((int )q_free == 0) {
+    if (q_free == 0) {
       p_dw_st = 2;
       p_dw_pc = 2;
 
@@ -167,18 +167,18 @@ void do_write_p(void)
   while_0_break: /* CIL Label */ ;
   }
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
 static int a_t  ;
-void do_read_c(void) 
+void do_read_c()
 { int a ;
 
   {
-  if ((int )c_dr_pc == 0) {
+  if (c_dr_pc == 0) {
     goto DR_ENTRY;
   } else {
-    if ((int )c_dr_pc == 2) {
+    if (c_dr_pc == 2) {
       goto DR_WAIT_WRITE;
     } else {
 
@@ -186,7 +186,7 @@ void do_read_c(void)
   }
   DR_ENTRY: 
   {
-  while (1) {
+  while (1 < 2) {
     while_1_continue: /* CIL Label */ ;
     c_dr_st = 2;
     c_dr_pc = 1;
@@ -194,7 +194,7 @@ void do_read_c(void)
 
     goto return_label;
     a = a_t;
-    if ((int )q_free == 1) {
+    if (q_free == 1) {
       c_dr_st = 2;
       c_dr_pc = 2;
       a_t = a;
@@ -215,26 +215,26 @@ void do_read_c(void)
 
       } else {
         {
-        assert(0);
+
         }
       }
     } else {
       {
-      assert(0);
+
       }
     }
   }
   while_1_break: /* CIL Label */ ;
   }
   return_label: /* CIL Label */ 
-  return;
+
 }
 }
-void update_channels(void) 
+void update_channels()
 { 
 
   {
-  if ((int )q_req_up == 1) {
+  if (q_req_up == 1) {
     {
     update_fifo_q();
     }
@@ -242,36 +242,36 @@ void update_channels(void)
 
   }
 
-  return;
+
 }
 }
-void init_threads(void) 
+void init_threads()
 { 
 
   {
-  if ((int )p_dw_i == 1) {
+  if (p_dw_i == 1) {
     p_dw_st = 0;
   } else {
     p_dw_st = 2;
   }
-  if ((int )c_dr_i == 1) {
+  if (c_dr_i == 1) {
     c_dr_st = 0;
   } else {
     c_dr_st = 2;
   }
 
-  return;
+
 }
 }
-int exists_runnable_thread(void) 
+int exists_runnable_thread()
 { int __retres1 ;
 
   {
-  if ((int )p_dw_st == 0) {
+  if (p_dw_st == 0) {
     __retres1 = 1;
     goto return_label;
   } else {
-    if ((int )c_dr_st == 0) {
+    if (c_dr_st == 0) {
       __retres1 = 1;
       goto return_label;
     } else {
@@ -283,45 +283,45 @@ int exists_runnable_thread(void)
   return (__retres1);
 }
 }
-void fire_delta_events(void) 
+void fire_delta_events()
 { 
 
   {
-  if ((int )q_read_ev == 0) {
+  if (q_read_ev == 0) {
     q_read_ev = 1;
   } else {
 
   }
-  if ((int )q_write_ev == 0) {
+  if (q_write_ev == 0) {
     q_write_ev = 1;
   } else {
 
   }
 
-  return;
+
 }
 }
-void reset_delta_events(void) 
+void reset_delta_events()
 { 
 
   {
-  if ((int )q_read_ev == 1) {
+  if (q_read_ev == 1) {
     q_read_ev = 2;
   } else {
 
   }
-  if ((int )q_write_ev == 1) {
+  if (q_write_ev == 1) {
     q_write_ev = 2;
   } else {
 
   }
 
-  return;
+
 }
 }
-void fire_time_events(void) ;
+void fire_time_events() ;
 static int t  =    0;
-void fire_time_events(void) 
+void fire_time_events()
 { 
 
   {
@@ -334,28 +334,28 @@ void fire_time_events(void)
     t = 0;
   }
 
-  return;
+
 }
 }
-void reset_time_events(void) 
+void reset_time_events()
 { 
 
   {
-  if ((int )fast_clk_edge == 1) {
+  if (fast_clk_edge == 1) {
     fast_clk_edge = 2;
   } else {
 
   }
-  if ((int )slow_clk_edge == 1) {
+  if (slow_clk_edge == 1) {
     slow_clk_edge = 2;
   } else {
 
   }
 
-  return;
+
 }
 }
-void activate_threads(void) 
+void activate_threads()
 { int tmp ;
   int tmp___0 ;
 
@@ -377,17 +377,17 @@ void activate_threads(void)
 
   }
 
-  return;
+
 }
 }
-void eval(void) 
+void eval()
 { int tmp ;
   int tmp___0 ;
   int tmp___1 ;
   int __NONDET;
   {
   {
-  while (1) {
+  while (1 < 2) {
     while_2_continue: /* CIL Label */ ;
     {
     tmp___1 = exists_runnable_thread();
@@ -397,7 +397,7 @@ void eval(void)
     } else {
       goto while_2_break;
     }
-    if ((int )p_dw_st == 0) {
+    if (p_dw_st == 0) {
       {
       tmp = __NONDET;
       }
@@ -412,7 +412,7 @@ void eval(void)
     } else {
 
     }
-    if ((int )c_dr_st == 0) {
+    if (c_dr_st == 0) {
       {
       tmp___0 = __NONDET;
       }
@@ -431,10 +431,10 @@ void eval(void)
   while_2_break: /* CIL Label */ ;
   }
 
-  return;
+
 }
 }
-int stop_simulation(void) 
+int stop_simulation()
 { int tmp ;
   int __retres2 ;
 
@@ -453,7 +453,7 @@ int stop_simulation(void)
   return (__retres2);
 }
 }
-void start_simulation(void) 
+void start_simulation()
 { int kernel_st ;
   int tmp ;
   int tmp___0 ;
@@ -468,7 +468,7 @@ void start_simulation(void)
   reset_delta_events();
   }
   {
-  while (1) {
+  while (1 < 2) {
     while_3_continue: /* CIL Label */ ;
     {
     kernel_st = 1;
@@ -509,10 +509,10 @@ void start_simulation(void)
   while_3_break: /* CIL Label */ ;
   }
 
-  return;
+
 }
 }
-void init_model(void) 
+void init_model()
 { 
 
   {
@@ -528,10 +528,10 @@ void init_model(void)
   c_dr_pc = 0;
   c_dr_i = 1;
 
-  return;
+
 }
 }
-int main(void) 
+int pc_sfifo_3()
 {
 int __retres1 ;
 
