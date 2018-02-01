@@ -19,6 +19,7 @@ import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndFunctionNode;
 import cfg.node.EndNode;
 import cfg.node.FunctionCallNode;
 import cfg.node.PlainNode;
@@ -43,6 +44,7 @@ public class MultiFunctionCFGBuilder {
 		this.ast = ast;
 
 	}
+
 	//Them cac cau lenh khoi tao toan cuc
 	public ControlFlowGraph build(IASTFunctionDefinition func) {
 		if (func == null) {
@@ -66,6 +68,9 @@ public class MultiFunctionCFGBuilder {
 		prvCfg.concat(mainFuncCfg);
 	
 		CFGNode newStart = iterateNode(prvCfg.getStart(), prvCfg.exit, func);
+		EndFunctionNode endFunction = new EndFunctionNode(func);
+		prvCfg.concat(new ControlFlowGraph(endFunction, endFunction));
+		
 		return prvCfg;	
 	}
 	
@@ -159,8 +164,9 @@ public class MultiFunctionCFGBuilder {
 			CFGNode plainNode = new PlainNode(statement); //tao ra plainNode khong co ten ham dang sau
 			cfg.concat(new ControlFlowGraph(plainNode, plainNode));
 		}
-		
-		
+		EndFunctionNode endFunction = new EndFunctionNode(func);
+		cfg.concat(new ControlFlowGraph(endFunction, endFunction));
+		//System.out.println("concated function");
 		return cfg;
 	}
 	/**

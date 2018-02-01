@@ -204,7 +204,8 @@ public class DecisionNode extends CFGNode {
 			run.index(thenVM);
 			if (run instanceof DecisionNode){
 				run = ((DecisionNode) run).getEndNode();
-			} else{
+			}
+			else{
 				run = run.getNext();
 			}
 		}
@@ -216,11 +217,11 @@ public class DecisionNode extends CFGNode {
 			run.index(elseVM);
 			if (run instanceof DecisionNode){
 				run = ((DecisionNode) run).getEndNode();
-			} else{
+			}
+			else{
 				run = run.getNext();
 			}
 		}
-
 		// sync
 		vm.setVariableList(sync().getVariableList());
 		

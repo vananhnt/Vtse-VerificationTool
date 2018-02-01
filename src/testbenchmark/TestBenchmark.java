@@ -19,9 +19,9 @@ public class TestBenchmark {
 //		}
 		
 		ExportExcel exportExcel = new ExportExcel();
-		File file = new File("./floats-cdfpl-func");
-		//File file = new File("./kratos");
-		//File file = new File("./kratos/TestInput.c");
+		//File file = new File("./floats-cdfpl-func");
+		File file = new File("./kratos/transmitter.12.c");
+		//File file = new File("./kratos/bist_cell.c");
 		FileVerification fv = new FileVerification();
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

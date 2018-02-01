@@ -89,31 +89,4 @@ public class FunctionHelper {
 		return list;
 	}
 	
-//	public static ArrayList<IASTIdExpression> getParameters(IASTFunctionDefinition func) {
-//		ArrayList<IASTIdExpression> params = new ArrayList<>();
-//		IASTNode[] nodes = func.getDeclarator().getChildren();
-//		String name;
-//		IASTName nameId;
-//		IASTIdExpression newIdEx;
-//		IASTParameterDeclaration paramDecl = null; 
-//		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
-//		
-//		for (IASTNode node : nodes) {
-//			if (node instanceof IASTParameterDeclaration) {
-//				paramDecl = (IASTParameterDeclaration) node;
-//				
-//				IASTNode[] paramDecls = paramDecl.getChildren();
-//				for (int i = 0; i < paramDecls.length; i++) {
-//					if (paramDecls[i] instanceof IASTDeclarator) {
-//						name = paramDecls[i].getRawSignature();
-//						nameId = factory.newName(name.toCharArray());
-//						newIdEx = factory.newIdExpression(nameId);
-//						params.add(newIdEx);
-//					}
-//				}
-//			}
-//		}
-//		return params;
-//	}
-
 }

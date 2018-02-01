@@ -39,6 +39,7 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndFunctionNode;
 import cfg.node.EndNode;
 import cfg.node.FunctionCallNode;
 import cfg.node.GotoNode;
@@ -172,11 +173,10 @@ public class ControlFlowGraphBuilder {
 	
 	private ControlFlowGraph createGotoGraph(IASTLabelStatement statement, IASTFunctionDefinition def) {
 		ControlFlowGraph cfg = null;
-		LabelNode labelNode = new LabelNode(statement);
+		LabelNode labelNode = new LabelNode(statement, def);
 		for (GotoNode go : gotoList) {
 			if (go.getLabelName().toString().equals(statement.getName().toString())) {
-				go.setNext(labelNode);
-				
+				go.setLabelNode(labelNode);
 			}
 		}
 		IASTStatement nested = statement.getNestedStatement();
@@ -265,12 +265,14 @@ public class ControlFlowGraphBuilder {
 			//Tao ra node moi co chua loi goi ham la 1 bien
 			cfg = createFuncCallGraph(statement, def);
 
-			if (!(statement.getExpression().getChildren()[0] instanceof IASTIdExpression)) {
+			if (statement.getExpression().getChildren().length == 1) {
 				//Kiem tra loi goi ham co la void khong, neu la void khong lam gi ca
 			} else {
 				plainNode = new PlainNode(statement, def);
 				cfg.concat(new ControlFlowGraph(plainNode, plainNode));
-			}		
+			}
+			//EndFunctionNode endFunctionNode = new EndFunctionNode();
+			//cfg.concat(new ControlFlowGraph(endFunctionNode, endFunctionNode));
 		}
 		return cfg;
 	}
@@ -296,6 +298,7 @@ public class ControlFlowGraphBuilder {
 			callNode.setFunctionCall((IASTFunctionCallExpression) node);
 			cfg = new ControlFlowGraph(callNode, callNode);
 		}
+		
 		return cfg;
 	}
 	

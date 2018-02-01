@@ -14,7 +14,12 @@ import cfg.build.index.VariableManager;
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
+import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndNode;
+import cfg.node.FunctionCallNode;
+import cfg.node.GotoNode;
+import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
 import cfg.utils.FunctionHelper;
@@ -109,20 +114,34 @@ public class VtseCFG extends ControlFlowGraph {
 		return this.func.getDeclSpecifier().toString();
 	}
 	
+
 	public void index() {
-		CFGNode node = start;
-		while (node != null && node != exit) {
-			node.index(vm);
-			if (node instanceof DecisionNode) {
-				node = ((DecisionNode) node).getEndNode();
-			} else {
-				node = node.getNext();
-			}
+		iteration(start);
+	}
+	
+	private void iteration(CFGNode start) {
+		CFGNode iter = start;
+		if (iter == null) {
+			return;
+		} else if (iter instanceof DecisionNode) {
+			iter.index(vm);
+			iteration(((DecisionNode) iter).getEndNode());
+		} 
+		else if (iter instanceof BeginNode)  {
+			iter.index(vm);
+			iteration(iter.getNext());
+			((BeginNode) iter).getEndNode().index(vm);
+			iteration(((BeginNode) iter).getEndNode().getNext());
 		}
-		if (node == exit){
-			node.index(vm);
+		else if (iter instanceof EndConditionNode) {
+			iter.index(vm);
+		} 
+		else {
+			iter.index(vm);
+			iteration(iter.getNext());
 		}
-	}	
+		
+	}
 	
 	
 	private void DFSHelper(CFGNode node) {

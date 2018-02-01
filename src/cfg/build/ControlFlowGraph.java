@@ -9,6 +9,7 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndFunctionNode;
 import cfg.node.EndNode;
 import cfg.node.GotoNode;
 import cfg.node.IterationNode;
@@ -18,8 +19,7 @@ public class ControlFlowGraph {
 	protected IASTFunctionDefinition func;
 	protected CFGNode start;
 	protected CFGNode exit;
-	
-	
+
 	public ControlFlowGraph(){}
 	
 	public ControlFlowGraph(IASTFunctionDefinition def) {
@@ -157,8 +157,9 @@ public class ControlFlowGraph {
 				print(((DecisionNode) iter).getElseNode(),  level + 7);		
 		}  else if (iter instanceof GotoNode) {
 			iter.printNode();
-			printSpace(level);
-			((GotoNode) iter).getLabelNode().printNode();
+			//printSpace(level);
+			//((GotoNode) iter).getNext().printNode();
+			print( ((GotoNode) iter).getNext(), level);
 		} else if (iter instanceof IterationNode) {
 			iter.printNode();
 			if (iter.getNext() != null) print(iter.getNext(), level);
@@ -175,7 +176,8 @@ public class ControlFlowGraph {
 			print(((BeginNode) iter).getEndNode().getNext(),  level);
 		} else if (iter instanceof EndNode) {
 			iter.printNode();
-		} 
+			print(iter.getNext(), level);
+		}
 		else {
 			iter.printNode();
 			print(iter.getNext(), level);
