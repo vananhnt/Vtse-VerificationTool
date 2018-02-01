@@ -9,9 +9,14 @@ import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndFunctionNode;
+import cfg.node.GotoNode;
 import cfg.node.IterationNode;
+import cfg.node.LabelNode;
 import cfg.node.PlainNode;
+import cfg.node.UndefinedNode;
 import cfg.utils.Cloner;
+import cfg.utils.FunctionHelper;
 
 
 /**
@@ -92,6 +97,7 @@ public class UnfoldCFG {
 	 * @return
 	 * @throws Exception
 	 */
+	
 	private ControlFlowGraph unfoldWhile(CFGNode start, CFGNode exit) throws Exception {
 		DecisionNode currentCondition = (DecisionNode) start.getNext();
 		IASTExpression conditionExpression = currentCondition.getCondition();
@@ -182,9 +188,9 @@ public class UnfoldCFG {
 	 * @throws Exception
 	 */
 	private CFGNode iterateNode(CFGNode node) throws Exception {
+		//if (node != null) node.printNode();
 		if (node == null) {
 			return null;
-		
 		} else if (node instanceof BeginWhileNode) {
 			ControlFlowGraph whileGraph = unfoldWhile(node, ((BeginWhileNode) node).getEndNode());
 			node.setNext(whileGraph.getStart());
@@ -204,16 +210,47 @@ public class UnfoldCFG {
 			ControlFlowGraph forGraph = unfoldFor(node, ((BeginForNode) node).getEndNode());
 			node.setNext(forGraph.getStart());
 			forGraph.getExit().setNext(iterateNode(((BeginForNode) node).getEndNode().getNext()));
-	
-		} else if (node instanceof EmptyNode) {
-			node.setNext(iterateNode(node.getNext()));				
 		
+		} else if (node instanceof EmptyNode || node instanceof LabelNode
+					|| node instanceof UndefinedNode ) {
+			node.setNext(iterateNode(node.getNext()));				
 		} else if (node instanceof EndConditionNode) {
 			//node.setNext(iterateNode(node.getNext()));		
+		} 
+		else if (node instanceof GotoNode) {
+			ControlFlowGraph gotoGraph = unfoldGoto((GotoNode)node);
+			CFGNode endNode = node.getNext();
+			node.setNext(gotoGraph.getStart());
+			gotoGraph.getExit().setNext(iterateNode(endNode));
+			
 		}
 		return node;
 }
-	
+	private CFGNode findEndFunctionNode(LabelNode label) {
+		CFGNode iter = label;
+		while (iter != null) {
+			if (iter instanceof EndFunctionNode) {
+				if (((EndFunctionNode) iter).getFunction().equals(label.getFunction())) {
+					return iter;
+				}
+			}
+			iter = iter.getNext();
+		}
+		return iter;
+	}
+	/* Chua xoa Goto va Label Node */
+	private ControlFlowGraph unfoldGoto(GotoNode node) {
+		// TODO Auto-generated method stub
+		EmptyNode emp = new EmptyNode();
+		CFGNode endNode = findEndFunctionNode((LabelNode) ((GotoNode) node).getLabelNode());
+		ControlFlowGraph tmpGraph = new ControlFlowGraph(node.getLabelNode().getNext(), endNode);
+		
+		ControlFlowGraph testGraph = Cloner.clone(tmpGraph);
+		testGraph.getExit().setNext(new EmptyNode());
+		//testGraph.printGraph();
+		return testGraph;
+	}
+
 	public void printGraph() {
 		ControlFlowGraph.printGraph(start);
 	}

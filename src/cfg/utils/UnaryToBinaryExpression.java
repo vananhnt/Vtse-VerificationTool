@@ -6,9 +6,9 @@ import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.core.dom.ast.INodeFactory;
 
 public class UnaryToBinaryExpression {
+	@SuppressWarnings("unused")
 	private void properStatement(IASTUnaryExpression unaryExpression) {
 		INodeFactory nodeFactory = unaryExpression.getTranslationUnit().getASTNodeFactory();
-		
 		
 		int unaryOperator = unaryExpression.getOperator();
 		IASTExpression operand = unaryExpression.getOperand();

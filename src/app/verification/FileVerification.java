@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+
 import app.verification.report.VerificationReport;
 import app.verification.userassertion.AssertionMethod;
 import cfg.build.ASTFactory;
@@ -45,6 +46,7 @@ public class FileVerification {
 		return reportList;
 	}
 	
+	@SuppressWarnings("unused")
 	public List<VerificationReport> verify(File file) {
 		
 		List<VerificationReport> reportList = new ArrayList<>();
@@ -72,6 +74,7 @@ public class FileVerification {
 		ASTFactory ast = new ASTFactory(filePath);
 		
 		
+		@SuppressWarnings("static-access")
 		ArrayList<IASTFunctionDefinition> listFunction = ast.getListFunction();
 		
 		FunctionVerification mv = new FunctionVerification();

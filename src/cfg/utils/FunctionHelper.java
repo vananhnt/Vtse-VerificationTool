@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
@@ -11,6 +12,9 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
+
+import cfg.build.index.IASTVariable;
+import cfg.build.index.VariableManager;
 
 public class FunctionHelper {
 	
@@ -23,6 +27,13 @@ public class FunctionHelper {
 			}
 		}
 		return null;
+	}
+	public static String getFunctionType (IASTFunctionDefinition func) {
+		return func.getDeclSpecifier().toString();
+			
+	}
+	public static String getFunctionName (IASTFunctionDefinition func) {
+		return func.getDeclarator().getName().getRawSignature();
 	}
 	//Lay Vm cua tat ca cac ham
 	public static VariableManager getVM(ArrayList<IASTFunctionDefinition> funcList) {
@@ -68,31 +79,14 @@ public class FunctionHelper {
 		return params;
 	}
 	
-//	public static ArrayList<IASTIdExpression> getParameters(IASTFunctionDefinition func) {
-//		ArrayList<IASTIdExpression> params = new ArrayList<>();
-//		IASTNode[] nodes = func.getDeclarator().getChildren();
-//		String name;
-//		IASTName nameId;
-//		IASTIdExpression newIdEx;
-//		IASTParameterDeclaration paramDecl = null; 
-//		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
-//		
-//		for (IASTNode node : nodes) {
-//			if (node instanceof IASTParameterDeclaration) {
-//				paramDecl = (IASTParameterDeclaration) node;
-//				
-//				IASTNode[] paramDecls = paramDecl.getChildren();
-//				for (int i = 0; i < paramDecls.length; i++) {
-//					if (paramDecls[i] instanceof IASTDeclarator) {
-//						name = paramDecls[i].getRawSignature();
-//						nameId = factory.newName(name.toCharArray());
-//						newIdEx = factory.newIdExpression(nameId);
-//						params.add(newIdEx);
-//					}
-//				}
-//			}
-//		}
-//		return params;
-//	}
-
+	public static ArrayList<IASTNode> getArguments(IASTFunctionCallExpression funcCall) 	{
+		ArrayList<IASTNode> list = new ArrayList<>();
+		for (IASTNode arg : funcCall.getArguments()) {
+			if (!(arg.getRawSignature().equals("void"))) {
+				list.add(arg);
+			}	
+		}
+		return list;
+	}
+	
 }

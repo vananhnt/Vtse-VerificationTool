@@ -1,24 +1,17 @@
 
 package test;
-import java.util.ArrayList;
-
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 
-import app.solver.SMTInput;
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
-import cfg.utils.Variable;
 
 public class Parser {
 	public static void  main(String[] args) throws Exception {
 		String fileLocation =  "./TestInput.c";		
 		ASTFactory ast = new ASTFactory(fileLocation);
-		ArrayList<IASTFunctionDefinition> funcList = ast.getListFunction();
-		
 		IASTFunctionDefinition func = ast.getFunction(0);
 		VtseCFG cfg = new VtseCFG(func);
 		cfg.unfold();

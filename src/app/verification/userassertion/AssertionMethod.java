@@ -4,27 +4,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.lang.model.element.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.fife.ui.rsyntaxtextarea.parser.XmlParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import app.solver.Z3Runner;
 
 public class AssertionMethod {
 	
@@ -94,6 +87,7 @@ public class AssertionMethod {
 		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
+			@SuppressWarnings("unused")
 			DocumentBuilder builder = factory.newDocumentBuilder();
 //			Document doc = builder.parse(file);
 	
@@ -151,6 +145,7 @@ public class AssertionMethod {
 	public static Document loadXMLFromFile(File file) throws Exception
 	{
 		InputStreamReader isp = new InputStreamReader(new FileInputStream(file));
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(isp);
 		
 		String xml = "";

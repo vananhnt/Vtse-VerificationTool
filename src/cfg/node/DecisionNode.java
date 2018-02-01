@@ -3,16 +3,21 @@ package cfg.node;
 
 import java.util.ArrayList;
 
+import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
+import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPField;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
+import cfg.build.index.FormulaCreater;
+import cfg.build.index.Index;
+import cfg.build.index.Variable;
+import cfg.build.index.VariableManager;
 import cfg.utils.Cloner;
 import cfg.utils.ExpressionHelper;
-import cfg.utils.FormulaCreater;
-import cfg.utils.Index;
-import cfg.utils.Variable;
-import cfg.utils.VariableHelper;
-import cfg.utils.VariableManager;
+import cfg.utils.ExpressionModifier;
 
 public class DecisionNode extends CFGNode {
 	private IASTExpression condition;
@@ -36,11 +41,25 @@ public class DecisionNode extends CFGNode {
 		this.condition = iastExpression;
 	}
 	public void setCondition(IASTExpression iastExpression, IASTFunctionDefinition func) {
-		changeName(iastExpression, func);
-	}
+		CPPNodeFactory factory = new CPPNodeFactory();
+		if (iastExpression instanceof IASTIdExpression) {
+			//System.err.println("err");
+			IASTLiteralExpression number = factory.newLiteralExpression(IASTLiteralExpression.lk_float_constant, "0");
+			IASTBinaryExpression binaryExpression = factory.newBinaryExpression(IASTBinaryExpression.op_notequals, iastExpression, number);
+		this.condition = binaryExpression;
+		changeName(binaryExpression, func);
+		} else {
+			this.condition = iastExpression;
+			changeName(iastExpression, func);	
+		}
+		
+	
+		
+ 	}
+	
 	private void changeName(IASTExpression expression, IASTFunctionDefinition func) {
-		condition = (IASTExpression) VariableHelper.changeVariableName(expression, func);
-}
+		condition = (IASTExpression) ExpressionModifier.changeVariableName(expression, func);
+	}
 //	set THEN NODE with Input is CFGNode  or  IASTStatement		
 	public CFGNode getThenNode() {
 		return thenNode;
@@ -57,7 +76,35 @@ public class DecisionNode extends CFGNode {
 	public CFGNode getElseNode(){
 		return this.getNext();
 	}
-	
+	public String getInfixFormula() {
+		String conditionStr = FormulaCreater.createInfixFormula(condition);
+		String notConditionStr = FormulaCreater.createInfixFormula(FormulaCreater.NEGATIVE, conditionStr);
+		
+		String thenFormula = FormulaCreater.createInfix(thenNode, endNode);
+		String elseFormula = FormulaCreater.createInfix(next, endNode);
+		
+		String formula = "";
+		
+		if (thenFormula == null && elseFormula == null) {
+			return null;
+		}	
+		else if (thenFormula == null) {
+			formula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, elseFormula);
+		}
+		else if (elseFormula == null) {
+			formula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+		}
+		else {
+			thenFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+			elseFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, notConditionStr, elseFormula);
+//			thenFormula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+//			elseFormula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, notConditionStr, elseFormula);
+//			
+			formula = FormulaCreater.wrapInfix(FormulaCreater.LOGIC_AND, thenFormula, elseFormula);
+		}
+		return formula;
+		
+	}
 	public String getFormula() {
 		String conditionStr = FormulaCreater.createFormula(condition);
 		String notConditionStr = FormulaCreater.createFormula(FormulaCreater.NEGATIVE, conditionStr);
@@ -88,7 +135,41 @@ public class DecisionNode extends CFGNode {
 		return formula;
 		
 	}
-
+	public ArrayList<String> va_getFormula() {
+		ArrayList<String> formulaList = new ArrayList<>();
+		String conditionStr = FormulaCreater.createFormula(condition);
+		String notConditionStr = FormulaCreater.createFormula(FormulaCreater.NEGATIVE, conditionStr);
+		
+		String thenFormula = FormulaCreater.create(thenNode, endNode);
+		String elseFormula = FormulaCreater.create(next, endNode);
+		
+		String formula = "";
+		
+		if (thenFormula == null && elseFormula == null) {
+			return null;
+		}	
+		else if (thenFormula == null) {
+			formula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, elseFormula);
+			formulaList.add(formula);
+		}
+		else if (elseFormula == null) {
+			formula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+			formulaList.add(formula);
+		}
+		else {
+//			thenFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+//			elseFormula = FormulaCreater.wrapInfix(FormulaCreater.BINARY_CONNECTIVE, notConditionStr, elseFormula);
+			thenFormula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, conditionStr, thenFormula);
+			elseFormula = FormulaCreater.wrapPrefix(FormulaCreater.BINARY_CONNECTIVE, notConditionStr, elseFormula);
+			formulaList.add(elseFormula);
+			formulaList.add(thenFormula);
+//			formula = FormulaCreater.wrapInfix(FormulaCreater.LOGIC_AND, thenFormula, elseFormula);
+			//formula = FormulaCreater.wrapPrefix(FormulaCreater.LOGIC_AND, thenFormula, elseFormula);
+		}
+		
+		return formulaList;
+		
+	}
 	public ArrayList<CFGNode> adjacent() {
 		ArrayList<CFGNode> adj = new ArrayList<>();
 		adj.add(thenNode);
@@ -123,7 +204,8 @@ public class DecisionNode extends CFGNode {
 			run.index(thenVM);
 			if (run instanceof DecisionNode){
 				run = ((DecisionNode) run).getEndNode();
-			} else{
+			}
+			else{
 				run = run.getNext();
 			}
 		}
@@ -135,11 +217,11 @@ public class DecisionNode extends CFGNode {
 			run.index(elseVM);
 			if (run instanceof DecisionNode){
 				run = ((DecisionNode) run).getEndNode();
-			} else{
+			}
+			else{
 				run = run.getNext();
 			}
 		}
-
 		// sync
 		vm.setVariableList(sync().getVariableList());
 		
@@ -199,7 +281,4 @@ public class DecisionNode extends CFGNode {
 		this.endOfThen = endOfThen;
 	}
 	
-	public static void main(String[] args) {
-		
-	}
 }

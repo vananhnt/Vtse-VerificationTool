@@ -5,11 +5,11 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 
+import cfg.build.index.FormulaCreater;
+import cfg.build.index.Index;
+import cfg.build.index.VariableManager;
 import cfg.utils.ExpressionHelper;
-import cfg.utils.FormulaCreater;
-import cfg.utils.Index;
-import cfg.utils.VariableHelper;
-import cfg.utils.VariableManager;
+import cfg.utils.ExpressionModifier;
 
 public class PlainNode extends CFGNode {
 	private IASTStatement statement;
@@ -25,11 +25,11 @@ public class PlainNode extends CFGNode {
 	
 	public PlainNode (IASTStatement statement, IASTFunctionDefinition func) {
 		this.statement = changeName(statement, func);
-		this.func = func;
+		this.setFunc(func);
 	}
 	
 	private IASTStatement changeName(IASTStatement statement, IASTFunctionDefinition func) {
-		return (IASTStatement) VariableHelper.changeVariableName(statement, func);
+		return (IASTStatement) ExpressionModifier.changeVariableName(statement, func);
 	}
 	public IASTStatement getStatement() {
 		return statement;
@@ -45,6 +45,9 @@ public class PlainNode extends CFGNode {
 	public String getFormula() {
 		return FormulaCreater.createFormula(statement);
 	}
+	public String getInfixFormula() {
+		return FormulaCreater.createInfixFormula(statement);
+	}
 
 	public String toString() {
 		return ExpressionHelper.toString(statement);
@@ -53,7 +56,7 @@ public class PlainNode extends CFGNode {
 		if (statement != null){
 			System.out.print("PlainNode: ");
 			System.out.println(ExpressionHelper.toString(statement));
-		}
+		} else System.out.println(this);
 		
 	}
 	public boolean isFunctionCall() {
@@ -72,5 +75,13 @@ public class PlainNode extends CFGNode {
 			}
 		}
 	return result;
-}	
+}
+
+	public IASTFunctionDefinition getFunc() {
+		return func;
+	}
+
+	public void setFunc(IASTFunctionDefinition func) {
+		this.func = func;
+	}	
 }

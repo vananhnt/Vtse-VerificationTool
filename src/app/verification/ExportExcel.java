@@ -2,7 +2,6 @@ package app.verification;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import app.verification.report.VerificationReport;
@@ -34,6 +33,10 @@ public class ExportExcel {
 		
 	}
 	
+	private static double roundAvoid(double value, int places) {
+	    double scale = Math.pow(10, places);
+	    return Math.round(value * scale) / scale;
+	}
 	
 	/**
 	 * new export excel for each row in excel file
@@ -46,7 +49,6 @@ public class ExportExcel {
 			throws IOException, RowsExceededException, WriteException{
 		
 		try {
-			int index = 1;
 			int numberOfRow = 4;
 			
 			//TODO: title of excel export
@@ -58,13 +60,15 @@ public class ExportExcel {
 			sheet.addCell(new Label(4, 3, "status"));
 			sheet.addCell(new Label(5, 3, "cputime (s)"));
 			sheet.addCell(new Label(6, 3, "memUsage (MB)"));
-			
+			sheet.addCell(new Label(7, 3, "totalTime (s)"));
 			//TODO: add element to excel export
 			for(VerificationReport row: reportList) {
 			
 				String function = null, preCondition = null, postCondition = null;
 				String status = null, memoryUsage = null, counterEx = null;
 				double cpuTime = 0;
+				double generateConstaintTime = 0;
+				double totalTime = 0;
 				WritableCellFormat cellFormat = new WritableCellFormat();
 				cellFormat.setAlignment(Alignment.LEFT);
 				cellFormat.setWrap(true);
@@ -74,6 +78,8 @@ public class ExportExcel {
 				postCondition = row.getPostCondition();
 				status = row.getStatus();
 				cpuTime = row.getSolverTime() / 1000.0;
+				generateConstaintTime = row.getGenerateConstraintTime() /1000.0;
+				totalTime = roundAvoid(cpuTime + generateConstaintTime, 3); 
 				memoryUsage = "unknown";
 				counterEx = row.getCounterEx();
 				
@@ -84,10 +90,10 @@ public class ExportExcel {
 				sheet.addCell(new Label(4, numberOfRow, status));
 				sheet.addCell(new Label(5, numberOfRow, String.valueOf(cpuTime)));
 				sheet.addCell(new Label(6, numberOfRow, memoryUsage));
-				sheet.addCell(new Label(7, numberOfRow, counterEx, cellFormat));
-				numberOfRow++;
-//		
-			
+				//sheet.addCell(new Label(7, numberOfRow, counterEx, cellFormat));
+				sheet.addCell(new Label(7, numberOfRow, String.valueOf(totalTime)));
+				
+				numberOfRow++;		
 			}
 		
 			workbook.write();

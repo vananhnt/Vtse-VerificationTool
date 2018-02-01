@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>pc_sfifo_3</Method>
+		<PreCondition>1 < 2</PreCondition>
+		<PostCondition>return < 1</PostCondition>
+	</AssertionMethod>
+</AssertionFile>

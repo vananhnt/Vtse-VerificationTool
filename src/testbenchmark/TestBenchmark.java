@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.activation.MimeType;
-import javax.activation.MimetypesFileTypeMap;
-
 import app.verification.ExportExcel;
 import app.verification.FileVerification;
 import app.verification.report.VerificationReport;
@@ -14,16 +11,15 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 public class TestBenchmark {
+	static String FLOAT_CDFPL = "./benchmark/floats-cdfpl-func";
+	static String KRATOS = "./benchmark/kratos";
+	
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
 		
-		if (args.length < 1) {
-			System.out.println("Nothing to do");
-			System.exit(1);
-		}
-		
 		ExportExcel exportExcel = new ExportExcel();
-		File file = new File("./floats-cdfpl-func");
-		FileVerification fv = new FileVerification();
+		//File file = new File(FLOAT_CDFPL);
+		File file = new File(KRATOS);
+		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);
 	}

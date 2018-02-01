@@ -3,7 +3,7 @@ package cfg.node;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import cfg.utils.VariableManager;
+import cfg.build.index.VariableManager;
 
 public abstract class CFGNode {	
 	protected CFGNode next;	
@@ -45,8 +45,14 @@ public abstract class CFGNode {
 	public String getFormula() {
 		return null;	
 	}
+	public String getInfixFormula() {
+		return null;
+	}
 	public void printFormular(PrintStream ps) {
 		ps.println(getFormula());
+	}
+	public void printInfixFormular(PrintStream ps) {
+		ps.println(getInfixFormula());
 	}
 	public void setVistited(boolean vistited) {
 		this.vistited = vistited;

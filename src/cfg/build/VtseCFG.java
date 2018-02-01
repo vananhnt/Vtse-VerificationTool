@@ -8,19 +8,25 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 
 import app.solver.SMTTypeConvertion;
+import cfg.build.index.FormulaCreater;
+import cfg.build.index.Variable;
+import cfg.build.index.VariableManager;
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
+import cfg.node.EmptyNode;
 import cfg.node.EndConditionNode;
+import cfg.node.EndNode;
+import cfg.node.FunctionCallNode;
+import cfg.node.GotoNode;
+import cfg.node.IterationNode;
 import cfg.node.PlainNode;
 import cfg.node.SyncNode;
-import cfg.utils.FormulaCreater;
 import cfg.utils.FunctionHelper;
-import cfg.utils.Variable;
-import cfg.utils.VariableManager;
 
 public class VtseCFG extends ControlFlowGraph {	
 	private VariableManager vm;
+	@SuppressWarnings("unused")
 	private String returnType;
 	
 	public VtseCFG() {
@@ -70,6 +76,9 @@ public class VtseCFG extends ControlFlowGraph {
 	public String createFormular() {
 		return FormulaCreater.create(start, exit); 
 	}
+	public String createInfixFormula() {
+		return FormulaCreater.createInfix(start, exit);
+	}
 	public void printFormular(PrintStream ps) {
 		ps.print(createFormular());
 	}
@@ -105,20 +114,34 @@ public class VtseCFG extends ControlFlowGraph {
 		return this.func.getDeclSpecifier().toString();
 	}
 	
+
 	public void index() {
-		CFGNode node = start;
-		while (node != null && node != exit) {
-			node.index(vm);
-			if (node instanceof DecisionNode) {
-				node = ((DecisionNode) node).getEndNode();
-			} else {
-				node = node.getNext();
-			}
+		iteration(start);
+	}
+	
+	private void iteration(CFGNode start) {
+		CFGNode iter = start;
+		if (iter == null) {
+			return;
+		} else if (iter instanceof DecisionNode) {
+			iter.index(vm);
+			iteration(((DecisionNode) iter).getEndNode());
+		} 
+		else if (iter instanceof BeginNode)  {
+			iter.index(vm);
+			iteration(iter.getNext());
+			((BeginNode) iter).getEndNode().index(vm);
+			iteration(((BeginNode) iter).getEndNode().getNext());
 		}
-		if (node == exit){
-			node.index(vm);
+		else if (iter instanceof EndConditionNode) {
+			iter.index(vm);
+		} 
+		else {
+			iter.index(vm);
+			iteration(iter.getNext());
 		}
-	}	
+		
+	}
 	
 	
 	private void DFSHelper(CFGNode node) {
@@ -178,9 +201,32 @@ public class VtseCFG extends ControlFlowGraph {
 		if (f != null) {
 			printStream.println("(assert " + f + ")");
 		}
-	
 	}
 	
+	public void va_printFormular(PrintStream printStream) {
+		int lastIndex;
+//		for (Variable var: vm.getVariableList()) {
+//			lastIndex = var.getIndex();
+//			if (lastIndex == -3) {
+//				printStream.println("(declare-fun " + var.getName() + 
+//						" () "+ SMTTypeConvertion.getSMTType(var.getType()) +")");
+//			}
+//			for (int i = 0; i <= lastIndex; i++) {
+//				printStream.println("(declare-fun " + var.getName() + "_" + i + 
+//										" () "+ SMTTypeConvertion.getSMTType(var.getType()) +")");
+//			}
+//			
+//		}
+		ArrayList<String> f = FormulaCreater.createListConstraint(start, exit); 
+		if (f != null) {
+			//System.out.print(f.get(1));
+			for (String f_child : f) {
+				if (f_child.length() < 30)
+				printStream.println("(assert " + f_child + ")");
+			}
+			
+		}
+	}
 	private static void printMeta(PrintStream printStream,CFGNode node, CFGNode end, String nSpaces) {
 		if (node == null) {
 			return;

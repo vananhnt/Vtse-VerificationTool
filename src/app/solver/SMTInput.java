@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.security.GeneralSecurityException;
-import java.util.List;
 import java.util.List;
 
-import cfg.utils.Variable;
+import cfg.build.index.Variable;
 
 public class SMTInput {
 	private List<Variable> variableList;
@@ -44,12 +42,13 @@ public class SMTInput {
 	public void setConstrainst(List<String> constrainst) {
 		this.constraints = constrainst;
 	}
+	
 	public void printInput() {
 		System.err.println("print");
 		for (Variable v: variableList) {
 			String smtType = getSMTType(v.getType());
-			if (v.hasInitialized()) {
-				
+//			if (v.hasInitialized()) {
+			
 				System.out.println("v: " + v);
 				if ( v.getIndex() < 0)
 					System.out.println("(declare-fun " + v.getVariableWithIndex() + " () " + smtType + ")");
@@ -58,12 +57,13 @@ public class SMTInput {
 						System.out.println(declare(v.getName(), i, smtType));
 				}
 			}
-			else if (v.getName().equals("return")) {
-				System.out.println("return return");
-				System.out.println("(declare-fun return () " + smtType + ")");
-			}
+//			else if (v.getName().equals("return")) {
+//				System.out.println("return return");
+//				System.out.println("(declare-fun return () " + smtType + ")");
+//			}
+//			
+//		}
 			
-		}
 //		for (String s: constraints) {
 //			System.out.println("(assert " + s + ")");
 //		}
@@ -78,16 +78,14 @@ public class SMTInput {
 		for (Variable v: variableList) {
 			smtType = getSMTType(v.getType());
 			// TODO changed
-//			if (v.getIndex() == -3){
-//				out.append("(declare-fun " + v.getName() +  " () " + smtType + ")\n");
-//			}
-			if (v.hasInitialized()) {
+
+		if (v.hasInitialized()) {
 				
-				System.out.println("v: " + v);
-				if ( v.getIndex() < 0)
+				//System.out.println("v: " + v);
+				if (v.getIndex() < 0)
 					out.append("(declare-fun " + v.getVariableWithIndex() + " () " + smtType + ")\n");
 				else {
-					for (int i = 0; i <= v.getIndex(); i++)
+					for (int i = -1; i <= v.getIndex(); i++)
 						out.append(declare(v.getName(), i, smtType) + "\n");
 				}
 			}
@@ -106,7 +104,7 @@ public class SMTInput {
 		
 		out.append("(check-sat)\n");
 		out.append("(get-model)");
-		
+
 		out.flush();
 	    out.close();
 	}

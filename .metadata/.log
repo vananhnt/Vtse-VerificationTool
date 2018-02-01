@@ -1,0 +1,13 @@
+!SESSION 2017-10-13 23:23:40.385 -----------------------------------------------
+eclipse.buildId=4.7.1.v20170915-1447
+java.version=1.8.0_144
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.equinox.p2.engine 4 4 2017-10-13 23:23:51.939
+!MESSAGE An error occurred while installing the items
+!SUBENTRY 1 org.eclipse.equinox.p2.engine 4 0 2017-10-13 23:23:51.939
+!MESSAGE session context was:(profile=SDKProfile, phase=org.eclipse.equinox.internal.p2.engine.phases.Install, operand=null --> [R]org.apache.lucene.grouping 6.1.0, action=org.eclipse.equinox.internal.p2.touchpoint.eclipse.actions.InstallBundleAction).
+!SUBENTRY 1 org.eclipse.equinox.p2.touchpoint.eclipse 4 0 2017-10-13 23:23:51.939
+!MESSAGE The artifact file for osgi.bundle,org.apache.lucene.grouping,6.1.0 was not found.
