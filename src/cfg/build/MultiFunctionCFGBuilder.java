@@ -164,6 +164,7 @@ public class MultiFunctionCFGBuilder {
 			CFGNode plainNode = new PlainNode(statement); //tao ra plainNode khong co ten ham dang sau
 			cfg.concat(new ControlFlowGraph(plainNode, plainNode));
 		}
+		
 		EndFunctionNode endFunction = new EndFunctionNode(func);
 		cfg.concat(new ControlFlowGraph(endFunction, endFunction));
 		//System.out.println("concated function");

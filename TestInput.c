@@ -1,5 +1,12 @@
 int a = 11;
 
+void sum();
+
+int main () {
+	sum();
+	return 0;
+}
+
 void sum () {
 	int x = 9;
 	if (x) {
@@ -10,9 +17,4 @@ void sum () {
 	a = a + 1;
 	label:;
 	a = a + 10;
-}
-
-int main () {
-	sum();
-	return 0;
 }
