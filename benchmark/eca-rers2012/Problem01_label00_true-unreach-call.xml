@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>main</Method>
+		<PreCondition>1 < 0</PreCondition>
+		<PostCondition>1 < 0</PostCondition>
+	</AssertionMethod>
+</AssertionFile>

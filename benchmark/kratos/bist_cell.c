@@ -464,16 +464,23 @@ void init_model()
 
 }
 }
-int bist_cell()
-{ int __retres1 = 0;
+int bist_cell(int IN)
+{ int __retres1 = IN;
 
   {
   {
   init_model();
   start_simulation();
   }
+ int assert = 0;
+ if (! (z_val == 0)) {
+    {
+      assert = 1;
+    }
+  } else {
 
+  }
   __retres1 = 0;
-  return (__retres1);
+  return (assert);
 }
 }

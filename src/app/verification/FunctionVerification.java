@@ -23,7 +23,7 @@ public class FunctionVerification {
 	FunctionDeclaration function;
 	String precondition;
 	String postcondition;
-	int nLoops = 5;
+	int nLoops = 100;
 	
 	static String SMTINPUT_DIR = "smt/";
 

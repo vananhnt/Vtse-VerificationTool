@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>zonotope_tight_true_unreach_call</Method>
+		<PreCondition>(IN >= 0)^(IN <= 10)</PreCondition>
+		<PostCondition>(return >= 0)^(return <= 4)</PostCondition>
+	</AssertionMethod>
+</AssertionFile>

@@ -76,7 +76,10 @@ public class ExpressionHelper {
 			expression = String.format("%s %s", "++", operand);
 		} else if (operator == IASTUnaryExpression.op_prefixDecr) {
 			expression = String.format("%s %s", "--", operand);
-		} else {
+		}  else if (operator == IASTUnaryExpression.op_not) {
+			expression = String.format("(%s %s)", "not", operand);
+		} 
+		else {
 			expression = toString(unaryExpression.getOperand());
 		}
 		return expression;

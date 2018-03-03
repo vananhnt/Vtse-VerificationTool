@@ -11,14 +11,18 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 public class TestBenchmark {
-	static String FLOAT_CDFPL = "./benchmark/floats-cdfpl-func";
+	static String FLOAT_CDFPL = "./benchmark/float-cdfpl-func";
+	static String FLOAT_BENCHS = "./benchmark/float-benchs";
 	static String KRATOS = "./benchmark/kratos";
+	static String ECA_RERS = "./benchmark/eca-rers2012";
 	
-	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
-		
+	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {	
 		ExportExcel exportExcel = new ExportExcel();
+		//File file = new File(ECA_RERS + "/Problem01_label50_false-unreach-call.c");
+		//File file = new File(FLOAT_BENCHS+ "/zonotope_tight_true_unreach_call.c");
+		File file = new File(FLOAT_BENCHS);
+		
 		//File file = new File(FLOAT_CDFPL);
-		File file = new File(KRATOS);
 		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

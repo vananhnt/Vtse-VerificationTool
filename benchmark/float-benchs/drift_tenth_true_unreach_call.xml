@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>drift_tenth_true_unreach_call</Method>
+		<PreCondition></PreCondition>
+		<PostCondition>(return < 1.0)^(return > 1.0)</PostCondition>
+	</AssertionMethod>
+</AssertionFile>

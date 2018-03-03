@@ -154,9 +154,10 @@ public class ExpressionModifier {
 	 * sua Unary
 	 */
 	private static IASTNode changeUnaryExpression(IASTUnaryExpression node, IASTFunctionDefinition func) {
-		IASTExpression expression = node.getOperand().copy();
 		CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
-		IASTUnaryExpression newUnary = factory.newUnaryExpression(node.getOperator(), (IASTExpression) changeVariableName(expression, func));
+		IASTUnaryExpression newUnary;
+		IASTExpression expression = node.getOperand().copy();
+		newUnary = factory.newUnaryExpression(node.getOperator(), (IASTExpression) changeVariableName(expression, func));
 		return newUnary;
 	}
 	

@@ -11,6 +11,7 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.parser.DefaultLogService;
 import org.eclipse.cdt.core.parser.FileContent;
@@ -21,6 +22,7 @@ import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.core.runtime.CoreException;
 
 import cfg.utils.ErrorPrompt;
+import cfg.utils.ExpressionHelper;
 import cfg.utils.FunctionHelper;
 
 /**
@@ -174,9 +176,15 @@ public class ASTFactory {
 		for (int i = 0; i < index; i++) {
 			//System.out.print(" ");
 		}
-		if (node instanceof IASTFunctionCallExpression) {
-			System.out.println(((IASTFunctionCallExpression) node).getExpressionType().toString());
-			
+		
+		if (node instanceof IASTUnaryExpression) {
+			if (node.getChildren()[0] instanceof IASTUnaryExpression) {
+				//System.out.println(IASTUnaryExpression.op_not);
+				//System.out.println(((IASTUnaryExpression) node).getOperator());	
+				System.out.println(ExpressionHelper.toString(node));
+				System.out.println(node.getRawSignature());
+				
+			}
 		}
 		//System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
 		for (IASTNode iastNode : children)

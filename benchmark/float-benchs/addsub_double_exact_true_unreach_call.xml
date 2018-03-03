@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>addsub_double_exact_true_unreach_call</Method>
+		<PreCondition>(0 < 1)</PreCondition>
+		<PostCondition>return == 2</PostCondition>
+	</AssertionMethod>
+</AssertionFile>
