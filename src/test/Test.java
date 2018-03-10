@@ -16,14 +16,16 @@ public class Test {
 	static String FLOAT_CDFPL = "./benchmark/floats-cdfpl-func";
 	static String KRATOS = "./benchmark/kratos";
 	static String ECA_RERS = "./benchmark/eca-rers2012";
+	static String EXAMPLE = "./benchmark/example";
+	
 	public static void  main(String[] args) throws FileNotFoundException {
 		//ASTFactory ast = new ASTFactory("./kratos/transmitter.12.c");
-		ASTFactory ast = new ASTFactory(ECA_RERS + "/Problem01_label50_false-unreach-call.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+		ASTFactory ast = new ASTFactory(EXAMPLE + "/sum.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("sum"), ast);
 		//ast.print();
 		//cfg.printBoundary();
-		//cfg.unfold();
-		//cfg.index();
+		cfg.unfold();
+		cfg.index();
 		cfg.printGraph();
 		//cfg.printMeta();
 		//cfg.getVm().printList();

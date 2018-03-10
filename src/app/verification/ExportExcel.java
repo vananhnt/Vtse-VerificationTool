@@ -90,7 +90,7 @@ public class ExportExcel {
 				sheet.addCell(new Label(4, numberOfRow, status));
 				sheet.addCell(new Label(5, numberOfRow, String.valueOf(cpuTime)));
 				sheet.addCell(new Label(6, numberOfRow, memoryUsage));
-				//sheet.addCell(new Label(7, numberOfRow, counterEx, cellFormat));
+				sheet.addCell(new Label(8, numberOfRow, counterEx, cellFormat));
 				sheet.addCell(new Label(7, numberOfRow, String.valueOf(totalTime)));
 				
 				numberOfRow++;		
@@ -99,7 +99,7 @@ public class ExportExcel {
 			workbook.write();
 			workbook.close();
 			
-			System.out.println("Export successfully");
+			//System.out.println("Export successfully");
 		}
 		catch(Exception e) {
 			System.err.println("Error while exporting excel");

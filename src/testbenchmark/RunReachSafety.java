@@ -10,18 +10,16 @@ import app.verification.report.VerificationReport;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
-public class TestBenchmark {
+public class RunReachSafety {
 	static String FLOAT_CDFPL = "./benchmark/float-cdfpl-func";
 	static String FLOAT_BENCHS = "./benchmark/float-benchs";
 	static String KRATOS = "./benchmark/kratos";
 	static String ECA_RERS = "./benchmark/eca-rers2012";
-	static String EXAMPLE = "./benchmark/example";
 	
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {	
 		ExportExcel exportExcel = new ExportExcel();
 		
-		File file = new File(EXAMPLE + "/complex.c");
-		
+		File file = new File(FLOAT_CDFPL+"/newton_1_1_true_unreach_call.c");
 		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

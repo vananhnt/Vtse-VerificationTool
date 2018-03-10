@@ -58,7 +58,7 @@ public class FileVerification {
 		
 		String filePath = file.getAbsolutePath();
 		
-		System.out.println(filePath);
+		//System.out.println(filePath);
 		
 		String CPPFilename = getCFilename(file);
 		String PPPathFile;
@@ -79,7 +79,7 @@ public class FileVerification {
 		
 		FunctionVerification mv = new FunctionVerification();
 		
-		System.err.println("file: " + file.getPath());
+		//System.err.println("file: " + file.getPath());
 		
 		
 		File PPFile = new File(PPPathFile);
@@ -93,8 +93,8 @@ public class FileVerification {
 		VerificationReport report;
 		
 		for (AssertionMethod am: listAssertion) {
-			System.err.println("***Verification report:");
-			System.err.println("-Method name: " + am.getMethodName());
+			//System.err.println("***Verification report:");
+			System.out.println("-Method name: " + am.getMethodName());
 			for (IASTFunctionDefinition function: listFunction) {
 				String functionName = getFunctionName(function);
 //				System.err.println("function name: " + functionName);

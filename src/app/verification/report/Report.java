@@ -109,7 +109,7 @@ public class Report {
 	    			}
 	    			
 	    			String value = getValue(valueStr);
-	    			paramtersDefineFun.add(new DefineFun(v.getName(), v.getType(), value));
+	    			paramtersDefineFun.add(new DefineFun(removePostFix(v.getName(), functionName), v.getType(), value));
 	    			break;
 	    		}
 	
@@ -136,6 +136,11 @@ public class Report {
     	}
 	}
 	
+	private String removePostFix(String varName, String funcName) {
+		int index = varName.lastIndexOf(funcName);
+		return varName.substring(0,  index - 1);
+		
+	}
 	private String getValue(String valueStr) {
 		valueStr = valueStr.replace('(', ' ')
 							.replace(')', ' ')

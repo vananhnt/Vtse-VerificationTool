@@ -396,41 +396,31 @@ int stop_simulation()
 void start_simulation()
 { int kernel_st = 0;
   int tmp = 0;
-
-  {
-  {
   kernel_st = 0;
   update_channels();
   init_threads();
   fire_delta_events();
   activate_threads();
   reset_delta_events();
-  }
-  {
+  
+  
   while (1 < 2) {
 
-    {
+    
     kernel_st = 1;
     eval();
-    }
-    {
+    
+    
     kernel_st = 2;
     update_channels();
-    }
-    {
+    
+    
     kernel_st = 3;
     fire_delta_events();
     activate_threads();
     reset_delta_events();
     tmp = stop_simulation();
-    }
-
   }
-
-  }
-
-
-}
 }
 void init_model()
 {

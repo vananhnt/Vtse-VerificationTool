@@ -2,6 +2,6 @@
 	<AssertionMethod>
 		<Method>bist_cell</Method>
 		<PreCondition>(IN == 0)</PreCondition>
-		<PostCondition>return < 0.1</PostCondition>
+		<PostCondition>return == 1</PostCondition>
 	</AssertionMethod>
 </AssertionFile>

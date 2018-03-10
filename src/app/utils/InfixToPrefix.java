@@ -21,12 +21,12 @@ public class InfixToPrefix {
 
 		String prefix = infixToPrefix(infix);
 		
-		System.out.println("prefix: " + prefix);
+		//System.out.println("prefix: " + prefix);
 				
 		String[] elementMath = prefix.split(" ");
 	    
 		for (String s: elementMath) {
-        	System.out.print("  " + s);
+        	//System.out.print("  " + s);
         }
 		
 		reverse(elementMath);
@@ -41,7 +41,7 @@ public class InfixToPrefix {
 		
 		int length = infix.length();
 		String operand = "";
-		System.out.printf("reverse: %s\n", infix);
+		//System.out.printf("reverse: %s\n", infix);
 		for (int i = 0; i < infix.length(); i++) {
 			ch = infix.charAt(i);
 			

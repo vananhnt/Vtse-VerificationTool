@@ -197,7 +197,7 @@ public class UserInput {
 				
 				if (mathElements[i].equals("/") && isInteger) {
 					//System.err.println("is integer: " + isInteger);
-					mathElements[i] = "div";
+					mathElements[i] = "/";
 				}
 				
 				String temp = "(" + mathElements[i] + " " + mathElements[i+1] + " " + mathElements[i+2] + ")";

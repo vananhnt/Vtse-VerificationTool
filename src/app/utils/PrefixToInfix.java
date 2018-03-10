@@ -16,12 +16,12 @@ public class PrefixToInfix {
 		
 		String[] parse = prefix.split(" ");
 		
-		System.out.println("length: " + parse.length);
+		//System.out.println("length: " + parse.length);
 		
 		for (String s: parse) {
-			System.out.print(" " + s);
+			//System.out.print(" " + s);
 		}
-		System.out.println("");
+		//System.out.println("");
 		
 		int currentLength = parse.length;
 		

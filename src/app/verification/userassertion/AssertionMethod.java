@@ -115,7 +115,7 @@ public class AssertionMethod {
 					}
 				}
 				
-				System.out.printf("%s - %s - %s\n", method, preCondition, postCondition);
+				//System.out.printf("%s - %s - %s\n", method, preCondition, postCondition);
 				
 				list.add(new AssertionMethod(method, preCondition, postCondition));
 			}

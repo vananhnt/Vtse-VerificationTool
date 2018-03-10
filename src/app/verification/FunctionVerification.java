@@ -53,8 +53,8 @@ public class FunctionVerification {
 		cfg.unfold();
 		cfg.index();
 		//cfg.printGraph();
-		cfg.printMeta();
-		cfg.printFormular(System.out);
+		//cfg.printMeta();
+		//cfg.printFormular(System.out);
 		
 		SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
 		
@@ -88,7 +88,7 @@ public class FunctionVerification {
 	    
 	    List<String> result = Z3Runner.runZ3(path);
 	    
-	    result.forEach(System.out::println);
+	    //result.forEach(System.out::println);
 	    Report report = new Report();
 	    report.setListParameter(cfg.getInitVariables());
 	    VerificationReport verReport = report.generateReport(result);
@@ -125,12 +125,12 @@ public class FunctionVerification {
 		if (preCondition != null && !preCondition.equals("")) {
 			constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
 			constraints.add(constraintTemp);
-			System.err.println(constraintTemp);
+			//System.err.println(constraintTemp);
 		}
 		
 		// add user's assertion
 		constraintTemp = userInput.createUserAssertion(postCondition,cfg.getNameFunction());
-		System.err.println(constraintTemp);
+		//System.err.println(constraintTemp);
 		constraintTemp = "(not " + constraintTemp + ")";
 		constraints.add(constraintTemp);
 		
@@ -141,7 +141,7 @@ public class FunctionVerification {
 		String functionName = cfg.getNameFunction();		
 		String path = SMTINPUT_DIR + functionName + ".smt";
 		
-		System.err.println("    0.o   " + path);
+		//System.err.println("    0.o   " + path);
 		
 		
 		FileOutputStream fo = new FileOutputStream(new File(path));
@@ -149,11 +149,19 @@ public class FunctionVerification {
 	    
 	    List<String> result = Z3Runner.runZ3(path);
 	    
-	    result.forEach(System.out::println);
 	    Report report = new Report();
 	    report.setListParameter(cfg.getInitVariables());
 	    report.setFunctionName(cfg.getNameFunction());
 	    VerificationReport verReport = report.generateReport(result);
+//	    
+//	    System.out.println(verReport.getStatus());
+//	    if (verReport.getStatus().equals(VerificationReport.NOT_ALWAYS_TRUE)) {
+//	    	System.out.println("Counter Example:");  
+//	    	System.out.println("\t" + verReport.getCounterEx());
+//	    }
+	    verReport.print();
+	    //result.forEach(System.out::println);
+	    
 	    verReport.setFunctionName(cfg.getNameFunction());
 	    verReport.setGenerateConstraintTime((int)(end-begin));
 	    verReport.setPreCondition(preCondition);

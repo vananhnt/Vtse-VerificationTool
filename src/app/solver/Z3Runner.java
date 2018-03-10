@@ -18,7 +18,7 @@ public class Z3Runner {
 		List<String> result = new ArrayList<String>();
 		String s;
   
-        System.err.println(filename);
+        //System.err.println(filename);
         if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
             try {
             	Process p = Runtime.getRuntime().exec("z3 -smt2 -st -T:1 " + filename);
@@ -49,7 +49,7 @@ public class Z3Runner {
     		ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", pathToZ3 + " -smt2 -st -T:1 " + filename);
     		builder.redirectErrorStream(true);
     		Process p = builder.start();
-    		System.err.println("p: " + p);
+    		//System.err.println("p: " + p);
     		BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
     		String line;
     		while (true) {

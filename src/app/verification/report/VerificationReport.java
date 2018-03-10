@@ -169,10 +169,10 @@ public class VerificationReport {
 		String result = "";
 		if (parameters != null) {
 			for (DefineFun param: parameters) {
-				result += param.getExpression() + " ";
+				result += param.getExpression() + "\n\t";
 			}
 			if (ret != null) {
-				result = result + " \n " + ret.getExpression();
+				result = result  + ret.getExpression();
 			}
 		}
 		
@@ -180,23 +180,24 @@ public class VerificationReport {
 	}
 
 	public void print() {
-		System.out.println("status: " + status);
+		System.out.println("Status: " + status);
 		if (errors != null) {
 			for (String err: errors) {
-				System.out.println("error: " + err);
+				//System.out.println("error: " + err);
 			}
 		}
 		
 		if (parameters != null) {
+			System.out.println("Counter example:");
 			for (DefineFun param: parameters) {
-				System.out.println("parameter: " + param);
+				System.out.println("	+ parameter: " + param);
 			}
 		}
 		
 		if (ret != null) {
-			System.out.println(ret.getExpression());
+			System.out.println("	+ " + ret.getExpression());
 		}
-		System.out.println("constraint time: " + generateConstraintTime);
-		System.out.println("solver time: " + solverTime);
+		//System.out.println("constraint time: " + generateConstraintTime + " (ms)");
+		System.out.println("Solver time: " + solverTime + " (ms)");
 	}
 }

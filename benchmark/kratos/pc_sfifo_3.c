@@ -226,6 +226,46 @@ void do_read_c()
   }
   while_1_break: /* CIL Label */ ;
   }
+  {
+    while_1_continue: /* CIL Label */ ;
+    c_dr_st = 2;
+    c_dr_pc = 1;
+    a_t = a;
+
+    goto return_label;
+    a = a_t;
+    if (q_free == 1) {
+      c_dr_st = 2;
+      c_dr_pc = 2;
+      a_t = a;
+
+      goto return_label;
+      DR_WAIT_WRITE: 
+      a = a_t;
+    } else {
+
+    }
+    a = q_buf_0;
+    c_last_read = a;
+    c_num_read += 1;
+    q_free = 1;
+    q_req_up = 1;
+    if (p_last_write == c_last_read) {
+      if (p_num_write == c_num_read) {
+
+      } else {
+        {
+
+        }
+      }
+    } else {
+      {
+
+      }
+    }
+  }
+  while_1_break: /* CIL Label */ ;
+  }
   return_label: /* CIL Label */ 
 
 }
@@ -428,6 +468,50 @@ void eval()
 
     }
   }
+
+  while_2_break: /* CIL Label */ ;
+  }
+   {
+    while_2_continue: /* CIL Label */ ;
+    {
+    tmp___1 = exists_runnable_thread();
+    }
+    if (tmp___1) {
+
+    } else {
+      goto while_2_break;
+    }
+    if (p_dw_st == 0) {
+      {
+      tmp = __NONDET;
+      }
+      if (tmp) {
+        {
+        p_dw_st = 1;
+        do_write_p();
+        }
+      } else {
+
+      }
+    } else {
+
+    }
+    if (c_dr_st == 0) {
+      {
+      tmp___0 = __NONDET;
+      }
+      if (tmp___0) {
+        {
+        c_dr_st = 1;
+        do_read_c();
+        }
+      } else {
+
+      }
+    } else {
+
+    }
+  }
   while_2_break: /* CIL Label */ ;
   }
 
@@ -468,7 +552,48 @@ void start_simulation()
   reset_delta_events();
   }
   {
-  while (1 < 2) {
+  //while (1 < 2) 
+  {
+    while_3_continue: /* CIL Label */ ;
+    {
+    kernel_st = 1;
+    eval();
+    }
+    {
+    kernel_st = 2;
+    update_channels();
+    }
+    {
+    kernel_st = 3;
+    fire_delta_events();
+    activate_threads();
+    reset_delta_events();
+    }
+    {
+    tmp = exists_runnable_thread();
+    }
+    if (tmp == 0) {
+      {
+      kernel_st = 4;
+      fire_time_events();
+      activate_threads();
+      reset_time_events();
+      }
+    } else {
+
+    }
+    {
+    tmp___0 = stop_simulation();
+    }
+    if (tmp___0) {
+      goto while_3_break;
+    } else {
+
+    }
+  }
+  while_3_break: /* CIL Label */ ;
+  }
+  {
     while_3_continue: /* CIL Label */ ;
     {
     kernel_st = 1;
