@@ -137,10 +137,12 @@ public class Report {
 	}
 	
 	private String removePostFix(String varName, String funcName) {
-		int index = varName.lastIndexOf(funcName);
-		return varName.substring(0,  index - 1);
-		
+		if (funcName == null) {
+		 return varName;	
+		}
+		return varName.substring(0,  varName.lastIndexOf(funcName) - 1);
 	}
+	
 	private String getValue(String valueStr) {
 		valueStr = valueStr.replace('(', ' ')
 							.replace(')', ' ')

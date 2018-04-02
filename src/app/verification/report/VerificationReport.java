@@ -183,7 +183,7 @@ public class VerificationReport {
 		System.out.println("Status: " + status);
 		if (errors != null) {
 			for (String err: errors) {
-				//System.out.println("error: " + err);
+				System.err.println("error: " + err);
 			}
 		}
 		
@@ -197,7 +197,7 @@ public class VerificationReport {
 		if (ret != null) {
 			System.out.println("	+ " + ret.getExpression());
 		}
-		//System.out.println("constraint time: " + generateConstraintTime + " (ms)");
-		System.out.println("Solver time: " + solverTime + " (ms)");
+		int res = solverTime + generateConstraintTime;
+		System.out.println("Total time: " + res + " (ms)");
 	}
 }

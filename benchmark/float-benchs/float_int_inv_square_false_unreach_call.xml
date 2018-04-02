@@ -2,6 +2,6 @@
 	<AssertionMethod>
 		<Method>float_int_inv_square_false_unreach_call</Method>
 		<PreCondition>(IN + 10 >= 0)^(IN <= 10)</PreCondition>
-		<PostCondition>return > 0.1</PostCondition>
+		<PostCondition>return != 0</PostCondition>
 	</AssertionMethod>
 </AssertionFile>

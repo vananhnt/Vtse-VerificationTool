@@ -23,7 +23,7 @@ public class FunctionVerification {
 	FunctionDeclaration function;
 	String precondition;
 	String postcondition;
-	int nLoops = 100;
+	int nLoops = 3;
 	
 	static String SMTINPUT_DIR = "smt/";
 
@@ -88,15 +88,18 @@ public class FunctionVerification {
 	    
 	    List<String> result = Z3Runner.runZ3(path);
 	    
-	    //result.forEach(System.out::println);
+	  result.forEach(System.out::println);
 	    Report report = new Report();
+	    
 	    report.setListParameter(cfg.getInitVariables());
 	    VerificationReport verReport = report.generateReport(result);
+	   
 	    verReport.setFunctionName(cfg.getNameFunction());
 	    verReport.setGenerateConstraintTime((int)(end-begin));
 	    verReport.setPreCondition(preCondition);
 	    verReport.setPostCondition(postCondition);
-		
+	    verReport.print();
+	    
 		return verReport;
 	}
 	public VerificationReport verify(ASTFactory ast, IASTFunctionDefinition function, String preCondition, String postCondition) 
@@ -153,12 +156,7 @@ public class FunctionVerification {
 	    report.setListParameter(cfg.getInitVariables());
 	    report.setFunctionName(cfg.getNameFunction());
 	    VerificationReport verReport = report.generateReport(result);
-//	    
-//	    System.out.println(verReport.getStatus());
-//	    if (verReport.getStatus().equals(VerificationReport.NOT_ALWAYS_TRUE)) {
-//	    	System.out.println("Counter Example:");  
-//	    	System.out.println("\t" + verReport.getCounterEx());
-//	    }
+
 	    verReport.print();
 	    //result.forEach(System.out::println);
 	    

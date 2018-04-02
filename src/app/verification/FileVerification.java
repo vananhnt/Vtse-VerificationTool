@@ -102,7 +102,8 @@ public class FileVerification {
 					try {
 						long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 //						System.err.println("function: " + functionName);
-						report = mv.verify(ast,function, am.getPreCondition(), am.getPostCondition());
+						report = mv.verify(ast, function, am.getPreCondition(), am.getPostCondition());
+						//report = mv.verify(function, am.getPreCondition(), am.getPostCondition());
 						if (report != null) {
 							reportList.add(report);
 						}

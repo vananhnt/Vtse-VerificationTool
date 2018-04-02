@@ -1,8 +1,9 @@
 
-int sum (int n) {
+int sum () {
 	int result = 0;
-	for (int i = 0; i <= n; i++) {
-		result = result + i;	
+	int i;
+	for (i = 1; i <= 3; i++) {  
+		result = result + 1;	
 	}
-	return 0;
-	}
+	return result;
+}

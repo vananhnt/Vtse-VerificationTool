@@ -1,4 +1,4 @@
-int foo (float a, float b) {
+float foo (float a, float b) {
 	float result;
 	if (a > b) {
 		result = a / (b - 2);	
