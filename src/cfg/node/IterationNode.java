@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
+import cfg.build.index.FormulaCreater;
 import cfg.build.index.Index;
 import cfg.build.index.VariableManager;
 import cfg.utils.ExpressionHelper;
@@ -55,6 +56,20 @@ public class IterationNode extends CFGNode {
 		return binaryOp;
 	}
 
+	public String getFormula() {
+		if (iterationExpression != null) {
+			return FormulaCreater.createFormula(iterationExpression);
+		} 
+		return null;
+		
+	}
+	public String getInfixFormula() {
+		if (iterationExpression != null) {
+		return FormulaCreater.createInfixFormula(iterationExpression);
+		} 
+		return null;
+	}
+
 	public IASTExpression getIterationExpression() {
 		return iterationExpression;
 	}
@@ -66,7 +81,7 @@ public class IterationNode extends CFGNode {
 		this.iterationExpression = (IASTExpression) ExpressionModifier.changeVariableName(iterationExpression, func);
 	}
 	
-	public void index( VariableManager vm){
+	public void index(VariableManager vm){
 		this.iterationExpression = (IASTExpression) Index.index(iterationExpression, vm);
 		//System.out.println( "--" + iterationExpression.);
 	}

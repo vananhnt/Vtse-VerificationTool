@@ -16,7 +16,6 @@ import cfg.node.LabelNode;
 import cfg.node.PlainNode;
 import cfg.node.UndefinedNode;
 import cfg.utils.Cloner;
-import cfg.utils.FunctionHelper;
 
 
 /**
@@ -26,7 +25,7 @@ import cfg.utils.FunctionHelper;
  */
 
 public class UnfoldCFG {
-	private int nLoops = 2;
+	private int nLoops = 6;
 	
 	private CFGNode start;
 	private CFGNode exit;
@@ -122,7 +121,7 @@ public class UnfoldCFG {
 			condition.setThenNode(copyThen.getStart());
 			copyThen.getExit().setNext(lastNode);
 			
-				//TODO change
+			//TODO change
 			condition.setEndOfThen(copyThen.getExit());
 			condition.setEndOfElse(condition.getElseNode());
 			condition.setEndNode(endNode);

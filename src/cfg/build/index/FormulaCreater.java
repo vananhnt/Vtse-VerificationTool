@@ -21,6 +21,7 @@ import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
+import cfg.node.IterationNode;
 import cfg.utils.ExpressionHelper;
 
 /**
@@ -41,7 +42,6 @@ public class FormulaCreater {
 		String temp;
 		CFGNode node = start.getNext();
 		while (node != null) {
-	
 			temp = node.getFormula();			
 			if (temp != null) {
 				if (constraint == null) {
@@ -115,6 +115,7 @@ public class FormulaCreater {
 			if (node == exit) break;
 			if (node instanceof DecisionNode) {
 				node = ((DecisionNode) node).getEndNode();
+			
 			} else {
 				node = node.getNext();
 			}

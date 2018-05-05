@@ -1,3 +1,0 @@
-(declare-fun a_0 () Int)
-(declare-fun return_0 () Int)
-(assert (= return_0 (* a_0 a_0)))

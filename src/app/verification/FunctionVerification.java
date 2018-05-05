@@ -23,19 +23,17 @@ public class FunctionVerification {
 	FunctionDeclaration function;
 	String precondition;
 	String postcondition;
-	int nLoops = 100;
+	int nLoops = 1;
 	
 	static String SMTINPUT_DIR = "smt/";
 
 	public FunctionVerification() {
-		
 	}
 	
 	public void setNumberOfLoops(int nLoops) {
 		this.nLoops = nLoops;
 	}
 
-	
 	/**
 	 * verify a function with pre-condition and post-condition
 	 * @param function: function to verify
@@ -99,13 +97,13 @@ public class FunctionVerification {
 		
 		return verReport;
 	}
-	public VerificationReport verify(ASTFactory ast, IASTFunctionDefinition function, String preCondition, String postCondition) 
+	public VerificationReport verify(ASTFactory ast, IASTFunctionDefinition function, String preCondition, String postCondition, int nLoops) 
 			throws IOException {
 		
 		long begin = System.currentTimeMillis();
 		
 		VtseCFG cfg = new VtseCFG(function, ast);
-		cfg.unfold();
+		cfg.unfold(nLoops);
 		cfg.index();
 		//cfg.printGraph();
 		//cfg.printMeta();
@@ -127,6 +125,7 @@ public class FunctionVerification {
 			constraints.add(constraintTemp);
 			//System.err.println(constraintTemp);
 		}
+		
 		
 		// add user's assertion
 		constraintTemp = userInput.createUserAssertion(postCondition,cfg.getNameFunction());

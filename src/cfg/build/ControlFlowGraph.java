@@ -107,6 +107,11 @@ public class ControlFlowGraph {
 		unfoldCfg.generate(this);
 	}
 	
+	public void unfold(int loopCount) {
+		UnfoldCFG unfoldCfg = new UnfoldCFG();
+		unfoldCfg.setLoop(loopCount);
+		unfoldCfg.generate(this);
+	}
 	/**
 	 * Ham printGraph de in cfg
 	 */

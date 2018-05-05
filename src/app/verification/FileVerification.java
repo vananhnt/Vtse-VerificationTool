@@ -89,12 +89,14 @@ public class FileVerification {
 		}
 		
 		List<AssertionMethod> listAssertion = AssertionMethod.getUserAssertions(PPFile);
-		
+	
 		VerificationReport report;
 		
 		for (AssertionMethod am: listAssertion) {
 			//System.err.println("***Verification report:");
 			System.out.println("-Method name: " + am.getMethodName());
+			int nLoops = Integer.parseInt(am.getLoopCount());
+			System.out.println(nLoops);
 			for (IASTFunctionDefinition function: listFunction) {
 				String functionName = getFunctionName(function);
 //				System.err.println("function name: " + functionName);
@@ -102,7 +104,7 @@ public class FileVerification {
 					try {
 						long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 //						System.err.println("function: " + functionName);
-						report = mv.verify(ast,function, am.getPreCondition(), am.getPostCondition());
+						report = mv.verify(ast,function, am.getPreCondition(), am.getPostCondition(), nLoops);
 						if (report != null) {
 							reportList.add(report);
 						}
