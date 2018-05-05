@@ -1,4 +1,4 @@
-/bin/
+/bin/*
 /test.c
 /.settings
 *.xls

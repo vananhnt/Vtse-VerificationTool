@@ -96,7 +96,6 @@ public class FileVerification {
 			//System.err.println("***Verification report:");
 			System.out.println("-Method name: " + am.getMethodName());
 			int nLoops = Integer.parseInt(am.getLoopCount());
-			System.out.println(nLoops);
 			for (IASTFunctionDefinition function: listFunction) {
 				String functionName = getFunctionName(function);
 //				System.err.println("function name: " + functionName);
