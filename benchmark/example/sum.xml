@@ -1,7 +1,7 @@
 <AssertionFile>
 	<AssertionMethod>
 		<Method>sum</Method>
-		<PreCondition></PreCondition>
-		<PostCondition>(return = 3)</PostCondition>
+		<PreCondition>(n = 6)</PreCondition>
+		<PostCondition>(return = 0)</PostCondition>
 	</AssertionMethod>
 </AssertionFile>

@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>newton_1_1_true_unreach_call</Method>
+		<PreCondition>(IN + 0.2 > 0)^(IN < 0.2)</PreCondition>
+		<PostCondition>return < 0.1</PostCondition>
+	</AssertionMethod>
+</AssertionFile>

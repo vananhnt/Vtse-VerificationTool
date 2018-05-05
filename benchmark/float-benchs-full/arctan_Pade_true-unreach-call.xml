@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>arctan_Pade_true-unreach-call</Method>
+		<PreCondition>(a >= -1.79e308)^(a < 1.79e308)</PreCondition>
+		<PostCondition>(return >= -1.571)^(return <= 1.571)</PostCondition>
+	</AssertionMethod>
+</AssertionFile>

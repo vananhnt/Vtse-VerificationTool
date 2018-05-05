@@ -19,7 +19,7 @@ public class RunReachSafety {
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {	
 		ExportExcel exportExcel = new ExportExcel();
 		
-		File file = new File(FLOAT_CDFPL);
+		File file = new File(FLOAT_CDFPL+"/newton_1_1_true_unreach_call.c");
 		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

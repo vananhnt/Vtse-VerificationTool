@@ -26,7 +26,7 @@ import cfg.utils.FunctionHelper;
  */
 
 public class UnfoldCFG {
-	private int nLoops = 1;
+	private int nLoops = 2;
 	
 	private CFGNode start;
 	private CFGNode exit;

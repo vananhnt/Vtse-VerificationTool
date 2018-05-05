@@ -1,0 +1,7 @@
+<AssertionFile>
+	<AssertionMethod>
+		<Method>square_2_false_unreach_call</Method>
+		<PreCondition>(IN >= 0.0)^(IN < 1.0)</PreCondition>
+		<PostCondition>(return >= 0)^(return < 1.398)</PostCondition>
+	</AssertionMethod>
+</AssertionFile>

@@ -21,7 +21,8 @@ public class Test {
 	public static void  main(String[] args) throws FileNotFoundException {
 		//ASTFactory ast = new ASTFactory("./kratos/transmitter.12.c");
 		ASTFactory ast = new ASTFactory(EXAMPLE + "/sum.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("sum"), ast);
+		//ASTFactory ast = new ASTFactory(EXAMPLE + "/assert.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 		//ast.print();
 		//cfg.printBoundary();
 		cfg.unfold();

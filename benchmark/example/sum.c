@@ -1,9 +1,9 @@
-
-int sum () {
+int sum (int n) {
 	int result = 0;
-	int i;
-	for (i = 1; i <= 3; i++) {  
-		result = result + 1;	
+	for (int i = 0; i <= n; i++) {
+		result = result + i;	
 	}
-	return result;
-}
+	return 0;
+	}
+//ASSERT(return = (n*(n + 1))/2)
+

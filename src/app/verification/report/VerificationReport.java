@@ -9,8 +9,8 @@ public class VerificationReport {
 //	public static final int TIMEOUT = 2;
 //	public static final int UNKNOWN = 3;
 	
-	public static final String NOT_ALWAYS_TRUE = "not always true";
-	public static final String ALWAYS_TRUE = "always true";
+	public static final String NOT_ALWAYS_TRUE = "unsafe";
+	public static final String ALWAYS_TRUE = "safe";
 	public static final String TIMEOUT = "timeout";
 	public static final String UNKNOWN = "unknown";
 	
@@ -183,7 +183,7 @@ public class VerificationReport {
 		System.out.println("Status: " + status);
 		if (errors != null) {
 			for (String err: errors) {
-				System.err.println("error: " + err);
+				//System.out.println("error: " + err);
 			}
 		}
 		
@@ -197,7 +197,8 @@ public class VerificationReport {
 		if (ret != null) {
 			System.out.println("	+ " + ret.getExpression());
 		}
-		int res = solverTime + generateConstraintTime;
-		System.out.println("Total time: " + res + " (ms)");
+		//System.out.println("constraint time: " + generateConstraintTime + " (ms)");
+		float total_time = generateConstraintTime + solverTime;
+		System.out.println("Total time: " + total_time + " (ms)");
 	}
 }

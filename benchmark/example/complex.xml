@@ -2,6 +2,6 @@
 	<AssertionMethod>
 		<Method>foo</Method>
 		<PreCondition></PreCondition>
-		<PostCondition>return * return > (a + b)/2</PostCondition>
+		<PostCondition>return = (n*(n + 1))/2</PostCondition>
 	</AssertionMethod>
 </AssertionFile>

@@ -1,5 +1,4 @@
-int assert = 0;
-
+int flag = 0;
 int add (int x, int y) {
 	int n = 10;
 	int tong;
@@ -7,7 +6,14 @@ int add (int x, int y) {
 		tong = x + y;
 	} else {
 		int z = x*y; // unreachable code
-		assert = 1;  //
+		flag = 1;  //
 	}
 	return tong;
 }
+ASSERT(flag = 0)
+
+
+
+
+
+

@@ -195,7 +195,7 @@ public class DecisionNode extends CFGNode {
 	}			
 
 	public void index(VariableManager vm) {
-		condition = (IASTExpression) Index.index(condition, vm);
+		condition = (IASTExpression) Index.index(condition, vm);		
 		
 		// then clause
 		thenVM = Cloner.clone(vm);
@@ -223,11 +223,15 @@ public class DecisionNode extends CFGNode {
 			}
 		}
 		// sync
-		vm.setVariableList(sync().getVariableList());
+		
+		vm.setVariableList(sync(vm).getVariableList());
 		
 	}
 	
-	private VariableManager sync(){
+	/*
+	 * flag : = true neu can them syncNode va nguoc lai
+	 */
+	private VariableManager sync(VariableManager vm){
 		int size = thenVM.getSize();
 		Variable thenVar;
 		Variable elseVar;
@@ -236,33 +240,43 @@ public class DecisionNode extends CFGNode {
 		SyncNode syncNode;
 		
 		for (int i = 0; i < size; i++) {
+			boolean flag = true;
+			int indexVar = vm.getVariable(i).getIndex();
 			thenVar = thenVM.getVariable(i);
-			elseVar = elseVM.getVariable(i);	
+			elseVar = elseVM.getVariable(i);
+			if (thenVar.getIndex() == indexVar || 
+				elseVar.getIndex() == indexVar){
+				flag = false;
+			}
 			
 			if (thenVar.getIndex() < elseVar.getIndex() ) {
 				rightHand = thenVar.getVariableWithIndex();
 				thenVar.setIndex(elseVar.getIndex());
-				leftHand = thenVar.getVariableWithIndex();				
-				syncNode = new SyncNode(leftHand, rightHand);				
+				leftHand = thenVar.getVariableWithIndex();
 				
-				this.endOfThen.setNext(syncNode);
-				syncNode.setNext(endNode);
-				setEndOfThen(syncNode);				
+				if (flag){
+					syncNode = new SyncNode(leftHand, rightHand);				
+					this.endOfThen.setNext(syncNode);
+					syncNode.setNext(endNode);
+					setEndOfThen(syncNode);	
+				}
 			}
 			else if (elseVar.getIndex() < thenVar.getIndex()) {
 				rightHand = elseVar.getVariableWithIndex();
 				elseVar.setIndex(thenVar.getIndex());
 				leftHand = elseVar.getVariableWithIndex();
-				syncNode = new SyncNode(leftHand, rightHand);
 				
-				this.endOfElse.setNext(syncNode);
-				syncNode.setNext(endNode);
-				setEndOfElse(syncNode);
+				if (flag){
+					syncNode = new SyncNode(leftHand, rightHand);				
+					this.endOfElse.setNext(syncNode);
+					syncNode.setNext(endNode);
+					setEndOfElse(syncNode);
+				}
 			}
 		}
 		
 		// set VM
-		return elseVM;
+		return thenVM;
 	}
 
 	public CFGNode getEndOfElse() {
