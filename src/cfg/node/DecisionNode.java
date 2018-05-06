@@ -238,7 +238,7 @@ public class DecisionNode extends CFGNode {
 		String leftHand;
 		String rightHand;
 		SyncNode syncNode;
-		
+		/*
 		for (int i = 0; i < size; i++) {
 			boolean flag = true;
 			int indexVar = vm.getVariable(i).getIndex();
@@ -274,7 +274,32 @@ public class DecisionNode extends CFGNode {
 				}
 			}
 		}
-		
+		*/
+		for (int i = 0; i < size; i++) {
+			thenVar = thenVM.getVariable(i);
+			elseVar = elseVM.getVariable(i);	
+			
+			if (thenVar.getIndex() < elseVar.getIndex() ) {
+				rightHand = thenVar.getVariableWithIndex();
+				thenVar.setIndex(elseVar.getIndex());
+				leftHand = thenVar.getVariableWithIndex();				
+				syncNode = new SyncNode(leftHand, rightHand);				
+				
+				this.endOfThen.setNext(syncNode);
+				syncNode.setNext(endNode);
+				setEndOfThen(syncNode);				
+			}
+			else if (elseVar.getIndex() < thenVar.getIndex()) {
+				rightHand = elseVar.getVariableWithIndex();
+				elseVar.setIndex(thenVar.getIndex());
+				leftHand = elseVar.getVariableWithIndex();
+				syncNode = new SyncNode(leftHand, rightHand);
+				
+				this.endOfElse.setNext(syncNode);
+				syncNode.setNext(endNode);
+				setEndOfElse(syncNode);
+			}
+}
 		// set VM
 		return thenVM;
 	}

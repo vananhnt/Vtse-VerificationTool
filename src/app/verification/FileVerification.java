@@ -95,7 +95,12 @@ public class FileVerification {
 		for (AssertionMethod am: listAssertion) {
 			//System.err.println("***Verification report:");
 			System.out.println("-Method name: " + am.getMethodName());
-			int nLoops = Integer.parseInt(am.getLoopCount());
+			int nLoops;
+			if (am.getLoopCount() != null) {
+				nLoops = Integer.parseInt(am.getLoopCount());
+			} else {
+				nLoops = 1;
+			}
 			for (IASTFunctionDefinition function: listFunction) {
 				String functionName = getFunctionName(function);
 //				System.err.println("function name: " + functionName);
