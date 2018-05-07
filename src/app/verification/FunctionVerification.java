@@ -50,7 +50,7 @@ public class FunctionVerification {
 		VtseCFG cfg = new VtseCFG(function);
 		cfg.unfold();
 		cfg.index();
-		//cfg.printGraph();
+//		cfg.printGraph();
 		//cfg.printMeta();
 		//cfg.printFormular(System.out);
 		
@@ -86,6 +86,7 @@ public class FunctionVerification {
 	    
 	    List<String> result = Z3Runner.runZ3(path);
 	    
+	    
 	    //result.forEach(System.out::println);
 	    Report report = new Report();
 	    report.setListParameter(cfg.getInitVariables());
@@ -105,9 +106,9 @@ public class FunctionVerification {
 		VtseCFG cfg = new VtseCFG(function, ast);
 		cfg.unfold(nLoops);
 		cfg.index();
-		//cfg.printGraph();
-		//cfg.printMeta();
-		//cfg.printFormular(System.out);
+//	 cfg.printGraph();
+		// cfg.printMeta();
+		// cfg.printFormular(System.out);
 		
 		SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
 		

@@ -19,7 +19,31 @@ public class Z3Runner {
 		String s;
   
         //System.err.println(filename);
-        if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+		if(System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
+            try {
+            	Process p = Runtime.getRuntime().exec("/usr/local/bin/z3 -smt2 -st -T:300 " + filename);
+             
+                BufferedReader br = new BufferedReader( new InputStreamReader(p.getInputStream()));
+                    while ((s = br.readLine()) != null)
+                    {
+//                        System.out.println("line: " + s);
+                        result.add(s);
+                        //System.err.println(s);
+                    }
+                    try {
+        				p.waitFor();
+        			} catch (InterruptedException e) {
+        				// TODO Auto-generated catch block
+        				e.printStackTrace();
+        			}
+                   // System.out.println ("exit: " + p.exitValue());
+                    
+                    //System.out.println("size: " + result.size());
+
+            } catch (Exception e) {}
+        }
+        
+        else if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
             try {
             	Process p = Runtime.getRuntime().exec("z3 -smt2 -st -T:1 " + filename);
              

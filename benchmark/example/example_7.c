@@ -1,16 +1,16 @@
 int flag = 0;
 int add (int x, int y) {
 	int n = 10;
-	int tong;
+	int sum;
 	if (n > 0) {
-		tong = x + y;
+		sum = x + y;
 	} else {
 		int z = x*y; // unreachable code
 		flag = 1;  //
 	}
-	return tong;
+	return flag;
 }
-ASSERT(flag = 0)
+// ASSERT(flag = 0)
 
 
 
