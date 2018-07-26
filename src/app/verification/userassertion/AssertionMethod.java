@@ -28,7 +28,7 @@ public class AssertionMethod {
 	public static final String LOOP_COUNT_TAG = "LoopCount";
 	
 	private String methodName;
-	private String loopCount;
+	private String loopCount = "1";
 	private String preCondition;
 	private String postCondition;
 	
@@ -117,7 +117,7 @@ public class AssertionMethod {
 			String method = null;
 			String preCondition = null;
 			String postCondition = null;
-			String loopCount = null;
+			String loopCount = "1";
 			Node node;
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				node = nodeList.item(i);

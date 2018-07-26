@@ -20,8 +20,9 @@ public class TestBenchmark {
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {	
 		ExportExcel exportExcel = new ExportExcel();
 		
-		File file = new File(EXAMPLE + "/sum.c");
-		
+//		File file = new File(EXAMPLE + "/example_3.c");
+//		File file = new File(EXAMPLE + "/example_4.c");
+		File file = new File(EXAMPLE + "/example_5.c");
 		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

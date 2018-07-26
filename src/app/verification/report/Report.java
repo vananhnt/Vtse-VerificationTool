@@ -94,13 +94,10 @@ public class Report {
 		for (Variable v: listParameter) {
 			if (v.getName().equals("return"))
 				continue;
-			
-	    	String varName = v.getName() + "_0"; 
-	    	
+	    	String varName = v.getName() + "_0";
 	    	i = begin;
 	    	while (i <= end) {
-	   
-	    		if (result.get(i).indexOf(varName) >= 0) {
+	    		if (result.get(i).indexOf(" " + varName + " ") >= 0) {
 	    			String valueStr = "";
 	    			i++;
 	    			while (i <= end && !result.get(i).contains("define-fun")) {
