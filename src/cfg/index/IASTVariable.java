@@ -1,4 +1,4 @@
-package cfg.build.index;
+package cfg.index;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;

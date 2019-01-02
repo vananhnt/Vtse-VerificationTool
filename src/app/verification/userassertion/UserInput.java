@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.utils.InfixToPrefix;
-import cfg.build.index.Variable;
+import cfg.index.Variable;
 /*
  * @author: Ba Tu
  * */

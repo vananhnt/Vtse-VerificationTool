@@ -7,9 +7,9 @@ import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import cfg.build.index.FormulaCreater;
-import cfg.build.index.Index;
-import cfg.build.index.VariableManager;
+import cfg.index.FormulaCreater;
+import cfg.index.Index;
+import cfg.index.VariableManager;
 import cfg.utils.ExpressionHelper;
 import cfg.utils.ExpressionModifier;
 

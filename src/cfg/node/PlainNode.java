@@ -5,9 +5,9 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 
-import cfg.build.index.FormulaCreater;
-import cfg.build.index.Index;
-import cfg.build.index.VariableManager;
+import cfg.index.FormulaCreater;
+import cfg.index.Index;
+import cfg.index.VariableManager;
 import cfg.utils.ExpressionHelper;
 import cfg.utils.ExpressionModifier;
 

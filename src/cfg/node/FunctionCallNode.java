@@ -2,7 +2,7 @@ package cfg.node;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 
-import cfg.build.index.FormulaCreater;
+import cfg.index.FormulaCreater;
 import cfg.utils.ExpressionHelper;
 
 public class FunctionCallNode extends CFGNode {
