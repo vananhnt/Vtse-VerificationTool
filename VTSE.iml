@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/libs/eclipse-equinox-common-3.5.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libs/org.eclipse.cdt.core_5.6.0.201402142303.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libs/objenesis-1.2.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libs/org.eclipse.cdt.codan.core_2.0.0.201109151620.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libs/kryo-4.0.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libs/kryo-2.21.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libs/jxl.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/libs/rsyntaxtextarea.jar!/" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="eclipse-equinox-common-3.5.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/eclipse-equinox-common-3.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="org.eclipse.cdt.core_5.6.0.201402142303.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/org.eclipse.cdt.core_5.6.0.201402142303.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/libs/org.eclipse.cdt.core_5.6.0.201402142303.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="objenesis-1.2.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/objenesis-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="org.eclipse.cdt.codan.core_2.0.0.201109151620.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/org.eclipse.cdt.codan.core_2.0.0.201109151620.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="kryo-4.0.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/kryo-4.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="kryo-2.21.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/kryo-2.21.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jxl.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/jxl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="rsyntaxtextarea.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/rsyntaxtextarea.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

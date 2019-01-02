@@ -298,7 +298,6 @@ public class ControlFlowGraphBuilder {
 			callNode.setFunctionCall((IASTFunctionCallExpression) node);
 			cfg = new ControlFlowGraph(callNode, callNode);
 		}
-		
 		return cfg;
 	}
 	
