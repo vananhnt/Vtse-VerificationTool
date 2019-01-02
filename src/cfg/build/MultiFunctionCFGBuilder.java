@@ -14,7 +14,7 @@ import org.eclipse.cdt.core.dom.ast.IASTInitializerClause;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import cfg.build.index.IASTVariable;
+import cfg.index.IASTVariable;
 import cfg.node.BeginNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;

@@ -3,7 +3,7 @@ package cfg.node;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import cfg.build.index.VariableManager;
+import cfg.index.VariableManager;
 
 public abstract class CFGNode {	
 	protected CFGNode next;	

@@ -16,7 +16,7 @@ import app.verification.report.VerificationReport;
 import app.verification.userassertion.UserInput;
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
-import cfg.build.index.Variable;
+import cfg.index.Variable;
 
 public class FunctionVerification {
 	

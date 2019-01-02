@@ -1,4 +1,4 @@
-package cfg.build.index;
+package cfg.index;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,6 @@ import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
-import cfg.node.IterationNode;
 import cfg.utils.ExpressionHelper;
 
 /**

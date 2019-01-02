@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.utils.PrefixToInfix;
-import cfg.build.index.Variable;
+import cfg.index.Variable;
 
 
 public class Report {

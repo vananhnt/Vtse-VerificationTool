@@ -8,13 +8,12 @@ import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPField;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import cfg.build.index.FormulaCreater;
-import cfg.build.index.Index;
-import cfg.build.index.Variable;
-import cfg.build.index.VariableManager;
+import cfg.index.FormulaCreater;
+import cfg.index.Index;
+import cfg.index.Variable;
+import cfg.index.VariableManager;
 import cfg.utils.Cloner;
 import cfg.utils.ExpressionHelper;
 import cfg.utils.ExpressionModifier;

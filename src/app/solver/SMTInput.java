@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 
-import cfg.build.index.Variable;
+import cfg.index.Variable;
 
 public class SMTInput {
 	private List<Variable> variableList;
