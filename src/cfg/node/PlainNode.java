@@ -54,8 +54,9 @@ public class PlainNode extends CFGNode {
 	}
 	public void printNode(){	
 		if (statement != null){
+			String expresstion_type = statement.getClass().getSimpleName();
 			System.out.print("PlainNode: ");
-			System.out.println(ExpressionHelper.toString(statement));
+			System.out.println(ExpressionHelper.toString(statement) + " -> " + expresstion_type);
 		} else System.out.println(this);
 		
 	}

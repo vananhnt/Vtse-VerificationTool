@@ -457,7 +457,7 @@ public class ControlFlowGraphBuilder {
 	 */
 	@Deprecated
 	private ControlFlowGraph createWhile(IASTWhileStatement whileStatement) {
-		BeginWhileNode beginWhileNode = new BeginWhileNode();
+		BeginWhileNode beginWhileNode = new BeginWhileNode(whileStatement);
 		DecisionNode decisionNode = new DecisionNode();
 		EndConditionNode end = new EndConditionNode();
 		IterationNode iterationNode = new IterationNode();
@@ -471,7 +471,7 @@ public class ControlFlowGraphBuilder {
 		// then branch
 		decisionNode.setThenNode(thenClause.getStart());
 		thenClause.getExit().setNext(iterationNode);
-		// TODO change
+
 		decisionNode.setEndOfThen(iterationNode);
 		// khi in can xet truong hop iterationNode rieng
 

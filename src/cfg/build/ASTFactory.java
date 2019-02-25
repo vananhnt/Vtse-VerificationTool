@@ -174,19 +174,10 @@ public class ASTFactory {
 		IASTNode[] children = node.getChildren();
 		
 		for (int i = 0; i < index; i++) {
-			//System.out.print(" ");
+			System.out.print(" ");
 		}
 		
-		if (node instanceof IASTUnaryExpression) {
-			if (node.getChildren()[0] instanceof IASTUnaryExpression) {
-				//System.out.println(IASTUnaryExpression.op_not);
-				//System.out.println(((IASTUnaryExpression) node).getOperator());	
-				System.out.println(ExpressionHelper.toString(node));
-				System.out.println(node.getRawSignature());
-				
-			}
-		}
-		//System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
+		System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);
 	}
