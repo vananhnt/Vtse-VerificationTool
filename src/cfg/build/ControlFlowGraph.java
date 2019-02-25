@@ -36,6 +36,10 @@ public class ControlFlowGraph {
 	
 	public ControlFlowGraph(IASTFunctionDefinition def, ASTFactory ast) {
 		ControlFlowGraph cfg = build(def, ast);
+		if (cfg == null) {
+			System.out.println("CFG is empty");
+			System.exit(1);
+		}
 		start = cfg.getStart();
 		exit = cfg.getExit();
 		func = def;
