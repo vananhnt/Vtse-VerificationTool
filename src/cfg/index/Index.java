@@ -24,7 +24,7 @@ import cfg.utils.ExpressionHelper;
  *
  */
 public class Index {
-	//private static CPPNodeFactory factory = (CPPNodeFactory) (new ASTGenerator()).getTranslationUnit() .getASTNodeFactory(); 
+
 	private static CPPNodeFactory factory = new CPPNodeFactory();
 	public static IASTNode index(IASTNode node, VariableManager vm) {
 		if (node instanceof IASTDeclarationStatement) {
@@ -45,7 +45,6 @@ public class Index {
 		} else if ( node instanceof IASTReturnStatement){
 			node = indexReturnStatement((IASTReturnStatement) node, vm);
 		}
-		
 		return node;
 	}
 	/**

@@ -2,6 +2,8 @@ package cfg.build;
 
 import java.util.ArrayList;
 
+import cfg.node.*;
+import cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTBreakStatement;
 import org.eclipse.cdt.core.dom.ast.IASTCaseStatement;
@@ -32,22 +34,6 @@ import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import cfg.node.BeginForNode;
-import cfg.node.BeginIfNode;
-import cfg.node.BeginWhileNode;
-import cfg.node.CFGNode;
-import cfg.node.DecisionNode;
-import cfg.node.EmptyNode;
-import cfg.node.EndConditionNode;
-import cfg.node.EndFunctionNode;
-import cfg.node.EndNode;
-import cfg.node.FunctionCallNode;
-import cfg.node.GotoNode;
-import cfg.node.IterationNode;
-import cfg.node.LabelNode;
-import cfg.node.PlainNode;
-import cfg.node.ReturnNode;
-import cfg.node.UndefinedNode;
 import cfg.utils.FunctionHelper;
 import cfg.utils.astnode.ASTNodeFactory;
 
@@ -173,19 +159,28 @@ public class ControlFlowGraphBuilder {
 	
 	private ControlFlowGraph createGotoGraph(IASTLabelStatement statement, IASTFunctionDefinition def) {
 		ControlFlowGraph cfg = null;
-		LabelNode labelNode = new LabelNode(statement, def);
-		for (GotoNode go : gotoList) {
-			if (go.getLabelName().toString().equals(statement.getName().toString())) {
-				go.setLabelNode(labelNode);
-			}
+		//check if label statement is invariant
+		if (statement.getRawSignature().contains("invariant")) {
+			IASTStatement nested = statement.getNestedStatement();
+			InvariantNode inv = new InvariantNode(nested,def);
+			cfg = new ControlFlowGraph(inv, inv);
 		}
-		IASTStatement nested = statement.getNestedStatement();
-		ControlFlowGraph sub = createSubGraph(nested, def);
-		if (sub != null) {
-			labelNode.setNext(sub.getStart());
-			cfg = new ControlFlowGraph(labelNode, sub.getExit());
-		} else {
-			cfg = new ControlFlowGraph(labelNode, labelNode);
+		else {
+			LabelNode labelNode = new LabelNode(statement, def);
+			for (GotoNode go : gotoList) {
+				if (go.getLabelName().toString().equals(statement.getName().toString())) {
+					go.setLabelNode(labelNode);
+				}
+			}
+			IASTStatement nested = statement.getNestedStatement();
+			ControlFlowGraph sub = createSubGraph(nested, def);
+			if (sub != null) {
+				labelNode.setNext(sub.getStart());
+				cfg = new ControlFlowGraph(labelNode, sub.getExit());
+			} else {
+				cfg = new ControlFlowGraph(labelNode, labelNode);
+			}
+
 		}
 		return cfg;
 	}
@@ -487,14 +482,14 @@ public class ControlFlowGraphBuilder {
 	}
 
 	private ControlFlowGraph createWhile(IASTWhileStatement whileStatement, IASTFunctionDefinition func) {
-		BeginWhileNode beginWhileNode = new BeginWhileNode();
+		BeginWhileNode beginWhileNode = new BeginWhileNode(whileStatement);
 		DecisionNode decisionNode = new DecisionNode();
 		EndConditionNode end = new EndConditionNode();
 		IterationNode iterationNode = new IterationNode();
 		// iterationNode.setIterationExpression(whileStatement.getCondition());
 
 		ControlFlowGraph thenClause = createSubGraph(whileStatement.getBody(), func);
-		// decisionNode.setNext(thenClause.getExit());
+		//begin node
 		decisionNode.setCondition(whileStatement.getCondition().copy(), func);
 		beginWhileNode.setNext(decisionNode);
 

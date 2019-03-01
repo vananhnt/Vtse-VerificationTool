@@ -116,6 +116,13 @@ public class ControlFlowGraph {
 		unfoldCfg.setLoop(loopCount);
 		unfoldCfg.generate(this);
 	}
+	/*
+	create invariant graph
+	 */
+	public void invariant() {
+		InvariantCFG invariantCFG = new InvariantCFG();
+		invariantCFG.generate(this);
+	}
 	/**
 	 * Ham printGraph de in cfg
 	 */

@@ -179,7 +179,7 @@ public class DecisionNode extends CFGNode {
 	public void printNode(){
 		String type = condition.getClass().getSimpleName();
 		if (condition != null)
-		System.out.println("with Condition " + ExpressionHelper.toString(condition) + " -> " + type);
+		System.out.println("with Condition " + ExpressionHelper.toString(condition));
 	}
 
 	public String toString() {

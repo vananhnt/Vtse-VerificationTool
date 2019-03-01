@@ -27,7 +27,7 @@ import cfg.utils.FunctionHelper;
 
 /**
  * Get IASTFunctionDefinition 
- * IASTFunctionDefiniton func = (new ASTGenerator(filelocation)).getFunction(index);
+ * IASTFunctionDefiniton func = (new ASTFactory(filelocation)).getFunction(index);
  * filelocation: String
  * index: int
  * @author va

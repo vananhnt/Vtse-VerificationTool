@@ -26,7 +26,8 @@ public class Test {
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 //		cfg.unfold();
 //		cfg.index();
-		
+		cfg.invariant();
+		//ast.print();
 		cfg.printGraph();
 
 	}

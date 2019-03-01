@@ -10,7 +10,7 @@ public class UndefinedNode extends CFGNode{
 	}
 	public void printNode() {
 		if (node != null)
-		System.out.println("Undefinded Element " + node.getClass().getSimpleName());
+		System.out.println("Undefinded Element: " + node.getClass().getSimpleName());
 	}
 	public IASTNode getNode() {
 		return node;

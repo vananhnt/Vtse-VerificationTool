@@ -1,5 +1,6 @@
 package cfg.utils;
 
+import cfg.build.ASTFactory;
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
@@ -14,18 +15,15 @@ import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
-
-import cfg.build.ASTGenerator;
 
 /**
  * @author va
  *
  */
 public class Index {
-	private static CPPNodeFactory factory = (CPPNodeFactory) (new ASTGenerator()).getTranslationUnit() .getASTNodeFactory(); 
+	private static CPPNodeFactory factory = (CPPNodeFactory) (new ASTFactory()).getTranslationUnit() .getASTNodeFactory();
 	
 	public static IASTNode index(IASTNode node, VariableManager vm) {
 		if (node instanceof IASTDeclarationStatement) {

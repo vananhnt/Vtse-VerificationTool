@@ -1,8 +1,5 @@
 package cfg.utils;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
@@ -10,18 +7,13 @@ import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTEqualsInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTLiteralExpression;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 
-import cfg.build.ASTGenerator;
-import cfg.build.VtseCFG;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
-import cfg.node.FunctionCallNode;
 
 /**
  * @author va
@@ -212,17 +204,5 @@ public class FormulaCreater {
 	public static String wrapInfix(String operand, String left, String right) {
 		return "(" + left + " " + operand + " " + right + ")";
 	}
-	
-	public static void main(String[] args) {
-		ASTGenerator ast = new ASTGenerator("./TestInput.c");
-		IASTFunctionDefinition func = ast.getFunction(0);
-		VtseCFG cfg = new VtseCFG(func);
-		cfg.index();
-		cfg.unfold();
-		System.out.println(create(cfg.getStart(), cfg.getExit()));
-	}
-	public static String createFuncCallFormula(IASTFunctionCallExpression funcCall, ASTGenerator ast) {
-		
-		return null;
-	}
+
 }

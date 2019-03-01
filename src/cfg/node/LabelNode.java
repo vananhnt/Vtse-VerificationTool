@@ -24,5 +24,6 @@ public class LabelNode extends CFGNode {
 	public void printNode() {
 		if (statement != null)
 		System.out.println("LabelNode: " + statement.getName() + "_" + FunctionHelper.getFunctionName(function));
+		System.out.print("     "); // to indent content of label nodes
 	}
 }
