@@ -25,7 +25,7 @@ import cfg.utils.Cloner;
  */
 
 public class UnfoldCFG {
-	private int nLoops = 5;
+	private int nLoops = 3;
 	
 	private CFGNode start;
 	private CFGNode exit;

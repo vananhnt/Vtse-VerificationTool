@@ -23,7 +23,7 @@ public class FunctionVerification {
 	FunctionDeclaration function;
 	String precondition;
 	String postcondition;
-	int nLoops = 1;
+	int nLoops = 3;
 	
 	static String SMTINPUT_DIR = "smt/";
 
@@ -104,9 +104,10 @@ public class FunctionVerification {
 		long begin = System.currentTimeMillis();
 		
 		VtseCFG cfg = new VtseCFG(function, ast);
-		cfg.unfold(nLoops);
+		//cfg.unfold(nLoops);
+		cfg.invariant();
 		cfg.index();
-//	 cfg.printGraph();
+		//cfg.printGraph();
 		// cfg.printMeta();
 		// cfg.printFormular(System.out);
 		
