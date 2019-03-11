@@ -1,7 +1,11 @@
 <AssertionFile>
-	<AssertionMethod>
-		<Method>sine_3_false_unreach_call</Method>
-		<PreCondition>(IN + 1.57079632679 > 0)^(IN < 1.57079632679)</PreCondition>
-		<PostCondition>(return <= 1.001)^(return + 1.001 >= 0)</PostCondition>
-	</AssertionMethod>
+    <AssertionMethod>
+        <Method>sine_3_false_unreach_call</Method>
+        <PreCondition>(IN + 1.57079632679 > 0)^(IN
+            <
+            1.57079632679)
+        </PreCondition>
+        <PostCondition>(return<= 1.001)^(return + 1.001 >= 0)
+        </PostCondition>
+    </AssertionMethod>
 </AssertionFile>

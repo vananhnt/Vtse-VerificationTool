@@ -5,16 +5,18 @@
 #
 # Author: Leonardo de Moura (leonardo)
 ############################################
-from z3 import *
-from z3core import *
-from z3printer import *
 from fractions import Fraction
+
+from z3 import *
+from z3printer import *
+
 
 def _to_numeral(num, ctx=None):
     if isinstance(num, Numeral):
         return num
     else:
         return Numeral(num, ctx)
+
 
 class Numeral:
     """
@@ -83,10 +85,11 @@ class Numeral:
     [2.8538479564?]
 
     """
+
     def __init__(self, num, ctx=None):
         if isinstance(num, Ast):
-            self.ast  = num
-            self.ctx  = z3._get_ctx(ctx)
+            self.ast = num
+            self.ctx = z3._get_ctx(ctx)
         elif isinstance(num, RatNumRef) or isinstance(num, AlgebraicNumRef):
             self.ast = num.ast
             self.ctx = num.ctx
@@ -100,7 +103,7 @@ class Numeral:
             self.ctx = v.ctx
         Z3_inc_ref(self.ctx_ref(), self.as_ast())
         assert Z3_algebraic_is_value(self.ctx_ref(), self.ast)
-    
+
     def __del__(self):
         Z3_dec_ref(self.ctx_ref(), self.as_ast())
 
@@ -137,7 +140,7 @@ class Numeral:
         >>> Numeral("2/3").denominator()
         3
         """
-        assert(self.is_rational())
+        assert (self.is_rational())
         return Numeral(Z3_get_denominator(self.ctx_ref(), self.as_ast()), self.ctx)
 
     def numerator(self):
@@ -146,9 +149,8 @@ class Numeral:
         >>> Numeral("2/3").numerator()
         2
         """
-        assert(self.is_rational())
+        assert (self.is_rational())
         return Numeral(Z3_get_numerator(self.ctx_ref(), self.as_ast()), self.ctx)
-
 
     def is_irrational(self):
         """ Return True if the numeral is irrational.
@@ -168,7 +170,7 @@ class Numeral:
         >>> (Numeral(10)**20).as_long()
         100000000000000000000L
         """
-        assert(self.is_integer())
+        assert (self.is_integer())
         return long(Z3_get_numeral_string(self.ctx_ref(), self.as_ast()))
 
     def as_fraction(self):
@@ -176,7 +178,7 @@ class Numeral:
         >>> Numeral("1/5").as_fraction()
         Fraction(1, 5)
         """
-        assert(self.is_rational())
+        assert (self.is_rational())
         return Fraction(self.numerator().as_long(), self.denominator().as_long())
 
     def approx(self, precision=10):
@@ -242,7 +244,7 @@ class Numeral:
         0
         """
         return Z3_algebraic_sign(self.ctx_ref(), self.ast)
-    
+
     def is_pos(self):
         """ Return True if the numeral is positive.
         
@@ -379,7 +381,7 @@ class Numeral:
         3
         """
         return Numeral(Z3_algebraic_power(self.ctx_ref(), self.ast, k), self.ctx)
-    
+
     def __pow__(self, k):
         """ Return the numeral `self^k`.
 
@@ -430,7 +432,6 @@ class Numeral:
         True
         """
         return self < other
-
 
     def __le__(self, other):
         """ Return True if `self <= other`.
@@ -514,6 +515,7 @@ class Numeral:
     def ctx_ref(self):
         return self.ctx.ref()
 
+
 def eval_sign_at(p, vs):
     """ 
     Evaluate the sign of the polynomial `p` at `vs`.  `p` is a Z3
@@ -537,6 +539,7 @@ def eval_sign_at(p, vs):
     for i in range(num):
         _vs[i] = vs[i].ast
     return Z3_algebraic_eval(p.ctx_ref(), p.as_ast(), num, _vs)
+
 
 def isolate_roots(p, vs=[]):
     """
@@ -564,10 +567,11 @@ def isolate_roots(p, vs=[]):
     for i in range(num):
         _vs[i] = vs[i].ast
     _roots = AstVector(Z3_algebraic_roots(p.ctx_ref(), p.as_ast(), num, _vs), p.ctx)
-    return [ Numeral(r) for r in _roots ]
-        
+    return [Numeral(r) for r in _roots]
+
+
 if __name__ == "__main__":
     import doctest
+
     if doctest.testmod().failed:
         exit(1)
-
