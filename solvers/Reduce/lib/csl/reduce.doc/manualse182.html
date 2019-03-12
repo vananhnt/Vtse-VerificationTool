@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Additional Expression Types</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch18.html#manualse182.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse183.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse181.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse181.html#tailmanualse181.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse182.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">18.3    </span></span> <a 
+ id="x242-103200018.3"></a><span 
+class="ptmr8t-x-x-120">Additional Expression Types</span></h3>
+<!--l. 148--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Two additional expression types are necessary for high energy calculations,</span>
+<span 
+class="ptmr8t-x-x-120">namely</span>
+<!--l. 151--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">18.3.1    </span></span> <a 
+ id="x242-103300018.3.1"></a><span 
+class="ptmr8t-x-x-120">Vector Expressions</span></h4>
+<a 
+ id="dx242-1033001"></a>
+<!--l. 153--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">These follow the normal rules of vector combination. Thus the product of a scalar</span>
+<span 
+class="ptmr8t-x-x-120">or numerical expression and a vector expression is a vector, as are the sum and</span>
+<span 
+class="ptmr8t-x-x-120">difference of vector expressions. If these rules are not followed, error</span>
+<span 
+class="ptmr8t-x-x-120">messages are printed. Furthermore, if the system finds an undeclared</span>
+<span 
+class="ptmr8t-x-x-120">variable where it expects a vector variable, it will ask the user in interactive</span>
+<span 
+class="ptmr8t-x-x-120">mode whether to make that variable a vector or not. In batch mode, the</span>
+<span 
+class="ptmr8t-x-x-120">declaration will be made automatically and the user informed of this by a</span>
+<span 
+class="ptmr8t-x-x-120">message.</span>
+<!--l. 162--><p class="noindent" ><span 
+class="ptmri8t-x-x-120">Examples:</span>
+<!--l. 164--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Assuming </span><span 
+class="pcrr8t-x-x-120">P </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">Q </span><span 
+class="ptmr8t-x-x-120">have been declared vectors, the following are vector</span>
+<span 
+class="ptmr8t-x-x-120">expressions</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1387">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;p
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*q/3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*x*y*p&#x00A0;-&#x00A0;p.q*q/(3*q.q)
+</div>
+<!--l. 170--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">whereas </span><span 
+class="pcrr8t-x-x-120">p*q </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">p/q </span><span 
+class="ptmr8t-x-x-120">are not.</span>
+<!--l. 173--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">18.3.2    </span></span> <a 
+ id="x242-103400018.3.2"></a><span 
+class="ptmr8t-x-x-120">Dirac Expressions</span></h4>
+<!--l. 175--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">These denote those expressions which involve </span><span 
+class="cmmi-12">&#x03B3; </span><span 
+class="ptmr8t-x-x-120">matrices. A </span><span 
+class="cmmi-12">&#x03B3; </span><span 
+class="ptmr8t-x-x-120">matrix is</span>
+<span 
+class="ptmr8t-x-x-120">implicitly a 4 </span><span 
+class="cmsy-10x-x-120">&#x00D7; </span><span 
+class="ptmr8t-x-x-120">4 matrix, and so the product, sum and difference of such</span>
+<span 
+class="ptmr8t-x-x-120">expressions, or the product of a scalar and Dirac expression is again a Dirac</span>
+<span 
+class="ptmr8t-x-x-120">expression. There are no Dirac variables in the system, so whenever a</span>
+<span 
+class="ptmr8t-x-x-120">scalar variable appears in a Dirac expression without an associated </span><span 
+class="cmmi-12">&#x03B3;</span>
+<span 
+class="ptmr8t-x-x-120">matrix expression, an implicit unit 4 by 4 matrix is assumed. For example,</span>
+<span 
+class="pcrr8t-x-x-120">g(l,p) + m </span><span 
+class="ptmr8t-x-x-120">denotes </span><span 
+class="pcrr8t-x-x-120">g(l,p) + m*</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="pcrro8t-x-x-120">unit 4 by 4 matrix</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">Multiplication of Dirac expressions, as for matrix expressions, is of course</span>
+<span 
+class="ptmr8t-x-x-120">non-commutative.</span>
+                                                                     
+
+                                                                     
+<!--l. 185--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch18.html#manualse182.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse183.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse181.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse181.html#tailmanualse181.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse182.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse182.html"></a>   
+</body></html> 

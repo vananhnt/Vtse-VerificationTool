@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Symmetric and Antisymmetric Operators</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse46.html" >Up</a></td><td class="clinks"><a 
+href="manualse47.html" >Next</a></td><td class="clinks"><a 
+href="manualse45.html" >Prev</a></td><td class="clinks"><a 
+href="manualse45.html#tailmanualse45.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse46.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.20    </span> <a 
+ id="x58-980007.20"></a>Symmetric and Antisymmetric Operators</h3>
+<!--l. 118--><p class="noindent" ></a> <a 
+ id="dx58-98001"></a><a 
+ id="dx58-98002"></a> <a 
+ id="dx58-98003"></a><a 
+ id="dx58-98004"></a>
+<!--l. 122--><p class="noindent" >An operator can be declared to be symmetric with respect to its arguments by the
+declaration <span 
+class="pcrr8t-x-x-109">SYMMETRIC</span>.<a 
+ id="dx58-98005"></a> For example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-159">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symmetric&#x00A0;u,v;
+</div>
+<!--l. 126--><p class="nopar" > means that any expression involving the top level operators <span 
+class="pcrr8t-x-x-109">U </span>or <span 
+class="pcrr8t-x-x-109">V </span>will have its
+arguments reordered to conform to the internal order used by REDUCE. The user can
+change this order for kernels by the command <span 
+class="pcrr8t-x-x-109">KORDER</span>.
+<!--l. 132--><p class="noindent" >For example, <span 
+class="pcrr8t-x-x-109">u(x,v(1,2)) </span>would become <span 
+class="pcrr8t-x-x-109">u(v(2,1),x)</span>, since numbers are
+ordered in decreasing order, and expressions are ordered in decreasing order of
+complexity.
+<!--l. 136--><p class="noindent" >Similarly the declaration <span 
+class="pcrr8t-x-x-109">ANTISYMMETRIC</span><a 
+ id="dx58-98006"></a> declares an operator antisymmetric. For
+example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-160">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;antisymmetric&#x00A0;l,m;
+</div>
+<!--l. 140--><p class="nopar" > means that any expression involving the top level operators <span 
+class="pcrr8t-x-x-109">L </span>or <span 
+class="pcrr8t-x-x-109">M </span>will have its
+arguments reordered to conform to the internal order of the system, and the sign of the
+expression changed if there are an odd number of argument interchanges necessary to
+bring about the new order.
+<!--l. 146--><p class="noindent" >For example, <span 
+class="pcrr8t-x-x-109">l(x,m(1,2)) </span>would become <span 
+class="pcrr8t-x-x-109">-l(-m(2,1),x) </span>since one interchange
+occurs with each operator. An expression like <span 
+class="pcrr8t-x-x-109">l(x,x) </span>would also be replaced by
+0.
+                                                                     
+
+                                                                     
+<!--l. 150--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse46.html" >Up</a></td><td class="clinks"><a 
+href="manualse47.html" >Next</a></td><td class="clinks"><a 
+href="manualse45.html" >Prev</a></td><td class="clinks"><a 
+href="manualse45.html#tailmanualse45.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse46.html" >Front</a></td></tr></table><a 
+ id="tailmanualse46.html"></a>  
+</body></html> 

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>REPEAT . . . UNTIL</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse19.html" >Up</a></td><td class="clinks"><a 
+href="manualse20.html" >Next</a></td><td class="clinks"><a 
+href="manualse18.html" >Prev</a></td><td class="clinks"><a 
+href="manualse18.html#tailmanualse18.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse19.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">5.6    </span> <a 
+ id="x28-410005.6"></a>REPEAT &#x2026;UNTIL</h3>
+<!--l. 374--><p class="noindent" ><a 
+ id="command:REPEAT"></a> <a 
+ id="reserved:UNTIL"></a>
+<a 
+ id="dx28-41001"></a>
+<a 
+ id="dx28-41002"></a>
+<a 
+ id="dx28-41003"></a>
+<!--l. 378--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">REPEAT</span>&#x2026; <span 
+class="pcrr8t-x-x-109">UNTIL </span>is very similar in purpose to <span 
+class="pcrr8t-x-x-109">WHILE</span>&#x2026; <span 
+class="pcrr8t-x-x-109">DO</span>. Its syntax is:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">REPEAT</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="pcrr8t-x-x-109">UNTIL</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">boolean expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div>
+<!--l. 383--><p class="noindent" >(PASCAL users note: Only a single statement &#8211; usually a group statement &#8211; is allowed
+between the <span 
+class="pcrr8t-x-x-109">REPEAT </span>and the <span 
+class="pcrr8t-x-x-109">UNTIL</span>.)
+<!--l. 386--><p class="noindent" >There are two essential differences:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x28-41005x1">The test is performed <span 
+class="ptmri8t-x-x-109">after </span>the controlled statement (or group of statements)
+     is executed, so the controlled statement is always executed at least once.
+     </li>
+     <li 
+  class="enumerate" id="x28-41007x2">The  test  is  a  test  for  when  to  stop  rather  than  when  to  continue,  so  its
+     &#8220;polarity&#8221; is the opposite of that in <span 
+class="pcrr8t-x-x-109">WHILE</span>&#x2026; <span 
+class="pcrr8t-x-x-109">DO.</span></li></ol>
+<!--l. 396--><p class="noindent" >As an example, we rewrite the example from the <span 
+class="pcrr8t-x-x-109">WHILE </span><span 
+class="pcrr8t-x-x-109">&#x2026;DO </span>section:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-63">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;ex:=0;&#x00A0;term:=1;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;repeat&#x00A0;&#x003C;&#x003C;ex&#x00A0;:=&#x00A0;ex+term;&#x00A0;term&#x00A0;:=&#x00A0;(term&#x00A0;+&#x00A0;term^2)/3&#x003E;&#x003E;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;until&#x00A0;num(term&#x00A0;-&#x00A0;1/1000)&#x00A0;&#x003C;&#x00A0;0;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ex;
+</div>
+<!--l. 403--><p class="nopar" >
+In this case, the answer will be the same as before, because in neither case is a term
+added to <span 
+class="pcrr8t-x-x-109">EX </span>which is less than 1/1000.
+                                                                     
+
+                                                                     
+<!--l. 408--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse19.html" >Up</a></td><td class="clinks"><a 
+href="manualse20.html" >Next</a></td><td class="clinks"><a 
+href="manualse18.html" >Prev</a></td><td class="clinks"><a 
+href="manualse18.html#tailmanualse18.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse19.html" >Front</a></td></tr></table><a 
+ id="tailmanualse19.html"></a>  
+</body></html> 

@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SPECFN: Package for special functions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse154.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse155.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse153.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse153.html#tailmanualse153.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse154.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.63    </span></span> <a 
+ id="x210-89900016.63"></a><span 
+class="ptmr8t-x-x-120">SPECFN: Package for special functions</span></h3>
+<a 
+ id="dx210-899001"></a>
+<a 
+ id="dx210-899002"></a>
+<a 
+ id="dx210-899003"></a>
+<a 
+ id="dx210-899004"></a>
+<a 
+ id="dx210-899005"></a>
+<a 
+ id="dx210-899006"></a>
+<a 
+ id="dx210-899007"></a>
+<a 
+ id="dx210-899008"></a>
+<a 
+ id="dx210-899009"></a>
+<a 
+ id="dx210-899010"></a>
+<a 
+ id="dx210-899011"></a>
+<a 
+ id="dx210-899012"></a>
+<a 
+ id="dx210-899013"></a>
+<a 
+ id="dx210-899014"></a>
+<a 
+ id="dx210-899015"></a>
+<a 
+ id="dx210-899016"></a>
+<a 
+ id="dx210-899017"></a>
+<a 
+ id="dx210-899018"></a>
+<a 
+ id="dx210-899019"></a>
+<a 
+ id="dx210-899020"></a>
+<a 
+ id="dx210-899021"></a>
+<a 
+ id="dx210-899022"></a>
+<a 
+ id="dx210-899023"></a>
+<a 
+ id="dx210-899024"></a>
+<a 
+ id="dx210-899025"></a>
+<a 
+ id="dx210-899026"></a>
+<a 
+ id="dx210-899027"></a>
+<a 
+ id="dx210-899028"></a>
+<a 
+ id="dx210-899029"></a>
+<a 
+ id="dx210-899030"></a>
+<a 
+ id="dx210-899031"></a>
+<a 
+ id="dx210-899032"></a>
+<a 
+ id="dx210-899033"></a>
+<a 
+ id="dx210-899034"></a>
+<a 
+ id="dx210-899035"></a>
+                                                                     
+
+                                                                     
+<a 
+ id="dx210-899036"></a>
+<a 
+ id="dx210-899037"></a>
+<a 
+ id="dx210-899038"></a>
+<a 
+ id="dx210-899039"></a>
+<a 
+ id="dx210-899040"></a>
+<a 
+ id="dx210-899041"></a>
+<a 
+ id="dx210-899042"></a>
+<a 
+ id="dx210-899043"></a>
+<a 
+ id="dx210-899044"></a>
+<a 
+ id="dx210-899045"></a>
+<a 
+ id="dx210-899046"></a>
+<a 
+ id="dx210-899047"></a>
+<a 
+ id="dx210-899048"></a>
+<a 
+ id="dx210-899049"></a>
+<a 
+ id="dx210-899050"></a>
+<a 
+ id="dx210-899051"></a>
+<a 
+ id="dx210-899052"></a>
+<a 
+ id="dx210-899053"></a>
+<a 
+ id="dx210-899054"></a>
+<a 
+ id="dx210-899055"></a>
+<a 
+ id="dx210-899056"></a>
+<a 
+ id="dx210-899057"></a>
+<a 
+ id="dx210-899058"></a>
+<a 
+ id="dx210-899059"></a>
+<a 
+ id="dx210-899060"></a>
+<a 
+ id="dx210-899061"></a>
+<a 
+ id="dx210-899062"></a>
+<a 
+ id="dx210-899063"></a>
+<a 
+ id="dx210-899064"></a>
+<a 
+ id="dx210-899065"></a>
+<a 
+ id="dx210-899066"></a>
+<a 
+ id="dx210-899067"></a>
+<a 
+ id="dx210-899068"></a>
+<a 
+ id="dx210-899069"></a>
+<a 
+ id="dx210-899070"></a>
+<a 
+ id="dx210-899071"></a>
+<a 
+ id="dx210-899072"></a>
+<a 
+ id="dx210-899073"></a>
+<a 
+ id="dx210-899074"></a>
+<a 
+ id="dx210-899075"></a>
+<a 
+ id="dx210-899076"></a>
+<a 
+ id="dx210-899077"></a>
+                                                                     
+
+                                                                     
+<a 
+ id="dx210-899078"></a>
+<a 
+ id="dx210-899079"></a>
+<a 
+ id="dx210-899080"></a>
+<a 
+ id="dx210-899081"></a>
+<a 
+ id="dx210-899082"></a>
+<a 
+ id="dx210-899083"></a>
+<a 
+ id="dx210-899084"></a>
+<a 
+ id="dx210-899085"></a>
+<!--l. 1116--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This special function package is separated into two portions to make it easier to</span>
+<span 
+class="ptmr8t-x-x-120">handle. The packages are called SPECFN and SPECFN2. The first one is more</span>
+<span 
+class="ptmr8t-x-x-120">general in nature, whereas the second is devoted to special special functions.</span>
+<span 
+class="ptmr8t-x-x-120">Documentation for the first package can be found in the file specfn.tex in the</span>
+<span 
+class="ptmr8t-x-x-120">&#8220;doc&#8221; directory, and examples in specfn.tst and specfmor.tst in the examples</span>
+<span 
+class="ptmr8t-x-x-120">directory.</span>
+<!--l. 1123--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The package SPECFN is designed to provide algebraic and numerical</span>
+<span 
+class="ptmr8t-x-x-120">manipulations of several common special functions, namely:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Bernoulli Numbers and Euler Numbers;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Stirling Numbers;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Binomial Coefficients;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Pochhammer notation;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Gamma function;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Psi function and its derivatives;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Riemann Zeta function;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Bessel functions J and Y of the first and second kind;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The modified Bessel functions I and K;</span>
+                                                                     
+
+                                                                     
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Hankel functions H1 and H2;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Kummer hypergeometric functions M and U;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Beta function, and Struve, Lommel and Whittaker functions;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Airy functions;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Exponential Integral, the Sine and Cosine Integrals;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Hyperbolic Sine and Cosine Integrals;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Fresnel Integrals and the Error function;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The Dilog function;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Hermite Polynomials;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Jacobi Polynomials;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Legendre Polynomials;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Spherical and Solid Harmonics;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Laguerre Polynomials;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Chebyshev Polynomials;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Gegenbauer Polynomials;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Euler Polynomials;</span>
+                                                                     
+
+                                                                     
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Bernoulli Polynomials.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Jacobi Elliptic Functions and Integrals;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">3j symbols, 6j symbols and Clebsch Gordan coefficients;</span></li></ul>
+<!--l. 1157--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Chris Cannam, with contributions from Winfried Neun, Herbert Melenk,</span>
+<span 
+class="ptmr8t-x-x-120">Victor Adamchik, Francis Wright and several others.</span>
+                                                                     
+
+                                                                     
+<!--l. 1160--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse154.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse155.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse153.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse153.html#tailmanualse153.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse154.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse154.html"></a>  
+</body></html> 

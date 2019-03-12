@@ -1,0 +1,758 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SETS: A basic set theory package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse151.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse152.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse150.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse150.html#tailmanualse150.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse151.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60    </span></span> <a 
+ id="x203-81500016.60"></a><span 
+class="ptmr8t-x-x-120">SETS: A basic set theory package</span></h3>
+<a 
+ id="dx203-815001"></a>
+<a 
+ id="dx203-815002"></a>
+<!--l. 1043--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Francis J. Wright.</span>
+<!--l. 4--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The SETS package for REDUCE 3.5 and later versions provides algebraic-mode</span>
+<span 
+class="ptmr8t-x-x-120">support for set operations on lists regarded as sets (or representing explicit sets)</span>
+<span 
+class="ptmr8t-x-x-120">and on implicit sets represented by identifiers. It provides the set-valued infix</span>
+<span 
+class="ptmr8t-x-x-120">operators (with synonyms) </span><span 
+class="pcrr8t-x-x-120">union</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">intersection </span><span 
+class="ptmr8t-x-x-120">(</span><span 
+class="pcrr8t-x-x-120">intersect</span><span 
+class="ptmr8t-x-x-120">) and</span>
+<span 
+class="pcrr8t-x-x-120">setdiff </span><span 
+class="ptmr8t-x-x-120">(</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">\</span></span></span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">minus</span><span 
+class="ptmr8t-x-x-120">) and the Boolean-valued infix operators (predicates)</span>
+<span 
+class="pcrr8t-x-x-120">member</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">subset_eq</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">subset</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">set_eq</span><span 
+class="ptmr8t-x-x-120">. The union and intersection</span>
+<span 
+class="ptmr8t-x-x-120">operators are n-ary and the rest are binary. A list can be explicitly converted to</span>
+<span 
+class="ptmr8t-x-x-120">the canonical set representation by applying the operator </span><span 
+class="pcrr8t-x-x-120">mkset</span><span 
+class="ptmr8t-x-x-120">. (The package</span>
+<span 
+class="ptmr8t-x-x-120">also provides an operator not specifically related to set theory called </span><span 
+class="pcrr8t-x-x-120">evalb </span><span 
+class="ptmr8t-x-x-120">that</span>
+<span 
+class="ptmr8t-x-x-120">allows the value of any Boolean-valued expression to be displayed in algebraic</span>
+<span 
+class="ptmr8t-x-x-120">mode.)</span>
+<!--l. 20--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.1    </span></span> <a 
+ id="x203-81600016.60.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<!--l. 22--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">REDUCE has no specific representation for a set, neither in algebraic mode nor</span>
+<span 
+class="ptmr8t-x-x-120">internally, and any object that is mathematically a set is represented in</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE as a list. The difference between a set and a list is that in a set the</span>
+<span 
+class="ptmr8t-x-x-120">ordering of elements is not significant and duplicate elements are not</span>
+<span 
+class="ptmr8t-x-x-120">allowed (or are ignored). Hence a list provides a perfectly natural and</span>
+<span 
+class="ptmr8t-x-x-120">satisfactory representation for a set (but not vice versa). Some languages, such</span>
+<span 
+class="ptmr8t-x-x-120">as Maple, provide different internal representations for sets and lists,</span>
+<span 
+class="ptmr8t-x-x-120">which may allow sets to be processed more efficiently, but this is not</span>
+<span 
+class="ptmri8t-x-x-120">necessary</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 32--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package supports set theoretic operations on lists and represents the results</span>
+<span 
+class="ptmr8t-x-x-120">as normal algebraic-mode lists, so that all other REDUCE facilities that apply to</span>
+<span 
+class="ptmr8t-x-x-120">lists can still be applied to lists that have been constructed by explicit set</span>
+<span 
+class="ptmr8t-x-x-120">operations. The algebraic-mode set operations provided by this package have all</span>
+<span 
+class="ptmr8t-x-x-120">been available in symbolic mode for a long time, and indeed are used internally</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">by the rest of REDUCE, so in that sense set theory facilities in REDUCE are far</span>
+<span 
+class="ptmr8t-x-x-120">from new. What this package does is make them available in algebraic</span>
+<span 
+class="ptmr8t-x-x-120">mode, generalize their operation by extending the arity of union and</span>
+<span 
+class="ptmr8t-x-x-120">intersection, and allow their arguments to be implicit sets represented by</span>
+<span 
+class="ptmr8t-x-x-120">unbound identifiers. It performs some simplifications on such symbolic</span>
+<span 
+class="ptmr8t-x-x-120">set-valued expressions, but this is currently rather </span><span 
+class="ptmri8t-x-x-120">ad hoc </span><span 
+class="ptmr8t-x-x-120">and is probably</span>
+<span 
+class="ptmr8t-x-x-120">incomplete.</span>
+<!--l. 46--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For examples of the operation of the SETS package see (or run) the test file</span>
+<span 
+class="pcrr8t-x-x-120">sets.tst</span><span 
+class="ptmr8t-x-x-120">. This package is experimental and developments are under</span>
+<span 
+class="ptmr8t-x-x-120">consideration; if you have suggestions for improvements (or corrections)</span>
+<span 
+class="ptmr8t-x-x-120">then please send them to me (FJW), preferably by email. The package is</span>
+<span 
+class="ptmr8t-x-x-120">intended to be run under REDUCE 3.5 and later versions; it may well run</span>
+<span 
+class="ptmr8t-x-x-120">correctly under earlier versions although I cannot provide support for such</span>
+<span 
+class="ptmr8t-x-x-120">use.</span>
+<!--l. 55--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.2    </span></span> <a 
+ id="x203-81700016.60.2"></a><span 
+class="ptmr8t-x-x-120">Infix operator precedence</span></h4>
+<!--l. 57--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The set operators are currently inserted into the standard REDUCE precedence</span>
+<span 
+class="ptmr8t-x-x-120">list (see page 28, §2.7, of the REDUCE 3.6 manual) as follows:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1174">
+or&#x00A0;and&#x00A0;not&#x00A0;member&#x00A0;memq&#x00A0;=&#x00A0;set_eq&#x00A0;neq&#x00A0;eq&#x00A0;&#x003E;=&#x00A0;&#x003E;&#x00A0;&#x003C;=&#x00A0;&#x003C;&#x00A0;subset_eq
+&#x00A0;<br />subset&#x00A0;freeof&#x00A0;+&#x00A0;-&#x00A0;setdiff&#x00A0;union&#x00A0;intersection&#x00A0;*&#x00A0;/&#x00A0;^&#x00A0;.
+</div>
+<!--l. 63--><p class="nopar" >
+<!--l. 66--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.3    </span></span> <a 
+ id="x203-81800016.60.3"></a><span 
+class="ptmr8t-x-x-120">Explicit set representation and </span><span 
+class="pcrr8t-x-x-120">mkset</span></h4>
+<a 
+ id="dx203-818001"></a>
+<!--l. 69--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Explicit sets are represented by lists, and this package does not require any</span>
+<span 
+class="ptmr8t-x-x-120">restrictions at all on the forms of lists that are regarded as sets. Nevertheless,</span>
+<span 
+class="ptmr8t-x-x-120">duplicate elements in a set correspond by definition to the same element and it is</span>
+<span 
+class="ptmr8t-x-x-120">conventional and convenient to represent them by a single element, i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;to</span>
+<span 
+class="ptmr8t-x-x-120">remove any duplicate elements. I will call this a normal representation. Since the</span>
+<span 
+class="ptmr8t-x-x-120">order of elements in a set is irrelevant it is also conventional and may be</span>
+<span 
+class="ptmr8t-x-x-120">convenient to sort them into some standard order, and an appropriate ordering of</span>
+<span 
+class="ptmr8t-x-x-120">a normal representation gives a canonical representation. This means that two</span>
+<span 
+class="ptmr8t-x-x-120">identical sets have identical representations, and therefore the standard REDUCE</span>
+<span 
+class="ptmr8t-x-x-120">equality predicate (</span><span 
+class="pcrr8t-x-x-120">=</span><span 
+class="ptmr8t-x-x-120">) correctly determines set equality; without a canonical</span>
+<span 
+class="ptmr8t-x-x-120">representation this is not the case.</span>
+<!--l. 83--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Pre-processing of explicit set-valued arguments of the set-valued operators to</span>
+<span 
+class="ptmr8t-x-x-120">remove duplicates is always done because of the obvious efficiency advantage if</span>
+<span 
+class="ptmr8t-x-x-120">there were any duplicates, and hence explicit sets appearing in the values of such</span>
+<span 
+class="ptmr8t-x-x-120">operators will never contain any duplicate elements. Such sets are also currently</span>
+<span 
+class="ptmr8t-x-x-120">sorted, mainly because the result looks better. The ordering used satisfies the</span>
+<span 
+class="pcrr8t-x-x-120">ordp </span><span 
+class="ptmr8t-x-x-120">predicate used for most sorting within REDUCE, except that explicit</span>
+<span 
+class="ptmr8t-x-x-120">integers are sorted into increasing numerical order rather than the decreasing</span>
+<span 
+class="ptmr8t-x-x-120">order that satisfies </span><span 
+class="pcrr8t-x-x-120">ordp</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 93--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Hence explicit sets appearing in the result of any set operator are currently</span>
+<span 
+class="ptmr8t-x-x-120">returned in a canonical form. Any explicit set can also be put into this form by</span>
+<span 
+class="ptmr8t-x-x-120">applying the operator </span><span 
+class="pcrr8t-x-x-120">mkset </span><span 
+class="ptmr8t-x-x-120">to the list representing it. For example</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1175">
+mkset&#x00A0;{1,2,y,x*y,x+y};
+&#x00A0;<br />
+&#x00A0;<br />{x&#x00A0;+&#x00A0;y,x*y,y,1,2}
+</div>
+<!--l. 101--><p class="nopar" >
+<!--l. 103--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The empty set is represented by the empty list </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">{}</span></span></span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 106--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.4    </span></span> <a 
+ id="x203-81900016.60.4"></a><span 
+class="ptmr8t-x-x-120">Union and intersection</span></h4>
+<a 
+ id="dx203-819001"></a>
+<a 
+ id="dx203-819002"></a>
+<!--l. 109--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">intersection </span><span 
+class="ptmr8t-x-x-120">(the name used internally) has the shorter</span>
+<span 
+class="ptmr8t-x-x-120">synonym </span><span 
+class="pcrr8t-x-x-120">intersect</span><span 
+class="ptmr8t-x-x-120">. These operators will probably most commonly be used</span>
+<span 
+class="ptmr8t-x-x-120">as binary infix operators applied to explicit sets, e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1176">
+{1,2,3}&#x00A0;union&#x00A0;{2,3,4};
+&#x00A0;<br />
+&#x00A0;<br />{1,2,3,4}
+&#x00A0;<br />
+&#x00A0;<br />{1,2,3}&#x00A0;intersect&#x00A0;{2,3,4};
+&#x00A0;<br />
+&#x00A0;<br />{2,3}
+</div>
+<!--l. 121--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">They can also be used as n-ary operators with any number of arguments, in</span>
+<span 
+class="ptmr8t-x-x-120">which case it saves typing to use them as prefix operators (which is possible with</span>
+<span 
+class="ptmr8t-x-x-120">all REDUCE infix operators), e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1177">
+{1,2,3}&#x00A0;union&#x00A0;{2,3,4}&#x00A0;union&#x00A0;{3,4,5};
+&#x00A0;<br />
+&#x00A0;<br />{1,2,3,4,5}
+&#x00A0;<br />
+&#x00A0;<br />intersect({1,2,3},&#x00A0;{2,3,4},&#x00A0;{3,4,5});
+&#x00A0;<br />
+&#x00A0;<br />{3}
+</div>
+<!--l. 133--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">For completeness, they can currently also be used as unary operators, in</span>
+<span 
+class="ptmr8t-x-x-120">which case they just return their arguments (in canonical form), and so</span>
+<span 
+class="ptmr8t-x-x-120">act as slightly less efficient versions of </span><span 
+class="pcrr8t-x-x-120">mkset </span><span 
+class="ptmr8t-x-x-120">(but this may change),</span>
+<span 
+class="ptmr8t-x-x-120">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1178">
+union&#x00A0;{1,5,3,5,1};
+&#x00A0;<br />
+&#x00A0;<br />{1,3,5}
+</div>
+<!--l. 142--><p class="nopar" >
+<!--l. 145--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.5    </span></span> <a 
+ id="x203-82000016.60.5"></a><span 
+class="ptmr8t-x-x-120">Symbolic set expressions</span></h4>
+<!--l. 147--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If one or more of the arguments evaluates to an unbound identifier then it is</span>
+<span 
+class="ptmr8t-x-x-120">regarded as representing a symbolic implicit set, and the union or intersection</span>
+<span 
+class="ptmr8t-x-x-120">will evaluate to an expression that still contains the union or intersection operator.</span>
+<span 
+class="ptmr8t-x-x-120">These two operators are symmetric, and so if they remain symbolic their</span>
+<span 
+class="ptmr8t-x-x-120">arguments will be sorted as for any symmetric operator. Such symbolic set</span>
+<span 
+class="ptmr8t-x-x-120">expressions are simplified, but the simplification may not be complete in</span>
+<span 
+class="ptmr8t-x-x-120">non-trivial cases. For example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1179">
+a&#x00A0;union&#x00A0;b&#x00A0;union&#x00A0;{}&#x00A0;union&#x00A0;b&#x00A0;union&#x00A0;{7,3};
+&#x00A0;<br />
+&#x00A0;<br />{3,7}&#x00A0;union&#x00A0;a&#x00A0;union&#x00A0;b
+&#x00A0;<br />
+&#x00A0;<br />a&#x00A0;intersect&#x00A0;{};
+&#x00A0;<br />
+&#x00A0;<br />{}
+</div>
+<!--l. 163--><p class="nopar" >
+<!--l. 165--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In implementations of REDUCE that provide fancy display using mathematical</span>
+<span 
+class="ptmr8t-x-x-120">notation, the empty set, union, intersection and set difference are all displayed</span>
+<span 
+class="ptmr8t-x-x-120">using their conventional mathematical symbols, namely </span><span 
+class="cmsy-10x-x-120">&#x2205;</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmsy-10x-x-120">&#x222A;</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmsy-10x-x-120">&#x2229;</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmsy-10x-x-120">\</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 170--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">A symbolic set expression is a valid argument for any other set operator,</span>
+<span 
+class="ptmr8t-x-x-120">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1180">
+a&#x00A0;union&#x00A0;(b&#x00A0;intersect&#x00A0;c);
+&#x00A0;<br />
+&#x00A0;<br />b&#x00A0;intersection&#x00A0;c&#x00A0;union&#x00A0;a
+</div>
+<!--l. 176--><p class="nopar" >
+<!--l. 178--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Intersection distributes over union, which is not applied by default but is</span>
+<span 
+class="ptmr8t-x-x-120">implemented as a rule list assigned to the variable </span><span 
+class="pcrr8t-x-x-120">set_distribution_rule</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="ptmr8t-x-x-120">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1181">
+a&#x00A0;intersect&#x00A0;(b&#x00A0;union&#x00A0;c);
+&#x00A0;<br />
+&#x00A0;<br />(b&#x00A0;union&#x00A0;c)&#x00A0;intersection&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />a&#x00A0;intersect&#x00A0;(b&#x00A0;union&#x00A0;c)&#x00A0;where&#x00A0;set_distribution_rule;
+&#x00A0;<br />
+&#x00A0;<br />a&#x00A0;intersection&#x00A0;b&#x00A0;union&#x00A0;a&#x00A0;intersection&#x00A0;c
+</div>
+<!--l. 189--><p class="nopar" >
+<!--l. 192--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.6    </span></span> <a 
+ id="x203-82100016.60.6"></a><span 
+class="ptmr8t-x-x-120">Set difference</span></h4>
+<a 
+ id="dx203-821001"></a>
+<a 
+ id="dx203-821002"></a>
+<!--l. 196--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The set difference operator is represented by the symbol </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">\</span></span></span> <span 
+class="ptmr8t-x-x-120">and is always output</span>
+<span 
+class="ptmr8t-x-x-120">using this symbol, although it can also be input using either of the two names</span>
+<span 
+class="pcrr8t-x-x-120">setdiff </span><span 
+class="ptmr8t-x-x-120">(the name used internally) or </span><span 
+class="pcrr8t-x-x-120">minus </span><span 
+class="ptmr8t-x-x-120">(as used in Maple). It is a binary</span>
+<span 
+class="ptmr8t-x-x-120">operator, its operands may be any combination of explicit or implicit sets, and it</span>
+<span 
+class="ptmr8t-x-x-120">may be used in an argument of any other set operator. Here are some</span>
+<span 
+class="ptmr8t-x-x-120">examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1182">
+{1,2,3}&#x00A0;\&#x00A0;{2,4};
+&#x00A0;<br />
+&#x00A0;<br />{1,3}
+&#x00A0;<br />
+&#x00A0;<br />{1,2,3}&#x00A0;\&#x00A0;{};
+&#x00A0;<br />
+&#x00A0;<br />{1,2,3}
+&#x00A0;<br />
+&#x00A0;<br />a&#x00A0;\&#x00A0;{1,2};
+&#x00A0;<br />
+&#x00A0;<br />a\{1,2}
+&#x00A0;<br />
+&#x00A0;<br />a&#x00A0;\&#x00A0;a;
+&#x00A0;<br />
+&#x00A0;<br />{}
+&#x00A0;<br />
+&#x00A0;<br />a&#x00A0;\&#x00A0;{};
+&#x00A0;<br />
+&#x00A0;<br />a
+&#x00A0;<br />
+&#x00A0;<br />{}&#x00A0;\&#x00A0;a;
+&#x00A0;<br />
+&#x00A0;<br />{}
+</div>
+<!--l. 227--><p class="nopar" >
+<!--l. 230--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.7    </span></span> <a 
+ id="x203-82200016.60.7"></a><span 
+class="ptmr8t-x-x-120">Predicates on sets</span></h4>
+<a 
+ id="dx203-822001"></a>
+<!--l. 233--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">These are all binary infix operators. Currently, like all REDUCE predicates, they</span>
+<span 
+class="ptmr8t-x-x-120">can only be used within conditional statements (</span><span 
+class="pcrr8t-x-x-120">if</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">while</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">repeat</span><span 
+class="ptmr8t-x-x-120">) or within</span>
+<span 
+class="ptmr8t-x-x-120">the argument of the </span><span 
+class="pcrr8t-x-x-120">evalb </span><span 
+class="ptmr8t-x-x-120">operator provided by this package, and they cannot</span>
+<span 
+class="ptmr8t-x-x-120">remain symbolic &#8211; a predicate that cannot be evaluated to a Boolean value causes</span>
+<span 
+class="ptmr8t-x-x-120">a normal REDUCE error.</span>
+<!--l. 240--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">evalb </span><span 
+class="ptmr8t-x-x-120">operator provides a convenient shorthand for an </span><span 
+class="pcrr8t-x-x-120">if </span><span 
+class="ptmr8t-x-x-120">statement</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">designed purely to display the value of any Boolean expression (not only</span>
+<span 
+class="ptmr8t-x-x-120">predicates defined in this package). It has some similarity with the </span><span 
+class="pcrr8t-x-x-120">evalb</span>
+<span 
+class="ptmr8t-x-x-120">function in Maple, except that the values returned by </span><span 
+class="pcrr8t-x-x-120">evalb </span><span 
+class="ptmr8t-x-x-120">in REDUCE (the</span>
+<span 
+class="ptmr8t-x-x-120">identifiers </span><span 
+class="pcrr8t-x-x-120">true </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">false</span><span 
+class="ptmr8t-x-x-120">) have no significance to REDUCE itself. Hence, in</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE, use of </span><span 
+class="pcrr8t-x-x-120">evalb </span><span 
+class="ptmr8t-x-x-120">is </span><span 
+class="ptmri8t-x-x-120">never </span><span 
+class="ptmr8t-x-x-120">necessary.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1183">
+if&#x00A0;a&#x00A0;=&#x00A0;a&#x00A0;then&#x00A0;true&#x00A0;else&#x00A0;false;
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb(a&#x00A0;=&#x00A0;a);
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />if&#x00A0;a&#x00A0;=&#x00A0;b&#x00A0;then&#x00A0;true&#x00A0;else&#x00A0;false;
+&#x00A0;<br />
+&#x00A0;<br />false
+&#x00A0;<br />
+&#x00A0;<br />evalb(a&#x00A0;=&#x00A0;b);
+&#x00A0;<br />
+&#x00A0;<br />false
+&#x00A0;<br />
+&#x00A0;<br />evalb&#x00A0;1;
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb&#x00A0;0;
+&#x00A0;<br />
+&#x00A0;<br />false
+</div>
+<!--l. 271--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">I will use the </span><span 
+class="pcrr8t-x-x-120">evalb </span><span 
+class="ptmr8t-x-x-120">operator in preference to an explicit </span><span 
+class="pcrr8t-x-x-120">if </span><span 
+class="ptmr8t-x-x-120">statement for</span>
+<span 
+class="ptmr8t-x-x-120">purposes of illustration.</span>
+<!--l. 276--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.7.1    </span></span> <a 
+ id="x203-82300016.60.7.1"></a><span 
+class="ptmr8t-x-x-120">Set membership</span></h5>
+<a 
+ id="dx203-823001"></a>
+<!--l. 279--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Set membership is tested by the predicate </span><span 
+class="pcrr8t-x-x-120">member</span><span 
+class="ptmr8t-x-x-120">. Its left operand is regarded</span>
+<span 
+class="ptmr8t-x-x-120">as a potential set element and its right operand </span><span 
+class="ptmri8t-x-x-120">must </span><span 
+class="ptmr8t-x-x-120">evaluate to an explicit set.</span>
+<span 
+class="ptmr8t-x-x-120">There is currently no sense in which the right operand could be an implicit set;</span>
+<span 
+class="ptmr8t-x-x-120">this would require a mechanism for declaring implicit set membership (akin to</span>
+<span 
+class="ptmr8t-x-x-120">implicit variable dependence) which is currently not implemented. Set</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">membership testing works like this:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1184">
+evalb(1&#x00A0;member&#x00A0;{1,2,3});
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb(2&#x00A0;member&#x00A0;{1,2}&#x00A0;intersect&#x00A0;{2,3});
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb(a&#x00A0;member&#x00A0;b);
+&#x00A0;<br />
+&#x00A0;<br />*****&#x00A0;b&#x00A0;invalid&#x00A0;as&#x00A0;list
+</div>
+<!--l. 298--><p class="nopar" >
+<!--l. 301--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.7.2    </span></span> <a 
+ id="x203-82400016.60.7.2"></a><span 
+class="ptmr8t-x-x-120">Set inclusion</span></h5>
+<a 
+ id="dx203-824001"></a>
+<!--l. 304--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Set inclusion is tested by the predicate </span><span 
+class="pcrr8t-x-x-120">subset_eq </span><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="pcrr8t-x-x-120">a subset_eq b </span><span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">true if the set </span><span 
+class="cmmi-12">a </span><span 
+class="ptmr8t-x-x-120">is either a subset of or equal to the set </span><span 
+class="cmmi-12">b</span><span 
+class="ptmr8t-x-x-120">; strict inclusion is tested</span>
+<span 
+class="ptmr8t-x-x-120">by the predicate </span><span 
+class="pcrr8t-x-x-120">subset </span><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="pcrr8t-x-x-120">a subset b </span><span 
+class="ptmr8t-x-x-120">is true if the set </span><span 
+class="cmmi-12">a </span><span 
+class="ptmr8t-x-x-120">is </span><span 
+class="ptmri8t-x-x-120">strictly </span><span 
+class="ptmr8t-x-x-120">a</span>
+<span 
+class="ptmr8t-x-x-120">subset of the set </span><span 
+class="cmmi-12">b </span><span 
+class="ptmr8t-x-x-120">and is false is </span><span 
+class="cmmi-12">a </span><span 
+class="ptmr8t-x-x-120">is equal to </span><span 
+class="cmmi-12">b</span><span 
+class="ptmr8t-x-x-120">. These predicates provide some</span>
+<span 
+class="ptmr8t-x-x-120">support for symbolic set expressions, but this is not yet correct as indicated</span>
+<span 
+class="ptmr8t-x-x-120">below. Here are some examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1185">
+evalb({1,2}&#x00A0;subset_eq&#x00A0;{1,2,3});
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb({1,2}&#x00A0;subset_eq&#x00A0;{1,2});
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb({1,2}&#x00A0;subset&#x00A0;{1,2});
+&#x00A0;<br />
+&#x00A0;<br />false
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />evalb(a&#x00A0;subset&#x00A0;a&#x00A0;union&#x00A0;b);
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb(a\b&#x00A0;subset&#x00A0;a);
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb(a&#x00A0;intersect&#x00A0;b&#x00A0;subset&#x00A0;a&#x00A0;union&#x00A0;b);&#x00A0;&#x00A0;%%%&#x00A0;BUG
+&#x00A0;<br />
+&#x00A0;<br />false
+</div>
+<!--l. 336--><p class="nopar" >
+<!--l. 338--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">An undecidable predicate causes a normal REDUCE error, e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1186">
+evalb(a&#x00A0;subset_eq&#x00A0;{b});
+&#x00A0;<br />
+&#x00A0;<br />*****&#x00A0;Cannot&#x00A0;evaluate&#x00A0;a&#x00A0;subset_eq&#x00A0;{b}&#x00A0;as&#x00A0;Boolean-valued&#x00A0;set
+&#x00A0;<br />&#x00A0;expression
+&#x00A0;<br />
+&#x00A0;<br />evalb(a&#x00A0;subset_eq&#x00A0;b);&#x00A0;&#x00A0;%%%&#x00A0;BUG
+&#x00A0;<br />
+&#x00A0;<br />false
+</div>
+<!--l. 348--><p class="nopar" >
+<!--l. 351--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.7.3    </span></span> <a 
+ id="x203-82500016.60.7.3"></a><span 
+class="ptmr8t-x-x-120">Set equality</span></h5>
+<a 
+ id="dx203-825001"></a>
+<!--l. 354--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">As explained above, equality of two sets in canonical form can be reliably tested</span>
+<span 
+class="ptmr8t-x-x-120">by the standard REDUCE equality predicate (</span><span 
+class="pcrr8t-x-x-120">=</span><span 
+class="ptmr8t-x-x-120">). This package also provides the</span>
+<span 
+class="ptmr8t-x-x-120">predicate </span><span 
+class="pcrr8t-x-x-120">set_eq </span><span 
+class="ptmr8t-x-x-120">to test equality of two sets not represented canonically.</span>
+<span 
+class="ptmr8t-x-x-120">The two predicates behave identically for operands that are symbolic set</span>
+<span 
+class="ptmr8t-x-x-120">expressions because these are always evaluated to canonical form (although</span>
+<span 
+class="ptmr8t-x-x-120">currently this is probably strictly true only in simple cases). Here are some</span>
+<span 
+class="ptmr8t-x-x-120">examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1187">
+evalb({1,2,3}&#x00A0;=&#x00A0;{1,2,3});
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb({2,1,3}&#x00A0;=&#x00A0;{1,3,2});
+&#x00A0;<br />
+&#x00A0;<br />false
+&#x00A0;<br />
+&#x00A0;<br />evalb(mkset{2,1,3}&#x00A0;=&#x00A0;mkset{1,3,2});
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb({2,1,3}&#x00A0;set_eq&#x00A0;{1,3,2});
+&#x00A0;<br />
+&#x00A0;<br />true
+&#x00A0;<br />
+&#x00A0;<br />evalb(a&#x00A0;union&#x00A0;a&#x00A0;=&#x00A0;a\{});
+&#x00A0;<br />
+&#x00A0;<br />true
+</div>
+<!--l. 382--><p class="nopar" >
+<!--l. 385--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.60.8    </span></span> <a 
+ id="x203-82600016.60.8"></a><span 
+class="ptmr8t-x-x-120">Possible future developments</span></h4>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Unary union/intersection to implement repeated union/intersection on</span>
+     <span 
+class="ptmr8t-x-x-120">a set of sets.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">More symbolic set algebra, canonical forms for set expressions, more</span>
+     <span 
+class="ptmr8t-x-x-120">complete simplification.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Better  support  for  Boolean  variables  via  a  version  (evalb10?)  of</span>
+                                                                     
+
+                                                                     
+     <span 
+class="pcrr8t-x-x-120">evalb </span><span 
+class="ptmr8t-x-x-120">that returns 1/0 instead of </span><span 
+class="pcrr8t-x-x-120">true</span><span 
+class="ptmr8t-x-x-120">/</span><span 
+class="pcrr8t-x-x-120">false</span><span 
+class="ptmr8t-x-x-120">, or predicates that</span>
+     <span 
+class="ptmr8t-x-x-120">return 1/0 directly.</span></li></ul>
+<!--l. 1047--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1049--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse151.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse152.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse150.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse150.html#tailmanualse150.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse151.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse151.html"></a>   
+</body></html> 

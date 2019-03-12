@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>9 Polynomials and Rationals</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch9.html" >Up</a></td><td class="clinks"><a 
+href="manualch10.html" >Next</a></td><td class="clinks"><a 
+href="manualch8.html" >Prev</a></td><td class="clinks"><a 
+href="manualch8.html#tailmanualch8.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualch9.html">Tail</a></td></tr></table><h2 class="ChapterHead"> 9&#x00A0;<a 
+ id="x68-1300009"></a>Polynomials and Rationals</h2>
+<!--l. 4--><p class="noindent" >Many operations in computer algebra are concerned with polynomials <a 
+ id="dx68-130001"></a>and rational
+functions<a 
+ id="dx68-130002"></a>. In this section, we review some of the switches and operators available for this
+purpose. These are in addition to those that work on general expressions (such as <span 
+class="pcrr8t-x-x-109">DF </span>and
+<span 
+class="pcrr8t-x-x-109">INT</span>) described elsewhere. In the case of operators, the arguments are first simplified
+before the operations are applied. In addition, they operate only on arguments of
+prescribed types, and produce a type mismatch error if given arguments which cannot be
+interpreted in the required mode with the current switch settings. For example, if an
+argument is required to be a kernel and <span 
+class="pcrr8t-x-x-109">a/2 </span>is used (with no other rules for <span 
+class="pcrr8t-x-x-109">A</span>), an
+error
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-218">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A/2&#x00A0;invalid&#x00A0;as&#x00A0;kernel
+</div>
+<!--l. 17--><p class="nopar" > will result.
+<!--l. 20--><p class="noindent" >With the exception of those that select various parts of a polynomial or rational
+function, these operations have potentially significant effects on the space and time
+associated with a given calculation. The user should therefore experiment with their
+use in a given calculation in order to determine the optimum set for a given
+problem.
+<!--l. 26--><p class="noindent" >One such operation provided by the system is an operator <span 
+class="pcrr8t-x-x-109">LENGTH</span><a 
+ id="dx68-130003"></a> which
+returns the number of top level terms in the numerator of its argument. For
+example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-219">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;length&#x00A0;((a+b+c)^3/(c+d));
+</div>
+<!--l. 31--><p class="nopar" > has the value 10. To get the number of terms in the denominator, one would
+first select the denominator by the operator <span 
+class="pcrr8t-x-x-109">DEN</span><a 
+ id="dx68-130004"></a> and then call <span 
+class="pcrr8t-x-x-109">LENGTH</span>, as
+in
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-220">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;length&#x00A0;den&#x00A0;((a+b+c)^3/(c+d));
+</div>
+<!--l. 37--><p class="nopar" > Other operations currently supported, the relevant switches and operators, and the
+required argument and value modes of the latter, follow.
+<div class="sectionTOCS">
+&#x00A0;<span class="sectionToc" >9.1 <a 
+href="manualse55.html#x69-1310009.1">Controlling the Expansion of Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.2 <a 
+href="manualse56.html#x70-1320009.2">Factorization of Polynomials</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.3 <a 
+href="manualse57.html#x71-1330009.3">Cancellation of Common Factors</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.4 <a 
+href="manualse58.html#x72-1350009.4">Working with Least Common Multiples</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.5 <a 
+href="manualse59.html#x73-1360009.5">Controlling Use of Common Denominators</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.6 <a 
+href="manualse60.html#x74-1370009.6"><span 
+class="pcrr8t-x-x-109">divide </span>and <span 
+class="pcrr8t-x-x-109">mod </span>/ <span 
+class="pcrr8t-x-x-109">remainder </span>Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.7 <a 
+href="manualse61.html#x75-1380009.7">Polynomial Pseudo-Division</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.8 <a 
+href="manualse62.html#x76-1390009.8">RESULTANT Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.9 <a 
+href="manualse63.html#x77-1400009.9">DECOMPOSE Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.10 <a 
+href="manualse64.html#x78-1410009.10">INTERPOL operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.11 <a 
+href="manualse65.html#x79-1420009.11">Obtaining Parts of Polynomials and Rationals</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.12 <a 
+href="manualse66.html#x80-1520009.12">Polynomial Coefficient Arithmetic</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.13 <a 
+href="manualse67.html#x81-1570009.13">ROOT_VAL Operator</a></span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                     
+
+                                                                     
+<table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch9.html" >Up</a></td><td class="clinks"><a 
+href="manualch10.html" >Next</a></td><td class="clinks"><a 
+href="manualch8.html" >Prev</a></td><td class="clinks"><a 
+href="manualch8.html#tailmanualch8.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualch9.html" >Front</a></td></tr></table><a 
+ id="tailmanualch9.html"></a>  
+</body></html> 

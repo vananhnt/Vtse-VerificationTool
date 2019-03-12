@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Identifiers</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch2.html#manualse3.html" >Up</a></td><td class="clinks"><a 
+href="manualse4.html" >Next</a></td><td class="clinks"><a 
+href="manualse2.html" >Prev</a></td><td class="clinks"><a 
+href="manualse2.html#tailmanualse2.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse3.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">2.3    </span> <a 
+ id="x9-80002.3"></a>Identifiers</h3>
+<!--l. 95--><p class="noindent" >Identifiers<a 
+ id="dx9-8001"></a> in REDUCE consist of one or more alphanumeric characters (i.e. alphabetic
+letters or decimal digits) the first of which must be alphabetic. The maximum number of
+characters allowed is implementation dependent, although twenty-four is permitted in
+most implementations. In addition, the underscore character (<span 
+class="pcrr8t-x-x-109">_</span>) is considered a letter if it
+is <span 
+class="ptmri8t-x-x-109">within </span>an identifier. For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-19">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;az&#x00A0;p1&#x00A0;q23p&#x00A0;&#x00A0;a_very_long_variable
+</div>
+<!--l. 104--><p class="nopar" > are all identifiers, whereas
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-20">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;_a
+</div>
+<!--l. 108--><p class="nopar" > is not.
+<!--l. 111--><p class="noindent" >A sequence of alphanumeric characters in which the first is a digit is interpreted as a
+product. For example, <span 
+class="pcrr8t-x-x-109">2ab3c </span>is interpreted as <span 
+class="pcrr8t-x-x-109">2*ab3c</span>. There is one exception to this:
+If the first letter after a digit is <span 
+class="pcrr8t-x-x-109">E</span>, the system will try to interpret that part of
+the sequence as a real number<a 
+ id="dx9-8002"></a>, which may fail in some cases. For example,
+<span 
+class="pcrr8t-x-x-109">2E12 </span>is the real number <span 
+class="cmr-10x-x-109">2</span><span 
+class="cmmi-10x-x-109">.</span><span 
+class="cmr-10x-x-109">0 </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmr-10x-x-109">10</span><sup><span 
+class="cmr-8">12</span></sup>, <span 
+class="pcrr8t-x-x-109">2e3c </span>is 2000.0*C, and <span 
+class="pcrr8t-x-x-109">2ebc </span>gives an
+error.
+<!--l. 119--><p class="noindent" >Special characters, such as <span 
+class="pcrr8t-x-x-109">-</span>, <span 
+class="pcrr8t-x-x-109">*</span>, and blank, may be used in identifiers too, even as the
+first character, but each must be preceded by an exclamation mark in input. For
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-21">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;light!-years&#x00A0;&#x00A0;&#x00A0;&#x00A0;d!*!*n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;good!&#x00A0;morning
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;!$sign&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;!5goldrings
+</div>
+<!--l. 126--><p class="nopar" > <span 
+class="ptmri8t-x-x-109">CAUTION: </span>Many system identifiers have such special characters in their names
+(especially * and =). If the user accidentally picks the name of one of them for his own
+purposes it may have catastrophic consequences for his REDUCE run. Users are
+therefore advised to avoid such names.
+<!--l. 132--><p class="noindent" >Identifiers are used as variables, labels and to name arrays, operators and procedures.
+<!--l. 135--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x9-90002.3"></a>Restrictions</h4>
+<!--l. 137--><p class="noindent" >The reserved words listed in section (<a 
+href="manualap1.html#x254-1049000A">A<!--tex4ht:ref: reservedids --></a> may not be used as identifiers. No spaces
+may appear within an identifier, and an identifier may not extend over a line of
+text.
+                                                                     
+
+                                                                     
+<!--l. 145--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch2.html#manualse3.html" >Up</a></td><td class="clinks"><a 
+href="manualse4.html" >Next</a></td><td class="clinks"><a 
+href="manualse2.html" >Prev</a></td><td class="clinks"><a 
+href="manualse2.html#tailmanualse2.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse3.html" >Front</a></td></tr></table><a 
+ id="tailmanualse3.html"></a>   
+</body></html> 

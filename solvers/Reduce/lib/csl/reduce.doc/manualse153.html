@@ -1,0 +1,1039 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SPDE: Finding symmetry groups of PDE&#8217;s</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse153.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse154.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse152.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse152.html#tailmanualse152.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse153.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.62    </span></span> <a 
+ id="x209-89500016.62"></a><span 
+class="ptmr8t-x-x-120">SPDE: Finding symmetry groups of</span>
+<span 
+class="ptmr8t-x-x-120">PDE&#8217;s</span></h3>
+<a 
+ id="dx209-895001"></a>
+<a 
+ id="dx209-895002"></a>
+<!--l. 1062--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The package SPDE provides a set of functions which may be used to determine</span>
+<span 
+class="ptmr8t-x-x-120">the symmetry group of Lie- or point-symmetries of a given system of partial</span>
+<span 
+class="ptmr8t-x-x-120">differential equations. In many cases the determining system is solved</span>
+<span 
+class="ptmr8t-x-x-120">completely automatically. In other cases the user has to provide additional input</span>
+<span 
+class="ptmr8t-x-x-120">information for the solution algorithm to terminate.</span>
+<!--l. 1068--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Fritz Schwarz.</span>
+<!--l. 2--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The package SPDE provides a set of functions which may be applied to</span>
+<span 
+class="ptmr8t-x-x-120">determine the symmetry group of Lie- or point-symmetries of a given system of</span>
+<span 
+class="ptmr8t-x-x-120">partial differential equations. Preferably it is used interactively on a computer</span>
+<span 
+class="ptmr8t-x-x-120">terminal. In many cases the determining system is solved completely</span>
+<span 
+class="ptmr8t-x-x-120">automatically. In some other cases the user has to provide some additional input</span>
+<span 
+class="ptmr8t-x-x-120">information for the solution algorithm to terminate. The package should only be</span>
+<span 
+class="ptmr8t-x-x-120">used in compiled form.</span>
+<!--l. 11--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For all theoretical questions, a description of the algorithm and numerous</span>
+<span 
+class="ptmr8t-x-x-120">examples the following articles should be consulted: &#8220;Automatically Determining</span>
+<span 
+class="ptmr8t-x-x-120">Symmetries of Partial Differential Equations&#8221;, Computing vol. 34, page</span>
+<span 
+class="ptmr8t-x-x-120">91-106(1985) and vol. 36, page 279-280(1986), &#8220;Symmetries of Differential</span>
+<span 
+class="ptmr8t-x-x-120">Equations: From Sophus Lie to Computer Algebra&#8221;, SIAM Review, to appear,</span>
+<span 
+class="ptmr8t-x-x-120">and Chapter 2 of the Lecture Notes &#8220;Computer Algebra and Differential</span>
+<span 
+class="ptmr8t-x-x-120">Equations of Mathematical Physics&#8221;, to appear.</span>
+<!--l. 21--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.62.1    </span></span> <a 
+ id="x209-89600016.62.1"></a><span 
+class="ptmr8t-x-x-120">Description of the System Functions and Variables</span></h4>
+<!--l. 23--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The symmetry analysis of partial differential equations logically falls into three</span>
+<span 
+class="ptmr8t-x-x-120">parts. Accordingly the most important functions provided by the package</span>
+<span 
+class="ptmr8t-x-x-120">are:</span>
+<div class="center" 
+>
+                                                                     
+
+                                                                     
+<!--l. 26--><p class="noindent" >
+<div class="tabular"> <table id="TBL-169" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-169-1g"><col 
+id="TBL-169-1"></colgroup><colgroup id="TBL-169-2g"><col 
+id="TBL-169-2"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-169-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-169-1-1"  
+class="td11">    <span 
+class="ptmr8t-x-x-120">Function name         </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-169-1-2"  
+class="td11">       <span 
+class="ptmr8t-x-x-120">Operation                 </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-169-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-169-2-1"  
+class="td11"><a 
+ id="dx209-896001"></a> <span 
+class="ptmr8t-x-x-120">CRESYS(</span><span 
+class="cmmi-12">&#x003C;</span> <span 
+class="ptmri8t-x-x-120">arguments</span> <span 
+class="cmmi-12">&#x003E;</span><span 
+class="ptmr8t-x-x-120">)</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-169-2-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">Constructs determining system</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-169-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-169-3-1"  
+class="td11">     <a 
+ id="dx209-896002"></a> <span 
+class="ptmr8t-x-x-120">SIMPSYS()            </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-169-3-2"  
+class="td11"> <span 
+class="ptmr8t-x-x-120">Solves determining system   </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-169-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-169-4-1"  
+class="td11">     <a 
+ id="dx209-896003"></a> <span 
+class="ptmr8t-x-x-120">RESULT()             </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-169-4-2"  
+class="td11"> <span 
+class="ptmr8t-x-x-120">Prints infinitesimal generators </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-169-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-169-5-1"  
+class="td11">                  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-169-5-2"  
+class="td11">   <span 
+class="ptmr8t-x-x-120">and commutator table       </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-169-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-169-6-1"  
+class="td11">                  </td>
+</tr></table></div><br />
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;16.6: </span><span  
+class="content">SPDE Functions</span></div><!--tex4ht:label?: x209-8960046 -->
+</div>
+<!--l. 42--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Some other useful functions for obtaining various kinds of output are:</span>
+<div class="center" 
+>
+<!--l. 44--><p class="noindent" >
+<div class="tabular"> <table id="TBL-170" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-170-1g"><col 
+id="TBL-170-1"></colgroup><colgroup id="TBL-170-2g"><col 
+id="TBL-170-2"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-170-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-170-1-1"  
+class="td11"><span 
+class="ptmr8t-x-x-120">Function name</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-170-1-2"  
+class="td11">          <span 
+class="ptmr8t-x-x-120">Operation                         </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-170-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-170-2-1"  
+class="td11">  <a 
+ id="dx209-896005"></a> <span 
+class="ptmr8t-x-x-120">PRSYS()    </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-170-2-2"  
+class="td11">     <span 
+class="ptmr8t-x-x-120">Prints determining system            </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-170-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-170-3-1"  
+class="td11">  <a 
+ id="dx209-896006"></a> <span 
+class="ptmr8t-x-x-120">PRGEN()    </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-170-3-2"  
+class="td11">    <span 
+class="ptmr8t-x-x-120">Prints infinitesimal generators         </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-170-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-170-4-1"  
+class="td11"><a 
+ id="dx209-896007"></a> <span 
+class="ptmr8t-x-x-120">COMM(U,V) </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-170-4-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">Prints commutator of generators U and V</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-170-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-170-5-1"  
+class="td11">          </td>
+</tr></table></div><br />
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;16.7: </span><span  
+class="content">SPDE Useful Output Functions</span></div><!--tex4ht:label?: x209-8960087 -->
+</div>
+<!--l. 58--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">There are several global variables defined by the system which should not be</span>
+<span 
+class="ptmr8t-x-x-120">used for any other purpose than that given in Table</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+href="manualse136.html#x209-8960128"><span 
+class="ptmr8t-x-x-120">16.8</span><!--tex4ht:ref: spde:intt --></a> <span 
+class="ptmr8t-x-x-120">and</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+href="manualse136.html#x209-8960249"><span 
+class="ptmr8t-x-x-120">16.9</span><!--tex4ht:ref: spde:op --></a><span 
+class="ptmr8t-x-x-120">. The three</span>
+<span 
+class="ptmr8t-x-x-120">globals of the type integer are:</span>
+<div class="center" 
+>
+<!--l. 62--><p class="noindent" >
+<div class="tabular"> <table id="TBL-171" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-171-1g"><col 
+id="TBL-171-1"></colgroup><colgroup id="TBL-171-2g"><col 
+id="TBL-171-2"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-171-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-171-1-1"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">Variable name    </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-171-1-2"  
+class="td11">        <span 
+class="ptmr8t-x-x-120">Meaning                    </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-171-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-171-2-1"  
+class="td11">     <a 
+ id="dx209-896009"></a> <span 
+class="ptmr8t-x-x-120">NN            </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-171-2-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">Number of independent variables</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-171-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-171-3-1"  
+class="td11">     <a 
+ id="dx209-896010"></a> <span 
+class="ptmr8t-x-x-120">MM            </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-171-3-2"  
+class="td11"> <span 
+class="ptmr8t-x-x-120">Number of dependent variables  </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-171-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-171-4-1"  
+class="td11"><a 
+ id="dx209-896011"></a> <span 
+class="ptmr8t-x-x-120">PCLASS=0, 1 or 2</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-171-4-2"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">Controls amount of output     </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-171-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-171-5-1"  
+class="td11">             </td>
+</tr></table></div><br />
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;16.8: </span><span  
+class="content">SPDE Integer valued globals</span></div><!--tex4ht:label?: x209-8960128 -->
+</div>
+<!--l. 76--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In addition there are the following global variables of type operator:</span>
+<div class="center" 
+>
+<!--l. 78--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="tabular"> <table id="TBL-172" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-172-1g"><col 
+id="TBL-172-1"></colgroup><colgroup id="TBL-172-2g"><col 
+id="TBL-172-2"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-1-1"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">Variable name     </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-1-2"  
+class="td11">           <span 
+class="ptmr8t-x-x-120">Meaning                           </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-2-1"  
+class="td11">     <a 
+ id="dx209-896013"></a> <span 
+class="ptmr8t-x-x-120">X(I)             </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-2-2"  
+class="td11">      <span 
+class="ptmr8t-x-x-120">Independent variable </span><span 
+class="cmmi-12">x</span><sub><span 
+class="cmmi-8">i</span></sub>             </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-3-1"  
+class="td11">   <a 
+ id="dx209-896014"></a> <span 
+class="ptmr8t-x-x-120">U(ALFA)        </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-3-2"  
+class="td11">      <span 
+class="ptmr8t-x-x-120">Dependent variable </span><span 
+class="cmmi-12">u</span><sup><span 
+class="cmmi-8">alfa</span></sup>            </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-4-1"  
+class="td11">   <a 
+ id="dx209-896015"></a> <span 
+class="ptmr8t-x-x-120">U(ALFA,I)       </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-4-2"  
+class="td11">     <span 
+class="ptmr8t-x-x-120">Derivative of </span><span 
+class="cmmi-12">u</span><sup><span 
+class="cmmi-8">alfa</span></sup> <span 
+class="ptmr8t-x-x-120">w.r.t. </span><span 
+class="cmmi-12">x</span><sub>
+<span 
+class="cmmi-8">i</span></sub>           </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-5-1"  
+class="td11">    <a 
+ id="dx209-896016"></a> <span 
+class="ptmr8t-x-x-120">DEQ(I)          </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-5-2"  
+class="td11">      <span 
+class="ptmr8t-x-x-120">i-th differential equation              </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-6-1"  
+class="td11">    <a 
+ id="dx209-896017"></a> <span 
+class="ptmr8t-x-x-120">SDER(I)         </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-6-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">Derivative w.r.t. which DEQ(I) is resolved</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-7-1"  
+class="td11">     <a 
+ id="dx209-896018"></a> <span 
+class="ptmr8t-x-x-120">GL(I)            </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-7-2"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">i-th equation of determining system     </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-8-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-8-1"  
+class="td11">    <a 
+ id="dx209-896019"></a> <span 
+class="ptmr8t-x-x-120">GEN(I)          </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-8-2"  
+class="td11">     <span 
+class="ptmr8t-x-x-120">i-th infinitesimal generator            </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-9-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-9-1"  
+class="td11"><a 
+ id="dx209-896020"></a><a 
+ id="dx209-896021"></a><a 
+ id="dx209-896022"></a> <span 
+class="ptmr8t-x-x-120">XI(I), ETA(ALFA)</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-9-2"  
+class="td11">     <span 
+class="ptmr8t-x-x-120">See definition given in the             </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-10-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-10-1"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">ZETA(ALFA,I)    </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-10-2"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">references quoted in the introduction.    </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-11-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-11-1"  
+class="td11">     <a 
+ id="dx209-896023"></a> <span 
+class="ptmr8t-x-x-120">C(I)             </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-172-11-2"  
+class="td11">   <span 
+class="ptmr8t-x-x-120">i-th function used for substitution       </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-172-12-"><td  style="white-space:nowrap; text-align:center;" id="TBL-172-12-1"  
+class="td11">              </td>
+</tr></table></div><br />
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;16.9: </span><span  
+class="content">SPDE Operator type global variables</span></div><!--tex4ht:label?: x209-8960249 -->
+</div>
+<!--l. 106--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The differential equations of the system at issue have to be assigned as values to</span>
+<span 
+class="ptmr8t-x-x-120">the operator deq i applying the notation which is defined in Table</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+href="manualse136.html#x209-8960249"><span 
+class="ptmr8t-x-x-120">16.9</span><!--tex4ht:ref: spde:op --></a><span 
+class="ptmr8t-x-x-120">. The</span>
+<span 
+class="ptmr8t-x-x-120">entries in the third and the last line of that Table have obvious extensions to</span>
+<span 
+class="ptmr8t-x-x-120">higher derivatives.</span>
+<!--l. 111--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The derivative w.r.t. which the i-th differential equation deq i is resolved has to be</span>
+<span 
+class="ptmr8t-x-x-120">assigned to sder i. Exception: If there is a single differential equation and no</span>
+<span 
+class="ptmr8t-x-x-120">assignment has been made by the user, the highest derivative is taken by</span>
+<span 
+class="ptmr8t-x-x-120">default.</span>
+<!--l. 116--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">When the appropriate assignments are made to the variable deq, the values of NN</span>
+<span 
+class="ptmr8t-x-x-120">and MM (Table</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+href="manualse136.html#x209-8960087"><span 
+class="ptmr8t-x-x-120">16.7</span><!--tex4ht:ref: spde:useful --></a><span 
+class="ptmr8t-x-x-120">) are determined automatically, i.e. they have not to be</span>
+<span 
+class="ptmr8t-x-x-120">assigned by the user.</span>
+<a 
+ id="dx209-896025"></a>
+<!--l. 121--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The function CRESYS may be called with any number of arguments,</span>
+<span 
+class="ptmr8t-x-x-120">i.e.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1192">
+&#x00A0;&#x00A0;CRESYS();&#x00A0;or&#x00A0;CRESYS(deq&#x00A0;1,deq&#x00A0;2,...&#x00A0;);
+</div>
+<!--l. 125--><p class="nopar" >
+<!--l. 127--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">are legal calls. If it is called without any argument, all current assignments to</span>
+<span 
+class="ptmr8t-x-x-120">deq are taken into account. Example: If deq 1, deq 2 and deq 3 have</span>
+<span 
+class="ptmr8t-x-x-120">been assigned a differential equation and the symmetry group of the</span>
+<span 
+class="ptmr8t-x-x-120">full system comprising all three equations is desired, equivalent calls</span>
+<span 
+class="ptmr8t-x-x-120">are</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1193">
+&#x00A0;&#x00A0;CRESYS();&#x00A0;&#x00A0;&#x00A0;or&#x00A0;&#x00A0;&#x00A0;CRESYS(deq&#x00A0;1,deq&#x00A0;2,deq&#x00A0;3);
+</div>
+<!--l. 135--><p class="nopar" >
+<!--l. 137--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The first alternative saves some typing. If later in the session the symmetry group</span>
+<span 
+class="ptmr8t-x-x-120">of deq 1 alone has to be determined, the correct call is</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1194">
+&#x00A0;&#x00A0;CRESYS&#x00A0;deq&#x00A0;1;
+</div>
+<!--l. 143--><p class="nopar" >
+<a 
+ id="dx209-896026"></a>
+<!--l. 146--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">After the determining system has bee created, SIMPSYS which has no</span>
+<span 
+class="ptmr8t-x-x-120">arguments may be called for solving it. The amount of intermediate output</span>
+<span 
+class="ptmr8t-x-x-120">produced by SIMPSYS is controlled by the global variable PCLASS with the</span>
+<span 
+class="ptmr8t-x-x-120">default value 0.</span> <a 
+ id="dx209-896027"></a> <span 
+class="ptmr8t-x-x-120">With PCLASS equal to 0, no intermediate steps are</span>
+<span 
+class="ptmr8t-x-x-120">shown. With PCLASS equal to 1, all intermediate steps are displayed</span>
+<span 
+class="ptmr8t-x-x-120">so that the solution algorithm may be followed</span> <a 
+ id="dx209-896028"></a><span 
+class="ptmr8t-x-x-120">through in detail. Each</span>
+<span 
+class="ptmr8t-x-x-120">time the algorithm passes through the top of the main solution loop the</span>
+<span 
+class="ptmr8t-x-x-120">message</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1195">
+&#x00A0;&#x00A0;Entering&#x00A0;main&#x00A0;loop
+</div>
+<!--l. 157--><p class="nopar" >
+<!--l. 159--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is written. PCLASS equal 2 produces a lot of LISP output and is of no interest for</span>
+<span 
+class="ptmr8t-x-x-120">the normal user.</span>
+<!--l. 162--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If with PCLASS=0 the procedure SIMPSYS terminates without any response,</span>
+<span 
+class="ptmr8t-x-x-120">the determining system is completely solved. In some cases SIMPSYS</span>
+<span 
+class="ptmr8t-x-x-120">does not solve the determining system completely in a single run. In</span>
+<span 
+class="ptmr8t-x-x-120">general this is true if there are only genuine differential equations left</span>
+<span 
+class="ptmr8t-x-x-120">which the algorithm cannot handle at present. If a case like this occurs,</span>
+<span 
+class="ptmr8t-x-x-120">SIMPSYS returns the remaining equations of the determining system.</span>
+<span 
+class="ptmr8t-x-x-120">To proceed with the solution algorithm, appropriate assignments have</span>
+<span 
+class="ptmr8t-x-x-120">to be transmitted by the user, e.g. the explicit solution for one of the</span>
+<span 
+class="ptmr8t-x-x-120">returned differential equations. Any new functions which are introduced</span>
+<span 
+class="ptmr8t-x-x-120">thereby must be operators of the form c(k) with the correct dependencies</span>
+<span 
+class="ptmr8t-x-x-120">generated by a depend statement (see the &#8220;REDUCE User&#8217;s Guide&#8221;). Its</span>
+<span 
+class="ptmr8t-x-x-120">enumeration has to be chosen in agreement with the current number of functions</span>
+<span 
+class="ptmr8t-x-x-120">which have alreday been introduced. This value is returned by SIMPSYS</span>
+<span 
+class="ptmr8t-x-x-120">too.</span>
+<!--l. 177--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">After the determining system has been solved, the procedure RESULT, which has</span>
+<span 
+class="ptmr8t-x-x-120">no arguments, may be called. It displays the infinitesimal generators and its</span>
+<span 
+class="ptmr8t-x-x-120">non-vanishing commutators.</span>
+<!--l. 182--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.62.2    </span></span> <a 
+ id="x209-89700016.62.2"></a><span 
+class="ptmr8t-x-x-120">How to Use the Package</span></h4>
+<!--l. 184--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In this Section it is explained by way of several examples how the package SPDE</span>
+<span 
+class="ptmr8t-x-x-120">is used interactively to determine the symmetry group of partial differential</span>
+<span 
+class="ptmr8t-x-x-120">equations. Consider first the diffusion equation which in the notation given above</span>
+<span 
+class="ptmr8t-x-x-120">may be written as</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1196">
+&#x00A0;&#x00A0;deq&#x00A0;1:=u(1,1)+u(1,2,2);
+</div>
+<!--l. 191--><p class="nopar" >
+<!--l. 193--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It has been assigned as the value of deq 1 by this statement. There is no need to</span>
+<span 
+class="ptmr8t-x-x-120">assign a value to sder 1 here because the system comprises only a single</span>
+<span 
+class="ptmr8t-x-x-120">equation.</span>
+<!--l. 197--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The determining system is constructed by calling</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1197">
+&#x00A0;&#x00A0;CRESYS();&#x00A0;or&#x00A0;CRESYS&#x00A0;deq&#x00A0;1;
+</div>
+<!--l. 201--><p class="nopar" >
+<!--l. 203--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The latter call is compulsory if there are other assignments to the operator deq i</span>
+<span 
+class="ptmr8t-x-x-120">than for i=1.</span>
+<!--l. 206--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The error message</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1198">
+&#x00A0;&#x00A0;*****&#x00A0;Differential&#x00A0;equations&#x00A0;not&#x00A0;defined
+</div>
+<!--l. 210--><p class="nopar" >
+<!--l. 212--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">appears if there are no differential equations assigned to any deq.</span>
+<!--l. 214--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the user wants the determining system displayed for inspection before starting</span>
+<span 
+class="ptmr8t-x-x-120">the solution algorithm he may call</span>
+<a 
+ id="dx209-897001"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1199">
+&#x00A0;&#x00A0;PRSYS();
+</div>
+<!--l. 220--><p class="nopar" >
+<!--l. 222--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">and gets the answer</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1200">
+&#x00A0;&#x00A0;GL(1):=2*DF(ETA(1),U(1),X(2))&#x00A0;-&#x00A0;DF(XI(2),X(2),2)&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DF(XI(2),X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(2):=DF(ETA(1),U(1),2)&#x00A0;-&#x00A0;2*DF(XI(2),U(1),X(2))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(3):=DF(ETA(1),X(2),2)&#x00A0;+&#x00A0;DF(ETA(1),X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(4):=DF(XI(2),U(1),2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(5):=DF(XI(2),U(1))&#x00A0;-&#x00A0;DF(XI(1),U(1),X(2))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(6):=2*DF(XI(2),X(2))&#x00A0;-&#x00A0;DF(XI(1),X(2),2)&#x00A0;-&#x00A0;DF(XI(1),X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(7):=DF(XI(1),U(1),2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(8):=DF(XI(1),U(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(9):=DF(XI(1),X(2))
+&#x00A0;<br />
+&#x00A0;<br />The&#x00A0;remaining&#x00A0;dependencies
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;XI(2)&#x00A0;depends&#x00A0;on&#x00A0;U(1),X(2),X(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;XI(1)&#x00A0;depends&#x00A0;on&#x00A0;U(1),X(2),X(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;ETA(1)&#x00A0;depends&#x00A0;on&#x00A0;U(1),X(2),X(1)
+</div>
+<!--l. 251--><p class="nopar" >
+<!--l. 253--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The last message means that all three functions XI(1), XI(2) and ETA(1) depend</span>
+<span 
+class="ptmr8t-x-x-120">on X(1), X(2) and U(1). Without this information the nine equations GL(1) to</span>
+<span 
+class="ptmr8t-x-x-120">GL(9) forming the determining system are meaningless. Now the solution</span>
+<span 
+class="ptmr8t-x-x-120">algorithm may be activated by calling</span>
+<a 
+ id="dx209-897002"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1201">
+&#x00A0;&#x00A0;&#x00A0;SIMPSYS();
+</div>
+<!--l. 261--><p class="nopar" >
+<a 
+ id="dx209-897003"></a>
+<!--l. 264--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the print flag PCLASS has its default value which is 0 no intermediate output is</span>
+<span 
+class="ptmr8t-x-x-120">produced and the answer is</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1202">
+&#x00A0;&#x00A0;Determining&#x00A0;system&#x00A0;is&#x00A0;not&#x00A0;completely&#x00A0;solved
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;The&#x00A0;remaining&#x00A0;equations&#x00A0;are
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GL(1):=DF(C(1),X(2),2)&#x00A0;+&#x00A0;DF(C(1),X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;Number&#x00A0;of&#x00A0;functions&#x00A0;is&#x00A0;16
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;The&#x00A0;remaining&#x00A0;dependencies
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;C(1)&#x00A0;depends&#x00A0;on&#x00A0;X(2),X(1)
+</div>
+<!--l. 279--><p class="nopar" >
+<!--l. 281--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">With PCLASS equal to 1 about 6 pages of intermediate output are obtained. It</span>
+<span 
+class="ptmr8t-x-x-120">allows the user to follow through each step of the solution algorithm.</span>
+<!--l. 285--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In this example the algorithm did not solve the determining system completely as</span>
+<span 
+class="ptmr8t-x-x-120">it is shown by the last message. This was to be expected because the diffusion</span>
+<span 
+class="ptmr8t-x-x-120">equation is linear and therefore the symmetry group contains a generator</span>
+<span 
+class="ptmr8t-x-x-120">depending on a function which solves the original differential equation. In cases</span>
+<span 
+class="ptmr8t-x-x-120">like this the user has to provide some additional information to the system so that</span>
+<span 
+class="ptmr8t-x-x-120">the solution algorithm may continue. In the example under consideration the</span>
+<span 
+class="ptmr8t-x-x-120">appropriate input is</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1203">
+&#x00A0;&#x00A0;&#x00A0;DF(C(1),X(1))&#x00A0;:=&#x00A0;-&#x00A0;DF(C(1),X(2),2);
+</div>
+<!--l. 296--><p class="nopar" >
+<!--l. 298--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If now the solution algorithm is activated again by</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1204">
+&#x00A0;&#x00A0;SIMPSYS();
+</div>
+<!--l. 302--><p class="nopar" >
+<!--l. 304--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">the solution algorithm terminates without any further message, i.e. there are no</span>
+<span 
+class="ptmr8t-x-x-120">equations of the determining system left unsolved. To obtain the symmetry</span>
+<span 
+class="ptmr8t-x-x-120">generators one has to say finally</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1205">
+&#x00A0;&#x00A0;RESULT();
+</div>
+<!--l. 310--><p class="nopar" >
+<!--l. 312--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">and obtains the answer</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1206">
+&#x00A0;&#x00A0;The&#x00A0;differential&#x00A0;equation
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;DEQ(1):=U(1,2,2)&#x00A0;+&#x00A0;U(1,1)
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;The&#x00A0;symmetry&#x00A0;generators&#x00A0;are
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GEN(1):=&#x00A0;DX(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GEN(2):=&#x00A0;DX(2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GEN(3):=&#x00A0;2*DX(2)*X(1)&#x00A0;+&#x00A0;DU(1)*U(1)*X(2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GEN(4):=&#x00A0;DU(1)*U(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GEN(5):=&#x00A0;2*DX(1)*X(1)&#x00A0;+&#x00A0;DX(2)*X(2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;GEN(6):=&#x00A0;4*DX(1)*X(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;4*DX(2)*X(2)*X(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;DU(1)*U(1)*(X(2)&#x00A0;&#x00A0;-&#x00A0;2*X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;GEN(7):=&#x00A0;DU(1)*C(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;The&#x00A0;remaining&#x00A0;dependencies
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;C(1)&#x00A0;depends&#x00A0;on&#x00A0;X(2),X(1)
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;Constraints
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;DF(C(1),X(1)):=&#x00A0;-&#x00A0;DF(C(1),X(2),2)
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;The&#x00A0;non-vanishing&#x00A0;commutators&#x00A0;of&#x00A0;the&#x00A0;finite&#x00A0;subgroup
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(1,3):=&#x00A0;2*DX(2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(1,5):=&#x00A0;2*DX(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(1,6):=&#x00A0;8*DX(1)*X(1)&#x00A0;+&#x00A0;4*DX(2)*X(2)&#x00A0;-&#x00A0;2*DU(1)*U(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(2,3):=&#x00A0;DU(1)*U(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(2,5):=&#x00A0;DX(2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(2,6):=&#x00A0;4*DX(2)*X(1)&#x00A0;+&#x00A0;2*DU(1)*U(1)*X(2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(3,5):=&#x00A0;&#x00A0;-&#x00A0;(2*DX(2)*X(1)&#x00A0;+&#x00A0;DU(1)*U(1)*X(2))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;COMM(5,6):=&#x00A0;8*DX(1)*X(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;8*DX(2)*X(2)*X(1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;2*DU(1)*U(1)*(X(2)&#x00A0;&#x00A0;-&#x00A0;2*X(1))
+</div>
+<!--l. 376--><p class="nopar" >
+<!--l. 378--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The message &#8220;Constraints&#8221; which appears after the symmetry generators are</span>
+<span 
+class="ptmr8t-x-x-120">displayed means that the function c(1) depends on x(1) and x(2) and satisfies the</span>
+<span 
+class="ptmr8t-x-x-120">diffusion equation.</span>
+<!--l. 382--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">More examples which may used for test runs are given in the final section.</span>
+<a 
+ id="dx209-897004"></a>
+<!--l. 386--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the user wants to test a certain ansatz of a symmetry generator for given</span>
+<span 
+class="ptmr8t-x-x-120">differential equations, the correct proceeding is as follows. Create the</span>
+<span 
+class="ptmr8t-x-x-120">determining system as described above. Make the appropriate assignments for</span>
+<span 
+class="ptmr8t-x-x-120">the generator and call PRSYS() after that. The determining system with this</span>
+<span 
+class="ptmr8t-x-x-120">ansatz substituted is returned. Example: Assume again that the determining</span>
+<span 
+class="ptmr8t-x-x-120">system for the diffusion equation has been created. To check the correctness</span>
+<span 
+class="ptmr8t-x-x-120">for example of generator GEN 3 which has been obtained above, the</span>
+<span 
+class="ptmr8t-x-x-120">assignments</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1207">
+&#x00A0;&#x00A0;XI(1):=0;&#x00A0;&#x00A0;XI(2):=2*X(1);&#x00A0;&#x00A0;ETA(1):=X(2)*U(1);
+</div>
+<!--l. 397--><p class="nopar" >
+<!--l. 399--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">have to be made. If now PRSYS() is called all GL(K) are zero proving the</span>
+<span 
+class="ptmr8t-x-x-120">correctness of this generator.</span>
+<!--l. 402--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Sometimes a user only wants to know some of the functions ZETA for for</span>
+<span 
+class="ptmr8t-x-x-120">various values of its possible arguments and given values of MM and NN. In</span>
+<span 
+class="ptmr8t-x-x-120">these cases the user has to assign the desired values of MM and NN and may call</span>
+<span 
+class="ptmr8t-x-x-120">the ZETAs after that. Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1208">
+&#x00A0;&#x00A0;MM:=1;&#x00A0;&#x00A0;NN:=2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;FACTOR&#x00A0;U(1,2),U(1,1),U(1,1,2),U(1,1,1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;ON&#x00A0;LIST;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;ZETA(1,1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-U(1,2)*U(1,1)*DF(XI(2),U(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-U(1,2)*DF(XI(2),X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;-U(1,1)&#x00A0;*DF(XI(1),U(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;+U(1,1)*(DF(ETA(1),U(1))&#x00A0;-DF(XI(1),X(1)))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;+DF(ETA(1),X(1))
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;ZETA(1,1,1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-2*U(1,1,2)*U(1,1)*DF(XI(2),U(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-2*U(1,1,2)*DF(XI(2),X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-U(1,1,1)*U(1,2)*DF(XI(2),U(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-3*U(1,1,1)*U(1,1)*DF(XI(1),U(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;+U(1,1,1)*(DF(ETA(1),U(1))&#x00A0;-2*DF(XI(1),X(1)))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;-U(1,2)*U(1,1)&#x00A0;*DF(XI(2),U(1),2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-2*U(1,2)*U(1,1)*DF(XI(2),U(1),X(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-U(1,2)*DF(XI(2),X(1),2)
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;-U(1,1)&#x00A0;*DF(XI(1),U(1),2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;+U(1,1)&#x00A0;*(DF(ETA(1),U(1),2)&#x00A0;-2*DF(XI(1),U(1),X(1)))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;+U(1,1)*(2*DF(ETA(1),U(1),X(1))&#x00A0;-DF(XI(1),X(1),2))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;+DF(ETA(1),X(1),2)
+</div>
+<!--l. 456--><p class="nopar" >
+<!--l. 458--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If by error no values to MM or NN and have been assigned the message</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1209">
+&#x00A0;&#x00A0;*****&#x00A0;Number&#x00A0;of&#x00A0;variables&#x00A0;not&#x00A0;defined
+</div>
+<!--l. 462--><p class="nopar" >
+<!--l. 464--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is returned. Often the functions ZETA are desired for special values of its</span>
+<span 
+class="ptmr8t-x-x-120">arguments ETA(ALFA) and XI(K). To this end they have to be assigned first to</span>
+<span 
+class="ptmr8t-x-x-120">some other variable. After that they may be evaluated for the special arguments.</span>
+<span 
+class="ptmr8t-x-x-120">In the previous example this may be achieved by</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1210">
+&#x00A0;&#x00A0;Z11:=ZETA(1,1)$&#x00A0;&#x00A0;&#x00A0;Z111:=ZETA(1,1,1)$
+</div>
+<!--l. 472--><p class="nopar" >
+<!--l. 474--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Now assign the following values to XI 1, XI 2 and ETA 1:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1211">
+&#x00A0;&#x00A0;XI&#x00A0;1:=4*X(1)**2;&#x00A0;XI&#x00A0;2:=4*X(2)*X(1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;ETA&#x00A0;1:=U(1)*(X(2)**2&#x00A0;&#x00A0;-&#x00A0;2*X(1));
+</div>
+<!--l. 480--><p class="nopar" >
+<!--l. 482--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">They correspond to the generator GEN 6 of the diffusion equation which</span>
+<span 
+class="ptmr8t-x-x-120">has been obtained above. Now the desired expressions are obtained by</span>
+<span 
+class="ptmr8t-x-x-120">calling</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1212">
+&#x00A0;&#x00A0;Z11;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;-&#x00A0;(4*U(1,2)*X(2)&#x00A0;-&#x00A0;U(1,1)*X(2)&#x00A0;&#x00A0;+&#x00A0;10*U(1,1)*X(1)&#x00A0;+&#x00A0;2*U(1))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;Z111;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;-&#x00A0;(8*U(1,1,2)*X(2)&#x00A0;-&#x00A0;U(1,1,1)*X(2)&#x00A0;&#x00A0;+&#x00A0;18*U(1,1,1)*X(1)&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;12*U(1,1))
+</div>
+<!--l. 497--><p class="nopar" >
+<!--l. 500--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.62.3    </span></span> <a 
+ id="x209-89800016.62.3"></a><span 
+class="ptmr8t-x-x-120">Test File</span></h4>
+<!--l. 502--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This appendix is a test file. The symmetry groups for various equations or</span>
+<span 
+class="ptmr8t-x-x-120">systems of equations are determined. The variable PCLASS has the default value</span>
+<span 
+class="ptmr8t-x-x-120">0 and may be changed by the user before running it. The output may be</span>
+<span 
+class="ptmr8t-x-x-120">compared with the results which are given in the references.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1213">
+%The&#x00A0;Burgers&#x00A0;equations
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;1:=u(1,1)+u&#x00A0;1*u(1,2)+u(1,2,2)$
+&#x00A0;<br />
+&#x00A0;<br />cresys&#x00A0;deq&#x00A0;1$&#x00A0;simpsys()$&#x00A0;result()$
+&#x00A0;<br />
+&#x00A0;<br />%The&#x00A0;Kadomtsev-Petviashvili&#x00A0;equation
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;1:=3*u(1,3,3)+u(1,2,2,2,2)+6*u(1,2,2)*u&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+6*u(1,2)**2+4*u(1,1,2)$
+&#x00A0;<br />
+&#x00A0;<br />cresys&#x00A0;deq&#x00A0;1$&#x00A0;simpsys()$&#x00A0;result()$
+&#x00A0;<br />
+&#x00A0;<br />%The&#x00A0;modified&#x00A0;Kadomtsev-Petviashvili&#x00A0;equation
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;1:=u(1,1,2)-u(1,2,2,2,2)-3*u(1,3,3)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+6*u(1,2)**2*u(1,2,2)+6*u(1,3)*u(1,2,2)$
+&#x00A0;<br />
+&#x00A0;<br />cresys&#x00A0;deq&#x00A0;1$&#x00A0;simpsys()$&#x00A0;result()$
+&#x00A0;<br />
+&#x00A0;<br />%The&#x00A0;real-&#x00A0;and&#x00A0;the&#x00A0;imaginary&#x00A0;part&#x00A0;of&#x00A0;the&#x00A0;nonlinear
+&#x00A0;<br />%Schroedinger&#x00A0;equation
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;1:=&#x00A0;u(1,1)+u(2,2,2)+2*u&#x00A0;1**2*u&#x00A0;2+2*u&#x00A0;2**3$
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;2:=-u(2,1)+u(1,2,2)+2*u&#x00A0;1*u&#x00A0;2**2+2*u&#x00A0;1**3$
+&#x00A0;<br />
+&#x00A0;<br />%Because&#x00A0;this&#x00A0;is&#x00A0;not&#x00A0;a&#x00A0;single&#x00A0;equation&#x00A0;the&#x00A0;two&#x00A0;assignments
+&#x00A0;<br />
+&#x00A0;<br />sder&#x00A0;1:=u(2,2,2)$&#x00A0;&#x00A0;sder&#x00A0;2:=u(1,2,2)$
+&#x00A0;<br />
+&#x00A0;<br />%are&#x00A0;necessary.
+&#x00A0;<br />
+&#x00A0;<br />cresys()$&#x00A0;simpsys()$&#x00A0;result()$
+&#x00A0;<br />
+&#x00A0;<br />%The&#x00A0;symmetries&#x00A0;of&#x00A0;the&#x00A0;system&#x00A0;comprising&#x00A0;the&#x00A0;four&#x00A0;equations
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;1:=u(1,1)+u&#x00A0;1*u(1,2)+u(1,2,2)$
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;2:=u(2,1)+u(2,2,2)$
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;3:=u&#x00A0;1*u&#x00A0;2-2*u(2,2)$
+&#x00A0;<br />
+&#x00A0;<br />deq&#x00A0;4:=4*u(2,1)+u&#x00A0;2*(u&#x00A0;1**2+2*u(1,2))$
+&#x00A0;<br />
+&#x00A0;<br />sder&#x00A0;1:=u(1,2,2)$&#x00A0;sder&#x00A0;2:=u(2,2,2)$&#x00A0;sder&#x00A0;3:=u(2,2)$
+&#x00A0;<br />sder&#x00A0;4:=u(2,1)$
+&#x00A0;<br />
+&#x00A0;<br />%is&#x00A0;obtained&#x00A0;by&#x00A0;calling
+&#x00A0;<br />
+&#x00A0;<br />cresys()$&#x00A0;simpsys()$
+&#x00A0;<br />
+&#x00A0;<br />df(c&#x00A0;5,x&#x00A0;1):=-df(c&#x00A0;5,x&#x00A0;2,2)$
+&#x00A0;<br />
+&#x00A0;<br />df(c&#x00A0;5,x&#x00A0;2,x&#x00A0;1):=-df(c&#x00A0;5,x&#x00A0;2,3)$
+&#x00A0;<br />
+&#x00A0;<br />simpsys()$&#x00A0;&#x00A0;result()$
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;symmetries&#x00A0;of&#x00A0;the&#x00A0;subsystem&#x00A0;comprising&#x00A0;equation&#x00A0;1
+&#x00A0;<br />%&#x00A0;&#x00A0;and&#x00A0;3&#x00A0;are&#x00A0;obtained&#x00A0;by
+&#x00A0;<br />
+&#x00A0;<br />cresys(deq&#x00A0;1,deq&#x00A0;3)$&#x00A0;simpsys()$&#x00A0;result()$
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;result&#x00A0;for&#x00A0;all&#x00A0;possible&#x00A0;subsystems&#x00A0;is&#x00A0;discussed&#x00A0;in
+&#x00A0;<br />%&#x00A0;detail&#x00A0;in&#x00A0;&#8216;&#8216;Symmetries&#x00A0;and&#x00A0;Involution&#x00A0;Systems:&#x00A0;Some
+&#x00A0;<br />%&#x00A0;Experiments&#x00A0;in&#x00A0;Computer&#x00A0;Algebra&#8217;&#8217;,&#x00A0;contribution&#x00A0;to&#x00A0;the
+&#x00A0;<br />%&#x00A0;Proceedings&#x00A0;of&#x00A0;the&#x00A0;Oberwolfach&#x00A0;Meeting&#x00A0;on&#x00A0;Nonlinear
+&#x00A0;<br />%&#x00A0;Evolution&#x00A0;Equations,&#x00A0;Summer&#x00A0;1986,&#x00A0;to&#x00A0;appear.
+</div>
+<!--l. 579--><p class="nopar" >
+<!--l. 1072--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1074--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse153.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse154.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse152.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse152.html#tailmanualse152.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse153.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse153.html"></a>   
+</body></html> 

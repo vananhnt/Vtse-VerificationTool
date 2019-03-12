@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>RESIDUE: A residue package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse145.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse146.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse144.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse144.html#tailmanualse144.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse145.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.54    </span></span> <a 
+ id="x197-78400016.54"></a><span 
+class="ptmr8t-x-x-120">RESIDUE: A residue package</span></h3>
+<a 
+ id="dx197-784001"></a>
+<a 
+ id="dx197-784002"></a>
+<!--l. 944--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package supports the calculation of residues of arbitrary expressions.</span>
+<!--l. 947--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Wolfram Koepf.</span>
+<!--l. 5--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The residue</span> <span 
+class="cmmi-12">Res</span><sub><span 
+class="cmmi-8">z</span><span 
+class="cmr-8">=</span><span 
+class="cmmi-8">a</span></sub><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">of a function </span><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">at the point </span><span 
+class="cmmi-12">a </span><span 
+class="cmsy-10x-x-120">&#x2208; </span><span 
+class="msbm-10x-x-120">&#x2102; </span><span 
+class="ptmr8t-x-x-120">is defined</span>
+<span 
+class="ptmr8t-x-x-120">as</span>
+<center class="math-display" >
+<img 
+src="manual516x.png" alt="                &#x222E;
+Res  f(z) = -1--   f(z)dz,
+ z=a        2&#x03C0;i
+" class="math-display" ></center>
+<!--l. 12--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">with integration along a closed curve around </span><span 
+class="cmmi-12">z </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a </span><span 
+class="ptmr8t-x-x-120">with winding number</span>
+<span 
+class="ptmr8t-x-x-120">1.</span>
+<!--l. 15--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If </span><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">is given by a Laurent series development at </span><span 
+class="cmmi-12">z </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span>
+<center class="math-display" >
+<img 
+src="manual517x.png" alt="         &#x221E;&#x2211;
+f (z) =      ak(z - a)k,
+        k=-&#x221E;
+" class="math-display" ></center>
+<!--l. 19--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">then</span>
+<table 
+class="equation"><tr><td><a 
+ id="x197-784003r94"></a>
+<center class="math-display" >
+<img 
+src="manual518x.png" alt="Rezs=a f(z) = a-1.
+" class="math-display" ></center></td><td class="equation-label"><span 
+class="ptmr8t-x-x-120">(16.94)</span></td></tr></table>
+<!--l. 25--><p class="nopar" >
+<span 
+class="ptmr8t-x-x-120">If </span><span 
+class="cmmi-12">a </span><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">&#x221E;</span><span 
+class="ptmr8t-x-x-120">, one defines on the other hand</span>
+<table 
+class="equation"><tr><td><a 
+ id="x197-784004r95"></a>
+<center class="math-display" >
+<img 
+src="manual519x.png" alt="Res f(z) = - a-1
+z=&#x221E;
+" class="math-display" ></center></td><td class="equation-label"><span 
+class="ptmr8t-x-x-120">(16.95)</span></td></tr></table>
+<!--l. 30--><p class="nopar" >
+<span 
+class="ptmr8t-x-x-120">for given Laurent representation</span>
+<center class="math-display" >
+<img 
+src="manual520x.png" alt="        &#x2211;&#x221E;      1
+f(z) =       ak-k.
+       k=- &#x221E;   z
+" class="math-display" ></center>
+<!--l. 35--><p class="nopar" >
+<!--l. 37--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The package is loaded by the statement</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1150">
+1:&#x00A0;load&#x00A0;residue;
+</div>
+<!--l. 41--><p class="nopar" >
+<!--l. 43--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It contains two REDUCE operators:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">residue(f,z,a) </span><span 
+class="ptmr8t-x-x-120">determines the residue of </span><span 
+class="cmmi-12">f </span><span 
+class="ptmr8t-x-x-120">at the point </span><span 
+class="cmmi-12">z </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span>
+     <span 
+class="ptmr8t-x-x-120">if </span><span 
+class="cmmi-12">f </span><span 
+class="ptmr8t-x-x-120">is meromorphic at </span><span 
+class="cmmi-12">z </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><span 
+class="ptmr8t-x-x-120">. The calculation of residues at essential</span>
+     <span 
+class="ptmr8t-x-x-120">singularities of </span><span 
+class="cmmi-12">f </span><span 
+class="ptmr8t-x-x-120">is not supported.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">poleorder(f,z,a) </span><span 
+class="ptmr8t-x-x-120">determines the pole order of </span><span 
+class="cmmi-12">f </span><span 
+class="ptmr8t-x-x-120">at the point</span>
+     <span 
+class="cmmi-12">z </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a </span><span 
+class="ptmr8t-x-x-120">if </span><span 
+class="cmmi-12">f </span><span 
+class="ptmr8t-x-x-120">is meromorphic at </span><span 
+class="cmmi-12">z </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><span 
+class="ptmr8t-x-x-120">.</span></li></ul>
+<!--l. 54--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Note that both functions use the </span><span 
+class="pcrr8t-x-x-120">taylor </span><span 
+class="ptmr8t-x-x-120">package in connection with</span>
+<span 
+class="ptmr8t-x-x-120">representations (</span><a 
+href="#x197-784003r94"><span 
+class="ptmr8t-x-x-120">16.94</span><!--tex4ht:ref: eq:Laurent --></a><span 
+class="ptmr8t-x-x-120">)&#8211;(</span><a 
+href="#x197-784004r95"><span 
+class="ptmr8t-x-x-120">16.95</span><!--tex4ht:ref: eq:Laurent2 --></a><span 
+class="ptmr8t-x-x-120">).</span>
+<!--l. 57--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Here are some examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1151">
+2:&#x00A0;residue(x/(x^2-2),x,sqrt(2));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;1
+&#x00A0;<br />---
+&#x00A0;<br />&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />3:&#x00A0;poleorder(x/(x^2-2),x,sqrt(2));
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />4:&#x00A0;residue(sin(x)/(x^2-2),x,sqrt(2));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;sqrt(2)*sin(sqrt(2))
+&#x00A0;<br />----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />
+&#x00A0;<br />5:&#x00A0;poleorder(sin(x)/(x^2-2),x,sqrt(2));
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />6:&#x00A0;residue(1/(x-1)^m/(x-2)^2,x,2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;-&#x00A0;m
+&#x00A0;<br />
+&#x00A0;<br />7:&#x00A0;poleorder(1/(x-1)/(x-2)^2,x,2);
+&#x00A0;<br />
+&#x00A0;<br />2
+&#x00A0;<br />
+&#x00A0;<br />8:&#x00A0;residue(sin(x)/x^2,x,0);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />9:&#x00A0;poleorder(sin(x)/x^2,x,0);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />10:&#x00A0;residue((1+x^2)/(1-x^2),x,1);
+&#x00A0;<br />
+                                                                     
+
+                                                                     
+&#x00A0;<br />-1
+&#x00A0;<br />
+&#x00A0;<br />11:&#x00A0;poleorder((1+x^2)/(1-x^2),x,1);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />12:&#x00A0;residue((1+x^2)/(1-x^2),x,-1);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />13:&#x00A0;poleorder((1+x^2)/(1-x^2),x,-1);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />14:&#x00A0;residue(tan(x),x,pi/2);
+&#x00A0;<br />
+&#x00A0;<br />-1
+&#x00A0;<br />
+&#x00A0;<br />15:&#x00A0;poleorder(tan(x),x,pi/2);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />16:&#x00A0;residue((x^n-y^n)/(x-y),x,y);
+&#x00A0;<br />
+&#x00A0;<br />0
+&#x00A0;<br />
+&#x00A0;<br />17:&#x00A0;poleorder((x^n-y^n)/(x-y),x,y);
+&#x00A0;<br />
+&#x00A0;<br />0
+&#x00A0;<br />
+&#x00A0;<br />18:&#x00A0;residue((x^n-y^n)/(x-y)^2,x,y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;y&#x00A0;*n
+&#x00A0;<br />------
+&#x00A0;<br />&#x00A0;&#x00A0;y
+&#x00A0;<br />
+&#x00A0;<br />19:&#x00A0;poleorder((x^n-y^n)/(x-y)^2,x,y);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />20:&#x00A0;residue(tan(x)/sec(x-pi/2)+1/cos(x),x,pi/2);
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />-2
+&#x00A0;<br />
+&#x00A0;<br />21:&#x00A0;poleorder(tan(x)/sec(x-pi/2)+1/cos(x),x,pi/2);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />22:&#x00A0;for&#x00A0;k:=1:2&#x00A0;sum&#x00A0;residue((a+b*x+c*x^2)/(d+e*x+f*x^2),x,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;part(part(solve(d+e*x+f*x^2,x),k),2));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;b*f&#x00A0;-&#x00A0;c*e
+&#x00A0;<br />-----------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;f
+&#x00A0;<br />
+&#x00A0;<br />23:&#x00A0;residue(x^3/sin(1/x)^2,x,infinity);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;1
+&#x00A0;<br />------
+&#x00A0;<br />&#x00A0;&#x00A0;15
+&#x00A0;<br />
+&#x00A0;<br />24:&#x00A0;residue(x^3*sin(1/x)^2,x,infinity);
+&#x00A0;<br />
+&#x00A0;<br />-1
+</div>
+<!--l. 164--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Note that the residues of factorial and </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms are not yet supported.</span>
+<!--l. 952--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 954--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse145.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse146.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse144.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse144.html#tailmanualse144.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse145.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse145.html"></a>  
+</body></html> 

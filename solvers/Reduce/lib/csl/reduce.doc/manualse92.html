@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>ALGINT: Integration of square roots</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse92.html" >Up</a></td><td class="clinks"><a 
+href="manualse93.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse92.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.1    </span> <a 
+ id="x113-20400016.1"></a>ALGINT: Integration of square roots</h3>
+<a 
+ id="dx113-204001"></a>
+<a 
+ id="dx113-204002"></a>
+<!--l. 62--><p class="noindent" >This package, which is an extension of the basic integration package distributed with
+REDUCE, will analytically integrate a wide range of expressions involving square roots
+where the answer exists in that class of functions. It is an implementation of the work
+described in J.H. Davenport, &#8220;On the Integration of Algebraic Functions", LNCS 102,
+Springer Verlag, 1981. Both this and the source code should be consulted for a more
+detailed description of this work.
+                                                                     
+
+                                                                     
+<!--l. 70--><p class="noindent" ><a 
+ id="switch:ALGINT"></a> The <span 
+class="pcrr8t-x-x-109">ALGINT </span>package is loaded automatically when the switch <span 
+class="pcrr8t-x-x-109">ALGINT </span>is turned
+on. One enters an expression for integration, as with the regular integrator, for
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-393">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;int(sqrt(x+sqrt(x**2+1))/x,x);
+</div>
+<!--l. 77--><p class="nopar" > If one later wishes to integrate expressions without using the facilities of this package,
+the switch <span 
+class="pcrr8t-x-x-109">ALGINT</span><a 
+ id="dx113-204003"></a><a 
+ id="dx113-204004"></a><a 
+ id="dx113-204005"></a> should be turned off.
+<!--l. 82--><p class="noindent" ><a 
+ id="switch:TRA"></a> The switches supported by the standard integrator (e.g., <span 
+class="pcrr8t-x-x-109">TRINT</span>) <a 
+ id="dx113-204006"></a><a 
+ id="dx113-204007"></a><a 
+ id="dx113-204008"></a> are also supported by
+this package. In addition, the switch <span 
+class="pcrr8t-x-x-109">TRA</span>, <a 
+ id="dx113-204009"></a><a 
+ id="dx113-204010"></a><a 
+ id="dx113-204011"></a> if on, will give further tracing information
+about the specific functioning of the algebraic integrator.
+<!--l. 88--><p class="noindent" >There is no additional documentation for this package.
+<!--l. 90--><p class="noindent" >Author: James H. Davenport.
+<!--l. 92--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 94--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse92.html" >Up</a></td><td class="clinks"><a 
+href="manualse93.html" >Next</a></td><td class="clinks"><a 
+href="manualse92.html" >Front</a></td></tr></table><a 
+ id="tailmanualse92.html"></a>  
+</body></html> 

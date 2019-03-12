@@ -1,0 +1,769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>AVECTOR: A vector algebra and calculus package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse97.html" >Up</a></td><td class="clinks"><a 
+href="manualse98.html" >Next</a></td><td class="clinks"><a 
+href="manualse96.html" >Prev</a></td><td class="clinks"><a 
+href="manualse96.html#tailmanualse96.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse97.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.6    </span> <a 
+ id="x119-25100016.6"></a>AVECTOR: A vector algebra and calculus package</h3>
+<a 
+ id="dx119-251001"></a>
+<a 
+ id="dx119-251002"></a>
+<!--l. 158--><p class="noindent" >This package provides REDUCE with the ability to perform vector algebra using the
+same notation as scalar algebra. The basic algebraic operations are supported, as are
+differentiation and integration of vectors with respect to scalar variables, cross product
+and dot product, component manipulation and application of scalar functions (e.g.
+cosine) to a vector to yield a vector result.
+<!--l. 165--><p class="noindent" >Author: David Harper.
+<a 
+ id="dx119-251003"></a>
+<!--l. 4--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.6.1    </span> <a 
+ id="x119-25200016.6.1"></a>Introduction</h4>
+<!--l. 6--><p class="noindent" >This package <span class="footnote-mark"><a 
+href="manual120.html#fn2x16"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x119-252001f2"></a> 
+is written in RLISP (the LISP meta-language) and is intended for use with REDUCE 3.4.
+<a 
+ id="dx119-252002"></a>It provides REDUCE with the ability to perform vector algebra using the same notation
+as scalar algebra. The basic algebraic operations are supported, as are differentiation and
+integration of vectors with respect to scalar variables, cross product and dot product,
+component manipulation and application of scalar functions (<span 
+class="ptmri8t-x-x-109">e.g. </span>cosine) to a vector to
+yield a vector result.
+<!--l. 17--><p class="noindent" >A set of vector calculus operators are provided for use with any orthogonal
+curvilinear coordinate system. These operators are gradient, divergence, curl
+and del-squared (Laplacian). The Laplacian operator can take scalar or vector
+arguments.
+<!--l. 22--><p class="noindent" >Several important coordinate systems are pre-defined and can be invoked by name. It is
+also possible to create new coordinate systems by specifying the names of the
+coordinates and the values of the scale factors.
+                                                                     
+
+                                                                     
+<h4 class="subsectionHead"><span class="titlemark">16.6.2    </span> <a 
+ id="x119-25300016.6.2"></a>Vector declaration and initialisation</h4>
+<!--l. 29--><p class="noindent" >Any name may be declared to be a vector, provided that it has not previously been
+declared as a matrix or an array. To declare a list of names to be vectors use the VEC
+command: <a 
+ id="dx119-253001"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-491">
+&#x00A0;&#x00A0;&#x00A0;VEC&#x00A0;A,B,C;
+</div>
+<!--l. 35--><p class="nopar" > declares the variables <span 
+class="pcrr8t-x-x-109">A</span>, <span 
+class="pcrr8t-x-x-109">B </span>and <span 
+class="pcrr8t-x-x-109">C </span>to be vectors. If they have already been assigned
+(scalar) values, these will be lost.
+<!--l. 39--><p class="noindent" >When a vector is declared using the <span 
+class="pcrr8t-x-x-109">VEC </span>command, it does not have an initial
+value.
+<!--l. 42--><p class="noindent" >If a vector value is assigned to a scalar variable, then that variable will automatically be
+declared as a vector and the user will be notified that this has happened.
+<a 
+ id="dx119-253002"></a>
+<!--l. 47--><p class="noindent" >A vector may be initialised using the <span 
+class="pcrr8t-x-x-109">AVEC </span>function which takes three scalar arguments
+and returns a vector made up from those scalars. For example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-492">
+&#x00A0;&#x00A0;&#x00A0;A&#x00A0;:=&#x00A0;AVEC(A1,&#x00A0;A2,&#x00A0;A3);
+</div>
+<!--l. 52--><p class="nopar" > sets the components of the vector <span 
+class="pcrr8t-x-x-109">A </span>to <span 
+class="pcrr8t-x-x-109">A1</span>, <span 
+class="pcrr8t-x-x-109">A2 </span>and <span 
+class="pcrr8t-x-x-109">A3</span>.
+<!--l. 55--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.6.3    </span> <a 
+ id="x119-25400016.6.3"></a>Vector algebra</h4>
+<!--l. 57--><p class="noindent" >(In the examples which follow, <span 
+class="pcrr8t-x-x-109">V</span>, <span 
+class="pcrr8t-x-x-109">V1</span>, <span 
+class="pcrr8t-x-x-109">V2 </span><span 
+class="ptmri8t-x-x-109">etc </span>are assumed to be vectors while <span 
+class="pcrr8t-x-x-109">S</span>, <span 
+class="pcrr8t-x-x-109">S1</span>, <span 
+class="pcrr8t-x-x-109">S2</span>
+etc are scalars.)
+<a 
+ id="dx119-254001"></a>
+<a 
+ id="dx119-254002"></a>
+<a 
+ id="dx119-254003"></a>
+<a 
+ id="dx119-254004"></a>
+<!--l. 64--><p class="noindent" >The scalar algebra operators +,-,* and / may be used with vector operands according to
+the rules of vector algebra. Thus multiplication and division of a vector by a
+scalar are both allowed, but it is an error to multiply or divide one vector by
+another.
+<div class="tabular"> <table id="TBL-21" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-21-1g"><col 
+id="TBL-21-1"><col 
+id="TBL-21-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-21-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := V1 + V2 - V3;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-1-2"  
+class="td11">Addition and subtraction</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := S1*3*V1;     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-2-2"  
+class="td11">Scalar multiplication      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := V1/S;        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-3-2"  
+class="td11">Scalar division                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-4-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := -V1;         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-21-4-2"  
+class="td11">Negation                         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-21-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-21-5-1"  
+class="td11">                  </td>
+</tr></table></div>
+<a 
+ id="dx119-254005"></a>
+<a 
+ id="dx119-254006"></a>
+<a 
+ id="dx119-254007"></a>
+<a 
+ id="dx119-254008"></a>
+<!--l. 79--><p class="noindent" >Vector multiplication is carried out using the infix operators <span 
+class="pcrr8t-x-x-109">DOT </span>and <span 
+class="pcrr8t-x-x-109">CROSS</span>.
+These are defined to have higher precedence than scalar multiplication and
+division.
+<div class="tabular"> <table id="TBL-22" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-22-1g"><col 
+id="TBL-22-1"><col 
+id="TBL-22-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-22-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := V1 CROSS V2;       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-22-1-2"  
+class="td11">Cross product</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">S := V1 DOT V2;         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-22-2-2"  
+class="td11">Dot product   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := V1 CROSS V2 + V3;  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-22-3-2"  
+class="td11">         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-4-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := (V1 CROSS V2) + V3;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-22-4-2"  
+class="td11">         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-22-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-22-5-1"  
+class="td11">                        </td>
+</tr></table></div>
+<!--l. 91--><p class="noindent" >The last two expressions are equivalent due to the precedence of the <span 
+class="pcrr8t-x-x-109">CROSS</span>
+operator.
+<a 
+ id="dx119-254009"></a>
+                                                                     
+
+                                                                     
+<!--l. 95--><p class="noindent" >The modulus of a vector may be calculated using the <span 
+class="pcrr8t-x-x-109">VMOD </span>operator.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-493">
+&#x00A0;&#x00A0;&#x00A0;S&#x00A0;:=&#x00A0;VMOD&#x00A0;V;
+</div>
+<!--l. 98--><p class="nopar" > A unit vector may be generated from any vector using the <span 
+class="pcrr8t-x-x-109">VMOD </span>operator.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-494">
+&#x00A0;&#x00A0;&#x00A0;V1&#x00A0;:=&#x00A0;V/(VMOD&#x00A0;V);
+</div>
+<!--l. 103--><p class="nopar" > Components may be extracted from any vector using index notation in the same way as
+an array.
+<div class="tabular"> <table id="TBL-23" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-23-1g"><col 
+id="TBL-23-1"><col 
+id="TBL-23-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-23-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := AVEC(AX, AY, AZ);</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-23-1-2"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V(0);                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-23-2-2"  
+class="td11">yields AX</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V(1);                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-23-3-2"  
+class="td11">yields AY</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-4-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V(2);                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-23-4-2"  
+class="td11">yields AZ</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-23-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-5-1"  
+class="td11">                      </td>
+</tr></table></div>
+<!--l. 114--><p class="noindent" >It is also possible to set values of individual components. Following from above:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-495">
+&#x00A0;&#x00A0;&#x00A0;V(1)&#x00A0;:=&#x00A0;B;
+</div>
+<!--l. 118--><p class="nopar" > The vector <span 
+class="pcrr8t-x-x-109">V </span>now has components <span 
+class="pcrr8t-x-x-109">AX</span>, <span 
+class="pcrr8t-x-x-109">B</span>, <span 
+class="pcrr8t-x-x-109">AZ</span>.
+<a 
+ id="dx119-254010"></a>
+<a 
+ id="dx119-254011"></a>
+<a 
+ id="dx119-254012"></a>
+<a 
+ id="dx119-254013"></a>
+<!--l. 123--><p class="noindent" >Vectors may be used as arguments in the differentiation and integration routines in place
+of the dependent expression.
+<div class="tabular"> <table id="TBL-24" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-24-1g"><col 
+id="TBL-24-1"><col 
+id="TBL-24-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-24-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := AVEC(X**2, SIN(X), Y);</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-24-1-2"  
+class="td11">                      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">DF(V,X);                   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-24-2-2"  
+class="td11">yields (2*X, COS(X), 0)            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">INT(V,X);                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-24-3-2"  
+class="td11">yields (X**3/3, -COS(X), Y*X)</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-24-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-24-4-1"  
+class="td11">                           </td>
+</tr></table></div>
+<!--l. 132--><p class="noindent" >Vectors may be given as arguments to monomial functions such as <span 
+class="pcrr8t-x-x-109">SIN</span>, <span 
+class="pcrr8t-x-x-109">LOG </span>and <span 
+class="pcrr8t-x-x-109">TAN</span>.
+The result is a vector obtained by applying the function component-wise to the argument
+vector.
+<div class="tabular"> <table id="TBL-25" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-25-1g"><col 
+id="TBL-25-1"><col 
+id="TBL-25-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-25-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := AVEC(A1, A2, A3);</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-25-1-2"  
+class="td11">                         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">SIN(V);               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-25-2-2"  
+class="td11">yields (SIN(A1), SIN(A2), SIN(A3))</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-25-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-25-3-1"  
+class="td11">                      </td>
+</tr></table></div>
+<!--l. 141--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.6.4    </span> <a 
+ id="x119-25500016.6.4"></a> Vector calculus</h4>
+<a 
+ id="dx119-255001"></a>
+<a 
+ id="dx119-255002"></a>
+<a 
+ id="dx119-255003"></a>
+<a 
+ id="dx119-255004"></a>
+<a 
+ id="dx119-255005"></a>
+<a 
+ id="dx119-255006"></a>
+<a 
+ id="dx119-255007"></a>
+<a 
+ id="dx119-255008"></a>
+<!--l. 147--><p class="noindent" >The vector calculus operators div, grad and curl are recognised. The Laplacian operator is
+also available and may be applied to scalar and vector arguments.
+                                                                     
+
+                                                                     
+<div class="tabular"> <table id="TBL-26" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-26-1g"><col 
+id="TBL-26-1"><col 
+id="TBL-26-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-26-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := GRAD S;  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-1-2"  
+class="td11">Gradient of a scalar field     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">S := DIV V;   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-2-2"  
+class="td11">Divergence of a vector field</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := CURL V1; </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-3-2"  
+class="td11">Curl of a vector field           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-4-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">S := DELSQ S1;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-4-2"  
+class="td11">Laplacian of a scalar field   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-5-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">V := DELSQ V1;</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-26-5-2"  
+class="td11">Laplacian of a vector field  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-26-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-26-6-1"  
+class="td11">              </td>
+</tr></table></div>
+<!--l. 159--><p class="noindent" >These operators may be used in any orthogonal curvilinear coordinate system.
+The user may alter the names of the coordinates and the values of the scale
+factors. Initially the coordinates are <span 
+class="pcrr8t-x-x-109">X</span>, <span 
+class="pcrr8t-x-x-109">Y </span>and <span 
+class="pcrr8t-x-x-109">Z </span>and the scale factors are all
+unity.
+<a 
+ id="dx119-255009"></a>
+<a 
+ id="dx119-255010"></a>
+<!--l. 165--><p class="noindent" >There are two special vectors : <span 
+class="pcrr8t-x-x-109">COORDS </span>contains the names of the coordinates in the
+current system and <span 
+class="pcrr8t-x-x-109">HFACTORS </span>contains the values of the scale factors.
+<a 
+ id="dx119-255011"></a>
+<!--l. 170--><p class="noindent" >The coordinate names may be changed using the <span 
+class="pcrr8t-x-x-109">COORDINATES </span>operator.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-496">
+&#x00A0;&#x00A0;&#x00A0;COORDINATES&#x00A0;R,THETA,PHI;
+</div>
+<!--l. 174--><p class="nopar" > This command changes the coordinate names to <span 
+class="pcrr8t-x-x-109">R</span>, <span 
+class="pcrr8t-x-x-109">THETA </span>and <span 
+class="pcrr8t-x-x-109">PHI</span>.
+<a 
+ id="dx119-255012"></a>
+<!--l. 179--><p class="noindent" >The scale factors may be altered using the <span 
+class="pcrr8t-x-x-109">SCALEFACTORS </span>operator.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-497">
+&#x00A0;&#x00A0;&#x00A0;SCALEFACTORS(1,R,R*SIN(THETA));
+</div>
+<!--l. 182--><p class="nopar" > This command changes the scale factors to <span 
+class="pcrr8t-x-x-109">1</span>, <span 
+class="pcrr8t-x-x-109">R </span>and <span 
+class="pcrr8t-x-x-109">R SIN(THETA)</span>.
+<!--l. 186--><p class="noindent" >Note that the arguments of <span 
+class="pcrr8t-x-x-109">SCALEFACTORS </span>must be enclosed in parentheses. This is
+not necessary with <span 
+class="pcrr8t-x-x-109">COORDINATES</span>.
+<!--l. 190--><p class="noindent" >When vector differential operators are applied to an expression, the current set of
+coordinates are used as the independent variables and the scale factors are employed in
+the calculation. (See, for example, Batchelor G.K. &#8217;An Introduction to Fluid Mechanics&#8217;,
+Appendix 2.)
+<a 
+ id="dx119-255013"></a>
+<!--l. 198--><p class="noindent" >Several coordinate systems are pre-defined and may be invoked by name. To see a list of
+valid names enter
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-498">
+&#x00A0;&#x00A0;&#x00A0;SYMBOLIC&#x00A0;!*CSYSTEMS;
+</div>
+<!--l. 202--><p class="nopar" > and REDUCE will respond with something like
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-499">
+&#x00A0;&#x00A0;&#x00A0;(CARTESIAN&#x00A0;SPHERICAL&#x00A0;CYLINDRICAL)
+</div>
+<!--l. 206--><p class="nopar" >
+<a 
+ id="dx119-255014"></a>
+<!--l. 209--><p class="noindent" >To choose a coordinate system by name, use the command <span 
+class="pcrr8t-x-x-109">GETCSYSTEM</span>.
+<!--l. 211--><p class="noindent" >To choose the Cartesian coordinate system :
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-500">
+&#x00A0;&#x00A0;&#x00A0;GETCSYSTEM&#x00A0;&#8217;CARTESIAN;
+</div>
+<!--l. 214--><p class="nopar" > <a 
+ id="dx119-255015"></a> Note the quote which prefixes the name of the coordinate system. This is required
+because <span 
+class="pcrr8t-x-x-109">GETCSYSTEM </span>(and its complement <span 
+class="pcrr8t-x-x-109">PUTCSYSTEM</span>) is a <span 
+class="pcrr8t-x-x-109">SYMBOLIC </span>procedure
+which requires a literal argument.
+<!--l. 221--><p class="noindent" >REDUCE responds by typing a list of the coordinate names in that coordinate system.
+The example above would produce the response
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-501">
+&#x00A0;&#x00A0;&#x00A0;(X&#x00A0;Y&#x00A0;Z)
+</div>
+<!--l. 225--><p class="nopar" > whilst
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-502">
+&#x00A0;&#x00A0;&#x00A0;GETCSYSTEM&#x00A0;&#8217;SPHERICAL;
+</div>
+<!--l. 229--><p class="nopar" > would produce
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-503">
+&#x00A0;&#x00A0;&#x00A0;(R&#x00A0;THETA&#x00A0;PHI)
+</div>
+<!--l. 233--><p class="nopar" > Note that any attempt to invoke a coordinate system is subject to the same restrictions as
+the implied calls to <span 
+class="pcrr8t-x-x-109">COORDINATES </span>and <span 
+class="pcrr8t-x-x-109">SCALEFACTORS</span>. In particular, <span 
+class="pcrr8t-x-x-109">GETCSYSTEM</span>
+fails if any of the coordinate names has been assigned a value and the previous
+coordinate system remains in effect.
+<!--l. 240--><p class="noindent" >A user-defined coordinate system can be assigned a name using the command
+<span 
+class="pcrr8t-x-x-109">PUTCSYSTEM</span>. It may then be re-invoked at a later stage using <span 
+class="pcrr8t-x-x-109">GETCSYSTEM</span>.
+<a 
+ id="x119-255016r5"></a>
+<!--l. 244--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 5</span><a 
+ id="dx119-255017"></a>
+<!--l. 246--><p class="noindent" >We define a general coordinate system with coordinate names <span 
+class="pcrr8t-x-x-109">X</span>,<span 
+class="pcrr8t-x-x-109">Y</span>,<span 
+class="pcrr8t-x-x-109">Z </span>and scale factors
+<span 
+class="pcrr8t-x-x-109">H1</span>,<span 
+class="pcrr8t-x-x-109">H2</span>,<span 
+class="pcrr8t-x-x-109">H3 </span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-504">
+&#x00A0;&#x00A0;&#x00A0;COORDINATES&#x00A0;X,Y,Z;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;SCALEFACTORS(H1,H2,H3);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;PUTCSYSTEM&#x00A0;&#8217;GENERAL;
+</div>
+<!--l. 252--><p class="nopar" > This system may later be invoked by entering
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-505">
+&#x00A0;&#x00A0;&#x00A0;GETCSYSTEM&#x00A0;&#8217;GENERAL;
+</div>
+<!--l. 256--><p class="nopar" >
+<!--l. 258--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.6.5    </span> <a 
+ id="x119-25600016.6.5"></a>Volume and Line Integration</h4>
+<!--l. 260--><p class="noindent" >Several functions are provided to perform volume and line integrals. These operate in any
+orthogonal curvilinear coordinate system and make use of the scale factors described in
+the previous section.
+<!--l. 265--><p class="noindent" >Definite integrals of scalar and vector expressions may be calculated using the <span 
+class="pcrr8t-x-x-109">DEFINT</span>
+function.
+<a 
+ id="x119-256001r6"></a>
+<!--l. 268--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 6</span><a 
+ id="dx119-256002"></a>
+<a 
+ id="dx119-256003"></a>
+<a 
+ id="dx119-256004"></a>
+<a 
+ id="dx119-256005"></a>
+<!--l. 272--><p class="noindent" >To calculate the definite integral of <span 
+class="cmr-10x-x-109">sin</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">)</span><sup><span 
+class="cmr-8">2</span></sup> between 0 and 2<span 
+class="cmmi-10x-x-109">&#x03C0; </span>we enter
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-506">
+&#x00A0;&#x00A0;&#x00A0;DEFINT(SIN(X)**2,X,0,2*PI);
+</div>
+<!--l. 276--><p class="nopar" > This function is a simple extension of the <span 
+class="pcrr8t-x-x-109">INT </span>function taking two extra arguments, the
+lower and upper bounds of integration respectively.
+<a 
+ id="dx119-256006"></a>
+<a 
+ id="dx119-256007"></a>
+<!--l. 282--><p class="noindent" >Definite volume integrals may be calculated using the <span 
+class="pcrr8t-x-x-109">VOLINTEGRAL </span>function whose
+syntax is as follows :
+<!--l. 285--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">VOLINTEGRAL</span>(<span 
+class="pcrr8t-x-x-109">integrand</span>, vector <span 
+class="pcrr8t-x-x-109">lower-bound</span>, vector <span 
+class="pcrr8t-x-x-109">upper-bound</span>);
+<a 
+ id="x119-256008r7"></a>
+<!--l. 288--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 7</span><a 
+ id="dx119-256009"></a>
+<!--l. 290--><p class="noindent" >In spherical polar coordinates we may calculate the volume of a sphere by integrating
+unity over the range <span 
+class="cmmi-10x-x-109">r</span>=0 to <span 
+class="pcrr8t-x-x-109">RR</span>, <span 
+class="cmmi-10x-x-109">&#x03B8;</span>=0 to <span 
+class="pcrr8t-x-x-109">PI</span>, <span 
+class="cmmi-10x-x-109">&#x03D5;</span>=0 to 2*<span 
+class="cmmi-10x-x-109">&#x03C0; </span>as follows :
+<div class="tabular"> <table id="TBL-27" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-27-1g"><col 
+id="TBL-27-1"><col 
+id="TBL-27-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-27-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">VLB := AVEC(0,0,0);     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-1-2"  
+class="td11">Lower bound                                   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">VUB := AVEC(RR,PI,2*PI);</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-2"  
+class="td11">Upper bound in <span 
+class="cmmi-10x-x-109">r,&#x03B8;,&#x03D5; </span>respectively</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">VOLINTORDER := (0,1,2); </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-2"  
+class="td11">The order of integration                  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">VOLINTEGRAL(1,VLB,VUB); </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-2"  
+class="td11">                       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-27-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-1"  
+class="td11">                        </td>
+</tr></table></div>
+<a 
+ id="dx119-256010"></a>
+<!--l. 303--><p class="noindent" >Note the use of the special vector <span 
+class="pcrr8t-x-x-109">VOLINTORDER </span>which controls the order in which the
+integrations are carried out. This vector should be set to contain the number 0, 1 and 2 in
+the required order. The first component of <span 
+class="pcrr8t-x-x-109">VOLINTORDER </span>contains the index of
+the first integration variable, the second component is the index of the second
+integration variable and the third component is the index of the third integration
+variable.
+<a 
+ id="x119-256011r8"></a>
+<!--l. 311--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 8</span><a 
+ id="dx119-256012"></a>
+<!--l. 313--><p class="noindent" >Suppose we wish to calculate the volume of a right circular cone. This is equivalent to
+integrating unity over a conical region with the bounds:
+<div class="tabular"> <table id="TBL-28" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-28-1g"><col 
+id="TBL-28-1"><col 
+id="TBL-28-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-28-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-1-1"  
+class="td11">z = 0 to H       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-1-2"  
+class="td11">(H = the height of the cone)              </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-2-1"  
+class="td11">r = 0 to pZ       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-2-2"  
+class="td11">(p = ratio of base diameter to height)</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-3-1"  
+class="td11">phi = 0 to 2*PI</td><td  style="white-space:nowrap; text-align:left;" id="TBL-28-3-2"  
+class="td11">                        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-28-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-28-4-1"  
+class="td11">          </td>
+</tr></table></div>
+<!--l. 323--><p class="noindent" >We evaluate the volume by integrating a series of infinitesimally thin circular disks of
+constant z-value. The integration is thus performed in the order : d(<span 
+class="cmmi-10x-x-109">&#x03D5;</span>) from 0
+to <span 
+class="cmr-10x-x-109">2</span><span 
+class="cmmi-10x-x-109">&#x03C0;</span>, dr from 0 to p*Z, dz from 0 to H. The order of the indices is thus 2, 0,
+                                                                     
+
+                                                                     
+1.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-507">
+&#x00A0;&#x00A0;&#x00A0;VOLINTORDER&#x00A0;:=&#x00A0;AVEC(2,0,1);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;VLB&#x00A0;:=&#x00A0;AVEC(0,0,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;VUB&#x00A0;:=&#x00A0;AVEC(P*Z,H,2*PI);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;VOLINTEGRAL(1,VLB,VUB);
+</div>
+<!--l. 332--><p class="nopar" > (At this stage, we replace <span 
+class="pcrr8t-x-x-109">P*H </span>by <span 
+class="pcrr8t-x-x-109">RR</span>, the base radius of the cone, to obtain the result in
+its more familiar form.)
+<a 
+ id="dx119-256013"></a>
+<a 
+ id="dx119-256014"></a>
+<a 
+ id="dx119-256015"></a>
+<a 
+ id="dx119-256016"></a>
+<!--l. 339--><p class="noindent" >Line integrals may be calculated using the <span 
+class="pcrr8t-x-x-109">LINEINT </span>and <span 
+class="pcrr8t-x-x-109">DEFLINEINT </span>functions.
+Their general syntax is
+<!--l. 342--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">LINEINT</span>(<span 
+class="pcrr8t-x-x-109">vector-function</span>, <span 
+class="pcrr8t-x-x-109">vector-curve</span>, <span 
+class="pcrr8t-x-x-109">variable</span>);
+<!--l. 345--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">DEFLINENINT</span>(<span 
+class="pcrr8t-x-x-109">vector-function</span>, <span 
+class="pcrr8t-x-x-109">vector-curve</span>, <span 
+class="pcrr8t-x-x-109">variable</span>, <span 
+class="pcrr8t-x-x-109">lower-bound</span>,
+<span 
+class="pcrr8t-x-x-109">upper-bound</span>);
+<!--l. 348--><p class="noindent" >where
+     <dl class="description"><dt class="description">
+<span 
+class="pcrr8t-x-x-109">vector-function</span> </dt><dd 
+class="description">is any vector-valued expression;
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">vector-curve</span> </dt><dd 
+class="description">is a vector expression which describes the path of integration in
+     terms of the independent variable;
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">variable</span> </dt><dd 
+class="description">is the independent variable;
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">lower-bound</span> </dt><dd 
+class="description">
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">upper-bound</span> </dt><dd 
+class="description">are the bounds of integration in terms of the independent variable.</dd></dl>
+<a 
+ id="x119-256017r9"></a>
+<!--l. 359--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 9</span><a 
+ id="dx119-256018"></a>
+<!--l. 361--><p class="noindent" >In spherical polar coordinates, we may integrate round a line of constant theta (&#8216;latitude&#8217;)
+to find the length of such a line. The vector function is thus the tangent to the &#8216;line of
+latitude&#8217;, (0,0,1) and the path is <span 
+class="pcrr8t-x-x-109">(0,LAT,PHI) </span>where <span 
+class="pcrr8t-x-x-109">PHI </span>is the independent
+                                                                     
+
+                                                                     
+variable. We show how to obtain the definite integral <span 
+class="ptmri8t-x-x-109">i.e. </span>from <span 
+class="cmmi-10x-x-109">&#x03D5; </span><span 
+class="cmr-10x-x-109">= 0 </span>to <span 
+class="cmr-10x-x-109">2</span><span 
+class="cmmi-10x-x-109">&#x03C0;</span>
+:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-508">
+DEFLINEINT(AVEC(0,0,1),AVEC(0,LAT,PHI),PHI,0,2*PI);
+</div>
+<!--l. 369--><p class="nopar" >
+<!--l. 371--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.6.6    </span> <a 
+ id="x119-25700016.6.6"></a>Defining new functions and procedures</h4>
+<!--l. 373--><p class="noindent" >Most of the procedures in this package are defined in symbolic mode and are
+invoked by the REDUCE expression-evaluator when a vector expression is
+encountered. It is not generally possible to define procedures which accept or
+return vector values in algebraic mode. This is a consequence of the way in
+which the REDUCE interpreter operates and it affects other non-scalar data
+types as well : arrays cannot be passed as algebraic procedure arguments, for
+example.
+<!--l. 381--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.6.7    </span> <a 
+ id="x119-25800016.6.7"></a>Acknowledgements</h4>
+<!--l. 383--><p class="noindent" >This package was written whilst the author was the U.K. Computer Algebra Support
+Officer at the University of Liverpool Computer Laboratory.
+<!--l. 169--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 171--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse97.html" >Up</a></td><td class="clinks"><a 
+href="manualse98.html" >Next</a></td><td class="clinks"><a 
+href="manualse96.html" >Prev</a></td><td class="clinks"><a 
+href="manualse96.html#tailmanualse96.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse97.html" >Front</a></td></tr></table><a 
+ id="tailmanualse97.html"></a>   
+</body></html> 

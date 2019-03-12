@@ -1,0 +1,2235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>EXCALC: A differential geometry package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse113.html" >Up</a></td><td class="clinks"><a 
+href="manualse114.html" >Next</a></td><td class="clinks"><a 
+href="manualse112.html" >Prev</a></td><td class="clinks"><a 
+href="manualse112.html#tailmanualse112.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse113.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.22    </span> <a 
+ id="x145-42300016.22"></a>EXCALC: A differential geometry package</h3>
+<a 
+ id="dx145-423001"></a>
+<a 
+ id="dx145-423002"></a>
+<!--l. 393--><p class="noindent" >EXCALC is designed for easy use by all who are familiar with the calculus of Modern
+Differential Geometry. The program is currently able to handle scalar-valued exterior
+forms, vectors and operations between them, as well as non-scalar valued forms (indexed
+forms). It is thus an ideal tool for studying differential equations, doing calculations in
+general relativity and field theories, or doing simple things such as calculating the
+Laplacian of a tensor field for an arbitrary given frame.
+<!--l. 401--><p class="noindent" >Author: Eberhard Schrüfer.
+<!--l. 3--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x145-42400016.22"></a>Acknowledgments</h4>
+<!--l. 5--><p class="noindent" >This program was developed over several years. I would like to express my deep
+gratitude to Dr.&#x00A0;Anthony Hearn for his continuous interest in this work, and especially
+for his hospitality and support during a visit in 1984/85 at the RAND Corporation, where
+substantial progress on this package could be achieved. The Heinrich Hertz-Stiftung
+supported this visit. Many thanks are also due to Drs. F.W. Hehl, University of Cologne,
+and J.D. McCrea, University College Dublin, for their suggestions and work on testing
+this program.
+<!--l. 14--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.1    </span> <a 
+ id="x145-42500016.22.1"></a>Introduction</h4>
+<a 
+ id="dx145-425001"></a>
+<!--l. 17--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">EXCALC </span>is designed for easy use by all who are familiar with the calculus of
+Modern Differential Geometry. Its syntax is kept as close as possible to standard
+textbook notations. Therefore, no great experience in writing computer algebra
+programs is required. It is almost possible to input to the computer the same as
+what would have been written down for a hand-calculation. For example, the
+statement
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-870">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f*x^y&#x00A0;+&#x00A0;u&#x00A0;_|&#x00A0;(y^z^x)
+</div>
+<!--l. 25--><p class="nopar" > <a 
+ id="dx145-425002"></a>would be recognized by the program as a formula involving exterior products and an
+inner product. The program is currently able to handle scalar-valued exterior forms,
+vectors and operations between them, as well as non-scalar valued forms (indexed
+forms). With this, it should be an ideal tool for studying differential equations, doing
+calculations in general relativity and field theories, or doing such simple things as
+calculating the Laplacian of a tensor field for an arbitrary given frame. With the
+increasing popularity of this calculus, this program should have an application in almost
+any field of physics and mathematics.
+<!--l. 38--><p class="noindent" >Since the program is completely embedded in REDUCE, all features and facilities of
+REDUCE are available in a calculation. Even for those who are not quite comfortable
+in this calculus, there is a good chance of learning it by just playing with the
+program.
+<!--l. 43--><p class="noindent" >This is the last release of version 2. A much extended differential geometry package
+(which includes complete symbolic index simplification, tensors, mappings, bundles and
+others) is under development.
+<!--l. 47--><p class="noindent" >Complaints and comments are appreciated and should be send to the author. If the use of
+this program leads to a publication, this document should be cited, and a copy of the
+article to the above address would be welcome.
+<!--l. 52--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.2    </span> <a 
+ id="x145-42600016.22.2"></a>Declarations</h4>
+<!--l. 54--><p class="noindent" >Geometrical objects like exterior forms or vectors are introduced to the system by
+declaration commands. The declarations can appear anywhere in a program,
+but must, of course, be made prior to the use of the object. Everything that
+has no declaration is treated as a constant; therefore zero-forms must also be
+declared.
+<!--l. 60--><p class="noindent" >An exterior form is introduced by <a 
+ id="dx145-426001"></a> <a 
+ id="dx145-426002"></a>
+<!--l. 63--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">PFORM </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">declaration</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>, <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">declaration</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>, &#x2026;;
+<!--l. 65--><p class="noindent" >where
+                                                                     
+
+                                                                     
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">declaration</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>::= <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span> <span 
+class="cmsy-10x-x-109">&#x2223;</span> <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">list of names</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>=<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">number</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span> <span 
+class="cmsy-10x-x-109">&#x2223;</span> <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span> <span 
+class="cmsy-10x-x-109">&#x2223;</span>
+</td></tr></table>
+<!--l. 67--><p class="noindent" >                                                       <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span></td></tr></table>
+<!--l. 68--><p class="noindent" >                <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>::= <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span> <span 
+class="cmsy-10x-x-109">&#x2223;</span> <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>(<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">arguments</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>)</td></tr></table>
+<!--l. 70--><p class="noindent" >
+<!--l. 72--><p class="noindent" >For example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-871">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;u=k,v=4,f=0,w=dim-1;
+</div>
+<!--l. 75--><p class="nopar" > declares <span 
+class="pcrr8t-x-x-109">U </span>to be an exterior form of degree <span 
+class="pcrr8t-x-x-109">K</span>, <span 
+class="pcrr8t-x-x-109">V </span>to be a form of degree 4, <span 
+class="pcrr8t-x-x-109">F </span>to be a form
+of degree 0 (a function), and <span 
+class="pcrr8t-x-x-109">W </span>to be a form of degree <span 
+class="pcrr8t-x-x-109">DIM</span>-1.
+<!--l. 80--><p class="noindent" >If the exterior form should have indices, the declaration would be <a 
+ id="dx145-426003"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-872">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;curv(a,b)=2,chris(a,b)=1;
+</div>
+<!--l. 84--><p class="nopar" > The names of the indices are arbitrary.
+<!--l. 87--><p class="noindent" >Exterior forms of the same degree can be grouped into lists to save typing.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-873">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;{x,y,z}=0,{rho(k,l),u,v(k)}=1;
+</div>
+<!--l. 90--><p class="nopar" > The declaration of vectors is similar. The command <span 
+class="pcrr8t-x-x-109">TVECTOR </span>takes a list of names.
+<a 
+ id="dx145-426004"></a> <a 
+ id="dx145-426005"></a>
+<!--l. 94--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">TVECTOR </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>, <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>, &#x2026;;
+<!--l. 96--><p class="noindent" >For example, to declare <span 
+class="pcrr8t-x-x-109">X </span>as a vector and <span 
+class="pcrr8t-x-x-109">COMM </span>as a vector with two indices, one would
+say
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-874">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tvector&#x00A0;x,comm(a,b);
+</div>
+<!--l. 100--><p class="nopar" > If a declaration of an already existing name is made, the old declaration is removed, and
+the new one is taken.
+<!--l. 104--><p class="noindent" >The exterior degree of a symbol or a general expression can be obtained with the
+function <a 
+ id="dx145-426006"></a>
+<!--l. 107--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">EXDEGREE </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>;
+<!--l. 109--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-875">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;exdegree(u&#x00A0;+&#x00A0;3*chris(k,-k));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+</div>
+<!--l. 114--><p class="nopar" >
+<!--l. 117--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.3    </span> <a 
+ id="x145-42700016.22.3"></a>Exterior Multiplication</h4>
+<a 
+ id="dx145-427001"></a>
+<a 
+ id="dx145-427002"></a>
+<!--l. 121--><p class="noindent" >Exterior multiplication between exterior forms is carried out with the nary infix operator
+<img 
+src="manual229x.png" alt="&#x02C6;  "  class="circ" > (wedge). Factors are ordered according to the usual ordering in REDUCE using the
+commutation rule for exterior products.
+<a 
+ id="x145-427003r10"></a>
+<!--l. 126--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 10</span><a 
+ id="dx145-427004"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-876">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;u=1,v=1,w=k;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u^v;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;U^V
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;v^u;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;U^V
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u^u;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w^u^v;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(&#x00A0;-&#x00A0;1)&#x00A0;*U^V^W
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(3*u-a*w)^(w+5*v)^u;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A*(5*U^V^W&#x00A0;-&#x00A0;U^W^W)
+</div>
+<!--l. 151--><p class="nopar" >
+<!--l. 153--><p class="noindent" >It is possible to declare the dimension of the underlying space by <a 
+ id="dx145-427005"></a> <a 
+ id="dx145-427006"></a>
+<!--l. 156--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">SPACEDIM </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">number</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span> <span 
+class="cmsy-10x-x-109">&#x2223;</span> <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>;
+<!--l. 158--><p class="noindent" >If an exterior product has a degree higher than the dimension of the space, it is replaced
+by 0:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-877">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;spacedim&#x00A0;4;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;u=2,v=3;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u^v;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+</div>
+<!--l. 169--><p class="nopar" >
+<!--l. 172--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.4    </span> <a 
+ id="x145-42800016.22.4"></a>Partial Differentiation</h4>
+<!--l. 174--><p class="noindent" >Partial differentiation is denoted by the operator <span 
+class="pcrr8t-x-x-109">@</span>. Its capability is the same as the
+REDUCE <span 
+class="pcrr8t-x-x-109">DF </span>operator. <a 
+ id="dx145-428001"></a> <a 
+ id="dx145-428002"></a><a 
+ id="dx145-428003"></a>
+<a 
+ id="x145-428004r11"></a>
+<!--l. 179--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 11</span><a 
+ id="dx145-428005"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-878">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@(sin&#x00A0;x,x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;COS(X)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@(f,x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+</div>
+<!--l. 189--><p class="nopar" >
+<!--l. 191--><p class="noindent" >An identifier can be declared to be a function of certain variables. <a 
+ id="dx145-428006"></a> This is done with
+the command <span 
+class="pcrr8t-x-x-109">FDOMAIN</span>. The following would tell the partial differentiation
+operator that <span 
+class="pcrr8t-x-x-109">F </span>is a function of the variables <span 
+class="pcrr8t-x-x-109">X </span>and <span 
+class="pcrr8t-x-x-109">Y </span>and that <span 
+class="pcrr8t-x-x-109">H </span>is a function of
+<span 
+class="pcrr8t-x-x-109">X</span>.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-879">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fdomain&#x00A0;f=f(x,y),h=h(x);
+</div>
+<!--l. 199--><p class="nopar" > Applying <span 
+class="pcrr8t-x-x-109">@ </span>to <span 
+class="pcrr8t-x-x-109">F </span>and <span 
+class="pcrr8t-x-x-109">H </span>would result in
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-880">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@(x*f,x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F&#x00A0;+&#x00A0;X*@&#x00A0;&#x00A0;F
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@(h,y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+</div>
+<!--l. 210--><p class="nopar" >
+<a 
+ id="dx145-428007"></a>
+<!--l. 213--><p class="noindent" >The partial derivative symbol can also be an operator with a single argument. It then
+represents a natural base element of a tangent vector.
+<a 
+ id="x145-428008r12"></a>
+<!--l. 217--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 12</span><a 
+ id="dx145-428009"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-881">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a*@&#x00A0;x&#x00A0;+&#x00A0;b*@&#x00A0;y;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A*@&#x00A0;&#x00A0;+&#x00A0;B*@
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y
+</div>
+<!--l. 224--><p class="nopar" >
+<!--l. 226--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.5    </span> <a 
+ id="x145-42900016.22.5"></a>Exterior Differentiation</h4>
+<a 
+ id="dx145-429001"></a>
+<!--l. 228--><p class="noindent" >Exterior differentiation of exterior forms is carried out by the operator <span 
+class="pcrr8t-x-x-109">d</span>. Products are
+normally differentiated out, <span 
+class="ptmri8t-x-x-109">i.e.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-882">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;x=0,y=k,z=m;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d(x&#x00A0;*&#x00A0;y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X*d&#x00A0;Y&#x00A0;+&#x00A0;d&#x00A0;X^Y
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d(r*y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R*d&#x00A0;Y
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d(x*y^z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(&#x00A0;-&#x00A0;1)&#x00A0;*X*Y^d&#x00A0;Z&#x00A0;&#x00A0;+&#x00A0;X*d&#x00A0;Y^Z&#x00A0;+&#x00A0;d&#x00A0;X^Y^Z
+</div>
+<!--l. 247--><p class="nopar" >
+<!--l. 249--><p class="noindent" >This expansion can be suppressed by the command <span 
+class="pcrr8t-x-x-109">NOXPND D</span>. <a 
+ id="dx145-429002"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-883">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;noxpnd&#x00A0;d;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d(y^z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d(Y^Z)
+</div>
+<!--l. 258--><p class="nopar" >
+<!--l. 260--><p class="noindent" >To obtain a canonical form for an exterior product when the expansion is switched off,
+the operator <span 
+class="pcrr8t-x-x-109">D </span>is shifted to the right if it appears in the leftmost place.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-884">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;y&#x00A0;^&#x00A0;z;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;(&#x00A0;-&#x00A0;1)&#x00A0;*Y^d&#x00A0;Z&#x00A0;+&#x00A0;d(Y^Z)
+</div>
+<!--l. 269--><p class="nopar" >
+<!--l. 271--><p class="noindent" >Expansion is performed again when the command <span 
+class="pcrr8t-x-x-109">XPND D </span>is executed. <a 
+ id="dx145-429003"></a>
+<!--l. 274--><p class="noindent" >Functions which are implicitly defined by the <span 
+class="pcrr8t-x-x-109">FDOMAIN </span>command are expanded into
+partial derivatives:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-885">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;x=0,y=0,z=0,f=0;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fdomain&#x00A0;f=f(x,y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;f;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@&#x00A0;&#x00A0;F*d&#x00A0;X&#x00A0;+&#x00A0;@&#x00A0;&#x00A0;F*d&#x00A0;Y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y
+</div>
+<!--l. 286--><p class="nopar" >
+<!--l. 288--><p class="noindent" >If an argument of an implicitly defined function has further dependencies the chain rule
+will be applied <span 
+class="ptmri8t-x-x-109">e.g.</span> <a 
+ id="dx145-429004"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-886">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fdomain&#x00A0;y=y(z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;f;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@&#x00A0;&#x00A0;F*d&#x00A0;X&#x00A0;+&#x00A0;@&#x00A0;&#x00A0;F*@&#x00A0;&#x00A0;Y*d&#x00A0;Z
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+</div>
+<!--l. 299--><p class="nopar" >
+<!--l. 301--><p class="noindent" >Expansion into partial derivatives can be inhibited by <span 
+class="pcrr8t-x-x-109">NOXPND @ </span>and enabled again by
+<span 
+class="pcrr8t-x-x-109">XPND @</span>. <a 
+ id="dx145-429005"></a> <a 
+ id="dx145-429006"></a>
+<!--l. 306--><p class="noindent" >The operator is of course aware of the rules that a repeated application always leads to
+zero and that there is no exterior form of higher degree than the dimension of the
+space.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-887">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;d&#x00A0;x;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;u=k;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;spacedim&#x00A0;k;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;u;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+</div>
+<!--l. 321--><p class="nopar" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.6    </span> <a 
+ id="x145-43000016.22.6"></a>Inner Product</h4>
+<a 
+ id="dx145-430001"></a>
+<!--l. 324--><p class="noindent" >The inner product between a vector and an exterior form is represented by the diphthong
+_<span 
+class="cmsy-10x-x-109">| </span>(underscore or-bar), which is the notation of many textbooks. If the exterior
+form is an exterior product, the inner product is carried through any factor.
+<a 
+ id="dx145-430002"></a>
+<a 
+ id="x145-430003r13"></a>
+<!--l. 330--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 13</span><a 
+ id="dx145-430004"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-888">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;x=0,y=k,z=m;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tvector&#x00A0;u,v;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u&#x00A0;_|&#x00A0;(x*y^z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X*((&#x00A0;-&#x00A0;1)&#x00A0;*Y^U&#x00A0;_|&#x00A0;Z&#x00A0;+&#x00A0;U&#x00A0;_|&#x00A0;Y^Z)
+</div>
+<!--l. 341--><p class="nopar" >
+<!--l. 343--><p class="noindent" >In repeated applications of the inner product to the same exterior form the vector
+arguments are ordered <span 
+class="ptmri8t-x-x-109">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-889">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(u+x*v)&#x00A0;_|&#x00A0;(u&#x00A0;_|&#x00A0;(3*z));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;3*U&#x00A0;_|&#x00A0;V&#x00A0;_|&#x00A0;Z
+</div>
+<!--l. 350--><p class="nopar" >
+<!--l. 352--><p class="noindent" >The duality of natural base elements is also known by the system, <span 
+class="ptmri8t-x-x-109">i.e.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-890">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;{x,y}=0;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(a*@&#x00A0;x+b*@(y))&#x00A0;_|&#x00A0;(3*d&#x00A0;x-d&#x00A0;y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*A&#x00A0;-&#x00A0;B
+</div>
+<!--l. 360--><p class="nopar" >
+<!--l. 362--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.7    </span> <a 
+ id="x145-43100016.22.7"></a>Lie Derivative</h4>
+<a 
+ id="dx145-431001"></a>
+<!--l. 365--><p class="noindent" >The Lie derivative can be taken between a vector and an exterior form or between two
+vectors. It is represented by the infix operator <span 
+class="cmsy-10x-x-109">|</span>_ . In the case of Lie differentiating, an
+exterior form by a vector, the Lie derivative is expressed through inner products and
+exterior differentiations, <span 
+class="ptmri8t-x-x-109">i.e.</span> <a 
+ id="dx145-431002"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-891">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;z=k;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tvector&#x00A0;u;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u&#x00A0;|_&#x00A0;z;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;U&#x00A0;_|&#x00A0;d&#x00A0;Z&#x00A0;+&#x00A0;d(U&#x00A0;_|&#x00A0;Z)
+</div>
+<!--l. 380--><p class="nopar" >
+<!--l. 382--><p class="noindent" >If the arguments of the Lie derivative are vectors, the vectors are ordered using
+the anticommutivity property, and functions (zero forms) are differentiated
+out.
+<a 
+ id="x145-431003r14"></a>
+<!--l. 386--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 14</span><a 
+ id="dx145-431004"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-892">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;tvector&#x00A0;u,v;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;v&#x00A0;|_&#x00A0;u;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;U&#x00A0;|_&#x00A0;V
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;x=0,y=0;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(x*u)&#x00A0;|_&#x00A0;(y*v);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;U*Y*V&#x00A0;_|&#x00A0;d&#x00A0;X&#x00A0;+&#x00A0;V*X*U&#x00A0;_|&#x00A0;d&#x00A0;Y&#x00A0;+&#x00A0;X*Y*U&#x00A0;|_&#x00A0;V
+</div>
+<!--l. 400--><p class="nopar" >
+<!--l. 402--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.8    </span> <a 
+ id="x145-43200016.22.8"></a>Hodge-* Duality Operator</h4>
+<a 
+ id="dx145-432001"></a>
+<a 
+ id="dx145-432002"></a>
+<!--l. 405--><p class="noindent" >The Hodge-* duality operator maps an exterior form of degree <span 
+class="pcrr8t-x-x-109">K </span>to an exterior form of
+degree <span 
+class="pcrr8t-x-x-109">N-K</span>, where <span 
+class="pcrr8t-x-x-109">N </span>is the dimension of the space. The double application of the
+operator must lead back to the original exterior form up to a factor. The following
+example shows how the factor is chosen here
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-893">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;spacedim&#x00A0;n;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;x=k;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;#&#x00A0;x;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(K&#x00A0;&#x00A0;+&#x00A0;K*N)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(&#x00A0;-&#x00A0;1)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*X*SGN
+</div>
+<!--l. 420--><p class="nopar" > <a 
+ id="dx145-432003"></a> <a 
+ id="dx145-432004"></a>The indeterminate SGN in the above example denotes the sign of the determinant of the
+metric. It can be assigned a value or will be automatically set if more of the metric
+structure is specified (via COFRAME), <span 
+class="ptmri8t-x-x-109">i.e. </span>it is then set to <span 
+class="cmmi-10x-x-109">g&#x2215;</span><span 
+class="cmsy-10x-x-109">|</span><span 
+class="cmmi-10x-x-109">g</span><span 
+class="cmsy-10x-x-109">|</span>, where <span 
+class="cmmi-10x-x-109">g </span>is the
+determinant of the metric. If the Hodge-* operator appears in an exterior product of
+maximal degree as the leftmost factor, the Hodge-* is shifted to the right according
+to
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-894">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;{x,y}=k;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#&#x00A0;x&#x00A0;^&#x00A0;y;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(K&#x00A0;&#x00A0;+&#x00A0;K*N)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(&#x00A0;-&#x00A0;1)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*X^#&#x00A0;Y
+</div>
+<!--l. 439--><p class="nopar" >
+<!--l. 441--><p class="noindent" >More simplifications are performed if a coframe is defined.
+<!--l. 445--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.9    </span> <a 
+ id="x145-43300016.22.9"></a>Variational Derivative</h4>
+<a 
+ id="dx145-433001"></a>
+<a 
+ id="dx145-433002"></a>
+<a 
+ id="dx145-433003"></a>
+<!--l. 449--><p class="noindent" >The function <span 
+class="pcrr8t-x-x-109">VARDF </span>returns as its value the variation of a given Lagrangian n-form with
+respect to a specified exterior form (a field of the Lagrangian). In the shared variable
+<a 
+ id="dx145-433004"></a> <span 
+class="pcrr8t-x-x-109">BNDEQ!*</span>, the expression is stored that has to yield zero if integrated over the
+boundary.
+<!--l. 456--><p class="noindent" >Syntax:
+<!--l. 458--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">VARDF</span>(<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">Lagrangian n-form</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>,<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">exterior form</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>)
+<a 
+ id="x145-433005r15"></a>
+<!--l. 460--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 15</span><a 
+ id="dx145-433006"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-895">
+&#x00A0;&#x00A0;spacedim&#x00A0;4;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;pform&#x00A0;l=4,a=1,j=3;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;l:=-1/2*d&#x00A0;a&#x00A0;^&#x00A0;#&#x00A0;d&#x00A0;a&#x00A0;-&#x00A0;a^#&#x00A0;j$&#x00A0;&#x00A0;%Lagrangian&#x00A0;of&#x00A0;the&#x00A0;e.m.&#x00A0;field
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;vardf(l,a);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;(#&#x00A0;J&#x00A0;+&#x00A0;d&#x00A0;#&#x00A0;d&#x00A0;A)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Maxwell&#8217;s&#x00A0;equations
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;bndeq!*;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;&#8217;A^#&#x00A0;d&#x00A0;A&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Equation&#x00A0;at&#x00A0;the&#x00A0;boundary
+</div>
+<!--l. 475--><p class="nopar" > Restrictions:
+<!--l. 478--><p class="noindent" >In the current implementation, the Lagrangian must be built up by the fields and the
+operations <span 
+class="pcrr8t-x-x-109">d</span>, <span 
+class="pcrr8t-x-x-109">#</span>, and <span 
+class="pcrr8t-x-x-109">@</span>. Variation with respect to indexed quantities is currently not
+allowed.
+<!--l. 482--><p class="noindent" >For the calculation of the conserved currents induced by symmetry operators (vector
+fields), the function <span 
+class="pcrr8t-x-x-109">NOETHER</span><a 
+ id="dx145-433007"></a> is provided. It has the syntax:
+<!--l. 487--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">NOETHER</span>(<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">Lagrangian n-form</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>,<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">field</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>,<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">symmetry generator</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>)
+<a 
+ id="x145-433008r16"></a>
+<!--l. 490--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 16</span><a 
+ id="dx145-433009"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-896">
+&#x00A0;&#x00A0;pform&#x00A0;l=4,a=1,f=2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;spacedim&#x00A0;4;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;l:=&#x00A0;-1/2*d&#x00A0;a^#d&#x00A0;a;&#x00A0;&#x00A0;&#x00A0;%Free&#x00A0;Maxwell&#x00A0;field;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;tvector&#x00A0;x(k);&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%An&#x00A0;unspecified&#x00A0;generator;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;noether(l,a,x(-k));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;(&#x00A0;-&#x00A0;2*d(X&#x00A0;_|A)^#&#x00A0;d&#x00A0;A&#x00A0;-&#x00A0;(X&#x00A0;_|d&#x00A0;A)^#&#x00A0;d&#x00A0;A&#x00A0;+&#x00A0;d&#x00A0;A^(X&#x00A0;_|#&#x00A0;d&#x00A0;A))/2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K
+</div>
+<!--l. 504--><p class="nopar" >
+<!--l. 506--><p class="noindent" >The above expression would be the canonical energy momentum 3-forms of the Maxwell
+field, if X is interpreted as a translation;
+<!--l. 512--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.10    </span> <a 
+ id="x145-43400016.22.10"></a>Handling of Indices</h4>
+<a 
+ id="dx145-434001"></a>
+<!--l. 514--><p class="noindent" >Exterior forms and vectors may have indices. On input, the indices are given as
+arguments of the object. A positive argument denotes a superscript and a negative
+argument a subscript. On output, the indexed quantity is displayed two dimensionally if
+<span 
+class="pcrr8t-x-x-109">NAT </span>is on. <a 
+ id="dx145-434002"></a><a 
+ id="dx145-434003"></a><a 
+ id="dx145-434004"></a> Indices may be identifiers or numbers.
+<a 
+ id="x145-434005r17"></a>
+<!--l. 521--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 17</span><a 
+ id="dx145-434006"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-897">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;om(k,l)=m,e(k)=1;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e(k)^e(-l);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E&#x00A0;^E
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;L
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;om(4,-2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;OM
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 537--><p class="nopar" >
+<!--l. 539--><p class="noindent" >In the current release, full simplification is performed only if an index range is
+specified. It is hoped that this restriction can be removed soon. If the index
+range (the values that the indices can obtain) is specified, the given expression
+is evaluated for all possible index values, and the summation convention is
+understood.
+<a 
+ id="x145-434007r18"></a>
+<!--l. 545--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 18</span><a 
+ id="dx145-434008"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-898">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;indexrange&#x00A0;t,r,ph,z;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;e(k)=1,s(k,l)=2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w&#x00A0;:=&#x00A0;e(k)*e(-k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;W&#x00A0;:=&#x00A0;E&#x00A0;*E&#x00A0;&#x00A0;+&#x00A0;E&#x00A0;*E&#x00A0;&#x00A0;+&#x00A0;E&#x00A0;&#x00A0;*E&#x00A0;&#x00A0;&#x00A0;+&#x00A0;E&#x00A0;*E
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;s(k,l):=e(k)^e(l);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;S&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;R
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;S&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;-&#x00A0;E&#x00A0;^E
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;PH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;S&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;-&#x00A0;E&#x00A0;^E
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />
+</div>
+<!--l. 574--><p class="nopar" >
+<!--l. 576--><p class="noindent" >If the expression to be evaluated is not an assignment, the values of the expression are
+displayed as an assignment to an indexed variable with name <span 
+class="pcrr8t-x-x-109">NS</span>. This is done only on
+output, <span 
+class="ptmri8t-x-x-109">i.e. </span>no actual binding to the variable NS occurs. <a 
+ id="dx145-434009"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-899">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e(k)^e(l);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;R
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;-&#x00A0;E&#x00A0;^E
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.
+</div>
+<!--l. 593--><p class="nopar" >
+<!--l. 595--><p class="noindent" >It should be noted, however, that the index positions on the variable NS can sometimes
+not be uniquely determined by the system (because of possible reorderings in the
+expression). Generally it is advisable to use assignments to display complicated
+expressions.
+<!--l. 600--><p class="noindent" >A range can also be assigned to individual index-names. For example, the declaration
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-900">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;indexrange&#x00A0;{k,l}={x,y,z},{u,v,w}={1,2};
+</div>
+<!--l. 605--><p class="nopar" >
+<!--l. 607--><p class="noindent" >would assign to the index identifiers k,l the range values x,y,z and to the index
+identifiers u,v,w the range values 1,2. The use of an index identifier not listed in
+previous indexrange statements has the range of the union of all given index
+ranges.
+<!--l. 612--><p class="noindent" >With the above example of an indexrange statement, the following index evaluations
+would take place
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-901">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;w&#x00A0;n=0;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w(k)*w(-k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;W&#x00A0;*W&#x00A0;&#x00A0;+&#x00A0;W&#x00A0;*W&#x00A0;&#x00A0;+&#x00A0;W&#x00A0;*W
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w(u)*w(-u);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;W&#x00A0;*W&#x00A0;&#x00A0;+&#x00A0;W&#x00A0;*W
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w(r)*w(-r);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;W&#x00A0;*W&#x00A0;&#x00A0;+&#x00A0;W&#x00A0;*W&#x00A0;&#x00A0;+&#x00A0;W&#x00A0;*W&#x00A0;&#x00A0;+&#x00A0;W&#x00A0;*W&#x00A0;&#x00A0;+&#x00A0;W&#x00A0;*W
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+</div>
+<!--l. 635--><p class="nopar" >
+<!--l. 637--><p class="noindent" >In certain cases, one would like to inhibit the summation over specified index names, or
+at all. For this the command
+<a 
+ id="dx145-434010"></a>
+<!--l. 641--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">NOSUM </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">indexname</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>, &#x2026;;
+<!--l. 643--><p class="noindent" >and the switch <span 
+class="pcrr8t-x-x-109">NOSUM </span>are<a 
+ id="dx145-434011"></a><a 
+ id="dx145-434012"></a><a 
+ id="dx145-434013"></a> available. The command <span 
+class="pcrr8t-x-x-109">NOSUM </span>has the effect that summation
+is not performed over those indices which had been listed. The command <span 
+class="pcrr8t-x-x-109">RENOSUM</span>
+enables summation again. The switch <span 
+class="pcrr8t-x-x-109">NOSUM</span>, if on, inhibits any summation.
+<a 
+ id="dx145-434014"></a>
+<a 
+ id="dx145-434015"></a>
+<!--l. 650--><p class="noindent" >It is possible to declare symmetry properties for an indexed quantity by the command
+<span 
+class="pcrr8t-x-x-109">INDEX_SYMMETRIES</span>. A prototypical example is as follows
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-902">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;index_symmetries&#x00A0;u(k,l,m,n):&#x00A0;symmetric&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;in&#x00A0;{k,l},{m,n}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;antisymmetric&#x00A0;in&#x00A0;{{k,l},{m,n}},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;g(k,l),h(k,l):&#x00A0;symmetric;
+&#x00A0;<br />
+</div>
+<!--l. 660--><p class="nopar" >
+<!--l. 662--><p class="noindent" >It declares the object <span 
+class="pcrr8t-x-x-109">u </span>symmetric in the first two and last two indices and antisymmetric
+with respect to commutation of the given index pairs. If an object is completely
+symmetric or antisymmetric, the indices need not to be given after the corresponding
+keyword as shown above for <span 
+class="pcrr8t-x-x-109">g </span>and <span 
+class="pcrr8t-x-x-109">h</span>.
+<!--l. 668--><p class="noindent" >If applicable, this command should be issued, since great savings in memory and
+execution time result. Only strict components are printed.
+<!--l. 672--><p class="noindent" >The commands symmetric and antisymmetric of earlier releases have no effect.
+<!--l. 676--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.11    </span> <a 
+ id="x145-43500016.22.11"></a>Metric Structures</h4>
+<a 
+ id="dx145-435001"></a>
+<a 
+ id="dx145-435002"></a>
+<!--l. 679--><p class="noindent" >A metric structure is defined in <span 
+class="ptmb8t-x-x-109">EXCALC </span>by specifying a set of basis one-forms (the
+coframe) together with the metric.
+<!--l. 682--><p class="noindent" >Syntax:
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:142;" 
+class="tabbing">&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">COFRAME </span></td><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;&#x003C;</span> <span 
+class="ptmri8t-x-x-109">(index</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="ptmri8t-x-x-109">)</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>=<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>,
+</td></tr></table>
+<!--l. 686--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:142;" 
+class="tabbing">                                   </td><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;&#x003C;</span> <span 
+class="ptmri8t-x-x-109">(index</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="ptmri8t-x-x-109">)</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>=<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>,</td></tr></table>
+<!--l. 687--><p class="noindent" >                                                  <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:142;" 
+class="tabbing">                                   </td><td  
+class="tabbing">.</td></tr></table>
+<!--l. 688--><p class="noindent" >                                                  <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:142;" 
+class="tabbing">                                   </td><td  
+class="tabbing">.</td></tr></table>
+<!--l. 689--><p class="noindent" >                                                  <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:142;" 
+class="tabbing">                                   </td><td  
+class="tabbing">.</td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 690--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:142;" 
+class="tabbing">                                   </td><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;&#x003C;</span> <span 
+class="ptmri8t-x-x-109">(index</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="ptmri8t-x-x-109">)</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>=<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span></td></tr></table>
+<!--l. 691--><p class="noindent" >       <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:142;" 
+class="tabbing">                      </td><td  
+class="tabbing">&#x00A0;     <span 
+class="ptmb8t-x-x-109">WITH METRIC </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>=<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>;</td></tr></table>
+<!--l. 692--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 693--><p class="noindent" >
+<a 
+ id="dx145-435003"></a>
+<a 
+ id="dx145-435004"></a>
+<!--l. 696--><p class="noindent" >This statement automatically sets the dimension of the space and the index range. The
+clause <span 
+class="pcrr8t-x-x-109">WITH METRIC </span>can be omitted if the metric <a 
+ id="dx145-435005"></a>is Euclidean and the shorthand
+<span 
+class="pcrr8t-x-x-109">WITH SIGNATURE </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="pcrro8t-x-x-109">diagonal elements</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>can be used in the case of a
+pseudo-Euclidean metric. The splitting of a metric structure in its metric tensor
+coefficients and basis one-forms is completely arbitrary including the extremes of an
+orthonormal frame and a coordinate frame.
+<a 
+ id="x145-435006r19"></a>
+<!--l. 705--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 19</span><a 
+ id="dx145-435007"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-903">
+&#x00A0;coframe&#x00A0;e&#x00A0;r=d&#x00A0;r,&#x00A0;e(ph)=r*d&#x00A0;ph
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;with&#x00A0;metric&#x00A0;g=e(r)*e(r)+e(ph)*e(ph);&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Polar&#x00A0;coframe
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;coframe&#x00A0;e(r)=d&#x00A0;r,e(ph)=r*d(ph);&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Same&#x00A0;as&#x00A0;before
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;coframe&#x00A0;o(t)=d&#x00A0;t,&#x00A0;o&#x00A0;x=d&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;with&#x00A0;signature&#x00A0;-1,1;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%A&#x00A0;Lorentz&#x00A0;coframe
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;coframe&#x00A0;b(xi)=d&#x00A0;xi,&#x00A0;b(eta)=d&#x00A0;eta&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%A&#x00A0;lightcone&#x00A0;coframe
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;with&#x00A0;metric&#x00A0;w=-1/2*(b(xi)*b(eta)+b(eta)*b(xi));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;coframe&#x00A0;e&#x00A0;r=d&#x00A0;r,&#x00A0;e&#x00A0;ph=d&#x00A0;ph&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Polar&#x00A0;coordinate
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;with&#x00A0;metric&#x00A0;g=e&#x00A0;r*e&#x00A0;r+r**2*e&#x00A0;ph*e&#x00A0;ph;&#x00A0;&#x00A0;&#x00A0;%basis
+&#x00A0;<br />
+</div>
+<!--l. 722--><p class="nopar" >
+<!--l. 724--><p class="noindent" >Individual elements of the metric can be accessed just by calling them with the
+desired indices. The value of the determinant of the <a 
+ id="dx145-435008"></a><a 
+ id="dx145-435009"></a> covariant metric is stored
+in the variable <span 
+class="pcrr8t-x-x-109">DETM!*</span>. The metric is not needed for lowering or raising of
+indices as the system performs this automatically, <span 
+class="ptmri8t-x-x-109">i.e. </span>no matter in what index
+position values were assigned to an indexed quantity, the values can be retrieved
+for any index position just by writing the indexed quantity with the desired
+indices.
+<a 
+ id="x145-435010r20"></a>
+<!--l. 734--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 20</span><a 
+ id="dx145-435011"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-904">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;coframe&#x00A0;e&#x00A0;t=d&#x00A0;t,e&#x00A0;x=d&#x00A0;x,e&#x00A0;y=d&#x00A0;y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;with&#x00A0;signature&#x00A0;-1,1,1;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;f(k,l)=0;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;antisymmetric&#x00A0;f;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f(-t,-x):=ex$&#x00A0;f(-x,-y):=b$&#x00A0;&#x00A0;f(-t,-y):=0$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;nero;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f(k,-l):=f(k,-l);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;-&#x00A0;EX
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;-&#x00A0;EX
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;-&#x00A0;B
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;B
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y
+</div>
+<!--l. 764--><p class="nopar" >
+<!--l. 766--><p class="noindent" >Any expression containing differentials of the coordinate functions will be transformed
+into an expression of the basis one-forms.The system also knows how to take the exterior
+derivative of the basis one-forms.
+<a 
+ id="dx145-435012"></a>
+<a 
+ id="x145-435013r21"></a>
+<!--l. 771--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 21</span>(Spherical coordinates)<a 
+ id="dx145-435014"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-905">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;coframe&#x00A0;e(r)=d(r),&#x00A0;e(th)=r*d(th),&#x00A0;e(ph)=r*sin(th)*d(ph);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;r^d&#x00A0;th;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;&#x00A0;TH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E&#x00A0;^E&#x00A0;&#x00A0;)/R
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d(e(th));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;&#x00A0;TH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(E&#x00A0;^E&#x00A0;&#x00A0;)/R
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;f=0;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fdomain&#x00A0;f=f(r,th,ph);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factor&#x00A0;e;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;rat;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;f;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%The&#x00A0;~gradient~&#x00A0;of&#x00A0;F&#x00A0;in&#x00A0;spherical&#x00A0;coordinates;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;E&#x00A0;*@&#x00A0;&#x00A0;F&#x00A0;+&#x00A0;(E&#x00A0;&#x00A0;*@&#x00A0;&#x00A0;&#x00A0;F)/R&#x00A0;+&#x00A0;(E&#x00A0;&#x00A0;*@&#x00A0;&#x00A0;&#x00A0;F)/(R*SIN(TH))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+</div>
+<!--l. 800--><p class="nopar" >
+<!--l. 802--><p class="noindent" >The frame dual to the frame defined by the <span 
+class="pcrr8t-x-x-109">COFRAME </span>command can be introduced by
+<span 
+class="ptmb8t-x-x-109">FRAME </span>command. <a 
+ id="dx145-435015"></a>
+<!--l. 805--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">FRAME </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">identifier</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span>;
+<!--l. 807--><p class="noindent" >This command causes the dual property to be recognized, and the tangent vectors of the
+coordinate functions are replaced by the frame basis vectors.
+<a 
+ id="x145-435016r22"></a>
+<!--l. 811--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 22</span><a 
+ id="dx145-435017"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-906">
+&#x00A0;&#x00A0;&#x00A0;coframe&#x00A0;b&#x00A0;r=d&#x00A0;r,b&#x00A0;ph=r*d&#x00A0;ph,e&#x00A0;z=d&#x00A0;z;&#x00A0;%Cylindrical&#x00A0;coframe;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;frame&#x00A0;x;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;on&#x00A0;nero;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x(-k)&#x00A0;_|&#x00A0;b(l);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Z
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x(-k)&#x00A0;|_&#x00A0;x(-l);&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%The&#x00A0;commutator&#x00A0;of&#x00A0;the&#x00A0;dual&#x00A0;frame;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;X&#x00A0;&#x00A0;/R
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH&#x00A0;R&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;(&#x00A0;-&#x00A0;X&#x00A0;&#x00A0;)/R&#x00A0;&#x00A0;%i.e.&#x00A0;it&#x00A0;is&#x00A0;not&#x00A0;a&#x00A0;coordinate&#x00A0;base;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;R&#x00A0;PH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />
+</div>
+<!--l. 844--><p class="nopar" >
+<a 
+ id="dx145-435018"></a>
+<a 
+ id="dx145-435019"></a>
+<a 
+ id="dx145-435020"></a>
+<!--l. 847--><p class="noindent" >As a convenience, the frames can be displayed at any point in a program by the command
+<span 
+class="pcrr8t-x-x-109">DISPLAYFRAME;</span>.
+<a 
+ id="dx145-435021"></a>
+                                                                     
+
+                                                                     
+<!--l. 851--><p class="noindent" >The Hodge-* duality operator returns the explicitly constructed dual element if applied to
+coframe base elements. The metric is properly taken into account.
+<a 
+ id="dx145-435022"></a>
+<a 
+ id="dx145-435023"></a>
+<!--l. 856--><p class="noindent" >The total antisymmetric Levi-Cevita tensor <span 
+class="pcrr8t-x-x-109">EPS </span>is also available. The value of <span 
+class="pcrr8t-x-x-109">EPS</span>
+with an even permutation of the indices in a covariant position is taken to be
++1.
+<!--l. 861--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.12    </span> <a 
+ id="x145-43600016.22.12"></a>Riemannian Connections</h4>
+<a 
+ id="dx145-436001"></a>
+<!--l. 864--><p class="noindent" >The command <span 
+class="pcrr8t-x-x-109">RIEMANNCONX </span>is provided for calculating the <a 
+ id="dx145-436002"></a> connection 1 forms. The
+values are stored on the name given to <span 
+class="pcrr8t-x-x-109">RIEMANNCONX</span>. This command is far more
+efficient than calculating the connection from the differential of the basis one-forms and
+using inner products.
+<a 
+ id="x145-436003r23"></a>
+<!--l. 871--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 23</span>(Calculate the connection 1-form and curvature 2-form on S(2))
+<a 
+ id="dx145-436004"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-907">
+&#x00A0;&#x00A0;&#x00A0;coframe&#x00A0;e&#x00A0;th=r*d&#x00A0;th,e&#x00A0;ph=r*sin(th)*d&#x00A0;ph;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;riemannconx&#x00A0;om;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;om(k,-l);&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Display&#x00A0;the&#x00A0;connection&#x00A0;forms;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;(E&#x00A0;&#x00A0;*COS(TH))/(SIN(TH)*R)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;(&#x00A0;-&#x00A0;E&#x00A0;&#x00A0;*COS(TH))/(SIN(TH)*R)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;curv(k,l)=2;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;curv(k,-l):=d&#x00A0;om(k,-l)&#x00A0;+&#x00A0;om(k,-m)^om(m-l);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%The&#x00A0;curvature&#x00A0;forms
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;CURV&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH&#x00A0;&#x00A0;PH&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;CURV&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;(&#x00A0;-&#x00A0;E&#x00A0;&#x00A0;^E&#x00A0;&#x00A0;)/R
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Of&#x00A0;course&#x00A0;it&#x00A0;was&#x00A0;a&#x00A0;sphere&#x00A0;with
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%radius&#x00A0;R.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TH&#x00A0;&#x00A0;PH&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;CURV&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;(E&#x00A0;&#x00A0;^E&#x00A0;&#x00A0;)/R
+                                                                     
+
+                                                                     
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;CURV&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:=&#x00A0;0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;PH
+</div>
+<!--l. 919--><p class="nopar" >
+<!--l. 921--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.13    </span> <a 
+ id="x145-43700016.22.13"></a>Ordering and Structuring</h4>
+<a 
+ id="dx145-437001"></a>
+<a 
+ id="dx145-437002"></a>
+<a 
+ id="dx145-437003"></a>
+<!--l. 925--><p class="noindent" >The ordering of an exterior form or vector can be changed by the command <span 
+class="pcrr8t-x-x-109">FORDER</span>. In
+an expression, the first identifier or kernel in the arguments of <span 
+class="pcrr8t-x-x-109">FORDER </span>is ordered ahead
+of the second, and so on, and ordered ahead of all not appearing as arguments. This
+ordering is done on the internal level and not only on output. The execution of this
+statement can therefore have tremendous effects on computation time and memory
+requirements. <span 
+class="pcrr8t-x-x-109">REMFORDER </span>brings back standard ordering for those elements that are
+listed as arguments. <a 
+ id="dx145-437004"></a>
+<!--l. 935--><p class="noindent" >An expression can be put in a more structured form by renaming a subexpression. This is
+done with the command <span 
+class="pcrr8t-x-x-109">KEEP </span>which has the syntax <a 
+ id="dx145-437005"></a>
+<!--l. 939--><p class="noindent" >&#x00A0;&#x00A0;         <span 
+class="ptmb8t-x-x-109">KEEP </span><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>=<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>,<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>=<span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">expression</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E;</span>,
+&#x2026;
+<!--l. 942--><p class="noindent" >The effect is that rules are set up for simplifying <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>without introducing its
+definition in an expression. In an expression the system also tries by reordering to
+generate as many instances of <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">name</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>as possible.
+<a 
+ id="x145-437006r24"></a>
+<!--l. 947--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 24</span><a 
+ id="dx145-437007"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-908">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pform&#x00A0;x=0,y=0,z=0,f=0,j=3;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;keep&#x00A0;j=d&#x00A0;x^d&#x00A0;y^d&#x00A0;z;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;j;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;J
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;j;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;j^d&#x00A0;x;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fdomain&#x00A0;f=f(x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;f^d&#x00A0;y^d&#x00A0;z;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@&#x00A0;&#x00A0;F*J
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+</div>
+<!--l. 972--><p class="nopar" >
+<a 
+ id="dx145-437008"></a>
+<!--l. 975--><p class="noindent" >The capabilities of <span 
+class="pcrr8t-x-x-109">KEEP </span>are currently very limited. Only exterior products should occur
+as righthand sides in <span 
+class="pcrr8t-x-x-109">KEEP</span>.
+<!--l. 979--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.22.14    </span> <a 
+ id="x145-43800016.22.14"></a>Summary of Operators and Commands</h4>
+<!--l. 980--><p class="noindent" >Table&#x00A0;<a 
+href="#x145-4380341">16.1<!--tex4ht:ref: EXCALC:sum --></a> summarizes EXCALC commands and the page number they are defined
+on.
+<div class="table">
+                                                                     
+
+                                                                     
+<!--l. 984--><p class="noindent" ><a 
+ id="x145-4380341"></a><hr class="float"><div class="float" 
+>
+                                                                     
+
+                                                                     
+<div class="tabular"> <table id="TBL-42" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-42-1g"><col 
+id="TBL-42-1"><col 
+id="TBL-42-2"><col 
+id="TBL-42-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-42-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-1-1"  
+class="td11"><a 
+ id="dx145-438001"></a><a 
+ id="dx145-438002"></a><img 
+src="manual230x.png" alt="&#x02C6;  "  class="circ" >                                    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-1-2"  
+class="td11">Exterior Multiplication                                      </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-1-3"  
+class="td11"><a 
+href="#x145-42700016.22.3">1340<!--tex4ht:ref: wedge --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-2-1"  
+class="td11"><a 
+ id="dx145-438003"></a> @                                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-2-2"  
+class="td11">Partial Differentiation                                        </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-2-3"  
+class="td11"><a 
+href="#x145-42800016.22.4">1342<!--tex4ht:ref: at --></a></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-3-1"  
+class="td11"><a 
+ id="dx145-438004"></a> @ </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-3-2"  
+class="td11">Tangent Vector </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-3-3"  
+class="td11"><a 
+href="#x145-428004r11">1345<!--tex4ht:ref: at1 --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-4-1"  
+class="td11"><a 
+ id="dx145-438005"></a> #                                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-4-2"  
+class="td11">Hodge-* Operator                                             </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-4-3"  
+class="td11"><a 
+href="#x145-43200016.22.8">1357<!--tex4ht:ref: hodge --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-5-1"  
+class="td11"><a 
+ id="dx145-438006"></a> _<span 
+class="cmsy-10x-x-109">|            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-5-2"  
+class="td11">Inner Product                                                     </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-5-3"  
+class="td11"><a 
+href="#x145-43000016.22.6">1352<!--tex4ht:ref: innerp --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-6-1"  
+class="td11"><a 
+ id="dx145-438007"></a><span 
+class="cmsy-10x-x-109">|</span>_                                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-6-2"  
+class="td11">Lie Derivative                                                    </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-6-3"  
+class="td11"><a 
+href="#x145-43100016.22.7">1355<!--tex4ht:ref: lie --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-7-1"  
+class="td11"><a 
+ id="dx145-438008"></a> COFRAME                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-7-2"  
+class="td11">Declaration of a coframe                                   </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-7-3"  
+class="td11"><a 
+href="#x145-43500016.22.11">1367<!--tex4ht:ref: COFRAME --></a></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-8-1"  
+class="td11"><a 
+ id="dx145-438009"></a> d </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-8-2"  
+class="td11">Exterior differentiation </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-8-3"  
+class="td11"><a 
+href="#x145-42900016.22.5">1346<!--tex4ht:ref: d --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-9-1"  
+class="td11"><a 
+ id="dx145-438010"></a> DISPLAYFRAME          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-9-2"  
+class="td11">Displays the frame                                            </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-9-3"  
+class="td11"><a 
+href="#x145-435016r22">1372<!--tex4ht:ref: DISPLAYFRAME --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-10-1"  
+class="td11"><a 
+ id="dx145-438011"></a> EPS                                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-10-2"  
+class="td11">Levi-Civita tensor                                              </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-10-3"  
+class="td11"><a 
+href="#x145-435016r22">1373<!--tex4ht:ref: EPS --></a></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-11-1"  
+class="td11"><a 
+ id="dx145-438012"></a> EXDEGREE </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-11-2"  
+class="td11">Calculates the exterior degree of an expression</td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-11-3"  
+class="td11"><a 
+href="#x145-42600016.22.2">1339<!--tex4ht:ref: EXDEGREE --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-12-1"  
+class="td11"><a 
+ id="dx145-438013"></a> FDOMAIN                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-12-2"  
+class="td11">Declaration of implicit dependencies                </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-12-3"  
+class="td11"><a 
+href="#x145-428004r11">1343<!--tex4ht:ref: FDOMAIN --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-13-1"  
+class="td11"><a 
+ id="dx145-438014"></a> FORDER                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-13-2"  
+class="td11">Ordering command                                           </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-13-3"  
+class="td11"><a 
+href="#x145-43700016.22.13">1375<!--tex4ht:ref: FORDER --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-14-1"  
+class="td11"><a 
+ id="dx145-438015"></a> FRAME                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-14-2"  
+class="td11">Declares the frame dual to the coframe            </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-14-3"  
+class="td11"><a 
+href="#x145-435013r21">1371<!--tex4ht:ref: FRAME --></a></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-15-1"  
+class="td11"><a 
+ id="dx145-438016"></a> INDEXRANGE </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-15-2"  
+class="td11">Declaration of indices </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-15-3"  
+class="td11"><a 
+href="#x145-434007r18">1362<!--tex4ht:ref: INDEXRANGE --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-16-1"  
+class="td11"><a 
+ id="dx145-438017"></a> INDEX_SYMMETRIES</td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-16-2"  
+class="td11">Declares arbitrary index symmetry properties  </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-16-3"  
+class="td11"><a 
+href="#x145-434007r18">1366<!--tex4ht:ref: INDEXSYMMETRIES --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-17-1"  
+class="td11"><a 
+ id="dx145-438018"></a> KEEP                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-17-2"  
+class="td11">Structuring command                                        </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-17-3"  
+class="td11"><a 
+href="#x145-43700016.22.13">1375<!--tex4ht:ref: KEEP --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-18-1"  
+class="td11"><a 
+ id="dx145-438019"></a> METRIC                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-18-2"  
+class="td11">Clause of COFRAME to specify a metric        </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-18-3"  
+class="td11"><a 
+href="#x145-43500016.22.11">1367<!--tex4ht:ref: COFRAME --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-19-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-19-1"  
+class="td11"><a 
+ id="dx145-438020"></a> NOETHER                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-19-2"  
+class="td11">Calculates the Noether current                          </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-19-3"  
+class="td11"><a 
+href="#x145-433005r15">1360<!--tex4ht:ref: NOETHER --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-20-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-20-1"  
+class="td11"><a 
+ id="dx145-438021"></a> NOSUM                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-20-2"  
+class="td11">Inhibits summation convention                         </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-20-3"  
+class="td11"><a 
+href="#x145-434007r18">1366<!--tex4ht:ref: NOSUM --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-21-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-21-1"  
+class="td11"><a 
+ id="dx145-438022"></a> NOXPND d                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-21-2"  
+class="td11">Inhibits the use of product rule for d                 </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-21-3"  
+class="td11"><a 
+href="#x145-42900016.22.5">1347<!--tex4ht:ref: NOXPNDD --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-22-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-22-1"  
+class="td11"><a 
+ id="dx145-438023"></a> NOXPND @                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-22-2"  
+class="td11">Inhibits expansion into partial derivatives         </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-22-3"  
+class="td11"><a 
+href="#x145-42900016.22.5">1351<!--tex4ht:ref: NOXPNDA --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-23-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-23-1"  
+class="td11"><a 
+ id="dx145-438024"></a> PFORM                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-23-2"  
+class="td11">Declaration of exterior forms                            </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-23-3"  
+class="td11"><a 
+href="#x145-42600016.22.2">1334<!--tex4ht:ref: PFORM --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-24-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-24-1"  
+class="td11"><a 
+ id="dx145-438025"></a> REMFORDER                </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-24-2"  
+class="td11">Clears ordering                                                  </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-24-3"  
+class="td11"><a 
+href="#x145-43700016.22.13">1375<!--tex4ht:ref: REMFORDER --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-25-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-25-1"  
+class="td11"><a 
+ id="dx145-438026"></a> RENOSUM                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-25-2"  
+class="td11">Enables summation convention                         </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-25-3"  
+class="td11"><a 
+href="#x145-434007r18">1366<!--tex4ht:ref: RENOSUM --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-26-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-26-1"  
+class="td11"><a 
+ id="dx145-438027"></a> RIEMANNCONX          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-26-2"  
+class="td11">Calculation of a Riemannian Connection         </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-26-3"  
+class="td11"><a 
+href="#x145-43600016.22.12">1373<!--tex4ht:ref: RIEMANNCONX --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-27-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-27-1"  
+class="td11"><a 
+ id="dx145-438028"></a> SIGNATURE                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-27-2"  
+class="td11">Clause of COFRAME to specify a pseudo-      </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-27-3"  
+class="td11"><a 
+href="#x145-43500016.22.11">1368<!--tex4ht:ref: SIGNATURE --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-28-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-28-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-28-2"  
+class="td11">Euclidean metric                                               </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-28-3"  
+class="td11">   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-29-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-29-1"  
+class="td11"><a 
+ id="dx145-438029"></a> SPACEDIM                     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-29-2"  
+class="td11">Command to set the dimension of a space        </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-29-3"  
+class="td11"><a 
+href="#x145-427003r10">1341<!--tex4ht:ref: SPACEDIM --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-30-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-30-1"  
+class="td11"><a 
+ id="dx145-438030"></a> TVECTOR                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-30-2"  
+class="td11">Declaration of vectors                                       </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-30-3"  
+class="td11"><a 
+href="#x145-42600016.22.2">1338<!--tex4ht:ref: TVECTOR --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-31-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-31-1"  
+class="td11"><a 
+ id="dx145-438031"></a> VARDF                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-31-2"  
+class="td11">Variational derivative                                        </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-31-3"  
+class="td11"><a 
+href="#x145-43300016.22.9">1359<!--tex4ht:ref: VARDF --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-32-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-32-1"  
+class="td11"><a 
+ id="dx145-438032"></a> XPND d                          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-32-2"  
+class="td11">Enables the use of product rule for d                </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-32-3"  
+class="td11"><a 
+href="#x145-42900016.22.5">1349<!--tex4ht:ref: XPNDD --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-33-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-33-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-33-2"  
+class="td11">(default)                                                             </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-33-3"  
+class="td11">   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-34-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-34-1"  
+class="td11"><a 
+ id="dx145-438033"></a> XPND @                         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-34-2"  
+class="td11">Enables expansion into partial derivatives        </td><td  style="white-space:nowrap; text-align:right;" id="TBL-42-34-3"  
+class="td11"><a 
+href="#x145-42900016.22.5">1351<!--tex4ht:ref: XPNDA --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-42-35-"><td  style="white-space:nowrap; text-align:left;" id="TBL-42-35-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-42-35-2"  
+class="td11">(default)                                                             </td></tr></table></div>
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;16.1: </span><span  
+class="content">EXCALC Command Summary</span></div><!--tex4ht:label?: x145-4380341 -->
+                                                                     
+
+                                                                     
+</div><hr class="endfloat" />
+</div>
+<!--l. 1060--><p class="noindent" >
+                                                                     
+
+                                                                     
+<h4 class="subsectionHead"><span class="titlemark">16.22.15    </span> <a 
+ id="x145-43900016.22.15"></a>Examples</h4>
+<!--l. 1063--><p class="noindent" >The following examples should illustrate the use of <span 
+class="ptmb8t-x-x-109">EXCALC</span>. It is not intended to show
+the most efficient or most elegant way of stating the problems; rather the variety of
+syntactic constructs are exemplified. The examples are on a test file distributed with
+<span 
+class="ptmb8t-x-x-109">EXCALC</span>. <a 
+ id="dx145-439001"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-909">
+&#x00A0;<br />%&#x00A0;Problem:&#x00A0;Calculate&#x00A0;the&#x00A0;PDE&#8217;s&#x00A0;for&#x00A0;the&#x00A0;isovector&#x00A0;of&#x00A0;the&#x00A0;heat&#x00A0;equation.
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(c.f.&#x00A0;B.K.&#x00A0;Harrison,&#x00A0;f.B.&#x00A0;Estabrook,&#x00A0;~Geometric&#x00A0;Approach...~,
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;J.&#x00A0;Math.&#x00A0;Phys.&#x00A0;12,&#x00A0;653,&#x00A0;1971)
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;heat&#x00A0;equation&#x00A0;@&#x00A0;&#x00A0;&#x00A0;psi&#x00A0;=&#x00A0;@&#x00A0;&#x00A0;psi&#x00A0;is&#x00A0;equivalent&#x00A0;to&#x00A0;the&#x00A0;set&#x00A0;of&#x00A0;exterior
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;xx&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;t
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;equations&#x00A0;(with&#x00A0;u=@&#x00A0;psi,&#x00A0;y=@&#x00A0;psi):
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;T&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{psi,u,x,y,t}=0,a=1,{da,b}=2;
+&#x00A0;<br />
+&#x00A0;<br />a&#x00A0;:=&#x00A0;d&#x00A0;psi&#x00A0;-&#x00A0;u*d&#x00A0;t&#x00A0;-&#x00A0;y*d&#x00A0;x;
+&#x00A0;<br />
+&#x00A0;<br />da&#x00A0;:=&#x00A0;-&#x00A0;d&#x00A0;u^d&#x00A0;t&#x00A0;-&#x00A0;d&#x00A0;y^d&#x00A0;x;
+&#x00A0;<br />
+&#x00A0;<br />b&#x00A0;:=&#x00A0;u*d&#x00A0;x^d&#x00A0;t&#x00A0;-&#x00A0;d&#x00A0;y^d&#x00A0;t;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Now&#x00A0;calculate&#x00A0;the&#x00A0;PDE&#8217;s&#x00A0;for&#x00A0;the&#x00A0;isovector.
+&#x00A0;<br />
+&#x00A0;<br />tvector&#x00A0;v;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{vpsi,vt,vu,vx,vy}=0;
+&#x00A0;<br />fdomain&#x00A0;vpsi=vpsi(psi,t,u,x,y),vt=vt(psi,t,u,x,y),vu=vu(psi,t,u,x,y),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;vx=vx(psi,t,u,x,y),vy=vy(psi,t,u,x,y);
+&#x00A0;<br />
+&#x00A0;<br />v&#x00A0;:=&#x00A0;vpsi*@&#x00A0;psi&#x00A0;+&#x00A0;vt*@&#x00A0;t&#x00A0;+&#x00A0;vu*@&#x00A0;u&#x00A0;+&#x00A0;vx*@&#x00A0;x&#x00A0;+&#x00A0;vy*@&#x00A0;y;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;d;
+&#x00A0;<br />on&#x00A0;rat;
+&#x00A0;<br />
+&#x00A0;<br />i1&#x00A0;:=&#x00A0;v&#x00A0;|_&#x00A0;a&#x00A0;-&#x00A0;l*a;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;o=1;
+&#x00A0;<br />
+&#x00A0;<br />o&#x00A0;:=&#x00A0;ot*d&#x00A0;t&#x00A0;+&#x00A0;ox*d&#x00A0;x&#x00A0;+&#x00A0;ou*d&#x00A0;u&#x00A0;+&#x00A0;oy*d&#x00A0;y;
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;f=f(psi,t,u,x,y);
+&#x00A0;<br />
+&#x00A0;<br />i11&#x00A0;:=&#x00A0;v&#x00A0;_|&#x00A0;d&#x00A0;a&#x00A0;-&#x00A0;l*a&#x00A0;+&#x00A0;d&#x00A0;f;
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;vx=-@(f,y),vt=-@(f,u),vu=@(f,t)+u*@(f,psi),vy=@(f,x)+y*@(f,psi),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;vpsi=f-u*@(f,u)-y*@(f,y);
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;^;
+&#x00A0;<br />
+&#x00A0;<br />i2&#x00A0;:=&#x00A0;v&#x00A0;|_&#x00A0;b&#x00A0;-&#x00A0;xi*b&#x00A0;-&#x00A0;o^a&#x00A0;+&#x00A0;zeta*da;
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;ou=0,oy=@(f,u,psi),ox=-u*@(f,u,psi),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ot=@(f,x,psi)+u*@(f,y,psi)+y*@(f,psi,psi);
+&#x00A0;<br />
+&#x00A0;<br />i2;
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;zeta=-@(f,u,x)-@(f,u,y)*u-@(f,u,psi)*y;
+&#x00A0;<br />
+&#x00A0;<br />i2;
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;xi=-@(f,t,u)-u*@(f,u,psi)+@(f,x,y)+u*@(f,y,y)+y*@(f,y,psi)+@(f,psi);
+&#x00A0;<br />
+&#x00A0;<br />i2;
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;@(f,u,u)=0;
+&#x00A0;<br />
+&#x00A0;<br />i2;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;These&#x00A0;PDE&#8217;s&#x00A0;have&#x00A0;to&#x00A0;be&#x00A0;solved.
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;a,da,b,v,i1,i11,o,i2,xi,t;
+&#x00A0;<br />remfdomain&#x00A0;f,vpsi,vt,vu,vx,vy;
+&#x00A0;<br />clear&#x00A0;@(f,u,u);
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Problem:
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;Calculate&#x00A0;the&#x00A0;integrability&#x00A0;conditions&#x00A0;for&#x00A0;the&#x00A0;system&#x00A0;of&#x00A0;PDE&#8217;s:
+&#x00A0;<br />%&#x00A0;(c.f.&#x00A0;B.F.&#x00A0;Schutz,&#x00A0;~Geometrical&#x00A0;Methods&#x00A0;of&#x00A0;Mathematical&#x00A0;Physics~
+&#x00A0;<br />%&#x00A0;Cambridge&#x00A0;University&#x00A0;Press,&#x00A0;1984,&#x00A0;p.&#x00A0;156)
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;@&#x00A0;z&#x00A0;/@&#x00A0;x&#x00A0;+&#x00A0;a1*z&#x00A0;&#x00A0;+&#x00A0;b1*z&#x00A0;&#x00A0;=&#x00A0;c1
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;@&#x00A0;z&#x00A0;/@&#x00A0;y&#x00A0;+&#x00A0;a2*z&#x00A0;&#x00A0;+&#x00A0;b2*z&#x00A0;&#x00A0;=&#x00A0;c2
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;@&#x00A0;z&#x00A0;/@&#x00A0;x&#x00A0;+&#x00A0;f1*z&#x00A0;&#x00A0;+&#x00A0;g1*z&#x00A0;&#x00A0;=&#x00A0;h1
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;@&#x00A0;z&#x00A0;/@&#x00A0;y&#x00A0;+&#x00A0;f2*z&#x00A0;&#x00A0;+&#x00A0;g2*z&#x00A0;&#x00A0;=&#x00A0;h2
+&#x00A0;<br />%&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;;
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;w(k)=1,integ(k)=4,{z(k),x,y}=0,{a,b,c,f,g,h}=1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{a1,a2,b1,b2,c1,c2,f1,f2,g1,g2,h1,h2}=0;
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;&#x00A0;a1=a1(x,y),a2=a2(x,y),b1=b1(x,y),b2=b2(x,y),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;c1=c1(x,y),c2=c2(x,y),f1=f1(x,y),f2=f2(x,y),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;g1=g1(x,y),g2=g2(x,y),h1=h1(x,y),h2=h2(x,y);
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />a:=a1*d&#x00A0;x+a2*d&#x00A0;y$
+&#x00A0;<br />b:=b1*d&#x00A0;x+b2*d&#x00A0;y$
+&#x00A0;<br />c:=c1*d&#x00A0;x+c2*d&#x00A0;y$
+&#x00A0;<br />f:=f1*d&#x00A0;x+f2*d&#x00A0;y$
+&#x00A0;<br />g:=g1*d&#x00A0;x+g2*d&#x00A0;y$
+&#x00A0;<br />h:=h1*d&#x00A0;x+h2*d&#x00A0;y$
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;equivalent&#x00A0;exterior&#x00A0;system:
+&#x00A0;<br />factor&#x00A0;d;
+&#x00A0;<br />w(1)&#x00A0;:=&#x00A0;d&#x00A0;z(-1)&#x00A0;+&#x00A0;z(-1)*a&#x00A0;+&#x00A0;z(-2)*b&#x00A0;-&#x00A0;c;
+&#x00A0;<br />w(2)&#x00A0;:=&#x00A0;d&#x00A0;z(-2)&#x00A0;+&#x00A0;z(-1)*f&#x00A0;+&#x00A0;z(-2)*g&#x00A0;-&#x00A0;h;
+&#x00A0;<br />indexrange&#x00A0;1,2;
+&#x00A0;<br />factor&#x00A0;z;
+&#x00A0;<br />%&#x00A0;The&#x00A0;integrability&#x00A0;conditions:
+&#x00A0;<br />
+&#x00A0;<br />integ(k)&#x00A0;:=&#x00A0;d&#x00A0;w(k)&#x00A0;^&#x00A0;w(1)&#x00A0;^&#x00A0;w(2);
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;a,b,c,f,g,h,x,y,w(k),integ(k),z(k);
+&#x00A0;<br />remfdomain&#x00A0;a1,a2,b1,c1,c2,f1,f2,g1,g2,h1,h2;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Problem:
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;Calculate&#x00A0;the&#x00A0;PDE&#8217;s&#x00A0;for&#x00A0;the&#x00A0;generators&#x00A0;of&#x00A0;the&#x00A0;d-theta&#x00A0;symmetries&#x00A0;of
+&#x00A0;<br />%&#x00A0;the&#x00A0;Lagrangian&#x00A0;system&#x00A0;of&#x00A0;the&#x00A0;planar&#x00A0;Kepler&#x00A0;problem.
+&#x00A0;<br />%&#x00A0;c.f.&#x00A0;W.Sarlet,&#x00A0;F.Cantrijn,&#x00A0;Siam&#x00A0;Review&#x00A0;23,&#x00A0;467,&#x00A0;1981
+&#x00A0;<br />%&#x00A0;Verify&#x00A0;that&#x00A0;time&#x00A0;translation&#x00A0;is&#x00A0;a&#x00A0;d-theta&#x00A0;symmetry&#x00A0;and&#x00A0;calculate&#x00A0;the
+&#x00A0;<br />%&#x00A0;corresponding&#x00A0;integral.
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{t,q(k),v(k),lam(k),tau,xi(k),eta(k)}=0,theta=1,f=0,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{l,glq(k),glv(k),glt}=0;
+&#x00A0;<br />
+&#x00A0;<br />tvector&#x00A0;gam,y;
+&#x00A0;<br />
+&#x00A0;<br />indexrange&#x00A0;1,2;
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;tau=tau(t,q(k),v(k)),xi=xi(t,q(k),v(k)),f=f(t,q(k),v(k));
+&#x00A0;<br />
+&#x00A0;<br />l&#x00A0;:=&#x00A0;1/2*(v(1)**2&#x00A0;+&#x00A0;v(2)**2)&#x00A0;+&#x00A0;m/r$&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;The&#x00A0;Lagrangian.
+&#x00A0;<br />
+                                                                     
+
+                                                                     
+&#x00A0;<br />pform&#x00A0;r=0;
+&#x00A0;<br />fdomain&#x00A0;r=r(q(k));
+&#x00A0;<br />let&#x00A0;@(r,q&#x00A0;1)=q(1)/r,@(r,q&#x00A0;2)=q(2)/r,q(1)**2+q(2)**2=r**2;
+&#x00A0;<br />
+&#x00A0;<br />lam(k)&#x00A0;:=&#x00A0;-m*q(k)/r;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;The&#x00A0;force.
+&#x00A0;<br />
+&#x00A0;<br />gam&#x00A0;:=&#x00A0;@&#x00A0;t&#x00A0;+&#x00A0;v(k)*@(q(k))&#x00A0;+&#x00A0;lam(k)*@(v(k))$
+&#x00A0;<br />
+&#x00A0;<br />eta(k)&#x00A0;:=&#x00A0;gam&#x00A0;_|&#x00A0;d&#x00A0;xi(k)&#x00A0;-&#x00A0;v(k)*gam&#x00A0;_|&#x00A0;d&#x00A0;tau$
+&#x00A0;<br />
+&#x00A0;<br />y&#x00A0;&#x00A0;:=&#x00A0;tau*@&#x00A0;t&#x00A0;+&#x00A0;xi(k)*@(q(k))&#x00A0;+&#x00A0;eta(k)*@(v(k))$&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Symmetry&#x00A0;generator.
+&#x00A0;<br />
+&#x00A0;<br />theta&#x00A0;:=&#x00A0;l*d&#x00A0;t&#x00A0;+&#x00A0;@(l,v(k))*(d&#x00A0;q(k)&#x00A0;-&#x00A0;v(k)*d&#x00A0;t)$
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;@;
+&#x00A0;<br />
+&#x00A0;<br />s&#x00A0;:=&#x00A0;y&#x00A0;|_&#x00A0;theta&#x00A0;-&#x00A0;d&#x00A0;f$
+&#x00A0;<br />
+&#x00A0;<br />glq(k)&#x00A0;:=&#x00A0;@(q&#x00A0;k)&#x00A0;_|&#x00A0;s;
+&#x00A0;<br />glv(k)&#x00A0;:=&#x00A0;@(v&#x00A0;k)&#x00A0;_|&#x00A0;s;
+&#x00A0;<br />glt&#x00A0;:=&#x00A0;@(t)&#x00A0;_|&#x00A0;s;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Translation&#x00A0;in&#x00A0;time&#x00A0;must&#x00A0;generate&#x00A0;a&#x00A0;symmetry.
+&#x00A0;<br />xi(k)&#x00A0;:=&#x00A0;0;
+&#x00A0;<br />tau&#x00A0;:=&#x00A0;1;
+&#x00A0;<br />
+&#x00A0;<br />glq&#x00A0;k&#x00A0;:=&#x00A0;glq&#x00A0;k;
+&#x00A0;<br />glv&#x00A0;k&#x00A0;:=&#x00A0;glv&#x00A0;k;
+&#x00A0;<br />glt;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;corresponding&#x00A0;integral&#x00A0;is&#x00A0;of&#x00A0;course&#x00A0;the&#x00A0;energy.
+&#x00A0;<br />integ&#x00A0;:=&#x00A0;-&#x00A0;y&#x00A0;_|&#x00A0;theta;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;l,lam&#x00A0;k,gam,eta&#x00A0;k,y,theta,s,glq&#x00A0;k,glv&#x00A0;k,glt,t,q&#x00A0;k,v&#x00A0;k,tau,xi&#x00A0;k;
+&#x00A0;<br />remfdomain&#x00A0;r,f,tau,xi;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Problem:
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;Calculate&#x00A0;the&#x00A0;~gradient~&#x00A0;and&#x00A0;~Laplacian~&#x00A0;of&#x00A0;a&#x00A0;function&#x00A0;and&#x00A0;the&#x00A0;~curl~
+&#x00A0;<br />%&#x00A0;and&#x00A0;~divergence~&#x00A0;of&#x00A0;a&#x00A0;one-form&#x00A0;in&#x00A0;elliptic&#x00A0;coordinates.
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />coframe&#x00A0;e&#x00A0;u&#x00A0;=&#x00A0;sqrt(cosh(v)**2&#x00A0;-&#x00A0;sin(u)**2)*d&#x00A0;u,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e&#x00A0;v&#x00A0;=&#x00A0;sqrt(cosh(v)**2&#x00A0;-&#x00A0;sin(u)**2)*d&#x00A0;v,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e&#x00A0;phi&#x00A0;=&#x00A0;cos&#x00A0;u*sinh&#x00A0;v*d&#x00A0;phi;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;f=0;
+&#x00A0;<br />
+                                                                     
+
+                                                                     
+&#x00A0;<br />fdomain&#x00A0;f=f(u,v,phi);
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;e,^;
+&#x00A0;<br />on&#x00A0;rat,gcd;
+&#x00A0;<br />order&#x00A0;cosh&#x00A0;v,&#x00A0;sin&#x00A0;u;
+&#x00A0;<br />%&#x00A0;The&#x00A0;gradient:
+&#x00A0;<br />d&#x00A0;f;
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;@;
+&#x00A0;<br />%&#x00A0;The&#x00A0;Laplacian:
+&#x00A0;<br />#&#x00A0;d&#x00A0;#&#x00A0;d&#x00A0;f;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Another&#x00A0;way&#x00A0;of&#x00A0;calculating&#x00A0;the&#x00A0;Laplacian:
+&#x00A0;<br />-#vardf(1/2*d&#x00A0;f^#d&#x00A0;f,f);
+&#x00A0;<br />
+&#x00A0;<br />remfac&#x00A0;@;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Now&#x00A0;calculate&#x00A0;the&#x00A0;~curl~&#x00A0;and&#x00A0;the&#x00A0;~divergence~&#x00A0;of&#x00A0;a&#x00A0;one-form.
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;w=1,a(k)=0;
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;a=a(u,v,phi);
+&#x00A0;<br />
+&#x00A0;<br />w&#x00A0;:=&#x00A0;a(-k)*e&#x00A0;k;
+&#x00A0;<br />%&#x00A0;The&#x00A0;curl:
+&#x00A0;<br />x&#x00A0;:=&#x00A0;#&#x00A0;d&#x00A0;w;
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;@;
+&#x00A0;<br />%&#x00A0;The&#x00A0;divergence:
+&#x00A0;<br />y&#x00A0;:=&#x00A0;#&#x00A0;d&#x00A0;#&#x00A0;w;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />remfac&#x00A0;@;
+&#x00A0;<br />clear&#x00A0;x,y,w,u,v,phi,e&#x00A0;k,a&#x00A0;k;
+&#x00A0;<br />remfdomain&#x00A0;a,f;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Problem:
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;Calculate&#x00A0;in&#x00A0;a&#x00A0;spherical&#x00A0;coordinate&#x00A0;system&#x00A0;the&#x00A0;Navier&#x00A0;Stokes&#x00A0;equations.
+&#x00A0;<br />
+&#x00A0;<br />coframe&#x00A0;e&#x00A0;r=d&#x00A0;r,&#x00A0;e&#x00A0;theta&#x00A0;=r*d&#x00A0;theta,&#x00A0;e&#x00A0;phi&#x00A0;=&#x00A0;r*sin&#x00A0;theta&#x00A0;*d&#x00A0;phi;
+&#x00A0;<br />frame&#x00A0;x;
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;v=v(t,r,theta,phi),p=p(r,theta,phi);
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;v(k)=0,p=0,w=1;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;We&#x00A0;first&#x00A0;calculate&#x00A0;the&#x00A0;convective&#x00A0;derivative.
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />w&#x00A0;:=&#x00A0;v(-k)*e(k)$
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;e;&#x00A0;on&#x00A0;rat;
+&#x00A0;<br />
+&#x00A0;<br />cdv&#x00A0;:=&#x00A0;@(w,t)&#x00A0;+&#x00A0;(v(k)*x(-k))&#x00A0;|_&#x00A0;w&#x00A0;-&#x00A0;1/2*d(v(k)*v(-k));
+&#x00A0;<br />
+&#x00A0;<br />%next&#x00A0;we&#x00A0;calculate&#x00A0;the&#x00A0;viscous&#x00A0;terms;
+&#x00A0;<br />
+&#x00A0;<br />visc&#x00A0;:=&#x00A0;nu*(d#d#&#x00A0;w&#x00A0;-&#x00A0;#d#d&#x00A0;w)&#x00A0;+&#x00A0;mu*d#d#&#x00A0;w;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Finally&#x00A0;we&#x00A0;add&#x00A0;the&#x00A0;pressure&#x00A0;term&#x00A0;and&#x00A0;print&#x00A0;the&#x00A0;components&#x00A0;of&#x00A0;the
+&#x00A0;<br />%&#x00A0;whole&#x00A0;equation.
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;nasteq=1,nast(k)=0;
+&#x00A0;<br />
+&#x00A0;<br />nasteq&#x00A0;:=&#x00A0;cdv&#x00A0;-&#x00A0;visc&#x00A0;+&#x00A0;1/rho*d&#x00A0;p$
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;@;
+&#x00A0;<br />
+&#x00A0;<br />nast(-k)&#x00A0;:=&#x00A0;x(-k)&#x00A0;_|&#x00A0;nasteq;
+&#x00A0;<br />
+&#x00A0;<br />remfac&#x00A0;@,e;
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;v&#x00A0;k,x&#x00A0;k,nast&#x00A0;k,cdv,visc,p,w,nasteq,e&#x00A0;k;
+&#x00A0;<br />remfdomain&#x00A0;p,v;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Problem:
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;Calculate&#x00A0;from&#x00A0;the&#x00A0;Lagrangian&#x00A0;of&#x00A0;a&#x00A0;vibrating&#x00A0;rod&#x00A0;the&#x00A0;equation&#x00A0;of
+&#x00A0;<br />%&#x00A0;motion&#x00A0;and&#x00A0;show&#x00A0;that&#x00A0;the&#x00A0;invariance&#x00A0;under&#x00A0;time&#x00A0;translation&#x00A0;leads
+&#x00A0;<br />%&#x00A0;to&#x00A0;a&#x00A0;conserved&#x00A0;current.
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{y,x,t,q,j}=0,lagr=2;
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;y=y(x,t),q=q(x),j=j(x);
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;^;
+&#x00A0;<br />
+&#x00A0;<br />lagr&#x00A0;:=&#x00A0;1/2*(rho*q*@(y,t)**2&#x00A0;-&#x00A0;e*j*@(y,x,x)**2)*d&#x00A0;x^d&#x00A0;t;
+&#x00A0;<br />
+&#x00A0;<br />vardf(lagr,y);
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;Lagrangian&#x00A0;does&#x00A0;not&#x00A0;explicitly&#x00A0;depend&#x00A0;on&#x00A0;time;&#x00A0;therefore&#x00A0;the
+&#x00A0;<br />%&#x00A0;vector&#x00A0;field&#x00A0;@&#x00A0;t&#x00A0;generates&#x00A0;a&#x00A0;symmetry.&#x00A0;The&#x00A0;conserved&#x00A0;current&#x00A0;is
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;c=1;
+&#x00A0;<br />factor&#x00A0;d;
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />c&#x00A0;:=&#x00A0;noether(lagr,y,@&#x00A0;t);
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;exterior&#x00A0;derivative&#x00A0;of&#x00A0;this&#x00A0;must&#x00A0;be&#x00A0;zero&#x00A0;or&#x00A0;a&#x00A0;multiple&#x00A0;of&#x00A0;the
+&#x00A0;<br />%&#x00A0;equation&#x00A0;of&#x00A0;motion&#x00A0;(weak&#x00A0;conservation&#x00A0;law)&#x00A0;to&#x00A0;be&#x00A0;a&#x00A0;conserved&#x00A0;current.
+&#x00A0;<br />
+&#x00A0;<br />remfac&#x00A0;d;
+&#x00A0;<br />
+&#x00A0;<br />d&#x00A0;c;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;i.e.&#x00A0;it&#x00A0;is&#x00A0;a&#x00A0;multiple&#x00A0;of&#x00A0;the&#x00A0;equation&#x00A0;of&#x00A0;motion.
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;lagr,c,j,y,q;
+&#x00A0;<br />remfdomain&#x00A0;y,q,j;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Problem:
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;Show&#x00A0;that&#x00A0;the&#x00A0;metric&#x00A0;structure&#x00A0;given&#x00A0;by&#x00A0;Eguchi&#x00A0;and&#x00A0;Hanson&#x00A0;induces&#x00A0;a
+&#x00A0;<br />%&#x00A0;self-dual&#x00A0;curvature.
+&#x00A0;<br />%&#x00A0;c.f.&#x00A0;T.&#x00A0;Eguchi,&#x00A0;P.B.&#x00A0;Gilkey,&#x00A0;A.J.&#x00A0;Hanson,&#x00A0;~Gravitation,&#x00A0;Gauge&#x00A0;Theories
+&#x00A0;<br />%&#x00A0;and&#x00A0;Differential&#x00A0;Geometry~,&#x00A0;Physics&#x00A0;Reports&#x00A0;66,&#x00A0;213,&#x00A0;1980
+&#x00A0;<br />
+&#x00A0;<br />for&#x00A0;all&#x00A0;x&#x00A0;let&#x00A0;cos(x)**2=1-sin(x)**2;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;f=0,g=0;
+&#x00A0;<br />fdomain&#x00A0;f=f(r),&#x00A0;g=g(r);
+&#x00A0;<br />
+&#x00A0;<br />coframe&#x00A0;&#x00A0;&#x00A0;o(r)&#x00A0;=&#x00A0;f*d&#x00A0;r,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(theta)&#x00A0;=&#x00A0;(r/2)*(sin(psi)*d&#x00A0;theta&#x00A0;-&#x00A0;sin(theta)*cos(psi)*d&#x00A0;phi),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(phi)&#x00A0;=&#x00A0;(r/2)*(-cos(psi)*d&#x00A0;theta&#x00A0;-&#x00A0;sin(theta)*sin(psi)*d&#x00A0;phi),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(psi)&#x00A0;=&#x00A0;(r/2)*g*(d&#x00A0;psi&#x00A0;+&#x00A0;cos(theta)*d&#x00A0;phi);
+&#x00A0;<br />
+&#x00A0;<br />frame&#x00A0;e;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;gamma(a,b)=1,curv2(a,b)=2;
+&#x00A0;<br />index_symmetries&#x00A0;gamma(a,b),curv2(a,b):&#x00A0;antisymmetric;
+&#x00A0;<br />
+&#x00A0;<br />factor&#x00A0;o;
+&#x00A0;<br />
+&#x00A0;<br />gamma(-a,-b)&#x00A0;:=&#x00A0;-(1/2)*(&#x00A0;e(-a)&#x00A0;_|&#x00A0;(e(-c)&#x00A0;_|&#x00A0;(d&#x00A0;o(-b)))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-e(-b)&#x00A0;_|&#x00A0;(e(-a)&#x00A0;_|&#x00A0;(d&#x00A0;o(-c)))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+e(-c)&#x00A0;_|&#x00A0;(e(-b)&#x00A0;_|&#x00A0;(d&#x00A0;o(-a)))&#x00A0;)*o(c)$
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />curv2(-a,b)&#x00A0;:=&#x00A0;d&#x00A0;gamma(-a,b)&#x00A0;+&#x00A0;gamma(-c,b)^gamma(-a,c)$
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;f=1/g,g=sqrt(1-(a/r)**4);
+&#x00A0;<br />
+                                                                     
+
+                                                                     
+&#x00A0;<br />pform&#x00A0;chck(k,l)=2;
+&#x00A0;<br />index_symmetries&#x00A0;chck(k,l):&#x00A0;antisymmetric;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;following&#x00A0;has&#x00A0;to&#x00A0;be&#x00A0;zero&#x00A0;for&#x00A0;a&#x00A0;self-dual&#x00A0;curvature.
+&#x00A0;<br />
+&#x00A0;<br />chck(k,l)&#x00A0;:=&#x00A0;1/2*eps(k,l,m,n)*curv2(-m,-n)&#x00A0;+&#x00A0;curv2(k,l);
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;gamma(a,b),curv2(a,b),f,g,chck(a,b),o(k),e(k),r,phi,psi;
+&#x00A0;<br />remfdomain&#x00A0;f,g;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Example:&#x00A0;6-dimensional&#x00A0;FRW&#x00A0;model&#x00A0;with&#x00A0;quadratic&#x00A0;curvature&#x00A0;terms&#x00A0;in
+&#x00A0;<br />%&#x00A0;-------
+&#x00A0;<br />%&#x00A0;the&#x00A0;Lagrangian&#x00A0;(Lanczos&#x00A0;and&#x00A0;Gauss-Bonnet&#x00A0;terms).
+&#x00A0;<br />%&#x00A0;cf.&#x00A0;Henriques,&#x00A0;Nuclear&#x00A0;Physics,&#x00A0;B277,&#x00A0;621&#x00A0;(1986)
+&#x00A0;<br />
+&#x00A0;<br />for&#x00A0;all&#x00A0;x&#x00A0;let&#x00A0;cos(x)**2+sin(x)**2=1;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{r,s}=0;
+&#x00A0;<br />fdomain&#x00A0;r=r(t),s=s(t);
+&#x00A0;<br />
+&#x00A0;<br />coframe&#x00A0;o(t)&#x00A0;=&#x00A0;d&#x00A0;t,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(1)&#x00A0;=&#x00A0;r*d&#x00A0;u/(1&#x00A0;+&#x00A0;k*(u**2)/4),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(2)&#x00A0;=&#x00A0;r*u*d&#x00A0;theta/(1&#x00A0;+&#x00A0;k*(u**2)/4),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(3)&#x00A0;=&#x00A0;r*u*sin(theta)*d&#x00A0;phi/(1&#x00A0;+&#x00A0;k*(u**2)/4),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(4)&#x00A0;=&#x00A0;s*d&#x00A0;v1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(5)&#x00A0;=&#x00A0;s*sin(v1)*d&#x00A0;v2
+&#x00A0;<br />&#x00A0;with&#x00A0;metric&#x00A0;g&#x00A0;=-o(t)*o(t)+o(1)*o(1)+o(2)*o(2)+o(3)*o(3)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+o(4)*o(4)+o(5)*o(5);
+&#x00A0;<br />
+&#x00A0;<br />frame&#x00A0;e;
+&#x00A0;<br />
+&#x00A0;<br />on&#x00A0;nero;&#x00A0;factor&#x00A0;o,^;
+&#x00A0;<br />
+&#x00A0;<br />riemannconx&#x00A0;om;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;curv(k,l)=2,{riemann(a,b,c,d),ricci(a,b),riccisc}=0;
+&#x00A0;<br />
+&#x00A0;<br />index_symmetries&#x00A0;curv(k,l):&#x00A0;antisymmetric,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;riemann(k,l,m,n):&#x00A0;antisymmetric&#x00A0;in&#x00A0;{k,l},{m,n}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symmetric&#x00A0;in&#x00A0;{{k,l},{m,n}},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ricci(k,l):&#x00A0;symmetric;
+&#x00A0;<br />
+&#x00A0;<br />curv(k,l)&#x00A0;:=&#x00A0;d&#x00A0;om(k,l)&#x00A0;+&#x00A0;om(k,-m)^om(m,l);
+&#x00A0;<br />
+&#x00A0;<br />riemann(a,b,c,d)&#x00A0;:=&#x00A0;e(d)&#x00A0;_|&#x00A0;(e&#x00A0;(c)&#x00A0;_|&#x00A0;curv(a,b));
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;rest&#x00A0;is&#x00A0;done&#x00A0;in&#x00A0;the&#x00A0;Ricci&#x00A0;calculus&#x00A0;language,
+&#x00A0;<br />
+&#x00A0;<br />ricci(-a,-b)&#x00A0;:=&#x00A0;riemann(c,-a,-d,-b)*g(-c,d);
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />riccisc&#x00A0;:=&#x00A0;ricci(-a,-b)*g(a,b);
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{laglanc,inv1,inv2}&#x00A0;=&#x00A0;0;
+&#x00A0;<br />
+&#x00A0;<br />index_symmetries&#x00A0;riemc3(k,l),riemri(k,l),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;hlang(k,l),einst(k,l):&#x00A0;symmetric;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{riemc3(i,j),riemri(i,j)}=0;
+&#x00A0;<br />
+&#x00A0;<br />riemc3(-i,-j)&#x00A0;:=&#x00A0;riemann(-i,-k,-l,-m)*riemann(-j,k,l,m)$
+&#x00A0;<br />inv1&#x00A0;:=&#x00A0;riemc3(-i,-j)*g(i,j);
+&#x00A0;<br />riemri(-i,-j)&#x00A0;:=&#x00A0;2*riemann(-i,-k,-j,-l)*ricci(k,l)$
+&#x00A0;<br />inv2&#x00A0;:=&#x00A0;ricci(-a,-b)*ricci(a,b);
+&#x00A0;<br />laglanc&#x00A0;:=&#x00A0;(1/2)*(inv1&#x00A0;-&#x00A0;4*inv2&#x00A0;+&#x00A0;riccisc**2);
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{einst(a,b),hlang(a,b)}=0;
+&#x00A0;<br />
+&#x00A0;<br />hlang(-i,-j)&#x00A0;:=&#x00A0;2*(riemc3(-i,-j)&#x00A0;-&#x00A0;riemri(-i,-j)&#x00A0;-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;2*ricci(-i,-k)*ricci(-j,K)&#x00A0;+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;riccisc*ricci(-i,-j)&#x00A0;-&#x00A0;(1/2)*laglanc*g(-i,-j));
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;complete&#x00A0;Einstein&#x00A0;tensor:
+&#x00A0;<br />
+&#x00A0;<br />einst(-i,-j)&#x00A0;:=&#x00A0;(ricci(-i,-j)&#x00A0;-&#x00A0;(1/2)*riccisc*g(-i,-j))*alp1&#x00A0;+
+&#x00A0;<br />hlang(-i,-j)*alp2$
+&#x00A0;<br />
+&#x00A0;<br />alp1&#x00A0;:=&#x00A0;1$
+&#x00A0;<br />factor&#x00A0;alp2;
+&#x00A0;<br />
+&#x00A0;<br />einst(-i,-j)&#x00A0;:=&#x00A0;einst(-i,-j);
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;o(k),e(k),riemc3(i,j),riemri(i,j),curv(k,l),riemann(a,b,c,d),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ricci(a,b),riccisc,t,u,v1,v2,theta,phi,r,om(k,l),einst(a,b),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;hlang(a,b);
+&#x00A0;<br />
+&#x00A0;<br />remfdomain&#x00A0;r,s;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Problem:
+&#x00A0;<br />%&#x00A0;--------
+&#x00A0;<br />%&#x00A0;Calculate&#x00A0;for&#x00A0;a&#x00A0;given&#x00A0;coframe&#x00A0;and&#x00A0;given&#x00A0;torsion&#x00A0;the&#x00A0;Riemannian&#x00A0;part&#x00A0;and
+&#x00A0;<br />%&#x00A0;the&#x00A0;torsion&#x00A0;induced&#x00A0;part&#x00A0;of&#x00A0;the&#x00A0;connection.&#x00A0;Calculate&#x00A0;the&#x00A0;curvature.
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;For&#x00A0;a&#x00A0;more&#x00A0;elaborate&#x00A0;example&#x00A0;see&#x00A0;E.Schruefer,&#x00A0;F.W.&#x00A0;Hehl,&#x00A0;J.D.&#x00A0;McCrea,
+&#x00A0;<br />%&#x00A0;~Application&#x00A0;of&#x00A0;the&#x00A0;REDUCE&#x00A0;package&#x00A0;EXCALC&#x00A0;to&#x00A0;the&#x00A0;Poincare&#x00A0;gauge&#x00A0;field
+&#x00A0;<br />%&#x00A0;theory&#x00A0;of&#x00A0;gravity~,&#x00A0;GRG&#x00A0;Journal,&#x00A0;vol.&#x00A0;19,&#x00A0;(1988)&#x00A0;&#x00A0;197--218
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{ff,&#x00A0;gg}=0;
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;ff=ff(r),&#x00A0;gg=gg(r);
+&#x00A0;<br />
+&#x00A0;<br />coframe&#x00A0;o(4)&#x00A0;=&#x00A0;d&#x00A0;u&#x00A0;+&#x00A0;2*b0*cos(theta)*d&#x00A0;phi,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(1)&#x00A0;=&#x00A0;ff*(d&#x00A0;u&#x00A0;+&#x00A0;2*b0*cos(theta)*d&#x00A0;phi)&#x00A0;+&#x00A0;d&#x00A0;r,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(2)&#x00A0;=&#x00A0;gg*d&#x00A0;theta,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;o(3)&#x00A0;=&#x00A0;gg*sin(theta)*d&#x00A0;phi
+&#x00A0;<br />&#x00A0;with&#x00A0;metric&#x00A0;g&#x00A0;=&#x00A0;-o(4)*o(1)-o(4)*o(1)+o(2)*o(2)+o(3)*o(3);
+&#x00A0;<br />
+&#x00A0;<br />frame&#x00A0;e;
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;{tor(a),gwt(a)}=2,gamma(a,b)=1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{u1,u3,u5}=0;
+&#x00A0;<br />
+&#x00A0;<br />index_symmetries&#x00A0;gamma(a,b):&#x00A0;antisymmetric;
+&#x00A0;<br />
+&#x00A0;<br />fdomain&#x00A0;u1=u1(r),u3=u3(r),u5=u5(r);
+&#x00A0;<br />
+&#x00A0;<br />tor(4)&#x00A0;:=&#x00A0;0$
+&#x00A0;<br />
+&#x00A0;<br />tor(1)&#x00A0;:=&#x00A0;-u5*o(4)^o(1)&#x00A0;-&#x00A0;2*u3*o(2)^o(3)$
+&#x00A0;<br />
+&#x00A0;<br />tor(2)&#x00A0;:=&#x00A0;u1*o(4)^o(2)&#x00A0;+&#x00A0;u3*o(4)^o(3)$
+&#x00A0;<br />
+&#x00A0;<br />tor(3)&#x00A0;:=&#x00A0;u1*o(4)^o(3)&#x00A0;-&#x00A0;u3*o(4)^o(2)$
+&#x00A0;<br />
+&#x00A0;<br />gwt(-a)&#x00A0;:=&#x00A0;d&#x00A0;o(-a)&#x00A0;-&#x00A0;tor(-a)$
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;The&#x00A0;following&#x00A0;is&#x00A0;the&#x00A0;combined&#x00A0;connection.
+&#x00A0;<br />%&#x00A0;The&#x00A0;Riemannian&#x00A0;part&#x00A0;could&#x00A0;have&#x00A0;equally&#x00A0;well&#x00A0;been&#x00A0;calculated&#x00A0;by&#x00A0;the
+&#x00A0;<br />%&#x00A0;RIEMANNCONX&#x00A0;statement.
+&#x00A0;<br />
+&#x00A0;<br />gamma(-a,-b)&#x00A0;:=&#x00A0;(1/2)*(&#x00A0;e(-b)&#x00A0;_|&#x00A0;(e(-c)&#x00A0;_|&#x00A0;gwt(-a))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+e(-c)&#x00A0;_|&#x00A0;(e(-a)&#x00A0;_|&#x00A0;gwt(-b))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-e(-a)&#x00A0;_|&#x00A0;(e(-b)&#x00A0;_|&#x00A0;gwt(-c))&#x00A0;)*o(c);
+&#x00A0;<br />
+&#x00A0;<br />pform&#x00A0;curv(a,b)=2;
+&#x00A0;<br />index_symmetries&#x00A0;curv(a,b):&#x00A0;antisymmetric;
+&#x00A0;<br />factor&#x00A0;^;
+&#x00A0;<br />
+&#x00A0;<br />curv(-a,b)&#x00A0;:=&#x00A0;d&#x00A0;gamma(-a,b)&#x00A0;+&#x00A0;gamma(-c,b)^gamma(-a,c);
+&#x00A0;<br />
+&#x00A0;<br />clear&#x00A0;o(k),e(k),curv(a,b),gamma(a,b),theta,phi,x,y,z,r,s,t,u,v,p,q,c,cs;
+&#x00A0;<br />remfdomain&#x00A0;u1,u3,u5,ff,gg;
+&#x00A0;<br />
+&#x00A0;<br />showtime;
+&#x00A0;<br />end;
+&#x00A0;<br />
+</div>
+                                                                     
+
+                                                                     
+<!--l. 1555--><p class="nopar" >
+<!--l. 405--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 407--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse113.html" >Up</a></td><td class="clinks"><a 
+href="manualse114.html" >Next</a></td><td class="clinks"><a 
+href="manualse112.html" >Prev</a></td><td class="clinks"><a 
+href="manualse112.html#tailmanualse112.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse113.html" >Front</a></td></tr></table><a 
+ id="tailmanualse113.html"></a>   
+</body></html> 

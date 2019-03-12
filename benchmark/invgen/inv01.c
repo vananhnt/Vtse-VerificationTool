@@ -9,6 +9,6 @@ void inv01()
    x = t1 + t2;
    y = t1 + t2;
  }
-   int c = 0;
+   //int c = 0;
  //assert(y>=1);
 }

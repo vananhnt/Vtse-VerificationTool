@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The Expression Workspace</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch8.html#manualse51.html" >Up</a></td><td class="clinks"><a 
+href="manualse52.html" >Next</a></td><td class="clinks"><a 
+href="manualse50.html" >Prev</a></td><td class="clinks"><a 
+href="manualse50.html#tailmanualse50.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse51.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">8.2    </span> <a 
+ id="x64-1040008.2"></a>The Expression Workspace</h3>
+<a 
+ id="dx64-104001"></a>
+<!--l. 77--><p class="noindent" >Several mechanisms are available for saving and retrieving previously evaluated
+expressions. The simplest of these refers to the last algebraic expression simplified.
+When an assignment of an algebraic expression is made, or an expression is evaluated at
+the top level, (i.e., not inside a compound statement or procedure) the results of the
+evaluation are automatically saved in a variable <span 
+class="pcrr8t-x-x-109">WS </span>that we shall refer to as the
+workspace. (More precisely, the expression is assigned to the variable <span 
+class="pcrr8t-x-x-109">WS </span>that is then
+available for further manipulation.)
+<!--l. 86--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 88--><p class="noindent" >If we evaluate the expression <span 
+class="pcrr8t-x-x-109">(x+y)^2 </span>at the top level and next wish to differentiate it
+with respect to <span 
+class="pcrr8t-x-x-109">Y</span>, we can simply say
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-168">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;df(ws,y);
+</div>
+<!--l. 93--><p class="nopar" > to get the desired answer.
+<!--l. 96--><p class="noindent" ><a 
+ id="command:SAVEAS"></a> If the user wishes to assign the workspace to a variable or expression for later use, the
+<span 
+class="pcrr8t-x-x-109">SAVEAS</span><a 
+ id="dx64-104002"></a><a 
+ id="dx64-104003"></a>statement can be used. It has the syntax
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">SAVEAS</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div>
+<!--l. 104--><p class="noindent" >For example, after the differentiation in the last example, the workspace holds the
+expression <span 
+class="pcrr8t-x-x-109">2*x+2*y</span>. If we wish to assign this to the variable <span 
+class="pcrr8t-x-x-109">Z </span>we can now
+say
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-169">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;saveas&#x00A0;z;
+</div>
+<!--l. 109--><p class="nopar" > If the user wishes to save the expression in a form that allows him to use some of its
+variables as arbitrary parameters, the <span 
+class="pcrr8t-x-x-109">FOR ALL </span>command can be used.
+<!--l. 114--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-170">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;all&#x00A0;x&#x00A0;saveas&#x00A0;h(x);
+</div>
+<!--l. 117--><p class="nopar" >
+<!--l. 119--><p class="noindent" >with the above expression would mean that <span 
+class="pcrr8t-x-x-109">h(z) </span>evaluates to <span 
+class="pcrr8t-x-x-109">2*Y+2*Z</span>.
+<!--l. 122--><p class="noindent" >A further method for referencing more than the last expression is described in chapter&#x00A0;<a 
+href="manualch13.html#x94-17800013">13<!--tex4ht:ref: interactive --></a>
+on interactive use of REDUCE.
+                                                                     
+
+                                                                     
+<!--l. 126--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch8.html#manualse51.html" >Up</a></td><td class="clinks"><a 
+href="manualse52.html" >Next</a></td><td class="clinks"><a 
+href="manualse50.html" >Prev</a></td><td class="clinks"><a 
+href="manualse50.html#tailmanualse50.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse51.html" >Front</a></td></tr></table><a 
+ id="tailmanualse51.html"></a>  
+</body></html> 

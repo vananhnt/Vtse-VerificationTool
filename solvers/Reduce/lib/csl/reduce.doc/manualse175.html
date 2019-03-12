@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Symbolic Procedures</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse175.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse176.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse174.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse174.html#tailmanualse174.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse175.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">17.7    </span></span> <a 
+ id="x234-101700017.7"></a><span 
+class="ptmr8t-x-x-120">Symbolic Procedures</span></h3>
+<a 
+ id="dx234-1017001"></a>
+<!--l. 220--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">All the functions described in the Standard Lisp Report are available to users in</span>
+<span 
+class="ptmr8t-x-x-120">symbolic mode. Additional functions may also be defined as symbolic</span>
+<span 
+class="ptmr8t-x-x-120">procedures. For example, to define the Lisp function </span><span 
+class="pcrr8t-x-x-120">ASSOC</span><span 
+class="ptmr8t-x-x-120">, the following could</span>
+<span 
+class="ptmr8t-x-x-120">be used:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1365">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic&#x00A0;procedure&#x00A0;assoc(u,v);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;null&#x00A0;v&#x00A0;then&#x00A0;nil
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;else&#x00A0;if&#x00A0;u&#x00A0;=&#x00A0;caar&#x00A0;v&#x00A0;then&#x00A0;car&#x00A0;v
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;else&#x00A0;assoc(u,&#x00A0;cdr&#x00A0;v);
+</div>
+<!--l. 229--><p class="nopar" > <a 
+ id="reserved:MACRO"></a><a 
+ id="reserved:EXPR"></a> <span 
+class="ptmr8t-x-x-120">If the default mode were symbolic, then </span><span 
+class="pcrr8t-x-x-120">SYMBOLIC </span><span 
+class="ptmr8t-x-x-120">could be omitted in</span>
+<span 
+class="ptmr8t-x-x-120">the above definition. </span><span 
+class="pcrr8t-x-x-120">MACRO</span><span 
+class="ptmr8t-x-x-120">s</span><a 
+ id="dx234-1017002"></a> <span 
+class="ptmr8t-x-x-120">may be defined by prefixing the keyword</span>
+<span 
+class="pcrr8t-x-x-120">PROCEDURE </span><span 
+class="ptmr8t-x-x-120">by the word </span><span 
+class="pcrr8t-x-x-120">MACRO</span><span 
+class="ptmr8t-x-x-120">. (In fact, ordinary functions may be</span>
+<span 
+class="ptmr8t-x-x-120">defined with the keyword </span><span 
+class="pcrr8t-x-x-120">EXPR</span><a 
+ id="dx234-1017003"></a> <span 
+class="ptmr8t-x-x-120">prefixing </span><span 
+class="pcrr8t-x-x-120">PROCEDURE </span><span 
+class="ptmr8t-x-x-120">as was used in the</span>
+<span 
+class="ptmr8t-x-x-120">Standard Lisp Report.) For example, we could define a </span><span 
+class="pcrr8t-x-x-120">MACRO CONSCONS</span>
+<span 
+class="ptmr8t-x-x-120">by</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1366">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic&#x00A0;macro&#x00A0;procedure&#x00A0;conscons&#x00A0;l;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;expand(cdr&#x00A0;l,&#8217;cons);
+</div>
+<!--l. 241--><p class="nopar" >
+<!--l. 243--><p class="noindent" ><a 
+ id="reserved:SMACRO"></a> <a 
+ id="reserved:INLINE"></a><a 
+ id="reserved:FEXPR"></a> <span 
+class="ptmr8t-x-x-120">Another form of macro, the </span><span 
+class="pcrr8t-x-x-120">SMACRO</span><a 
+ id="dx234-1017004"></a> <span 
+class="ptmr8t-x-x-120">is also available. These are described in</span>
+<span 
+class="ptmr8t-x-x-120">the Standard Lisp Report. The Report also defines a function type </span><span 
+class="pcrr8t-x-x-120">FEXPR</span><span 
+class="ptmr8t-x-x-120">.</span><a 
+ id="dx234-1017005"></a>
+<span 
+class="ptmr8t-x-x-120">However, its use is discouraged since it is hard to implement efficiently, and most</span>
+<span 
+class="ptmr8t-x-x-120">uses can be replaced by macros. At the present time, there are no </span><span 
+class="pcrr8t-x-x-120">FEXPR</span><span 
+class="ptmr8t-x-x-120">s in the</span>
+<span 
+class="ptmr8t-x-x-120">core REDUCE system.</span>
+                                                                     
+
+                                                                     
+<!--l. 253--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse175.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse176.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse174.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse174.html#tailmanualse174.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse175.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse175.html"></a>  
+</body></html> 

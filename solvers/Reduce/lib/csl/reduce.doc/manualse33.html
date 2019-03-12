@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>CONTINUED_FRACTION Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse33.html" >Up</a></td><td class="clinks"><a 
+href="manualse34.html" >Next</a></td><td class="clinks"><a 
+href="manualse32.html" >Prev</a></td><td class="clinks"><a 
+href="manualse32.html#tailmanualse32.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse33.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.7    </span> <a 
+ id="x44-760007.7"></a>CONTINUED_FRACTION Operator</h3>
+<!--l. 707--><p class="noindent" ><a 
+ id="operator:CONTINUED_FRACTION"></a> <a 
+ id="dx44-76001"></a><a 
+ id="dx44-76002"></a>
+<!--l. 710--><p class="noindent" >The operator <span 
+class="pcrr8t-x-x-109">CONTINUED_FRACTION</span><a 
+ id="dx44-76003"></a> approximates the real number (rational number,
+rounded number) into a continued fraction. <span 
+class="pcrr8t-x-x-109">CONTINUED_FRACTION </span>has one or two
+arguments, the number to be converted and an optional precision:
+  <div class="syntax">
+  <div class="array"> <table id="TBL-13" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-13-1g"><col 
+id="TBL-13-1"><col 
+id="TBL-13-2"><col 
+id="TBL-13-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">continued_fraction(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">num</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span></div></td></tr></table>                            </div></div>
+<!--l. 719--><p class="noindent" >or
+  <div class="syntax">
+  <div class="array"> <table id="TBL-14" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-14-1g"><col 
+id="TBL-14-1"><col 
+id="TBL-14-2"><col 
+id="TBL-14-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">continued_fraction(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">num</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">size</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span></div></td></tr></table>                       </div></div>
+<!--l. 723--><p class="noindent" >The result is a list of two elements: the first one is the rational value of the approximation,
+the second one is the list of terms of the continued fraction which represents the same
+value according to the definition <span 
+class="pcrr8t-x-x-109">t0 +1/(t1 + 1/(t2 + ...))</span>. Precision: the
+second optional parameter <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">size</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> is an upper bound for the absolute value of the result
+denominator. If omitted, the approximation is performed up to the current system
+precision.
+<!--l. 731--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-113">
+continued_fraction&#x00A0;pi;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;1146408
+&#x00A0;<br />{---------,{3,7,15,1,292,1,1,1,2,1}}
+&#x00A0;<br />&#x00A0;&#x00A0;364913
+&#x00A0;<br />
+&#x00A0;<br />continued_fraction(pi,100);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;22
+&#x00A0;<br />{----,{3,7}}
+&#x00A0;<br />&#x00A0;&#x00A0;7
+&#x00A0;<br />
+</div>
+<!--l. 749--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 752--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse33.html" >Up</a></td><td class="clinks"><a 
+href="manualse34.html" >Next</a></td><td class="clinks"><a 
+href="manualse32.html" >Prev</a></td><td class="clinks"><a 
+href="manualse32.html#tailmanualse32.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse33.html" >Front</a></td></tr></table><a 
+ id="tailmanualse33.html"></a>  
+</body></html> 

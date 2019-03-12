@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>ASSERT: Dynamic Verification of Assertions on Function Types</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse95.html" >Up</a></td><td class="clinks"><a 
+href="manualse96.html" >Next</a></td><td class="clinks"><a 
+href="manualse94.html" >Prev</a></td><td class="clinks"><a 
+href="manualse94.html#tailmanualse94.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse95.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.4    </span> <a 
+ id="x116-22800016.4"></a>ASSERT: Dynamic Verification of Assertions on
+Function Types</h3>
+<a 
+ id="dx116-228001"></a>
+<a 
+ id="dx116-228002"></a>
+<!--l. 129--><p class="noindent" >ASSERT admits to add to symbolic mode RLISP code assertions (partly) specifying
+<span 
+class="ptmri8t-x-x-109">types </span>of the arguments and results of RLISP expr procedures. These types can be
+associated with functions testing the validity of the respective arguments during
+runtime.
+<!--l. 134--><p class="noindent" >Author: Thomas Sturm.
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.4.1    </span> <a 
+ id="x116-22900016.4.1"></a>Loading and Using</h4>
+<!--l. 3--><p class="noindent" >The package is loaded using <span 
+class="pcrr8t-x-x-109">load_package </span>or <span 
+class="pcrr8t-x-x-109">load!-package </span>in algebraic or
+symbolic mode, resp. There is a central switch <span 
+class="pcrr8t-x-x-109">assertcheck</span>, which is off by default.
+With <span 
+class="pcrr8t-x-x-109">assertcheck </span>off, all type definitions and assertions described in the sequel
+are ignored and have the status of comments. For verification of the assertions
+it most be turned on (dynamically) before the first relevant type definition or
+assertion.
+<!--l. 11--><p class="noindent" >ASSERT aims at the dynamic analysis of RLISP expr procedure in symbolic mode. All
+uses of <span 
+class="pcrr8t-x-x-109">typedef </span>and <span 
+class="pcrr8t-x-x-109">assert </span>discussed in the following have to take place in symbolic
+mode. There is, in contrast, a final print routine <span 
+class="pcrr8t-x-x-109">assert_analyze </span>that is available in
+both symbolic and algebraic mode.
+<!--l. 17--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.4.2    </span> <a 
+ id="x116-23000016.4.2"></a>Type Definitions</h4>
+<!--l. 18--><p class="noindent" >Here are some examples for definitions of types:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-412">
+typedef&#x00A0;any;
+&#x00A0;<br />typedef&#x00A0;number&#x00A0;checked&#x00A0;by&#x00A0;numberp;
+&#x00A0;<br />typedef&#x00A0;sf&#x00A0;checked&#x00A0;by&#x00A0;sfpx;
+&#x00A0;<br />typedef&#x00A0;sq&#x00A0;checked&#x00A0;by&#x00A0;sqp;
+</div>
+<!--l. 24--><p class="nopar" > The first one defines a type <span 
+class="pcrr8t-x-x-109">any</span>, which is not possibly checked by any function. This is
+useful, e.g., for functions which admit any argument at one position but at others rely on
+certain types or guarantee certain result types, e.g.,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-413">
+procedure&#x00A0;cellcnt(a);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;a&#x00A0;is&#x00A0;any,&#x00A0;returns&#x00A0;a&#x00A0;number.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;if&#x00A0;not&#x00A0;pairp&#x00A0;a&#x00A0;then&#x00A0;0&#x00A0;else&#x00A0;cellcnt&#x00A0;car&#x00A0;a&#x00A0;+&#x00A0;cellcnt&#x00A0;cdr&#x00A0;a&#x00A0;+&#x00A0;1;
+</div>
+<!--l. 33--><p class="nopar" >
+<!--l. 35--><p class="noindent" >The other ones define a type <span 
+class="pcrr8t-x-x-109">number</span>, which can be checked by the RLISP
+function <span 
+class="pcrr8t-x-x-109">numberp</span>, a type <span 
+class="pcrr8t-x-x-109">sf </span>for standard forms, which can be checked by
+the function <span 
+class="pcrr8t-x-x-109">sfpx </span>provided by ASSERT, and similarly a type for standard
+quotients.
+<!--l. 40--><p class="noindent" >All type checking functions take one argument and return extended Boolean, i.e., non-nil
+iff their argument is of the corresponding type.
+<!--l. 43--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.4.3    </span> <a 
+ id="x116-23100016.4.3"></a>Assertions</h4>
+<!--l. 44--><p class="noindent" >Having defined types, we can formulate assertions on expr procedures in terms of these
+types:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-414">
+assert&#x00A0;cellcnt:&#x00A0;(any)&#x00A0;-&#x003E;&#x00A0;number;
+&#x00A0;<br />assert&#x00A0;addsq:&#x00A0;(sq,sq)&#x00A0;-&#x003E;&#x00A0;sq;
+</div>
+<!--l. 49--><p class="nopar" > Note that on the argument side parenthesis are mandatory also with only one
+argument. This notation is inspired by Haskell but avoids the intuition of
+currying.<span class="footnote-mark"><a 
+href="manual117.html#fn1x16"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x116-231001f1"></a> 
+<!--l. 54--><p class="noindent" >Assertions can be dynamically checked only for expr procedures. When making
+assertions for other types of procedures, a warning is issued and the assertion has the
+status of a comment.
+<!--l. 58--><p class="noindent" >It is important that assertions via assert come after the definitions of the used types via
+<span 
+class="pcrr8t-x-x-109">typedef </span>and also after the definition of the procedures they make assertions
+on.
+<!--l. 62--><p class="noindent" >A natural order for adding type definitions and assertions to the source code files would
+be to have all typedefs at the beginning of a module and assertions immediately after the
+respective functions. Fig.&#x00A0;<a 
+href="#x116-2310021">16.1<!--tex4ht:ref: FIG:assMod --></a> illustrates this. Note that for dynamic checking of the
+assertions the switch <span 
+class="pcrr8t-x-x-109">assertcheck </span>has to be on during the translation of
+the module; i.e., either when reading it with <span 
+class="pcrr8t-x-x-109">in </span>or during compilation. For
+compilation this can be achieved by commenting in the <span 
+class="pcrr8t-x-x-109">on assertcheck </span>at the
+beginning or by parameterizing the Lisp-specific compilation scripts in a suitable
+way.
+<!--l. 72--><p class="noindent" >An alternative option is to have type definitions and assertions for specific packages right
+after <span 
+class="pcrr8t-x-x-109">load_package </span>in batch files as illustrated in Fig.&#x00A0;<a 
+href="#x116-2310032">16.2<!--tex4ht:ref: FIG:assBat --></a>. <hr class="figure"><div class="figure" 
+>
+                                                                     
+
+                                                                     
+<a 
+ id="x116-2310021"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-415">
+module&#x00A0;sizetools;
+&#x00A0;<br />
+&#x00A0;<br />load!-package&#x00A0;&#8217;assert;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;on&#x00A0;assertcheck;
+&#x00A0;<br />
+&#x00A0;<br />typedef&#x00A0;any;
+&#x00A0;<br />typedef&#x00A0;number&#x00A0;checked&#x00A0;by&#x00A0;number;
+&#x00A0;<br />
+&#x00A0;<br />procedure&#x00A0;cellcnt(a);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;a&#x00A0;is&#x00A0;any,&#x00A0;returns&#x00A0;a&#x00A0;number.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;if&#x00A0;not&#x00A0;pairp&#x00A0;a&#x00A0;then&#x00A0;0&#x00A0;else&#x00A0;cellcnt&#x00A0;car&#x00A0;a&#x00A0;+&#x00A0;cellcnt&#x00A0;cdr&#x00A0;a&#x00A0;+&#x00A0;1;
+&#x00A0;<br />
+&#x00A0;<br />assert&#x00A0;cellcnt:&#x00A0;(any)&#x00A0;-&#x003E;&#x00A0;number;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;...
+&#x00A0;<br />
+&#x00A0;<br />endmodule;
+&#x00A0;<br />
+&#x00A0;<br />end;&#x00A0;&#x00A0;%&#x00A0;of&#x00A0;file
+</div>
+<!--l. 98--><p class="nopar" >
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;16.1: </span><span  
+class="content">Assertions in the source code.</span></div><!--tex4ht:label?: x116-2310021 -->
+                                                                     
+
+                                                                     
+<!--l. 101--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 103--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                     
+
+                                                                     
+<a 
+ id="x116-2310032"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-416">
+load_package&#x00A0;sizetools;
+&#x00A0;<br />load_package&#x00A0;assert;
+&#x00A0;<br />
+&#x00A0;<br />on&#x00A0;assertcheck;
+&#x00A0;<br />
+&#x00A0;<br />lisp&#x00A0;&#x003C;&#x003C;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;typedef&#x00A0;any;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;typedef&#x00A0;number&#x00A0;checked&#x00A0;by&#x00A0;numberp;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;assert&#x00A0;cellcnt:&#x00A0;(any)&#x00A0;-&#x003E;&#x00A0;number
+&#x00A0;<br />&#x003E;&#x003E;;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;...&#x00A0;computations&#x00A0;...
+&#x00A0;<br />
+&#x00A0;<br />assert_analyze();
+&#x00A0;<br />
+&#x00A0;<br />end;&#x00A0;&#x00A0;%&#x00A0;of&#x00A0;file
+</div>
+<!--l. 123--><p class="nopar" >
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;16.2: </span><span  
+class="content">Assertions in a batch file.</span></div><!--tex4ht:label?: x116-2310032 -->
+                                                                     
+
+                                                                     
+<!--l. 126--><p class="noindent" ></div><hr class="endfigure">
+<h4 class="subsectionHead"><span class="titlemark">16.4.4    </span> <a 
+ id="x116-23200016.4.4"></a>Dynamic Checking of Assertions</h4>
+<!--l. 129--><p class="noindent" >Recall that with the switch <span 
+class="pcrr8t-x-x-109">assertcheck </span>off at translation time, all type definitions
+and assertions have the status of comments. We are now going to discuss how these
+statements are processed with <span 
+class="pcrr8t-x-x-109">assertcheck </span>on.
+<!--l. 134--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">typedef </span>marks the type identifier as a valid type and possibly associates the given
+typechecking function with it. Technically, the property list of the type identifier is used
+for both purposes.
+<!--l. 138--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">assert </span>encapsulates the procedure that it asserts on into another one, which checks the
+types of the arguments and of the result to the extent that there are typechecking
+functions given. Whenever some argument does not pass the test by the typechecking
+function, there is a warning message issued. Furthermore, the following numbers are
+counted for each asserted function:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x116-232002x1">The number of overall calls,
+     </li>
+     <li 
+  class="enumerate" id="x116-232004x2">the number of calls with at least one assertion violation,
+     </li>
+     <li 
+  class="enumerate" id="x116-232006x3">the number of assertion violations.</li></ol>
+<!--l. 149--><p class="noindent" >These numbers can be printed anytime in either symbolic or algebraic mode using the
+command <span 
+class="pcrr8t-x-x-109">assert_analyze()</span>. This command at the same time resets all the
+counters.
+<!--l. 153--><p class="noindent" >Fig.&#x00A0;<a 
+href="#x116-2320073">16.3<!--tex4ht:ref: FIG:sample --></a> shows an interactive sample session. <hr class="figure"><div class="figure" 
+>
+                                                                     
+
+                                                                     
+<a 
+ id="x116-2320073"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-417">
+1:&#x00A0;symbolic$
+&#x00A0;<br />
+&#x00A0;<br />2*&#x00A0;load_package&#x00A0;assert$
+&#x00A0;<br />
+&#x00A0;<br />3*&#x00A0;on&#x00A0;assertcheck$
+&#x00A0;<br />
+&#x00A0;<br />4*&#x00A0;typedef&#x00A0;sq&#x00A0;checked&#x00A0;by&#x00A0;sqp;
+&#x00A0;<br />sqp
+&#x00A0;<br />
+&#x00A0;<br />5*&#x00A0;assert&#x00A0;negsq:&#x00A0;(sq)&#x00A0;-&#x003E;&#x00A0;sq;
+&#x00A0;<br />+++&#x00A0;negsq&#x00A0;compiled,&#x00A0;13&#x00A0;+&#x00A0;20&#x00A0;bytes
+&#x00A0;<br />
+&#x00A0;<br />(negsq)
+&#x00A0;<br />
+&#x00A0;<br />6*&#x00A0;assert&#x00A0;addsq:&#x00A0;(sq,sq)&#x00A0;-&#x003E;&#x00A0;sq;
+&#x00A0;<br />+++&#x00A0;addsq&#x00A0;compiled,&#x00A0;14&#x00A0;+&#x00A0;20&#x00A0;bytes
+&#x00A0;<br />
+&#x00A0;<br />(addsq)
+&#x00A0;<br />
+&#x00A0;<br />7*&#x00A0;addsq(simp&#x00A0;&#8217;x,negsq&#x00A0;simp&#x00A0;&#8217;y);
+&#x00A0;<br />
+&#x00A0;<br />((((x&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;1)&#x00A0;((y&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;-1))&#x00A0;.&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />8*&#x00A0;addsq(simp&#x00A0;&#8217;x,negsq&#x00A0;numr&#x00A0;simp&#x00A0;&#8217;y);
+&#x00A0;<br />
+&#x00A0;<br />***&#x00A0;assertion&#x00A0;negsq:&#x00A0;(sq)&#x00A0;-&#x003E;&#x00A0;sq&#x00A0;violated&#x00A0;by&#x00A0;arg1&#x00A0;(((y&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;1))
+&#x00A0;<br />
+&#x00A0;<br />***&#x00A0;assertion&#x00A0;negsq:&#x00A0;(sq)&#x00A0;-&#x003E;&#x00A0;sq&#x00A0;violated&#x00A0;by&#x00A0;result&#x00A0;(((y&#x00A0;.&#x00A0;-1)&#x00A0;.&#x00A0;-1))
+&#x00A0;<br />
+&#x00A0;<br />***&#x00A0;assertion&#x00A0;addsq:&#x00A0;(sq,sq)&#x00A0;-&#x003E;&#x00A0;sq&#x00A0;violated&#x00A0;by&#x00A0;arg2&#x00A0;(((y&#x00A0;.&#x00A0;-1)&#x00A0;.&#x00A0;-1))
+&#x00A0;<br />
+&#x00A0;<br />***&#x00A0;assertion&#x00A0;addsq:&#x00A0;(sq,sq)&#x00A0;-&#x003E;&#x00A0;sq&#x00A0;violated&#x00A0;by&#x00A0;result&#x00A0;(((y&#x00A0;.&#x00A0;-1)&#x00A0;.&#x00A0;-1))
+&#x00A0;<br />
+&#x00A0;<br />(((y&#x00A0;.&#x00A0;-1)&#x00A0;.&#x00A0;-1))
+&#x00A0;<br />
+&#x00A0;<br />9*&#x00A0;assert_analyze()$
+&#x00A0;<br />------------------------------------------------------------------------
+&#x00A0;<br />function&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#calls&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;#bad&#x00A0;calls&#x00A0;&#x00A0;&#x00A0;#assertion&#x00A0;violations
+&#x00A0;<br />------------------------------------------------------------------------
+&#x00A0;<br />addsq&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />negsq&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />------------------------------------------------------------------------
+&#x00A0;<br />sum&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />------------------------------------------------------------------------
+</div>
+<!--l. 202--><p class="nopar" >
+                                                                     
+
+                                                                     
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;16.3: </span><span  
+class="content">An interactive sample session.</span></div><!--tex4ht:label?: x116-2320073 -->
+                                                                     
+
+                                                                     
+<!--l. 205--><p class="noindent" ></div><hr class="endfigure">
+<h4 class="subsectionHead"><span class="titlemark">16.4.5    </span> <a 
+ id="x116-23300016.4.5"></a>Switches</h4>
+<!--l. 208--><p class="noindent" >As discussed above, the switch <span 
+class="pcrr8t-x-x-109">assertcheck </span>controls at translation time whether or
+not assertions are dynamically checked.
+<!--l. 211--><p class="noindent" >There is a switch <span 
+class="pcrr8t-x-x-109">assertbreak</span>, which is off by default. When on, there are not only
+warnings issued for assertion violations but the computations is interrupted with a
+corresponding error.
+<!--l. 215--><p class="noindent" >The statistical counting of procedure calls and assertion violations is toggled by the
+switch <span 
+class="pcrr8t-x-x-109">assertstatistics</span>, which is on by default.
+<!--l. 218--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.4.6    </span> <a 
+ id="x116-23400016.4.6"></a>Efficiency</h4>
+<!--l. 219--><p class="noindent" >The encapsulating functions introduced with assertions are automatically compiled.
+<!--l. 243--><p class="noindent" >We have experimentally checked assertions on the standard quotient arithmetic <span 
+class="pcrr8t-x-x-109">addsq</span>,
+<span 
+class="pcrr8t-x-x-109">multsq</span>, <span 
+class="pcrr8t-x-x-109">quotsq</span>, <span 
+class="pcrr8t-x-x-109">invsq</span>, <span 
+class="pcrr8t-x-x-109">negsq </span>for the test file <span 
+class="pcrr8t-x-x-109">taylor.tst </span>of the TAYLOR
+package. For CSL we observe a slowdown of factor 3.2, and for PSL we observe a
+slowdown of factor 1.8 in this particular example, where there are 323 750 function calls
+checked altogether.
+<!--l. 250--><p class="noindent" >The ASSERT package is considered an analysis and debugging tool. Production system
+should as a rule not run with dynamic assertion checking. For critical applications,
+however, the slowdown might be even acceptable.
+<!--l. 255--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.4.7    </span> <a 
+ id="x116-23500016.4.7"></a>Possible Extensions</h4>
+<!--l. 256--><p class="noindent" >Our assertions could be used also for a static type analysis of source code. In that case,
+the type checking functions become irrelevant. On the other hand, the introduction of
+variouse unchecked types becomes meaningful.
+<!--l. 261--><p class="noindent" >In a model, where the source code is systematically annotated with assertions, it is
+technically no problem to generalize the specification of procedure definitions such that
+assertions become implicit. For instance, one could <span 
+class="ptmri8t-x-x-109">optionally </span>admit procedure
+definitions like the following:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-418">
+procedure&#x00A0;cellcnt(a:any):number;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;if&#x00A0;not&#x00A0;pairp&#x00A0;a&#x00A0;then&#x00A0;0&#x00A0;else&#x00A0;cellcnt&#x00A0;car&#x00A0;a&#x00A0;+&#x00A0;cellcnt&#x00A0;cdr&#x00A0;a&#x00A0;+&#x00A0;1;
+</div>
+<!--l. 269--><p class="nopar" >
+<!--l. 138--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 140--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse95.html" >Up</a></td><td class="clinks"><a 
+href="manualse96.html" >Next</a></td><td class="clinks"><a 
+href="manualse94.html" >Prev</a></td><td class="clinks"><a 
+href="manualse94.html#tailmanualse94.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse95.html" >Front</a></td></tr></table><a 
+ id="tailmanualse95.html"></a>   
+</body></html> 

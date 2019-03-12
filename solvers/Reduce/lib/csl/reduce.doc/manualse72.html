@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Rule Lists</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch11.html#manualse72.html" >Up</a></td><td class="clinks"><a 
+href="manualse73.html" >Next</a></td><td class="clinks"><a 
+href="manualse71.html" >Prev</a></td><td class="clinks"><a 
+href="manualse71.html#tailmanualse71.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse72.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">11.3    </span> <a 
+ id="x88-16900011.3"></a>Rule Lists</h3>
+<a 
+ id="dx88-169001"></a>
+<!--l. 433--><p class="noindent" >Rule lists offer an alternative approach to defining substitutions that is different from
+either <span 
+class="pcrr8t-x-x-109">SUB </span>or <span 
+class="pcrr8t-x-x-109">LET</span>. In fact, they provide the best features of both, since they have all
+the capabilities of <span 
+class="pcrr8t-x-x-109">LET</span>, but the rules can also be applied locally as is possible
+with <span 
+class="pcrr8t-x-x-109">SUB</span>. In time, they will be used more and more in REDUCE. However,
+since they are relatively new, much of the REDUCE code you see uses the older
+constructs.
+<!--l. 441--><p class="noindent" ><a 
+ id="reserved:WHEN"></a> A rule list is a list of <span 
+class="ptmri8t-x-x-109">rules </span>that have the syntax
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-319">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;expression&#x003E;&#x00A0;=&#x003E;&#x00A0;&#x003C;expression&#x003E;&#x00A0;(WHEN&#x00A0;&#x003C;boolean&#x00A0;expression&#x003E;)
+</div>
+<!--l. 445--><p class="nopar" > For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-320">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{cos(~x)*cos(~y)&#x00A0;=&#x003E;&#x00A0;(cos(x+y)+cos(x-y))/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(~n*pi)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;=&#x003E;&#x00A0;(-1)^n&#x00A0;when&#x00A0;remainder(n,2)=0}
+</div>
+<!--l. 450--><p class="nopar" >
+<!--l. 452--><p class="noindent" >The tilde preceding a variable marks that variable as <span 
+class="ptmri8t-x-x-109">free </span>for that rule, much as a variable
+in a <span 
+class="pcrr8t-x-x-109">FOR ALL </span>clause in a <span 
+class="pcrr8t-x-x-109">LET </span>statement. The first occurrence of that variable in each
+relevant rule must be so marked on input, otherwise inconsistent results can occur. For
+example, the rule list
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-321">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{cos(~x)*cos(~y)&#x00A0;=&#x003E;&#x00A0;(cos(x+y)+cos(x-y))/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(x)^2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;=&#x003E;&#x00A0;(1+cos(2x))/2}
+</div>
+<!--l. 460--><p class="nopar" > designed to replace products of cosines, would not be correct, since the second rule
+would only apply to the explicit argument <span 
+class="pcrr8t-x-x-109">X</span>. Later occurrences in the same rule may also
+be marked, but this is optional (internally, all such rules are stored with each relevant
+variable explicitly marked). The optional <span 
+class="pcrr8t-x-x-109">WHEN</span><a 
+ id="dx88-169002"></a> clause allows constraints to be
+placed on the application of the rule, much as the <span 
+class="pcrr8t-x-x-109">SUCH THAT </span>clause in a <span 
+class="pcrr8t-x-x-109">LET</span>
+statement.
+<!--l. 469--><p class="noindent" >A rule list may be named, for example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-322">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;trig1&#x00A0;:=&#x00A0;{cos(~x)*cos(~y)&#x00A0;=&#x003E;&#x00A0;(cos(x+y)+cos(x-y))/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(~x)*sin(~y)&#x00A0;=&#x003E;&#x00A0;(sin(x+y)-sin(x-y))/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sin(~x)*sin(~y)&#x00A0;=&#x003E;&#x00A0;(cos(x-y)-cos(x+y))/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(~x)^2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;=&#x003E;&#x00A0;(1+cos(2*x))/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sin(~x)^2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;=&#x003E;&#x00A0;(1-cos(2*x))/2};
+</div>
+<!--l. 476--><p class="nopar" >
+<!--l. 478--><p class="noindent" >Such named rule lists may be inspected as needed. E.g., the command <span 
+class="pcrr8t-x-x-109">trig1; </span>would
+cause the above list to be printed.
+<!--l. 481--><p class="noindent" ><a 
+ id="CLEARRULES"></a> Rule lists may be used in two ways. They can be globally instantiated by means of the
+command <span 
+class="pcrr8t-x-x-109">LET</span><a 
+ id="dx88-169003"></a>. For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-323">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;trig1;
+</div>
+<!--l. 486--><p class="nopar" > would cause the above list of rules to be globally active from then on until cancelled by
+the command <span 
+class="pcrr8t-x-x-109">CLEARRULES</span>,<a 
+ id="dx88-169004"></a> as in
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-324">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;clearrules&#x00A0;trig1;
+</div>
+<!--l. 491--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">CLEARRULES </span>has the syntax
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-325">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;CLEARRULES&#x00A0;&#x003C;rule&#x00A0;list&#x003E;|&#x003C;name&#x00A0;of&#x00A0;rule&#x00A0;list&#x003E;(,...)&#x00A0;.
+</div>
+<!--l. 495--><p class="nopar" >
+<!--l. 497--><p class="noindent" ><a 
+ id="operator:WHERE"></a> The second way to use rule lists is to invoke them locally by means of a <span 
+class="pcrr8t-x-x-109">WHERE</span><a 
+ id="dx88-169005"></a> clause.
+For example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-326">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(a)*cos(b+c)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;{cos(~x)*cos(~y)&#x00A0;=&#x003E;&#x00A0;(cos(x+y)+cos(x-y))/2};
+</div>
+<!--l. 503--><p class="nopar" > or
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-327">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(a)*sin(b)&#x00A0;where&#x00A0;trigrules;
+</div>
+<!--l. 507--><p class="nopar" >
+<!--l. 509--><p class="noindent" >The syntax of an expression with a <span 
+class="pcrr8t-x-x-109">WHERE </span>clause is:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-328">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;expression&#x003E;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;WHERE&#x00A0;&#x003C;rule&#x003E;|&#x003C;rule&#x00A0;list&#x003E;(,&#x003C;rule&#x003E;|&#x003C;rule&#x00A0;list&#x003E;&#x00A0;...)
+</div>
+<!--l. 513--><p class="nopar" > so the first example above could also be written
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-329">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(a)*cos(b+c)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where&#x00A0;cos(~x)*cos(~y)&#x00A0;=&#x003E;&#x00A0;(cos(x+y)+cos(x-y))/2;
+</div>
+<!--l. 518--><p class="nopar" >
+<!--l. 520--><p class="noindent" >The effect of this construct is that the rule list(s) in the <span 
+class="pcrr8t-x-x-109">WHERE </span>clause only apply to the
+expression on the left of <span 
+class="pcrr8t-x-x-109">WHERE</span>. They have no effect outside the expression. In
+particular, they do not affect previously defined <span 
+class="pcrr8t-x-x-109">WHERE </span>clauses or <span 
+class="pcrr8t-x-x-109">LET </span>statements. For
+example, the sequence
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-330">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;a=2;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;where&#x00A0;a=&#x003E;4;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a;
+</div>
+<!--l. 529--><p class="nopar" > would result in the output
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-331">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 535--><p class="nopar" >
+<!--l. 537--><p class="noindent" >Although <span 
+class="pcrr8t-x-x-109">WHERE </span>has a precedence less than any other infix operator, it still binds
+higher than keywords such as <span 
+class="pcrr8t-x-x-109">ELSE</span>, <span 
+class="pcrr8t-x-x-109">THEN</span>, <span 
+class="pcrr8t-x-x-109">DO</span>, <span 
+class="pcrr8t-x-x-109">REPEAT </span>and so on. Thus the
+expression
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-332">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;a=2&#x00A0;then&#x00A0;3&#x00A0;else&#x00A0;a+2&#x00A0;where&#x00A0;a=3
+</div>
+<!--l. 542--><p class="nopar" > will parse as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-333">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;a=2&#x00A0;then&#x00A0;3&#x00A0;else&#x00A0;(a+2&#x00A0;where&#x00A0;a=3)
+</div>
+<!--l. 546--><p class="nopar" >
+<!--l. 548--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">WHERE </span>may be used to introduce auxiliary variables in symbolic mode expressions, as
+described in Section&#x00A0;<a 
+href="manualse172.html#x231-101400017.4">17.4<!--tex4ht:ref: sec-lambda --></a>. However, the symbolic mode use has different semantics, so
+expressions do not carry from one mode to the other.
+<!--l. 553--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Compatibility Note:</span><span 
+class="ptmri8t-x-x-109">&#x00A0;</span>In order to provide compatibility with older versions of rule lists
+released through the Network Library, it is currently possible to use an equal sign
+interchangeably with the replacement sign <span 
+class="pcrr8t-x-x-109">=&#x003E; </span>in rules and <span 
+class="pcrr8t-x-x-109">LET </span>statements. However,
+since this will change in future versions, the replacement sign is preferable in rules and
+the equal sign in non-rule-based <span 
+class="pcrr8t-x-x-109">LET </span>statements.
+<!--l. 560--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x88-17000011.3"></a>Advanced Use of Rule Lists</h4>
+<!--l. 562--><p class="noindent" >Some advanced features of the rule list mechanism make it possible to write more
+complicated rules than those discussed so far, and in many cases to write more compact
+rule lists. These features are:
+     <ul class="itemize1">
+     <li class="itemize">Free operators
+     </li>
+     <li class="itemize">Double slash operator
+     </li>
+     <li class="itemize">Double tilde variables.</li></ul>
+<a 
+ id="dx88-170001"></a>
+<a 
+ id="dx88-170002"></a>
+<a 
+ id="dx88-170003"></a>
+<!--l. 574--><p class="noindent" >A <span 
+class="ptmri8t-x-x-109">free operator </span>in the left hand side of a pattern will match any operator with the same
+number of arguments. The free operator is written in the same style as a variable. For
+example, the implementation of the product rule of differentiation can be written
+as:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-334">
+operator&#x00A0;diff,&#x00A0;!~f,&#x00A0;!~g;
+&#x00A0;<br />
+&#x00A0;<br />prule&#x00A0;:=&#x00A0;{diff(~f(~x)&#x00A0;*&#x00A0;~g(~x),x)&#x00A0;=&#x003E;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;diff(f(x),x)&#x00A0;*&#x00A0;g(x)&#x00A0;+&#x00A0;diff(g(x),x)&#x00A0;*&#x00A0;f(x)};
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;prule;
+&#x00A0;<br />
+&#x00A0;<br />diff(sin(z)*cos(z),z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(z)*diff(sin(z),z)&#x00A0;+&#x00A0;diff(cos(z),z)*sin(z)
+</div>
+<!--l. 589--><p class="nopar" >
+<!--l. 591--><p class="noindent" ><a 
+ id="reserved:doubleslashop"></a> <a 
+ id="dx88-170004"></a> <a 
+ id="dx88-170005"></a><a 
+ id="dx88-170006"></a> <a 
+ id="dx88-170007"></a>The <span 
+class="ptmri8t-x-x-109">double slash operator </span>may be used as an alternative to a single slash (quotient) in
+order to match quotients properly. E.g., in the example of the Gamma function above,
+one can use:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-335">
+gammarule&#x00A0;:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{gamma(~z)//(~c*gamma(~zz))&#x00A0;&#x00A0;=&#x003E;&#x00A0;gamma(z)/(c*gamma(zz-1)*zz)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;fixp(zz&#x00A0;-z)&#x00A0;and&#x00A0;(zz&#x00A0;-z)&#x00A0;&#x003E;0,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma(~z)//gamma(~zz)&#x00A0;=&#x003E;&#x00A0;gamma(z)/(gamma(zz-1)*zz)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;fixp(zz&#x00A0;-z)&#x00A0;and&#x00A0;(zz&#x00A0;-z)&#x00A0;&#x003E;0};
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;gammarule;
+&#x00A0;<br />
+&#x00A0;<br />gamma(z)/gamma(z+3);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+&#x00A0;<br />----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;z&#x00A0;&#x00A0;+&#x00A0;6*z&#x00A0;&#x00A0;+&#x00A0;11*z&#x00A0;+&#x00A0;6
+</div>
+<!--l. 614--><p class="nopar" > <a 
+ id="dx88-170008"></a><a 
+ id="dx88-170009"></a> <a 
+ id="dx88-170010"></a>The above example suffers from the fact that two rules had to be written in order to
+perform the required operation. This can be simplified by the use of <span 
+class="ptmri8t-x-x-109">double tilde</span>
+<span 
+class="ptmri8t-x-x-109">variables</span>. E.g. the rule list
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-336">
+&#x00A0;GGrule&#x00A0;:=&#x00A0;&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma(~z)//(~~c*gamma(~zz))&#x00A0;&#x00A0;=&#x003E;&#x00A0;gamma(z)/(c*gamma(zz-1)*zz)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;fixp(zz&#x00A0;-z)&#x00A0;and&#x00A0;(zz&#x00A0;-z)&#x00A0;&#x003E;0};
+</div>
+<!--l. 625--><p class="nopar" > will implement the same operation in a much more compact way. In general, double
+tilde variables are bound to the neutral element with respect to the operation in which
+they are used.
+<div class="tabular"> <table id="TBL-18" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-18-1g"><col 
+id="TBL-18-1"><col 
+id="TBL-18-2"><col 
+id="TBL-18-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-18-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-1-1"  
+class="td11">Pattern given</td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-1-2"  
+class="td11">Argument used</td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-1-3"  
+class="td11">Binding                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-1"  
+class="td11">         </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-1"  
+class="td11">~z + ~~y</td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-2"  
+class="td11">x                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-3"  
+class="td11">z=x; y=0                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-1"  
+class="td11">~z + ~~y       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-2"  
+class="td11">x+3                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-3"  
+class="td11">z=x; y=3 or z=3; y=x</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-5-1"  
+class="td11">         </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-1"  
+class="td11">~z * ~~y</td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-2"  
+class="td11">x                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-3"  
+class="td11">z=x; y=1                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-1"  
+class="td11">~z * ~~y        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-2"  
+class="td11">x*3                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-3"  
+class="td11">z=x; y=3 or z=3; y=x</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-8-1"  
+class="td11">         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-1"  
+class="td11">~z / ~~y         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-2"  
+class="td11">x                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-3"  
+class="td11">z=x; y=1                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-1"  
+class="td11">~z / ~~y         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-2"  
+class="td11">x/3                   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-3"  
+class="td11">z=x; y=3                    </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-11-1"  
+class="td11">         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-18-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-12-1"  
+class="td11">         </td>
+</tr></table></div>
+<!--l. 645--><p class="noindent" >Remarks: A double tilde variable as the numerator of a pattern is not allowed. Also,
+using double tilde variables may lead to recursion errors when the zero case is not
+handled properly.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-337">
+let&#x00A0;f(~~a&#x00A0;*&#x00A0;~x,x)&#x00A0;&#x00A0;=&#x003E;&#x00A0;a&#x00A0;*&#x00A0;f(x,x)&#x00A0;when&#x00A0;freeof&#x00A0;(a,x);
+&#x00A0;<br />
+&#x00A0;<br />f(z,z);
+&#x00A0;<br />
+&#x00A0;<br />*****&#x00A0;f(z,z)&#x00A0;improperly&#x00A0;defined&#x00A0;in&#x00A0;terms&#x00A0;of&#x00A0;itself
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;BUT:
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;ff(~~a&#x00A0;*&#x00A0;~x,x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;=&#x003E;&#x00A0;a&#x00A0;*&#x00A0;ff(x,x)&#x00A0;when&#x00A0;freeof&#x00A0;(a,x)&#x00A0;and&#x00A0;a&#x00A0;neq&#x00A0;1;
+&#x00A0;<br />
+&#x00A0;<br />ff(z,z);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ff(z,z)
+&#x00A0;<br />
+&#x00A0;<br />ff(3*z,z);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*ff(z,z)
+</div>
+<!--l. 665--><p class="nopar" >
+<!--l. 667--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x88-17100011.3"></a>Displaying Rules Associated with an Operator</h4>
+<!--l. 668--><p class="noindent" ><a 
+ id="operator:SHOWRULES"></a>
+<!--l. 670--><p class="noindent" >The operator <span 
+class="pcrr8t-x-x-109">SHOWRULES</span><a 
+ id="dx88-171001"></a> takes a single identifier as argument, and returns in rule-list
+form the operator rules associated with that argument. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-338">
+showrules&#x00A0;log;
+&#x00A0;<br />
+&#x00A0;<br />{LOG(E)&#x00A0;=&#x003E;&#x00A0;1,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;LOG(1)&#x00A0;=&#x003E;&#x00A0;0,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~X
+&#x00A0;<br />&#x00A0;LOG(E&#x00A0;&#x00A0;)&#x00A0;=&#x003E;&#x00A0;~X,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+&#x00A0;<br />&#x00A0;DF(LOG(~X),~X)&#x00A0;=&#x003E;&#x00A0;----}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~X
+</div>
+<!--l. 686--><p class="nopar" >
+<!--l. 688--><p class="noindent" >Such rules can then be manipulated further as with any list. For example <span 
+class="pcrr8t-x-x-109">rhs first</span>
+<span 
+class="pcrr8t-x-x-109">ws; </span>has the value <span 
+class="pcrr8t-x-x-109">1</span>. Note that an operator may have other properties that cannot be
+displayed in such a form, such as the fact it is an odd function, or has a definition defined
+as a procedure.
+<!--l. 693--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x88-17200011.3"></a>Order of Application of Rules</h4>
+<!--l. 695--><p class="noindent" >If rules have overlapping domains, their order of application is important. In
+general, it is very difficult to specify this order precisely, so that it is best to
+assume that the order is arbitrary. However, if only one operator is involved, the
+order of application of the rules for this operator can be determined from the
+following:
+<!--l. 701--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x88-172002x1">Rules containing at least one free variable apply before all rules without free
+     variables.
+     </li>
+     <li 
+  class="enumerate" id="x88-172004x2">Rules activated in the most recent <span 
+class="pcrr8t-x-x-109">LET </span>command are applied first.
+     </li>
+                                                                     
+
+                                                                     
+     <li 
+  class="enumerate" id="x88-172006x3"><span 
+class="pcrr8t-x-x-109">LET </span>with  several  entries  generate  the  same  order  of  application  as  a
+     corresponding sequence of commands with one rule or rule set each.
+     </li>
+     <li 
+  class="enumerate" id="x88-172008x4">Within a rule set, the rules containing at least one free variable are applied in
+     their given order. In other words, the first member of the list is applied first.
+     </li>
+     <li 
+  class="enumerate" id="x88-172010x5">Consistent with the first item, any rule in a rule list that contains no free
+     variables is applied after all rules containing free variables.</li></ol>
+<!--l. 716--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example: </span>The following rule set enables the computation of exact values of the Gamma
+function:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-339">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;operator&#x00A0;gamma,gamma_error;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma_rules&#x00A0;:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{gamma(~x)=&#x003E;sqrt(pi)/2&#x00A0;when&#x00A0;x=1/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma(~n)=&#x003E;factorial(n-1)&#x00A0;when&#x00A0;fixp&#x00A0;n&#x00A0;and&#x00A0;n&#x003E;0,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma(~n)=&#x003E;gamma_error(n)&#x00A0;when&#x00A0;fixp&#x00A0;n,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma(~x)=&#x003E;(x-1)*gamma(x-1)&#x00A0;when&#x00A0;fixp(2*x)&#x00A0;and&#x00A0;x&#x003E;1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma(~x)=&#x003E;gamma(x+1)/x&#x00A0;when&#x00A0;fixp(2*x)};
+</div>
+<!--l. 726--><p class="nopar" > Here, rule by rule, cases of known or definitely uncomputable values are sorted out; e.g.
+the rule leading to the error expression will be applied for negative integers only, since
+the positive integers are caught by the preceding rule, and the last rule will apply for
+negative odd multiples of <span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">2 </span>only. Alternatively the first rule could have been written
+as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-340">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gamma(1/2)&#x00A0;=&#x003E;&#x00A0;sqrt(pi)/2,
+</div>
+<!--l. 735--><p class="nopar" > but then the case <span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">= 1</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">2 </span>should be excluded in the <span 
+class="pcrr8t-x-x-109">WHEN </span>part of the last rule explicitly
+because a rule without free variables cannot take precedence over the other
+rules.
+                                                                     
+
+                                                                     
+<!--l. 740--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch11.html#manualse72.html" >Up</a></td><td class="clinks"><a 
+href="manualse73.html" >Next</a></td><td class="clinks"><a 
+href="manualse71.html" >Prev</a></td><td class="clinks"><a 
+href="manualse71.html#tailmanualse71.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse72.html" >Front</a></td></tr></table><a 
+ id="tailmanualse72.html"></a>   
+</body></html> 

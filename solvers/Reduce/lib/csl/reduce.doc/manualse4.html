@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Variables</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch2.html#manualse4.html" >Up</a></td><td class="clinks"><a 
+href="manualse5.html" >Next</a></td><td class="clinks"><a 
+href="manualse3.html" >Prev</a></td><td class="clinks"><a 
+href="manualse3.html#tailmanualse3.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse4.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">2.4    </span> <a 
+ id="x10-100002.4"></a>Variables</h3>
+<!--l. 147--><p class="noindent" >Every variable<a 
+ id="dx10-10001"></a> is named by an identifier, and is given a specific type. The type
+is of no concern to the ordinary user. Most variables are allowed to have the
+default type, called <a 
+ id="dx10-10002"></a><span 
+class="ptmri8t-x-x-109">scalar</span>. These can receive, as values, the representation of any
+ordinary algebraic expression. In the absence of such a value, they stand for
+themselves.
+<!--l. 154--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x10-110002.4"></a>Reserved Variables</h4>
+<!--l. 155--><p class="noindent" ><a 
+ id="reserved:E"></a> <a 
+ id="reserved:I"></a> <a 
+ id="reserved:INFINITY"></a> <a 
+ id="reserved:NIL"></a> <a 
+ id="reserved:PI"></a> <a 
+ id="reserved:T"></a> <a 
+ id="reserved:K!*"></a> <a 
+ id="reserved:EULER_GAMMA"></a> <a 
+ id="reserved:GOLDEN_RATIO"></a> <a 
+ id="reserved:CATALAN"></a> <a 
+ id="reserved:KHINCHIN"></a> <a 
+ id="reserved:NEGATIVE"></a> <a 
+ id="reserved:POSITIVE"></a>
+<!--l. 169--><p class="noindent" >Several variables<a 
+ id="dx10-11001"></a> in REDUCE have particular properties which should not be changed by
+the user. These variables include:
+<!--l. 176--><p class="noindent" >
+            <dl class="list1"><dt class="list">
+<span 
+class="pcrr8t-x-x-109">CATALAN</span>   </dt><dd 
+class="list">
+            <!--l. 178--><p class="noindent" >Catalan&#8217;s constant, defined as
+            <center class="math-display" >
+            <img 
+src="manual0x.png" alt="&#x221E;&#x2211;    (- 1)n
+   --------2.
+n=0(2n + 1)
+            " class="math-display" ></center>
+            <!--l. 181--><p class="nopar" >
+            <a 
+ id="dx10-11002"></a> <a 
+ id="dx10-11003"></a>
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">E</span>           </dt><dd 
+class="list">
+            <!--l. 185--><p class="noindent" >Intended to represent the base of <a 
+ id="dx10-11004"></a> the natural logarithms. <span 
+class="pcrr8t-x-x-109">log(e)</span>, if it
+            occurs in an expression, is automatically replaced by 1. If <span 
+class="pcrr8t-x-x-109">ROUNDED</span><a 
+ id="dx10-11005"></a><a 
+ id="dx10-11006"></a><a 
+ id="dx10-11007"></a> is on,
+            <span 
+class="pcrr8t-x-x-109">E </span>is replaced by the value of E to the current degree of floating point
+            precision<a 
+ id="dx10-11008"></a>.
+                                                                     
+
+                                                                     
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">EULER_GAMMA</span>  </dt><dd 
+class="list">
+            <!--l. 192--><p class="noindent" >Euler&#8217;s constant, also available as <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmmi-10x-x-109">&#x03C8;</span><span 
+class="cmr-10x-x-109">(1)</span>. <a 
+ id="dx10-11009"></a> <a 
+ id="dx10-11010"></a>
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">GOLDEN_RATIO</span>  </dt><dd 
+class="list">
+            <!--l. 196--><p class="noindent" >The number <img 
+src="manual1x.png" alt="1+&#x221A;5-
+  2"  class="frac" align="middle">. <a 
+ id="dx10-11011"></a> <a 
+ id="dx10-11012"></a>
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">I</span>           </dt><dd 
+class="list">
+            <!--l. 200--><p class="noindent" >Intended to represent the square <a 
+ id="dx10-11013"></a> <a 
+ id="dx10-11014"></a>
+            <!--l. 204--><p class="noindent" >root of <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span>. <span 
+class="pcrr8t-x-x-109">i^2 </span>is replaced by <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span>, and appropriately for higher powers of
+            <span 
+class="pcrr8t-x-x-109">I</span>. This applies only to the symbol <span 
+class="pcrr8t-x-x-109">I </span>used on the top level, not as a formal
+            parameter in a procedure, a local variable, nor in the context <span 
+class="pcrr8t-x-x-109">for i:=</span>
+            <span 
+class="pcrr8t-x-x-109">...</span>.
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">INFINITY</span>  </dt><dd 
+class="list">
+            <!--l. 210--><p class="noindent" >Intended to represent <span 
+class="cmsy-10x-x-109">&#x221E;</span><a 
+ id="dx10-11015"></a><a 
+ id="dx10-11016"></a>
+            <!--l. 214--><p class="noindent" >in limit and power series calculations for example, as well as in definite
+            integration. Note however that the current system does <span 
+class="ptmri8t-x-x-109">not </span>do proper
+            arithmetic on <span 
+class="cmsy-10x-x-109">&#x221E;</span>. For example, <span 
+class="pcrr8t-x-x-109">infinity + infinity </span>is
+            <span 
+class="pcrr8t-x-x-109">2*infinity</span>.
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">KHINCHIN</span>  </dt><dd 
+class="list">
+            <!--l. 219--><p class="noindent" >Khinchin&#8217;s constant, defined as
+            <center class="math-display" >
+            <img 
+src="manual2x.png" alt=" &#x221E;&#x220F;  (            )log2n
+     1 + ----1---      .
+n=1      n(n + 2)
+            " class="math-display" ></center>
+            <!--l. 222--><p class="nopar" >
+            <a 
+ id="dx10-11017"></a><a 
+ id="dx10-11018"></a>
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">NEGATIVE</span>  </dt><dd 
+class="list">
+            <!--l. 227--><p class="noindent" >Used in the <a 
+href="manualse147.html#package:ROOTS">Roots package</a>. <a 
+ id="dx10-11019"></a> <a 
+ id="dx10-11020"></a>
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">NIL</span>        </dt><dd 
+class="list">
+                                                                     
+
+                                                                     
+            <!--l. 231--><p class="noindent" >In REDUCE (algebraic mode only) taken as a synonym for zero.
+            Therefore <span 
+class="pcrr8t-x-x-109">NIL </span>cannot be used as a variable. <a 
+ id="dx10-11021"></a> <a 
+ id="dx10-11022"></a>
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">PI</span>          </dt><dd 
+class="list">
+            <!--l. 237--><p class="noindent" >Intended to represent the circular <a 
+ id="dx10-11023"></a> <a 
+ id="dx10-11024"></a>constant. With <span 
+class="pcrr8t-x-x-109">ROUNDED</span><a 
+ id="dx10-11025"></a><a 
+ id="dx10-11026"></a><a 
+ id="dx10-11027"></a> on, it is
+            replaced by the value of <span 
+class="cmmi-10x-x-109">&#x03C0; </span>to the current degree of floating point
+            precision.
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">POSITIVE</span>  </dt><dd 
+class="list">
+            <!--l. 243--><p class="noindent" >Used in the <a 
+href="manualse147.html#package:ROOTS">Roots package</a>. <a 
+ id="dx10-11028"></a> <a 
+ id="dx10-11029"></a>
+            </dd><dt class="list">
+<span 
+class="pcrr8t-x-x-109">T</span>           </dt><dd 
+class="list">
+            <!--l. 247--><p class="noindent" >Must not be used as a formal <a 
+ id="dx10-11030"></a> <a 
+ id="dx10-11031"></a>parameter or local variable in procedures,
+            since conflict arises with the symbolic mode meaning of T as
+            <span 
+class="ptmri8t-x-x-109">true</span>.</dd></dl>
+<!--l. 254--><p class="noindent" >Other reserved variables, such as <span 
+class="pcrr8t-x-x-109">LOW_POW</span>, described in other sections, are listed in
+Appendix A.
+<!--l. 257--><p class="noindent" >Using these reserved variables<a 
+ id="dx10-11032"></a> inappropriately will lead to errors.
+<!--l. 260--><p class="noindent" >There are also internal variables used by REDUCE that have similar restrictions. These
+usually have an asterisk in their names, so it is unlikely a casual user would use
+one. An example of such a variable is <span 
+class="pcrr8t-x-x-109">K!* </span>used in the asymptotic command
+package.
+<!--l. 265--><p class="noindent" >Certain words are reserved in REDUCE. They may only be used in the manner intended.
+A list of these is given in the section &#8220;Reserved Identifiers&#8221;. There are, of course, an
+impossibly large number of such names to keep in mind. The reader may therefore want
+to make himself a copy of the list, deleting the names he doesn&#8217;t think he is likely to use
+by mistake.
+                                                                     
+
+                                                                     
+<!--l. 271--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch2.html#manualse4.html" >Up</a></td><td class="clinks"><a 
+href="manualse5.html" >Next</a></td><td class="clinks"><a 
+href="manualse3.html" >Prev</a></td><td class="clinks"><a 
+href="manualse3.html#tailmanualse3.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse4.html" >Front</a></td></tr></table><a 
+ id="tailmanualse4.html"></a>   
+</body></html> 

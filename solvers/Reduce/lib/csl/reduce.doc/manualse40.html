@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>PF Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse40.html" >Up</a></td><td class="clinks"><a 
+href="manualse41.html" >Next</a></td><td class="clinks"><a 
+href="manualse39.html" >Prev</a></td><td class="clinks"><a 
+href="manualse39.html#tailmanualse39.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse40.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.14    </span> <a 
+ id="x51-880007.14"></a>PF Operator</h3>
+<a 
+ id="dx51-88001"></a>
+<!--l. 1123--><p class="noindent" ><a 
+ id="operator:PF"></a>
+<a 
+ id="dx51-88002"></a>
+<a 
+ id="dx51-88003"></a>
+<a 
+ id="dx51-88004"></a>
+<!--l. 1126--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">PF(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="pcrro8t-x-x-109">exp</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="pcrro8t-x-x-109">var</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">) </span>transforms the expression <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">exp</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> into a list of partial fractions
+with respect to the main variable, <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>. <span 
+class="pcrr8t-x-x-109">PF </span>does a complete partial fraction
+decomposition, and as the algorithms used are fairly unsophisticated (factorization and
+the extended Euclidean algorithm), the code may be unacceptably slow in complicated
+cases.
+<!--l. 1133--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example: </span>Given <span 
+class="pcrr8t-x-x-109">2/((x+1)^2*(x+2)) </span>in the workspace, <span 
+class="pcrr8t-x-x-109">pf(ws,x); </span>gives the
+result
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-130">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{-------,-------,--------------}&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;X&#x00A0;+&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;+&#x00A0;2*X&#x00A0;+&#x00A0;1
+</div>
+<!--l. 1142--><p class="nopar" >
+<!--l. 1145--><p class="noindent" >If you want the denominators in factored form, use <span 
+class="pcrr8t-x-x-109">off exp;</span>. Thus, with
+<span 
+class="pcrr8t-x-x-109">2/((x+1)^2*(x+2)) </span>in the workspace, the commands <span 
+class="pcrr8t-x-x-109">off exp; pf(ws,x);</span>
+give the result
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-131">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{-------,-------,----------}&#x00A0;.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;X&#x00A0;+&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(X&#x00A0;+&#x00A0;1)
+</div>
+<!--l. 1153--><p class="nopar" >
+<!--l. 1155--><p class="noindent" >To recombine the terms, <span 
+class="pcrr8t-x-x-109">FOR EACH</span>&#x2026; <span 
+class="pcrr8t-x-x-109">SUM </span>can be used. So with the above list in the
+workspace, <span 
+class="pcrr8t-x-x-109">for each j in ws sum j; </span>returns the result
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-132">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(X&#x00A0;+&#x00A0;2)*(X&#x00A0;+&#x00A0;1)
+</div>
+<!--l. 1163--><p class="nopar" >
+<!--l. 1165--><p class="noindent" >Alternatively, one can use the operations on lists to extract any desired term.
+                                                                     
+
+                                                                     
+<!--l. 1169--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse40.html" >Up</a></td><td class="clinks"><a 
+href="manualse41.html" >Next</a></td><td class="clinks"><a 
+href="manualse39.html" >Prev</a></td><td class="clinks"><a 
+href="manualse39.html#tailmanualse39.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse40.html" >Front</a></td></tr></table><a 
+ id="tailmanualse40.html"></a>  
+</body></html> 

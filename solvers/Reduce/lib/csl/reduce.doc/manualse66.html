@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Polynomial Coefficient Arithmetic</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse66.html" >Up</a></td><td class="clinks"><a 
+href="manualse67.html" >Next</a></td><td class="clinks"><a 
+href="manualse65.html" >Prev</a></td><td class="clinks"><a 
+href="manualse65.html#tailmanualse65.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse66.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">9.12    </span> <a 
+ id="x80-1520009.12"></a>Polynomial Coefficient Arithmetic</h3>
+<a 
+ id="dx80-152001"></a>
+<!--l. 842--><p class="noindent" >REDUCE allows for a variety of numerical domains for the numerical coefficients of
+polynomials used in calculations. The default mode is integer arithmetic, although the
+possibility of using real coefficients <a 
+ id="dx80-152002"></a>has been discussed elsewhere. Rational coefficients
+have also been available by using integer coefficients in both the numerator and
+denominator of an expression, using the <span 
+class="pcrr8t-x-x-109">ON DIV</span><a 
+ id="dx80-152003"></a><a 
+ id="dx80-152004"></a><a 
+ id="dx80-152005"></a> option to print the coefficients
+as rationals. However, REDUCE includes several other coefficient options in
+its basic version which we shall describe in this section. All such coefficient
+modes are supported in a table-driven manner so that it is straightforward to
+extend the range of possibilities. A description of how to do this is given in R.J.
+Bradford, A.C. Hearn, J.A. Padget and E. Schrüfer, &#8220;Enlarging the REDUCE
+Domain of Computation,&#8221; Proc. of SYMSAC &#8217;86, ACM, New York (1986),
+100&#8211;106.
+<!--l. 857--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">9.12.1    </span> <a 
+ id="x80-1530009.12.1"></a>Rational Coefficients in Polynomials</h4>
+<a 
+ id="dx80-153001"></a>
+<!--l. 858--><p class="noindent" ><a 
+ id="switch:RATIONAL"></a> <a 
+ id="dx80-153002"></a>Instead of treating rational numbers as the numerator and denominator of a rational
+expression, it is also possible to use them as polynomial coefficients directly. This is
+accomplished by turning on the switch <span 
+class="pcrr8t-x-x-109">RATIONAL</span>.<a 
+ id="dx80-153003"></a><a 
+ id="dx80-153004"></a><a 
+ id="dx80-153005"></a>
+<!--l. 865--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example: </span>With <span 
+class="pcrr8t-x-x-109">RATIONAL </span>off, the input expression <span 
+class="pcrr8t-x-x-109">a/2 </span>would be converted into a
+rational expression, whose numerator was <span 
+class="pcrr8t-x-x-109">A </span>and denominator 2. With <span 
+class="pcrr8t-x-x-109">RATIONAL </span>on,
+the same input would become a rational expression with numerator <span 
+class="pcrr8t-x-x-109">1/2*A </span>and
+denominator <span 
+class="pcrr8t-x-x-109">1</span>. Thus the latter can be used in operations that require polynomial input
+whereas the former could not.
+<!--l. 872--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">9.12.2    </span> <a 
+ id="x80-1540009.12.2"></a>Real Coefficients in Polynomials</h4>
+<a 
+ id="dx80-154001"></a>
+<a 
+ id="dx80-154002"></a>
+                                                                     
+
+                                                                     
+<!--l. 874--><p class="noindent" ><a 
+ id="switch:ROUNDED"></a> <a 
+ id="switch:ROUNDBF"></a> <a 
+ id="operator:PRECISION"></a> The switch <span 
+class="pcrr8t-x-x-109">ROUNDED</span><a 
+ id="dx80-154003"></a><a 
+ id="dx80-154004"></a><a 
+ id="dx80-154005"></a> permits the use of arbitrary sized real coefficients in polynomial
+expressions. The actual precision of these coefficients can be set by the operator
+<span 
+class="pcrr8t-x-x-109">PRECISION</span>. <a 
+ id="dx80-154006"></a> For example, <span 
+class="pcrr8t-x-x-109">precision 50; </span>sets the precision to fifty decimal digits.
+The default precision is system dependent and can be found by <span 
+class="pcrr8t-x-x-109">precision 0;</span>. In this
+mode, denominators are automatically made monic, and an appropriate adjustment is
+made to the numerator.
+<!--l. 886--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example: </span>With <span 
+class="pcrr8t-x-x-109">ROUNDED </span>on, the input expression <span 
+class="pcrr8t-x-x-109">a/2 </span>would be converted into a
+rational expression whose numerator is <span 
+class="pcrr8t-x-x-109">0.5*A </span>and denominator <span 
+class="pcrr8t-x-x-109">1</span>.
+<!--l. 890--><p class="noindent" >Internally, REDUCE uses floating point numbers up to the precision supported by the
+underlying machine hardware, and so-called <span 
+class="ptmri8t-x-x-109">bigfloats </span>for higher precision or whenever
+necessary to represent numbers whose value cannot be represented in floating point.
+The internal precision is two decimal digits greater than the external precision
+to guard against roundoff inaccuracies. Bigfloats represent the fraction and
+exponent parts of a floating-point number by means of (arbitrary precision)
+integers, which is a more precise representation in many cases than the machine
+floating point arithmetic, but not as efficient. If a case arises where use of the
+machine arithmetic leads to problems, a user can force REDUCE to use the
+bigfloat representation at all precisions by turning on the switch <span 
+class="pcrr8t-x-x-109">ROUNDBF</span>.<a 
+ id="dx80-154007"></a><a 
+ id="dx80-154008"></a><a 
+ id="dx80-154009"></a> In
+rare cases, this switch is turned on by the system, and the user informed by the
+message
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-274">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ROUNDBF&#x00A0;turned&#x00A0;on&#x00A0;to&#x00A0;increase&#x00A0;accuracy
+</div>
+<!--l. 906--><p class="nopar" >
+<!--l. 908--><p class="noindent" ><a 
+ id="command:PRINT_PRECISION"></a> Rounded numbers are normally printed to the specified precision. However, if the user
+wishes to print such numbers with less precision, the printing precision can be set by the
+command <span 
+class="pcrr8t-x-x-109">PRINT_PRECISION</span>. <a 
+ id="dx80-154010"></a> For example, <span 
+class="pcrr8t-x-x-109">print_precision 5; </span>will cause
+such numbers to be printed with five digits maximum.
+<!--l. 915--><p class="noindent" ><a 
+ id="switch:NOCONVERT"></a> Under normal circumstances when <span 
+class="pcrr8t-x-x-109">ROUNDED </span>is on, REDUCE converts the number 1.0
+to the integer 1. If this is not desired, the switch <span 
+class="pcrr8t-x-x-109">NOCONVERT</span><a 
+ id="dx80-154011"></a><a 
+ id="dx80-154012"></a><a 
+ id="dx80-154013"></a> can be turned
+on.
+<!--l. 920--><p class="noindent" ><a 
+ id="switch:BFSPACE"></a> Numbers that are stored internally as bigfloats are normally printed with a space
+between every five digits to improve readability. If this feature is not required, it can be
+suppressed by turning off the switch <span 
+class="pcrr8t-x-x-109">BFSPACE</span>.<a 
+ id="dx80-154014"></a><a 
+ id="dx80-154015"></a><a 
+ id="dx80-154016"></a>
+<!--l. 926--><p class="noindent" >Further information on the bigfloat arithmetic may be found in T. Sasaki, &#8220;Manual for
+Arbitrary Precision Real Arithmetic System in REDUCE&#8221;, Department of Computer
+Science, University of Utah, Technical Note No. TR-8 (1979).
+<!--l. 931--><p class="noindent" ><a 
+ id="switch:ADJPREC"></a> When a real number is input, it is normally truncated to the precision in effect at the time
+the number is read. If it is desired to keep the full precision of all numbers input, the
+switch <span 
+class="pcrr8t-x-x-109">ADJPREC</span><a 
+ id="dx80-154017"></a><a 
+ id="dx80-154018"></a><a 
+ id="dx80-154019"></a> (for <span 
+class="ptmri8t-x-x-109">adjust precision</span>) can be turned on. While on, <span 
+class="pcrr8t-x-x-109">ADJPREC</span>
+will automatically increase the precision, when necessary, to match that of any
+integer or real input, and a message printed to inform the user of the precision
+increase.
+<!--l. 940--><p class="noindent" ><a 
+ id="switch:ROUNDALL"></a> When <span 
+class="pcrr8t-x-x-109">ROUNDED </span>is on, rational numbers are normally converted to rounded
+representation. However, if a user wishes to keep such numbers in a rational form until
+used in an operation that returns a real number, the switch <span 
+class="pcrr8t-x-x-109">ROUNDALL</span><a 
+ id="dx80-154020"></a><a 
+ id="dx80-154021"></a><a 
+ id="dx80-154022"></a> can be turned off.
+This switch is normally on.
+<!--l. 947--><p class="noindent" >Results from rounded calculations are returned in rounded form with two exceptions: if
+the result is recognized as <span 
+class="pcrr8t-x-x-109">0 </span>or <span 
+class="pcrr8t-x-x-109">1 </span>to the current precision, the integer result is
+returned.
+<!--l. 951--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">9.12.3    </span> <a 
+ id="x80-1550009.12.3"></a>Modular Number Coefficients in Polynomials</h4>
+<a 
+ id="dx80-155001"></a>
+                                                                     
+
+                                                                     
+<!--l. 952--><p class="noindent" ><a 
+ id="switch:MODULAR"></a> <a 
+ id="command:SETMOD"></a> <a 
+ id="dx80-155002"></a>REDUCE includes facilities for manipulating polynomials whose coefficients are
+computed modulo a given base. To use this option, two commands must be used;
+<span 
+class="pcrr8t-x-x-109">SETMOD</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">integer</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><a 
+ id="dx80-155003"></a>, to set the prime modulus, and <span 
+class="pcrr8t-x-x-109">ON MODULAR</span><a 
+ id="dx80-155004"></a><a 
+ id="dx80-155005"></a><a 
+ id="dx80-155006"></a> to cause the actual
+modular calculations to occur. For example, with <span 
+class="pcrr8t-x-x-109">setmod 3; </span>and <span 
+class="pcrr8t-x-x-109">on modular;</span>, the
+polynomial <span 
+class="pcrr8t-x-x-109">(a+2*b)^3 </span>would become <span 
+class="pcrr8t-x-x-109">A^3+2*B^3</span>.
+<!--l. 964--><p class="noindent" >The argument of <span 
+class="pcrr8t-x-x-109">SETMOD </span>is evaluated algebraically, except that non-modular (integer)
+arithmetic is used. Thus the sequence
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-275">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setmod&#x00A0;3;&#x00A0;on&#x00A0;modular;&#x00A0;setmod&#x00A0;7;
+</div>
+<!--l. 968--><p class="nopar" > will correctly set the modulus to 7.
+<!--l. 971--><p class="noindent" ><a 
+ id="switch:BALANCED_MOD"></a> Modular numbers are by default represented by integers in the interval [0,p-1] where p is
+the current modulus. Sometimes it is more convenient to use an equivalent symmetric
+representation in the interval [-p/2+1,p/2], or more precisely [-floor((p-1)/2),
+ceiling((p-1)/2)], especially if the modular numbers map objects that include negative
+quantities. The switch <span 
+class="pcrr8t-x-x-109">BALANCED_MOD</span><a 
+ id="dx80-155007"></a><a 
+ id="dx80-155008"></a><a 
+ id="dx80-155009"></a> allows you to select the symmetric
+representation for output.
+<!--l. 981--><p class="noindent" >Users should note that the modular calculations are on the polynomial coefficients only.
+It is not currently possible to reduce the exponents since no check for a prime modulus is
+made (which would allow <span 
+class="cmmi-10x-x-109">x</span><sup><span 
+class="cmmi-8">p</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sup> to be reduced to 1 mod p). Note also that any division by
+a number not co-prime with the modulus will result in the error &#8220;Invalid modular
+division&#8221;.
+<!--l. 988--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">9.12.4    </span> <a 
+ id="x80-1560009.12.4"></a>Complex Number Coefficients in Polynomials</h4>
+<a 
+ id="dx80-156001"></a>
+<a 
+ id="dx80-156002"></a>
+<!--l. 991--><p class="noindent" ><a 
+ id="switch:COMPLEX">A</a>lthough REDUCE routinely treats the square of the variable <span 
+class="ptmri8t-x-x-109">i </span>as equivalent to <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1</span>,
+this is not sufficient to reduce expressions involving <span 
+class="ptmri8t-x-x-109">i </span>to lowest terms, or to
+factor such expressions over the complex numbers. For example, in the default
+case,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-276">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorize(a^2+1);
+</div>
+<!--l. 997--><p class="nopar" > gives the result
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-277">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{{A**2+1,1}}
+</div>
+<!--l. 1001--><p class="nopar" > and
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-278">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(a^2+b^2)/(a+i*b)
+</div>
+<!--l. 1005--><p class="nopar" > is not reduced further. However, if the switch <span 
+class="pcrr8t-x-x-109">COMPLEX</span><a 
+ id="dx80-156003"></a><a 
+ id="dx80-156004"></a><a 
+ id="dx80-156005"></a> is turned on, full complex
+arithmetic is then carried out. In other words, the above factorization will give the
+result
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-279">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{{A&#x00A0;+&#x00A0;I,1},{A&#x00A0;-&#x00A0;I,1}}
+</div>
+<!--l. 1011--><p class="nopar" > and the quotient will be reduced to <span 
+class="pcrr8t-x-x-109">A-I*B</span>.
+<!--l. 1014--><p class="noindent" >The switch <span 
+class="pcrr8t-x-x-109">COMPLEX </span>may be combined with <span 
+class="pcrr8t-x-x-109">ROUNDED </span>to give complex real numbers;
+the appropriate arithmetic is performed in this case.
+<!--l. 1017--><p class="noindent" ><a 
+ id="switch:RATIONALIZE"></a> Complex conjugation is used to remove complex numbers from denominators of
+expressions. To do this if <span 
+class="pcrr8t-x-x-109">COMPLEX </span>is off, you must turn the switch <span 
+class="pcrr8t-x-x-109">RATIONALIZE</span><a 
+ id="dx80-156006"></a><a 
+ id="dx80-156007"></a><a 
+ id="dx80-156008"></a>
+on.
+                                                                     
+
+                                                                     
+<!--l. 1022--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse66.html" >Up</a></td><td class="clinks"><a 
+href="manualse67.html" >Next</a></td><td class="clinks"><a 
+href="manualse65.html" >Prev</a></td><td class="clinks"><a 
+href="manualse65.html#tailmanualse65.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse66.html" >Front</a></td></tr></table><a 
+ id="tailmanualse66.html"></a>   
+</body></html> 

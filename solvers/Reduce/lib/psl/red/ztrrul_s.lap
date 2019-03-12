@@ -1,0 +1,1190 @@
+(progn (setk (quote ztransrules) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote ztrans_aux) 1 (list (quote !~) (quote n)) (list (quote 
+!~) (quote z))) (list (quote quotient) (quote z) (list (quote difference) (quote
+z) 1))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote binomial)
+(list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (list (quote !~)
+(quote k)))) (list (quote !~) (quote m))) (list (quote !~) (quote n)) (list (
+quote !~) (quote z))) (list (quote when) (list (quote quotient) (list (quote 
+expt) (quote z) (list (quote plus) (quote k) 1)) (list (quote expt) (list (quote
+difference) (quote z) 1) (list (quote plus) (quote m) 1))) (list (quote and) (
+list (quote freeof) (quote k) (quote n)) (list (quote freeof) (quote m) (quote n
+))))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote quotient) (
+list (quote factorial) (list (quote !~) (quote n))) (list (quote times) (list (
+quote factorial) (list (quote difference) (list (quote !~) (quote n)) (list (
+quote !~) (quote k)))) (list (quote factorial) (list (quote !~) (quote k))))) (
+list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list
+(quote ztrans) (list (quote binomial) (quote n) (quote k)) (quote n) (quote z))
+(list (quote freeof) (quote k) (quote n)))) (list (quote replaceby) (list (quote
+ztrans_aux) (list (quote quotient) 1 (list (quote plus) (list (quote !~) (quote
+n)) (list (quote !~) (list (quote !~) (quote k))))) (list (quote !~) (quote n))
+(list (quote !~) (quote z))) (list (quote when) (list (quote times) (list (quote
+expt) (quote z) (list (quote difference) (quote k) 1)) (list (quote difference)
+(list (quote times) (quote z) (list (quote log) (list (quote quotient) (quote z)
+(list (quote difference) (quote z) 1)))) (list (quote sum) (list (quote quotient
+) 1 (list (quote times) (list (quote plus) (quote j) 1) (list (quote expt) (
+quote z) (quote j)))) (quote j) 0 (list (quote difference) (quote k) 2)))) (list
+(quote and) (list (quote freeof) (quote k) (quote n)) (list (quote fixp) (quote
+k)) (list (quote greaterp) (quote k) 0)))) (list (quote replaceby) (list (quote
+ztrans_aux) (list (quote expt) (list (quote !~) (quote a)) (list (quote plus) (
+list (quote !~) (quote n)) (list (quote !~) (list (quote !~) (quote k))))) (list
+(quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list (
+quote times) (list (quote expt) (quote a) (quote k)) (list (quote quotient) (
+quote z) (list (quote difference) (quote z) (quote a)))) (list (quote and) (list
+(quote freeof) (quote a) (quote n)) (list (quote freeof) (quote k) (quote n)))))
+(list (quote replaceby) (list (quote ztrans_aux) (list (quote quotient) 1 (list
+(quote expt) (list (quote !~) (quote a)) (list (quote plus) (list (quote !~) (
+quote n)) (list (quote !~) (list (quote !~) (quote k)))))) (list (quote !~) (
+quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote sub) (
+list (quote equal) (quote a) (list (quote quotient) 1 (quote a))) (list (quote 
+ztrans) (list (quote expt) (quote a) (list (quote plus) (quote n) (quote k))) (
+quote n) (quote z))) (list (quote and) (list (quote freeof) (quote a) (quote n))
+(list (quote freeof) (quote k) (quote n))))) (list (quote replaceby) (list (
+quote ztrans_aux) (list (quote expt) (quote e) (list (quote times) (list (quote
+!~) (quote n)) (list (quote !~) (list (quote !~) (quote a))))) (list (quote !~)
+(quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote minus) (
+list (quote quotient) (quote z) (list (quote difference) (list (quote expt) (
+quote e) (quote a)) (quote z)))) (list (quote freeof) (quote a) (quote n)))) (
+list (quote replaceby) (list (quote ztrans_aux) (list (quote expt) (quote e) (
+list (quote times) (list (quote plus) (list (quote !~) (quote n)) (list (quote 
+!~) (list (quote !~) (quote k)))) (list (quote !~) (list (quote !~) (quote a))))
+) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (
+list (quote times) (list (quote expt) (quote e) (list (quote times) (quote a) (
+quote k))) (list (quote minus) (list (quote quotient) (quote z) (list (quote 
+difference) (list (quote expt) (quote e) (quote a)) (quote z))))) (list (quote 
+and) (list (quote freeof) (quote a) (quote n)) (list (quote freeof) (quote k) (
+quote n))))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote 
+quotient) 1 (list (quote factorial) (list (quote !~) (quote n)))) (list (quote 
+!~) (quote n)) (list (quote !~) (quote z))) (list (quote expt) (quote e) (list (
+quote quotient) 1 (quote z)))) (list (quote replaceby) (list (quote ztrans_aux)
+(list (quote quotient) 1 (list (quote factorial) (list (quote plus) (list (quote
+times) 2 (list (quote !~) (quote n))) (list (quote !~) (list (quote !~) (quote k
+)))))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote 
+when) (list (quote times) (list (quote expt) (quote z) (list (quote quotient) (
+list (quote difference) (quote k) 1) 2)) (list (quote difference) (list (quote 
+times) (list (quote sqrt) (quote z)) (list (quote sinh) (list (quote quotient) 1
+(list (quote sqrt) (quote z))))) (list (quote sum) (list (quote quotient) 1 (
+list (quote times) (list (quote factorial) (list (quote plus) (list (quote times
+) 2 (quote j)) 1)) (list (quote expt) (quote z) (quote j)))) (quote j) 0 (list (
+quote quotient) (list (quote difference) (quote k) 3) 2)))) (list (quote and) (
+list (quote freeof) (quote k) (quote n)) (list (quote fixp) (list (quote 
+quotient) (list (quote plus) (quote k) 1) 2)) (list (quote greaterp) (quote k) 0
+)))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote quotient) 1 (
+list (quote factorial) (list (quote plus) (list (quote times) 2 (list (quote !~)
+(quote n))) (list (quote !~) (list (quote !~) (quote k)))))) (list (quote !~) (
+quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (
+list (quote expt) (quote z) (list (quote quotient) (quote k) 2)) (list (quote 
+difference) (list (quote cosh) (list (quote quotient) 1 (list (quote sqrt) (
+quote z)))) (list (quote sum) (list (quote quotient) 1 (list (quote times) (list
+(quote factorial) (list (quote times) 2 (quote j))) (list (quote expt) (quote z)
+(quote j)))) (quote j) 0 (list (quote difference) (list (quote quotient) (quote
+k) 2) 1)))) (list (quote and) (list (quote freeof) (quote k) (quote n)) (list (
+quote fixp) (list (quote quotient) (quote k) 2)) (list (quote geq) (quote k) 0))
+)) (list (quote replaceby) (list (quote ztrans_aux) (list (quote quotient) (list
+(quote expt) (minus 1) (list (quote !~) (quote n))) (list (quote factorial) (
+list (quote plus) (list (quote times) 2 (list (quote !~) (quote n))) (list (
+quote !~) (list (quote !~) (quote k)))))) (list (quote !~) (quote n)) (list (
+quote !~) (quote z))) (list (quote when) (list (quote times) (list (quote expt)
+(list (quote minus) (quote z)) (list (quote quotient) (list (quote difference) (
+quote k) 1) 2)) (list (quote difference) (list (quote times) (list (quote sqrt)
+(quote z)) (list (quote sin) (list (quote quotient) 1 (list (quote sqrt) (quote
+z))))) (list (quote sum) (list (quote quotient) (list (quote expt) (minus 1) (
+quote j)) (list (quote times) (list (quote factorial) (list (quote plus) (list (
+quote times) 2 (quote j)) 1)) (list (quote expt) (quote z) (quote j)))) (quote j
+) 0 (list (quote quotient) (list (quote difference) (quote k) 3) 2)))) (list (
+quote and) (list (quote freeof) (quote k) (quote n)) (list (quote fixp) (list (
+quote quotient) (list (quote plus) (quote k) 1) 2)) (list (quote greaterp) (
+quote k) 0)))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote 
+quotient) (list (quote expt) (minus 1) (list (quote !~) (quote n))) (list (quote
+factorial) (list (quote plus) (list (quote times) 2 (list (quote !~) (quote n)))
+(list (quote !~) (list (quote !~) (quote k)))))) (list (quote !~) (quote n)) (
+list (quote !~) (quote z))) (list (quote when) (list (quote times) (list (quote
+expt) (list (quote minus) (quote z)) (list (quote quotient) (quote k) 2)) (list
+(quote difference) (list (quote cos) (list (quote quotient) 1 (list (quote sqrt)
+(quote z)))) (list (quote sum) (list (quote quotient) (list (quote expt) (minus
+1) (quote j)) (list (quote times) (list (quote factorial) (list (quote times) 2
+(quote j))) (list (quote expt) (quote z) (quote j)))) (quote j) 0 (list (quote 
+difference) (list (quote quotient) (quote k) 2) 1)))) (list (quote and) (list (
+quote freeof) (quote k) (quote n)) (list (quote fixp) (list (quote quotient) (
+quote k) 2)) (list (quote geq) (quote k) 0)))) (list (quote replaceby) (list (
+quote ztrans_aux) (list (quote sinh) (list (quote plus) (list (quote times) (
+list (quote !~) (list (quote !~) (quote al))) (list (quote !~) (quote n))) (list
+(quote !~) (list (quote !~) (quote p))))) (list (quote !~) (quote n)) (list (
+quote !~) (quote z))) (list (quote when) (list (quote times) (quote z) (list (
+quote quotient) (list (quote plus) (list (quote times) (quote z) (list (quote 
+sinh) (quote p))) (list (quote sinh) (list (quote difference) (quote al) (quote
+p)))) (list (quote plus) (list (quote difference) (list (quote expt) (quote z) 2
+) (list (quote times) 2 (quote z) (list (quote cosh) (quote al)))) 1))) (list (
+quote and) (list (quote freeof) (quote al) (quote n)) (list (quote freeof) (
+quote p) (quote n))))) (list (quote replaceby) (list (quote ztrans_aux) (list (
+quote cosh) (list (quote plus) (list (quote times) (list (quote !~) (list (quote
+!~) (quote al))) (list (quote !~) (quote n))) (list (quote !~) (list (quote !~)
+(quote p))))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (
+quote when) (list (quote times) (quote z) (list (quote quotient) (list (quote 
+difference) (list (quote times) (quote z) (list (quote cosh) (quote p))) (list (
+quote cosh) (list (quote difference) (quote al) (quote p)))) (list (quote plus)
+(list (quote difference) (list (quote expt) (quote z) 2) (list (quote times) 2 (
+quote z) (list (quote cosh) (quote al)))) 1))) (list (quote and) (list (quote 
+freeof) (quote al) (quote n)) (list (quote freeof) (quote p) (quote n))))) (list
+(quote replaceby) (list (quote ztrans_aux) (list (quote sin) (list (quote plus)
+(list (quote times) (list (quote !~) (list (quote !~) (quote b))) (list (quote 
+!~) (quote n))) (list (quote !~) (list (quote !~) (quote p))))) (list (quote !~)
+(quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (
+quote z) (list (quote quotient) (list (quote plus) (list (quote times) (quote z)
+(list (quote sin) (quote p))) (list (quote sin) (list (quote difference) (quote
+b) (quote p)))) (list (quote plus) (list (quote difference) (list (quote expt) (
+quote z) 2) (list (quote times) 2 (quote z) (list (quote cos) (quote b)))) 1)))
+(list (quote and) (list (quote freeof) (quote b) (quote n)) (list (quote freeof)
+(quote p) (quote n))))) (list (quote replaceby) (list (quote ztrans_aux) (list (
+quote cos) (list (quote plus) (list (quote times) (list (quote !~) (list (quote
+!~) (quote b))) (list (quote !~) (quote n))) (list (quote !~) (list (quote !~) (
+quote p))))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (
+quote when) (list (quote times) (quote z) (list (quote quotient) (list (quote 
+difference) (list (quote times) (quote z) (list (quote cos) (quote p))) (list (
+quote cos) (list (quote difference) (quote b) (quote p)))) (list (quote plus) (
+list (quote difference) (list (quote expt) (quote z) 2) (list (quote times) 2 (
+quote z) (list (quote cos) (quote b)))) 1))) (list (quote and) (list (quote 
+freeof) (quote b) (quote n)) (list (quote freeof) (quote p) (quote n))))) (list
+(quote replaceby) (list (quote ztrans_aux) (list (quote times) (list (quote expt
+) (quote e) (list (quote times) (list (quote !~) (list (quote !~) (quote a))) (
+list (quote !~) (quote n)))) (list (quote sin) (list (quote times) (list (quote
+!~) (list (quote !~) (quote b))) (list (quote !~) (quote n))))) (list (quote !~)
+(quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (
+quote z) (list (quote expt) (quote e) (quote a)) (list (quote quotient) (list (
+quote sin) (quote b)) (list (quote plus) (list (quote difference) (list (quote 
+expt) (quote z) 2) (list (quote times) 2 (quote z) (list (quote expt) (quote e)
+(quote a)) (list (quote cos) (quote b)))) (list (quote expt) (quote e) (list (
+quote times) 2 (quote a)))))) (list (quote and) (list (quote freeof) (quote a) (
+quote n)) (list (quote freeof) (quote b) (quote n))))) (list (quote replaceby) (
+list (quote ztrans_aux) (list (quote times) (list (quote expt) (quote e) (list (
+quote times) (list (quote !~) (list (quote !~) (quote a))) (list (quote !~) (
+quote n)))) (list (quote cos) (list (quote times) (list (quote !~) (list (quote
+!~) (quote b))) (list (quote !~) (quote n))))) (list (quote !~) (quote n)) (list
+(quote !~) (quote z))) (list (quote when) (list (quote times) (quote z) (list (
+quote quotient) (list (quote difference) (quote z) (list (quote times) (list (
+quote expt) (quote e) (quote a)) (list (quote cos) (quote b)))) (list (quote 
+plus) (list (quote difference) (list (quote expt) (quote z) 2) (list (quote 
+times) 2 (quote z) (list (quote expt) (quote e) (quote a)) (list (quote cos) (
+quote b)))) (list (quote expt) (quote e) (list (quote times) 2 (quote a)))))) (
+list (quote and) (list (quote freeof) (quote a) (quote n)) (list (quote freeof)
+(quote b) (quote n))))) (list (quote replaceby) (list (quote ztrans_aux) (list (
+quote quotient) (list (quote cos) (list (quote times) (list (quote !~) (list (
+quote !~) (quote b))) (list (quote plus) (list (quote !~) (quote n)) (list (
+quote !~) (list (quote !~) (quote k)))))) (list (quote plus) (list (quote !~) (
+quote n)) (list (quote !~) (list (quote !~) (quote k))))) (list (quote !~) (
+quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (
+list (quote expt) (quote z) (list (quote difference) (quote k) 1)) (list (quote
+difference) (list (quote times) (quote z) (list (quote log) (list (quote 
+quotient) (quote z) (list (quote sqrt) (list (quote plus) (list (quote 
+difference) (list (quote expt) (quote z) 2) (list (quote times) 2 (quote z) (
+list (quote cos) (quote b)))) 1))))) (list (quote sum) (list (quote quotient) (
+list (quote cos) (list (quote times) (quote b) (list (quote plus) (quote j) 1)))
+(list (quote times) (list (quote plus) (quote j) 1) (list (quote expt) (quote z)
+(quote j)))) (quote j) 0 (list (quote difference) (quote k) 2)))) (list (quote 
+and) (list (quote freeof) (quote b) (quote n)) (list (quote freeof) (quote k) (
+quote n)) (list (quote fixp) (quote k)) (list (quote greaterp) (quote k) 0)))) (
+list (quote replaceby) (list (quote ztrans_aux) (list (quote quotient) (list (
+quote sin) (list (quote times) (list (quote !~) (list (quote !~) (quote b))) (
+list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (list (quote !~)
+(quote k)))))) (list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (
+list (quote !~) (quote k))))) (list (quote !~) (quote n)) (list (quote !~) (
+quote z))) (list (quote when) (list (quote times) (list (quote expt) (quote z) (
+list (quote difference) (quote k) 1)) (list (quote difference) (list (quote 
+minus) (list (quote times) (quote z) (list (quote atan) (list (quote quotient) (
+list (quote sin) (quote b)) (list (quote difference) (list (quote cos) (quote b)
+) (quote z)))))) (list (quote sum) (list (quote quotient) (list (quote sin) (
+list (quote times) (quote b) (list (quote plus) (quote j) 1))) (list (quote 
+times) (list (quote plus) (quote j) 1) (list (quote expt) (quote z) (quote j))))
+(quote j) 0 (list (quote difference) (quote k) 2)))) (list (quote and) (list (
+quote freeof) (quote b) (quote n)) (list (quote freeof) (quote k) (quote n)) (
+list (quote fixp) (quote k)) (list (quote greaterp) (quote k) 0)))) (list (quote
+replaceby) (list (quote ztrans_aux) (list (quote times) (list (quote expt) (
+minus 1) (quote n)) (list (quote quotient) (list (quote cos) (list (quote times)
+(list (quote !~) (list (quote !~) (quote b))) (list (quote plus) (list (quote !~
+) (quote n)) (list (quote !~) (list (quote !~) (quote k)))))) (list (quote plus)
+(list (quote !~) (quote n)) (list (quote !~) (list (quote !~) (quote k)))))) (
+list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list
+(quote minus) (list (quote times) (list (quote expt) (list (quote minus) (quote
+z)) (list (quote difference) (quote k) 1)) (list (quote difference) (list (quote
+times) (quote z) (list (quote log) (list (quote sqrt) (list (quote plus) (list (
+quote expt) (quote z) 2) (list (quote times) 2 (quote z) (list (quote cos) (
+quote b))) (list (quote quotient) 1 (quote z)))))) (list (quote sum) (list (
+quote times) (list (quote expt) (minus 1) (quote j)) (list (quote quotient) (
+list (quote cos) (list (quote times) (quote b) (list (quote plus) (quote j) 1)))
+(list (quote times) (list (quote plus) (quote j) 1) (list (quote expt) (quote z)
+(quote j))))) (quote j) 0 (list (quote difference) (quote k) 2))))) (list (quote
+and) (list (quote freeof) (quote b) (quote n)) (list (quote freeof) (quote k) (
+quote n)) (list (quote fixp) (quote k))))) (list (quote replaceby) (list (quote
+ztrans_aux) (list (quote quotient) (list (quote cos) (list (quote times) (list (
+quote !~) (list (quote !~) (quote b))) (list (quote !~) (quote n)))) (list (
+quote factorial) (list (quote !~) (quote n)))) (list (quote !~) (quote n)) (list
+(quote !~) (quote z))) (list (quote when) (list (quote times) (list (quote cos)
+(list (quote quotient) (list (quote sin) (quote b)) (quote z))) (list (quote 
+expt) (quote e) (list (quote quotient) (list (quote cos) (quote b)) (quote z))))
+(list (quote freeof) (quote b) (quote n)))) (list (quote replaceby) (list (quote
+ztrans_aux) (list (quote quotient) (list (quote cos) (list (quote times) (list (
+quote !~) (list (quote !~) (quote b))) (list (quote plus) (list (quote !~) (
+quote n)) (list (quote !~) (list (quote !~) (quote k)))))) (list (quote 
+factorial) (list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (list
+(quote !~) (quote k)))))) (list (quote !~) (quote n)) (list (quote !~) (quote z)
+)) (list (quote when) (list (quote times) (list (quote expt) (quote z) (quote k)
+) (list (quote difference) (list (quote times) (list (quote cos) (list (quote 
+quotient) (list (quote sin) (quote b)) (quote z))) (list (quote expt) (quote e)
+(list (quote quotient) (list (quote cos) (quote b)) (quote z)))) (list (quote 
+sum) (list (quote quotient) (list (quote cos) (list (quote times) (quote b) (
+quote j))) (list (quote times) (list (quote factorial) (quote j)) (list (quote 
+expt) (quote z) (quote j)))) (quote j) 0 (list (quote difference) (quote k) 1)))
+) (list (quote and) (list (quote freeof) (quote b) (quote n)) (list (quote fixp)
+(quote k))))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote 
+quotient) (list (quote sin) (list (quote times) (list (quote !~) (list (quote !~
+) (quote b))) (list (quote !~) (quote n)))) (list (quote factorial) (list (quote
+!~) (quote n)))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list
+(quote when) (list (quote times) (list (quote sin) (list (quote quotient) (list
+(quote sin) (quote b)) (quote z))) (list (quote expt) (quote e) (list (quote 
+quotient) (list (quote cos) (quote b)) (quote z)))) (list (quote freeof) (quote
+b) (quote n)))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote 
+quotient) (list (quote sin) (list (quote times) (list (quote !~) (list (quote !~
+) (quote b))) (list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (
+list (quote !~) (quote k)))))) (list (quote factorial) (list (quote plus) (list
+(quote !~) (quote n)) (list (quote !~) (list (quote !~) (quote k)))))) (list (
+quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list (
+quote times) (list (quote expt) (quote z) (quote k)) (list (quote difference) (
+list (quote times) (list (quote sin) (list (quote quotient) (list (quote sin) (
+quote b)) (quote z))) (list (quote expt) (quote e) (list (quote quotient) (list
+(quote cos) (quote b)) (quote z)))) (list (quote sum) (list (quote quotient) (
+list (quote sin) (list (quote times) (quote b) (quote j))) (list (quote times) (
+list (quote factorial) (quote j)) (list (quote expt) (quote z) (quote j)))) (
+quote j) 0 (list (quote difference) (quote k) 1)))) (list (quote and) (list (
+quote freeof) (quote b) (quote n)) (list (quote fixp) (quote k))))) (list (quote
+replaceby) (list (quote ztrans_aux) (list (quote minus) (list (quote !~) (quote
+f))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote minus
+) (list (quote ztrans) (quote f) (quote n) (quote z)))) (list (quote replaceby)
+(list (quote ztrans_aux) (list (quote !~) (quote a)) (list (quote !~) (quote n))
+(list (quote !~) (quote z))) (list (quote when) (list (quote times) (quote a) (
+list (quote ztrans) 1 (quote n) (quote z))) (list (quote freeof) (quote a) (
+quote n)))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote times)
+(list (quote !~) (quote a)) (list (quote !~) (quote f))) (list (quote !~) (quote
+n)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (quote a
+) (list (quote ztrans) (quote f) (quote n) (quote z))) (list (quote freeof) (
+quote a) (quote n)))) (list (quote replaceby) (list (quote ztrans_aux) (list (
+quote quotient) (list (quote !~) (quote f)) (list (quote !~) (quote b))) (list (
+quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list (
+quote quotient) (list (quote ztrans) (quote f) (quote n) (quote z)) (quote b)) (
+list (quote freeof) (quote b) (quote n)))) (list (quote replaceby) (list (quote
+ztrans_aux) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~)
+(quote g))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (
+quote when) (list (quote times) (quote a) (list (quote ztrans) (list (quote 
+quotient) 1 (quote g)) (quote n) (quote z))) (list (quote and) (list (quote 
+freeof) (quote a) (quote n)) (list (quote not) (list (quote equal) (quote a) 1))
+))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote times) (list (
+quote !~) (quote a)) (list (quote quotient) (list (quote !~) (quote f)) (list (
+quote !~) (quote g)))) (list (quote !~) (quote n)) (list (quote !~) (quote z)))
+(list (quote when) (list (quote times) (quote a) (list (quote ztrans) (list (
+quote quotient) (quote f) (quote g)) (quote n) (quote z))) (list (quote freeof)
+(quote a) (quote n)))) (list (quote replaceby) (list (quote ztrans_aux) (list (
+quote quotient) (list (quote !~) (quote f)) (list (quote times) (list (quote !~)
+(quote b)) (list (quote !~) (quote g)))) (list (quote !~) (quote n)) (list (
+quote !~) (quote z))) (list (quote when) (list (quote quotient) (list (quote 
+ztrans) (list (quote quotient) (quote f) (quote g)) (quote n) (quote z)) (quote
+b)) (list (quote freeof) (quote b) (quote n)))) (list (quote replaceby) (list (
+quote ztrans_aux) (list (quote quotient) (list (quote plus) (list (quote !~) (
+quote f)) (list (quote !~) (quote g))) (list (quote !~) (list (quote !~) (quote
+h)))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote plus
+) (list (quote ztrans) (list (quote quotient) (quote f) (quote h)) (quote n) (
+quote z)) (list (quote ztrans) (list (quote quotient) (quote g) (quote h)) (
+quote n) (quote z)))) (list (quote replaceby) (list (quote ztrans_aux) (list (
+quote times) (list (quote expt) (list (quote !~) (quote n)) (list (quote !~) (
+list (quote !~) (quote p)))) (list (quote !~) (list (quote !~) (quote f)))) (
+list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list
+(quote minus) (list (quote times) (quote z) (list (quote df) (list (quote ztrans
+) (list (quote times) (list (quote expt) (quote n) (list (quote difference) (
+quote p) 1)) (quote f)) (quote n) (quote z)) (quote z)))) (list (quote and) (
+list (quote freeof) (quote p) (quote n)) (list (quote fixp) (quote p)) (list (
+quote greaterp) (quote p) 0)))) (list (quote replaceby) (list (quote ztrans_aux)
+(list (quote times) (list (quote expt) (list (quote !~) (quote n)) (list (quote
+!~) (list (quote !~) (quote p)))) (list (quote quotient) (list (quote !~) (list
+(quote !~) (quote f))) (list (quote !~) (quote g)))) (list (quote !~) (quote n))
+(list (quote !~) (quote z))) (list (quote when) (list (quote minus) (list (quote
+times) (quote z) (list (quote df) (list (quote ztrans) (list (quote times) (list
+(quote expt) (quote n) (list (quote difference) (quote p) 1)) (list (quote 
+quotient) (quote f) (quote g))) (quote n) (quote z)) (quote z)))) (list (quote 
+and) (list (quote freeof) (quote p) (quote n)) (list (quote fixp) (quote p)) (
+list (quote greaterp) (quote p) 0)))) (list (quote replaceby) (list (quote 
+ztrans_aux) (list (quote !~) (list (quote f) (list (quote plus) (list (quote !~)
+(quote n)) (list (quote !~) (quote k))))) (list (quote !~) (quote n)) (list (
+quote !~) (quote z))) (list (quote when) (list (quote times) (list (quote expt)
+(quote z) (quote k)) (list (quote difference) (list (quote ztrans) (list (quote
+f) (quote n)) (quote n) (quote z)) (list (quote sum) (list (quote times) (list (
+quote f) (quote n)) (list (quote expt) (quote z) (list (quote minus) (quote n)))
+) (quote n) 0 (list (quote difference) (quote k) 1)))) (list (quote and) (list (
+quote freeof) (quote k) (quote n)) (list (quote fixp) (quote k)) (list (quote 
+greaterp) (quote k) 0)))) (list (quote replaceby) (list (quote ztrans_aux) (list
+(quote quotient) (list (quote !~) (list (quote f) (list (quote plus) (list (
+quote !~) (quote n)) (list (quote !~) (quote k))))) (list (quote !~) (list (
+quote g) (list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (quote
+k)))))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote 
+when) (list (quote times) (list (quote expt) (quote z) (quote k)) (list (quote 
+difference) (list (quote ztrans) (list (quote quotient) (list (quote f) (quote n
+)) (list (quote g) (quote n))) (quote n) (quote z)) (list (quote sum) (list (
+quote times) (list (quote quotient) (list (quote f) (quote n)) (list (quote g) (
+quote n))) (list (quote expt) (quote z) (list (quote minus) (quote n)))) (quote
+n) 0 (list (quote difference) (quote k) 1)))) (list (quote and) (list (quote 
+freeof) (quote k) (quote n)) (list (quote fixp) (quote k)) (list (quote greaterp
+) (quote k) 0)))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote
+quotient) 1 (list (quote !~) (list (quote g) (list (quote plus) (list (quote !~)
+(quote n)) (list (quote !~) (quote k)))))) (list (quote !~) (quote n)) (list (
+quote !~) (quote z))) (list (quote when) (list (quote times) (list (quote expt)
+(quote z) (quote k)) (list (quote difference) (list (quote ztrans) (list (quote
+quotient) 1 (list (quote g) (quote n))) (quote n) (quote z)) (list (quote sum) (
+list (quote times) (list (quote quotient) 1 (list (quote g) (quote n))) (list (
+quote expt) (quote z) (list (quote minus) (quote n)))) (quote n) 0 (list (quote
+difference) (quote k) 1)))) (list (quote and) (list (quote freeof) (quote k) (
+quote n)) (list (quote fixp) (quote k)) (list (quote greaterp) (quote k) 0)))) (
+list (quote replaceby) (list (quote ztrans_aux) (list (quote times) (list (quote
+expt) (list (quote !~) (quote a)) (list (quote plus) (list (quote !~) (quote n))
+(list (quote !~) (list (quote !~) (quote k))))) (list (quote !~) (quote f))) (
+list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list
+(quote times) (list (quote expt) (quote a) (quote k)) (list (quote sub) (list (
+quote equal) (quote z) (list (quote quotient) (quote z) (quote a))) (list (quote
+ztrans) (quote f) (quote n) (quote z)))) (list (quote and) (list (quote freeof)
+(quote a) (quote n)) (list (quote freeof) (quote k) (quote n))))) (list (quote 
+replaceby) (list (quote ztrans_aux) (list (quote times) (list (quote expt) (list
+(quote !~) (quote a)) (list (quote plus) (list (quote !~) (quote n)) (list (
+quote !~) (list (quote !~) (quote k))))) (list (quote quotient) (list (quote !~)
+(list (quote !~) (quote f))) (list (quote !~) (quote g)))) (list (quote !~) (
+quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (
+list (quote expt) (quote a) (quote k)) (list (quote sub) (list (quote equal) (
+quote z) (list (quote quotient) (quote z) (quote a))) (list (quote ztrans) (list
+(quote quotient) (quote f) (quote g)) (quote n) (quote z)))) (list (quote and) (
+list (quote freeof) (quote a) (quote n)) (list (quote freeof) (quote k) (quote n
+))))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote times) (list
+(quote expt) (list (quote !~) (quote a)) (list (quote difference) (list (quote 
+!~) (quote n)) (list (quote !~) (list (quote !~) (quote k))))) (list (quote 
+quotient) (list (quote !~) (list (quote !~) (quote f))) (list (quote !~) (quote
+g)))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when
+) (list (quote times) (list (quote expt) (quote a) (quote k)) (list (quote sub)
+(list (quote equal) (quote z) (list (quote quotient) (quote z) (quote a))) (list
+(quote ztrans) (list (quote quotient) (quote f) (quote g)) (quote n) (quote z)))
+) (list (quote and) (list (quote freeof) (quote a) (quote n)) (list (quote 
+freeof) (quote k) (quote n))))) (list (quote replaceby) (list (quote ztrans_aux)
+(list (quote times) (list (quote quotient) 1 (list (quote expt) (list (quote !~)
+(quote a)) (list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (list
+(quote !~) (quote k)))))) (list (quote !~) (quote f))) (list (quote !~) (quote n
+)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (list (
+quote quotient) 1 (list (quote expt) (quote a) (quote k))) (list (quote sub) (
+list (quote equal) (quote z) (list (quote times) (quote z) (quote a))) (list (
+quote ztrans) (quote f) (quote n) (quote z)))) (list (quote and) (list (quote 
+freeof) (quote a) (quote n)) (list (quote freeof) (quote k) (quote n))))) (list
+(quote replaceby) (list (quote ztrans_aux) (list (quote times) (list (quote 
+quotient) 1 (list (quote expt) (list (quote !~) (quote a)) (list (quote plus) (
+list (quote !~) (quote n)) (list (quote !~) (list (quote !~) (quote k)))))) (
+list (quote quotient) (list (quote !~) (list (quote !~) (quote f))) (list (quote
+!~) (quote g)))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list
+(quote when) (list (quote times) (list (quote quotient) 1 (list (quote expt) (
+quote a) (quote k))) (list (quote sub) (list (quote equal) (quote z) (list (
+quote times) (quote z) (quote a))) (list (quote ztrans) (list (quote quotient) (
+quote f) (quote g)) (quote n) (quote z)))) (list (quote and) (list (quote freeof
+) (quote a) (quote n)) (list (quote freeof) (quote k) (quote n))))) (list (quote
+replaceby) (list (quote ztrans_aux) (list (quote sum) (list (quote times) (list
+(quote !~) (list (quote f) (list (quote !~) (quote k)))) (list (quote !~) (list
+(quote g) (list (quote difference) (list (quote !~) (quote n)) (list (quote !~)
+(quote k)))))) (list (quote !~) (quote k)) 0 (list (quote !~) (quote n))) (list
+(quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list (
+quote times) (list (quote ztrans) (list (quote f) (quote n)) (quote n) (quote z)
+) (list (quote ztrans) (list (quote g) (quote n)) (quote n) (quote z))) (list (
+quote freeof) (quote k) (quote n)))) (list (quote replaceby) (list (quote 
+ztrans_aux) (list (quote !~) (list (quote summ) (list (quote !~) (quote f)) (
+list (quote !~) (quote k)) 0 (list (quote !~) (quote n)))) (list (quote !~) (
+quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote times) (
+quote z) (list (quote quotient) (list (quote ztrans) (list (quote sub) (list (
+quote equal) (quote k) (quote n)) (quote f)) (quote n) (quote z)) (list (quote 
+difference) (quote z) 1))) (list (quote and) (list (quote freeof) (quote k) (
+quote n)) (list (quote equal) (quote summ) (quote sum))))) (list (quote 
+replaceby) (list (quote ztrans_aux) (list (quote !~) (list (quote summ) (list (
+quote !~) (quote f)) (list (quote !~) (quote k)) 0 (list (quote plus) (list (
+quote !~) (quote n)) (list (quote !~) (quote w))))) (list (quote !~) (quote n))
+(list (quote !~) (quote z))) (list (quote when) (list (quote plus) (list (quote
+times) (quote z) (list (quote quotient) (list (quote ztrans) (list (quote sub) (
+list (quote equal) (quote k) (quote n)) (quote f)) (quote n) (quote z)) (list (
+quote difference) (quote z) 1))) (list (quote sum) (list (quote times) (list (
+quote expt) (quote z) (quote x)) (list (quote difference) (list (quote ztrans) (
+list (quote sub) (list (quote equal) (quote k) (quote n)) (quote f)) (quote n) (
+quote z)) (list (quote sum) (list (quote quotient) (list (quote sub) (list (
+quote equal) (quote k) (quote n)) (quote f)) (list (quote expt) (quote z) (quote
+n))) (quote n) 0 (list (quote difference) (quote x) 1)))) (quote x) 1 (quote w))
+) (list (quote and) (list (quote freeof) (quote w) (quote n)) (list (quote fixp)
+(quote w)) (list (quote greaterp) (quote w) 0) (list (quote equal) (quote summ)
+(quote sum))))) (list (quote replaceby) (list (quote ztrans_aux) (list (quote !~
+) (list (quote summ) (list (quote !~) (quote f)) (list (quote !~) (quote k)) (
+list (quote !~) (quote p)) (list (quote !~) (quote n)))) (list (quote !~) (quote
+n)) (list (quote !~) (quote z))) (list (quote when) (list (quote ztrans) (list (
+quote sum) (list (quote sub) (list (quote equal) (quote k) (list (quote plus) (
+quote k) (quote p))) (quote f)) (quote k) 0 (list (quote difference) (quote n) (
+quote p))) (quote n) (quote z)) (list (quote and) (list (quote freeof) (quote p)
+(quote n)) (list (quote fixp) (quote p)) (list (quote greaterp) (quote p) 0) (
+list (quote equal) (quote summ) (quote sum))))) (list (quote replaceby) (list (
+quote ztrans_aux) (list (quote !~) (list (quote summ) (list (quote !~) (quote f)
+) (list (quote !~) (quote k)) 0 (list (quote !~) (quote nn)))) (list (quote !~)
+(quote n)) (list (quote !~) (quote z))) (list (quote when) (list (quote 
+difference) (list (quote quotient) (list (quote ztrans) (list (quote sub) (list
+(quote equal) (quote k) (quote n)) (quote f)) (quote n) (quote z)) (list (quote
+difference) (quote z) 1)) (list (quote sum) (list (quote times) (list (quote 
+quotient) 1 (list (quote expt) (quote z) (quote y))) (list (quote ztrans) (list
+(quote sub) (list (quote equal) (quote k) (quote n)) (quote f)) (quote n) (quote
+z))) (quote y) 1 (list (quote difference) (list (quote difference) (quote n) (
+quote nn)) 1))) (list (quote and) (list (quote freeof) (list (quote difference)
+(quote nn) (quote n)) (quote n)) (list (quote fixp) (list (quote difference) (
+quote nn) (quote n))) (list (quote lessp) (list (quote difference) (quote nn) (
+quote n)) 0) (list (quote equal) (quote summ) (quote sum))))) (list (quote 
+replaceby) (list (quote ztrans_aux) (list (quote !~) (list (quote summ) (list (
+quote !~) (quote f)) (list (quote !~) (quote k)) (list (quote !~) (quote p)) (
+list (quote !~) (quote n)))) (list (quote !~) (quote n)) (list (quote !~) (quote
+z))) (list (quote when) (list (quote ztrans) (list (quote sum) (list (quote sub)
+(list (quote equal) (quote k) (list (quote plus) (quote k) (quote p))) (quote f)
+) (quote k) 0 (list (quote plus) (quote n) (list (quote minus) (quote p)))) (
+quote n) (quote z)) (list (quote and) (list (quote freeof) (quote p) (quote n))
+(list (quote fixp) (quote p)) (list (quote lessp) (quote p) 0) (list (quote 
+equal) (quote summ) (quote sum))))) (list (quote replaceby) (list (quote 
+ztrans_aux) (list (quote !~) (list (quote summ) (list (quote !~) (quote f)) (
+list (quote !~) (quote k)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when)
+(list (quote prog) (list (quote r)) (list (quote setq) (quote r) (list (quote 
+aeval) (list (quote list) (quote (quote difference)) (quote (quote q)) (quote (
+quote p))))) (list (quote return) (list (quote aeval) (list (quote list) (quote
+(quote ztrans)) (list (quote list) (quote (quote sum)) (list (quote list) (quote
+(quote sub)) (list (quote list) (quote (quote equal)) (quote (quote k)) (list (
+quote list) (quote (quote plus)) (quote (quote k)) (quote (quote p)))) (quote (
+quote f))) (quote (quote k)) 0 (quote r)) (quote (quote n)) (quote (quote z)))))
+) (list (quote and) (list (quote not) (list (quote equal) (quote p) 0)) (list (
+quote equal) (quote summ) (quote sum))))) (list (quote replaceby) (list (quote 
+ztrans_aux) (list (quote quotient) (list (quote !~) (list (quote !~) (quote f)))
+(list (quote plus) (list (quote !~) (quote n)) (list (quote !~) (list (quote !~)
+(quote k))))) (list (quote !~) (quote n)) (list (quote !~) (quote z))) (list (
+quote when) (list (quote prog) nil (list (quote aeval) (list (quote list) (quote
+(quote newrederr)) (list (quote list) (quote (quote list)) 
+"ERROR: zero divisor in " (list (quote list) (quote (quote sum)) (list (quote 
+list) (quote (quote quotient)) (quote (quote f)) (list (quote list) (quote (
+quote times)) (list (quote list) (quote (quote plus)) (quote (quote n)) (quote (
+quote k))) (list (quote list) (quote (quote expt)) (quote (quote z)) (quote (
+quote n))))) (quote (quote n)) 0 (quote (quote infinity))))))) (list (quote and)
+(list (quote numberp) (quote k)) (list (quote lessp) (quote k) 1)))) (list (
+quote replaceby) (list (quote ztrans_aux) (list (quote quotient) (list (quote !~
+) (list (quote !~) (quote f))) (list (quote factorial) (list (quote plus) (list
+(quote !~) (quote n)) (list (quote !~) (list (quote !~) (quote k)))))) (list (
+quote !~) (quote n)) (list (quote !~) (quote z))) (list (quote when) (list (
+quote prog) nil (list (quote aeval) (list (quote list) (quote (quote newrederr))
+(list (quote list) (quote (quote list)) "ERROR: zero divisor in " (list (quote 
+list) (quote (quote sum)) (list (quote list) (quote (quote quotient)) (quote (
+quote f)) (list (quote list) (quote (quote times)) (list (quote list) (quote (
+quote factorial)) (list (quote list) (quote (quote plus)) (quote (quote n)) (
+quote (quote k)))) (list (quote list) (quote (quote expt)) (quote (quote z)) (
+quote (quote n))))) (quote (quote n)) 0 (quote (quote infinity))))))) (list (
+quote and) (list (quote numberp) (quote k)) (list (quote lessp) (quote k) 0)))))
+)) (aeval (!~let (quote (ztransrules)))))
+(load!-package (quote residue))
+(progn (setk (quote ztranstrighypsimplificationrules) (aeval (list (quote list)
+(list (quote replaceby) (list (quote asin) (list (quote sin) (list (quote !~) (
+quote xx)))) (quote xx)) (list (quote replaceby) (list (quote acos) (list (quote
+cos) (list (quote !~) (quote xx)))) (quote xx)) (list (quote replaceby) (list (
+quote atan) (list (quote tan) (list (quote !~) (quote xx)))) (quote xx)) (list (
+quote replaceby) (list (quote acot) (list (quote cot) (list (quote !~) (quote xx
+)))) (quote xx)) (list (quote replaceby) (list (quote asinh) (list (quote sinh)
+(list (quote !~) (quote xx)))) (quote xx)) (list (quote replaceby) (list (quote
+acosh) (list (quote cosh) (list (quote !~) (quote xx)))) (quote xx)) (list (
+quote replaceby) (list (quote atanh) (list (quote tanh) (list (quote !~) (quote
+xx)))) (quote xx)) (list (quote replaceby) (list (quote acoth) (list (quote coth
+) (list (quote !~) (quote xx)))) (quote xx)) (list (quote replaceby) (list (
+quote expt) (list (quote difference) 1 (list (quote expt) (list (quote sin) (
+list (quote !~) (quote xx))) 2)) (list (quote quotient) 1 2)) (list (quote cos)
+(quote xx))) (list (quote replaceby) (list (quote expt) (list (quote difference)
+1 (list (quote expt) (list (quote cos) (list (quote !~) (quote xx))) 2)) (list (
+quote quotient) 1 2)) (list (quote sin) (quote xx))) (list (quote replaceby) (
+list (quote expt) (list (quote difference) (list (quote expt) (list (quote cosh)
+(list (quote !~) (quote xx))) 2) 1) (list (quote quotient) 1 2)) (list (quote 
+sinh) (quote xx))) (list (quote replaceby) (list (quote expt) (list (quote plus)
+1 (list (quote expt) (list (quote sinh) (list (quote !~) (quote xx))) 2)) (list
+(quote quotient) 1 2)) (list (quote cosh) (quote xx))) (list (quote replaceby) (
+list (quote expt) (list (quote plus) (list (quote cosh) (list (quote !~) (quote
+xx))) (list (quote sinh) (list (quote !~) (quote xx)))) (list (quote !~) (quote
+nn))) (list (quote plus) (list (quote cosh) (list (quote times) (quote nn) (
+quote xx))) (list (quote sinh) (list (quote times) (quote nn) (quote xx))))) (
+list (quote replaceby) (list (quote expt) (list (quote difference) (list (quote
+cosh) (list (quote !~) (quote xx))) (list (quote sinh) (list (quote !~) (quote 
+xx)))) (list (quote !~) (quote nn))) (list (quote difference) (list (quote cosh)
+(list (quote times) (quote nn) (quote xx))) (list (quote sinh) (list (quote 
+times) (quote nn) (quote xx)))))))) (aeval (operator (list (quote invztrans) (
+quote invztrans_aux) (quote invztrans1) (quote invztrans_end)))) (aeval (!~let (
+quote ((list (replaceby (binomial (!~ n) (!~ k)) (when (quotient (prog (i 
+forall!-result) (setq i 0) (setq forall!-result 1) lab1 (cond ((aminusp!: (list
+(quote difference) (aeval!* (list (quote difference) (quote k) 1)) i)) (return 
+forall!-result))) (setq forall!-result (aeval!* (list (quote times) (aeval!* (
+list (quote difference) (quote n) i)) forall!-result))) (setq i ((lambda (
+forall!-result) (aeval!* (list (quote plus) forall!-result 1))) i)) (go lab1)) (
+factorial k)) (fixp k)))))))) (aeval (quote nil)))
+(progn (aeval (put (quote do_invztrans) (quote procedure_type) (quote (arrow (
+times general general general) general)))) (aeval (put (quote do_invztrans) (
+quote defined!-in!-file) (quote ztrans!/ztrrules!.red))) (aeval (put (quote 
+do_invztrans) (quote defined!-on!-line) 300)) (progn (put (quote do_invztrans) (
+quote number!-of!-args) 3) (flag (quote (do_invztrans)) (quote opfn)) (de 
+do_invztrans (f z n) (prog (tmp numtmp dentmp) (setq tmp (aeval (list (quote 
+invztrans1) f z n))) (setq numtmp (aeval (list (quote num) tmp))) (setq dentmp (
+aeval (list (quote den) tmp))) (setq numtmp (aeval (list (quote whereexp) (list
+(quote list) (quote ztranstrighypsimplificationrules)) numtmp))) (setq dentmp (
+aeval (list (quote whereexp) (list (quote list) (quote 
+ztranstrighypsimplificationrules)) dentmp))) (setq tmp (aeval (list (quote 
+quotient) numtmp dentmp))) (return (aeval tmp))))))
+(put (quote slash) (quote simpfn) (quote simpiden))
+(progn (setk (quote invztransrules) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote invztrans) (list (quote !~) (quote p)) (list (quote !~)
+(quote z)) (list (quote !~) (quote n))) (list (quote when) (quote 
+!$do_invztrans!$) (list (quote freeof) (list (quote setq) (quote 
+!$do_invztrans!$) (list (quote do_invztrans) (quote p) (quote z) (quote n))) (
+list (quote symbolic) (quote (quote fail)))))) (list (quote replaceby) (list (
+quote invztrans1) (list (quote !~) (quote p)) (list (quote !~) (quote z)) (list
+(quote !~) (quote n))) (list (quote when) (list (quote times) (quote p) (list (
+quote invztrans1) 1 (quote z) (quote n))) (list (quote and) (list (quote freeof)
+(quote p) (quote z)) (list (quote not) (list (quote equal) (quote p) 1))))) (
+list (quote replaceby) (list (quote invztrans1) (list (quote times) (list (quote
+!~) (quote p)) (list (quote !~) (quote f))) (list (quote !~) (quote z)) (list (
+quote !~) (quote n))) (list (quote when) (list (quote times) (quote p) (list (
+quote invztrans1) (quote f) (quote z) (quote n))) (list (quote freeof) (quote p)
+(quote z)))) (list (quote replaceby) (list (quote invztrans1) (list (quote 
+quotient) (list (quote !~) (quote f)) (list (quote !~) (quote q))) (list (quote
+!~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list (quote 
+quotient) (list (quote invztrans1) (quote f) (quote z) (quote n)) (quote q)) (
+list (quote freeof) (quote q) (quote z)))) (list (quote replaceby) (list (quote
+invztrans1) (list (quote quotient) (list (quote !~) (quote p)) (list (quote !~)
+(quote g))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (
+quote when) (list (quote times) (quote p) (list (quote invztrans1) (list (quote
+quotient) 1 (quote g)) (quote z) (quote n))) (list (quote and) (list (quote 
+freeof) (quote p) (quote z)) (list (quote not) (list (quote equal) (quote p) 1))
+))) (list (quote replaceby) (list (quote invztrans1) (list (quote times) (list (
+quote !~) (quote p)) (list (quote quotient) (list (quote !~) (quote f)) (list (
+quote !~) (quote g)))) (list (quote !~) (quote z)) (list (quote !~) (quote n)))
+(list (quote when) (list (quote times) (quote p) (list (quote invztrans1) (list
+(quote quotient) (quote f) (quote g)) (quote z) (quote n))) (list (quote freeof)
+(quote p) (quote z)))) (list (quote replaceby) (list (quote invztrans1) (list (
+quote quotient) (list (quote !~) (quote f)) (list (quote times) (list (quote !~)
+(quote q)) (list (quote !~) (quote g)))) (list (quote !~) (quote z)) (list (
+quote !~) (quote n))) (list (quote when) (list (quote quotient) (list (quote 
+invztrans1) (list (quote quotient) (quote f) (quote g)) (quote z) (quote n)) (
+quote q)) (list (quote freeof) (quote q) (quote z)))) (list (quote replaceby) (
+list (quote invztrans1) (list (quote minus) (list (quote !~) (quote f))) (list (
+quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote minus) (list (
+quote invztrans1) (quote f) (quote z) (quote n)))) (list (quote replaceby) (list
+(quote invztrans1) (list (quote quotient) (list (quote plus) (list (quote !~) (
+quote f)) (list (quote !~) (quote g))) (list (quote !~) (list (quote !~) (quote
+h)))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote plus
+) (list (quote invztrans1) (list (quote quotient) (quote f) (quote h)) (quote z)
+(quote n)) (list (quote invztrans1) (list (quote quotient) (quote g) (quote h))
+(quote z) (quote n)))) (list (quote replaceby) (list (quote invztrans1) (list (
+quote quotient) (list (quote !~) (quote f)) (list (quote !~) (quote g))) (list (
+quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list (
+quote invztrans_aux) (quote f) (quote g) (quote z) (quote n)) (list (quote or) (
+list (quote not) (list (quote freeof) (list (quote quotient) (quote f) (quote g)
+) (quote sin))) (list (quote not) (list (quote freeof) (list (quote quotient) (
+quote f) (quote g)) (quote cos))) (list (quote not) (list (quote freeof) (list (
+quote quotient) (quote f) (quote g)) (quote sinh))) (list (quote not) (list (
+quote freeof) (list (quote quotient) (quote f) (quote g)) (quote cosh)))))) (
+list (quote replaceby) (list (quote invztrans1) (list (quote !~) (quote f)) (
+list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote 
+invztrans_end) (quote f) (quote z) (quote n)))))) (aeval (!~let (quote (
+invztransrules)))) (setk (quote invztrans_auxrules) (aeval (list (quote list) (
+list (quote replaceby) (list (quote invztrans_aux) (list (quote !~) (quote f)) (
+list (quote plus) (list (quote minus) (list (quote times) (list (quote !~) (list
+(quote !~) (quote x))) (list (quote expt) (list (quote !~) (quote z)) 2))) (list
+(quote difference) (list (quote times) (list (quote !~) (list (quote !~) (quote
+w))) (list (quote !~) (quote z))) (list (quote !~) (quote y)))) (list (quote !~)
+(quote z)) (list (quote !~) (quote n))) (list (quote minus) (list (quote 
+invztrans_aux) (quote f) (list (quote plus) (list (quote difference) (list (
+quote times) (quote x) (list (quote expt) (quote z) 2)) (list (quote times) (
+quote w) (quote z))) (quote y)) (quote z) (quote n)))) (list (quote replaceby) (
+list (quote invztrans_aux) (list (quote plus) (list (quote !~) (quote f)) (list
+(quote !~) (quote h))) (list (quote !~) (quote g)) (list (quote !~) (quote z)) (
+list (quote !~) (quote n))) (list (quote plus) (list (quote invztrans_aux) (
+quote f) (quote g) (quote z) (quote n)) (list (quote invztrans_aux) (quote h) (
+quote g) (quote z) (quote n)))) (list (quote replaceby) (list (quote 
+invztrans_aux) (list (quote !~) (quote z)) (list (quote plus) (list (quote 
+difference) (list (quote times) (list (quote !~) (list (quote !~) (quote x))) (
+list (quote expt) (list (quote !~) (quote z)) 2)) (list (quote times) (list (
+quote !~) (list (quote !~) (quote w))) (list (quote !~) (quote z)))) (list (
+quote !~) (quote y))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (
+list (quote when) (list (quote sub) (list (quote equal) (quote srx) (list (quote
+sqrt) (quote x))) (list (quote equal) (quote srw) (list (quote sqrt) (quote w)))
+(list (quote equal) (quote sry) (list (quote sqrt) (quote y))) (list (quote 
+times) 2 (list (quote expt) (quote sry) (quote n)) (list (quote quotient) (list
+(quote sin) (list (quote times) (list (quote acos) (list (quote times) (quote 
+srx) (list (quote quotient) (quote w) (list (quote times) 2 (quote sry) (quote x
+))))) (quote n))) (list (quote times) (list (quote expt) (quote srx) (quote n))
+(list (quote sqrt) (list (quote difference) (list (quote times) 4 (quote x) (
+quote y)) (list (quote expt) (quote w) 2))))))) (list (quote or) (list (quote 
+and) (list (quote numberp) (quote x)) (list (quote numberp) (quote w)) (list (
+quote numberp) (quote y)) (list (quote greaterp) (quote y) 0) (list (quote 
+greaterp) (quote w) 0) (list (quote lessp) (list (quote expt) (quote w) 2) (list
+(quote times) 4 (quote x) (quote y)))) (list (quote and) (list (quote numberp) (
+quote x)) (list (quote numberp) (quote w)) (list (quote not) (list (quote 
+numberp) (quote y))) (list (quote greaterp) (quote w) 0)) (list (quote and) (
+list (quote not) (list (quote and) (list (quote numberp) (quote x)) (list (quote
+numberp) (quote w)) (list (quote numberp) (quote y)))) (list (quote freeof) (
+list (quote quotient) (quote w) (quote x)) (quote cosh)))))) (list (quote 
+replaceby) (list (quote invztrans_aux) (list (quote !~) (quote z)) (list (quote
+plus) (list (quote times) (list (quote !~) (list (quote !~) (quote x))) (list (
+quote expt) (list (quote !~) (quote z)) 2)) (list (quote times) (list (quote !~)
+(list (quote !~) (quote w))) (list (quote !~) (quote z))) (list (quote !~) (
+quote y))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote
+when) (list (quote sub) (list (quote equal) (quote srx) (list (quote sqrt) (
+quote x))) (list (quote equal) (quote srw) (list (quote sqrt) (quote w))) (list
+(quote equal) (quote sry) (list (quote sqrt) (quote y))) (list (quote minus) (
+list (quote times) 2 (list (quote expt) (quote sry) (quote n)) (list (quote expt
+) (minus 1) (quote n)) (list (quote quotient) (list (quote sin) (list (quote 
+times) (list (quote acos) (list (quote times) (quote srx) (list (quote quotient)
+(quote w) (list (quote times) 2 (quote sry) (quote x))))) (quote n))) (list (
+quote times) (list (quote expt) (quote srx) (quote n)) (list (quote sqrt) (list
+(quote difference) (list (quote times) 4 (quote x) (quote y)) (list (quote expt)
+(quote w) 2)))))))) (list (quote or) (list (quote and) (list (quote numberp) (
+quote x)) (list (quote numberp) (quote w)) (list (quote numberp) (quote y)) (
+list (quote greaterp) (quote y) 0) (list (quote greaterp) (quote w) 0) (list (
+quote lessp) (list (quote expt) (quote w) 2) (list (quote times) 4 (quote x) (
+quote y)))) (list (quote and) (list (quote numberp) (quote x)) (list (quote 
+numberp) (quote w)) (list (quote not) (list (quote numberp) (quote y))) (list (
+quote lessp) (quote w) 0)) (list (quote and) (list (quote not) (list (quote and)
+(list (quote numberp) (quote x)) (list (quote numberp) (quote w)) (list (quote 
+numberp) (quote y)))) (list (quote freeof) (list (quote quotient) (quote w) (
+quote x)) (quote cosh)))))) (list (quote replaceby) (list (quote invztrans_aux)
+(list (quote !~) (quote z)) (list (quote plus) (list (quote difference) (list (
+quote times) (list (quote !~) (list (quote !~) (quote x))) (list (quote expt) (
+list (quote !~) (quote z)) 2)) (list (quote times) (list (quote !~) (list (quote
+!~) (quote w))) (list (quote !~) (quote z)))) (list (quote !~) (quote y))) (list
+(quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list (
+quote sub) (list (quote equal) (quote srx) (list (quote sqrt) (quote x))) (list
+(quote equal) (quote srw) (list (quote sqrt) (quote w))) (list (quote equal) (
+quote sry) (list (quote sqrt) (quote y))) (list (quote times) 2 (list (quote 
+expt) (quote sry) (quote n)) (list (quote quotient) (list (quote sinh) (list (
+quote times) (list (quote acosh) (list (quote times) (quote srx) (list (quote 
+quotient) (quote w) (list (quote times) 2 (quote sry) (quote x))))) (quote n)))
+(list (quote times) (list (quote expt) (quote srx) (quote n)) (list (quote sqrt)
+(list (quote difference) (list (quote expt) (quote w) 2) (list (quote times) 4 (
+quote x) (quote y)))))))) (list (quote or) (list (quote and) (list (quote 
+numberp) (quote x)) (list (quote numberp) (quote w)) (list (quote numberp) (
+quote y)) (list (quote greaterp) (quote y) 0) (list (quote greaterp) (list (
+quote expt) (quote w) 2) (list (quote times) 4 (quote x) (quote y)))) (list (
+quote not) (list (quote and) (list (quote numberp) (quote x)) (list (quote 
+numberp) (quote w)) (list (quote numberp) (quote y))))))) (list (quote replaceby
+) (list (quote invztrans_aux) (list (quote !~) (quote z)) (list (quote plus) (
+list (quote times) (list (quote !~) (list (quote !~) (quote x))) (list (quote 
+expt) (list (quote !~) (quote z)) 2)) (list (quote times) (list (quote !~) (list
+(quote !~) (quote w))) (list (quote !~) (quote z))) (list (quote !~) (quote y)))
+(list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (
+list (quote sub) (list (quote equal) (quote srx) (list (quote sqrt) (quote x)))
+(list (quote equal) (quote srw) (list (quote sqrt) (quote w))) (list (quote 
+equal) (quote sry) (list (quote sqrt) (quote y))) (list (quote minus) (list (
+quote times) 2 (list (quote expt) (list (quote minus) (quote sry)) (quote n)) (
+list (quote quotient) (list (quote sinh) (list (quote times) (list (quote acosh)
+(list (quote times) (quote srx) (list (quote quotient) (quote w) (list (quote 
+times) 2 (quote sry) (quote x))))) (quote n))) (list (quote times) (list (quote
+expt) (quote srx) (quote n)) (list (quote sqrt) (list (quote difference) (list (
+quote expt) (quote w) 2) (list (quote times) 4 (quote x) (quote y))))))))) (list
+(quote or) (list (quote and) (list (quote numberp) (quote x)) (list (quote 
+numberp) (quote w)) (list (quote numberp) (quote y)) (list (quote greaterp) (
+quote y) 0) (list (quote greaterp) (list (quote expt) (quote w) 2) (list (quote
+times) 4 (quote x) (quote y)))) (list (quote not) (list (quote and) (list (quote
+numberp) (quote x)) (list (quote numberp) (quote w)) (list (quote numberp) (
+quote y))))))) (list (quote replaceby) (list (quote invztrans_aux) (list (quote
+expt) (list (quote !~) (quote z)) 2) (list (quote plus) (list (quote difference)
+(list (quote times) (list (quote !~) (list (quote !~) (quote x))) (list (quote 
+expt) (list (quote !~) (quote z)) 2)) (list (quote times) (list (quote !~) (list
+(quote !~) (quote w))) (list (quote !~) (quote z)))) (list (quote !~) (quote y))
+) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (
+list (quote sub) (list (quote equal) (quote srx) (list (quote sqrt) (quote x)))
+(list (quote equal) (quote srw) (list (quote sqrt) (quote w))) (list (quote 
+equal) (quote sry) (list (quote sqrt) (quote y))) (list (quote quotient) (list (
+quote times) (list (quote expt) (quote sry) (quote n)) (list (quote plus) (list
+(quote times) (list (quote sqrt) (list (quote difference) (list (quote times) 4
+(quote x) (quote y)) (list (quote expt) (quote w) 2))) (list (quote cos) (list (
+quote times) (list (quote acos) (list (quote times) (quote srx) (list (quote 
+quotient) (quote w) (list (quote times) 2 (quote sry) (quote x))))) (quote n))))
+(list (quote times) (list (quote sin) (list (quote times) (list (quote acos) (
+list (quote times) (quote srx) (list (quote quotient) (quote w) (list (quote 
+times) 2 (quote sry) (quote x))))) (quote n))) (quote w)))) (list (quote times)
+(list (quote expt) (quote srx) (quote n)) (list (quote sqrt) (list (quote 
+difference) (list (quote times) 4 (quote x) (quote y)) (list (quote expt) (quote
+w) 2))) (quote x)))) (list (quote or) (list (quote and) (list (quote numberp) (
+quote x)) (list (quote numberp) (quote w)) (list (quote numberp) (quote y)) (
+list (quote greaterp) (quote y) 0) (list (quote greaterp) (quote w) 0) (list (
+quote lessp) (list (quote expt) (quote w) 2) (list (quote times) 2 (quote x) (
+quote y)))) (list (quote and) (list (quote numberp) (quote x)) (list (quote 
+numberp) (quote w)) (list (quote greaterp) (quote w) 0)) (list (quote and) (list
+(quote not) (list (quote and) (list (quote numberp) (quote x)) (list (quote 
+numberp) (quote w)) (list (quote numberp) (quote y)))) (list (quote freeof) (
+list (quote quotient) (quote w) (quote x)) (quote cosh)))))) (list (quote 
+replaceby) (list (quote invztrans_aux) (list (quote expt) (list (quote !~) (
+quote z)) 2) (list (quote plus) (list (quote times) (list (quote !~) (list (
+quote !~) (quote x))) (list (quote expt) (list (quote !~) (quote z)) 2)) (list (
+quote times) (list (quote !~) (list (quote !~) (quote w))) (list (quote !~) (
+quote z))) (list (quote !~) (quote y))) (list (quote !~) (quote z)) (list (quote
+!~) (quote n))) (list (quote when) (list (quote sub) (list (quote equal) (quote
+srx) (list (quote sqrt) (quote x))) (list (quote equal) (quote srw) (list (quote
+sqrt) (quote w))) (list (quote equal) (quote sry) (list (quote sqrt) (quote y)))
+(list (quote quotient) (list (quote times) (list (quote expt) (quote sry) (quote
+n)) (list (quote expt) (minus 1) (quote n)) (list (quote plus) (list (quote 
+times) (list (quote sqrt) (list (quote difference) (list (quote times) 4 (quote
+x) (quote y)) (list (quote expt) (quote w) 2))) (list (quote cos) (list (quote 
+times) (list (quote acos) (list (quote times) (quote srx) (list (quote quotient)
+(quote w) (list (quote times) 2 (quote sry) (quote x))))) (quote n)))) (list (
+quote times) (list (quote sin) (list (quote times) (list (quote acos) (list (
+quote times) (quote srx) (list (quote quotient) (quote w) (list (quote times) 2
+(quote sry) (quote x))))) (quote n))) (quote w)))) (list (quote times) (list (
+quote expt) (quote srx) (quote n)) (list (quote sqrt) (list (quote difference) (
+list (quote times) 4 (quote x) (quote y)) (list (quote expt) (quote w) 2))) (
+quote x)))) (list (quote or) (list (quote and) (list (quote numberp) (quote x))
+(list (quote numberp) (quote w)) (list (quote numberp) (quote y)) (list (quote 
+greaterp) (quote y) 0) (list (quote greaterp) (quote w) 0) (list (quote greaterp
+) (list (quote expt) (quote w) 2) (list (quote times) 4 (quote x) (quote y)))) (
+list (quote and) (list (quote numberp) (quote x)) (list (quote numberp) (quote w
+)) (list (quote lessp) (quote w) 0)) (list (quote and) (list (quote not) (list (
+quote and) (list (quote numberp) (quote x)) (list (quote numberp) (quote w)) (
+list (quote numberp) (quote y)))) (list (quote freeof) (list (quote quotient) (
+quote w) (quote x)) (quote cosh)))))) (list (quote replaceby) (list (quote 
+invztrans_aux) (list (quote expt) (list (quote !~) (quote z)) 2) (list (quote 
+plus) (list (quote difference) (list (quote times) (list (quote !~) (list (quote
+!~) (quote x))) (list (quote expt) (list (quote !~) (quote z)) 2)) (list (quote
+times) (list (quote !~) (list (quote !~) (quote w))) (list (quote !~) (quote z))
+)) (list (quote !~) (quote y))) (list (quote !~) (quote z)) (list (quote !~) (
+quote n))) (list (quote when) (list (quote sub) (list (quote equal) (quote srx)
+(list (quote sqrt) (quote x))) (list (quote equal) (quote srw) (list (quote sqrt
+) (quote w))) (list (quote equal) (quote sry) (list (quote sqrt) (quote y))) (
+list (quote quotient) (list (quote times) (list (quote expt) (quote sry) (quote
+n)) (list (quote plus) (list (quote times) (list (quote sqrt) (list (quote 
+difference) (list (quote expt) (quote w) 2) (list (quote times) 4 (quote x) (
+quote y)))) (list (quote cosh) (list (quote times) (list (quote acosh) (list (
+quote times) (quote srx) (list (quote quotient) (quote w) (list (quote times) 2
+(quote sry) (quote x))))) (quote n)))) (list (quote times) (list (quote sinh) (
+list (quote times) (list (quote acosh) (list (quote times) (quote srx) (list (
+quote quotient) (quote w) (list (quote times) 2 (quote sry) (quote x))))) (quote
+n))) (quote w)))) (list (quote times) (list (quote expt) (quote srx) (quote n))
+(list (quote sqrt) (list (quote difference) (list (quote expt) (quote w) 2) (
+list (quote times) 4 (quote x) (quote y)))) (quote x)))) (list (quote or) (list
+(quote and) (list (quote numberp) (quote x)) (list (quote numberp) (quote w)) (
+list (quote numberp) (quote y)) (list (quote greaterp) (quote y) 0) (list (quote
+greaterp) (quote w) (list (quote times) 4 (quote x) (quote y)))) (list (quote 
+not) (list (quote and) (list (quote numberp) (quote x)) (list (quote numberp) (
+quote w)) (list (quote numberp) (quote y))))))) (list (quote replaceby) (list (
+quote invztrans_aux) (list (quote expt) (list (quote !~) (quote z)) 2) (list (
+quote plus) (list (quote times) (list (quote !~) (list (quote !~) (quote x))) (
+list (quote expt) (list (quote !~) (quote z)) 2)) (list (quote times) (list (
+quote !~) (list (quote !~) (quote w))) (list (quote !~) (quote z))) (list (quote
+!~) (quote y))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (
+quote when) (list (quote sub) (list (quote equal) (quote srx) (list (quote sqrt)
+(quote x))) (list (quote equal) (quote srw) (list (quote sqrt) (quote w))) (list
+(quote equal) (quote sry) (list (quote sqrt) (quote y))) (list (quote quotient)
+(list (quote times) (list (quote expt) (list (quote minus) (quote sry)) (quote n
+)) (list (quote plus) (list (quote times) (list (quote sqrt) (list (quote 
+difference) (list (quote expt) (quote w) 2) (list (quote times) 4 (quote x) (
+quote y)))) (list (quote cosh) (list (quote times) (list (quote acosh) (list (
+quote times) (quote srx) (list (quote quotient) (quote w) (list (quote times) 2
+(quote sry) (quote x))))) (quote n)))) (list (quote times) (list (quote sinh) (
+list (quote times) (list (quote acosh) (list (quote times) (quote srx) (list (
+quote quotient) (quote w) (list (quote times) 2 (quote sry) (quote x))))) (quote
+n))) (quote w)))) (list (quote times) (list (quote expt) (quote srx) (quote n))
+(list (quote sqrt) (list (quote difference) (list (quote expt) (quote w) 2) (
+list (quote times) 4 (quote x) (quote y)))) (quote x)))) (list (quote or) (list
+(quote and) (list (quote numberp) (quote x)) (list (quote numberp) (quote w)) (
+list (quote numberp) (quote y)) (list (quote greaterp) (quote y) 0) (list (quote
+greaterp) (quote w) (list (quote times) 4 (quote x) (quote y)))) (list (quote 
+not) (list (quote and) (list (quote numberp) (quote x)) (list (quote numberp) (
+quote w)) (list (quote numberp) (quote y))))))) (list (quote replaceby) (list (
+quote invztrans_aux) (list (quote !~) (quote f)) (list (quote !~) (quote g)) (
+list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote 
+invztrans_end) (list (quote quotient) (quote f) (quote g)) (quote z) (quote n)))
+))) (aeval (!~let (quote (invztrans_auxrules)))) (setk (quote invztrans_endrules
+) (aeval (list (quote list) (list (quote replaceby) (list (quote invztrans_end)
+(list (quote times) (list (quote !~) (quote z)) (list (quote atan) (list (quote
+slash) (list (quote sin) (list (quote !~) (quote b))) (list (quote difference) (
+list (quote cos) (list (quote !~) (quote b))) (list (quote !~) (quote z)))))) (
+list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list
+(quote minus) (list (quote quotient) (list (quote sin) (list (quote times) (
+quote b) (list (quote plus) (quote n) 1))) (list (quote plus) (quote n) 1))) (
+list (quote or) (list (quote numberp) (quote b)) (list (quote and) (list (quote
+freeof) (quote b) (quote z)) (list (quote not) (list (quote numberp) (quote b)))
+)))) (list (quote replaceby) (list (quote invztrans_end) (list (quote times) (
+list (quote !~) (quote z)) (list (quote atan) (list (quote slash) (list (quote 
+sin) (list (quote !~) (quote b))) (list (quote plus) (list (quote !~) (quote z))
+(list (quote cos) (list (quote !~) (quote b))))))) (list (quote !~) (quote z)) (
+list (quote !~) (quote n))) (list (quote when) (list (quote times) (list (quote
+expt) (minus 1) (quote n)) (list (quote quotient) (list (quote sin) (list (quote
+times) (quote b) (list (quote plus) (quote n) 1))) (list (quote plus) (quote n)
+1))) (list (quote or) (list (quote numberp) (quote a)) (list (quote and) (list (
+quote freeof) (quote a) (quote z)) (list (quote not) (list (quote numberp) (
+quote a))))))) (list (quote replaceby) (list (quote invztrans_end) (list (quote
+times) (list (quote !~) (quote z)) (list (quote log) (list (quote quotient) (
+list (quote !~) (quote z)) (list (quote sqrt) (list (quote plus) (list (quote 
+difference) (list (quote expt) (list (quote !~) (quote z)) 2) (list (quote times
+) (list (quote !~) (quote a)) (list (quote !~) (quote z)))) 1))))) (list (quote
+!~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list (quote 
+quotient) (list (quote cos) (list (quote times) (list (quote acos) (list (quote
+quotient) (quote a) 2)) (list (quote plus) (quote n) 1))) (list (quote plus) (
+quote n) 1)) (list (quote or) (list (quote and) (list (quote numberp) (quote a))
+(list (quote greaterp) (quote a) 0) (list (quote leq) (quote a) (list (quote 
+minus) 2))) (list (quote and) (list (quote freeof) (quote a) (quote z)) (list (
+quote not) (list (quote numberp) (quote a))))))) (list (quote replaceby) (list (
+quote invztrans_end) (list (quote times) (list (quote !~) (quote z)) (list (
+quote log) (list (quote quotient) (list (quote !~) (quote z)) (list (quote sqrt)
+(list (quote plus) (list (quote expt) (list (quote !~) (quote z)) 2) (list (
+quote times) (list (quote !~) (quote a)) (list (quote !~) (quote z))) 1))))) (
+list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list
+(quote quotient) (list (quote cos) (list (quote times) (list (quote acos) (list
+(quote minus) (list (quote quotient) (quote a) 2))) (list (quote plus) (quote n)
+1))) (list (quote plus) (quote n) 1)) (list (quote or) (list (quote and) (list (
+quote numberp) (quote a)) (list (quote lessp) (quote a) 0) (list (quote geq) (
+quote a) (list (quote minus) 2))) (list (quote and) (list (quote freeof) (quote
+a) (quote z)) (list (quote not) (list (quote numberp) (quote a))))))) (list (
+quote replaceby) (list (quote invztrans_end) (list (quote times) (list (quote !~
+) (quote z)) (list (quote log) (list (quote quotient) (list (quote sqrt) (list (
+quote plus) (list (quote difference) (list (quote expt) (list (quote !~) (quote
+z)) 2) (list (quote times) (list (quote !~) (quote a)) (list (quote !~) (quote z
+)))) 1)) (list (quote !~) (quote z))))) (list (quote !~) (quote z)) (list (quote
+!~) (quote n))) (list (quote when) (list (quote times) (list (quote expt) (minus
+1) (quote n)) (list (quote quotient) (list (quote cos) (list (quote times) (list
+(quote acos) (list (quote minus) (list (quote quotient) (quote a) 2))) (list (
+quote plus) (quote n) 1))) (list (quote plus) (quote n) 1))) (list (quote or) (
+list (quote and) (list (quote numberp) (quote a)) (list (quote lessp) (quote a)
+0) (list (quote geq) (quote a) (list (quote minus) 2))) (list (quote and) (list
+(quote freeof) (quote a) (quote z)) (list (quote not) (list (quote numberp) (
+quote a))))))) (list (quote replaceby) (list (quote invztrans_end) (list (quote
+times) (list (quote !~) (quote z)) (list (quote log) (list (quote quotient) (
+list (quote sqrt) (list (quote plus) (list (quote expt) (list (quote !~) (quote
+z)) 2) (list (quote times) (list (quote !~) (quote a)) (list (quote !~) (quote z
+))) 1)) (list (quote !~) (quote z))))) (list (quote !~) (quote z)) (list (quote
+!~) (quote n))) (list (quote when) (list (quote times) (list (quote expt) (minus
+1) (quote n)) (list (quote quotient) (list (quote cos) (list (quote times) (list
+(quote acos) (list (quote quotient) (quote a) 2)) (list (quote plus) (quote n) 1
+))) (list (quote plus) (quote n) 1))) (list (quote or) (list (quote and) (list (
+quote numberp) (quote a)) (list (quote greaterp) (quote a) 0) (list (quote leq)
+(quote a) (list (quote minus) 2))) (list (quote and) (list (quote freeof) (quote
+a) (quote z)) (list (quote not) (list (quote numberp) (quote a))))))) (list (
+quote replaceby) (list (quote invztrans_end) (list (quote times) (list (quote 
+cos) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (quote
+z)))) (list (quote expt) (quote e) (list (quote quotient) (list (quote sqrt) (
+list (quote difference) 1 (list (quote expt) (list (quote !~) (quote a)) 2))) (
+list (quote !~) (quote z))))) (list (quote !~) (quote z)) (list (quote !~) (
+quote n))) (list (quote when) (list (quote quotient) (list (quote cos) (list (
+quote times) (list (quote asin) (quote a)) (quote n))) (list (quote factorial) (
+quote n))) (list (quote or) (list (quote and) (list (quote numberp) (quote a)) (
+list (quote leq) (quote a) 1) (list (quote geq) (quote a) (list (quote minus) 1)
+)) (list (quote and) (list (quote freeof) (quote a) (quote z)) (list (quote not)
+(list (quote numberp) (quote a))))))) (list (quote replaceby) (list (quote 
+invztrans_end) (list (quote !~) (quote f)) (list (quote !~) (quote z)) (list (
+quote !~) (quote n))) (list (quote when) (list (quote prog) (list (quote 
+denominator) (quote result) (quote solutionset) (quote solution) (quote 
+!*fullroots)) (list (quote aeval) (list (quote !~on) (list (quote list) (quote (
+quote fullroots))))) (list (quote setq) (quote denominator) (list (quote aeval)
+(list (quote list) (quote (quote den)) (quote (quote f))))) (list (quote setq) (
+quote solution) (list (quote aeval) (list (quote list) (quote (quote solve)) (
+quote denominator) (quote (quote z))))) (list (quote cond) (list (list (quote 
+not) (list (quote freeof) (list (quote revalx) (quote solution)) (list (quote 
+revalx) (quote (quote root_of))))) (list (quote aeval) (list (quote rederr) (
+list (quote revalx) "denominator could not be factorized"))))) (list (quote setq
+) (quote solutionset) (list (quote prog) (list (quote i) (quote forall!-result)
+(quote forall!-endptr)) (list (quote setq) (quote i) 1) (list (quote cond) (list
+(list (quote aminusp!:) (list (quote list) (quote (quote difference)) (list (
+quote aeval!*) (list (quote list) (quote (quote length)) (quote solution))) (
+quote i))) (list (quote return) (list (quote makelist) nil)))) (list (quote setq
+) (quote forall!-result) (list (quote setq) (quote forall!-endptr) (list (quote
+cons) (list (quote aeval!*) (list (quote list) (quote (quote part)) (list (quote
+list) (quote (quote part)) (quote solution) (quote i)) 2)) nil))) (quote 
+looplabel) (list (quote setq) (quote i) (list (list (quote lambda) (list (quote
+forall!-result)) (list (quote aeval!*) (list (quote list) (quote (quote plus)) (
+quote forall!-result) 1))) (quote i))) (list (quote cond) (list (list (quote 
+aminusp!:) (list (quote list) (quote (quote difference)) (list (quote aeval!*) (
+list (quote list) (quote (quote length)) (quote solution))) (quote i))) (list (
+quote return) (list (quote cons) (quote (quote list)) (quote forall!-result)))))
+(list (quote rplacd) (quote forall!-endptr) (list (quote cons) (list (quote 
+aeval!*) (list (quote list) (quote (quote part)) (list (quote list) (quote (
+quote part)) (quote solution) (quote i)) 2)) nil)) (list (quote setq) (quote 
+forall!-endptr) (list (quote cdr) (quote forall!-endptr))) (list (quote go) (
+quote looplabel)))) (list (quote setq) (quote result) (list (quote prog) (list (
+quote a) (quote forall!-result)) (list (quote setq) (quote a) (list (quote 
+getrlist) (list (quote aeval) (quote solutionset)))) (list (quote setq) (quote 
+forall!-result) 0) (quote lab1) (list (quote cond) (list (list (quote null) (
+quote a)) (list (quote return) (quote forall!-result)))) (list (quote setq) (
+quote forall!-result) (list (quote aeval!*) (list (quote list) (quote (quote 
+plus)) (list (list (quote lambda) (list (quote a)) (list (quote aeval) (list (
+quote list) (quote (quote residue)) (list (quote list) (quote (quote times)) (
+quote (quote f)) (list (quote list) (quote (quote expt)) (quote (quote z)) (list
+(quote list) (quote (quote difference)) (quote (quote n)) 1))) (quote (quote z))
+(quote a)))) (list (quote car) (quote a))) (quote forall!-result)))) (list (
+quote setq) (quote a) (list (quote cdr) (quote a))) (list (quote go) (quote lab1
+)))) (list (quote return) (list (quote aeval) (quote result)))) (list (quote 
+type_ratpoly) (quote f) (quote z)))) (list (quote replaceby) (list (quote 
+invztrans) (list (quote quotient) (list (quote expt) (list (quote !~) (quote z))
+(list (quote !~) (list (quote !~) (quote k)))) (list (quote expt) (list (quote 
+plus) (quote z) (list (quote !~) (list (quote !~) (quote a)))) (list (quote !~)
+(list (quote !~) (quote m))))) (list (quote !~) (quote z)) (list (quote !~) (
+quote n))) (list (quote when) (list (quote times) (list (quote binomial) (list (
+quote plus) (quote n) (list (quote difference) (quote k) 1)) (list (quote 
+difference) (quote m) 1)) (list (quote quotient) (list (quote expt) (list (quote
+minus) (quote a)) (list (quote plus) (quote n) (quote k))) (list (quote expt) (
+list (quote minus) (quote a)) (quote m)))) (list (quote and) (list (quote freeof
+) (quote k) (quote z)) (list (quote freeof) (quote m) (quote z)) (list (quote 
+freeof) (quote a) (quote z)) (list (quote or) (list (quote not) (list (quote 
+numberp) (quote k))) (list (quote and) (list (quote numberp) (quote k)) (list (
+quote fixp) (quote k)))) (list (quote or) (list (quote not) (list (quote numberp
+) (quote m))) (list (quote and) (list (quote numberp) (quote m)) (list (quote 
+fixp) (quote m))))))) (list (quote replaceby) (list (quote invztrans_end) (list
+(quote expt) (quote e) (list (quote quotient) (list (quote !~) (quote k)) (list
+(quote !~) (quote z)))) (list (quote !~) (quote z)) (list (quote !~) (quote n)))
+(list (quote when) (list (quote quotient) (list (quote expt) (quote k) (quote n)
+) (list (quote factorial) (quote n))) (list (quote freeof) (quote k) (quote z)))
+) (list (quote replaceby) (list (quote invztrans_end) (list (quote quotient) (
+list (quote expt) (quote e) (list (quote quotient) (list (quote !~) (quote k)) (
+list (quote !~) (quote z)))) (list (quote !~) (quote z))) (list (quote !~) (
+quote z)) (list (quote !~) (quote n))) (list (quote when) (list (quote times) (
+list (quote quotient) (quote n) (quote k)) (list (quote quotient) (list (quote 
+expt) (quote k) (quote n)) (list (quote factorial) (quote n)))) (list (quote 
+freeof) (quote k) (quote z)))) (list (quote replaceby) (list (quote 
+invztrans_end) (list (quote quotient) 1 (list (quote expt) (quote e) (list (
+quote quotient) (list (quote !~) (quote k)) (list (quote !~) (quote z))))) (list
+(quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list (
+quote quotient) (list (quote expt) (list (quote minus) (quote k)) (quote n)) (
+list (quote factorial) (quote n))) (list (quote freeof) (quote k) (quote z)))) (
+list (quote replaceby) (list (quote invztrans_end) (list (quote quotient) 1 (
+list (quote times) (list (quote expt) (quote e) (list (quote quotient) (list (
+quote !~) (quote k)) (list (quote !~) (quote z)))) (list (quote !~) (quote z))))
+(list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (
+list (quote minus) (list (quote times) (list (quote quotient) (quote n) (quote k
+)) (list (quote quotient) (list (quote expt) (list (quote minus) (quote k)) (
+quote n)) (list (quote factorial) (quote n))))) (list (quote freeof) (quote k) (
+quote z)))) (list (quote replaceby) (list (quote invztrans_end) (list (quote 
+expt) (quote e) (list (quote quotient) (list (quote !~) (quote k)) (list (quote
+times) (list (quote !~) (list (quote !~) (quote j))) (list (quote !~) (quote z))
+))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when)
+(list (quote quotient) (list (quote expt) (list (quote quotient) (quote k) (
+quote j)) (quote n)) (list (quote factorial) (quote n))) (list (quote and) (list
+(quote freeof) (quote k) (quote z)) (list (quote freeof) (quote j) (quote z)))))
+(list (quote replaceby) (list (quote invztrans_end) (list (quote quotient) (list
+(quote expt) (quote e) (list (quote quotient) (list (quote !~) (quote k)) (list
+(quote times) (list (quote !~) (list (quote !~) (quote j))) (list (quote !~) (
+quote z))))) (list (quote !~) (quote z))) (list (quote !~) (quote z)) (list (
+quote !~) (quote n))) (list (quote when) (list (quote times) (list (quote 
+quotient) (quote n) (list (quote quotient) (quote k) (quote j))) (list (quote 
+quotient) (list (quote expt) (list (quote quotient) (quote k) (quote j)) (quote
+n)) (list (quote factorial) (quote n)))) (list (quote and) (list (quote freeof)
+(quote k) (quote z)) (list (quote freeof) (quote j) (quote z))))) (list (quote 
+replaceby) (list (quote invztrans_end) (list (quote quotient) 1 (list (quote 
+expt) (quote e) (list (quote quotient) (list (quote !~) (quote k)) (list (quote
+times) (list (quote !~) (list (quote !~) (quote j))) (list (quote !~) (quote z))
+)))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when)
+(list (quote quotient) (list (quote expt) (list (quote minus) (list (quote 
+quotient) (quote k) (quote j))) (quote n)) (list (quote factorial) (quote n))) (
+list (quote and) (list (quote freeof) (quote k) (quote z)) (list (quote freeof)
+(quote j) (quote z))))) (list (quote replaceby) (list (quote invztrans_end) (
+list (quote quotient) 1 (list (quote times) (list (quote expt) (quote e) (list (
+quote quotient) (list (quote !~) (quote k)) (list (quote times) (list (quote !~)
+(list (quote !~) (quote j))) (list (quote !~) (quote z))))) (list (quote !~) (
+quote z)))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (
+quote when) (list (quote times) (list (quote quotient) (quote n) (list (quote 
+minus) (list (quote quotient) (quote k) (quote j)))) (list (quote quotient) (
+list (quote expt) (list (quote minus) (list (quote quotient) (quote k) (quote j)
+)) (quote n)) (list (quote factorial) (quote n)))) (list (quote and) (list (
+quote freeof) (quote k) (quote z)) (list (quote freeof) (quote j) (quote z)))))
+(list (quote replaceby) (list (quote invztrans_end) (list (quote times) (list (
+quote cos) (list (quote quotient) (list (quote sin) (list (quote !~) (list (
+quote !~) (quote b)))) (list (quote !~) (quote z)))) (list (quote expt) (quote e
+) (list (quote quotient) (list (quote cos) (list (quote !~) (list (quote !~) (
+quote b)))) (list (quote !~) (quote z))))) (list (quote !~) (quote z)) (list (
+quote !~) (quote n))) (list (quote when) (list (quote quotient) (list (quote cos
+) (list (quote times) (quote b) (quote n))) (list (quote factorial) (quote n)))
+(list (quote freeof) (quote b) (quote z)))) (list (quote replaceby) (list (quote
+invztrans_end) (list (quote times) (list (quote sin) (list (quote quotient) (
+list (quote sin) (list (quote !~) (list (quote !~) (quote b)))) (list (quote !~)
+(quote z)))) (list (quote expt) (quote e) (list (quote quotient) (list (quote 
+cos) (list (quote !~) (list (quote !~) (quote b)))) (list (quote !~) (quote z)))
+)) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (
+list (quote quotient) (list (quote sin) (list (quote times) (quote b) (quote n))
+) (list (quote factorial) (quote n))) (list (quote freeof) (quote b) (quote z)))
+) (list (quote replaceby) (list (quote invztrans_end) (list (quote cosh) (list (
+quote quotient) (list (quote !~) (quote k)) (list (quote sqrt) (list (quote !~)
+(quote z))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (
+quote when) (list (quote quotient) (list (quote expt) (quote k) (list (quote 
+times) 2 (quote n))) (list (quote factorial) (list (quote times) 2 (quote n))))
+(list (quote freeof) (quote k) (quote z)))) (list (quote replaceby) (list (quote
+invztrans_end) (list (quote cos) (list (quote quotient) (list (quote !~) (quote
+k)) (list (quote sqrt) (list (quote !~) (quote z))))) (list (quote !~) (quote z)
+) (list (quote !~) (quote n))) (list (quote when) (list (quote quotient) (list (
+quote expt) (list (quote minus) (list (quote expt) (quote k) 2)) (quote n)) (
+list (quote factorial) (list (quote times) 2 (quote n)))) (list (quote freeof) (
+quote k) (quote z)))) (list (quote replaceby) (list (quote invztrans_end) (list
+(quote cosh) (list (quote quotient) (list (quote !~) (quote k)) (list (quote 
+times) (list (quote !~) (list (quote !~) (quote j))) (list (quote sqrt) (list (
+quote !~) (quote z)))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))
+) (list (quote when) (list (quote quotient) (list (quote expt) (list (quote 
+quotient) (quote k) (quote j)) (list (quote times) 2 (quote n))) (list (quote 
+factorial) (list (quote times) 2 (quote n)))) (list (quote and) (list (quote 
+freeof) (quote k) (quote z)) (list (quote freeof) (quote j) (quote z))))) (list
+(quote replaceby) (list (quote invztrans_end) (list (quote cos) (list (quote 
+quotient) (list (quote !~) (quote k)) (list (quote times) (list (quote !~) (list
+(quote !~) (quote j))) (list (quote sqrt) (list (quote !~) (quote z)))))) (list
+(quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list (
+quote quotient) (list (quote expt) (list (quote minus) (list (quote expt) (list
+(quote quotient) (quote k) (quote j)) 2)) (quote n)) (list (quote factorial) (
+list (quote times) 2 (quote n)))) (list (quote and) (list (quote freeof) (quote
+k) (quote z)) (list (quote freeof) (quote j) (quote z))))) (list (quote 
+replaceby) (list (quote invztrans_end) (list (quote times) (list (quote sqrt) (
+list (quote !~) (quote z))) (list (quote sinh) (list (quote quotient) (list (
+quote !~) (quote k)) (list (quote sqrt) (list (quote !~) (quote z)))))) (list (
+quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (list (
+quote times) (quote k) (list (quote quotient) (list (quote expt) (quote k) (list
+(quote times) 2 (quote n))) (list (quote factorial) (list (quote plus) (list (
+quote times) 2 (quote n)) 1)))) (list (quote freeof) (quote k) (quote z)))) (
+list (quote replaceby) (list (quote invztrans_end) (list (quote times) (list (
+quote sqrt) (list (quote !~) (quote z))) (list (quote sinh) (list (quote 
+quotient) (list (quote !~) (quote k)) (list (quote sqrt) (list (quote minus) (
+list (quote !~) (quote z))))))) (list (quote !~) (quote z)) (list (quote !~) (
+quote n))) (list (quote when) (list (quote times) (quote i) (quote k) (list (
+quote minus) (list (quote expt) (quote k) 2)) (list (quote quotient) (quote n) (
+list (quote factorial) (list (quote plus) (list (quote times) 2 (quote n)) 1))))
+(list (quote freeof) (quote k) (quote z)))) (list (quote replaceby) (list (quote
+invztrans_end) (list (quote times) (list (quote sqrt) (list (quote !~) (quote z)
+)) (list (quote sin) (list (quote quotient) (list (quote !~) (quote k)) (list (
+quote sqrt) (list (quote !~) (quote z)))))) (list (quote !~) (quote z)) (list (
+quote !~) (quote n))) (list (quote when) (list (quote times) (quote k) (list (
+quote quotient) (list (quote expt) (list (quote minus) (list (quote expt) (quote
+k) 2)) (quote n)) (list (quote factorial) (list (quote plus) (list (quote times)
+2 (quote n)) 1)))) (list (quote freeof) (quote k) (quote z)))) (list (quote 
+replaceby) (list (quote invztrans_end) (list (quote times) (list (quote sqrt) (
+list (quote minus) (list (quote !~) (quote z)))) (list (quote sinh) (list (quote
+quotient) (list (quote !~) (quote k)) (list (quote sqrt) (list (quote !~) (quote
+z)))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote 
+when) (list (quote times) (list (quote sqrt) (list (quote minus) (list (quote 
+expt) (quote k) 2))) (list (quote quotient) (list (quote expt) (quote k) (list (
+quote times) 2 (quote n))) (list (quote factorial) (list (quote plus) (list (
+quote times) 2 (quote n)) 1)))) (list (quote freeof) (quote k) (quote z)))) (
+list (quote replaceby) (list (quote invztrans_end) (list (quote times) (list (
+quote sqrt) (list (quote minus) (list (quote !~) (quote z)))) (list (quote sin)
+(list (quote quotient) (list (quote !~) (quote k)) (list (quote sqrt) (list (
+quote !~) (quote z)))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))
+) (list (quote when) (list (quote times) (quote k) (list (quote quotient) (list
+(quote expt) (list (quote minus) (list (quote expt) (quote k) 2)) (quote n)) (
+list (quote times) (quote i) (list (quote factorial) (list (quote plus) (list (
+quote times) 2 (quote n)) 1))))) (list (quote freeof) (quote k) (quote z)))) (
+list (quote replaceby) (list (quote invztrans_end) (list (quote times) (list (
+quote sqrt) (list (quote minus) (list (quote !~) (quote z)))) (list (quote sinh)
+(list (quote quotient) (list (quote !~) (quote k)) (list (quote sqrt) (list (
+quote minus) (list (quote !~) (quote z))))))) (list (quote !~) (quote z)) (list
+(quote !~) (quote n))) (list (quote when) (list (quote times) (quote k) (list (
+quote minus) (list (quote expt) (quote k) 2)) (list (quote quotient) (quote n) (
+list (quote factorial) (list (quote plus) (list (quote times) 2 (quote n)) 1))))
+(list (quote freeof) (quote k) (quote z)))) (list (quote replaceby) (list (quote
+invztrans_end) (list (quote times) (list (quote sqrt) (list (quote minus) (list
+(quote !~) (quote z)))) (list (quote sin) (list (quote quotient) (list (quote !~
+) (quote k)) (list (quote sqrt) (list (quote !~) (quote z)))))) (list (quote !~)
+(quote z)) (list (quote !~) (quote n))) (list (quote when) (list (quote times) (
+quote k) (list (quote minus) (list (quote expt) (quote k) 2)) (list (quote 
+quotient) (quote n) (list (quote times) (quote i) (list (quote factorial) (list
+(quote plus) (list (quote times) 2 (quote n)) 1))))) (list (quote freeof) (quote
+k) (quote z)))) (list (quote replaceby) (list (quote invztrans_end) (list (quote
+times) (list (quote sqrt) (list (quote !~) (quote z))) (list (quote sinh) (list
+(quote quotient) (list (quote !~) (quote k)) (list (quote times) (list (quote !~
+) (list (quote !~) (quote j))) (list (quote sqrt) (list (quote !~) (quote z)))))
+)) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote when) (
+list (quote times) (list (quote quotient) (quote k) (quote j)) (list (quote 
+quotient) (list (quote expt) (list (quote quotient) (quote k) (quote j)) (list (
+quote times) 2 (quote n))) (list (quote factorial) (list (quote plus) (list (
+quote times) 2 (quote n)) 1)))) (list (quote and) (list (quote freeof) (quote k)
+(quote z)) (list (quote freeof) (quote j) (quote z))))) (list (quote replaceby)
+(list (quote invztrans_end) (list (quote times) (list (quote sqrt) (list (quote
+minus) (list (quote !~) (quote z)))) (list (quote sinh) (list (quote quotient) (
+list (quote !~) (quote k)) (list (quote times) (list (quote !~) (list (quote !~)
+(quote j))) (list (quote sqrt) (list (quote !~) (quote z))))))) (list (quote !~)
+(quote z)) (list (quote !~) (quote n))) (list (quote when) (list (quote times) (
+list (quote quotient) (quote k) (quote j)) (list (quote quotient) (list (quote 
+expt) (list (quote quotient) (quote k) (quote j)) (list (quote times) 2 (quote n
+))) (list (quote factorial) (list (quote plus) (list (quote times) 2 (quote n))
+1)))) (list (quote and) (list (quote freeof) (quote k) (quote z)) (list (quote 
+freeof) (quote j) (quote z))))) (list (quote replaceby) (list (quote 
+invztrans_end) (list (quote times) (list (quote sqrt) (list (quote minus) (list
+(quote times) (list (quote !~) (quote b)) (list (quote !~) (quote z))))) (list (
+quote sinh) (list (quote quotient) (list (quote !~) (quote k)) (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote b))) (list (quote sqrt) (list
+(quote !~) (quote z))))))) (list (quote !~) (quote z)) (list (quote !~) (quote n
+))) (list (quote when) (list (quote times) (list (quote sqrt) (list (quote minus
+) (list (quote expt) (quote k) 2))) (list (quote quotient) (list (quote expt) (
+list (quote quotient) (list (quote expt) (quote k) 2) (quote b)) (quote n)) (
+list (quote factorial) (list (quote plus) (list (quote times) 2 (quote n)) 1))))
+(list (quote and) (list (quote freeof) (quote k) (quote z)) (list (quote freeof)
+(quote j) (quote z))))) (list (quote replaceby) (list (quote invztrans_end) (
+list (quote times) (list (quote sqrt) (list (quote !~) (quote z))) (list (quote
+sin) (list (quote quotient) (list (quote !~) (quote k)) (list (quote times) (
+list (quote !~) (list (quote !~) (quote j))) (list (quote sqrt) (list (quote !~)
+(quote z))))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (
+quote when) (list (quote times) (list (quote quotient) (list (quote sqrt) (list
+(quote minus) (list (quote expt) (quote k) 2))) (quote j)) (list (quote quotient
+) (list (quote quotient) (list (quote expt) (list (quote minus) (list (quote 
+expt) (quote k) 2)) (quote n)) (list (quote expt) (quote j) (list (quote times)
+2 (quote n)))) (list (quote times) (quote i) (list (quote factorial) (list (
+quote plus) (list (quote times) 2 (quote n)) 1))))) (list (quote and) (list (
+quote freeof) (quote k) (quote z)) (list (quote freeof) (quote j) (quote z)))))
+(list (quote replaceby) (list (quote invztrans_end) (list (quote times) (list (
+quote sqrt) (list (quote minus) (list (quote !~) (quote z)))) (list (quote sin)
+(list (quote quotient) (list (quote !~) (quote k)) (list (quote times) (list (
+quote !~) (list (quote !~) (quote j))) (list (quote sqrt) (list (quote !~) (
+quote z))))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (
+quote when) (list (quote times) (list (quote quotient) (quote k) (quote j)) (
+list (quote quotient) (list (quote expt) (list (quote quotient) (quote k) (quote
+j)) (list (quote times) 2 (quote n))) (list (quote times) (quote i) (list (quote
+factorial) (list (quote plus) (list (quote times) 2 (quote n)) 1))))) (list (
+quote and) (list (quote freeof) (quote k) (quote z)) (list (quote freeof) (quote
+j) (quote z))))) (list (quote replaceby) (list (quote invztrans_end) (list (
+quote times) (list (quote sqrt) (list (quote minus) (list (quote times) (list (
+quote !~) (quote b)) (list (quote !~) (quote z))))) (list (quote sin) (list (
+quote quotient) (list (quote !~) (quote k)) (list (quote times) (list (quote 
+sqrt) (list (quote !~) (quote b))) (list (quote sqrt) (list (quote !~) (quote z)
+)))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote 
+when) (list (quote times) (quote k) (list (quote quotient) (list (quote expt) (
+list (quote minus) (list (quote quotient) (list (quote expt) (quote k) 2) (quote
+b))) (quote n)) (list (quote times) (quote i) (list (quote factorial) (list (
+quote plus) (list (quote times) 2 (quote n)) 1))))) (list (quote and) (list (
+quote freeof) (quote k) (quote z)) (list (quote freeof) (quote b) (quote z)))))
+(list (quote replaceby) (list (quote invztrans_end) (list (quote times) (list (
+quote sqrt) (list (quote !~) (quote z))) (list (quote sinh) (list (quote 
+quotient) (list (quote !~) (quote k)) (list (quote times) (list (quote !~) (list
+(quote !~) (quote j))) (list (quote sqrt) (list (quote minus) (list (quote !~) (
+quote z)))))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (
+quote when) (list (quote times) (quote i) (list (quote quotient) (quote k) (
+quote j)) (list (quote quotient) (list (quote expt) (list (quote quotient) (
+quote k) (quote j)) (list (quote times) 2 (quote n))) (list (quote factorial) (
+list (quote plus) (list (quote times) 2 (quote n)) 1)))) (list (quote and) (list
+(quote freeof) (quote k) (quote z)) (list (quote freeof) (quote j) (quote z)))))
+(list (quote replaceby) (list (quote invztrans_end) (list (quote times) (list (
+quote sqrt) (list (quote !~) (quote z))) (list (quote sin) (list (quote quotient
+) (list (quote !~) (quote k)) (list (quote times) (list (quote !~) (list (quote
+!~) (quote j))) (list (quote sqrt) (list (quote minus) (list (quote !~) (quote z
+)))))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote 
+when) (list (quote times) (list (quote quotient) (list (quote sqrt) (list (quote
+minus) (list (quote expt) (quote k) 2))) (quote j)) (list (quote quotient) (list
+(quote expt) (list (quote quotient) (list (quote sqrt) (list (quote minus) (list
+(quote expt) (quote k) 2))) (quote j)) (list (quote times) 2 (quote n))) (list (
+quote factorial) (list (quote plus) (list (quote times) 2 (quote n)) 1)))) (list
+(quote and) (list (quote freeof) (quote k) (quote z)) (list (quote freeof) (
+quote j) (quote z))))) (list (quote replaceby) (list (quote invztrans_end) (list
+(quote times) (list (quote !~) (quote z)) (list (quote log) (list (quote times)
+(list (quote !~) (list (quote !~) (quote b))) (list (quote quotient) (list (
+quote !~) (quote z)) (list (quote plus) (list (quote times) (list (quote !~) (
+list (quote !~) (quote b))) (list (quote !~) (quote z))) (list (quote !~) (quote
+a))))))) (list (quote !~) (quote z)) (list (quote !~) (quote n))) (list (quote 
+when) (list (quote quotient) (list (quote expt) (list (quote minus) (list (quote
+quotient) (quote a) (quote b))) (list (quote plus) (quote n) 1)) (list (quote 
+plus) (quote n) 1)) (list (quote and) (list (quote freeof) (quote a) (quote z))
+(list (quote freeof) (quote b) (quote z))))) (list (quote replaceby) (list (
+quote invztrans_end) (list (quote times) (list (quote !~) (quote z)) (list (
+quote log) (list (quote quotient) (list (quote plus) (list (quote times) (list (
+quote !~) (list (quote !~) (quote b))) (list (quote !~) (quote z))) (list (quote
+!~) (quote a))) (list (quote times) (list (quote !~) (list (quote !~) (quote b))
+) (list (quote !~) (quote z)))))) (list (quote !~) (quote z)) (list (quote !~) (
+quote n))) (list (quote when) (list (quote minus) (list (quote invztrans1) (list
+(quote times) (quote z) (list (quote log) (list (quote times) (quote b) (list (
+quote quotient) (quote z) (list (quote plus) (list (quote times) (quote b) (
+quote z)) (quote a)))))) (quote z) (quote n))) (list (quote and) (list (quote 
+freeof) (quote a) (quote z)) (list (quote freeof) (quote b) (quote z))))) (list
+(quote replaceby) (list (quote invztrans_end) (list (quote !~) (quote f)) (list
+(quote !~) (quote z)) (list (quote !~) (quote n))) (quote fail))))) (aeval (
+!~let (quote (invztrans_endrules)))) (aeval (quote nil)))

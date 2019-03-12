@@ -1,0 +1,3909 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>QSUM: Indefinite and Definite Summation of q-hypergeometric Terms</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse139.html" >Up</a></td><td class="clinks"><a 
+href="manualse140.html" >Next</a></td><td class="clinks"><a 
+href="manualse138.html" >Prev</a></td><td class="clinks"><a 
+href="manualse138.html#tailmanualse138.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse139.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.48    </span> <a 
+ id="x188-75100016.48"></a>QSUM: Indefinite and Definite Summation of
+<span 
+class="ptmro8t-x-x-109">q</span>-hypergeometric Terms</h3>
+<a 
+ id="dx188-751001"></a>
+<a 
+ id="dx188-751002"></a>
+<!--l. 867--><p class="noindent" >Authors: Harald Böing and Wolfram Koepf
+<!--l. 22--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.48.1    </span> <a 
+ id="x188-75200016.48.1"></a>Introduction</h4>
+<!--l. 24--><p class="noindent" >This package is an implementation of the <span 
+class="cmmi-10x-x-109">q</span>-analogues of Gosper&#8217;s and
+Zeilberger&#8217;s<span class="footnote-mark"><a 
+href="manual189.html#fn29x16"><sup class="textsuperscript">29</sup></a></span><a 
+ id="x188-752001f29"></a> 
+algorithm for indefinite, and definite summation of <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric terms,
+respectively.
+<!--l. 35--><p class="noindent" >An expression <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> is called a <span 
+class="cmmi-10x-x-109">q</span><span 
+class="ptmro8t-x-x-109">-hypergeometric term</span>, if <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-10x-x-109">&#x2215;a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> is a rational function
+with respect to <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup>. Most <span 
+class="cmmi-10x-x-109">q</span>-terms are based on the <span 
+class="cmmi-10x-x-109">q</span><span 
+class="ptmro8t-x-x-109">-shifted factorial </span>or <span 
+class="ptmro8t-x-x-109">qpochhammer</span>.
+Other typical <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric terms are ratios of products of powers, <span 
+class="cmmi-10x-x-109">q</span>-factorials,
+<span 
+class="cmmi-10x-x-109">q</span>-binomial coefficients, and <span 
+class="cmmi-10x-x-109">q</span>-shifted factorials that are integer-linear in their
+arguments.
+<h4 class="subsectionHead"><span class="titlemark">16.48.2    </span> <a 
+ id="x188-75300016.48.2"></a>Elementary <span 
+class="ptmro8t-x-x-109">q</span>-Functions</h4>
+<a 
+ id="dx188-753001"></a>
+<a 
+ id="dx188-753002"></a>
+<a 
+ id="dx188-753003"></a>
+<a 
+ id="dx188-753004"></a>
+<!--l. 50--><p class="noindent" >Our package supports the input of the following elementary <span 
+class="cmmi-10x-x-109">q</span>-functions:
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qpochhammer(a,q,infinity)@</span>
+                                                                     
+
+                                                                     
+     <center class="math-display" >
+     <img 
+src="manual474x.png" alt="         &#x220F;&#x221E;
+(a;q)   :=    (1 - aqj)
+    &#x221E;    j=0
+     " class="math-display" ></center>
+     <!--l. 56--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qpochhammer(a,q,k)</span>
+     <center class="math-display" >
+     <img 
+src="manual475x.png" alt="         (|   &#x220F;k -1(      j)
+         {     j=0 1 - aq       if k &#x003E; 0
+(a; q)k :=  | &#x220F;     (  1    )- 1   if k = 0
+         (   kj=1  1- aq- j      if k &#x003C; 0
+     " class="math-display" ></center>
+     <!--l. 64--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qbrackets(k,q)</span>
+     <center class="math-display" >
+     <img 
+src="manual476x.png" alt="        qk - 1
+[q,k] :=-q --1
+     " class="math-display" ></center>
+     <!--l. 66--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qfactorial(k,q)</span>
+     <center class="math-display" >
+     <img 
+src="manual477x.png" alt="        (q;q)
+[k ]q! :=------kk-
+       (1 - q)
+     " class="math-display" ></center>
+     <!--l. 68--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qbinomial(n,k,q)</span>
+     <center class="math-display" >
+     <img 
+src="manual478x.png" alt="(n )          (q;q)n
+  k   := (q;q)-&#x22C5;(q;q)---
+     q        k      n-k
+     " class="math-display" ></center>
+     <!--l. 71--><p class="nopar" ></li></ul>
+<a 
+ id="dx188-753005"></a>
+<a 
+ id="dx188-753006"></a>
+<!--l. 76--><p class="noindent" >Furthermore it is possible to use an abbreviation for the <span 
+class="ptmro8t-x-x-109">generalized </span><span 
+class="cmmi-10x-x-109">q</span><span 
+class="ptmro8t-x-x-109">-hypergeometric</span>
+<span 
+class="ptmro8t-x-x-109">series </span>(<span 
+class="ptmro8t-x-x-109">basic generalized hypergeometric series</span>, see e. g.&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>, Chapter 1) which is defined
+as: <div class="eqnarray">
+<center class="math-display" >
+<img 
+src="manual479x.png" alt="   [ a ,a ,...,a  ||   ]
+r&#x03D5;s   1  2      r ||q,z :=
+      b1,b2,...,bs
+                &#x221E;&#x2211;  (a1,a2,...,ar;q)k--zk---[    k (k)]1+s- r
+                    (b1,b2,...,bs;q)  (q;q)   (- 1) q 2
+                k=0               k     k
+" class="math-display" ></center>
+</div>where <img 
+src="manual480x.png" alt="(a1,a2,...,ar;q)"  class="left" align="middle"><sub><span 
+class="cmmi-8">k</span></sub> is a short form to write the product <span 
+class="cmex-10x-x-109">&#x220F;</span>
+  <sub><span 
+class="cmmi-8">j</span><span 
+class="cmr-8">=1</span></sub><sup><span 
+class="cmmi-8">r</span></sup><img 
+src="manual481x.png" alt="(aj;q)"  class="left" align="middle"><sub><span 
+class="cmmi-8">k</span></sub>. An <sub><span 
+class="cmmi-8">r</span></sub><span 
+class="cmmi-10x-x-109">&#x03D5;</span><sub><span 
+class="cmmi-8">s</span></sub>
+series terminates if one of its numerator parameters is of the form <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">n</span></sup> with <span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="msbm-10x-x-109">&#x2115;</span>. The
+additional factor <img 
+src="manual482x.png" alt="[       k ]
+ (- 1)kq(2)"  class="left" align="middle"><sup><span 
+class="cmr-8">1+</span><span 
+class="cmmi-8">s</span><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">r</span></sup> (which does not occur in the corresponding
+definition of the <span 
+class="ptmro8t-x-x-109">generalized hypergeometric function</span>) is due to a <span 
+class="ptmro8t-x-x-109">confluence process</span>.
+With this factor one gets the simple formula:
+<center class="math-display" >
+<img 
+src="manual483x.png" alt="         [ a ,a ,...,a  ||   ]        [ a ,a ,...,a    ||   ]
+ali&#x2192;m&#x221E; r&#x03D5;s   1b,b2,...,br ||q,z  = r- 1&#x03D5;s   1b 2,b ,...,rb-1 ||q,z .
+ r           1 2      s                   1 2      s
+" class="math-display" ></center>
+<!--l. 100--><p class="nopar" > Another variation is the <span 
+class="ptmro8t-x-x-109">bilateral basic hypergeometric series </span>(see e. g.&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>, Chapter 5)
+that is defined as
+<center class="math-display" >
+<img 
+src="manual484x.png" alt="    [              |   ]     &#x221E;
+      a1,a2,...,ar ||        &#x2211;    (a1,a2,...,ar;q)k-k[     k (k2)]s-r
+r&#x03C8;s   b1,b2,...,bs |q,z :=       (b1,b2,...,bs;q)k z (- 1) q      .
+                           k=- &#x221E;
+" class="math-display" ></center>
+<!--l. 108--><p class="nopar" > The <span 
+class="ptmro8t-x-x-109">summands </span>of those generalized <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric series may be entered
+by
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qphihyperterm(a1,a2,...,a3,b1,b2,...,b3,q,z,k) </span>and
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qpsihyperterm(a1,a2,...,a3,b1,b2,...,b3,q,z,k)</span></li></ul>
+<!--l. 116--><p class="noindent" >respectively.
+<!--l. 120--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.48.3    </span> <a 
+ id="x188-75400016.48.3"></a><span 
+class="ptmro8t-x-x-109">q</span>-Gosper Algorithm</h4>
+<!--l. 123--><p class="noindent" >The <span 
+class="cmmi-10x-x-109">q</span>-Gosper algorithm<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> is a <span 
+class="ptmro8t-x-x-109">decision procedure</span>, that decides by algebraic calculations
+whether or not a given <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric term <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> has a <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric term
+antidifference <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub>, i. e.&#x00A0;<span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> with <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-10x-x-109">&#x2215;g</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> rational in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup>. The ratio <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-10x-x-109">&#x2215;a</span><sub><span 
+class="cmmi-8">k</span></sub> is
+also rational in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup> &#8212; an important fact which makes the <span 
+class="ptmro8t-x-x-109">rational certification </span>(see
+§&#x00A0;<a 
+href="#x188-75500016.48.4">16.48.4<!--tex4ht:ref: qzeilberger --></a>) of Zeilberger&#8217;s algorithm possible. If the procedure is successful it returns <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub>,
+in which case we call <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmmi-10x-x-109">q</span><span 
+class="ptmro8t-x-x-109">-Gosper-summable</span>. Otherwise <span 
+class="ptmro8t-x-x-109">no </span><span 
+class="cmmi-10x-x-109">q</span><span 
+class="ptmro8t-x-x-109">-hypergeometric</span>
+<span 
+class="ptmro8t-x-x-109">antidifference exists</span>. Therefore if the <span 
+class="cmmi-10x-x-109">q</span>-Gosper algorithm does not return a
+<span 
+class="cmmi-10x-x-109">q</span>-hypergeometric antidifference, it has <span 
+class="ptmro8t-x-x-109">proved </span>that no such solution exists, an
+information that may be quite useful and important.
+<!--l. 138--><p class="noindent" >Any antidifference is uniquely determined up to a constant, and is denoted by
+<center class="math-display" >
+<img 
+src="manual485x.png" alt="    &#x2211;
+gk =    ak&#x03B4;k.
+" class="math-display" ></center>
+<!--l. 143--><p class="nopar" > Finding <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub> given <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> is called <span 
+class="ptmro8t-x-x-109">indefinite summation</span>. The antidifference operator <span 
+class="cmr-10x-x-109">&#x03A3; </span>is the
+inverse of the downward difference operator <span 
+class="cmsy-10x-x-109">&#x2207;</span><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub>. There is an
+analogous summation theory corresponding to the upward difference operator
+<span 
+class="cmr-10x-x-109">&#x0394;</span><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">+1</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub>.
+<!--l. 150--><p class="noindent" >In case, an antidifference <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub> of <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> is known, any sum <span 
+class="cmex-10x-x-109">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">=</span><span 
+class="cmmi-8">m</span></sub><sup><span 
+class="cmmi-8">n</span></sup><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> can be easily
+calculated by an evaluation of <span 
+class="cmmi-10x-x-109">g </span>at the boundary points like in the integration
+case:
+                                                                     
+
+                                                                     
+<center class="math-display" >
+<img 
+src="manual486x.png" alt="&#x2211;n
+    ak = gn - gm -1
+k=m
+" class="math-display" ></center>
+<!--l. 155--><p class="nopar" >
+<!--l. 160--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.48.4    </span> <a 
+ id="x188-75500016.48.4"></a><span 
+class="ptmro8t-x-x-109">q</span>-Zeilberger Algorithm</h4>
+<!--l. 163--><p class="noindent" >The <span 
+class="cmmi-10x-x-109">q</span>-Zeilberger algorithm <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> deals with the <span 
+class="ptmro8t-x-x-109">definite summation </span>of <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric
+terms <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) </span>wrt.&#x00A0;<span 
+class="cmmi-10x-x-109">n </span>and <span 
+class="cmmi-10x-x-109">k</span>:
+<center class="math-display" >
+<img 
+src="manual487x.png" alt="        &#x2211;&#x221E;
+s(n) :=     f(n,k)
+       k=- &#x221E;
+" class="math-display" ></center>
+<!--l. 168--><p class="nopar" > Zeilberger&#8217;s idea is to use Gosper&#8217;s algorithm to find an inhomogeneous recurrence
+equation with polynomial coefficients for <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) </span>of the form
+<table 
+class="equation"><tr><td><a 
+ id="x188-755001r91"></a>
+<center class="math-display" >
+<img 
+src="manual488x.png" alt=" J
+&#x2211;  &#x03C3; (n )&#x22C5;f(n + j,k) = g(k)- g(k - 1),
+j=0  j
+" class="math-display" ></center></td><td class="equation-label">(16.91)</td></tr></table>
+<!--l. 175--><p class="nopar" >
+where <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">) </span>is rational in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup> and <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">n</span></sup>. Assuming finite support of <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) </span>wrt.&#x00A0;<span 
+class="cmmi-10x-x-109">k </span>(i. e.
+<span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) = 0 </span>for any <span 
+class="cmmi-10x-x-109">n </span>and all sufficiently large <span 
+class="cmmi-10x-x-109">k</span>) we can sum equation (<a 
+href="#x188-755001r91">16.91<!--tex4ht:ref: eq:f_n_k-recursion --></a>) over all
+<span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="msbm-10x-x-109">&#x2124;</span>. Thus we receive a homogeneous recurrence equation with polynomial coefficients
+(called <span 
+class="ptmro8t-x-x-109">holonomic equation</span>) for <span 
+class="cmr-10x-x-109">s(</span><span 
+class="cmmi-10x-x-109">n</span><span 
+class="cmr-10x-x-109">)</span>:
+                                                                     
+
+                                                                     
+<table 
+class="equation"><tr><td><a 
+ id="x188-755002r92"></a>
+<center class="math-display" >
+<img 
+src="manual489x.png" alt="&#x2211;J
+   &#x03C3;j(n)&#x22C5;s(n + j) = 0
+j=0
+" class="math-display" ></center></td><td class="equation-label">(16.92)</td></tr></table>
+<!--l. 184--><p class="nopar" >
+At this stage the implementation assumes that the summation bounds are infinite and the
+input term has finite support wrt.&#x00A0;<span 
+class="cmmi-10x-x-109">k</span>. If those input requirements are not fulfilled the
+resulting recursion is probably not valid. Thus we strongly advise the user to check those
+requirements.
+<!--l. 192--><p class="noindent" >Despite this restriction you may still be able to get valuable information by the program:
+On request it returns the left hand side of the recurrence equation (<a 
+href="#x188-755002r92">16.92<!--tex4ht:ref: holonomic_recurrence --></a>) <span 
+class="ptmro8t-x-x-109">and </span>the
+antidifference <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">) </span>of equation (<a 
+href="#x188-755001r91">16.91<!--tex4ht:ref: eq:f_n_k-recursion --></a>).
+<!--l. 198--><p class="noindent" >Once you have the certificate <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">) </span>it is trivial (at least theoretically) to prove equation
+(<a 
+href="#x188-755002r92">16.92<!--tex4ht:ref: holonomic_recurrence --></a>) as long as the input requirements are fulfilled. Let&#8217;s assume somone gives us
+equation (<a 
+href="#x188-755001r91">16.91<!--tex4ht:ref: eq:f_n_k-recursion --></a>). If we divide it by <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) </span>we get a rational identity (in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">n</span></sup> and <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup>) &#8212;due
+to the fact that <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) </span>is rational in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">n</span></sup> and <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup>. Once we confirmed this identity we
+sum equation (<a 
+href="#x188-755001r91">16.91<!--tex4ht:ref: eq:f_n_k-recursion --></a>) over <span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="msbm-10x-x-109">&#x2124;</span>:
+<table 
+class="equation"><tr><td><a 
+ id="x188-755003r93"></a>
+<center class="math-display" >
+<img 
+src="manual490x.png" alt="&#x2211;  &#x2211;J                    &#x2211;
+       &#x03C3;j(n )&#x22C5;f(n+ j,k) =    (g(k)- g(k - 1)),
+k&#x2208;&#x2124;j=0                   k&#x2208;&#x2124;
+" class="math-display" ></center></td><td class="equation-label">(16.93)</td></tr></table>
+<!--l. 209--><p class="nopar" >
+Again we exploit the fact that <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">) </span>is a rational multiple of <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) </span>and thus <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">) </span>has
+                                                                     
+
+                                                                     
+<span 
+class="ptmro8t-x-x-109">finite support </span>which makes the telescoping sum on the right hand side vanish. If we
+exchange the order of summation we get equation (<a 
+href="#x188-755002r92">16.92<!--tex4ht:ref: holonomic_recurrence --></a>) which finishes the
+proof.
+<!--l. 217--><p class="noindent" >Note that we may relax the requirements for <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">)</span>: An infinite support is possible as
+long as <span 
+class="cmr-10x-x-109">lim</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">&#x2192;&#x221E;</span></sub><span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span> <span 
+class="cmr-10x-x-109">= 0</span>. (This is certainly true if <span 
+class="cmr-10x-x-109">lim</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">&#x2192;&#x221E;</span></sub><span 
+class="cmr-10x-x-109">p(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span> <span 
+class="cmr-10x-x-109">= 0 </span>for all
+polynomials <span 
+class="cmr-10x-x-109">p(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span>.)
+<!--l. 224--><p class="noindent" >For a quite general class of <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric terms (<span 
+class="ptmro8t-x-x-109">proper q-hypergeometric terms</span>) the
+<span 
+class="cmmi-10x-x-109">q</span>-Zeilberger algorithm always finds a recurrence equation, not necessarily of
+lowest order though. Unlike Zeilberger&#8217;s original algorithm its <span 
+class="cmmi-10x-x-109">q</span>-analogue more
+often fails to determine the recursion of lowest possible order, however (see
+<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>).
+<!--l. 231--><p class="noindent" >If the resulting recurrence equation is of first order
+<center class="math-display" >
+<img 
+src="manual491x.png" alt="a(n)s(n- 1 )+ b(n)s(n) = 0,
+" class="math-display" ></center>
+<!--l. 235--><p class="nopar" > <span 
+class="cmr-10x-x-109">s(</span><span 
+class="cmmi-10x-x-109">n</span><span 
+class="cmr-10x-x-109">) </span>turns out to be a <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric term (as a and b are polynomials in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">n</span></sup>), and
+a <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric solution can be easily established using a suitable initial
+value.
+<!--l. 241--><p class="noindent" >If the resulting recurrence equation has order larger than one, this information can be
+used for identification purposes: Any other expression satisfying the same recurrence
+equation, and the same initial values, represents the same function.
+<!--l. 246--><p class="noindent" >Our implementation is mainly based on <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> and on the hypergeometric analogue
+described in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. More examples can be found in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>, <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>, some of which are contained in
+the test file <span 
+class="pcrr8t-x-x-109">qsum.tst</span>.
+<!--l. 254--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.48.5    </span> <a 
+ id="x188-75600016.48.5"></a>REDUCE operator <span 
+class="pcrr8t-x-x-109">QGOSPER</span></h4>
+<a 
+ id="dx188-756001"></a>
+<!--l. 258--><p class="noindent" >The QSUM package must be loaded by:
+<div class="alltt">
+<!--l. 260--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-">1:</span><span 
+class="pcrr8t-">&#x00A0;load</span><span 
+class="pcrr8t-">&#x00A0;qsum;</span>
+</div>
+                                                                     
+
+                                                                     
+</div>
+<!--l. 262--><p class="noindent" >
+The <span 
+class="pcrr8t-x-x-109">qgosper </span>operator is an implementation of the <span 
+class="cmmi-10x-x-109">q</span>-Gosper algorithm.
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qgosper(a,q,k) </span>determines  a  <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric  antidifference.  (By
+     default  it  returns  a  <span 
+class="ptmro8t-x-x-109">downward  </span>antidifference,  which  may  be  changed  by
+     the switch <span 
+class="pcrr8t-x-x-109">qgosper_down</span>; see also <a 
+ id="dx188-756002"></a><a 
+ id="dx188-756003"></a><a 
+ id="dx188-756004"></a> §&#x00A0;<a 
+href="#x188-75900016.48.8">16.48.8<!--tex4ht:ref: switches --></a>.) If it does not return a
+     <span 
+class="ptmro8t-x-x-109">q</span>-hypergeometric antidifference, then such an antidifference does not exist.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qgosper(a,q,k,m,n) </span>determines  a  closed  formula  for  the  definite
+     sum <span 
+class="cmex-10x-x-109">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">=</span><span 
+class="cmmi-8">m</span></sub><sup><span 
+class="cmmi-8">n</span></sup><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> using the <span 
+class="cmmi-10x-x-109">q</span>-analogue of Gosper&#8217;s algorithm. This is only
+     successful if <span 
+class="ptmro8t-x-x-109">q</span>-Gosper&#8217;s algorithm applies.</li></ul>
+<!--l. 280--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Examples</span>: The following two examples can be found in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> ((II.3) and (2.3.4)).
+<div class="alltt">
+<!--l. 283--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-">2:</span><span 
+class="pcrr8t-">&#x00A0;qgosper(qpochhammer(a,q,k)*q^k/qpochhammer(q,q,k),q,k);</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;(q</span><span 
+class="pcrr8t-">&#x00A0;*a</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*qpochhammer(a,q,k)</span>
+<br /><span 
+class="pcrr8t-">-------------------------------</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;(a</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*qpochhammer(q,q,k)</span>
+<br />
+<br /><span 
+class="pcrr8t-">3:</span><span 
+class="pcrr8t-">&#x00A0;qgosper(qpochhammer(a,q,k)*qpochhammer(a*q^2,q^2,k)*</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;qpochhammer(q^(-n),q,k)*q^(n*k)/(qpochhammer(a,q^2,k)*</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;qpochhammer(a*q^(n+1),q,k)*qpochhammer(q,q,k)),q,k);</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k*n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;1</span>
+<br /><span 
+class="pcrr8t-">(</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;*(q</span><span 
+class="pcrr8t-">&#x00A0;*a</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;)*qpochhammer(----,q,k)</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;2</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;2</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;2*k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;*qpochhammer(a*q</span><span 
+class="pcrr8t-">&#x00A0;,q</span><span 
+class="pcrr8t-">&#x00A0;,k)*qpochhammer(a,q,k))/((q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;*a</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;2</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;*qpochhammer(q</span><span 
+class="pcrr8t-">&#x00A0;*a*q,q,k)*qpochhammer(a,q</span><span 
+class="pcrr8t-">&#x00A0;,k)*qpochhammer(q,q,k))</span>
+</div>
+</div>
+<!--l. 305--><p class="noindent" >
+                                                                     
+
+                                                                     
+<!--l. 307--><p class="noindent" >Here are some other simple examples: <div class="alltt">
+<!--l. 308--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-">4:</span><span 
+class="pcrr8t-">&#x00A0;qgosper(qpochhammer(q^(-n),q,k)*z^k/qpochhammer(q,q,k),q,k);</span>
+<br />
+<br /><span 
+class="pcrr8t-">*****</span><span 
+class="pcrr8t-">&#x00A0;No</span><span 
+class="pcrr8t-">&#x00A0;q-hypergeometric</span><span 
+class="pcrr8t-">&#x00A0;antidifference</span><span 
+class="pcrr8t-">&#x00A0;exists.</span>
+<br />
+<br /><span 
+class="pcrr8t-">5:</span><span 
+class="pcrr8t-">&#x00A0;off</span><span 
+class="pcrr8t-">&#x00A0;qgosper_down;</span>
+<br />
+<br /><span 
+class="pcrr8t-">6:</span><span 
+class="pcrr8t-">&#x00A0;qgosper(q^k*qbrackets(k,q),q,k);</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;*(q</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;1</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;)*qbrackets(k,q)</span>
+<br /><span 
+class="pcrr8t-">-----------------------------------</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*(q</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;1)*(q</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)</span>
+<br />
+<br /><span 
+class="pcrr8t-">7:</span><span 
+class="pcrr8t-">&#x00A0;on</span><span 
+class="pcrr8t-">&#x00A0;qgosper_down;</span>
+<br />
+<br /><span 
+class="pcrr8t-">8:</span><span 
+class="pcrr8t-">&#x00A0;qgosper(q^k,q,k,0,n);</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;*q</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1</span>
+<br /><span 
+class="pcrr8t-">----------</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1</span>
+</div>
+</div>
+<!--l. 331--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.48.6    </span> <a 
+ id="x188-75700016.48.6"></a>REDUCE operator <span 
+class="pcrr8t-x-x-109">QSUMRECURSION</span></h4>
+<a 
+ id="dx188-757001"></a>
+<!--l. 339--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>operator is an implementation of the <span 
+class="cmmi-10x-x-109">q</span>-Zeilberger algorithm. It
+tries to determine a homogeneous recurrence equation for <span 
+class="cmr-10x-x-109">s</span><span 
+class="cmmi-10x-x-109">umm</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">n</span><span 
+class="cmr-10x-x-109">) </span>wrt. <span 
+class="cmmi-10x-x-109">n </span>with
+polynomial coefficients (in <span 
+class="cmmi-10x-x-109">n</span>), where
+<center class="math-display" >
+<img 
+src="manual492x.png" alt="              &#x221E;
+summ  (n) := &#x2211;    f(n,k).
+
+            k=- &#x221E;
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 346--><p class="nopar" > If successful the left hand side of the recurrence equation (<a 
+href="#x188-755002r92">16.92<!--tex4ht:ref: holonomic_recurrence --></a>) is returned.
+<!--l. 351--><p class="noindent" >There are three different ways to pass a summand <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">) </span>to <span 
+class="pcrr8t-x-x-109">qsumrecursion</span>:
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsumrecursion(f,q,k,n)</span>, where <span 
+class="pcrr8t-x-x-109">f </span>is a <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric term wrt.
+     <span 
+class="pcrr8t-x-x-109">k </span>and <span 
+class="pcrr8t-x-x-109">n</span>, <span 
+class="pcrr8t-x-x-109">k </span>is the summation variable and <span 
+class="pcrr8t-x-x-109">n </span>the recursion variable, <span 
+class="pcrr8t-x-x-109">q </span>is a
+     symbol.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsumrecursion(upper,lower,q,z,n) </span>is a shortcut for <br 
+class="newline" /><span 
+class="pcrr8t-x-x-109">qsumrecursion(qphihyperterm(upper,lower,q,z,k),q,k,n)</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsumrecursion(f,upper,lower,q,z,n) </span>is a similar shortcut for<br 
+class="newline" /><span 
+class="pcrr8t-x-x-109">qsumrecursion(f*qphihyperterm(upper,lower,q,z,k),q,k,n)</span>,</li></ul>
+<!--l. 366--><p class="noindent" >i. e.&#x00A0;<span 
+class="pcrr8t-x-x-109">upper </span>and <span 
+class="pcrr8t-x-x-109">lower </span>are lists of upper and lower parameters of the generalized
+<span 
+class="cmmi-10x-x-109">q</span>-hypergeometric function. The third form is handy if you have any additional
+factors.
+<!--l. 370--><p class="noindent" >For all three instances the following variations are allowed:
+     <ul class="itemize1">
+     <li class="itemize">If for some reason the recursion order is known in advance you can specify
+     it  as  an  additional  (<span 
+class="ptmro8t-x-x-109">optional </span>)  argument  at  the  very  end  of  the  parameter
+     sequence.  There  are  two  ways.  If  you  just  specify  a  positive  integer,
+     <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>looks only for a recurrence equation of this order. You
+     can also specify a range by a list of two positive integers, i. e.&#x00A0;the first one
+     specifying the lowest and the second one the highest order.
+     <!--l. 381--><p class="noindent" >By default <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>will search for recurrences of order from 1
+     to 5. (The global variable <span 
+class="pcrr8t-x-x-109">qsumrecursion_recrange!* </span>controls this
+     behavior, see §&#x00A0;<a 
+href="#x188-75900016.48.8">16.48.8<!--tex4ht:ref: switches --></a>.)
+     </li>
+     <li class="itemize">Usually <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>uses <span 
+class="pcrr8t-x-x-109">summ </span>as a name for the <span 
+class="cmr-10x-x-109">summ</span>-function
+     defined  above.  If  you  want  to  use  another  operator,  say  e. g.  <span 
+class="pcrr8t-x-x-109">s</span>,  then  the
+     following syntax applies: <span 
+class="pcrr8t-x-x-109">qsumrecursion(f,q,k,s(n))</span></li></ul>
+<!--l. 391--><p class="noindent" >As a first example we want to consider the <span 
+class="ptmro8t-x-x-109">q-binomial theorem</span>:
+<center class="math-display" >
+<img 
+src="manual493x.png" alt="&#x221E;&#x2211;
+   (a;q)kzk = (az;q)&#x221E;-,
+k=0(q;q)k      (z;q)&#x221E;
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 395--><p class="nopar" > provided that <span 
+class="cmsy-10x-x-109">|</span><span 
+class="cmmi-10x-x-109">z</span><span 
+class="cmsy-10x-x-109">|</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">|</span><span 
+class="cmmi-10x-x-109">q</span><span 
+class="cmsy-10x-x-109">| </span><span 
+class="cmmi-10x-x-109">&#x003C; </span><span 
+class="cmr-10x-x-109">1</span>. It is the <span 
+class="cmmi-10x-x-109">q</span>-analogue of the binomial theorem in the sense
+that
+<center class="math-display" >
+<img 
+src="manual494x.png" alt="     &#x2211;&#x221E;  (qa;q)      &#x2211;&#x221E;  (a)
+ lim      -----kzk =     ---kzk = (1- z)-a.
+q&#x2192;1- k=0 (q;q)k     k=0  k!
+" class="math-display" ></center>
+<!--l. 402--><p class="nopar" > For <span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">:= </span><span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">n</span></sup> with <span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="msbm-10x-x-109">&#x2115; </span>our implementation gets: <div class="alltt">
+<!--l. 404--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-">9:</span><span 
+class="pcrr8t-">&#x00A0;qsumrecursion(qpochhammer(q^(-n),q,k)*z^k/</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;qpochhammer(q,q,k),q,k,n);</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;((q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;z)*summ(n</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;*summ(n))</span>
+</div>
+</div>
+<!--l. 410--><p class="noindent" >
+Notice that the input requirements are fulfilled. For <span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="msbm-10x-x-109">&#x2115; </span>the summand is zero for all
+<span 
+class="cmmi-10x-x-109">k &#x003E; n </span>as <img 
+src="manual495x.png" alt="(q- n;q)"  class="left" align="middle"><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-10x-x-109">= 0 </span>and the <img 
+src="manual496x.png" alt="(q;q)"  class="left" align="middle"><sub><span 
+class="cmmi-8">k</span></sub>-term in the denominator makes the summand
+vanish for all <span 
+class="cmmi-10x-x-109">k &#x003C; </span><span 
+class="cmr-10x-x-109">0</span>.
+<a 
+ id="dx188-757002"></a>
+<a 
+ id="dx188-757003"></a>
+<a 
+ id="dx188-757004"></a>
+<!--l. 418--><p class="noindent" >With the switch <span 
+class="pcrr8t-x-x-109">qsumrecursion_certificate </span>it is possible to get the
+antidifference <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub> described above. When switched on, <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>returns a list
+with five entries, see §&#x00A0;<a 
+href="#x188-75900016.48.8">16.48.8<!--tex4ht:ref: switches --></a>. For the last example we get:
+<div class="alltt">
+<!--l. 424--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-">10:</span><span 
+class="pcrr8t-">&#x00A0;on</span><span 
+class="pcrr8t-">&#x00A0;qsumrecursion_certificate;</span>
+<br />
+<br /><span 
+class="pcrr8t-">11:</span><span 
+class="pcrr8t-">&#x00A0;proof:=</span><span 
+class="pcrr8t-">&#x00A0;qsumrecursion(qpochhammer(q^(-n),q,k)*z^k/</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;qpochhammer(q,q,k),q,k,n);</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">proof</span><span 
+class="pcrr8t-">&#x00A0;:=</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;((q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;z)*summ(n</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;*summ(n)),</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+                                                                     
+
+                                                                     
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;)*z</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;----------------,</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;1</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;z</span><span 
+class="pcrr8t-">&#x00A0;*qpochhammer(----,q,k)</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;--------------------------,</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;qpochhammer(q,q,k)</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k,</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;downward_antidifference</span>
+<br />
+<br /><span 
+class="pcrr8t-">12:</span><span 
+class="pcrr8t-">&#x00A0;off</span><span 
+class="pcrr8t-">&#x00A0;qsumrecursion_certificate;</span>
+</div>
+</div>
+<!--l. 451--><p class="noindent" >
+ Let&#8217;s define the list entries as <span 
+class="pcrr8t-x-x-109">{rec,cert,f,k,dir}</span>. If you substitute
+<span 
+class="cmr-10x-x-109">s</span><span 
+class="cmmi-10x-x-109">umm</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">j</span><span 
+class="cmr-10x-x-109">) </span>by <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">j,k</span><span 
+class="cmr-10x-x-109">) </span>in <span 
+class="pcrr8t-x-x-109">rec </span>then you obtain the left hand side of equation
+(<a 
+href="#x188-755001r91">16.91<!--tex4ht:ref: eq:f_n_k-recursion --></a>), where <span 
+class="pcrr8t-x-x-109">f </span>is the input summand. The function <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">) :=</span> <span 
+class="pcrr8t-x-x-109">f*cert</span> is the
+corresponding antidifference, where <span 
+class="pcrr8t-x-x-109">dir </span>states which sort of antidifference was
+calculated <span 
+class="pcrr8t-x-x-109">downward_antidifference </span>or <span 
+class="pcrr8t-x-x-109">upward_antidifference</span>, see also
+§&#x00A0;<a 
+href="#x188-75900016.48.8">16.48.8<!--tex4ht:ref: switches --></a>. Those informations enable you to prove the recurrence equation for the sum
+or supply you with the necessary informations to determine an inhomogeneous
+recurrence equation for a sum with nonnatural bounds.
+<a 
+ id="dx188-757005"></a>
+<!--l. 467--><p class="noindent" >For our last example we can now calculate both sides of equation (<a 
+href="#x188-755001r91">16.91<!--tex4ht:ref: eq:f_n_k-recursion --></a>):
+<div class="alltt">
+<!--l. 470--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-">13:</span><span 
+class="pcrr8t-">&#x00A0;lhside:=</span><span 
+class="pcrr8t-">&#x00A0;qsimpcomb(sub(summ(n)=part(proof,3),</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;summ(n-1)=sub(n=n-1,part(proof,3)),part(proof,1)));</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;1</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;z</span><span 
+class="pcrr8t-">&#x00A0;*(q</span><span 
+class="pcrr8t-">&#x00A0;*(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;z)</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;*(z</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1))*qpochhammer(----,q,k)</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q</span>
+<br /><span 
+class="pcrr8t-">lhside</span><span 
+class="pcrr8t-">&#x00A0;:=</span><span 
+class="pcrr8t-">&#x00A0;-----------------------------------------------------</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*qpochhammer(q,q,k)</span>
+<br />
+<br /><span 
+class="pcrr8t-">14:</span><span 
+class="pcrr8t-">&#x00A0;rhside:=</span><span 
+class="pcrr8t-">&#x00A0;qsimpcomb((part(proof,2)*part(proof,3)-</span>
+                                                                     
+
+                                                                     
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;sub(k=k-1,part(proof,2)*part(proof,3))));</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;k</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;1</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;z</span><span 
+class="pcrr8t-">&#x00A0;*((q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;)*z</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;*(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1))*qpochhammer(----,q,k)</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q</span>
+<br /><span 
+class="pcrr8t-">rhside</span><span 
+class="pcrr8t-">&#x00A0;:=</span><span 
+class="pcrr8t-">&#x00A0;---------------------------------------------------------</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*qpochhammer(q,q,k)</span>
+<br />
+<br /><span 
+class="pcrr8t-">15:</span><span 
+class="pcrr8t-">&#x00A0;qsimpcomb((rhside-lhside)/part(proof,3));</span>
+<br />
+<br /><span 
+class="pcrr8t-">0</span>
+</div>
+</div>
+<!--l. 496--><p class="noindent" >
+ Thus we have proved the validity of the recurrence equation.
+<!--l. 501--><p class="noindent" >As some other examples we want to consider some generalizations of orthogonal
+polynomials from the Askey&#8211;Wilson&#8211;scheme <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>: The <span 
+class="cmmi-10x-x-109">q</span>-Laguerre (3.21), <span 
+class="cmmi-10x-x-109">q</span>-Charlier
+(3.23) and the continuous <span 
+class="cmmi-10x-x-109">q</span>-Jacobi (3.10) polynomials.
+<div class="alltt">
+<!--l. 508--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-">16:</span><span 
+class="pcrr8t-">&#x00A0;operator</span><span 
+class="pcrr8t-">&#x00A0;qlaguerre,qcharlier;</span>
+<br />
+<br /><span 
+class="pcrr8t-">17:</span><span 
+class="pcrr8t-">&#x00A0;qsumrecursion(qpochhammer(q^(alpha+1),q,n)/qpochhammer(q,q,n),</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;{q^(-n)},</span><span 
+class="pcrr8t-">&#x00A0;{q^(alpha+1)},</span><span 
+class="pcrr8t-">&#x00A0;q,</span><span 
+class="pcrr8t-">&#x00A0;-x*q^(n+alpha+1),</span><span 
+class="pcrr8t-">&#x00A0;qlaguerre(n));</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;alpha</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">((q</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;1</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;)*q</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;*(q</span><span 
+class="pcrr8t-">&#x00A0;*x</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;q))*qlaguerre(n</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;alpha</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;((q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q)*qlaguerre(n</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;2)</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)*qlaguerre(n))*q</span>
+<br />
+<br /><span 
+class="pcrr8t-">18:</span><span 
+class="pcrr8t-">&#x00A0;qsumrecursion({q^(-n),q^(-x)},{0},q,-q^(n+1)/a,qcharlier(n));</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;x</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;2*n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;((q</span><span 
+class="pcrr8t-">&#x00A0;*((q</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;1</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;)*a</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;)*q</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;)*qcharlier(n</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;1)</span>
+<br />
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;x</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;q</span><span 
+class="pcrr8t-">&#x00A0;*((q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;+</span><span 
+class="pcrr8t-">&#x00A0;a*q)*(q</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;q)*qcharlier(n</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;2)</span><span 
+class="pcrr8t-">&#x00A0;-</span><span 
+class="pcrr8t-">&#x00A0;qcharlier(n)*a*q))</span>
+<br />
+<br /><span 
+class="pcrr8t-">19:</span><span 
+class="pcrr8t-">&#x00A0;on</span><span 
+class="pcrr8t-">&#x00A0;qsum_nullspace;</span>
+<br />
+<br /><span 
+class="pcrr8t-">20:</span><span 
+class="pcrr8t-">&#x00A0;term:=</span><span 
+class="pcrr8t-">&#x00A0;qpochhammer(q^(alpha+1),q,n)/qpochhammer(q,q,n)*</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;qphihyperterm({q^(-n),q^(n+alpha+beta+1),</span>
+                                                                     
+
+                                                                     
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q^(alpha/2+1/4)*exp(I*theta),</span><span 
+class="pcrr8t-">&#x00A0;q^(alpha/2+1/4)*exp(-I*theta)},</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;{q^(alpha+1),</span><span 
+class="pcrr8t-">&#x00A0;-q^((alpha+beta+1)/2),</span><span 
+class="pcrr8t-">&#x00A0;-q^((alpha+beta+2)/2)},</span>
+<br /><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;</span><span 
+class="pcrr8t-">&#x00A0;q,q,k)$</span>
+<br />
+<br /><span 
+class="pcrr8t-">21:</span><span 
+class="pcrr8t-">&#x00A0;qsumrecursion(term,q,k,n,2);</span>
+</div>
+</div>
+<!--l. 537--><p class="noindent" >
+<div class="alltt">
+<!--l. 539--><p class="noindent" ><div class="obeylines-v">
+<span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;i*theta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;((q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*e</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;))</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta)/2</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;))</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)))*(sqrt(q)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(2*alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)/4</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*i*theta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(e</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;)</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1))*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)*summ(n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;i*theta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n)/2</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n)/2</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;e</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*((q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n)/2</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)*(sqrt(q)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(2*alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;4*n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)/2</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)</span>
+<br />
+                                                                     
+
+                                                                     
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;))*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)*summ(n)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(sqrt(q)*q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;)</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;(3*alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n)/2</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(sqrt(q)</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q))</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2*n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;alpha</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;beta</span><span 
+class="pcrr8t-x-x-90">&#x00A0;+</span><span 
+class="pcrr8t-x-x-90">&#x00A0;n</span>
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;1)*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)*(q</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;q)</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;</span><span 
+class="pcrr8t-x-x-90">&#x00A0;*summ(n</span><span 
+class="pcrr8t-x-x-90">&#x00A0;-</span><span 
+class="pcrr8t-x-x-90">&#x00A0;2)))</span>
+<br />
+<br /><span 
+class="pcrr8t-x-x-90">22:</span><span 
+class="pcrr8t-x-x-90">&#x00A0;off</span><span 
+class="pcrr8t-x-x-90">&#x00A0;qsum_nullspace;</span>
+</div>
+</div>
+<!--l. 584--><p class="noindent" >The setting of <span 
+class="pcrr8t-x-x-109">qsum_nullspace</span><a 
+ id="dx188-757006"></a><a 
+ id="dx188-757007"></a><a 
+ id="dx188-757008"></a> (see <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> and §&#x00A0;<a 
+href="#x188-75900016.48.8">16.48.8<!--tex4ht:ref: switches --></a>) results in a faster calculation
+of the recurrence equation for this example.
+<h4 class="subsectionHead"><span class="titlemark">16.48.7    </span> <a 
+ id="x188-75800016.48.7"></a>Simplification Operators</h4>
+<a 
+ id="dx188-758001"></a>
+<a 
+ id="dx188-758002"></a>
+<a 
+ id="dx188-758003"></a>
+<a 
+ id="dx188-758004"></a>
+<!--l. 600--><p class="noindent" >An essential step in the algorithms introduced above is to decide whether a term <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> is
+<span 
+class="cmmi-10x-x-109">q</span>-hypergeometric, i. e.&#x00A0;if the ratio <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-10x-x-109">&#x2215;a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> is rational in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup>.
+<!--l. 604--><p class="noindent" >The procedure <span 
+class="pcrr8t-x-x-109">qsimpcomb </span>provides this facility. It tries to simplify all exponential
+expressions in the given term and applies some transformation rules to the known
+elementary <span 
+class="cmmi-10x-x-109">q</span>-functions as <span 
+class="pcrr8t-x-x-109">qpochhammer</span>, <span 
+class="pcrr8t-x-x-109">qbrackets</span>, <span 
+class="pcrr8t-x-x-109">qbinomial </span>and
+<span 
+class="pcrr8t-x-x-109">qfactorial</span>. Note that the procedure may fail to completely simplify some
+expressions. This is due to the fact that the procedure was designed to simplify ratios of
+<span 
+class="cmmi-10x-x-109">q</span>-hypergeometric terms in the form <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1) </span>and not arbitrary <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric
+terms.
+<!--l. 614--><p class="noindent" >E. g.&#x00A0;an expression like <img 
+src="manual497x.png" alt="(a;q)"  class="left" align="middle"><sub><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmsy-10x-x-109">&#x22C5;</span><img 
+src="manual498x.png" alt="(a&#x2215;qn;q)"  class="left" align="middle"><sub><span 
+class="cmmi-8">n</span></sub> is not recognized as 1, despite the
+transformation formula
+<center class="math-display" >
+<img 
+src="manual499x.png" alt="(a;q)   = ----1----,
+     -n   (a&#x2215;qn;q)n
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 617--><p class="nopar" > which is valid for <span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="msbm-10x-x-109">&#x2115;</span>.
+<!--l. 620--><p class="noindent" >Note that due to necessary simplification of powers, the switch <span 
+class="pcrr8t-x-x-109">precise </span>is (locally)
+turned off in <span 
+class="pcrr8t-x-x-109">qsimpcomb</span>. This might produce wrong results if the input term contains
+e. g.&#x00A0;complex variables.
+<!--l. 625--><p class="noindent" >The following synomyms may be used:
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">up_qratio(f,k)       </span>or                  <span 
+class="pcrr8t-x-x-109">qratio(f,k)       </span>for
+     <span 
+class="pcrr8t-x-x-109">qsimpcomb(sub(k=k+1,f)/f) </span>and
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">down_qratio(f,k) </span>for <span 
+class="pcrr8t-x-x-109">qsimpcomp(f/sub(k=k-1,f))</span>.</li></ul>
+<!--l. 634--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.48.8    </span> <a 
+ id="x188-75900016.48.8"></a>Global Variables and Switches</h4>
+<a 
+ id="dx188-759001"></a>
+<a 
+ id="dx188-759002"></a>
+<a 
+ id="dx188-759003"></a>
+<a 
+ id="dx188-759004"></a>
+<a 
+ id="dx188-759005"></a>
+<a 
+ id="dx188-759006"></a>
+<a 
+ id="dx188-759007"></a>
+<a 
+ id="dx188-759008"></a>
+<a 
+ id="dx188-759009"></a>
+<a 
+ id="dx188-759010"></a>
+<a 
+ id="dx188-759011"></a>
+<a 
+ id="dx188-759012"></a>
+<a 
+ id="dx188-759013"></a>
+<a 
+ id="dx188-759014"></a>
+<a 
+ id="dx188-759015"></a>
+<a 
+ id="dx188-759016"></a>
+<a 
+ id="dx188-759017"></a>
+<a 
+ id="dx188-759018"></a>
+<a 
+ id="dx188-759019"></a>
+<a 
+ id="dx188-759020"></a>
+<a 
+ id="dx188-759021"></a>
+<a 
+ id="dx188-759022"></a>
+<a 
+ id="dx188-759023"></a>
+<!--l. 645--><p class="noindent" >The following switches can be used in connection with the <span 
+class="pcrr8t-x-x-109">QSUM </span>package:
+                                                                     
+
+                                                                     
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsum_trace</span>, default setting is off. If it is turned on some intermediate
+     results are printed.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qgosper_down</span>,  default  setting  is  on.  It  determines  whether  <span 
+class="pcrr8t-x-x-109">qgosper</span>
+     returns a downward or an upward antidifference <span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub> for the input term <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub>,
+     i. e.&#x00A0;<span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> or <span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">+1</span></sub> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmmi-8">k</span></sub> respectively.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsumrecursion_down</span>,  default  setting  is  on.  If  it  is  switched  on  a
+     downward  recurrence  equation  will  be  returned  by  <span 
+class="pcrr8t-x-x-109">qsumrecursion</span>.
+     Switching it off leads to an upward recurrence equation.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsum_nullspace</span>,  default  setting  is  off.  The  antidifference  <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)  </span>is
+     always  a  rational  multiple  (in  <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup>)  of  the  input  term  <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span>.  <span 
+class="pcrr8t-x-x-109">qgosper </span>and
+     <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>determine this certificate, which requires solving a set of
+     linear equations. If the switch <span 
+class="pcrr8t-x-x-109">qsum_nullspace </span>is turned on a modified
+     nullspace-algorithm  will  be  used  for  solving  those  equations.  In  general
+     this method is slower. However if the resulting recurrence equation is quite
+     complicated it might help to switch on <span 
+class="pcrr8t-x-x-109">qsum_nullspace</span>. See also <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>
+     and <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qgosper_specialsol</span>,  default  setting  is  on.  The  antidifference  <span 
+class="cmr-10x-x-109">g(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">)</span>
+     which  is  determined  by  <span 
+class="pcrr8t-x-x-109">qgosper </span>might  not  be  unique.  If  this  switch  is
+     turned  on,  just  one  special  solution  is  returned.  If  you  want  to  see  all
+     solutions, you should turn the switch off.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsumrecursion_exp</span>, default setting is off. This switch determines if the
+     coefficients of the resulting recurrence equation should be factored. Turning
+     it  off  might  speed  up  the  calculation  (if  factoring  is  complicated).  Note
+     that  when  turning  on  <span 
+class="pcrr8t-x-x-109">qsum_nullspace </span>usually  no  speedup  occurs  by
+     switching <span 
+class="pcrr8t-x-x-109">qsumrecursion_exp </span>on.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">qsumrecursion_certificate</span>, default off. As Zeilberger&#8217;s algorithm
+     delivers  a  recurrence  equation  for  a  <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric  term  <span 
+class="cmr-10x-x-109">f(</span><span 
+class="cmmi-10x-x-109">n,k</span><span 
+class="cmr-10x-x-109">)</span>,  see
+     equation (<a 
+href="#x188-755001r91">16.91<!--tex4ht:ref: eq:f_n_k-recursion --></a>), this switch is used to get all necessary informations for
+     proving this recurrence equation.
+     <!--l. 688--><p class="noindent" >If   it   is   set   on,   instead   of   simply   returning   the   resulting   recurrence
+     equation  (for  the  sum)&#8212;if  one  exists&#8212;<span 
+class="pcrr8t-x-x-109">qsumrecursion </span>returns  a  list
+     <span 
+class="pcrr8t-x-x-109">{rec,cert,f,k,dir} </span>with  five  items:  The  first  entry  contains  the
+     recurrence equation, while the other items enable you to prove the recurrence
+                                                                     
+
+                                                                     
+     a posteriori by rational arithmetic.
+     <!--l. 696--><p class="noindent" >If   we   denote   by   <span 
+class="pcrr8t-x-x-109">r </span>the   recurrence   <span 
+class="pcrr8t-x-x-109">rec </span>where   we   substituted   the
+     <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">summ</span></span></span>-function by the input term <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">f</span></span></span> (with the corresponding shifts in <span 
+class="pcrr8t-x-x-109">n</span>) then
+     the following equation is valid:
+     <center class="math-display" >
+     <img 
+src="manual500x.png" alt="r =  cert*f  -  sub (k=k -1,cert*f  )
+     " class="math-display" ></center>
+     <!--l. 700--><p class="nopar" > or
+     <center class="math-display" >
+     <img 
+src="manual501x.png" alt="r =  sub(k=k+1,cert*f    ) -  cert*f
+     " class="math-display" ></center>
+     <!--l. 702--><p class="nopar" >       if                 <span 
+class="pcrr8t-x-x-109">dir=downward_antidifference       </span>or
+     <span 
+class="pcrr8t-x-x-109">dir=upward_antidifference </span>respectively.</li></ul>
+<!--l. 707--><p class="noindent" >The global variable <span 
+class="pcrr8t-x-x-109">qsumrecursion_recrange!* </span>controls for which recursion
+orders the procedure <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>looks. It has to be a list with two entries, the
+first one representing the lowest and the second one the highest order of a recursion to
+search for. By default it is set to <span 
+class="pcrr8t-x-x-109">{1,5}</span>.
+<!--l. 715--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.48.9    </span> <a 
+ id="x188-76000016.48.9"></a>Messages</h4>
+<!--l. 717--><p class="noindent" >The following messages may occur:
+     <ul class="itemize1">
+     <li class="itemize">If your call to <span 
+class="pcrr8t-x-x-109">qgosper </span>or <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>reveals some incorrect syntax,
+     e. g.&#x00A0;wrong number of arguments or wrong type you may receive the following
+     messages:
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1136">
+     *****&#x00A0;Wrong&#x00A0;number&#x00A0;of&#x00A0;arguments.
+</div>
+     <!--l. 723--><p class="nopar" > or
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1137">
+     *****&#x00A0;Wrong&#x00A0;type&#x00A0;of&#x00A0;arguments.
+</div>
+     <!--l. 725--><p class="nopar" >
+     </li>
+     <li class="itemize">If you call <span 
+class="pcrr8t-x-x-109">qgosper </span>with a summand term that is free of the summation variable
+     you get
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1138">
+     WARNING:&#x00A0;Summand&#x00A0;is&#x00A0;independent&#x00A0;of&#x00A0;summation&#x00A0;variable.
+     &#x00A0;<br />*****&#x00A0;No&#x00A0;q-hypergeometric&#x00A0;antidifference&#x00A0;exists.
+</div>
+     <!--l. 732--><p class="nopar" >
+     </li>
+     <li class="itemize">If <span 
+class="pcrr8t-x-x-109">qgosper </span>finds no antidifference it returns:
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1139">
+     *****&#x00A0;No&#x00A0;q-hypergeometric&#x00A0;antidifference&#x00A0;exists.
+</div>
+     <!--l. 743--><p class="nopar" >
+     </li>
+     <li class="itemize">If <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>finds no recursion in the specified range it returns:
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1140">
+     *****&#x00A0;Found&#x00A0;no&#x00A0;recursion.&#x00A0;Use&#x00A0;higher&#x00A0;order.
+</div>
+     <!--l. 747--><p class="nopar" > (If you do not pass a range as an argument to <span 
+class="pcrr8t-x-x-109">qsumrecursion </span>the default range
+     in <span 
+class="pcrr8t-x-x-109">qsumrecursion_recrange!* </span>will be used.)
+     </li>
+     <li class="itemize">If the input term passed to <span 
+class="pcrr8t-x-x-109">qgosper </span>(<span 
+class="pcrr8t-x-x-109">qsumrecursion</span>) is not <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric
+     wrt.&#x00A0;the summation variable &#8212; say <span 
+class="cmmi-10x-x-109">k </span>&#8212; (and the recursion variable) then you
+     get
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1141">
+     *****&#x00A0;Input&#x00A0;term&#x00A0;is&#x00A0;probably&#x00A0;not&#x00A0;q-hypergeometric.
+</div>
+     <!--l. 757--><p class="nopar" > With all the examples we tested, our procedures decided properly whether the
+     input term was <span 
+class="cmmi-10x-x-109">q</span>-hypergeometric or not. However, we cannot guarantee in general
+     that <span 
+class="pcrr8t-x-x-109">qsimpcomb </span><span 
+class="ptmri8t-x-x-109">always </span>returns an expression that <span 
+class="ptmri8t-x-x-109">looks </span>rational in <span 
+class="cmmi-10x-x-109">q</span><sup><span 
+class="cmmi-8">k</span></sup> if it
+     actually is.
+     </li>
+     <li class="itemize">If the global variable <span 
+class="pcrr8t-x-x-109">qsumrecursion_recrange!* </span>was assigned an invalid
+     value:
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1142">
+     Global&#x00A0;variable&#x00A0;qsumrecursion_recrange!*&#x00A0;must&#x00A0;be&#x00A0;a&#x00A0;list
+     &#x00A0;<br />of&#x00A0;two&#x00A0;positive&#x00A0;integers:&#x00A0;{lo,hi}&#x00A0;with&#x00A0;lo&#x003C;=hi.
+     &#x00A0;<br />*****&#x00A0;Invalid&#x00A0;value&#x00A0;of&#x00A0;qsumrecursion_recrange!*
+</div>
+     <!--l. 769--><p class="nopar" ></li></ul>
+<!--l. 775--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x188-761000"></a>Bibliography</h4>
+<!--l. 775--><p class="noindent" >
+     <div class="thebibliography">
+     <p class="bibitem" ><span class="biblabel">
+  [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XAskeyWilson"></a>Askey                          R.&#x00A0;and                          Wilson,                          J.:
+     <span 
+class="ptmro8t-x-x-109">Some Basic Hypergeometric Orthogonal Polynomials that Generalize Jacobi</span>
+     <span 
+class="ptmro8t-x-x-109">Polynomials</span>. Memoirs Amer.&#x00A0;Math.&#x00A0;Soc.&#x00A0;319, Providence, RI, 1985.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XGasper"></a>Gasper, G.: <span 
+class="ptmro8t-x-x-109">Lecture Notes for an Introductory Minicourse on </span><span 
+class="cmmi-10x-x-109">q</span><span 
+class="ptmro8t-x-x-109">-Series</span>.
+     1995.         To         obtain         from         ftp://unvie6.un.or.at/siam/opsf_new/
+     00index_by_author.html.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XGasperRahman"></a>Gasper, G.&#x00A0;and Rahman, M.: <span 
+class="ptmro8t-x-x-109">Basic Hypergeometric Series</span>, Encyclopedia
+     of  Mathematics  and  its  Applications,  <span 
+class="ptmb8t-x-x-109">35</span>,  (G.-C.&#x00A0;Rota,  ed.),  Cambridge
+     University Press, London and New York, 1990.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XGosper"></a>Gosper  Jr.,  R.&#x00A0;W.:  Decision  procedure  for  indefinite  hypergeometric
+     summation. Proc.&#x00A0;Natl.&#x00A0;Acad.&#x00A0;Sci.&#x00A0;USA <span 
+class="ptmb8t-x-x-109">75</span>, 1978, 40&#8211;42.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKnuth"></a>Knuth,  D.&#x00A0;E.:  <span 
+class="ptmro8t-x-x-109">The  Art  of  Computer  Programming,  Seminumerical</span>
+     <span 
+class="ptmro8t-x-x-109">Algorithms</span>. 2nd ed., 1981, Addison-Wesley Publishing Company.
+                                                                     
+
+                                                                     
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [6]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoepf1"></a>Koepf, W.: Algorithms for <span 
+class="cmmi-10x-x-109">m</span>-fold hypergeometric summation. Journal of
+     Symbolic Computation <span 
+class="ptmb8t-x-x-109">20</span>, 1995, 399&#8211;417.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [7]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoepf2"></a>Koepf,  W.:  REDUCE  package  for  indefinite  and  definite  summation.
+     SIGSAM Bulletin <span 
+class="ptmb8t-x-x-109">29</span>, 1995, 14&#8211;30.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [8]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoornwinder"></a>Koornwinder,  T.&#x00A0;H.:  On  Zeilberger&#8217;s  algorithm  and  its  <span 
+class="cmmi-10x-x-109">q</span>-analogue:  a
+     rigorous description. J.&#x00A0;of Comput.&#x00A0;and Appl.&#x00A0;Math.&#x00A0;<span 
+class="ptmb8t-x-x-109">48</span>, 1993, 91&#8211;111.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [9]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoekoekSwarttouw"></a>Koekoek,
+     R.&#x00A0;und Swarttouw, R.F.: <span 
+class="ptmro8t-x-x-109">The Askey-scheme of Hypergeometric Orthogonal</span>
+     <span 
+class="ptmro8t-x-x-109">Polynomials and its </span><span 
+class="cmmi-10x-x-109">q</span><span 
+class="ptmro8t-x-x-109">-analogue</span>. Report 94&#8211;05, Technische Universiteit Delft,
+     Faculty of Technical Mathematics and Informatics, Delft, 1994.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [10]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XPaule1"></a>Paule,  P.&#x00A0;und  Riese,  A.:  A  Mathematica  <span 
+class="ptmro8t-x-x-109">q</span>-analogue  of  Zeilberger&#8217;s
+     algorithm based on an algebraically motivated approach to <span 
+class="ptmro8t-x-x-109">q</span>-hypergeometric
+     telescoping. Fields Proceedings of the Workshop &#8216;Special Functions, <span 
+class="ptmro8t-x-x-109">q</span>-Series
+     and  Related  Topics&#8217;,  organized  by  the  Fields  Institute  for  Research  in
+     Mathematical  Sciences  at  Univerisity  College,  12-23  June  1995,  Toronto,
+     Ontario,179&#8211;210.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [11]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xhyper_Zeilberger1"></a>Zeilberger, D.: A fast algorithm for proving terminating hypergeometric
+     identities. Discrete Math.&#x00A0;<span 
+class="ptmb8t-x-x-109">80</span>, 1990, 207&#8211;211.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ [12]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xhyper_Zeilberger2"></a>Zeilberger,   D.:   The   method   of   creative   telescoping.   J.&#x00A0;Symbolic
+     Computation <span 
+class="ptmb8t-x-x-109">11</span>, 1991, 195&#8211;204.
+</p>
+     </div>
+<!--l. 871--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 873--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse139.html" >Up</a></td><td class="clinks"><a 
+href="manualse140.html" >Next</a></td><td class="clinks"><a 
+href="manualse138.html" >Prev</a></td><td class="clinks"><a 
+href="manualse138.html#tailmanualse138.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse139.html" >Front</a></td></tr></table><a 
+ id="tailmanualse139.html"></a>   
+</body></html> 

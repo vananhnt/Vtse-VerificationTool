@@ -1,0 +1,980 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Output of Expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch8.html#manualse52.html" >Up</a></td><td class="clinks"><a 
+href="manualse53.html" >Next</a></td><td class="clinks"><a 
+href="manualse51.html" >Prev</a></td><td class="clinks"><a 
+href="manualse51.html#tailmanualse51.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse52.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">8.3    </span> <a 
+ id="x65-1050008.3"></a>Output of Expressions</h3>
+<!--l. 128--><p class="noindent" >A considerable degree of flexibility is available in REDUCE in the printing
+of expressions generated during calculations. No explicit format statements
+are supplied, as these are in most cases of little use in algebraic calculations,
+where the size of output or its composition is not generally known in advance.
+Instead, REDUCE provides a series of mode options to the user that should
+enable him to produce his output in a comprehensible and possibly pleasing
+form.
+<!--l. 136--><p class="noindent" ><a 
+ id="switch:OUTPUT"></a> The most extreme option offered is to suppress the output entirely from any top level
+evaluation. This is accomplished by turning off the switch <span 
+class="pcrr8t-x-x-109">OUTPUT</span><a 
+ id="dx65-105001"></a><a 
+ id="dx65-105002"></a><a 
+ id="dx65-105003"></a> which is normally
+on. It is useful for limiting output when loading large files or producing &#8220;clean&#8221; output
+from the prettyprint programs.
+<!--l. 143--><p class="noindent" >In most circumstances, however, we wish to view the output, so we need to
+know how to format it appropriately. As we mentioned earlier, an algebraic
+expression is normally printed in an expanded form, filling the whole output line with
+terms. Certain output declarations,<a 
+ id="dx65-105004"></a> however, can be used to affect this format.
+To begin with, we look at an operator for changing the length of the output
+line.
+<!--l. 150--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">8.3.1    </span> <a 
+ id="x65-1060008.3.1"></a>LINELENGTH Operator</h4>
+<a 
+ id="dx65-106001"></a>
+<!--l. 151--><p class="noindent" ><a 
+ id="operator:LINELENGTH"></a>
+<!--l. 153--><p class="noindent" >This operator is used with the syntax
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-171">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;LINELENGTH(NUM:integer):integer
+</div>
+<!--l. 156--><p class="nopar" > and sets the output line length to the integer <span 
+class="pcrr8t-x-x-109">NUM</span>. It returns the previous output line
+length (so that it can be stored for later resetting of the output line if needed).
+<!--l. 161--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">8.3.2    </span> <a 
+ id="x65-1070008.3.2"></a>Output Declarations</h4>
+<!--l. 162--><p class="noindent" ><a 
+ id="switch:PRI"></a>
+<!--l. 164--><p class="noindent" >We now describe a number of switches and declarations that are available for controlling
+output formats. It should be noted, however, that the transformation of large expressions
+to produce these varied output formats can take a lot of computing time and space. If a
+user wishes to speed up the printing of the output in such cases, he can turn off the switch
+<span 
+class="pcrr8t-x-x-109">PRI</span><a 
+ id="dx65-107001"></a><a 
+ id="dx65-107002"></a><a 
+ id="dx65-107003"></a>. If this is done, then output is produced in one fixed format, which basically reflects
+the internal form of the expression, and none of the options below apply. <span 
+class="pcrr8t-x-x-109">PRI </span>is normally
+on.
+<!--l. 173--><p class="noindent" >With <span 
+class="pcrr8t-x-x-109">PRI </span>on, the output declarations<a 
+ id="dx65-107004"></a> and switches available are as follows:
+<!--l. 176--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1080008.3.2"></a>ORDER Declaration</h5>
+<!--l. 177--><p class="noindent" ><a 
+ id="command:ORDER"></a>
+<!--l. 179--><p class="noindent" >The declaration <span 
+class="pcrr8t-x-x-109">ORDER</span><a 
+ id="dx65-108001"></a> may be used to order variables on output. The syntax
+is:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-172">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;order&#x00A0;v1,...vn;
+</div>
+<!--l. 183--><p class="nopar" > where the <span 
+class="pcrr8t-x-x-109">vi </span>are kernels. Thus,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-173">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;order&#x00A0;x,y,z;
+</div>
+<!--l. 187--><p class="nopar" > orders <span 
+class="pcrr8t-x-x-109">X </span>ahead of <span 
+class="pcrr8t-x-x-109">Y</span>, <span 
+class="pcrr8t-x-x-109">Y </span>ahead of <span 
+class="pcrr8t-x-x-109">Z </span>and all three ahead of other variables not
+given an order. <span 
+class="pcrr8t-x-x-109">order nil; </span>resets the output order to the system default.
+The order of variables may be changed by further calls of <span 
+class="pcrr8t-x-x-109">ORDER</span>, but then the
+reordered variables would have an order lower than those in earlier <span 
+class="pcrr8t-x-x-109">ORDER </span>calls.
+Thus,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-174">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;order&#x00A0;x,y,z;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;order&#x00A0;y,x;
+</div>
+<!--l. 197--><p class="nopar" > would order <span 
+class="pcrr8t-x-x-109">Z </span>ahead of <span 
+class="pcrr8t-x-x-109">Y </span>and <span 
+class="pcrr8t-x-x-109">X</span>. The default ordering is usually alphabetic.
+<!--l. 201--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1090008.3.2"></a>FACTOR Declaration</h5>
+<!--l. 202--><p class="noindent" ><a 
+ id="command:FACTOR"></a>
+<!--l. 204--><p class="noindent" >This declaration takes a list of identifiers or kernels<a 
+ id="dx65-109001"></a> as argument. <span 
+class="pcrr8t-x-x-109">FACTOR</span><a 
+ id="dx65-109002"></a> is not a
+factoring command (use <span 
+class="pcrr8t-x-x-109">FACTORIZE </span>or the <span 
+class="pcrr8t-x-x-109">FACTOR </span>switch for this purpose); rather
+it is a separation command. All terms involving fixed powers of the declared
+expressions are printed as a product of the fixed powers and a sum of the rest of the
+terms.
+<!--l. 211--><p class="noindent" >For example, after the declaration
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-175">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factor&#x00A0;x;
+</div>
+<!--l. 214--><p class="nopar" > the polynomial <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">y </span><span 
+class="cmr-10x-x-109">+ 1)</span><sup><span 
+class="cmr-8">2</span></sup> will be printed as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-176">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;+&#x00A0;2*X*(Y&#x00A0;+&#x00A0;1)&#x00A0;+&#x00A0;Y&#x00A0;&#x00A0;+&#x00A0;2*Y&#x00A0;+&#x00A0;1
+</div>
+<!--l. 219--><p class="nopar" > All expressions involving a given prefix operator may also be factored by putting the
+operator name in the list of factored identifiers. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-177">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factor&#x00A0;x,cos,sin(x);
+</div>
+<!--l. 224--><p class="nopar" > causes all powers of <span 
+class="pcrr8t-x-x-109">X </span>and <span 
+class="pcrr8t-x-x-109">SIN(X) </span>and all functions of <span 
+class="pcrr8t-x-x-109">COS </span>to be factored.
+<!--l. 228--><p class="noindent" >Note that <span 
+class="pcrr8t-x-x-109">FACTOR </span>does not affect the order of its arguments. You should also use
+<span 
+class="pcrr8t-x-x-109">ORDER </span>if this is important.
+<!--l. 231--><p class="noindent" ><a 
+ id="command:REMFAC"></a> The declaration <span 
+class="pcrr8t-x-x-109">remfac v1,...,vn;</span><a 
+ id="dx65-109003"></a> removes the factoring flag from the
+expressions <span 
+class="pcrr8t-x-x-109">v1 </span>through <span 
+class="pcrr8t-x-x-109">vn</span>.
+<!--l. 235--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">8.3.3    </span> <a 
+ id="x65-1100008.3.3"></a>Output Control Switches</h4>
+<!--l. 237--><p class="noindent" >In addition to these declarations, the form of the output can be modified by switching
+various output control switches using the declarations <span 
+class="pcrr8t-x-x-109">ON </span>and <span 
+class="pcrr8t-x-x-109">OFF</span>. We shall
+illustrate the use of these switches by an example, namely the printing of the
+expression
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-178">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x^2*(y^2+2*y)+x*(y^2+z)/(2*a)&#x00A0;.
+</div>
+<!--l. 243--><p class="nopar" > The relevant switches are as follows:
+<!--l. 246--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1110008.3.3"></a>ALLFAC Switch</h5>
+<!--l. 247--><p class="noindent" ><a 
+ id="switch:ALLFAC"></a> <a 
+ id="dx65-111001"></a><a 
+ id="dx65-111002"></a><a 
+ id="dx65-111003"></a>
+<!--l. 250--><p class="noindent" >This switch will cause the system to search the whole expression, or any sub-expression
+enclosed in parentheses, for simple multiplicative factors and print them outside the
+parentheses. Thus our expression with <span 
+class="pcrr8t-x-x-109">ALLFAC</span><a 
+ id="dx65-111004"></a><a 
+ id="dx65-111005"></a><a 
+ id="dx65-111006"></a> off will print as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-179">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2*X&#x00A0;*Y&#x00A0;*A&#x00A0;+&#x00A0;4*X&#x00A0;*Y*A&#x00A0;+&#x00A0;X*Y&#x00A0;&#x00A0;+&#x00A0;X*Z)/(2*A)
+</div>
+<!--l. 258--><p class="nopar" > and with <span 
+class="pcrr8t-x-x-109">ALLFAC </span>on as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-180">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X*(2*X*Y&#x00A0;*A&#x00A0;+&#x00A0;4*X*Y*A&#x00A0;+&#x00A0;Y&#x00A0;&#x00A0;+&#x00A0;Z)/(2*A)&#x00A0;.
+</div>
+<!--l. 263--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">ALLFAC </span>is normally on, and is on in the following examples, except where otherwise
+stated.
+<!--l. 267--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1120008.3.3"></a>DIV Switch</h5>
+<!--l. 268--><p class="noindent" ><a 
+ id="switch:DIV"></a> <a 
+ id="dx65-112001"></a><a 
+ id="dx65-112002"></a><a 
+ id="dx65-112003"></a>
+<!--l. 271--><p class="noindent" >This switch makes the system search the denominator of an expression for simple factors
+that it divides into the numerator, so that rational fractions and negative powers appear in
+the output. With <span 
+class="pcrr8t-x-x-109">DIV </span>on, our expression would print as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-181">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;(-1)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-1)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X*(X*Y&#x00A0;&#x00A0;+&#x00A0;2*X*Y&#x00A0;+&#x00A0;1/2*Y&#x00A0;*A&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;1/2*A&#x00A0;&#x00A0;&#x00A0;&#x00A0;*Z)&#x00A0;.
+</div>
+<!--l. 278--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">DIV </span>is normally off.
+<!--l. 281--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1130008.3.3"></a>LIST Switch</h5>
+<a 
+ id="dx65-113001"></a>
+<!--l. 282--><p class="noindent" ><a 
+ id="switch:LIST"></a> <a 
+ id="dx65-113002"></a><a 
+ id="dx65-113003"></a><a 
+ id="dx65-113004"></a>
+<!--l. 285--><p class="noindent" >This switch causes the system to print each term in any sum on a separate line. With
+<span 
+class="pcrr8t-x-x-109">LIST </span>on, our expression prints as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-182">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X*(2*X*Y&#x00A0;*A
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;4*X*Y*A
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;Y
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;Z)/(2*A)&#x00A0;.
+</div>
+<!--l. 297--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">LIST </span>is normally off.
+<!--l. 300--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1140008.3.3"></a>NOSPLIT Switch</h5>
+<a 
+ id="dx65-114001"></a>
+<!--l. 301--><p class="noindent" ><a 
+ id="switch:NOSPLIT"></a> <a 
+ id="dx65-114002"></a><a 
+ id="dx65-114003"></a><a 
+ id="dx65-114004"></a>
+<!--l. 304--><p class="noindent" >Under normal circumstances, the printing routines try to break an expression across
+lines at a natural point. This is a fairly expensive process. If you are not overly
+concerned about where the end-of-line breaks come, you can speed up the printing
+of expressions by turning off the switch <span 
+class="pcrr8t-x-x-109">NOSPLIT</span>. This switch is normally
+on.
+<!--l. 310--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1150008.3.3"></a>RAT Switch</h5>
+<a 
+ id="dx65-115001"></a>
+<!--l. 311--><p class="noindent" ><a 
+ id="switch:RAT"></a> <a 
+ id="dx65-115002"></a><a 
+ id="dx65-115003"></a><a 
+ id="dx65-115004"></a>
+<!--l. 314--><p class="noindent" >This switch is only useful with expressions in which variables are factored with
+<span 
+class="pcrr8t-x-x-109">FACTOR</span>. With this mode, the overall denominator of the expression is printed with each
+factored sub-expression. We assume a prior declaration <span 
+class="pcrr8t-x-x-109">factor x; </span>in the following
+output. We first print the expression with <span 
+class="pcrr8t-x-x-109">RAT </span>set to off:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-183">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(2*X&#x00A0;*Y*A*(Y&#x00A0;+&#x00A0;2)&#x00A0;+&#x00A0;X*(Y&#x00A0;&#x00A0;+&#x00A0;Z))/(2*A)&#x00A0;.
+</div>
+<!--l. 322--><p class="nopar" > With <span 
+class="pcrr8t-x-x-109">RAT </span>on the output becomes:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-184">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;*Y*(Y&#x00A0;+&#x00A0;2)&#x00A0;+&#x00A0;X*(Y&#x00A0;&#x00A0;+&#x00A0;Z)/(2*A)&#x00A0;.
+</div>
+<!--l. 328--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">RAT </span>is normally off.
+<!--l. 331--><p class="noindent" >Next, if we leave <span 
+class="pcrr8t-x-x-109">X </span>factored, and turn on both <span 
+class="pcrr8t-x-x-109">DIV </span>and <span 
+class="pcrr8t-x-x-109">RAT</span>, the result becomes
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-185">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-1)&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;*Y*(Y&#x00A0;+&#x00A0;2)&#x00A0;+&#x00A0;1/2*X*A&#x00A0;&#x00A0;&#x00A0;&#x00A0;*(Y&#x00A0;&#x00A0;+&#x00A0;Z)&#x00A0;.
+</div>
+<!--l. 336--><p class="nopar" > Finally, with <span 
+class="pcrr8t-x-x-109">X </span>factored, <span 
+class="pcrr8t-x-x-109">RAT </span>on and <span 
+class="pcrr8t-x-x-109">ALLFAC</span><a 
+ id="dx65-115005"></a><a 
+ id="dx65-115006"></a><a 
+ id="dx65-115007"></a> off we retrieve the original structure
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-186">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;*(Y&#x00A0;&#x00A0;+&#x00A0;2*Y)&#x00A0;+&#x00A0;X*(Y&#x00A0;&#x00A0;+&#x00A0;Z)/(2*A)&#x00A0;.
+</div>
+<!--l. 342--><p class="nopar" >
+<!--l. 344--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1160008.3.3"></a>RATPRI Switch</h5>
+<a 
+ id="dx65-116001"></a>
+<!--l. 345--><p class="noindent" ><a 
+ id="switch:RATPRI"></a> <a 
+ id="dx65-116002"></a><a 
+ id="dx65-116003"></a><a 
+ id="dx65-116004"></a>
+<!--l. 348--><p class="noindent" >If the numerator and denominator of an expression can each be printed in one line, the
+output routines will print them in a two dimensional notation, with numerator and
+denominator on separate lines and a line of dashes in between. For example, <span 
+class="pcrr8t-x-x-109">(a+b)/2</span>
+will print as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-187">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A&#x00A0;+&#x00A0;B
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-----
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 356--><p class="nopar" > Turning this switch off causes such expressions to be output in a linear form.
+<!--l. 360--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1170008.3.3"></a>REVPRI Switch</h5>
+<a 
+ id="dx65-117001"></a>
+<!--l. 361--><p class="noindent" ><a 
+ id="switch:REVPRI"></a> <a 
+ id="dx65-117002"></a><a 
+ id="dx65-117003"></a><a 
+ id="dx65-117004"></a>
+<!--l. 364--><p class="noindent" >The normal ordering of terms in output is from highest to lowest power. In
+some situations (e.g., when a power series is output), the opposite ordering is
+more convenient. The switch <span 
+class="pcrr8t-x-x-109">REVPRI </span>if on causes such a reverse ordering of
+terms. For example, the expression <span 
+class="pcrr8t-x-x-109">y*(x+1)^2+(y+3)^2 </span>will normally print
+as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-188">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;*Y&#x00A0;+&#x00A0;2*X*Y&#x00A0;+&#x00A0;Y&#x00A0;&#x00A0;+&#x00A0;7*Y&#x00A0;+&#x00A0;9
+</div>
+<!--l. 372--><p class="nopar" > whereas with <span 
+class="pcrr8t-x-x-109">REVPRI </span>on, it will print as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-189">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9&#x00A0;+&#x00A0;7*Y&#x00A0;+&#x00A0;Y&#x00A0;&#x00A0;+&#x00A0;2*X*Y&#x00A0;+&#x00A0;X&#x00A0;*Y.
+</div>
+<!--l. 377--><p class="nopar" >
+<!--l. 379--><p class="noindent" ><a 
+ id="command:WRITE">
+<h4 class="subsectionHead"><span class="titlemark">8.3.4    </span> <a 
+ id="x65-1180008.3.4"></a>WRITE Command</h4>
+<!--l. 379--><p class="noindent" ></a><a 
+ id="dx65-118001"></a>
+<!--l. 381--><p class="noindent" >In simple cases no explicit output<a 
+ id="dx65-118002"></a> command is necessary in REDUCE, since the
+value of any expression is automatically printed if a semicolon is used as a
+delimiter. There are, however, several situations in which such a command is
+useful.
+<!--l. 386--><p class="noindent" >In a <span 
+class="pcrr8t-x-x-109">FOR</span>, <span 
+class="pcrr8t-x-x-109">WHILE</span>, or <span 
+class="pcrr8t-x-x-109">REPEAT </span>statement it may be desired to output something each time
+the statement within the loop construct is repeated.
+<!--l. 390--><p class="noindent" >It may be desired for a procedure to output intermediate results or other information
+while it is running. It may be desired to have results labeled in special ways, especially if
+the output is directed to a file or device other than the terminal.
+<!--l. 395--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">WRITE </span>command consists of the word <span 
+class="pcrr8t-x-x-109">WRITE </span>followed by one or more items
+separated by commas, and followed by a terminator. There are three kinds of items that
+can be used:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x65-118004x1">Expressions (including variables and constants). The expression is evaluated,
+     and the result is printed out.
+     </li>
+     <li 
+  class="enumerate" id="x65-118006x2">Assignments.  The  expression  on  the  right  side  of  the  <span 
+class="pcrr8t-x-x-109">:=</span> <a 
+ id="dx65-118007"></a> operator  is
+     evaluated,  and  is  assigned  to  the  variable  on  the  left;  then  the  symbol
+     on  the  left  is  printed,  followed  by  a  &#8220;<span 
+class="pcrr8t-x-x-109">:=</span>&#8221;,  followed  by  the  value  of  the
+     expression on the right &#8211; almost exactly the way an assignment followed by
+     a semicolon prints out normally. (The difference is that if the <span 
+class="pcrr8t-x-x-109">WRITE </span>is in a
+     <span 
+class="pcrr8t-x-x-109">FOR </span>statement and the left-hand side of the assignment is an array position
+     or something similar containing the variable of the <span 
+class="pcrr8t-x-x-109">FOR </span>iteration, then the
+     value of that variable is inserted in the printout.)
+     </li>
+                                                                     
+
+                                                                     
+     <li 
+  class="enumerate" id="x65-118009x3">Arbitrary  strings  of  characters,  preceded  and  followed  by  double-quote
+     marks (e.g., <span 
+class="pcrr8t-x-x-109">~string~</span>).</li></ol>
+<!--l. 416--><p class="noindent" >The items specified by a single <span 
+class="pcrr8t-x-x-109">WRITE </span>statement print side by side on one line. (The line
+is broken automatically if it is too long.) Strings print exactly as quoted. The <span 
+class="pcrr8t-x-x-109">WRITE</span>
+command itself however does not return a value.
+<!--l. 421--><p class="noindent" >The print line is closed at the end of a <span 
+class="pcrr8t-x-x-109">WRITE </span>command evaluation. Therefore the
+command <span 
+class="pcrr8t-x-x-109">WRITE ~~; </span>(specifying nothing to be printed except the empty string) causes
+a line to be skipped.
+<!--l. 425--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x65-118011x1">If <span 
+class="pcrr8t-x-x-109">A </span>is <span 
+class="pcrr8t-x-x-109">X+5</span>, <span 
+class="pcrr8t-x-x-109">B </span>is itself, <span 
+class="pcrr8t-x-x-109">C </span>is 123, <span 
+class="pcrr8t-x-x-109">M </span>is an array, and <span 
+class="pcrr8t-x-x-109">Q</span>=3, then
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-190">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;write&#x00A0;m(q):=a,~&#x00A0;~,b/c,~&#x00A0;THANK&#x00A0;YOU~;
+</div>
+     <!--l. 431--><p class="nopar" > will set <span 
+class="pcrr8t-x-x-109">M(3) </span>to <span 
+class="pcrr8t-x-x-109">x+5 </span>and print
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-191">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;M(Q)&#x00A0;:=&#x00A0;X&#x00A0;+&#x00A0;5&#x00A0;B/123&#x00A0;THANK&#x00A0;YOU
+</div>
+     <!--l. 435--><p class="nopar" > The blanks between the <span 
+class="pcrr8t-x-x-109">5 </span>and <span 
+class="pcrr8t-x-x-109">B</span>, and the <span 
+class="pcrr8t-x-x-109">3 </span>and <span 
+class="pcrr8t-x-x-109">T</span>, come from the blanks in the
+     quoted strings.
+     </li>
+     <li 
+  class="enumerate" id="x65-118013x2">To print a table of the squares of the integers from 1 to 20:
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-192">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;i:=1:20&#x00A0;do&#x00A0;write&#x00A0;i,~&#x00A0;~,i^2;
+</div>
+     <!--l. 442--><p class="nopar" >
+     </li>
+     <li 
+  class="enumerate" id="x65-118015x3">To print a table of the squares of the integers from 1 to 20, and at the same time
+     store them in positions 1 to 20 of an array <span 
+class="pcrr8t-x-x-109">A:</span>
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-193">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;i:=1:20&#x00A0;do&#x00A0;&#x003C;&#x003C;a(i):=i^2;&#x00A0;write&#x00A0;i,~&#x00A0;~,a(i)&#x003E;&#x003E;;
+</div>
+     <!--l. 448--><p class="nopar" > This will give us two columns of numbers. If we had used
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-194">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;i:=1:20&#x00A0;do&#x00A0;write&#x00A0;i,~&#x00A0;~,a(i):=i^2;
+</div>
+     <!--l. 452--><p class="nopar" > we would also get <span 
+class="pcrr8t-x-x-109">A(</span>i<span 
+class="pcrr8t-x-x-109">) := </span>repeated on each line.
+     </li>
+     <li 
+  class="enumerate" id="x65-118017x4">The following more complete example calculates the famous f and g series,
+     first reported in Sconzo, P., LeSchack, A. R., and Tobey, R., &#8220;Symbolic
+     Computation of f and g Series by Computer&#8221;, Astronomical Journal 70 (May
+     1965).
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-195">
+     &#x00A0;x1:=&#x00A0;-sig*(mu+2*eps)$
+     &#x00A0;<br />&#x00A0;x2:=&#x00A0;eps&#x00A0;-&#x00A0;2*sig^2$
+     &#x00A0;<br />&#x00A0;x3:=&#x00A0;-3*mu*sig$
+     &#x00A0;<br />&#x00A0;f:=&#x00A0;1$
+     &#x00A0;<br />&#x00A0;g:=&#x00A0;0$
+     &#x00A0;<br />&#x00A0;for&#x00A0;i:=&#x00A0;1&#x00A0;step&#x00A0;1&#x00A0;until&#x00A0;10&#x00A0;do&#x00A0;begin
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;f1:=&#x00A0;-mu*g+x1*df(f,eps)+x2*df(f,sig)+x3*df(f,mu);
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;write&#x00A0;~f(~,i,~)&#x00A0;:=&#x00A0;~,f1;
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;g1:=&#x00A0;f+x1*df(g,eps)+x2*df(g,sig)+x3*df(g,mu);
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;write&#x00A0;~g(~,i,~)&#x00A0;:=&#x00A0;~,g1;
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;f:=f1$
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;g:=g1$
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;end;
+</div>
+     <!--l. 473--><p class="nopar" > A portion of the output, to illustrate the printout from the <span 
+class="pcrr8t-x-x-109">WRITE </span>command, is as
+     follows:
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-196">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;...&#x00A0;&#x003C;prior&#x00A0;output&#x003E;&#x00A0;...
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+     &#x00A0;<br />&#x00A0;F(4)&#x00A0;:=&#x00A0;MU*(3*EPS&#x00A0;-&#x00A0;15*SIG&#x00A0;&#x00A0;+&#x00A0;MU)
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;G(4)&#x00A0;:=&#x00A0;6*SIG*MU
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+     &#x00A0;<br />&#x00A0;F(5)&#x00A0;:=&#x00A0;15*SIG*MU*(&#x00A0;-&#x00A0;3*EPS&#x00A0;+&#x00A0;7*SIG&#x00A0;&#x00A0;-&#x00A0;MU)
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+     &#x00A0;<br />&#x00A0;G(5)&#x00A0;:=&#x00A0;MU*(9*EPS&#x00A0;-&#x00A0;45*SIG&#x00A0;&#x00A0;+&#x00A0;MU)
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;...&#x00A0;&#x003C;more&#x00A0;output&#x003E;&#x00A0;...
+     &#x00A0;<br />
+</div>
+     <!--l. 492--><p class="nopar" ></li></ol>
+<!--l. 495--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">8.3.5    </span> <a 
+ id="x65-1190008.3.5"></a>Suppression of Zeros</h4>
+<!--l. 496--><p class="noindent" ><a 
+ id="switch:NERO"></a> <a 
+ id="dx65-119001"></a><a 
+ id="dx65-119002"></a><a 
+ id="dx65-119003"></a>
+<!--l. 499--><p class="noindent" >It is sometimes annoying to have zero assignments (i.e. assignments of the form
+<span 
+class="pcrr8t-x-x-109">&#x003C;expression&#x003E; := 0</span>) printed, especially in printing large arrays with many zero
+elements. The output from such assignments can be suppressed by turning on the switch
+<span 
+class="pcrr8t-x-x-109">NERO</span>.<a 
+ id="dx65-119004"></a>
+<!--l. 504--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">8.3.6    </span> <a 
+ id="x65-1200008.3.6"></a>FORTRAN Style Output Of Expressions</h4>
+<!--l. 506--><p class="noindent" >It is naturally possible to evaluate expressions numerically in REDUCE by giving all
+variables and sub-expressions numerical values. However, as we pointed out elsewhere
+the user must declare real arithmetical operation by turning on the switch <span 
+class="pcrr8t-x-x-109">ROUNDED</span><a 
+ id="dx65-120001"></a>.
+However, it should be remembered that arithmetic in REDUCE is not particularly fast,
+since results are interpreted rather than evaluated in a compiled form. The user
+                                                                     
+
+                                                                     
+with a large amount of numerical computation after all necessary algebraic
+manipulations have been performed is therefore well advised to perform these
+calculations in a FORTRAN<a 
+ id="dx65-120002"></a> or similar system. For this purpose, REDUCE
+offers facilities for users to produce FORTRAN compatible files for numerical
+processing.
+<!--l. 518--><p class="noindent" ><a 
+ id="reserved:CARD_NO"></a> <a 
+ id="switch:FORT"></a> <a 
+ id="dx65-120003"></a><a 
+ id="dx65-120004"></a><a 
+ id="dx65-120005"></a> First, when the switch <span 
+class="pcrr8t-x-x-109">FORT</span><a 
+ id="dx65-120006"></a> is on, the system will print expressions in a FORTRAN
+notation. Expressions begin in column seven. If an expression extends over one
+line, a continuation mark (.) followed by a blank appears on subsequent cards.
+After a certain number of lines have been produced (according to the value of
+the variable <span 
+class="pcrr8t-x-x-109">CARD_NO</span>),<a 
+ id="dx65-120007"></a> a new expression is started. If the expression printed
+arises from an assignment to a variable, the variable is printed as the name
+of the expression. Otherwise the expression is given the default name <span 
+class="pcrr8t-x-x-109">ANS</span>.
+An error occurs if identifiers or numbers are outside the bounds permitted by
+FORTRAN.
+<!--l. 533--><p class="noindent" >A second option is to use the <span 
+class="pcrr8t-x-x-109">WRITE </span>command to produce other programs.
+<!--l. 535--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 537--><p class="noindent" >The following REDUCE statements
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-197">
+&#x00A0;on&#x00A0;fort;
+&#x00A0;<br />&#x00A0;out&#x00A0;~forfil~;
+&#x00A0;<br />&#x00A0;write&#x00A0;~C&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;this&#x00A0;is&#x00A0;a&#x00A0;fortran&#x00A0;program~;
+&#x00A0;<br />&#x00A0;write&#x00A0;~&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;format(e13.5)~;
+&#x00A0;<br />&#x00A0;write&#x00A0;~&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u=1.23~;
+&#x00A0;<br />&#x00A0;write&#x00A0;~&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;v=2.17~;
+&#x00A0;<br />&#x00A0;write&#x00A0;~&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w=5.2~;
+&#x00A0;<br />&#x00A0;x:=(u+v+w)^11;
+&#x00A0;<br />&#x00A0;write&#x00A0;~C&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;it&#x00A0;was&#x00A0;foolish&#x00A0;to&#x00A0;expand&#x00A0;this&#x00A0;expression~;
+&#x00A0;<br />&#x00A0;write&#x00A0;~&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;print&#x00A0;1,x~;
+&#x00A0;<br />&#x00A0;write&#x00A0;~&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;end~;
+&#x00A0;<br />&#x00A0;shut&#x00A0;~forfil~;
+&#x00A0;<br />&#x00A0;off&#x00A0;fort;
+</div>
+<!--l. 552--><p class="nopar" > will generate a file <span 
+class="pcrr8t-x-x-109">forfil </span>that contains:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-198">
+c&#x00A0;this&#x00A0;is&#x00A0;a&#x00A0;fortran&#x00A0;program
+&#x00A0;<br />&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;format(e13.5)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u=1.23
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;v=2.17
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w=5.2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ans1=1320.*u**3*v*w**7+165.*u**3*w**8+55.*u**2*v**9+495.*u
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**2*v**8*w+1980.*u**2*v**7*w**2+4620.*u**2*v**6*w**3+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;6930.*u**2*v**5*w**4+6930.*u**2*v**4*w**5+4620.*u**2*v**3*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;w**6+1980.*u**2*v**2*w**7+495.*u**2*v*w**8+55.*u**2*w**9+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;11.*u*v**10+110.*u*v**9*w+495.*u*v**8*w**2+1320.*u*v**7*w
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**3+2310.*u*v**6*w**4+2772.*u*v**5*w**5+2310.*u*v**4*w**6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;+1320.*u*v**3*w**7+495.*u*v**2*w**8+110.*u*v*w**9+11.*u*w
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**10+v**11+11.*v**10*w+55.*v**9*w**2+165.*v**8*w**3+330.*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;v**7*w**4+462.*v**6*w**5+462.*v**5*w**6+330.*v**4*w**7+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;165.*v**3*w**8+55.*v**2*w**9+11.*v*w**10+w**11
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x=u**11+11.*u**10*v+11.*u**10*w+55.*u**9*v**2+110.*u**9*v*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;w+55.*u**9*w**2+165.*u**8*v**3+495.*u**8*v**2*w+495.*u**8
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;*v*w**2+165.*u**8*w**3+330.*u**7*v**4+1320.*u**7*v**3*w+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;1980.*u**7*v**2*w**2+1320.*u**7*v*w**3+330.*u**7*w**4+462.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;*u**6*v**5+2310.*u**6*v**4*w+4620.*u**6*v**3*w**2+4620.*u
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**6*v**2*w**3+2310.*u**6*v*w**4+462.*u**6*w**5+462.*u**5*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;v**6+2772.*u**5*v**5*w+6930.*u**5*v**4*w**2+9240.*u**5*v
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**3*w**3+6930.*u**5*v**2*w**4+2772.*u**5*v*w**5+462.*u**5
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;*w**6+330.*u**4*v**7+2310.*u**4*v**6*w+6930.*u**4*v**5*w
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**2+11550.*u**4*v**4*w**3+11550.*u**4*v**3*w**4+6930.*u**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;4*v**2*w**5+2310.*u**4*v*w**6+330.*u**4*w**7+165.*u**3*v
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**8+1320.*u**3*v**7*w+4620.*u**3*v**6*w**2+9240.*u**3*v**
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;5*w**3+11550.*u**3*v**4*w**4+9240.*u**3*v**3*w**5+4620.*u
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.&#x00A0;**3*v**2*w**6+ans1
+&#x00A0;<br />c&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;it&#x00A0;was&#x00A0;foolish&#x00A0;to&#x00A0;expand&#x00A0;this&#x00A0;expression
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;print&#x00A0;1,x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;end
+</div>
+<!--l. 589--><p class="nopar" > If the arguments of a <span 
+class="pcrr8t-x-x-109">WRITE </span>statement include an expression that requires continuation
+records, the output will need editing, since the output routine prints the arguments of
+<span 
+class="pcrr8t-x-x-109">WRITE </span>sequentially, and the continuation mechanism therefore generates its auxiliary
+variables after the preceding expression has been printed.
+<!--l. 597--><p class="noindent" >Finally, since there is no direct analog of <span 
+class="ptmri8t-x-x-109">list </span>in FORTRAN, a comment line of the
+form
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-199">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;c&#x00A0;*****&#x00A0;invalid&#x00A0;fortran&#x00A0;construct&#x00A0;(list)&#x00A0;not&#x00A0;printed
+</div>
+<!--l. 601--><p class="nopar" > will be printed if you try to print a list with <span 
+class="pcrr8t-x-x-109">FORT </span>on.
+<!--l. 604--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x65-1210008.3.6"></a>FORTRAN Output Options</h5>
+<a 
+ id="dx65-121001"></a>
+<a 
+ id="dx65-121002"></a>
+<!--l. 605--><p class="noindent" ><a 
+ id="reserved:FORT_WIDTH"></a> <a 
+ id="switch:PERIOD"></a> <a 
+ id="switch:FORTUPPER"></a>
+<!--l. 609--><p class="noindent" >There are a number of methods available to change the default format of the FORTRAN
+output.
+<!--l. 612--><p class="noindent" >The breakup of the expression into subparts is such that the number of continuation
+lines produced is less than a given number. This number can be modified by the
+assignment
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">card_no :=</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">number</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">;</span></div>
+<!--l. 618--><p class="noindent" >where <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">number</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> is the <span 
+class="ptmri8t-x-x-109">total </span>number of cards allowed in a statement. The default value of
+<span 
+class="pcrr8t-x-x-109">CARD_NO </span>is 20.
+<!--l. 621--><p class="noindent" >The width of the output expression is also adjustable by the assignment
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">fort_width :=</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">integer</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">;</span></div>
+<!--l. 625--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">FORT_WIDTH </span>which sets the total width of a given line to <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">integer</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>. The initial
+FORTRAN output width is 70.
+<!--l. 628--><p class="noindent" >REDUCE automatically inserts a decimal point after each isolated integer coefficient in a
+FORTRAN expression (so that, for example, 4 becomes <span 
+class="pcrr8t-x-x-109">4. </span>). To prevent this, set the
+<span 
+class="pcrr8t-x-x-109">PERIOD</span><a 
+ id="dx65-121003"></a><a 
+ id="dx65-121004"></a><a 
+ id="dx65-121005"></a> mode switch to <span 
+class="pcrr8t-x-x-109">OFF</span>.
+<!--l. 633--><p class="noindent" >FORTRAN output is normally produced in lower case. If upper case is desired, the
+switch <span 
+class="pcrr8t-x-x-109">FORTUPPER</span><a 
+ id="dx65-121006"></a><a 
+ id="dx65-121007"></a><a 
+ id="dx65-121008"></a> should be turned on.
+<!--l. 636--><p class="noindent" ><a 
+ id="operator:VARNAME"></a> Finally, the default name <span 
+class="pcrr8t-x-x-109">ANS </span>assigned to an unnamed expression and its subparts can
+be changed by the operator <span 
+class="pcrr8t-x-x-109">VARNAME</span>. <a 
+ id="dx65-121009"></a> This takes a single identifier as argument,
+                                                                     
+
+                                                                     
+which then replaces <span 
+class="pcrr8t-x-x-109">ANS </span>as the expression name. The value of <span 
+class="pcrr8t-x-x-109">VARNAME </span>is its
+argument.
+<!--l. 643--><p class="noindent" >Further facilities for the production of FORTRAN and other language output are
+provided by the SCOPE and GENTRAN packagesdescribed in chapters&#x00A0;<a 
+href="manualse117.html#x149-48600016.26">16.26<!--tex4ht:ref: GENTRAN --></a> and
+<a 
+href="manualse150.html#x202-81400016.59">16.59<!--tex4ht:ref: SCOPE --></a>.
+<!--l. 647--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">8.3.7    </span> <a 
+ id="x65-1220008.3.7"></a>Saving Expressions for Later Use as Input</h4>
+<a 
+ id="dx65-122001"></a>
+<!--l. 649--><p class="noindent" ><a 
+ id="switch:NAT"></a>
+<!--l. 651--><p class="noindent" >It is often useful to save an expression on an external file for use later as input in further
+calculations. The commands for opening and closing output files are explained
+elsewhere. However, we see in the examples on output of expressions that the standard
+&#8220;natural&#8221; method of printing expressions is not compatible with the input syntax. So to
+print the expression in an input compatible form we must inhibit this natural style by
+turning off the switch <span 
+class="pcrr8t-x-x-109">NAT</span>.<a 
+ id="dx65-122002"></a><a 
+ id="dx65-122003"></a><a 
+ id="dx65-122004"></a> If this is done, a dollar sign will also be printed at the end of
+the expression.
+<!--l. 660--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 662--><p class="noindent" >The following sequence of commands
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-200">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;off&#x00A0;nat;&#x00A0;out&#x00A0;~out~;&#x00A0;x&#x00A0;:=&#x00A0;(y+z)^2;&#x00A0;write&#x00A0;~end~;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;shut&#x00A0;~out~;&#x00A0;on&#x00A0;nat;
+</div>
+<!--l. 666--><p class="nopar" > will generate a file <span 
+class="pcrr8t-x-x-109">out </span>that contains
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-201">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;:=&#x00A0;Y**2&#x00A0;+&#x00A0;2*Y*Z&#x00A0;+&#x00A0;Z**2$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;END$
+</div>
+<!--l. 671--><p class="nopar" >
+<!--l. 673--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">8.3.8    </span> <a 
+ id="x65-1230008.3.8"></a>Displaying Expression Structure</h4>
+<a 
+ id="dx65-123001"></a>
+<!--l. 674--><p class="noindent" ><a 
+ id="operator:STRUCTR"></a>
+<!--l. 676--><p class="noindent" >In those cases where the final result has a complicated form, it is often convenient to
+display the skeletal structure of the answer. The operator <span 
+class="pcrr8t-x-x-109">STRUCTR</span>,<a 
+ id="dx65-123002"></a> that takes a single
+expression as argument, will do this for you. Its syntax is:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-202">
+&#x00A0;&#x00A0;&#x00A0;STRUCTR(EXPRN:algebraic[,ID1:identifier[,ID2:identifier]]);
+</div>
+<!--l. 682--><p class="nopar" > The structure is printed effectively as a tree, in which the subparts are laid out with
+auxiliary names. If the optional <span 
+class="pcrr8t-x-x-109">ID1 </span>is absent, the auxiliary names are prefixed by the
+root <span 
+class="pcrr8t-x-x-109">ANS</span>. This root may be changed by the operator <span 
+class="pcrr8t-x-x-109">VARNAME</span><a 
+ id="dx65-123003"></a>. If the optional <span 
+class="pcrr8t-x-x-109">ID1 </span>is
+present, and is an array name, the subparts are named as elements of that array, otherwise
+<span 
+class="pcrr8t-x-x-109">ID1 </span>is used as the root prefix. (The second optional argument <span 
+class="pcrr8t-x-x-109">ID2 </span>is explained
+later.)
+<!--l. 691--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">EXPRN </span>can be either a scalar or a matrix expression. Use of any other will result in
+an error.
+<!--l. 694--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 696--><p class="noindent" >Let us suppose that the workspace contains <span 
+class="pcrr8t-x-x-109">((A+B)^2+C)^3+D</span>. Then the input
+<span 
+class="pcrr8t-x-x-109">STRUCTR WS; </span>will (with <span 
+class="pcrr8t-x-x-109">EXP </span>off) result in the output:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-203">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ANS3
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;where
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ANS3&#x00A0;:=&#x00A0;ANS2&#x00A0;&#x00A0;+&#x00A0;D
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ANS2&#x00A0;:=&#x00A0;ANS1&#x00A0;&#x00A0;+&#x00A0;C
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ANS1&#x00A0;:=&#x00A0;A&#x00A0;+&#x00A0;B
+</div>
+<!--l. 712--><p class="nopar" > <a 
+ id="switch:SAVESTRUCTR"></a> The workspace remains unchanged after this operation, since <span 
+class="pcrr8t-x-x-109">STRUCTR</span><a 
+ id="dx65-123004"></a> in the default
+situation returns no value (if <span 
+class="pcrr8t-x-x-109">STRUCTR </span>is used as a sub-expression, its value is taken to
+be 0). In addition, the sub-expressions are normally only displayed and not retained. If
+you wish to access the sub-expressions with their displayed names, the switch
+<span 
+class="pcrr8t-x-x-109">SAVESTRUCTR</span><a 
+ id="dx65-123005"></a><a 
+ id="dx65-123006"></a><a 
+ id="dx65-123007"></a> should be turned on. In this case, <span 
+class="pcrr8t-x-x-109">STRUCTR </span>returns a list whose first
+element is a representation for the expression, and subsequent elements are the
+sub-expression relations. Thus, with <span 
+class="pcrr8t-x-x-109">SAVESTRUCTR </span>on, <span 
+class="pcrr8t-x-x-109">STRUCTR WS </span>in the above
+example would return
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-204">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{ANS3,ANS3=ANS2&#x00A0;&#x00A0;+&#x00A0;D,ANS2=ANS1&#x00A0;&#x00A0;+&#x00A0;C,ANS1=A&#x00A0;+&#x00A0;B}
+</div>
+<!--l. 727--><p class="nopar" > The <span 
+class="pcrr8t-x-x-109">PART</span><a 
+ id="dx65-123008"></a> operator can be used to retrieve the required parts of the expression. For
+example, to get the value of <span 
+class="pcrr8t-x-x-109">ANS2 </span>in the above, one could say:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-205">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;part(ws,3,2);
+</div>
+<!--l. 733--><p class="nopar" > If <span 
+class="pcrr8t-x-x-109">FORT </span>is on, then the results are printed in the reverse order; the algorithm in fact
+guaranteeing that no sub-expression will be referenced before it is defined. The second
+optional argument <span 
+class="pcrr8t-x-x-109">ID2 </span>may also be used in this case to name the actual expression (or
+expressions in the case of a matrix argument).
+<!--l. 740--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 742--><p class="noindent" >Let us suppose that <span 
+class="pcrr8t-x-x-109">M</span>, a 2 by 1 matrix, contains the elements <span 
+class="pcrr8t-x-x-109">((a+b)</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">2 + c)</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">3 +</span>
+<span 
+class="pcrr8t-x-x-109">d </span>and <span 
+class="pcrr8t-x-x-109">(a + b)*(c + d) </span>respectively, and that <span 
+class="pcrr8t-x-x-109">V </span>has been declared to be an array.
+With <span 
+class="pcrr8t-x-x-109">EXP </span>off and <span 
+class="pcrr8t-x-x-109">FORT </span>on, the statement <span 
+class="pcrr8t-x-x-109">structr(2*m,v,k); </span>will result in the
+output
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-206">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;V(1)=A+B
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;V(2)=V(1)**2+C
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;V(3)=V(2)**3+D
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;V(4)=C+D
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K(1,1)=2.*V(3)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K(2,1)=2.*V(1)*V(4)
+</div>
+<!--l. 754--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 756--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch8.html#manualse52.html" >Up</a></td><td class="clinks"><a 
+href="manualse53.html" >Next</a></td><td class="clinks"><a 
+href="manualse51.html" >Prev</a></td><td class="clinks"><a 
+href="manualse51.html#tailmanualse51.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse52.html" >Front</a></td></tr></table><a 
+ id="tailmanualse52.html"></a>   
+</body></html> 

@@ -1,0 +1,487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>BIBASIS: A Package for Calculating Boolean Involutive Bases</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse98.html" >Up</a></td><td class="clinks"><a 
+href="manualse99.html" >Next</a></td><td class="clinks"><a 
+href="manualse97.html" >Prev</a></td><td class="clinks"><a 
+href="manualse97.html#tailmanualse97.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse98.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.7    </span> <a 
+ id="x121-25900016.7"></a>BIBASIS: A Package for Calculating Boolean Involutive
+Bases</h3>
+<a 
+ id="dx121-259001"></a>
+<a 
+ id="dx121-259002"></a>
+<!--l. 174--><p class="noindent" >Authors: Yuri A. Blinkov and Mikhail V. Zinin
+<!--l. 3--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.7.1    </span> <a 
+ id="x121-26000016.7.1"></a>Introduction</h4>
+<!--l. 5--><p class="noindent" >Involutive polynomial bases are redundant Gröbner bases of special structure with some
+additional useful features in comparison with reduced Gröbner bases&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. Apart from
+numerous applications of involutive bases&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> the involutive algorithms&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> provide an
+efficient method for computing reduced Gröbner bases. A reduced Gröbner basis is a
+well-determined subset of an involutive basis and can be easily extracted from the latter
+without any extra reductions. All this takes place not only in rings of commutative
+polynomials but also in Boolean rings.
+<!--l. 11--><p class="noindent" >Boolean Gröbner basis already have already revealed their value and usability in practice.
+The first impressive demonstration of practicability of Boolean Gröbner bases
+was breaking the first HFE (Hidden Fields Equations) challenge in the public
+key cryptography done in&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> by computing a Boolean Gröbner basis for the
+system of quadratic polynomials in 80 variables. Since that time the Boolean
+Gröbner bases application area has widen drastically and nowadays there is also a
+number of quite successful examples of using Gröbner bases for solving SAT
+problems.
+<!--l. 17--><p class="noindent" >During our research we had developed&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>,&#x00A0;<span 
+class="ptmb8t-x-x-109">?</span>,&#x00A0;<span 
+class="ptmb8t-x-x-109">?</span>]</span> Boolean involutive algorithms based on
+Janet and Pommaret divisions and applied them to computation of Boolean Gröbner
+bases. Our implementation of both divisions has experimentally demonstrated
+computational superiority of the Pommaret division implementation. This package
+BIBASIS is the result of our thorough research in the field of Boolean Gröbner bases.
+BIBASIS implements the involutive algorithm based on Pommaret division in a
+multivariate Boolean ring.
+<!--l. 23--><p class="noindent" >In section 2 the Boolean ring and its peculiarities are shortly introduced. In section 3 we
+briefly argue why the involutive algorithm and Pommaret division are good for
+Boolean ring while the Buhberger&#8217;s algorithm is not. And finally in section 4 we
+                                                                     
+
+                                                                     
+give the full description of BIBASIS package capabilities and illustrate it by
+examples.
+<!--l. 27--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.7.2    </span> <a 
+ id="x121-26100016.7.2"></a>Boolean Ring</h4>
+<!--l. 29--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Boolean ring </span>perfectly goes with its name, it is a ring of <span 
+class="ptmri8t-x-x-109">Boolean functions </span>of <span 
+class="cmmi-10x-x-109">n</span>
+variables, i.e mappings from <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">0</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmsy-10x-x-109">}</span><sup><span 
+class="cmmi-8">n</span></sup> to <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">0</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmsy-10x-x-109">}</span><sup><span 
+class="cmmi-8">n</span></sup>. Considering these variables are
+<span 
+class="cmbx-10x-x-109">X</span> <span 
+class="cmr-10x-x-109">:= </span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,x</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-109">} </span>and <span 
+class="msbm-10x-x-109">F</span><sub><span 
+class="cmr-8">2</span></sub> is the finite field of two elements <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmr-10x-x-109">0</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmsy-10x-x-109">}</span>, Boolean ring can be
+regarded as the quotient ring
+<center class="math-display" >
+<img 
+src="manual88x.png" alt="B[X ] := F2[X ]&#x2215; &#x003C; x21 + x1,...,x2n + xn &#x003E; . " class="math-display" ></center>
+Multiplication in <span 
+class="msbm-10x-x-109">B</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmbx-10x-x-109">X</span><span 
+class="cmr-10x-x-109">] </span>is <span 
+class="ptmri8t-x-x-109">idempotent </span>and addition is <span 
+class="ptmri8t-x-x-109">nilpotent</span>
+<center class="math-display" >
+<img 
+src="manual89x.png" alt="             2
+&#x2200;b &#x2208; B[X ] : b = b, b+ b = 0. " class="math-display" ></center>
+Elements in <span 
+class="msbm-10x-x-109">B</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmbx-10x-x-109">X</span><span 
+class="cmr-10x-x-109">] </span>are <span 
+class="ptmri8t-x-x-109">Boolean polynomials </span>and can be represented as finite
+sums
+<center class="math-display" >
+<img 
+src="manual90x.png" alt="&#x2211;     &#x220F;
+           x
+ j  x&#x2208;&#x03A9;j&#x2286;X " class="math-display" ></center>
+of <span 
+class="ptmri8t-x-x-109">Boolean monomials</span>. Each monomial is a conjunction. If set <span 
+class="cmr-10x-x-109">&#x03A9; </span>is empty,
+then the corresponding monomial is the unity Boolean function 1. The sum of
+zero monomials corresponds to zero polynomial, i.e. is zero Boolean function
+0.
+<!--l. 47--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.7.3    </span> <a 
+ id="x121-26200016.7.3"></a>Pommaret Involutive Algorithm</h4>
+<!--l. 49--><p class="noindent" >Detailed description of involutive algorithm can found in&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. Here we note that result of
+both involutive and Buhberger&#8217;s algorithms depend on chosen monomial ordering. At
+that the ordering must be admissible, i.e.
+<center class="math-display" >
+<img 
+src="manual91x.png" alt="m  &#x2044;= 1 &#x21D0;&#x21D2;  m &#x227B;  1,   m  &#x227B; m  &#x21D0; &#x21D2;  m  m &#x227B; m  m    &#x2200; m,m  ,m  .
+                      1     2       1      2           1   2 " class="math-display" ></center> But
+as one can easily check the second condition of admissibility does not hold for any
+monomial ordering in Boolean ring:
+<center class="math-display" >
+<img 
+src="manual92x.png" alt="x1 &#x227B; x2   -*-x-1-&#x2192;   x1 * x1 &#x227B; x2 *x2  --&#x2192;    x1 &#x227A; x1x2  " class="math-display" ></center>
+Though <span 
+class="msbm-10x-x-109">B</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmbx-10x-x-109">X</span><span 
+class="cmr-10x-x-109">] </span>is a principal ideal ring, boolean singleton <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">p</span><span 
+class="cmsy-10x-x-109">} </span>is not necessarily a Gröbner
+basis of ideal <span 
+class="cmmi-10x-x-109">&#x003C; p &#x003E;</span>, for example:
+                                                                     
+
+                                                                     
+<center class="math-display" >
+<img 
+src="manual93x.png" alt="x1,x2 &#x2208; &#x003C; x1x2 + x1 + x2 &#x003E; &#x2282; B[x1,x2]. " class="math-display" ></center> That
+the reason why one cannot apply the Buhberger&#8217;s algorithm directly in a Boolean ring,
+using instead a ring <span 
+class="msbm-10x-x-109">F</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmbx-10x-x-109">X</span><span 
+class="cmr-10x-x-109">] </span>and <span 
+class="ptmri8t-x-x-109">the field binomials </span><span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,x</span><sub><span 
+class="cmmi-8">n</span></sub><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmmi-8">n</span></sub>.
+<!--l. 69--><p class="noindent" >The involutive algorithm based on Janet division has the same disadvantage unlike the
+Pommaret division algorithm as shown in&#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. The Pommaret division algorithm can be
+applied directly in a Boolean ring and admits effective data structures for monomial
+representation.
+<!--l. 73--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.7.4    </span> <a 
+ id="x121-26300016.7.4"></a>BIBASIS Package</h4>
+<!--l. 75--><p class="noindent" >The package BIBASIS implements the Pommaret division algorithm in a Boolean ring.
+The first step to using the package is to load it:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-509">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;1:&#x00A0;load_package&#x00A0;bibasis;
+</div>
+<!--l. 79--><p class="nopar" > The current version of the BIBASIS user interface consists only of 2 functions:
+<span 
+class="pcrr8t-x-x-109">bibasis </span>and <span 
+class="pcrr8t-x-x-109">bibasis_print_statistics</span>.
+<a 
+ id="dx121-263001"></a>
+<!--l. 85--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">bibasis </span>is the function that performs all the computation and has the following
+syntax:
+<div class="center" 
+>
+<!--l. 86--><p class="noindent" >
+<!--l. 87--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">bibasis(initial_polynomial_list, variables_list,</span>
+<span 
+class="pcrr8t-x-x-109">monomial_ordering, reduce_to_groebner);</span></div>
+<!--l. 89--><p class="noindent" >Input:
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">initial_polynomial_list </span>is the list of polynomials containing the
+     known  basis  of  initial  Boolean  ideal.  All  given  polynomials  are  treated
+     modulo 2. See Example 1.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">variables_list </span>is the list of independent variables in decreasing order.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">monomial_ordering </span>is a chosen monomial ordering and the supported ones
+     are:
+          <ul class="itemize2">
+          <li class="itemize"><span 
+class="pcrr8t-x-x-109">lex </span>&#8211; pure lexicographical ordering;
+          </li>
+          <li class="itemize"><span 
+class="pcrr8t-x-x-109">deglex </span>&#8211; degree lexicographic ordering;
+          </li>
+          <li class="itemize"><span 
+class="pcrr8t-x-x-109">degrevlex </span>&#8211; degree reverse lexicographic.</li></ul>
+     <!--l. 102--><p class="noindent" >See Examples 2&#8212;4 to check that Gröbner (as well as involutive) basis depends on
+     monomial ordering.
+     </li>
+                                                                     
+
+                                                                     
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">reduce_to_groebner </span>is a Boolean value, if it is <span 
+class="pcrr8t-x-x-109">t </span>the output is the reduced
+     Boolean Gröbner basis, if <span 
+class="pcrr8t-x-x-109">nil</span>, then the reduced Boolean Pommaret basis.
+     Examples 5,6 show distinctions between these two outputs.</li></ul>
+<!--l. 107--><p class="noindent" >Output:
+     <ul class="itemize1">
+     <li class="itemize">The list of polynomials which constitute the reduced Boolean Gröbner or
+     Pommaret basis.</li></ul>
+<a 
+ id="dx121-263002"></a>
+<!--l. 113--><p class="noindent" >The syntax of <span 
+class="pcrr8t-x-x-109">bibasis_print_statistics </span>is simple:
+<div class="center" 
+>
+<!--l. 114--><p class="noindent" >
+<!--l. 115--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">bibasis_print_statistics();</span></div>
+<!--l. 117--><p class="noindent" >This function prints out a brief statistics for the last invocation of <span 
+class="pcrr8t-x-x-109">bibasis </span>function.
+See Example 7.
+<!--l. 119--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.7.5    </span> <a 
+ id="x121-26400016.7.5"></a>Examples</h4>
+<!--l. 122--><p class="noindent" >Example 1:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-510">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;1:&#x00A0;load_package&#x00A0;bibasis;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2:&#x00A0;bibasis({x+2*y},&#x00A0;{x,y},&#x00A0;lex,&#x00A0;t);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{x}
+&#x00A0;<br />
+</div>
+<!--l. 128--><p class="nopar" >
+<!--l. 130--><p class="noindent" >Example 2:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-511">
+1:&#x00A0;load_package&#x00A0;bibasis;
+&#x00A0;<br />2:&#x00A0;variables&#x00A0;:={x0,x1,x2,x3,x4}$
+&#x00A0;<br />3:&#x00A0;polynomials&#x00A0;:=&#x00A0;{x0*x3+x1*x2,x2*x4+x0}$
+&#x00A0;<br />4:&#x00A0;bibasis(polynomials,&#x00A0;variables,&#x00A0;lex,&#x00A0;t);
+&#x00A0;<br />{x0&#x00A0;+&#x00A0;x2*x4,x2*(x1&#x00A0;+&#x00A0;x3*x4)}
+&#x00A0;<br />
+</div>
+<!--l. 138--><p class="nopar" >
+<!--l. 140--><p class="noindent" >Example 3:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-512">
+1:&#x00A0;load_package&#x00A0;bibasis;
+&#x00A0;<br />2:&#x00A0;variables&#x00A0;:={x0,x1,x2,x3,x4}$
+&#x00A0;<br />3:&#x00A0;polynomials&#x00A0;:=&#x00A0;{x0*x3+x1*x2,x2*x4+x0}$
+&#x00A0;<br />4:&#x00A0;bibasis(polynomials,&#x00A0;variables,&#x00A0;deglex,&#x00A0;t);
+&#x00A0;<br />{x1*x2*(x3&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;x1*(x0&#x00A0;+&#x00A0;x2),
+&#x00A0;<br />&#x00A0;x0*(x2&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;x0*x3&#x00A0;+&#x00A0;x1*x2,
+&#x00A0;<br />&#x00A0;x0*(x4&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;x2*x4&#x00A0;+&#x00A0;x0}
+&#x00A0;<br />
+</div>
+<!--l. 153--><p class="nopar" >
+<!--l. 155--><p class="noindent" >Example 4:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-513">
+1:&#x00A0;load_package&#x00A0;bibasis;
+&#x00A0;<br />2:&#x00A0;variables&#x00A0;:={x0,x1,x2,x3,x4}$
+&#x00A0;<br />3:&#x00A0;polynomials&#x00A0;:=&#x00A0;{x0*x3+x1*x2,x2*x4+x0}$
+&#x00A0;<br />4:&#x00A0;bibasis(polynomials,&#x00A0;variables,&#x00A0;degrevlex,&#x00A0;t);
+&#x00A0;<br />{x0*(x1&#x00A0;+&#x00A0;x3),
+&#x00A0;<br />&#x00A0;x0*(x2&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;x1*x2&#x00A0;+&#x00A0;x0*x3,
+&#x00A0;<br />&#x00A0;x0*(x4&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;x2*x4&#x00A0;+&#x00A0;x0}
+&#x00A0;<br />
+</div>
+<!--l. 167--><p class="nopar" >
+<!--l. 169--><p class="noindent" >
+                                                                     
+
+                                                                     
+<!--l. 171--><p class="noindent" >Example 5:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-514">
+1:&#x00A0;load_package&#x00A0;bibasis;
+&#x00A0;<br />2:&#x00A0;variables&#x00A0;:={x,y,z}$
+&#x00A0;<br />3:&#x00A0;polinomials&#x00A0;:=&#x00A0;{x,&#x00A0;z}$
+&#x00A0;<br />4:&#x00A0;bibasis(polinomials,&#x00A0;variables,&#x00A0;degrevlex,&#x00A0;t);
+&#x00A0;<br />{x,z}
+&#x00A0;<br />
+</div>
+<!--l. 179--><p class="nopar" >
+<!--l. 181--><p class="noindent" >Example 6:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-515">
+1:&#x00A0;load_package&#x00A0;bibasis;
+&#x00A0;<br />2:&#x00A0;variables&#x00A0;:={x,y,z}$
+&#x00A0;<br />3:&#x00A0;polinomials&#x00A0;:=&#x00A0;{x,&#x00A0;z}$
+&#x00A0;<br />4:&#x00A0;bibasis(polinomials,&#x00A0;variables,&#x00A0;degrevlex,&#x00A0;nil);
+&#x00A0;<br />{x,z,y*z}
+&#x00A0;<br />
+</div>
+<!--l. 189--><p class="nopar" >
+<!--l. 191--><p class="noindent" >Example 7:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-516">
+1:&#x00A0;load_package&#x00A0;bibasis;
+&#x00A0;<br />2:&#x00A0;variables&#x00A0;:={u0,u1,u2,u3,u4,u5,u6,u7,u8,u9}$
+&#x00A0;<br />3:&#x00A0;polinomials&#x00A0;:=&#x00A0;{u0*u1+u1*u2+u1+u2*u3+u3*u4+u4*u5+u5*u6+u6*u7+u7*u8+u8*u9,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0*u2+u1+u1*u3+u2*u4+u2+u3*u5+u4*u6+u5*u7+u6*u8+u7*u9,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0*u3+u1*u2+u1*u4+u2*u5+u3*u6+u3+u4*u7+u5*u8+u6*u9,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0*u4+u1*u3+u1*u5+u2+u2*u6+u3*u7+u4*u8+u4+u5*u9,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0*u5+u1*u4+u1*u6+u2*u3+u2*u7+u3*u8+u4*u9+u5,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0*u6+u1*u5+u1*u7+u2*u4+u2*u8+u3+u3*u9+u6,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0*u7+u1*u6+u1*u8+u2*u5+u2*u9+u3*u4+u7,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0*u8+u1*u7+u1*u9+u2*u6+u3*u5+u4+u8,
+&#x00A0;<br />3:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;u0+u1+u2+u3+u4+u5+u6+u7+u8+u9+1}$
+&#x00A0;<br />4:&#x00A0;bibasis(polinomials,&#x00A0;variables,&#x00A0;degrevlex,&#x00A0;t);
+&#x00A0;<br />{u3*u6,
+&#x00A0;<br />&#x00A0;u3*u7,
+&#x00A0;<br />&#x00A0;u7*(u6&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;u3*u8,
+&#x00A0;<br />&#x00A0;u6*u8&#x00A0;+&#x00A0;u6&#x00A0;+&#x00A0;u7,
+&#x00A0;<br />&#x00A0;u7*u8,
+&#x00A0;<br />&#x00A0;u3*(u9&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;u6*u9&#x00A0;+&#x00A0;u7,
+&#x00A0;<br />&#x00A0;u7*(u9&#x00A0;+&#x00A0;1),
+&#x00A0;<br />&#x00A0;u8*u9&#x00A0;+&#x00A0;u6&#x00A0;+&#x00A0;u7&#x00A0;+&#x00A0;u8,
+&#x00A0;<br />&#x00A0;u0&#x00A0;+&#x00A0;u3&#x00A0;+&#x00A0;u6&#x00A0;+&#x00A0;u9&#x00A0;+&#x00A0;1,
+&#x00A0;<br />&#x00A0;u1&#x00A0;+&#x00A0;u7,
+&#x00A0;<br />&#x00A0;u2&#x00A0;+&#x00A0;u7&#x00A0;+&#x00A0;u8,
+&#x00A0;<br />&#x00A0;u4&#x00A0;+&#x00A0;u6&#x00A0;+&#x00A0;u8,
+&#x00A0;<br />&#x00A0;u5&#x00A0;+&#x00A0;u6&#x00A0;+&#x00A0;u7&#x00A0;+&#x00A0;u8}
+&#x00A0;<br />5:&#x00A0;bibasis_print_statistics();
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Variables&#x00A0;order&#x00A0;=&#x00A0;u0&#x00A0;&#x003E;&#x00A0;u1&#x00A0;&#x003E;&#x00A0;u2&#x00A0;&#x003E;&#x00A0;u3&#x00A0;&#x003E;&#x00A0;u4&#x00A0;&#x003E;&#x00A0;u5&#x00A0;&#x003E;&#x00A0;u6&#x00A0;&#x003E;&#x00A0;u7&#x00A0;&#x003E;&#x00A0;u8&#x00A0;&#x003E;&#x00A0;u9
+&#x00A0;<br />Normal&#x00A0;forms&#x00A0;calculated&#x00A0;=&#x00A0;216
+&#x00A0;<br />&#x00A0;&#x00A0;Non-zero&#x00A0;normal&#x00A0;forms&#x00A0;=&#x00A0;85
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Reductions&#x00A0;made&#x00A0;=&#x00A0;4488
+&#x00A0;<br />Time:&#x00A0;270&#x00A0;ms
+&#x00A0;<br />GC&#x00A0;time:&#x00A0;0&#x00A0;ms
+&#x00A0;<br />
+</div>
+<!--l. 228--><p class="nopar" >
+                                                                     
+
+                                                                     
+<h4 class="likesubsectionHead"><a 
+ id="x121-265000"></a>Bibliography</h4>
+<!--l. 231--><p class="noindent" >
+     <div class="thebibliography">
+     <p class="bibitem" ><span class="biblabel">
+  [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XGB'98"></a>V.P.Gerdt  and  Yu.A.Blinkov.  <span 
+class="ptmri8t-x-x-109">Involutive  Bases  of  Polynomial  Ideals</span>.
+     Mathematics  and  Computers  in  Simulation,  45,  519&#8211;542,  1998;  <span 
+class="ptmri8t-x-x-109">Minimal</span>
+     <span 
+class="ptmri8t-x-x-109">Involutive Bases</span>, ibid. 543&#8211;560.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XSeiler'10"></a>W.M.Seiler.  <span 
+class="ptmri8t-x-x-109">Involution:  The  Formal  Theory  of  Differential  Equations</span>
+     <span 
+class="ptmri8t-x-x-109">and its Applications in Computer Algebra</span>. Algorithms and Computation in
+     Mathematics, 24, Springer, 2010. arXiv:math.AC/0501111
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XGerdt'05"></a>Vladimir P. Gerdt. <span 
+class="ptmri8t-x-x-109">Involutive Algorithms for Computing Gr</span><span 
+class="ptmri8t-x-x-109">öbner Bases</span>.
+     Computational  Commutative  and  Non-Commutative  Algebraic  Geometry.
+     IOS Press, Amsterdam, 2005, pp.199&#8211;225.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XFaugere'03"></a>J.-C.Faugère  and  A.Joux.  Algebraic  Cryptanalysis  of  Hidden  Field
+     Equations (HFE) Using Gröbner Bases. <span 
+class="ptmri8t-x-x-109">LNCS </span>2729, Springer-Verlag, 2003,
+     pp.44&#8211;60.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XISSAC'08"></a>V.P.Gerdt   and   M.V.Zinin.   A   Pommaret   Division   Algorithm   for
+     Computing Gröbner Bases in Boolean Rings. <span 
+class="ptmri8t-x-x-109">Proceedings of ISSAC 2008</span>,
+     ACM Press, 2008, pp.95&#8211;102.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [6]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XPaCS'08"></a>V.P.Gerdt  and  M.V.Zinin.  Involutive  Method  for  Computing  Gröbner
+     Bases over <span 
+class="cmmi-10x-x-109">F</span><sub><span 
+class="cmr-8">2</span></sub>. <span 
+class="ptmri8t-x-x-109">Programming and Computer Software</span>, Vol.34, No. 4, 2008,
+     191&#8211;203.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [7]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XPCA'09"></a>Vladimir  Gerdt,  Mikhail  Zinin  and  Yuri  Blinkov.  On  computation
+     of   Boolean   involutive   bases,   Proceedings   of   International   Conference
+                                                                     
+
+                                                                     
+     Polynomial Computer Algebra 2009, pp. 17-24 (International Euler Institute,
+     April 7-12, 2009, St. Peterburg, Russia)
+</p>
+     </div>
+<!--l. 178--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 180--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse98.html" >Up</a></td><td class="clinks"><a 
+href="manualse99.html" >Next</a></td><td class="clinks"><a 
+href="manualse97.html" >Prev</a></td><td class="clinks"><a 
+href="manualse97.html#tailmanualse97.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse98.html" >Front</a></td></tr></table><a 
+ id="tailmanualse98.html"></a>   
+</body></html> 

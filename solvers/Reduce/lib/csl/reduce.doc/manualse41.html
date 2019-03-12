@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SELECT Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse41.html" >Up</a></td><td class="clinks"><a 
+href="manualse42.html" >Next</a></td><td class="clinks"><a 
+href="manualse40.html" >Prev</a></td><td class="clinks"><a 
+href="manualse40.html#tailmanualse40.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse41.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.15    </span> <a 
+ id="x52-890007.15"></a>SELECT Operator</h3>
+<a 
+ id="dx52-89001"></a>
+<!--l. 1170--><p class="noindent" ><a 
+ id="operator:SELECT"></a> <a 
+ id="dx52-89002"></a><a 
+ id="dx52-89003"></a>
+<!--l. 1173--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">SELECT </span>operator extracts from a list, or from the arguments of an n&#8211;ary
+operator, elements corresponding to a boolean predicate. It is used with the
+syntax:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">SELECT(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">FNC:function</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">LST:list</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span></div>
+<!--l. 1180--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">FNC </span>can be one of the following forms:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x52-89005x1">the name of an operator with a single argument: the operator is evaluated
+     once on each element of <span 
+class="pcrr8t-x-x-109">LST</span>;
+     </li>
+     <li 
+  class="enumerate" id="x52-89007x2">an  algebraic  expression  with  exactly  one  free  variable,  i.e.  a  variable
+     preceded by the tilde symbol. The expression is evaluated for each element
+     of <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">LST</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>, with the element substituted for the free variable;
+     </li>
+     <li 
+  class="enumerate" id="x52-89009x3">a replacement rule of the form <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="pcrr8t-x-x-109">=&#x003E;</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">rep</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> where <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> is a variable (a
+     kernel without subscript) and <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">rep</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> is an expression that contains <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>. <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">rep</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>
+     is evaluated for each element of <span 
+class="pcrr8t-x-x-109">LST </span>with the element substituted for <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>.
+     <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> may be optionally preceded by a tilde.</li></ol>
+<!--l. 1195--><p class="noindent" >The rule form for <span 
+class="pcrr8t-x-x-109">FNC </span>is needed when more than one free variable occurs.
+<!--l. 1198--><p class="noindent" >The result of evaluating <span 
+class="pcrr8t-x-x-109">FNC </span>is interpreted as a boolean value corresponding to the
+conventions of REDUCE. These values are composed with the leading operator of the
+input expression.
+<!--l. 1203--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-133">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;select(&#x00A0;~w&#x003E;0&#x00A0;,&#x00A0;{1,-1,2,-3,3})&#x00A0;-&#x003E;&#x00A0;{1,2,3}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;select(evenp&#x00A0;deg(~w,y),part((x+y)^5,0):=list)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;{X^5&#x00A0;,10*X^3*Y^2&#x00A0;,5*X*Y^4}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;select(evenp&#x00A0;deg(~w,x),2x^2+3x^3+4x^4)&#x00A0;-&#x003E;&#x00A0;4X^4&#x00A0;+&#x00A0;2X^2
+</div>
+<!--l. 1209--><p class="nopar" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse41.html" >Up</a></td><td class="clinks"><a 
+href="manualse42.html" >Next</a></td><td class="clinks"><a 
+href="manualse40.html" >Prev</a></td><td class="clinks"><a 
+href="manualse40.html#tailmanualse40.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse41.html" >Front</a></td></tr></table><a 
+ id="tailmanualse41.html"></a>  
+</body></html> 

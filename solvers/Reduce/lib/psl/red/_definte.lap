@@ -1,0 +1,465 @@
+(progn (setk (quote laplace2_rules) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote laplace2) (list (quote quotient) 1 (list (quote !~) (
+quote x))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote quotient) 1 (quote x)) (quote f1) (
+list (quote expt) (quote e) (list (quote minus) (list (quote times) (quote s) (
+quote x))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote
+laplace2) (list (quote quotient) 1 (list (quote expt) (list (quote !~) (quote x)
+) (list (quote !~) (quote a)))) (list (quote !~) (quote f1)) (list (quote !~) (
+quote x))) (list (quote int) (list (quote times) (list (quote quotient) 1 (list
+(quote expt) (quote x) (quote a))) (quote f1) (list (quote expt) (quote e) (list
+(quote minus) (list (quote times) (quote s) (quote x))))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote laplace2) (list (quote quotient
+) 1 (list (quote sqrt) (list (quote !~) (quote x)))) (list (quote !~) (quote f1)
+) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (
+quote quotient) 1 (list (quote sqrt) (quote x))) (quote f1) (list (quote expt) (
+quote e) (list (quote minus) (list (quote times) (quote s) (quote x))))) (quote
+x) 0 (quote infinity))) (list (quote replaceby) (list (quote laplace2) (list (
+quote quotient) 1 (list (quote times) (list (quote sqrt) (list (quote !~) (quote
+x))) (list (quote !~) (quote x)))) (list (quote !~) (quote f1)) (list (quote !~)
+(quote x))) (list (quote int) (list (quote times) (list (quote quotient) 1 (list
+(quote times) (list (quote sqrt) (quote x)) (quote x))) (quote f1) (list (quote
+expt) (quote e) (list (quote minus) (list (quote times) (quote s) (quote x)))))
+(quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote laplace2) (
+list (quote quotient) 1 (list (quote times) (list (quote sqrt) (list (quote !~)
+(quote x))) (list (quote expt) (list (quote !~) (quote x)) (list (quote !~) (
+quote a))))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote quotient) 1 (list (quote times) (
+list (quote sqrt) (quote x)) (list (quote expt) (quote x) (quote a)))) (quote f1
+) (list (quote expt) (quote e) (list (quote minus) (list (quote times) (quote s)
+(quote x))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote laplace2) (list (quote expt) (list (quote !~) (quote x)) (list (quote !~)
+(quote a))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote expt) (quote x) (quote a)) (quote f1
+) (list (quote expt) (quote e) (list (quote minus) (list (quote times) (quote s)
+(quote x))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote laplace2) (list (quote !~) (quote x)) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (quote x) (quote f1)
+(list (quote expt) (quote e) (list (quote minus) (list (quote times) (quote s) (
+quote x))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote
+laplace2) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (
+quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (
+list (quote sqrt) (quote x)) (quote f1) (list (quote expt) (quote e) (list (
+quote minus) (list (quote times) (quote s) (quote x))))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote laplace2) (list (quote times) (
+list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x))) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (list (quote sqrt) (quote x)) (quote x) (quote f1) (list (quote 
+expt) (quote e) (list (quote minus) (list (quote times) (quote s) (quote x)))))
+(quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote laplace2) (
+list (quote times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote
+expt) (list (quote !~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~)
+(quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (
+list (quote sqrt) (quote x)) (list (quote expt) (quote x) (quote a)) (quote f1)
+(list (quote expt) (quote e) (list (quote minus) (list (quote times) (quote s) (
+quote x))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote
+laplace2) (list (quote !~) (quote b)) (list (quote !~) (quote f1)) (list (quote
+!~) (quote x))) (list (quote int) (list (quote times) (quote b) (quote f1) (list
+(quote expt) (quote e) (list (quote minus) (list (quote times) (quote s) (quote
+x))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote 
+laplace2) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote
+int) (list (quote times) (quote f1) (list (quote expt) (quote e) (list (quote 
+minus) (list (quote times) (quote s) (quote x))))) (quote x) 0 (quote infinity))
+)))) (aeval (!~let (quote (laplace2_rules)))) (setk (quote hankel2_rules) (aeval
+(list (quote list) (list (quote replaceby) (list (quote hankel2) (list (quote 
+quotient) 1 (list (quote !~) (quote x))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (quote x)) (quote f1) (list (quote besselj) (quote n) (list (quote 
+times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list (
+quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote hankel2) (list (quote quotient) 1 (list (quote expt) (list (quote 
+!~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote f1)) (list
+(quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote expt) (quote x) (quote a))) (quote f1) (list (quote 
+besselj) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times)
+(quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity
+))) (list (quote replaceby) (list (quote hankel2) (list (quote quotient) 1 (list
+(quote sqrt) (list (quote !~) (quote x)))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote sqrt) (quote x))) (quote f1) (list (quote besselj) (
+quote n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s)
+(quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list
+(quote replaceby) (list (quote hankel2) (list (quote quotient) 1 (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x
+)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int)
+(list (quote times) (list (quote quotient) 1 (list (quote times) (list (quote 
+sqrt) (quote x)) (quote x))) (quote f1) (list (quote besselj) (quote n) (list (
+quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list
+(quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote hankel2) (list (quote quotient) 1 (list (quote times) (list (quote
+sqrt) (list (quote !~) (quote x))) (list (quote expt) (list (quote !~) (quote x)
+) (list (quote !~) (quote a))))) (list (quote !~) (quote f1)) (list (quote !~) (
+quote x))) (list (quote int) (list (quote times) (list (quote quotient) 1 (list
+(quote times) (list (quote sqrt) (quote x)) (list (quote expt) (quote x) (quote
+a)))) (quote f1) (list (quote besselj) (quote n) (list (quote times) 2 (list (
+quote expt) (list (quote times) (quote s) (quote x)) (list (quote quotient) 1 2)
+)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote hankel2
+) (list (quote expt) (list (quote !~) (quote x)) (list (quote !~) (quote a))) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (list (quote expt) (quote x) (quote a)) (quote f1) (list (quote 
+besselj) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times)
+(quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity
+))) (list (quote replaceby) (list (quote hankel2) (list (quote !~) (quote x)) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (quote x) (quote f1) (list (quote besselj) (quote n) (list (quote
+times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list (
+quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote hankel2) (list (quote sqrt) (list (quote !~) (quote x))) (list (
+quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (
+quote times) (list (quote sqrt) (quote x)) (quote f1) (list (quote besselj) (
+quote n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s)
+(quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list
+(quote replaceby) (list (quote hankel2) (list (quote times) (list (quote sqrt) (
+list (quote !~) (quote x))) (list (quote !~) (quote x))) (list (quote !~) (quote
+f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (
+quote sqrt) (quote x)) (quote x)) (quote f1) (list (quote besselj) (quote n) (
+list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x))
+(list (quote quotient) 1 2)))) (quote x) 0 (quote infinity))) (list (quote 
+replaceby) (list (quote hankel2) (list (quote times) (list (quote sqrt) (list (
+quote !~) (quote x))) (list (quote expt) (list (quote !~) (quote x)) (list (
+quote !~) (quote a)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x)))
+(list (quote int) (list (quote times) (list (quote sqrt) (quote x)) (list (quote
+expt) (quote x) (quote a)) (quote f1) (list (quote besselj) (quote n) (list (
+quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list
+(quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote hankel2) (list (quote !~) (quote b)) (list (quote !~) (quote f1)) (
+list (quote !~) (quote x))) (list (quote int) (list (quote times) (quote b) (
+quote f1) (list (quote besselj) (quote n) (list (quote times) 2 (list (quote 
+expt) (list (quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (
+quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote hankel2) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (quote f1) (list (quote besselj) (quote n) (list (quote times) 2 (
+list (quote expt) (list (quote times) (quote s) (quote x)) (list (quote quotient
+) 1 2))))) (quote x) 0 (quote infinity)))))) (aeval (!~let (quote (hankel2_rules
+)))) (setk (quote y_transform2_rules) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote y_transform2) (list (quote quotient) 1 (list (quote !~)
+(quote x))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote quotient) 1 (quote x)) (quote f1) (
+list (quote bessely) (quote n) (list (quote times) 2 (list (quote expt) (list (
+quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (
+quote infinity))) (list (quote replaceby) (list (quote y_transform2) (list (
+quote quotient) 1 (list (quote expt) (list (quote !~) (quote x)) (list (quote !~
+) (quote a)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote quotient) 1 (list (quote expt) (
+quote x) (quote a))) (quote f1) (list (quote bessely) (quote n) (list (quote 
+times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list (
+quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote y_transform2) (list (quote quotient) 1 (list (quote sqrt) (list (
+quote !~) (quote x)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x)))
+(list (quote int) (list (quote times) (list (quote quotient) 1 (list (quote sqrt
+) (quote x))) (quote f1) (list (quote bessely) (quote n) (list (quote times) 2 (
+list (quote expt) (list (quote times) (quote s) (quote x)) (list (quote quotient
+) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote 
+y_transform2) (list (quote quotient) 1 (list (quote times) (list (quote sqrt) (
+list (quote !~) (quote x))) (list (quote !~) (quote x)))) (list (quote !~) (
+quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (
+list (quote quotient) 1 (list (quote times) (list (quote sqrt) (quote x)) (quote
+x))) (quote f1) (list (quote bessely) (quote n) (list (quote times) 2 (list (
+quote expt) (list (quote times) (quote s) (quote x)) (list (quote quotient) 1 2)
+)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote 
+y_transform2) (list (quote quotient) 1 (list (quote times) (list (quote sqrt) (
+list (quote !~) (quote x))) (list (quote expt) (list (quote !~) (quote x)) (list
+(quote !~) (quote a))))) (list (quote !~) (quote f1)) (list (quote !~) (quote x)
+)) (list (quote int) (list (quote times) (list (quote quotient) 1 (list (quote 
+times) (list (quote sqrt) (quote x)) (list (quote expt) (quote x) (quote a)))) (
+quote f1) (list (quote bessely) (quote n) (list (quote times) 2 (list (quote 
+expt) (list (quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (
+quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote y_transform2)
+(list (quote expt) (list (quote !~) (quote x)) (list (quote !~) (quote a))) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (list (quote expt) (quote x) (quote a)) (quote f1) (list (quote 
+bessely) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times)
+(quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity
+))) (list (quote replaceby) (list (quote y_transform2) (list (quote !~) (quote x
+)) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (
+list (quote times) (quote x) (quote f1) (list (quote bessely) (quote n) (list (
+quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list
+(quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote y_transform2) (list (quote sqrt) (list (quote !~) (quote x))) (list
+(quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (
+quote times) (list (quote sqrt) (quote x)) (quote f1) (list (quote bessely) (
+quote n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s)
+(quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list
+(quote replaceby) (list (quote y_transform2) (list (quote times) (list (quote 
+sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x))) (list (quote !~)
+(quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (
+list (quote sqrt) (quote x)) (quote x) (quote f1) (list (quote bessely) (quote n
+) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote
+x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote
+replaceby) (list (quote y_transform2) (list (quote times) (list (quote sqrt) (
+list (quote !~) (quote x))) (list (quote expt) (list (quote !~) (quote x)) (list
+(quote !~) (quote a)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))
+) (list (quote int) (list (quote times) (list (quote sqrt) (quote x)) (list (
+quote expt) (quote x) (quote a)) (quote f1) (list (quote bessely) (quote n) (
+list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x))
+(list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote 
+replaceby) (list (quote y_transform2) (list (quote !~) (quote b)) (list (quote 
+!~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote 
+times) (quote b) (quote f1) (list (quote bessely) (quote n) (list (quote times)
+2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list (quote 
+quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list
+(quote y_transform2) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (
+list (quote int) (list (quote times) (quote f1) (list (quote bessely) (quote n)
+(list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)
+) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity)))))) (aeval (
+!~let (quote (y_transform2_rules)))) (setk (quote k_transform2_rules) (aeval (
+list (quote list) (list (quote replaceby) (list (quote k_transform2) (list (
+quote quotient) 1 (list (quote !~) (quote x))) (list (quote !~) (quote f1)) (
+list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (quote x)) (quote f1) (list (quote besselk) (quote n) (list (quote 
+times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list (
+quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote k_transform2) (list (quote quotient) 1 (list (quote expt) (list (
+quote !~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote f1))
+(list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote
+quotient) 1 (list (quote expt) (quote x) (quote a))) (quote f1) (list (quote 
+besselk) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times)
+(quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity
+))) (list (quote replaceby) (list (quote k_transform2) (list (quote quotient) 1
+(list (quote sqrt) (list (quote !~) (quote x)))) (list (quote !~) (quote f1)) (
+list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote sqrt) (quote x))) (quote f1) (list (quote besselk) (
+quote n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s)
+(quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list
+(quote replaceby) (list (quote k_transform2) (list (quote quotient) 1 (list (
+quote times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (
+quote x)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote quotient) 1 (list (quote times) (
+list (quote sqrt) (quote x)) (quote x))) (quote f1) (list (quote besselk) (quote
+n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote
+x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote
+replaceby) (list (quote k_transform2) (list (quote quotient) 1 (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote expt) (list
+(quote !~) (quote x)) (list (quote !~) (quote a))))) (list (quote !~) (quote f1)
+) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (
+quote quotient) 1 (list (quote times) (list (quote sqrt) (quote x)) (list (quote
+expt) (quote x) (quote a)))) (quote f1) (list (quote besselk) (quote n) (list (
+quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list
+(quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote k_transform2) (list (quote expt) (list (quote !~) (quote x)) (list
+(quote !~) (quote a))) (list (quote !~) (quote f1)) (list (quote !~) (quote x)))
+(list (quote int) (list (quote times) (list (quote expt) (quote x) (quote a)) (
+quote f1) (list (quote besselk) (quote n) (list (quote times) 2 (list (quote 
+expt) (list (quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (
+quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote k_transform2)
+(list (quote !~) (quote x)) (list (quote !~) (quote f1)) (list (quote !~) (quote
+x))) (list (quote int) (list (quote times) (quote x) (quote f1) (list (quote 
+besselk) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times)
+(quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity
+))) (list (quote replaceby) (list (quote k_transform2) (list (quote sqrt) (list
+(quote !~) (quote x))) (list (quote !~) (quote f1)) (list (quote !~) (quote x)))
+(list (quote int) (list (quote times) (list (quote sqrt) (quote x)) (quote f1) (
+list (quote besselk) (quote n) (list (quote times) 2 (list (quote expt) (list (
+quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (
+quote infinity))) (list (quote replaceby) (list (quote k_transform2) (list (
+quote times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (
+quote x))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote sqrt) (quote x)) (quote x) (quote f1
+) (list (quote besselk) (quote n) (list (quote times) 2 (list (quote expt) (list
+(quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (
+quote infinity))) (list (quote replaceby) (list (quote k_transform2) (list (
+quote times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote expt)
+(list (quote !~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~) (
+quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (
+list (quote sqrt) (quote x)) (list (quote expt) (quote x) (quote a)) (quote f1)
+(list (quote besselk) (quote n) (list (quote times) 2 (list (quote expt) (list (
+quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (
+quote infinity))) (list (quote replaceby) (list (quote k_transform2) (list (
+quote !~) (quote b)) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (
+list (quote int) (list (quote times) (quote b) (quote f1) (list (quote besselk)
+(quote n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s)
+(quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list
+(quote replaceby) (list (quote k_transform2) (list (quote !~) (quote f1)) (list
+(quote !~) (quote x))) (list (quote int) (list (quote times) (quote f1) (list (
+quote besselk) (quote n) (list (quote times) 2 (list (quote expt) (list (quote 
+times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote 
+infinity)))))) (aeval (!~let (quote (k_transform2_rules)))) (setk (quote 
+struveh2_rules) (aeval (list (quote list) (list (quote replaceby) (list (quote 
+struveh2) (list (quote quotient) 1 (list (quote !~) (quote x))) (list (quote !~)
+(quote f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (
+list (quote quotient) 1 (quote x)) (quote f1) (list (quote struveh) (quote n) (
+list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x))
+(list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote 
+replaceby) (list (quote struveh2) (list (quote quotient) 1 (list (quote expt) (
+list (quote !~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote
+f1)) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (
+quote quotient) 1 (list (quote expt) (quote x) (quote a))) (quote f1) (list (
+quote struveh) (quote n) (list (quote times) 2 (list (quote expt) (list (quote 
+times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote struveh2) (list (quote quotient
+) 1 (list (quote sqrt) (list (quote !~) (quote x)))) (list (quote !~) (quote f1)
+) (list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (
+quote quotient) 1 (list (quote sqrt) (quote x))) (quote f1) (list (quote struveh
+) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote
+s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (
+list (quote replaceby) (list (quote struveh2) (list (quote quotient) 1 (list (
+quote times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (
+quote x)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote quotient) 1 (list (quote times) (
+list (quote sqrt) (quote x)) (quote x))) (quote f1) (list (quote struveh) (quote
+n) (list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote
+x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote
+replaceby) (list (quote struveh2) (list (quote quotient) 1 (list (quote times) (
+list (quote sqrt) (list (quote !~) (quote x))) (list (quote expt) (list (quote 
+!~) (quote x)) (list (quote !~) (quote a))))) (list (quote !~) (quote f1)) (list
+(quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote times) (list (quote sqrt) (quote x)) (list (quote expt)
+(quote x) (quote a)))) (quote f1) (list (quote struveh) (quote n) (list (quote 
+times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list (
+quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote struveh2) (list (quote expt) (list (quote !~) (quote x)) (list (
+quote !~) (quote a))) (list (quote !~) (quote f1)) (list (quote !~) (quote x)))
+(list (quote int) (list (quote times) (list (quote expt) (quote x) (quote a)) (
+quote f1) (list (quote struveh) (quote n) (list (quote times) 2 (list (quote 
+expt) (list (quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (
+quote x) 0 (quote infinity))) (list (quote replaceby) (list (quote struveh2) (
+list (quote !~) (quote x)) (list (quote !~) (quote f1)) (list (quote !~) (quote
+x))) (list (quote int) (list (quote times) (quote x) (quote f1) (list (quote 
+struveh) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times)
+(quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity
+))) (list (quote replaceby) (list (quote struveh2) (list (quote sqrt) (list (
+quote !~) (quote x))) (list (quote !~) (quote f1)) (list (quote !~) (quote x)))
+(list (quote int) (list (quote times) (list (quote sqrt) (quote x)) (quote f1) (
+list (quote struveh) (quote n) (list (quote times) 2 (list (quote expt) (list (
+quote times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (
+quote infinity))) (list (quote replaceby) (list (quote struveh2) (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x
+))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int)
+(list (quote times) (list (quote sqrt) (quote x)) (quote x) (quote f1) (list (
+quote struveh) (quote n) (list (quote times) 2 (list (quote expt) (list (quote 
+times) (quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote struveh2) (list (quote times) (
+list (quote sqrt) (list (quote !~) (quote x))) (list (quote expt) (list (quote 
+!~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote f1)) (list
+(quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote sqrt)
+(quote x)) (list (quote expt) (quote x) (quote a)) (quote f1) (list (quote 
+struveh) (quote n) (list (quote times) 2 (list (quote expt) (list (quote times)
+(quote s) (quote x)) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity
+))) (list (quote replaceby) (list (quote struveh2) (list (quote !~) (quote b)) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (quote b) (quote f1) (list (quote struveh) (quote n) (list (quote
+times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)) (list (
+quote quotient) 1 2))))) (quote x) 0 (quote infinity))) (list (quote replaceby)
+(list (quote struveh2) (list (quote !~) (quote f1)) (list (quote !~) (quote x)))
+(list (quote int) (list (quote times) (quote f1) (list (quote struveh) (quote n)
+(list (quote times) 2 (list (quote expt) (list (quote times) (quote s) (quote x)
+) (list (quote quotient) 1 2))))) (quote x) 0 (quote infinity)))))) (aeval (
+!~let (quote (struveh2_rules)))) (setk (quote fourier_sin2_rules) (aeval (list (
+quote list) (list (quote replaceby) (list (quote fourier_sin2) (list (quote 
+quotient) 1 (list (quote !~) (quote x))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (quote x)) (quote f1) (list (quote sin) (list (quote times) (quote s
+) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote fourier_sin2) (list (quote quotient) 1 (list (quote expt) (list (quote !~)
+(quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote expt) (quote x) (quote a))) (quote f1) (list (quote sin
+) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (
+list (quote replaceby) (list (quote fourier_sin2) (list (quote quotient) 1 (list
+(quote sqrt) (list (quote !~) (quote x)))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote sqrt) (quote x))) (quote f1) (list (quote sin) (list (
+quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (list (quote
+replaceby) (list (quote fourier_sin2) (list (quote quotient) 1 (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x
+)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int)
+(list (quote times) (list (quote quotient) 1 (list (quote times) (list (quote 
+sqrt) (quote x)) (quote x))) (quote f1) (list (quote sin) (list (quote times) (
+quote s) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (
+list (quote fourier_sin2) (list (quote quotient) 1 (list (quote times) (list (
+quote sqrt) (list (quote !~) (quote x))) (list (quote expt) (list (quote !~) (
+quote x)) (list (quote !~) (quote a))))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote times) (list (quote sqrt) (quote x)) (list (quote expt)
+(quote x) (quote a)))) (quote f1) (list (quote sin) (list (quote times) (quote s
+) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote fourier_sin2) (list (quote expt) (list (quote !~) (quote x)) (list (quote
+!~) (quote a))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list
+(quote int) (list (quote times) (list (quote expt) (quote x) (quote a)) (quote 
+f1) (list (quote sin) (list (quote times) (quote s) (quote x)))) (quote x) 0 (
+quote infinity))) (list (quote replaceby) (list (quote fourier_sin2) (list (
+quote !~) (quote x)) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (
+list (quote int) (list (quote times) (quote x) (quote f1) (list (quote sin) (
+list (quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (list (
+quote replaceby) (list (quote fourier_sin2) (list (quote sqrt) (list (quote !~)
+(quote x))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote sqrt) (quote x)) (quote f1) (list (
+quote sin) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote fourier_sin2) (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x
+))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int)
+(list (quote times) (list (quote sqrt) (quote x)) (quote x) (quote f1) (list (
+quote sin) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote fourier_sin2) (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote expt) (list
+(quote !~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote f1))
+(list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote
+sqrt) (quote x)) (list (quote expt) (quote x) (quote a)) (quote f1) (list (quote
+sin) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (
+list (quote replaceby) (list (quote fourier_sin2) (list (quote !~) (quote b)) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (quote b) (quote f1) (list (quote sin) (list (quote times) (quote
+s) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote fourier_sin2) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (
+list (quote int) (list (quote times) (quote f1) (list (quote sin) (list (quote 
+times) (quote s) (quote x)))) (quote x) 0 (quote infinity)))))) (aeval (!~let (
+quote (fourier_sin2_rules)))) (setk (quote fourier_cos2_rules) (aeval (list (
+quote list) (list (quote replaceby) (list (quote fourier_cos2) (list (quote 
+quotient) 1 (list (quote !~) (quote x))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (quote x)) (quote f1) (list (quote cos) (list (quote times) (quote s
+) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote fourier_cos2) (list (quote quotient) 1 (list (quote expt) (list (quote !~)
+(quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote expt) (quote x) (quote a))) (quote f1) (list (quote cos
+) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (
+list (quote replaceby) (list (quote fourier_cos2) (list (quote quotient) 1 (list
+(quote sqrt) (list (quote !~) (quote x)))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote sqrt) (quote x))) (quote f1) (list (quote cos) (list (
+quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (list (quote
+replaceby) (list (quote fourier_cos2) (list (quote quotient) 1 (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x
+)))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int)
+(list (quote times) (list (quote quotient) 1 (list (quote times) (list (quote 
+sqrt) (quote x)) (quote x))) (quote f1) (list (quote cos) (list (quote times) (
+quote s) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (
+list (quote fourier_cos2) (list (quote quotient) 1 (list (quote times) (list (
+quote sqrt) (list (quote !~) (quote x))) (list (quote expt) (list (quote !~) (
+quote x)) (list (quote !~) (quote a))))) (list (quote !~) (quote f1)) (list (
+quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote 
+quotient) 1 (list (quote times) (list (quote sqrt) (quote x)) (list (quote expt)
+(quote x) (quote a)))) (quote f1) (list (quote cos) (list (quote times) (quote s
+) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote fourier_cos2) (list (quote expt) (list (quote !~) (quote x)) (list (quote
+!~) (quote a))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list
+(quote int) (list (quote times) (list (quote expt) (quote x) (quote a)) (quote 
+f1) (list (quote cos) (list (quote times) (quote s) (quote x)))) (quote x) 0 (
+quote infinity))) (list (quote replaceby) (list (quote fourier_cos2) (list (
+quote !~) (quote x)) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (
+list (quote int) (list (quote times) (quote x) (quote f1) (list (quote cos) (
+list (quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (list (
+quote replaceby) (list (quote fourier_cos2) (list (quote sqrt) (list (quote !~)
+(quote x))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (
+quote int) (list (quote times) (list (quote sqrt) (quote x)) (quote f1) (list (
+quote cos) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote fourier_cos2) (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote !~) (quote x
+))) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int)
+(list (quote times) (list (quote sqrt) (quote x)) (quote x) (quote f1) (list (
+quote cos) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote 
+infinity))) (list (quote replaceby) (list (quote fourier_cos2) (list (quote 
+times) (list (quote sqrt) (list (quote !~) (quote x))) (list (quote expt) (list
+(quote !~) (quote x)) (list (quote !~) (quote a)))) (list (quote !~) (quote f1))
+(list (quote !~) (quote x))) (list (quote int) (list (quote times) (list (quote
+sqrt) (quote x)) (list (quote expt) (quote x) (quote a)) (quote f1) (list (quote
+cos) (list (quote times) (quote s) (quote x)))) (quote x) 0 (quote infinity))) (
+list (quote replaceby) (list (quote fourier_cos2) (list (quote !~) (quote b)) (
+list (quote !~) (quote f1)) (list (quote !~) (quote x))) (list (quote int) (list
+(quote times) (quote b) (quote f1) (list (quote cos) (list (quote times) (quote
+s) (quote x)))) (quote x) 0 (quote infinity))) (list (quote replaceby) (list (
+quote fourier_cos2) (list (quote !~) (quote f1)) (list (quote !~) (quote x))) (
+list (quote int) (list (quote times) (quote f1) (list (quote cos) (list (quote 
+times) (quote s) (quote x)))) (quote x) 0 (quote infinity)))))) (aeval (!~let (
+quote (fourier_cos2_rules)))) (aeval (quote nil)))

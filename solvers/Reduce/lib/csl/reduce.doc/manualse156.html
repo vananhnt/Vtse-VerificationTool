@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SSTOOLS: Computations with supersymmetric algebraic and differential
+expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse156.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse157.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse155.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse155.html#tailmanualse155.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse156.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.65    </span></span> <a 
+ id="x212-90500016.65"></a><span 
+class="ptmr8t-x-x-120">SSTOOLS: Computations with supersymmetric</span>
+<span 
+class="ptmr8t-x-x-120">algebraic and differential expressions</span></h3>
+<a 
+ id="dx212-905001"></a>
+<a 
+ id="dx212-905002"></a>
+<a 
+ id="dx212-905003"></a>
+<!--l. 1185--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Authors: Thomas Wolf and Eberhard Schruefer</span>
+<!--l. 1189--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.65.1    </span></span> <a 
+ id="x212-90600016.65.1"></a><span 
+class="ptmr8t-x-x-120">Overview</span></h4>
+<!--l. 1190--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">A detailed description is available through the online tutorial </span><br 
+class="newline" /><a 
+href="https://lie.ac.brocku.ca/crack/susy/" class="url" ><span 
+class="pcrr8t-x-x-120">https://lie.ac.brocku.ca/crack/susy/</span></a><span 
+class="ptmr8t-x-x-120">. An essentially equivalent</span>
+<span 
+class="ptmr8t-x-x-120">description is available after loading </span><span 
+class="ptmrc8t-x-x-120">S<span 
+class="small-caps">S</span>T<span 
+class="small-caps">O</span><span 
+class="small-caps">O</span><span 
+class="small-caps">L</span><span 
+class="small-caps">S</span> </span><span 
+class="ptmr8t-x-x-120">and issuing the command</span>
+<span 
+class="pcrr8t-x-x-120">sshelp()$</span><span 
+class="ptmr8t-x-x-120">. The correct functioning of all procedures is tested through reading</span>
+<span 
+class="ptmr8t-x-x-120">in and running </span><span 
+class="pcrr8t-x-x-120">sstools.tst</span><span 
+class="ptmr8t-x-x-120">. This test also illustrates the commutator rules</span>
+<span 
+class="ptmr8t-x-x-120">for products of the different fields and their derivatives with respect to besonic</span>
+<span 
+class="ptmr8t-x-x-120">and fermionic variables.</span>
+<!--l. 1198--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The topics in the tutorial and in </span><span 
+class="pcrr8t-x-x-120">sshelp()$ </span><span 
+class="ptmr8t-x-x-120">are:</span>
+     <dl class="description"><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Purpose</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Interactive Session</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Loading Files</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Notation</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Initializations</span>
+                                                                     
+
+                                                                     
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The command coeffn</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The procedure SSym</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The procedure SSConL</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The procedure FindSSWeights</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The procedure Linearize</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The procedure GenSSPoly</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The procedure ToCoo</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The procedure ToField</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Discovery of recursion operators</span>
+     </dd><dt class="description">
+ </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Verification of symmetries</span></dd></dl>
+<!--l. 1218--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x212-907000"></a><span 
+class="ptmr8t-x-x-120">Bibliography</span></h4>
+<!--l. 1218--><p class="noindent" >
+     <div class="thebibliography">
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[1]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="Xbi1"></a><span 
+class="ptmr8t-x-x-120">Hussin,   V.,   Kiselev,   A.V.,   Krutov,   A.O.,   Wolf,   T.:   N=2</span>
+     <span 
+class="ptmr8t-x-x-120">Supersymmetric  a=4  -  Korteweg-de  Vries  hierarchy  derived  via</span>
+     <span 
+class="ptmr8t-x-x-120">Gardner&#8217;s  deformation  of  Kaup-Bousinesq  equation,  J.  Math.  Phys.</span>
+     <span 
+class="ptmr8t-x-x-120">51, 083507 (2010); doi:10.1063/1.3447731 (19 pages) link, pdf file</span>
+                                                                     
+
+                                                                     
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[2]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="Xbi2"></a><span 
+class="ptmr8t-x-x-120">Kiselev,  A.  and  Wolf,  T.:  Supersymmetric  Representations  and</span>
+     <span 
+class="ptmr8t-x-x-120">Integrable Super-Extensions of the Burgers and Bussinesq Equations,</span>
+     <span 
+class="ptmr8t-x-x-120">SIGMA, Vol. 2 (2006), Paper 030, 19 pages (arXiv math-ph/0511071).</span>
+     <span 
+class="ptmr8t-x-x-120">ps file, pdf file</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[3]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="Xbi3"></a><span 
+class="ptmr8t-x-x-120">Kiselev,  A.  and  Wolf,  T.:  On  weakly  non-local,  nilpotent,  and</span>
+     <span 
+class="ptmr8t-x-x-120">super-recursion  operators  for  N=1  homogeneous  super-equations,</span>
+     <span 
+class="ptmr8t-x-x-120">Proc.  Int.  Workshop  &#8220;Supersymmetries  and  Quantum  Symmetries&#8221;</span>
+     <span 
+class="ptmr8t-x-x-120">(SQS&#8217;05),  Dubna,  July  24&#8211;31,  2005,  JINR,  p.  231&#8211;237.  (arXiv</span>
+     <span 
+class="ptmr8t-x-x-120">nlin.SI/0511056) http://theor.jinr.ru/</span><span 
+class="ptmr8t-x-x-120">&#x00A0;sqs05/SQS05.pdf dvi file, ps file,</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[4]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="Xbi4"></a><span 
+class="ptmr8t-x-x-120">Kiselev,    A.    and    Wolf,    T.:    Classification    of    integrable</span>
+     <span 
+class="ptmr8t-x-x-120">super-equations by the SsTools environment, Comp Phys Comm, Vol.</span>
+     <span 
+class="ptmr8t-x-x-120">177, no. 3 (2007) p 315-328 (and on arXiv: nlin.SI/0609065). dvi file,</span>
+     <span 
+class="ptmr8t-x-x-120">ps file, pdf file</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[5]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="Xbi5"></a><span 
+class="ptmr8t-x-x-120">I. S. Krasil&#8217;shchik, P. H. M. Kersten, Symmetries and recursion</span>
+     <span 
+class="ptmr8t-x-x-120">operators  for  classical  and  supersymmetric  differential  equations,</span>
+     <span 
+class="ptmr8t-x-x-120">Kluwer Acad. Publ., Dordrecht etc, (2000)</span>
+</p>
+     </div>
+<!--l. 1253--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1255--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse156.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse157.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse155.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse155.html#tailmanualse155.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse156.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse156.html"></a>   
+</body></html> 

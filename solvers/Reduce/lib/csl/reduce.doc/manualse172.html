@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Lambda Expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse172.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse173.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse171.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse171.html#tailmanualse171.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse172.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">17.4    </span></span> <a 
+ id="x231-101400017.4"></a><span 
+class="ptmr8t-x-x-120">Lambda Expressions</span></h3>
+<a 
+ id="dx231-1014001"></a>
+<!--l. 136--><p class="noindent" ><a 
+ id="reserved:LAMBDA"></a>
+<!--l. 139--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">LAMBDA </span><span 
+class="ptmr8t-x-x-120">expressions provide the means for constructing Lisp </span><span 
+class="pcrr8t-x-x-120">LAMBDA</span>
+<span 
+class="ptmr8t-x-x-120">expressions in symbolic mode. They may not be used in algebraic mode.</span>
+<!--l. 142--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+  <div class="syntax">
+  <div class="array"> <table id="TBL-174" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-174-1g"><col 
+id="TBL-174-1"><col 
+id="TBL-174-2"><col 
+id="TBL-174-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="pcrro8t-x-x-120">LAMBDA</span><span 
+class="ptmri8t-x-x-120">expression</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="cmr-12">::=                          </span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11">   <span 
+class="pcrr8t-x-x-120">LAMBDA</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">varlist</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">terminator</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">statement</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span></div></td></tr></table>            </div></div>
+<!--l. 147--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">where</span>
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">varlist</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="cmr-12">::=</span> <span 
+class="pcrr8t-x-x-120">(</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="pcrr8t-x-x-120">)</span></div>
+<!--l. 151--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">e.g.,</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1359">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;lambda&#x00A0;(x,y);&#x00A0;car&#x00A0;x&#x00A0;.&#x00A0;cdr&#x00A0;y;
+</div>
+<!--l. 154--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">is equivalent to the Lisp </span><span 
+class="pcrr8t-x-x-120">LAMBDA </span><span 
+class="ptmr8t-x-x-120">expression</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1360">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(lambda&#x00A0;(x&#x00A0;y)&#x00A0;(cons&#x00A0;(car&#x00A0;x)&#x00A0;(cdr&#x00A0;y)))
+</div>
+<!--l. 158--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The parentheses may be omitted in specifying the variable list if desired.</span>
+<!--l. 161--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">LAMBDA </span><span 
+class="ptmr8t-x-x-120">expressions may be used in symbolic mode in place of prefix operators,</span>
+<span 
+class="ptmr8t-x-x-120">or as an argument of the reserved word </span><span 
+class="pcrr8t-x-x-120">FUNCTION</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 164--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In those cases where a </span><span 
+class="pcrr8t-x-x-120">LAMBDA </span><span 
+class="ptmr8t-x-x-120">expression is used to introduce local variables to</span>
+<span 
+class="ptmr8t-x-x-120">avoid recomputation, a </span><span 
+class="pcrr8t-x-x-120">WHERE </span><span 
+class="ptmr8t-x-x-120">statement can also be used. For example, the</span>
+<span 
+class="ptmr8t-x-x-120">expression</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1361">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(lambda&#x00A0;(x,y);&#x00A0;list(car&#x00A0;x,cdr&#x00A0;x,car&#x00A0;y,cdr&#x00A0;y))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(reverse&#x00A0;u,reverse&#x00A0;v)
+</div>
+<!--l. 170--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">can also be written</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1362">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{car&#x00A0;x,cdr&#x00A0;x,car&#x00A0;y,cdr&#x00A0;y}&#x00A0;where&#x00A0;x=reverse&#x00A0;u,y=reverse&#x00A0;v
+</div>
+<!--l. 174--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Where possible, </span><span 
+class="pcrr8t-x-x-120">WHERE </span><span 
+class="ptmr8t-x-x-120">syntax is preferred to </span><span 
+class="pcrr8t-x-x-120">LAMBDA </span><span 
+class="ptmr8t-x-x-120">syntax, since it is more</span>
+<span 
+class="ptmr8t-x-x-120">natural.</span>
+                                                                     
+
+                                                                     
+<!--l. 178--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse172.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse173.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse171.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse171.html#tailmanualse171.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse172.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse172.html"></a>  
+</body></html> 

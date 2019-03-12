@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Matrix Assignments</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch14.html#manualse84.html" >Up</a></td><td class="clinks"><a 
+href="manualse85.html" >Next</a></td><td class="clinks"><a 
+href="manualse83.html" >Prev</a></td><td class="clinks"><a 
+href="manualse83.html#tailmanualse83.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse84.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">14.5    </span> <a 
+ id="x103-19400014.5"></a>Matrix Assignments</h3>
+<a 
+ id="dx103-194001"></a>
+<!--l. 281--><p class="noindent" >Matrix expressions may appear in the right-hand side of assignment statements. If the
+left-hand side of the assignment, which must be a variable, has not already been declared
+a matrix, it is declared by default to the size of the right-hand side. The variable is then
+set to the value of the right-hand side.
+<!--l. 287--><p class="noindent" >Such an assignment may be used very conveniently to find the solution of a set
+of linear equations. For example, to find the solution of the following set of
+equations
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-366">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a11*x(1)&#x00A0;+&#x00A0;a12*x(2)&#x00A0;=&#x00A0;y1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a21*x(1)&#x00A0;+&#x00A0;a22*x(2)&#x00A0;=&#x00A0;y2
+</div>
+<!--l. 293--><p class="nopar" > we simply write
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-367">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;:=&#x00A0;1/mat((a11,a12),(a21,a22))*mat((y1),(y2));
+</div>
+<!--l. 297--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 299--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch14.html#manualse84.html" >Up</a></td><td class="clinks"><a 
+href="manualse85.html" >Next</a></td><td class="clinks"><a 
+href="manualse83.html" >Prev</a></td><td class="clinks"><a 
+href="manualse83.html#tailmanualse83.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse84.html" >Front</a></td></tr></table><a 
+ id="tailmanualse84.html"></a>  
+</body></html> 

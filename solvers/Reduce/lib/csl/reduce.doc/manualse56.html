@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Factorization of Polynomials</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse56.html" >Up</a></td><td class="clinks"><a 
+href="manualse57.html" >Next</a></td><td class="clinks"><a 
+href="manualse55.html" >Prev</a></td><td class="clinks"><a 
+href="manualse55.html#tailmanualse55.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse56.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">9.2    </span> <a 
+ id="x70-1320009.2"></a>Factorization of Polynomials</h3>
+<a 
+ id="dx70-132001"></a>
+<!--l. 73--><p class="noindent" ><a 
+ id="switch:FACTOR"></a> <a 
+ id="switch:IFACTOR"></a>
+<!--l. 76--><p class="noindent" >REDUCE is capable of factorizing univariate and multivariate polynomials that have
+integer coefficients, finding all factors that also have integer coefficients. The package for
+doing this was written by Dr. Arthur C. Norman and Ms. P. Mary Ann Moore at The
+University of Cambridge. It is described in P. M. A. Moore and A. C. Norman,
+&#8220;Implementing a Polynomial Factorization and GCD Package&#8221;, Proc. SYMSAC &#8217;81,
+ACM (New York) (1981), 109-116.
+<!--l. 84--><p class="noindent" >The easiest way to use this facility is to turn on the switch <span 
+class="pcrr8t-x-x-109">FACTOR</span>,<a 
+ id="dx70-132002"></a><a 
+ id="dx70-132003"></a><a 
+ id="dx70-132004"></a> which causes all
+expressions to be output in a factored form. For example, with <span 
+class="pcrr8t-x-x-109">FACTOR </span>on, the
+expression <span 
+class="pcrr8t-x-x-109">A^2-B^2 </span>is returned as <span 
+class="pcrr8t-x-x-109">(A+B)*(A-B)</span>.
+<!--l. 90--><p class="noindent" ><a 
+ id="operator:FACTORIZE"></a> It is also possible to factorize a given expression explicitly. The operator <span 
+class="pcrr8t-x-x-109">FACTORIZE</span><a 
+ id="dx70-132005"></a>
+that invokes this facility is used with the syntax
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-224">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;FACTORIZE(EXPRN:polynomial[,INTEXP:prime&#x00A0;integer]):list,
+</div>
+<!--l. 96--><p class="nopar" > the optional argument of which will be described later. Thus to find and display all
+factors of the cyclotomic polynomial <span 
+class="cmmi-10x-x-109">x</span><sup><span 
+class="cmr-8">105</span></sup> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1</span>, one could write:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-225">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorize(x^105-1);
+</div>
+<!--l. 102--><p class="nopar" > The result is a list of factor,exponent pairs. In the above example, there is no overall
+numerical factor in the result, so the results will consist only of polynomials in x. The
+number of such polynomials can be found by using the operator <span 
+class="pcrr8t-x-x-109">LENGTH</span>.<a 
+ id="dx70-132006"></a> If there is a
+numerical factor, as in factorizing <span 
+class="cmr-10x-x-109">12</span><span 
+class="cmmi-10x-x-109">x</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">12</span>, that factor will appear as the first member
+of the result. It will however not be factored further. Prime factors of such numbers can
+be found, using a probabilistic algorithm, by turning on the switch <span 
+class="pcrr8t-x-x-109">IFACTOR</span>.<a 
+ id="dx70-132007"></a><a 
+ id="dx70-132008"></a><a 
+ id="dx70-132009"></a> For
+example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-226">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;ifactor;&#x00A0;factorize(12x^2-12);
+</div>
+<!--l. 114--><p class="nopar" > would result in the output
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-227">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{{2,2},{3,1},{X&#x00A0;+&#x00A0;1,1},{X&#x00A0;-&#x00A0;1,1}}.
+</div>
+<!--l. 118--><p class="nopar" >
+<!--l. 120--><p class="noindent" >If the first argument of <span 
+class="pcrr8t-x-x-109">FACTORIZE </span>is an integer, it will be decomposed into its prime
+components, whether or not <span 
+class="pcrr8t-x-x-109">IFACTOR </span>is on.
+<!--l. 123--><p class="noindent" >Note that the <span 
+class="pcrr8t-x-x-109">IFACTOR </span>switch only affects the result of <span 
+class="pcrr8t-x-x-109">FACTORIZE</span>. It has no effect if
+the <span 
+class="pcrr8t-x-x-109">FACTOR</span><a 
+ id="dx70-132010"></a><a 
+ id="dx70-132011"></a><a 
+ id="dx70-132012"></a> switch is also on.
+<!--l. 126--><p class="noindent" >The order in which the factors occur in the result (with the exception of a possible overall
+numerical coefficient which comes first) can be system dependent and should not be
+relied on. Similarly it should be noted that any pair of individual factors can be
+negated without altering their product, and that REDUCE may sometimes do
+that.
+<!--l. 132--><p class="noindent" >The factorizer works by first reducing multivariate problems to univariate ones and
+then solving the univariate ones modulo small primes. It normally selects both
+evaluation points and primes using a random number generator that should lead to
+different detailed behavior each time any particular problem is tackled. If, for
+some reason, it is known that a certain (probably univariate) factorization can be
+performed effectively with a known prime, <span 
+class="pcrr8t-x-x-109">P </span>say, this value of <span 
+class="pcrr8t-x-x-109">P </span>can be handed to
+<span 
+class="pcrr8t-x-x-109">FACTORIZE</span><a 
+ id="dx70-132013"></a> as a second argument. An error will occur if a non-prime is provided to
+<span 
+class="pcrr8t-x-x-109">FACTORIZE </span>in this manner. It is also an error to specify a prime that divides the
+discriminant of the polynomial being factored, but users should note that this
+condition is not checked by the program, so this capability should be used with
+care.
+<a 
+ id="dx70-132014"></a>
+<a 
+ id="dx70-132015"></a>
+<a 
+ id="dx70-132016"></a>
+<!--l. 147--><p class="noindent" >Factorization can be performed over a number of polynomial coefficient domains in
+addition to integers. The particular description of the relevant domain should be
+consulted to see if factorization is supported. For example, the following statements will
+factorize <span 
+class="cmmi-10x-x-109">x</span><sup><span 
+class="cmr-8">4</span></sup> <span 
+class="cmr-10x-x-109">+ 1 </span>modulo 7:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-228">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setmod&#x00A0;7;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;modular;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorize(x^4+1);
+</div>
+<!--l. 155--><p class="nopar" > <a 
+ id="switch:TRFAC"></a> The factorization module is provided with a trace facility that may be useful as a way of
+monitoring progress on large problems, and of satisfying curiosity about the internal
+workings of the package. The most simple use of this is enabled by issuing the REDUCE
+command<a 
+ id="dx70-132017"></a><a 
+ id="dx70-132018"></a><a 
+ id="dx70-132019"></a> <span 
+class="pcrr8t-x-x-109">on trfac; </span>. Following this, all calls to the factorizer will generate
+informative messages reporting on such things as the reduction of multivariate to
+univariate cases, the choice of a prime and the reconstruction of full factors from
+their images. Further levels of detail in the trace are intended mainly for system
+tuners and for the investigation of suspected bugs. For example, <span 
+class="pcrr8t-x-x-109">TRALLFAC</span>
+gives tracing information at all levels of detail. The switch that can be set by
+<span 
+class="pcrr8t-x-x-109">on timings; </span>makes it possible for one who is familiar with the algorithms
+used to determine what part of the factorization code is consuming the most
+resources. <span 
+class="pcrr8t-x-x-109">on overview</span>; reduces the amount of detail presented in other
+forms of trace. Other forms of trace output are enabled by directives of the
+form
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-229">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic&#x00A0;set!-trace!-factor(&#x003C;number&#x003E;,&#x003C;filename&#x003E;);
+</div>
+<!--l. 175--><p class="nopar" > where useful numbers are 1, 2, 3 and 100, 101, ... . This facility is intended to
+make it possible to discover in fairly great detail what just some small part of
+the code has been doing &#8212; the numbers refer mainly to depths of recursion
+when the factorizer calls itself, and to the split between its work forming and
+factorizing images and reconstructing full factors from these. If <span 
+class="pcrr8t-x-x-109">NIL </span>is used in
+place of a filename the trace output requested is directed to the standard output
+stream. After use of this trace facility the generated trace files should be closed by
+calling
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-230">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic&#x00A0;close!-trace!-files();
+</div>
+<!--l. 186--><p class="nopar" > <span 
+class="ptmri8t-x-x-109">NOTE: </span>Using the factorizer with <span 
+class="pcrr8t-x-x-109">MCD</span><a 
+ id="dx70-132020"></a><a 
+ id="dx70-132021"></a><a 
+ id="dx70-132022"></a> off will result in an error.
+                                                                     
+
+                                                                     
+<!--l. 190--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse56.html" >Up</a></td><td class="clinks"><a 
+href="manualse57.html" >Next</a></td><td class="clinks"><a 
+href="manualse55.html" >Prev</a></td><td class="clinks"><a 
+href="manualse55.html#tailmanualse55.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse56.html" >Front</a></td></tr></table><a 
+ id="tailmanualse56.html"></a>  
+</body></html> 

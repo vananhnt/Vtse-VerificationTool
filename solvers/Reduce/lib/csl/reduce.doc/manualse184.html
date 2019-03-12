@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Mass Declarations</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch18.html#manualse184.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse185.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse183.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse183.html#tailmanualse183.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse184.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">18.5    </span></span> <a 
+ id="x244-103600018.5"></a><span 
+class="ptmr8t-x-x-120">Mass Declarations</span></h3>
+<a 
+ id="dx244-1036001"></a>
+<!--l. 228--><p class="noindent" ><a 
+ id="command:MASS"></a> <a 
+ id="command:MSHELL"></a>
+<!--l. 231--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It is often necessary to put a particle &#8220;on the mass shell&#8221; in a calculation. This</span>
+<span 
+class="ptmr8t-x-x-120">can, of course, be accomplished with a </span><span 
+class="pcrr8t-x-x-120">LET </span><span 
+class="ptmr8t-x-x-120">command such as</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1390">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;p.p=&#x00A0;m^2;
+</div>
+<!--l. 236--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">but an alternative method is provided by two commands </span><span 
+class="pcrr8t-x-x-120">MASS </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">MSHELL</span><span 
+class="ptmr8t-x-x-120">.</span><a 
+ id="dx244-1036002"></a>
+<span 
+class="pcrr8t-x-x-120">MASS </span><span 
+class="ptmr8t-x-x-120">takes a list of equations of the form:</span>
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">vector variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="pcrr8t-x-x-120">=</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">scalar variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span></div>
+<!--l. 243--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">for example,</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1391">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mass&#x00A0;p1=m,&#x00A0;q1=mu;
+</div>
+<!--l. 246--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The only effect of this command is to associate the relevant scalar variable as a</span>
+<span 
+class="ptmr8t-x-x-120">mass with the corresponding vector. If we now say</span>
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-120">mshell</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">vector variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">vector variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">terminator</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span></div>
+<!--l. 252--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">and a mass has been associated with these arguments, a substitution of the</span>
+<span 
+class="ptmr8t-x-x-120">form</span>
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">vector variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="pcrr8t-x-x-120">.</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">vector variable</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="pcrr8t-x-x-120">=</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">mass</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="pcrr8t-x-x-120">^</span><span 
+class="cmr-12">2</span></div>
+<!--l. 258--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is set up. An error results if the variable has no preassigned mass.</span>
+                                                                     
+
+                                                                     
+<!--l. 260--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch18.html#manualse184.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse185.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse183.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse183.html#tailmanualse183.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse184.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse184.html"></a>  
+</body></html> 

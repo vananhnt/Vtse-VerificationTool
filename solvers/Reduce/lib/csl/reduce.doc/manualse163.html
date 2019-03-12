@@ -1,0 +1,1070 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>TURTLE: Turtle Graphics Interface for REDUCE</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse163.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse164.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse162.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse162.html#tailmanualse162.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse163.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72    </span></span> <a 
+ id="x219-95100016.72"></a><span 
+class="ptmr8t-x-x-120">TURTLE: Turtle Graphics Interface for</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE</span></h3>
+<a 
+ id="dx219-951001"></a>
+<a 
+ id="dx219-951002"></a>
+<!--l. 1362--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Caroline Cotter</span>
+<a 
+ id="dx219-951003"></a>
+<!--l. 6--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package is a simple implementation of the &#8220;Turtle Graphics&#8221; style of</span>
+<span 
+class="ptmr8t-x-x-120">drawing graphs in REDUCE. The background and ideas of &#8220;Turtle Graphics&#8221; are</span>
+<span 
+class="ptmr8t-x-x-120">outlined below.</span>
+<!--l. 10--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.1    </span></span> <a 
+ id="x219-95200016.72.1"></a><span 
+class="ptmr8t-x-x-120">Turtle Graphics</span></h4>
+<!--l. 12--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Turtle Graphics was originally developed in the 1960&#8217;s as part of the LOGO</span>
+<span 
+class="ptmr8t-x-x-120">system, and used in the classroom as an introduction to graphics and using</span>
+<span 
+class="ptmr8t-x-x-120">computers to help with mathematics.</span>
+<!--l. 16--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The LOGO language was created as part of an experiment to test the idea that</span>
+<span 
+class="ptmr8t-x-x-120">programming may be used as an educational discipline to teach children. It was</span>
+<span 
+class="ptmr8t-x-x-120">first intended to be used for problem solving, for illustrating mathematical</span>
+<span 
+class="ptmr8t-x-x-120">concepts usually difficult to grasp, and for creation of experiments with abstract</span>
+<span 
+class="ptmr8t-x-x-120">ideas.</span>
+<!--l. 22--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">At first LOGO had no graphics capabilities, but fast development enabled the</span>
+<span 
+class="ptmr8t-x-x-120">incorporation of graphics, known as &#8220;Turtle Graphics&#8221; into the language. &#8220;Turtle</span>
+<span 
+class="ptmr8t-x-x-120">Graphics&#8221; is regarded by many as the main use of LOGO.</span>
+<!--l. 28--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Main Idea:  </span><span 
+class="ptmr8t-x-x-120">To use simple commands directing a turtle, such as forward, back,</span>
+<span 
+class="ptmr8t-x-x-120">turnleft, in order to construct pictures as opposed to drawing lines connecting</span>
+<span 
+class="ptmr8t-x-x-120">cartesian coordinate points.</span>
+<!--l. 32--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The &#8216;turtle&#8217; is at all times determined by its state {</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">a</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">p</span><span 
+class="ptmr8t-x-x-120">}- where </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y </span><span 
+class="ptmr8t-x-x-120">determine</span>
+<span 
+class="ptmr8t-x-x-120">its position in the</span> <span 
+class="ptmr8t-x-x-120">(</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">)-plane</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">a </span><span 
+class="ptmr8t-x-x-120">determines the angle (which describes the</span>
+<span 
+class="ptmr8t-x-x-120">direction the turtle is facing) and </span><span 
+class="cmmi-12">p </span><span 
+class="ptmr8t-x-x-120">signals whether the pen is up or down (i.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span>
+<span 
+class="ptmr8t-x-x-120">whether or not it is drawing on the paper).</span>
+                                                                     
+
+                                                                     
+<!--l. 39--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.2    </span></span> <a 
+ id="x219-95300016.72.2"></a><span 
+class="ptmr8t-x-x-120">Implementation</span></h4>
+<!--l. 40--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Some alterations to the original &#8220;Turtle Graphics&#8221; commands have been made in</span>
+<span 
+class="ptmr8t-x-x-120">this implementation due to the design of the graphics package </span><span 
+class="ptmri8t-x-x-120">gnuplot </span><span 
+class="ptmr8t-x-x-120">used in</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE.</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">It is not possible to draw lines individually and to see each seperate</span>
+     <span 
+class="ptmr8t-x-x-120">line as it is added to the graph since gnuplot automatically replaces</span>
+     <span 
+class="ptmr8t-x-x-120">the last graph each time it calls on the plot function.</span>
+     <!--l. 50--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Thus the whole sequence of commands must be input together if the</span>
+     <span 
+class="ptmr8t-x-x-120">complete picture is to be seen.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">This  implementation  does  not  make  use  of  the  standard  turtle</span>
+     <span 
+class="ptmr8t-x-x-120">commands  &#8216;pen-up&#8217;  or  &#8216;pen-down&#8217;  .  Instead,  &#8216;set&#8217;  commands  are</span>
+     <span 
+class="ptmr8t-x-x-120">included which allow the turtle to move without drawing a line.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">No facility is provided here to change the pen-colour, but gnuplot does</span>
+     <span 
+class="ptmr8t-x-x-120">have the capability to handle a few different colours (which could be</span>
+     <span 
+class="ptmr8t-x-x-120">included later).</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Many of the commands are long and difficult to type out repeatedly,</span>
+     <span 
+class="ptmr8t-x-x-120">therefore all the commands included under </span><span 
+class="ptmri8t-x-x-120">&#8216;Turtle Functions&#8217; </span><span 
+class="ptmr8t-x-x-120">(below)</span>
+     <span 
+class="ptmr8t-x-x-120">are listed alongside an equivalent abbreviated form.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The user has no control over the range of output that can be seen on</span>
+     <span 
+class="ptmr8t-x-x-120">the screen since the gnuplot program automatically adjusts the picture</span>
+     <span 
+class="ptmr8t-x-x-120">to fit the window. Hence the size of each specified &#8216;step&#8217; the turtle</span>
+     <span 
+class="ptmr8t-x-x-120">takes in any direction is not a fixed unit of length, rather it is relative</span>
+     <span 
+class="ptmr8t-x-x-120">to the scale chosen by gnuplot.</span></li></ul>
+<!--l. 69--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.3    </span></span> <a 
+ id="x219-95400016.72.3"></a><span 
+class="ptmr8t-x-x-120">Turtle Functions</span></h4>
+                                                                     
+
+                                                                     
+<!--l. 70--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">As previously mentioned, the turtle is determined at all times by its state {</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">a</span><span 
+class="ptmr8t-x-x-120">}:</span>
+<span 
+class="ptmr8t-x-x-120">its position on the</span> <span 
+class="ptmr8t-x-x-120">(</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">)-plane</span> <span 
+class="ptmr8t-x-x-120">and its angle(</span><span 
+class="cmmi-12">a</span><span 
+class="ptmr8t-x-x-120">) - its </span><span 
+class="ptmri8t-x-x-120">heading </span><span 
+class="ptmr8t-x-x-120">- which determines</span>
+<span 
+class="ptmr8t-x-x-120">the direction the turtle is facing, in degrees, relative anticlockwise to the positive</span>
+<span 
+class="ptmr8t-x-x-120">x-axis.</span>
+<!--l. 76--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.3.1    </span></span> <a 
+ id="x219-95500016.72.3.1"></a><span 
+class="ptmr8t-x-x-120">User Setting Functions</span></h5>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">setheading</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Takes a number as its argument and resets the heading to this</span>
+     <span 
+class="ptmr8t-x-x-120">number. If the number entered is negative or greater than or equal to</span>
+     <span 
+class="ptmr8t-x-x-120">360 then it is automatically checked to lie between 0 and 360.</span>
+     <!--l. 83--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the turtle position {</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">}</span>
+     <!--l. 85--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">setheading(</span><span 
+class="cmmi-12">&#x03B8;</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 87--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">sh(</span><span 
+class="cmmi-12">&#x03B8;</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">leftturn</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The turtle is turned anticlockwise through the stated number of</span>
+     <span 
+class="ptmr8t-x-x-120">degrees. Takes a number as its argument and resets the heading by</span>
+     <span 
+class="ptmr8t-x-x-120">adding this number to the previous heading setting.</span>
+     <!--l. 93--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the turtle position {</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">}</span>
+     <!--l. 95--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">leftturn(</span><span 
+class="cmmi-12">&#x03B1;</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 97--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">slt(</span><span 
+class="cmmi-12">&#x03B1;</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">rightturn</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Similar to </span><span 
+class="pcrr8t-x-x-120">leftturn</span><span 
+class="ptmr8t-x-x-120">, but the turtle is turned clockwise through</span>
+     <span 
+class="ptmr8t-x-x-120">the  stated  number  of  degrees.  Takes  a  number  as  its  argument  and</span>
+     <span 
+class="ptmr8t-x-x-120">resets  the  heading  by  subtracting  this  number  from  the  previous</span>
+     <span 
+class="ptmr8t-x-x-120">heading setting.</span>
+     <!--l. 103--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the turtle position {</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">}</span>
+     <!--l. 105--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">rightturn(</span><span 
+class="cmmi-12">&#x03B2;</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 107--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">srt(</span><span 
+class="cmmi-12">&#x03B2;</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">setx</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Relocates the turtle in the x direction. Takes a number as its argument</span>
+     <span 
+class="ptmr8t-x-x-120">and repositions the state of the turtle by changing its x-coordinate.</span>
+     <!--l. 112--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns {}</span>
+                                                                     
+
+                                                                     
+     <!--l. 114--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">setx(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 116--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">sx(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">sety</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Relocates the turtle in the y direction. Takes a number as its argument</span>
+     <span 
+class="ptmr8t-x-x-120">and repositions the state of the turtle by changing its y-coordinate.</span>
+     <!--l. 121--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns {}</span>
+     <!--l. 123--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">sety(</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 125--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">sy(</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">setposition</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Relocates  the  turtle  from  its  current  position  to  the  new</span>
+     <span 
+class="ptmr8t-x-x-120">cartesian coordinate position described. Takes a pair of numbers as its</span>
+     <span 
+class="ptmr8t-x-x-120">arguments and repositions the state of the turtle by changing the x and</span>
+     <span 
+class="ptmr8t-x-x-120">y coordinates.</span>
+     <!--l. 131--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns {}</span>
+     <!--l. 133--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">setposition(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 135--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">spn(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">setheadingtowards</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Resets the heading so that the turtle is facing towards</span>
+     <span 
+class="ptmr8t-x-x-120">the given point, with respect to its current position on the coordinate</span>
+     <span 
+class="ptmr8t-x-x-120">axes.  Takes  a  pair  of  numbers  as  its  arguments  and  changes  the</span>
+     <span 
+class="ptmr8t-x-x-120">heading, but the turtle stays in the same place.</span>
+     <!--l. 141--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the turtle position {</span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">}</span>
+     <!--l. 143--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">setheadingtowards(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 145--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">shto(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">setforward</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Relocates  the  turtle  from  its  current  position  by  moving</span>
+     <span 
+class="ptmr8t-x-x-120">forward (in the direction of its heading) the number of steps given.</span>
+     <span 
+class="ptmr8t-x-x-120">Takes a number as its argument and repositions the state of the turtle</span>
+     <span 
+class="ptmr8t-x-x-120">by changing the x and y coordinates.</span>
+     <!--l. 151--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns {}</span>
+     <!--l. 153--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">setforward(</span><span 
+class="cmmi-12">n</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 155--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">sfwd(</span><span 
+class="cmmi-12">n</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">setback</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">As with </span><span 
+class="pcrr8t-x-x-120">setforward</span><span 
+class="ptmr8t-x-x-120">, but moves back (in the opposite direction</span>
+     <span 
+class="ptmr8t-x-x-120">of its heading) the number of steps given.</span>
+                                                                     
+
+                                                                     
+     <!--l. 159--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns {}</span>
+     <!--l. 161--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">setback(</span><span 
+class="cmmi-12">n</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 163--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">sbk(</span><span 
+class="cmmi-12">n</span><span 
+class="pcrr8t-x-x-120">)</span></dd></dl>
+<!--l. 166--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.3.2    </span></span> <a 
+ id="x219-95600016.72.3.2"></a><span 
+class="ptmr8t-x-x-120">Line-Drawing Functions</span></h5>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">forward</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Moves the turtle forward (in the direction its heading) the number</span>
+     <span 
+class="ptmr8t-x-x-120">of steps given. Takes a number as its argument and draws a line from</span>
+     <span 
+class="ptmr8t-x-x-120">its current position to a new position on the coordinate plane. The x</span>
+     <span 
+class="ptmr8t-x-x-120">and y coordinates are reset to the new values.</span>
+     <!--l. 174--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the list of points { {</span><span 
+class="ptmri8t-x-x-120">old </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">old </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">}, {</span><span 
+class="ptmri8t-x-x-120">new </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">new </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">} }</span>
+     <!--l. 177--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">forward(</span><span 
+class="cmmi-12">s</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 179--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">fwd(</span><span 
+class="cmmi-12">s</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">back</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">As  with  </span><span 
+class="pcrr8t-x-x-120">forward </span><span 
+class="ptmr8t-x-x-120">except  the  turtle  moves  back  (in  the  opposite</span>
+     <span 
+class="ptmr8t-x-x-120">direction to its heading) the number of steps given.</span>
+     <!--l. 183--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the list of points { {</span><span 
+class="ptmri8t-x-x-120">old </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">old </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">}, {</span><span 
+class="ptmri8t-x-x-120">new </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">new </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">} }</span>
+     <!--l. 186--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">back(</span><span 
+class="cmmi-12">s</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 188--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">bk(</span><span 
+class="cmmi-12">s</span><span 
+class="pcrr8t-x-x-120">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">move</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Moves the turtle to a specified point on the coordinate plane. Takes</span>
+     <span 
+class="ptmr8t-x-x-120">a pair of numbers as its arguments and draws a line from its current</span>
+     <span 
+class="ptmr8t-x-x-120">position to the position described. The x and y coordinates are set to</span>
+     <span 
+class="ptmr8t-x-x-120">these new values.</span>
+     <!--l. 194--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the list of points { {</span><span 
+class="ptmri8t-x-x-120">old </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">old </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">}, {</span><span 
+class="ptmri8t-x-x-120">new </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">new </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">} }</span>
+     <!--l. 197--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">move(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span>
+     <!--l. 199--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">mv(</span><span 
+class="cmmi-12">x</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="cmmi-12">y</span><span 
+class="pcrr8t-x-x-120">)</span></dd></dl>
+                                                                     
+
+                                                                     
+<!--l. 202--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.3.3    </span></span> <a 
+ id="x219-95700016.72.3.3"></a><span 
+class="ptmr8t-x-x-120">Plotting Functions</span></h5>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">draw</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This is the function the user calls within REDUCE to draw the list of</span>
+     <span 
+class="ptmr8t-x-x-120">turtle commands given into a picture. Takes a list as its argument, with</span>
+     <span 
+class="ptmr8t-x-x-120">each seperate command being seperated by a comma, and returns the</span>
+     <span 
+class="ptmr8t-x-x-120">graph drawn by following the commands.</span>
+     <!--l. 210--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">draw{</span><span 
+class="pcrro8t-x-x-120">command(command_args)</span><span 
+class="pcrr8t-x-x-120">,</span><span 
+class="pcrr8t-x-x-120">&#x2026;,command(command_args)}</span>
+     <span class="underline"><span 
+class="ptmr8t-x-x-120">Note:</span></span> <span 
+class="ptmr8t-x-x-120">all commands may be entered in either long or shorthand form,</span>
+     <span 
+class="ptmr8t-x-x-120">and  with  a  space  before  the  arguments  instead  of  parentheses  only</span>
+     <span 
+class="ptmr8t-x-x-120">if  just  one  argument  is  needed.  Commands  taking  more  than  one</span>
+     <span 
+class="ptmr8t-x-x-120">argument must be written in parentheses and arguments seperated by</span>
+     <span 
+class="ptmr8t-x-x-120">a comma.</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">fdraw</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This function is also called in REDUCE by the user and outputs the</span>
+     <span 
+class="ptmr8t-x-x-120">same as the </span><span 
+class="pcrr8t-x-x-120">draw </span><span 
+class="ptmr8t-x-x-120">command, but it takes a filename as its argument.</span>
+     <span 
+class="ptmr8t-x-x-120">The file which is called upon by </span><span 
+class="pcrr8t-x-x-120">fdraw </span><span 
+class="ptmr8t-x-x-120">must contain only the turtle</span>
+     <span 
+class="ptmr8t-x-x-120">commands and other functions defined by the user for turtle graphics.</span>
+     <span 
+class="ptmr8t-x-x-120">(This is intended to make it easier for the user to make small changes</span>
+     <span 
+class="ptmr8t-x-x-120">without constantly typing out long series of commands.)</span>
+     <!--l. 225--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:      </span><span 
+class="pcrr8t-x-x-120">fdraw{~</span><span 
+class="pcrro8t-x-x-120">filename</span><span 
+class="pcrr8t-x-x-120">~} </span><span class="underline"><span 
+class="ptmr8t-x-x-120">Note:</span></span>   <span 
+class="ptmr8t-x-x-120">commands   may   be</span>
+     <span 
+class="ptmr8t-x-x-120">entered in long or shorthand form but each command must be written</span>
+     <span 
+class="ptmr8t-x-x-120">on a separate line of the file. Also, arguments are to be written without</span>
+     <span 
+class="ptmr8t-x-x-120">parentheses and separated with a space, not a comma, regardless of</span>
+     <span 
+class="ptmr8t-x-x-120">the number of arguments given to the function.</span></dd></dl>
+<!--l. 235--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.3.4    </span></span> <a 
+ id="x219-95800016.72.3.4"></a><span 
+class="ptmr8t-x-x-120">Other Important Functions</span></h5>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">info</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This function is called on its own in REDUCE to tell user the current</span>
+     <span 
+class="ptmr8t-x-x-120">state of the turtle. Takes no arguments but returns a list containing the</span>
+     <span 
+class="ptmr8t-x-x-120">current values of the x and y coordinates and the heading variable.</span>
+     <!--l. 242--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns the list {</span><span 
+class="ptmri8t-x-x-120">x_coord</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">y_coord</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="ptmri8t-x-x-120">heading</span><span 
+class="ptmr8t-x-x-120">}</span>
+                                                                     
+
+                                                                     
+     <!--l. 244--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">info() </span><span 
+class="ptmr8t-x-x-120">or simply </span><span 
+class="pcrr8t-x-x-120">info</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">clearscreen</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This is also called on its own in REDUCE to get rid of the</span>
+     <span 
+class="ptmr8t-x-x-120">last gnuplot window, displaying the last turtle graphics picture, and to</span>
+     <span 
+class="ptmr8t-x-x-120">reset all the variables to 0. Takes no arguments and returns no printed</span>
+     <span 
+class="ptmr8t-x-x-120">output to the screen but the graphics window is simply cleared.</span>
+     <!--l. 251--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">clearscreen() </span><span 
+class="ptmr8t-x-x-120">or simply </span><span 
+class="pcrr8t-x-x-120">clearscreen</span>
+     <!--l. 253--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">Abbreviated form:  </span><span 
+class="pcrr8t-x-x-120">cls() </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">cls</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">home</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This is a command which can be called within a plot function as well</span>
+     <span 
+class="ptmr8t-x-x-120">as outside of one. Takes no arguments, and simply resets the x and</span>
+     <span 
+class="ptmr8t-x-x-120">y coordinates and the heading variable to 0. When used in a series</span>
+     <span 
+class="ptmr8t-x-x-120">of turtle commands, it moves the turtle from its current position to</span>
+     <span 
+class="ptmr8t-x-x-120">the origin and sets the direction of the turtle along the x-axis, without</span>
+     <span 
+class="ptmr8t-x-x-120">drawing a line.</span>
+     <!--l. 261--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Returns {0,0}</span>
+     <!--l. 263--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">home() </span><span 
+class="ptmr8t-x-x-120">or simply </span><span 
+class="pcrr8t-x-x-120">home</span></dd></dl>
+<!--l. 266--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.3.5    </span></span> <a 
+ id="x219-95900016.72.3.5"></a><span 
+class="ptmr8t-x-x-120">Defining Functions</span></h5>
+<!--l. 268--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It is possible to use conditional statements (if </span><span 
+class="ptmr8t-x-x-120">&#x2026;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;then </span><span 
+class="ptmr8t-x-x-120">&#x2026;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;else </span><span 
+class="ptmr8t-x-x-120">&#x2026;) and &#8216;for&#8217;</span>
+<span 
+class="ptmr8t-x-x-120">statements (for i:=</span><span 
+class="ptmr8t-x-x-120">&#x2026;collect{</span><span 
+class="ptmr8t-x-x-120">&#x2026;}) in calls to draw. However, care must be taken -</span>
+<span 
+class="ptmr8t-x-x-120">when using conditional statements the final else statement must return a point or</span>
+<span 
+class="ptmr8t-x-x-120">at least {x_coord,y_coord} if the picture is to be continued at that point. Also,</span>
+<span 
+class="ptmr8t-x-x-120">&#8216;for&#8217; statements </span><span 
+class="ptmri8t-x-x-120">must </span><span 
+class="ptmr8t-x-x-120">include &#8216;collect&#8217; followed by a list of turtle commands (in</span>
+<span 
+class="ptmr8t-x-x-120">addition, the variable must begin counting from 0 if it is to be joined to the</span>
+<span 
+class="ptmr8t-x-x-120">previous list of turtle commands at that point exactly, e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;g.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;for i:=0:10 collect</span>
+<span 
+class="ptmr8t-x-x-120">{</span><span 
+class="ptmr8t-x-x-120">&#x2026;}).</span>
+<!--l. 279--><p class="noindent" ><span 
+class="ptmro8t-x-x-120">SYNTAX:  </span><span 
+class="pcrr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">{ </span><span 
+class="ptmr8t-">(For user-defined Turtle functions)</span><span 
+class="ptmr8t-x-x-120">}</span>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">  </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-120">procedure </span><span 
+class="pcrro8t-x-x-120">func_name(func_args)</span><span 
+class="pcrr8t-x-x-120">;</span>
+</td></tr></table>
+<!--l. 282--><p class="noindent" >                 <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">  </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-120">begin [scalar </span><span 
+class="pcrro8t-x-x-120">additional variables</span><span 
+class="pcrr8t-x-x-120">];</span></td></tr></table>
+<!--l. 283--><p class="noindent" >                                                          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">  </td><td style="width:51;" 
+class="tabbing">     </td><td  
+class="tabbing"><img 
+src="manual587x.png" alt=".
+..  "  class="vdots" ></td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 284--><p class="noindent" >         <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">    </td><td style="width:51;" 
+class="tabbing">           </td><td  
+class="tabbing"><span 
+class="ptmri8t-x-x-120">(the procedure body containing some turtle commands)</span></td></tr></table>
+<!--l. 285--><p class="noindent" >                                                          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">    </td><td style="width:51;" 
+class="tabbing">           </td><td  
+class="tabbing"><img 
+src="manual588x.png" alt="..
+.  "  class="vdots" ></td></tr></table>
+<!--l. 286--><p class="noindent" >           <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">    </td><td style="width:51;" 
+class="tabbing">           </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-120">return</span><span 
+class="ptmri8t-x-x-120">(a list, or label to a list, of turtle commands</span></td></tr></table>
+<!--l. 287--><p class="noindent" >                                    <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">    </td><td style="width:51;" 
+class="tabbing">           </td><td style="width:28;" 
+class="tabbing">      </td><td  
+class="tabbing"><span 
+class="ptmri8t-x-x-120">as accepted by </span><span 
+class="pcrro8t-x-x-120">draw</span><span 
+class="ptmri8t-x-x-120">)</span></td></tr></table>
+<!--l. 288--><p class="noindent" >                                                             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:18;" 
+class="tabbing">    </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-120">end;</span></td></tr></table>
+<!--l. 289--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 290--><p class="noindent" >
+<!--l. 292--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For convenience, it is recommended that all user defined functions, such as those</span>
+<span 
+class="ptmr8t-x-x-120">involving </span><span 
+class="pcrr8t-x-x-120">if</span><span 
+class="pcrr8t-x-x-120">&#x2026;then</span><span 
+class="pcrr8t-x-x-120">&#x2026;else</span><span 
+class="pcrr8t-x-x-120">&#x2026; </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">for i:=</span><span 
+class="pcrr8t-x-x-120">&#x2026;collect{</span><span 
+class="pcrr8t-x-x-120">&#x2026;} </span><span 
+class="ptmr8t-x-x-120">are defined together</span>
+<span 
+class="ptmr8t-x-x-120">in a separate file, then called into REDUCE using the </span><span 
+class="pcrr8t-x-x-120">in ~</span><span 
+class="pcrro8t-x-x-120">filename</span><span 
+class="pcrr8t-x-x-120">~</span>
+<span 
+class="ptmr8t-x-x-120">command.</span>
+<!--l. 297--><p class="noindent" >
+                                                                     
+
+                                                                     
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.4    </span></span> <a 
+ id="x219-96000016.72.4"></a><span 
+class="ptmr8t-x-x-120">Examples</span></h4>
+<!--l. 301--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The following examples are taken from the tur.tst file. Examples 1,2,5 &amp; 6</span>
+<span 
+class="ptmr8t-x-x-120">are simple calls to draw. Examples 3 &amp; 4 show how more complicated</span>
+<span 
+class="ptmr8t-x-x-120">commands can be built (which can take their own set of arguments) using</span>
+<span 
+class="ptmr8t-x-x-120">procedures. Examples 7 &amp; 8 show the difference between the draw and fdraw</span>
+<span 
+class="ptmr8t-x-x-120">commands.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1282">
+%&#x00A0;(1)&#x00A0;Draw&#x00A0;36&#x00A0;rays&#x00A0;of&#x00A0;length&#x00A0;100
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{for&#x00A0;i:=1:36&#x00A0;collect{setheading(i*10),&#x00A0;forward&#x00A0;100,&#x00A0;back&#x00A0;100}&#x00A0;};
+</div>
+<!--l. 311--><p class="nopar" >
+<!--l. 314--><p class="center" ><img 
+src="manual589x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1283">
+%&#x00A0;(2)&#x00A0;Draw&#x00A0;12&#x00A0;regular&#x00A0;polygons&#x00A0;with&#x00A0;12&#x00A0;sides&#x00A0;of&#x00A0;length&#x00A0;40,each&#x00A0;polygon
+&#x00A0;<br />%forming&#x00A0;an&#x00A0;angle&#x00A0;of&#x00A0;360/n&#x00A0;degrees&#x00A0;with&#x00A0;the&#x00A0;previous&#x00A0;one.
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{for&#x00A0;i:=1:12&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{leftturn(30),&#x00A0;for&#x00A0;j:=1:12&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{forward&#x00A0;40,&#x00A0;leftturn(30)}}&#x00A0;};
+</div>
+<!--l. 325--><p class="nopar" >
+<!--l. 328--><p class="center" ><img 
+src="manual590x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1284">
+%&#x00A0;(3)&#x00A0;A&#x00A0;~peak~&#x00A0;pattern&#x00A0;-&#x00A0;an&#x00A0;example&#x00A0;of&#x00A0;a&#x00A0;recursive&#x00A0;procedure.
+&#x00A0;<br />
+&#x00A0;<br />procedure&#x00A0;peak(r);
+&#x00A0;<br />begin;
+&#x00A0;<br />&#x00A0;&#x00A0;return&#x00A0;for&#x00A0;i:=0:r&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{move(x_coord+5,y_coord-10),&#x00A0;move(x_coord+10,y_coord+60),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;move(x_coord+10,y_coord-60),move(x_coord+5,y_coord+10)};
+&#x00A0;<br />end;
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{home(),&#x00A0;peak(3)};
+</div>
+<!--l. 343--><p class="nopar" >
+<!--l. 346--><p class="center" ><img 
+src="manual591x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1285">
+%This&#x00A0;procedure&#x00A0;can&#x00A0;then&#x00A0;be&#x00A0;part&#x00A0;of&#x00A0;a&#x00A0;longer&#x00A0;chain&#x00A0;of&#x00A0;commands:
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{home(),&#x00A0;move(5,50),&#x00A0;peak(3),&#x00A0;move(x_coord+10,-100),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;peak(2),&#x00A0;move(x_coord+10,0)};
+</div>
+<!--l. 355--><p class="nopar" >
+<!--l. 358--><p class="center" ><img 
+src="manual592x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1286">
+%&#x00A0;(4)&#x00A0;&#x00A0;Write&#x00A0;a&#x00A0;recursive&#x00A0;procedure&#x00A0;which&#x00A0;draws&#x00A0;~trees~&#x00A0;such&#x00A0;that&#x00A0;every
+&#x00A0;<br />%branch&#x00A0;is&#x00A0;half&#x00A0;the&#x00A0;length&#x00A0;of&#x00A0;the&#x00A0;previous&#x00A0;branch.
+&#x00A0;<br />
+&#x00A0;<br />procedure&#x00A0;tree(a,b);&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%Here:&#x00A0;a&#x00A0;is&#x00A0;the&#x00A0;start&#x00A0;length,&#x00A0;b&#x00A0;is&#x00A0;the
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%number&#x00A0;of&#x00A0;levels
+&#x00A0;<br />begin;
+&#x00A0;<br />&#x00A0;&#x00A0;return&#x00A0;if&#x00A0;fixpb&#x00A0;and&#x00A0;b&#x003E;0&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%checking&#x00A0;b&#x00A0;is&#x00A0;a&#x00A0;positive&#x00A0;integer
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;then&#x00A0;{leftturn(45),&#x00A0;forward&#x00A0;a,&#x00A0;tree(a/2,b-1),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;back&#x00A0;a,&#x00A0;rightturn(90),&#x00A0;forward&#x00A0;a,&#x00A0;tree(a/2,b-1),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;back&#x00A0;a,&#x00A0;leftturn(45)}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;else&#x00A0;{x_coord,y_coord};&#x00A0;&#x00A0;&#x00A0;&#x00A0;%default:&#x00A0;Turtle&#x00A0;stays&#x00A0;still
+&#x00A0;<br />end;
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{home(),&#x00A0;tree(130,7)};
+</div>
+<!--l. 378--><p class="nopar" >
+<!--l. 381--><p class="center" ><img 
+src="manual593x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1287">
+%&#x00A0;(5)&#x00A0;&#x00A0;A&#x00A0;36-point&#x00A0;star.
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{home(),&#x00A0;for&#x00A0;i:=1:36&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{leftturn(10),&#x00A0;forward&#x00A0;100,&#x00A0;leftturn(10),&#x00A0;back&#x00A0;100}&#x00A0;};
+</div>
+<!--l. 390--><p class="nopar" >
+<!--l. 393--><p class="center" ><img 
+src="manual594x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1288">
+%&#x00A0;(6)&#x00A0;Draw&#x00A0;100&#x00A0;equilateral&#x00A0;triangles&#x00A0;with&#x00A0;the&#x00A0;leading&#x00A0;points
+&#x00A0;<br />%equally&#x00A0;spaced&#x00A0;on&#x00A0;a&#x00A0;circular&#x00A0;path.
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{home(),&#x00A0;for&#x00A0;i:=1:100&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{forward&#x00A0;150,&#x00A0;rightturn(60),&#x00A0;back(150),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rightturn(60),&#x00A0;forward&#x00A0;150,&#x00A0;setheading(i*3.6)}&#x00A0;};
+</div>
+<!--l. 404--><p class="nopar" >
+<!--l. 407--><p class="center" ><img 
+src="manual595x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1289">
+%&#x00A0;(7)&#x00A0;Two&#x00A0;or&#x00A0;more&#x00A0;graphs&#x00A0;can&#x00A0;be&#x00A0;drawn&#x00A0;together&#x00A0;(this&#x00A0;is&#x00A0;easier
+&#x00A0;<br />%if&#x00A0;the&#x00A0;graphs&#x00A0;are&#x00A0;named).&#x00A0;Here&#x00A0;we&#x00A0;show&#x00A0;graphs&#x00A0;2&#x00A0;and&#x00A0;6&#x00A0;on&#x00A0;top&#x00A0;of&#x00A0;one
+&#x00A0;<br />%another:
+&#x00A0;<br />
+&#x00A0;<br />gr2:={home(),&#x00A0;for&#x00A0;i:=1:12&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{leftturn(30),&#x00A0;for&#x00A0;j:=1:12&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{forward&#x00A0;40,&#x00A0;leftturn(30)}}&#x00A0;}$
+&#x00A0;<br />
+&#x00A0;<br />gr6:={home(),&#x00A0;for&#x00A0;i:=1:100&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{forward&#x00A0;150,&#x00A0;rightturn(60),&#x00A0;back(150),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rightturn(60),&#x00A0;forward&#x00A0;150,&#x00A0;setheading(i*3.6)}&#x00A0;}$
+&#x00A0;<br />
+&#x00A0;<br />draw&#x00A0;{gr2,&#x00A0;gr6};
+</div>
+<!--l. 425--><p class="nopar" >
+<!--l. 428--><p class="center" ><img 
+src="manual596x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1290">
+%&#x00A0;(8)&#x00A0;Example&#x00A0;7&#x00A0;could&#x00A0;have&#x00A0;been&#x00A0;tackled&#x00A0;another&#x00A0;way,&#x00A0;which&#x00A0;makes&#x00A0;use&#x00A0;of
+&#x00A0;<br />%the&#x00A0;fdraw&#x00A0;command.
+&#x00A0;<br />%By&#x00A0;inputting&#x00A0;gr2&#x00A0;and&#x00A0;gr6&#x00A0;as&#x00A0;procedures&#x00A0;into&#x00A0;reduce,&#x00A0;they&#x00A0;can&#x00A0;then&#x00A0;be
+&#x00A0;<br />%used&#x00A0;at&#x00A0;any&#x00A0;time&#x00A0;in&#x00A0;the&#x00A0;same&#x00A0;reduce&#x00A0;session&#x00A0;in&#x00A0;a&#x00A0;call&#x00A0;to&#x00A0;draw&#x00A0;and&#x00A0;even
+&#x00A0;<br />%fdraw.
+&#x00A0;<br />
+&#x00A0;<br />%First&#x00A0;save&#x00A0;the&#x00A0;procedures&#x00A0;in&#x00A0;a&#x00A0;file,&#x00A0;say&#x00A0;fxp&#x00A0;(fdraw&#x00A0;example&#x00A0;procedures):
+&#x00A0;<br />
+&#x00A0;<br />procedure&#x00A0;gr2;
+&#x00A0;<br />begin;
+&#x00A0;<br />&#x00A0;&#x00A0;return&#x00A0;{home,&#x00A0;for&#x00A0;i:=1:12&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{leftturn(30),&#x00A0;for&#x00A0;j:=1:12&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{forward&#x00A0;40,&#x00A0;leftturn(30)}}&#x00A0;};
+&#x00A0;<br />end;
+&#x00A0;<br />
+&#x00A0;<br />procedure&#x00A0;gr6;
+&#x00A0;<br />begin;
+&#x00A0;<br />&#x00A0;&#x00A0;return&#x00A0;{home(),&#x00A0;for&#x00A0;i:=1:100&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{forward&#x00A0;150,&#x00A0;rightturn(60),&#x00A0;back(150),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rightturn(60),&#x00A0;forward&#x00A0;150,&#x00A0;setheading(i*3.6)}&#x00A0;};
+&#x00A0;<br />end;
+&#x00A0;<br />
+&#x00A0;<br />%Then&#x00A0;create&#x00A0;another&#x00A0;file&#x00A0;where&#x00A0;the&#x00A0;functions&#x00A0;may&#x00A0;be&#x00A0;called&#x00A0;to&#x00A0;fdraw,
+&#x00A0;<br />%e.g.&#x00A0;fx:
+&#x00A0;<br />
+&#x00A0;<br />gr2
+&#x00A0;<br />gr6
+&#x00A0;<br />
+&#x00A0;<br />%Now&#x00A0;in&#x00A0;reduce,&#x00A0;after&#x00A0;loading&#x00A0;the&#x00A0;turtle&#x00A0;package&#x00A0;just&#x00A0;type&#x00A0;the&#x00A0;following:
+&#x00A0;<br />
+&#x00A0;<br />in&#x00A0;~fxp~;
+&#x00A0;<br />fdraw&#x00A0;&#8217;~fx~;
+&#x00A0;<br />
+&#x00A0;<br />%..and&#x00A0;the&#x00A0;graphs&#x00A0;will&#x00A0;appear.
+&#x00A0;<br />
+&#x00A0;<br />%This&#x00A0;method&#x00A0;is&#x00A0;useful&#x00A0;if&#x00A0;the&#x00A0;user&#x00A0;wants&#x00A0;to&#x00A0;define&#x00A0;many&#x00A0;of&#x00A0;their&#x00A0;own
+&#x00A0;<br />%functions,&#x00A0;and,&#x00A0;using&#x00A0;fdraw,&#x00A0;subtle&#x00A0;changes&#x00A0;can&#x00A0;be&#x00A0;made&#x00A0;quickly&#x00A0;without
+&#x00A0;<br />%having&#x00A0;to&#x00A0;type&#x00A0;out&#x00A0;the&#x00A0;whole&#x00A0;string&#x00A0;of&#x00A0;commands&#x00A0;to&#x00A0;plot&#x00A0;each&#x00A0;time.&#x00A0;It
+                                                                     
+
+                                                                     
+&#x00A0;<br />%is&#x00A0;particularly&#x00A0;useful&#x00A0;if&#x00A0;there&#x00A0;are&#x00A0;several&#x00A0;pictures&#x00A0;to&#x00A0;plot&#x00A0;at&#x00A0;once&#x00A0;and
+&#x00A0;<br />%it&#x00A0;is&#x00A0;an&#x00A0;easy&#x00A0;way&#x00A0;to&#x00A0;build&#x00A0;pictures&#x00A0;so&#x00A0;that&#x00A0;the&#x00A0;difference&#x00A0;an&#x00A0;extra
+&#x00A0;<br />%command&#x00A0;makes&#x00A0;to&#x00A0;the&#x00A0;overall&#x00A0;picture&#x00A0;can&#x00A0;be&#x00A0;clearly&#x00A0;seen.
+&#x00A0;<br />%(In&#x00A0;the&#x00A0;above&#x00A0;example,&#x00A0;the&#x00A0;file&#x00A0;called&#x00A0;to&#x00A0;fdraw&#x00A0;was&#x00A0;only&#x00A0;2&#x00A0;lines&#x00A0;long,
+&#x00A0;<br />%so&#x00A0;this&#x00A0;method&#x00A0;did&#x00A0;not&#x00A0;have&#x00A0;any&#x00A0;advantage&#x00A0;over&#x00A0;the&#x00A0;normal&#x00A0;draw&#x00A0;command.
+&#x00A0;<br />%However,&#x00A0;when&#x00A0;the&#x00A0;list&#x00A0;of&#x00A0;commands&#x00A0;is&#x00A0;longer&#x00A0;it&#x00A0;is&#x00A0;clearly&#x00A0;advantageous
+&#x00A0;<br />%to&#x00A0;use&#x00A0;fdraw)
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+<!--l. 480--><p class="nopar" >
+<!--l. 483--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.72.5    </span></span> <a 
+ id="x219-96100016.72.5"></a><span 
+class="ptmr8t-x-x-120">References</span></h4>
+<!--l. 485--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x219-961002x1"><span 
+class="ptmb8t-x-x-120">An Implementation of Turtle Graphics for Teaching Purposes</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Zoran I. Putnik &amp; Zoram d.Budimac</span>
+     </li>
+     <li 
+  class="enumerate" id="x219-961004x2"><span 
+class="ptmb8t-x-x-120">Mapletech - </span><span 
+class="ptmr8t-x-x-120">Maple in Mathematics and the Sciences,</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Special Issue 1994</span><br 
+class="newline" /><span 
+class="ptmb8t-x-x-120">An Implementation of &#8220;Turtle Graphics&#8221; in Maple V</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Eugenio Roanes Lozano &amp; Eugenio Roanes Macias</span>
+     </li></ol>
+<!--l. 1367--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1369--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse163.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse164.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse162.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse162.html#tailmanualse162.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse163.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse163.html"></a>   
+</body></html> 

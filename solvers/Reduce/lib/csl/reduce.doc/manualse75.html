@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>OUT Command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch12.html#manualse75.html" >Up</a></td><td class="clinks"><a 
+href="manualse76.html" >Next</a></td><td class="clinks"><a 
+href="manualse74.html" >Prev</a></td><td class="clinks"><a 
+href="manualse74.html#tailmanualse74.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse75.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">12.2    </span> <a 
+ id="x92-17600012.2"></a>OUT Command</h3>
+<a 
+ id="dx92-176001"></a>
+<!--l. 45--><p class="noindent" ><a 
+ id="command:OUT"></a> This command takes a single file name as argument, and directs output to that file
+from then on, until another <span 
+class="pcrr8t-x-x-109">OUT </span>changes the output file, or <span 
+class="pcrr8t-x-x-109">SHUT </span>closes it.
+Output can go to only one file at a time, although many can be open. If the
+file has previously been used for output during the current job, and not <span 
+class="pcrr8t-x-x-109">SHUT</span>,
+the new output is appended to the end of the file. Any existing file is erased
+before its first use for output in a job, or if it had been <span 
+class="pcrr8t-x-x-109">SHUT </span>before the new
+<span 
+class="pcrr8t-x-x-109">OUT</span>.
+<!--l. 55--><p class="noindent" >To output on the terminal without closing the output file, the reserved file name T (for
+terminal) may be used. For example, <span 
+class="pcrr8t-x-x-109">out ofile; </span>will direct output to the file <span 
+class="pcrr8t-x-x-109">OFILE</span>
+and <span 
+class="pcrr8t-x-x-109">out t; </span>will direct output to the user&#8217;s terminal.
+<!--l. 60--><p class="noindent" >The output sent to the file will be in the same form that it would have on the terminal. In
+particular <span 
+class="pcrr8t-x-x-109">x^2 </span>would appear on two lines, an <span 
+class="pcrr8t-x-x-109">X </span>on the lower line and a 2 on the line
+above. If the purpose of the output file is to save results to be read in later, this is not an
+appropriate form. We first must turn off the <span 
+class="pcrr8t-x-x-109">NAT </span>switch that specifies that output should
+be in standard mathematical notation.
+<!--l. 68--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example: </span>To create a file <span 
+class="pcrr8t-x-x-109">ABCD </span>from which it will be possible to read &#8211; using <span 
+class="pcrr8t-x-x-109">IN </span>&#8211; the
+value of the expression <span 
+class="pcrr8t-x-x-109">XYZ</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-344">
+&#x00A0;off&#x00A0;echo$&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;needed&#x00A0;if&#x00A0;your&#x00A0;input&#x00A0;is&#x00A0;from&#x00A0;a&#x00A0;file.
+&#x00A0;<br />&#x00A0;off&#x00A0;nat$&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;output&#x00A0;in&#x00A0;IN-readable&#x00A0;form.&#x00A0;Each&#x00A0;expression
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;printed&#x00A0;will&#x00A0;end&#x00A0;with&#x00A0;a&#x00A0;$&#x00A0;.
+&#x00A0;<br />&#x00A0;out&#x00A0;abcd$&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;output&#x00A0;to&#x00A0;new&#x00A0;file
+&#x00A0;<br />&#x00A0;linelength&#x00A0;72$&#x00A0;%&#x00A0;for&#x00A0;systems&#x00A0;with&#x00A0;fixed&#x00A0;input&#x00A0;line&#x00A0;length.
+&#x00A0;<br />&#x00A0;xyz:=xyz;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;will&#x00A0;output&#x00A0;~XYZ&#x00A0;:=&#x00A0;~&#x00A0;followed&#x00A0;by&#x00A0;the&#x00A0;value
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;of&#x00A0;XYZ
+&#x00A0;<br />&#x00A0;write&#x00A0;~;end~$&#x00A0;&#x00A0;%&#x00A0;standard&#x00A0;for&#x00A0;ending&#x00A0;files&#x00A0;for&#x00A0;IN
+&#x00A0;<br />&#x00A0;shut&#x00A0;abcd$&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;save&#x00A0;ABCD,&#x00A0;return&#x00A0;to&#x00A0;terminal&#x00A0;output
+&#x00A0;<br />&#x00A0;on&#x00A0;nat$&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;restore&#x00A0;usual&#x00A0;output&#x00A0;form
+</div>
+<!--l. 81--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 83--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch12.html#manualse75.html" >Up</a></td><td class="clinks"><a 
+href="manualse76.html" >Next</a></td><td class="clinks"><a 
+href="manualse74.html" >Prev</a></td><td class="clinks"><a 
+href="manualse74.html#tailmanualse74.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse75.html" >Front</a></td></tr></table><a 
+ id="tailmanualse75.html"></a>  
+</body></html> 

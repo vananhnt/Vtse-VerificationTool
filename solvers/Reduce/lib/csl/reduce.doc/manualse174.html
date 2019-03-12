@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>FOR EACH Statement</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse174.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse175.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse173.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse173.html#tailmanualse173.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse174.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">17.6    </span></span> <a 
+ id="x233-101600017.6"></a><span 
+class="ptmr8t-x-x-120">FOR EACH Statement</span></h3>
+<a 
+ id="dx233-1016001"></a>
+<a 
+ id="dx233-1016002"></a>
+<!--l. 192--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">FOR EACH </span><span 
+class="ptmr8t-x-x-120">form of the </span><span 
+class="pcrr8t-x-x-120">FOR </span><span 
+class="ptmr8t-x-x-120">statement, designed for iteration down a list, is</span>
+<span 
+class="ptmr8t-x-x-120">more general in symbolic mode. Its syntax is:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1363">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;FOR&#x00A0;EACH&#x00A0;ID:identifier&#x00A0;{IN|ON}&#x00A0;LST:list
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{DO|COLLECT|JOIN|PRODUCT|SUM}&#x00A0;EXPRN:S-expr
+</div>
+<!--l. 198--><p class="nopar" >
+<!--l. 200--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">As in algebraic mode, if the keyword </span><span 
+class="pcrr8t-x-x-120">IN </span><span 
+class="ptmr8t-x-x-120">is used, iteration is on each</span>
+<span 
+class="ptmr8t-x-x-120">element of the list. With </span><span 
+class="pcrr8t-x-x-120">ON</span><span 
+class="ptmr8t-x-x-120">, iteration is on the whole list remaining at each</span>
+<span 
+class="ptmr8t-x-x-120">point in the iteration. As a result, we have the following equivalence</span>
+<span 
+class="ptmr8t-x-x-120">between each form of </span><span 
+class="pcrr8t-x-x-120">FOR EACH </span><span 
+class="ptmr8t-x-x-120">and the various mapping functions in</span>
+<span 
+class="ptmr8t-x-x-120">Lisp:</span>
+<div class="center" 
+>
+<!--l. 205--><p class="noindent" >
+<!--l. 211--><p class="noindent" >
+<!--tex4ht:inline--><div class="tabular"> <table id="TBL-175" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-175-1g"><col 
+id="TBL-175-1"></colgroup><colgroup id="TBL-175-2g"><col 
+id="TBL-175-2"><col 
+id="TBL-175-3"><col 
+id="TBL-175-4"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-175-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-175-1-1"  
+class="td11"> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-175-1-2"  
+class="td11"><span 
+class="pcrr8t-x-x-120">DO  </span></td><td  style="white-space:nowrap; text-align:right;" id="TBL-175-1-3"  
+class="td11"><span 
+class="pcrr8t-x-x-120">COLLECT</span></td><td  style="white-space:nowrap; text-align:right;" id="TBL-175-1-4"  
+class="td11">  <span 
+class="pcrr8t-x-x-120">JOIN</span></td></tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-175-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-175-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-120">IN</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-175-2-2"  
+class="td11"><span 
+class="pcrr8t-x-x-120">MAPC</span></td><td  style="white-space:nowrap; text-align:right;" id="TBL-175-2-3"  
+class="td11"> <span 
+class="pcrr8t-x-x-120">MAPCAR</span></td><td  style="white-space:nowrap; text-align:right;" id="TBL-175-2-4"  
+class="td11"><span 
+class="pcrr8t-x-x-120">MAPCAN</span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-175-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-175-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-120">ON</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-175-3-2"  
+class="td11"><span 
+class="pcrr8t-x-x-120">MAP </span></td><td  style="white-space:nowrap; text-align:right;" id="TBL-175-3-3"  
+class="td11"><span 
+class="pcrr8t-x-x-120">MAPLIST</span></td><td  style="white-space:nowrap; text-align:right;" id="TBL-175-3-4"  
+class="td11"><span 
+class="pcrr8t-x-x-120">MAPCON</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-175-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-175-4-1"  
+class="td11">  </td>
+</tr></table></div></div>
+<!--l. 213--><p class="noindent" ><span 
+class="ptmri8t-x-x-120">Example: </span><span 
+class="ptmr8t-x-x-120">To list each element of the list </span><span 
+class="pcrr8t-x-x-120">(a b c)</span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1364">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;each&#x00A0;x&#x00A0;in&#x00A0;&#8217;(a&#x00A0;b&#x00A0;c)&#x00A0;collect&#x00A0;list&#x00A0;x;
+</div>
+<!--l. 216--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 218--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse174.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse175.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse173.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse173.html#tailmanualse173.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse174.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse174.html"></a>  
+</body></html> 

@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Mathematical Functions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse28.html" >Up</a></td><td class="clinks"><a 
+href="manualse29.html" >Next</a></td><td class="clinks"><a 
+href="manualse27.html" >Prev</a></td><td class="clinks"><a 
+href="manualse27.html#tailmanualse27.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse28.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.2    </span> <a 
+ id="x39-690007.2"></a>Mathematical Functions</h3>
+<!--l. 205--><p class="noindent" ><a 
+ id="operator:ACOS"></a> <a 
+ id="operator:ACOSH"></a> <a 
+ id="operator:ACOT"></a> <a 
+ id="operator:ACOTH"></a> <a 
+ id="operator:ACSC"></a> <a 
+ id="operator:ACSCH"></a> <a 
+ id="operator:AIRY_AI"></a> <a 
+ id="operator:AIRY_AIPRIME"></a> <a 
+ id="operator:AIRY_BI"></a> <a 
+ id="operator:AIRY_BIPRIME"></a> <a 
+ id="operator:ASEC"></a> <a 
+ id="operator:ASECH"></a> <a 
+ id="operator:ASIN"></a> <a 
+ id="operator:ASINH"></a> <a 
+ id="operator:ATAN"></a> <a 
+ id="operator:ATANH"></a> <a 
+ id="operator:ATAN2"></a> <a 
+ id="operator:BESSELI"></a> <a 
+ id="operator:BESSELJ"></a> <a 
+ id="operator:BESSELK"></a> <a 
+ id="operator:BESSELY"></a> <a 
+ id="operator:HANKEL1"></a> <a 
+ id="operator:HANKEL2"></a> <a 
+ id="operator:KUMMERM"></a> <a 
+ id="operator:KUMMERU"></a> <a 
+ id="operator:LOMMEL1"></a> <a 
+ id="operator:LOMMEL2"></a> <a 
+ id="operator:STRUVEH"></a> <a 
+ id="operator:STRUVEL"></a> <a 
+ id="operator:WHITTAKERM"></a> <a 
+ id="operator:WHITTAKERU"></a> <a 
+ id="operator:BETA"></a> <a 
+ id="operator:CI"></a> <a 
+ id="operator:COS"></a> <a 
+ id="operator:COSH"></a> <a 
+ id="operator:COT"></a> <a 
+ id="operator:COTH"></a> <a 
+ id="operator:CSC"></a> <a 
+ id="operator:CSCH"></a> <a 
+ id="operator:DILOG"></a> <a 
+ id="operator:EI"></a> <a 
+ id="operator:EXP"></a> <a 
+ id="operator:GAMMA"></a> <a 
+ id="operator:HYPOT"></a> <a 
+ id="operator:IBETA"></a> <a 
+ id="operator:IGAMMA"></a> <a 
+ id="operator:LERCH_PHI"></a> <a 
+ id="operator:LN"></a> <a 
+ id="operator:LOG"></a> <a 
+ id="operator:LOGB"></a> <a 
+ id="operator:LOG10"></a> <a 
+ id="operator:POCHHAMMER"></a> <a 
+ id="operator:POLYGAMMA"></a> <a 
+ id="operator:PSI"></a> <a 
+ id="operator:SEC"></a> <a 
+ id="operator:SECH"></a> <a 
+ id="operator:SI"></a> <a 
+ id="operator:SIN"></a> <a 
+ id="operator:SINH"></a> <a 
+ id="operator:SPHERICALHARMONICY"></a> <a 
+ id="operator:SOLIDHARMONICY"></a> <a 
+ id="operator:SQRT"></a> <a 
+ id="operator:TAN"></a> <a 
+ id="operator:TANH"></a> <a 
+ id="operator:ZETA"></a>
+<!--l. 271--><p class="noindent" >REDUCE knows that the following represent mathematical functions <a 
+ id="dx39-69001"></a>that can take
+arbitrary scalar expressions as their argument(s):
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-92">
+&#x00A0;&#x00A0;&#x00A0;ACOS&#x00A0;ACOSH&#x00A0;ACOT&#x00A0;ACOTH&#x00A0;ACSC&#x00A0;ACSCH&#x00A0;ASEC&#x00A0;ASECH&#x00A0;ASIN
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;ASINH&#x00A0;ATAN&#x00A0;ATANH&#x00A0;ATAN2&#x00A0;BETA&#x00A0;CI&#x00A0;COS&#x00A0;COSH&#x00A0;COT&#x00A0;COTH&#x00A0;CSC
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;CSCH&#x00A0;DILOG&#x00A0;EI&#x00A0;EXP&#x00A0;GAMMA&#x00A0;HYPOT&#x00A0;IBETA&#x00A0;IGAMMA&#x00A0;LN&#x00A0;LOG
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;LOGB&#x00A0;LOG10&#x00A0;SEC&#x00A0;SECH&#x00A0;SI&#x00A0;SIN&#x00A0;SINH&#x00A0;SQRT&#x00A0;TAN&#x00A0;TANH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;AIRY_AI&#x00A0;AIRY_AIPRIME&#x00A0;AIRY_BI&#x00A0;AIRY_BIPRIME
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;BESSELI&#x00A0;BESSELJ&#x00A0;BESSELK&#x00A0;BESSELY
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;HANKEL1&#x00A0;HANKEL2&#x00A0;KUMMERM&#x00A0;KUMMERU&#x00A0;LOMMEL1&#x00A0;LOMMEL2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;STRUVEH&#x00A0;STRUVEL&#x00A0;WHITTAKERM&#x00A0;WHITTAKERU
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;POLYGAMMA&#x00A0;PSI&#x00A0;ZETA
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;SOLIDHARMONICY&#x00A0;SPHERICALHARMONICY
+</div>
+<!--l. 285--><p class="nopar" > <a 
+ id="dx39-69002"></a><a 
+ id="dx39-69003"></a><a 
+ id="dx39-69004"></a> <a 
+ id="dx39-69005"></a><a 
+ id="dx39-69006"></a><a 
+ id="dx39-69007"></a> <a 
+ id="dx39-69008"></a><a 
+ id="dx39-69009"></a> <a 
+ id="dx39-69010"></a><a 
+ id="dx39-69011"></a> <a 
+ id="dx39-69012"></a><a 
+ id="dx39-69013"></a><a 
+ id="dx39-69014"></a> <a 
+ id="dx39-69015"></a><a 
+ id="dx39-69016"></a><a 
+ id="dx39-69017"></a><a 
+ id="dx39-69018"></a> <a 
+ id="dx39-69019"></a><a 
+ id="dx39-69020"></a><a 
+ id="dx39-69021"></a><a 
+ id="dx39-69022"></a> <a 
+ id="dx39-69023"></a><a 
+ id="dx39-69024"></a><a 
+ id="dx39-69025"></a> <a 
+ id="dx39-69026"></a><a 
+ id="dx39-69027"></a><a 
+ id="dx39-69028"></a><a 
+ id="dx39-69029"></a> <a 
+ id="dx39-69030"></a><a 
+ id="dx39-69031"></a><a 
+ id="dx39-69032"></a><a 
+ id="dx39-69033"></a><a 
+ id="dx39-69034"></a> <a 
+ id="dx39-69035"></a><a 
+ id="dx39-69036"></a> <a 
+ id="dx39-69037"></a><a 
+ id="dx39-69038"></a> <a 
+ id="dx39-69039"></a><a 
+ id="dx39-69040"></a> <a 
+ id="dx39-69041"></a><a 
+ id="dx39-69042"></a> <a 
+ id="dx39-69043"></a><a 
+ id="dx39-69044"></a> <a 
+ id="dx39-69045"></a><a 
+ id="dx39-69046"></a><a 
+ id="dx39-69047"></a><a 
+ id="dx39-69048"></a><a 
+ id="dx39-69049"></a><a 
+ id="dx39-69050"></a><a 
+ id="dx39-69051"></a> <a 
+ id="dx39-69052"></a><a 
+ id="dx39-69053"></a><a 
+ id="dx39-69054"></a> <a 
+ id="dx39-69055"></a><a 
+ id="dx39-69056"></a><a 
+ id="dx39-69057"></a><a 
+ id="dx39-69058"></a> <a 
+ id="dx39-69059"></a><a 
+ id="dx39-69060"></a><a 
+ id="dx39-69061"></a><a 
+ id="dx39-69062"></a> <a 
+ id="dx39-69063"></a> where <span 
+class="pcrr8t-x-x-109">LOG </span>is the natural logarithm (and equivalent to <span 
+class="pcrr8t-x-x-109">LN</span>), and <span 
+class="pcrr8t-x-x-109">LOGB </span>has
+two arguments of which the second is the logarithmic base.
+<!--l. 309--><p class="noindent" >The derivatives of all these functions are also known to the system.
+<!--l. 311--><p class="noindent" >REDUCE knows various elementary identities and properties of these functions. For
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-93">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(-x)&#x00A0;=&#x00A0;cos(x)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sin(-x)&#x00A0;=&#x00A0;-&#x00A0;sin&#x00A0;(x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(n*pi)&#x00A0;=&#x00A0;(-1)^n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sin(n*pi)&#x00A0;=&#x00A0;0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;log(e)&#x00A0;&#x00A0;=&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e^(i*pi/2)&#x00A0;=&#x00A0;i
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;log(1)&#x00A0;&#x00A0;=&#x00A0;0&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e^(i*pi)&#x00A0;=&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;log(e^x)&#x00A0;=&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e^(3*i*pi/2)&#x00A0;=&#x00A0;-i
+</div>
+<!--l. 319--><p class="nopar" >
+<!--l. 321--><p class="noindent" >Beside these identities, there are a lot of simplifications for elementary functions defined
+in the REDUCE system as rulelists. In order to view these, the SHOWRULES operator
+can be used, e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-94">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SHOWRULES&#x00A0;tan;
+&#x00A0;<br />
+&#x00A0;<br />{tan(~n*arbint(~i)*pi&#x00A0;+&#x00A0;~~x)&#x00A0;=&#x003E;&#x00A0;tan(x)&#x00A0;when&#x00A0;fixp(n),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;tan(~x)&#x00A0;=&#x003E;&#x00A0;trigquot(sin(x),cos(x))&#x00A0;when&#x00A0;knowledge_about(sin,x,tan),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~x&#x00A0;+&#x00A0;~~k*pi&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+&#x00A0;<br />&#x00A0;tan(-------------)&#x00A0;=&#x003E;&#x00A0;&#x00A0;-&#x00A0;cot(---&#x00A0;+&#x00A0;i*pi*impart(---))&#x00A0;when&#x00A0;abs(repart(---))=---,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~~d&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~~w&#x00A0;+&#x00A0;~~k*pi&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k
+&#x00A0;<br />&#x00A0;tan(--------------)&#x00A0;=&#x003E;&#x00A0;tan(---&#x00A0;+&#x00A0;(---&#x00A0;-&#x00A0;fix(repart(---)))*pi)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;~~d&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k
+&#x00A0;<br />&#x00A0;&#x00A0;when&#x00A0;((ratnump(rp)&#x00A0;and&#x00A0;abs(rp)&#x003E;=1)&#x00A0;where&#x00A0;rp&#x00A0;=&#x003E;&#x00A0;repart(---)),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;d
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;tan(atan(~x))&#x00A0;=&#x003E;&#x00A0;x,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;df(tan(~x),~x)&#x00A0;=&#x003E;&#x00A0;1&#x00A0;+&#x00A0;tan(x)&#x00A0;}
+&#x00A0;<br />
+</div>
+<!--l. 350--><p class="nopar" >
+<!--l. 352--><p class="noindent" >For further simplification, especially of expressions involving trigonometric functions,
+see the TRIGSIMP<a 
+ id="dx39-69064"></a><a 
+ id="dx39-69065"></a> package (chapter&#x00A0;<a 
+href="manualse162.html#x218-94400016.71">16.71<!--tex4ht:ref: TRIGSIMP --></a>) documentation.
+<!--l. 356--><p class="noindent" >Functions not listed above may be defined in the special functions package
+SPECFN<a 
+ id="dx39-69066"></a>.
+<!--l. 359--><p class="noindent" >The user can add further rules for the reduction of expressions involving these operators
+by using the <span 
+class="pcrr8t-x-x-109">LET</span><a 
+ id="dx39-69067"></a> command.
+<!--l. 367--><p class="noindent" ><a 
+ id="switch:COMBINELOGS"></a> <a 
+ id="switch:EXPANDLOGS"></a> In many cases it is desirable to expand product arguments of logarithms, or collect a
+sum of logarithms into a single logarithm. Since these are inverse operations, it is not
+possible to provide rules for doing both at the same time and preserve the REDUCE
+concept of idempotent evaluation. As an alternative, REDUCE provides two
+switches <span 
+class="pcrr8t-x-x-109">EXPANDLOGS</span><a 
+ id="dx39-69068"></a><a 
+ id="dx39-69069"></a><a 
+ id="dx39-69070"></a> and <span 
+class="pcrr8t-x-x-109">COMBINELOGS</span><a 
+ id="dx39-69071"></a><a 
+ id="dx39-69072"></a><a 
+ id="dx39-69073"></a> to carry out these operations.
+Both are off by default, and are subject to the value of the switch <span 
+class="pcrr8t-x-x-109">PRECISE</span><a 
+ id="dx39-69074"></a><a 
+ id="dx39-69075"></a><a 
+ id="dx39-69076"></a>.
+                                                                     
+
+                                                                     
+This switch is on by default and prevents modifications that may be false in
+a complex domain. Thus to expand <span 
+class="pcrr8t-x-x-109">LOG(3*Y) </span>into a sum of logs, one can
+say
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-95">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ON&#x00A0;EXPANDLOGS;&#x00A0;LOG(3*Y);
+</div>
+<!--l. 381--><p class="nopar" > whereas to expand <span 
+class="pcrr8t-x-x-109">LOG(X*Y) </span>into a sum of logs, one needs to say
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-96">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;OFF&#x00A0;PRECISE;&#x00A0;ON&#x00A0;EXPANDLOGS;&#x00A0;LOG(X*Y);
+</div>
+<!--l. 385--><p class="nopar" > To combine this sum into a single log:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-97">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;OFF&#x00A0;PRECISE;&#x00A0;ON&#x00A0;COMBINELOGS;&#x00A0;LOG(X)&#x00A0;+&#x00A0;LOG(Y);
+</div>
+<!--l. 389--><p class="nopar" >
+<!--l. 391--><p class="noindent" >These switches affect the logarithmic functions LOG10 (base 10) and LOGB (arbitrary
+base) as well.
+<!--l. 394--><p class="noindent" >At the present time, it is possible to have both switches on at once, which could lead to
+infinite recursion. However, an expression is switched from one form to the other in this
+case. Users should not rely on this behavior, since it may change in the next
+release.
+<!--l. 399--><p class="noindent" ><a 
+ id="switch:COMBINEEXPT"></a> The current version of REDUCE does a poor job of simplifying surds. In particular,
+expressions involving the product of variables raised to non-integer powers do not
+usually have their powers combined internally, even though they are printed as if those
+powers were combined. For example, the expression
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-98">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x^(1/3)*x^(1/6);
+</div>
+<!--l. 407--><p class="nopar" > will print as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-99">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SQRT(X)
+</div>
+<!--l. 411--><p class="nopar" > but will have an internal form containing the two exponentiated terms. If you now
+subtract <span 
+class="pcrr8t-x-x-109">sqrt(x) </span>from this expression, you will <span 
+class="ptmri8t-x-x-109">not </span>get zero. Instead, the confusing
+form
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-100">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SQRT(X)&#x00A0;-&#x00A0;SQRT(X)
+</div>
+<!--l. 417--><p class="nopar" > will result. To combine such exponentiated terms, the switch <span 
+class="pcrr8t-x-x-109">COMBINEEXPT</span><a 
+ id="dx39-69077"></a><a 
+ id="dx39-69078"></a><a 
+ id="dx39-69079"></a> should be
+turned on.
+<!--l. 421--><p class="noindent" >The square root function can be input using the name <span 
+class="pcrr8t-x-x-109">SQRT</span>, or the power operation
+<span 
+class="pcrr8t-x-x-109">^(1/2)</span>. On output, unsimplified square roots are normally represented by the operator
+<span 
+class="pcrr8t-x-x-109">SQRT </span>rather than a fractional power. With the default system switch settings, the
+argument of a square root is first simplified, and any divisors of the expression that are
+perfect squares taken outside the square root argument. The remaining expression is left
+under the square root. Thus the expression
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-101">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sqrt(-8a^2*b)
+&#x00A0;<br />&#x00A0;
+</div>
+<!--l. 435--><p class="nopar" > becomes
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-102">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*a*sqrt(-2*b).
+</div>
+<!--l. 439--><p class="nopar" >
+<!--l. 447--><p class="noindent" ><a 
+ id="switch:PRECISE"></a> Note that such simplifications can cause trouble if <span 
+class="pcrr8t-x-x-109">A </span>is eventually given a value that is a
+negative number. If it is important that the positive property of the square root and higher
+even roots always be preserved, the switch <span 
+class="pcrr8t-x-x-109">PRECISE</span><a 
+ id="dx39-69080"></a><a 
+ id="dx39-69081"></a><a 
+ id="dx39-69082"></a> should be set on (the default
+value). This causes any non-numerical factors taken out of surds to be represented by
+their absolute value form. With <span 
+class="pcrr8t-x-x-109">PRECISE </span>on then, the above example would
+become
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-103">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*abs(a)*sqrt(-2*b).
+</div>
+<!--l. 459--><p class="nopar" >
+<!--l. 461--><p class="noindent" ><a 
+ id="switch:PRECISE_COMPLEX"></a> However, this is incorrect in the complex domain, where the <img 
+src="manual4x.png" alt="&#x221A; ---
+  x2"  class="sqrt" > is not identical to <span 
+class="cmsy-10x-x-109">|</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmsy-10x-x-109">|</span>.
+To avoid the above simplification, the switch <span 
+class="pcrr8t-x-x-109">PRECISE_COMPLEX</span><a 
+ id="dx39-69083"></a><a 
+ id="dx39-69084"></a><a 
+ id="dx39-69085"></a> should be set on
+(default is off). For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-104">
+on&#x00A0;precise_complex;&#x00A0;sqrt(-8a^2*b);
+</div>
+<!--l. 469--><p class="nopar" > yields the output
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-105">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />2*sqrt(&#x00A0;-&#x00A0;2*a&#x00A0;*b)
+</div>
+<!--l. 474--><p class="nopar" >
+<!--l. 476--><p class="noindent" >The statement that REDUCE knows very little about these functions applies only in the
+mathematically exact <span 
+class="pcrr8t-x-x-109">off rounded </span>mode. If <span 
+class="pcrr8t-x-x-109">ROUNDED</span><a 
+ id="dx39-69086"></a><a 
+ id="dx39-69087"></a><a 
+ id="dx39-69088"></a> is on, any of the
+functions
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-106">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;ACOS&#x00A0;ACOSH&#x00A0;ACOT&#x00A0;ACOTH&#x00A0;ACSC&#x00A0;ACSCH&#x00A0;ASEC&#x00A0;ASECH&#x00A0;ASIN
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ASINH&#x00A0;ATAN&#x00A0;ATANH&#x00A0;ATAN2&#x00A0;COS&#x00A0;COSH&#x00A0;COT&#x00A0;COTH&#x00A0;CSC&#x00A0;CSCH
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;EXP&#x00A0;HYPOT&#x00A0;IBETA&#x00A0;IGAMMA&#x00A0;LN&#x00A0;LOG&#x00A0;LOGB&#x00A0;LOG10&#x00A0;PSI&#x00A0;SEC
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;SECH&#x00A0;SIN&#x00A0;SINH&#x00A0;SQRT&#x00A0;TAN&#x00A0;TANH
+</div>
+<!--l. 484--><p class="nopar" > <a 
+ id="dx39-69089"></a><a 
+ id="dx39-69090"></a><a 
+ id="dx39-69091"></a><a 
+ id="dx39-69092"></a> <a 
+ id="dx39-69093"></a><a 
+ id="dx39-69094"></a><a 
+ id="dx39-69095"></a><a 
+ id="dx39-69096"></a> <a 
+ id="dx39-69097"></a><a 
+ id="dx39-69098"></a><a 
+ id="dx39-69099"></a><a 
+ id="dx39-69100"></a> <a 
+ id="dx39-69101"></a><a 
+ id="dx39-69102"></a><a 
+ id="dx39-69103"></a><a 
+ id="dx39-69104"></a> <a 
+ id="dx39-69105"></a><a 
+ id="dx39-69106"></a><a 
+ id="dx39-69107"></a><a 
+ id="dx39-69108"></a><a 
+ id="dx39-69109"></a> <a 
+ id="dx39-69110"></a><a 
+ id="dx39-69111"></a><a 
+ id="dx39-69112"></a><a 
+ id="dx39-69113"></a><a 
+ id="dx39-69114"></a><a 
+ id="dx39-69115"></a> <a 
+ id="dx39-69116"></a><a 
+ id="dx39-69117"></a><a 
+ id="dx39-69118"></a><a 
+ id="dx39-69119"></a><a 
+ id="dx39-69120"></a> <a 
+ id="dx39-69121"></a> when given a numerical argument has its value calculated to the current degree of
+floating point precision. In addition, real (non-integer valued) powers of numbers will
+also be evaluated.
+<!--l. 497--><p class="noindent" >If the <span 
+class="pcrr8t-x-x-109">COMPLEX</span><a 
+ id="dx39-69122"></a><a 
+ id="dx39-69123"></a><a 
+ id="dx39-69124"></a> switch is turned on in addition to <span 
+class="pcrr8t-x-x-109">ROUNDED</span>, these functions will also
+calculate a real or complex result, again to the current degree of floating point precision,
+if given complex arguments. For example, with <span 
+class="pcrr8t-x-x-109">on rounded,complex;</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-107">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;2.3^(5.6i)&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-0.0480793490914&#x00A0;-&#x00A0;0.998843519372*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(2+3i)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-4.18962569097&#x00A0;-&#x00A0;9.10922789376*I
+</div>
+<!--l. 504--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 506--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse28.html" >Up</a></td><td class="clinks"><a 
+href="manualse29.html" >Next</a></td><td class="clinks"><a 
+href="manualse27.html" >Prev</a></td><td class="clinks"><a 
+href="manualse27.html#tailmanualse27.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse28.html" >Front</a></td></tr></table><a 
+ id="tailmanualse28.html"></a>  
+</body></html> 

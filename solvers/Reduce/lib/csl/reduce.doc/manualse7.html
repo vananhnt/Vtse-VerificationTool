@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Operators</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch2.html#manualse7.html" >Up</a></td><td class="clinks"><a 
+href="manualse6.html" >Prev</a></td><td class="clinks"><a 
+href="manualse6.html#tailmanualse6.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse7.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">2.7    </span> <a 
+ id="x13-140002.7"></a>Operators</h3>
+<!--l. 311--><p class="noindent" >Operators<a 
+ id="dx13-14001"></a> in REDUCE are specified by name and type. There are two types, infix<a 
+ id="dx13-14002"></a> and
+prefix. <a 
+ id="dx13-14003"></a>Operators can be purely abstract, just symbols with no properties; they can have
+values assigned (using <span 
+class="pcrr8t-x-x-109">:= </span>or simple <span 
+class="pcrr8t-x-x-109">LET </span>declarations) for specific arguments; they
+can have properties declared for some collection of arguments (using more
+general <span 
+class="pcrr8t-x-x-109">LET </span>declarations); or they can be fully defined (usually by a procedure
+declaration).
+<!--l. 320--><p class="noindent" >Infix operators<a 
+ id="dx13-14004"></a> have a definite precedence with respect to one another, and normally
+occur between their arguments. For example:
+     <div class="quote">
+     <div class="tabular"> <table id="TBL-1" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-1-1g"><col 
+id="TBL-1-1"><col 
+id="TBL-1-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-1-1-"><td  style="white-space:wrap; text-align:left;" id="TBL-1-1-1"  
+class="td11"><!--l. 325--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">a + b - c</span>        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-1-2"  
+class="td11">(spaces optional)                      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-2-"><td  style="white-space:wrap; text-align:left;" id="TBL-1-2-1"  
+class="td11"><!--l. 326--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">x&#x003C;y and y=z</span>       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-2-2"  
+class="td11">(spaces required where shown)</td></tr></table>
+     </div></div>
+<!--l. 329--><p class="noindent" >Spaces can be freely inserted between operators and variables or operators and operators.
+They are required only where operator names are spelled out with letters (such as the
+<span 
+class="pcrr8t-x-x-109">AND </span>in the example) and must be unambiguously separated from another such or
+from a variable (like <span 
+class="pcrr8t-x-x-109">Y</span>). Wherever one space can be used, so can any larger
+number.
+<!--l. 335--><p class="noindent" >Prefix operators occur to the left of their arguments, which are written as a list enclosed
+in parentheses and separated by commas, as with normal mathematical functions,
+e.g.,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-23">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(u)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;df(x^2,x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;q(v+w)
+</div>
+<!--l. 342--><p class="nopar" > Unmatched parentheses, incorrect groupings of infix operators <a 
+ id="dx13-14005"></a>and the like, naturally
+lead to syntax errors. The parentheses can be omitted (replaced by a space following the
+operator<a 
+ id="dx13-14006"></a> name) if the operator is unary and the argument is a single symbol or begins
+with a prefix operator name:
+<!--l. 349--><p class="noindent" >
+     <div class="quote">
+     <div class="tabular"> <table id="TBL-2" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"><col 
+id="TBL-2-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:wrap; text-align:left;" id="TBL-2-1-1"  
+class="td11"><!--l. 351--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">cos y</span>            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-1-2"  
+class="td11">means cos(y)                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:wrap; text-align:left;" id="TBL-2-2-1"  
+class="td11"><!--l. 352--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">cos (-y)</span>          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-2-2"  
+class="td11">&#8211; parentheses necessary</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:wrap; text-align:left;" id="TBL-2-3-1"  
+class="td11"><!--l. 353--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">log cos y</span>         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-3-2"  
+class="td11">means log(cos(y))         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:wrap; text-align:left;" id="TBL-2-4-1"  
+class="td11"><!--l. 354--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">log cos (a+b)</span>     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-2-4-2"  
+class="td11">means log(cos(a+b))     </td></tr></table>
+     </div></div>
+<!--l. 357--><p class="noindent" >but
+     <div class="quote">
+     <div class="tabular"> <table id="TBL-3" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1"><col 
+id="TBL-3-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td  style="white-space:wrap; text-align:left;" id="TBL-3-1-1"  
+class="td11"><!--l. 360--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">cos a*b</span>          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-1-2"  
+class="td11">means (cos a)*b                            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:wrap; text-align:left;" id="TBL-3-2-1"  
+class="td11"><!--l. 361--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">cos -y</span>            </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-2-2"  
+class="td11">is erroneous (treated as a variable</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:wrap; text-align:left;" id="TBL-3-3-1"  
+class="td11"><!--l. 362--><p class="noindent" >                  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-3-3-2"  
+class="td11">&#8220;<span 
+class="pcrr8t-x-x-109">cos</span>&#8221; minus the variable <span 
+class="pcrr8t-x-x-109">y</span>)        </td></tr></table>
+     </div></div>
+<!--l. 365--><p class="noindent" >A unary prefix operator<a 
+ id="dx13-14007"></a><a 
+ id="dx13-14008"></a> <a 
+ id="dx13-14009"></a>has a precedence <a 
+ id="dx13-14010"></a>higher than any infix operator, including unary
+infix operators. <a 
+ id="dx13-14011"></a><a 
+ id="dx13-14012"></a> In other words, REDUCE will always interpret <span 
+class="pcrr8t-x-x-109">cos</span><span 
+class="pcrr8t-x-x-109">&#x00A0;y + 3 </span>as
+<span 
+class="pcrr8t-x-x-109">(cos</span><span 
+class="pcrr8t-x-x-109">&#x00A0;y) + 3 </span>rather than as <span 
+class="pcrr8t-x-x-109">cos(y + 3)</span>.
+<!--l. 373--><p class="noindent" >Infix operators may also be used in a prefix format on input, e.g., <span 
+class="pcrr8t-x-x-109">+(a,b,c)</span>. On output,
+however, such expressions will always be printed in infix form (i.e., <span 
+class="pcrr8t-x-x-109">a + b + c </span>for this
+example).
+<!--l. 377--><p class="noindent" >A number of prefix operators are built into the system with predefined properties. Users
+may also add new operators and define their rules for simplification. The built in
+operators are described in another section.
+<!--l. 381--><p class="noindent" >
+                                                                     
+
+                                                                     
+<h4 class="likesubsectionHead"><a 
+ id="x13-150002.7"></a>Built-In Infix Operators</h4>
+<!--l. 382--><p class="noindent" ><a 
+ id="operator:MEMBER"></a> <a 
+ id="operator:MEMQ"></a> <a 
+ id="operator:EQ"></a> <a 
+ id="operator:NEQ"></a> <a 
+ id="reserved:plusop"></a> <a 
+ id="reserved:minusop"></a> <a 
+ id="reserved:timesop"></a> <a 
+ id="reserved:quotientop"></a> <a 
+ id="reserved:caretop"></a> <a 
+ id="reserved:exptop"></a> <a 
+ id="reserved:greaterop"></a> <a 
+ id="reserved:lessop"></a> <a 
+ id="reserved:geqop"></a> <a 
+ id="reserved:leqop"></a> <a 
+ id="reserved:equalop"></a>
+<!--l. 398--><p class="noindent" >The following infix operators<a 
+ id="dx13-15001"></a> are built into the system. They are all defined internally as
+procedures.
+  <div class="syntax">
+  <div class="array"> <table id="TBL-4" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-4-1g"><col 
+id="TBL-4-1"><col 
+id="TBL-4-2"><col 
+id="TBL-4-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">infix operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">where</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">:=</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">or</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">and</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">member</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">memq</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11">           </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11">  </div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">=</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">neq</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">eq</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003E;=</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003E;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003C;=</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003C;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span>       </div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11">           </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11">  </div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">+</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">-</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">*</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">/</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">^</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">**</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">.</span>              </div></td></tr></table>           </div></div>
+<!--l. 409--><p class="noindent" >These operators may be further divided into the following subclasses:
+  <div class="syntax">
+  <div class="array"> <table id="TBL-5" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-5-1g"><col 
+id="TBL-5-1"><col 
+id="TBL-5-2"><col 
+id="TBL-5-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">assignment operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">:=</span>              </div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">logical operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>   </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">or</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">and</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">member</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">memq</span></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">relational operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">=</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">neq</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">eq</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003E;=</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003E;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003C;=</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">&#x003C;</span>  </div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">substitution operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">where</span>           </div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">arithmetic operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">+</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">-</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">*</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">/</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">^</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">**</span>       </div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">construction operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">.</span>               </div></td></tr></table>              </div></div>
+<!--l. 421--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">MEMQ </span>and <span 
+class="pcrr8t-x-x-109">EQ </span>are not used in the algebraic mode of REDUCE. They are explained in the
+section on symbolic mode. <span 
+class="pcrr8t-x-x-109">WHERE </span>is described in the section on substitutions.
+<!--l. 425--><p class="noindent" >In previous versions of REDUCE, <span 
+class="ptmri8t-x-x-109">not </span>was also defined as an infix operator.
+In the present version it is a regular prefix operator, and interchangeable with
+<span 
+class="ptmri8t-x-x-109">null</span>.
+<!--l. 429--><p class="noindent" >For compatibility with the intermediate language used by REDUCE, each special
+character infix operator<a 
+ id="dx13-15002"></a> has an alternative alphanumeric identifier associated with it.
+These identifiers may be used interchangeably with the corresponding special character
+names on input. This correspondence is as follows: <a 
+ id="operator:EQUAL"></a><a 
+ id="operator:GEQ"></a><a 
+ id="operator:GREATERP"></a><a 
+ id="operator:LEQ"></a><a 
+ id="operator:LESSP"></a><a 
+ id="operator:PLUS"></a><a 
+ id="operator:DIFFERENCE"></a><a 
+ id="operator:MINUS"></a><a 
+ id="operator:TIMES"></a><a 
+ id="operator:QUOTIENT"></a><a 
+ id="operator:RECIP"></a><a 
+ id="operator:EXPT"></a>
+     <div class="quote">
+     <div class="tabular"> <table id="TBL-6" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-6-1g"><col 
+id="TBL-6-1"><col 
+id="TBL-6-2"><col 
+id="TBL-6-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-6-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">:=     </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">setq      </span>&#x00A0;&#x00A0;&#x00A0;             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-3"  
+class="td01">(the assignment operator)</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">=      </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">equal     </span>&#x00A0;&#x00A0;&#x00A0;             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">&#x003E;=     </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">geq       </span>&#x00A0;&#x00A0;&#x00A0;             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">&#x003E;      </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">greaterp  </span>&#x00A0;&#x00A0;&#x00A0;             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">&#x003C;=     </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">leq       </span>&#x00A0;&#x00A0;&#x00A0;             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">&#x003C;      </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">lessp     </span>&#x00A0;&#x00A0;&#x00A0;             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-7-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">+      </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-7-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">plus      </span>&#x00A0;&#x00A0;&#x00A0;             </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-8-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">-      </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-8-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">difference</span>&#x00A0;&#x00A0;&#x00A0;             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-8-3"  
+class="td01">(if unary, <span 
+class="pcrr8t-x-x-109">minus</span>)            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-9-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">*      </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-9-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">times     </span>&#x00A0;&#x00A0;&#x00A0;             </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-10-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">/ </span>&#x00A0;&#x00A0; </td> <td  style="white-space:nowrap; text-align:left;" id="TBL-6-10-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">quotient </span>&#x00A0;&#x00A0;&#x00A0;</td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-10-3"  
+class="td01">(if unary, <span 
+class="pcrr8t-x-x-109">recip</span>)            </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-11-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">^ or **</span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-11-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">expt      </span>&#x00A0;&#x00A0;&#x00A0;             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-11-3"  
+class="td01">(raising to a power)          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-12-1"  
+class="td10"><span 
+class="pcrr8t-x-x-109">.      </span>&#x00A0;&#x00A0;           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-12-2"  
+class="td00"><span 
+class="pcrr8t-x-x-109">cons      </span>&#x00A0;&#x00A0;&#x00A0;             </td></tr></table>
+     </div></div>
+<!--l. 462--><p class="noindent" >Note: <span 
+class="pcrr8t-x-x-109">NEQ </span>is used to mean <span 
+class="ptmri8t-x-x-109">not equal</span>. There is no special symbol provided for
+it.
+                                                                     
+
+                                                                     
+<!--l. 465--><p class="noindent" >The above operators<a 
+ id="dx13-15003"></a> are binary, except <span 
+class="pcrr8t-x-x-109">NOT </span>which is unary and <span 
+class="pcrr8t-x-x-109">+ </span>and <span 
+class="pcrr8t-x-x-109">* </span>which are nary
+(i.e., taking an arbitrary number of arguments). In addition, <span 
+class="pcrr8t-x-x-109">- </span>and <span 
+class="pcrr8t-x-x-109">/ </span>may be used as
+unary operators, e.g., /2 means the same as 1/2. Any other operator is parsed as a binary
+operator using a left association rule. Thus <span 
+class="pcrr8t-x-x-109">a/b/c </span>is interpreted as <span 
+class="pcrr8t-x-x-109">(a/b)/c</span>. There are
+two exceptions to this rule: <span 
+class="pcrr8t-x-x-109">:= </span>and <span 
+class="pcrr8t-x-x-109">. </span>are right associative. Example: <span 
+class="pcrr8t-x-x-109">a:=b:=c </span>is
+interpreted as <span 
+class="pcrr8t-x-x-109">a:=(b:=c)</span>. Unlike ALGOL and PASCAL, <span 
+class="pcrr8t-x-x-109">^ </span>is left associative. In other
+words, <span 
+class="pcrr8t-x-x-109">a^b^c </span>is interpreted as <span 
+class="pcrr8t-x-x-109">(a^b)^c</span>.
+<!--l. 478--><p class="noindent" >The operators<a 
+ id="dx13-15004"></a> <span 
+class="pcrr8t-x-x-109">&#x003C;</span>, <span 
+class="pcrr8t-x-x-109">&#x003C;=</span>, <span 
+class="pcrr8t-x-x-109">&#x003E;</span>, <span 
+class="pcrr8t-x-x-109">&#x003E;= </span>can only be used for making comparisons between numbers.
+No meaning is currently assigned to this kind of comparison between general
+expressions. <a 
+ id="dx13-15005"></a> <a 
+ id="dx13-15006"></a> <a 
+ id="dx13-15007"></a><a 
+ id="dx13-15008"></a>
+<!--l. 485--><p class="noindent" >Parentheses may be used to specify the order of combination. If parentheses are omitted
+then this order is by the ordering of the precedence list<a 
+ id="dx13-15009"></a> defined by the right-hand side of
+the <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">infix operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><a 
+ id="dx13-15010"></a> table at the beginning of this section, from lowest to highest. In
+other words, <span 
+class="pcrr8t-x-x-109">WHERE </span>has the lowest precedence, and <span 
+class="pcrr8t-x-x-109">. </span>(the dot operator) the
+highest.
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch2.html#manualse7.html" >Up</a></td><td class="clinks"><a 
+href="manualse6.html" >Prev</a></td><td class="clinks"><a 
+href="manualse6.html#tailmanualse6.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse7.html" >Front</a></td></tr></table><a 
+ id="tailmanualse7.html"></a>   
+</body></html> 

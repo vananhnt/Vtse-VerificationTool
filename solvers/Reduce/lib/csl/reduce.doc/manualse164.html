@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>WU: Wu algorithm for polynomial systems</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse164.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse165.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse163.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse163.html#tailmanualse163.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse164.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.73    </span></span> <a 
+ id="x220-96200016.73"></a><span 
+class="ptmr8t-x-x-120">WU: Wu algorithm for polynomial systems</span></h3>
+<a 
+ id="dx220-962001"></a>
+<a 
+ id="dx220-962002"></a>
+<!--l. 1372--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This is a simple implementation of the Wu algorithm implemented</span>
+<span 
+class="ptmr8t-x-x-120">in REDUCE working directly from &#8220;A Zero Structure Theorem for</span>
+<span 
+class="ptmr8t-x-x-120">Polynomial-Equations-Solving,&#8221; Wu Wen-tsun, Institute of Systems Science,</span>
+<span 
+class="ptmr8t-x-x-120">Academia Sinica, Beijing.</span>
+<!--l. 1377--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Russell Bradford.</span>
+<!--l. 7--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Its purpose was to aid my understanding of the algorithm, so the code is simple,</span>
+<span 
+class="ptmr8t-x-x-120">and has a lot of tracing included. This is a working implementation, but there is</span>
+<span 
+class="ptmr8t-x-x-120">magnificent scope for improvement and optimisation. Things like using</span>
+<span 
+class="ptmr8t-x-x-120">intelligent sorts on polynomial lists, and avoiding the re-computation of various</span>
+<span 
+class="ptmr8t-x-x-120">data spring easily to mind. Also, an attempt at factorization of the input</span>
+<span 
+class="ptmr8t-x-x-120">polynomials at each pass might have beneficial results. Of course, exploitation of</span>
+<span 
+class="ptmr8t-x-x-120">the natural parallel structure is a must!</span>
+<!--l. 15--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">All bug fixes and improvements are welcomed.</span>
+<!--l. 17--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The interface:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1291">
+wu(&#x00A0;{x^2+y^2+z^2-r^2,&#x00A0;x*y+z^2-1,&#x00A0;x*y*z-x^2-y^2-z+1},&#x00A0;{x,y,z});
+</div>
+<!--l. 20--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">calls </span><span 
+class="pcrr8t-x-x-120">wu </span><span 
+class="ptmr8t-x-x-120">with the named polynomials, and with the variable ordering </span><span 
+class="cmmi-12">x &#x003E; y &#x003E; z</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">In this example, </span><span 
+class="pcrr8t-x-x-120">r </span><span 
+class="ptmr8t-x-x-120">is a parameter.</span>
+<!--l. 24--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The result is</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1292">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />{{{r&#x00A0;&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;1,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;r&#x00A0;*y&#x00A0;&#x00A0;+&#x00A0;r&#x00A0;*z&#x00A0;+&#x00A0;r&#x00A0;&#x00A0;-&#x00A0;y&#x00A0;&#x00A0;-&#x00A0;y&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;z&#x00A0;-&#x00A0;2,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x*y&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;1},
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;y},
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;7&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;4
+&#x00A0;<br />&#x00A0;{{r&#x00A0;*z&#x00A0;&#x00A0;-&#x00A0;2*r&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;r&#x00A0;&#x00A0;+&#x00A0;3*r&#x00A0;*z&#x00A0;&#x00A0;-&#x00A0;3*r&#x00A0;*z&#x00A0;&#x00A0;-&#x00A0;6*r&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;3*r&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;3*
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;10&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;9&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;8&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;7
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;r&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;3*r&#x00A0;*z&#x00A0;&#x00A0;-&#x00A0;3*r&#x00A0;&#x00A0;+&#x00A0;3*r&#x00A0;*z&#x00A0;&#x00A0;&#x00A0;-&#x00A0;6*r&#x00A0;*z&#x00A0;&#x00A0;-&#x00A0;3*r&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;6*r&#x00A0;*z&#x00A0;&#x00A0;+
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;13&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;12&#x00A0;&#x00A0;&#x00A0;&#x00A0;11
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*r&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;6*r&#x00A0;*z&#x00A0;&#x00A0;-&#x00A0;6*r&#x00A0;*z&#x00A0;&#x00A0;-&#x00A0;6*r&#x00A0;*z&#x00A0;&#x00A0;+&#x00A0;3*r&#x00A0;&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;&#x00A0;-&#x00A0;3*z&#x00A0;&#x00A0;&#x00A0;+&#x00A0;z
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;10&#x00A0;&#x00A0;&#x00A0;&#x00A0;9&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;7&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;2*z&#x00A0;&#x00A0;&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;+&#x00A0;2*z&#x00A0;&#x00A0;-&#x00A0;6*z&#x00A0;&#x00A0;-&#x00A0;z&#x00A0;&#x00A0;+&#x00A0;2*z&#x00A0;&#x00A0;+&#x00A0;3*z&#x00A0;&#x00A0;-&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;1,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;y&#x00A0;*(r&#x00A0;&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;1),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x*y&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;1},
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;y*(r&#x00A0;&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;1)}}
+</div>
+<!--l. 57--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">namely, a list of pairs of characteristic sets and initials for the characteristic</span>
+<span 
+class="ptmr8t-x-x-120">sets.</span>
+<!--l. 61--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Thus, the first pair above has the characteristic set</span>
+                                                                     
+
+                                                                     
+<center class="math-display" >
+<img 
+src="manual597x.png" alt=" 2    3    2      2 2    2    2    4    2 2    2               2
+r  + z -  z -  1,r y +  r z + r - y  - y z  + z  - z - 2,xy + z  - 1 " class="math-display" ></center> <span 
+class="ptmr8t-x-x-120">and</span>
+<span 
+class="ptmr8t-x-x-120">initial </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 67--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">According to Wu&#8217;s theorem, the set of roots of the original polynomials is the</span>
+<span 
+class="ptmr8t-x-x-120">union of the sets of roots of the characteristic sets, with the additional constraints</span>
+<span 
+class="ptmr8t-x-x-120">that the corresponding initial is non-zero. Thus, for the first pair above, we find</span>
+<span 
+class="ptmr8t-x-x-120">the roots of </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">r</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">3</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1</span><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">&#x00A0;</span><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">under the constraint that </span><span 
+class="cmmi-12">y</span><span 
+class="cmmi-12">&#x2260;</span><span 
+class="cmr-12">0</span><span 
+class="ptmr8t-x-x-120">. These</span>
+<span 
+class="ptmr8t-x-x-120">roots, together with the roots of the other characteristic set (under the</span>
+<span 
+class="ptmr8t-x-x-120">constraint of </span><span 
+class="cmmi-12">y</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">r</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">3</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1)</span><span 
+class="cmmi-12">&#x2260;</span><span 
+class="cmr-12">0</span><span 
+class="ptmr8t-x-x-120">), comprise all the roots of the original</span>
+<span 
+class="ptmr8t-x-x-120">set.</span>
+<!--l. 76--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Additional information about the working of the algorithm can be gained by</span>
+<a 
+ id="dx220-962003"></a><a 
+ id="dx220-962004"></a><a 
+ id="dx220-962005"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1293">
+on&#x00A0;trwu;
+</div>
+<!--l. 80--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">This prints out details of the choice of basic sets, and the computation of</span>
+<span 
+class="ptmr8t-x-x-120">characteristic sets.</span>
+<!--l. 84--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The second argument (the list of variables) may be omitted, when all</span>
+<span 
+class="ptmr8t-x-x-120">the variables in the input polynomials are implied with some random</span>
+<span 
+class="ptmr8t-x-x-120">ordering.</span>
+<!--l. 1381--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1383--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse164.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse165.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse163.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse163.html#tailmanualse163.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse164.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse164.html"></a>  
+</body></html> 

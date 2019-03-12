@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Numerical Operators</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse27.html" >Up</a></td><td class="clinks"><a 
+href="manualse28.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse27.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.1    </span> <a 
+ id="x38-540007.1"></a>Numerical Operators</h3>
+<a 
+ id="dx38-54001"></a>
+<a 
+ id="dx38-54002"></a>
+<!--l. 21--><p class="noindent" >REDUCE includes a number of functions that are analogs of those found in most
+numerical systems. With numerical arguments, such functions return the expected result.
+However, they may also be called with non-numerical arguments. In such cases, except
+where noted, the system attempts to simplify the expression as far as it can. In such
+cases, a residual expression involving the original operator usually remains. These
+operators are as follows:
+<!--l. 29--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.1    </span> <a 
+ id="x38-550007.1.1"></a>ABS</h4>
+<!--l. 30--><p class="noindent" ><a 
+ id="operator:ABS"></a> <span 
+class="pcrr8t-x-x-109">ABS</span><a 
+ id="dx38-55001"></a> returns the absolute value of its single argument, if that argument has a
+numerical value. A non-numerical argument is returned as an absolute value, with an
+overall numerical coefficient taken outside the absolute value operator. For
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-79">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(-3/4)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;3/4
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(2a)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;2*ABS(A)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(i)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(-x)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;ABS(X)
+</div>
+<!--l. 40--><p class="nopar" >
+<!--l. 42--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.2    </span> <a 
+ id="x38-560007.1.2"></a>CEILING</h4>
+<a 
+ id="dx38-56001"></a>
+<!--l. 43--><p class="noindent" ><a 
+ id="operator:CEILING"></a> This operator returns the ceiling (i.e., the least integer greater than the given argument) if
+its single argument has a numerical value. A non-numerical argument is returned as an
+expression in the original operator. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-80">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ceiling(-5/4)&#x00A0;-&#x003E;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ceiling(-a)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;CEILING(-A)
+</div>
+<!--l. 52--><p class="nopar" >
+<!--l. 54--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.3    </span> <a 
+ id="x38-570007.1.3"></a>CONJ</h4>
+<a 
+ id="dx38-57001"></a>
+<!--l. 55--><p class="noindent" ><a 
+ id="operator:CONJ"></a> This returns the complex conjugate of an expression, if that argument has an numerical
+value. A non-numerical argument is returned as an expression in the operators <span 
+class="pcrr8t-x-x-109">REPART</span><a 
+ id="dx38-57002"></a>
+and <span 
+class="pcrr8t-x-x-109">IMPART</span><a 
+ id="dx38-57003"></a>. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-81">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;conj(1+i)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;1-I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;conj(a+i*b)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;REPART(A)&#x00A0;-&#x00A0;REPART(B)*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;IMPART(A)*I&#x00A0;-&#x00A0;IMPART(B)
+</div>
+<!--l. 64--><p class="nopar" >
+<!--l. 66--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.4    </span> <a 
+ id="x38-580007.1.4"></a>FACTORIAL</h4>
+<a 
+ id="dx38-58001"></a>
+<!--l. 67--><p class="noindent" ><a 
+ id="operator:FACTORIAL"></a>
+<!--l. 69--><p class="noindent" >If the single argument of <span 
+class="pcrr8t-x-x-109">FACTORIAL </span>evaluates to a non-negative integer, its factorial
+is returned. Otherwise an expression involving <span 
+class="pcrr8t-x-x-109">FACTORIAL </span>is returned. For
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-82">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(5)&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;120
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(a)&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;FACTORIAL(A)
+</div>
+<!--l. 75--><p class="nopar" >
+<!--l. 77--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.5    </span> <a 
+ id="x38-590007.1.5"></a>FIX</h4>
+<a 
+ id="dx38-59001"></a>
+<!--l. 78--><p class="noindent" ><a 
+ id="operator:FIX"></a> This operator returns the fixed value (i.e., the integer part of the given argument) if its
+single argument has a numerical value. A non-numerical argument is returned as an
+expression in the original operator. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-83">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fix(-5/4)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fix(a)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;FIX(A)
+</div>
+<!--l. 87--><p class="nopar" >
+<!--l. 89--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.6    </span> <a 
+ id="x38-600007.1.6"></a>FLOOR</h4>
+<a 
+ id="dx38-60001"></a>
+<!--l. 90--><p class="noindent" ><a 
+ id="operator:FLOOR"></a> This operator returns the floor (i.e., the greatest integer less than the given argument) if
+its single argument has a numerical value. A non-numerical argument is returned as an
+expression in the original operator. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-84">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;floor(-5/4)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;floor(a)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;FLOOR(A)
+</div>
+<!--l. 99--><p class="nopar" >
+<!--l. 101--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.7    </span> <a 
+ id="x38-610007.1.7"></a>IMPART</h4>
+<a 
+ id="dx38-61001"></a>
+<!--l. 102--><p class="noindent" ><a 
+ id="operator:IMPART"></a> This operator returns the imaginary part of an expression, if that argument has an
+numerical value. A non-numerical argument is returned as an expression in the operators
+<span 
+class="pcrr8t-x-x-109">REPART</span><a 
+ id="dx38-61002"></a> and <span 
+class="pcrr8t-x-x-109">IMPART</span>. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-85">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;impart(1+i)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;impart(a+i*b)&#x00A0;-&#x003E;&#x00A0;REPART(B)&#x00A0;+&#x00A0;IMPART(A)
+</div>
+<!--l. 109--><p class="nopar" >
+<!--l. 111--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.8    </span> <a 
+ id="x38-620007.1.8"></a>MAX/MIN</h4>
+<!--l. 112--><p class="noindent" ><a 
+ id="operator:MAX"></a> <a 
+ id="operator:MIN"></a>
+<!--l. 115--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">MAX </span>and <span 
+class="pcrr8t-x-x-109">MIN</span><a 
+ id="dx38-62001"></a><a 
+ id="dx38-62002"></a> can take an arbitrary number of expressions as their arguments. If all
+arguments evaluate to numerical values, the maximum or minimum of the argument list
+is returned. If any argument is non-numeric, an appropriately reduced expression is
+returned. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-86">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;max(2,-3,4,5)&#x00A0;-&#x003E;&#x00A0;&#x00A0;5
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;min(2,-2)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-2.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;max(a,2,3)&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;MAX(A,3)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;min(x)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;X
+</div>
+<!--l. 125--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">MAX </span>or <span 
+class="pcrr8t-x-x-109">MIN </span>of an empty list returns 0.
+<!--l. 128--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.9    </span> <a 
+ id="x38-630007.1.9"></a>NEXTPRIME</h4>
+<a 
+ id="dx38-63001"></a>
+<!--l. 129--><p class="noindent" ><a 
+ id="operator:NEXTPRIME"></a>
+<!--l. 131--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">NEXTPRIME </span>returns the next prime greater than its integer argument, using a
+probabilistic algorithm. A type error occurs if the value of the argument is not an integer.
+For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-87">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;nextprime(5)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;7
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;nextprime(-2)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;nextprime(-7)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;-5
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;nextprime&#x00A0;1000000&#x00A0;-&#x003E;&#x00A0;1000003
+</div>
+<!--l. 139--><p class="nopar" > whereas <span 
+class="pcrr8t-x-x-109">nextprime(a) </span>gives a type error.
+<!--l. 142--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.10    </span> <a 
+ id="x38-640007.1.10"></a>RANDOM</h4>
+<a 
+ id="dx38-64001"></a>
+<!--l. 143--><p class="noindent" ><a 
+ id="operator:RANDOM"></a>
+<!--l. 145--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">random(</span><span 
+class="ptmri8t-x-x-109">n</span><span 
+class="pcrr8t-x-x-109">) </span>returns a random number <span 
+class="cmmi-10x-x-109">r </span>in the range <span 
+class="cmr-10x-x-109">0 </span><span 
+class="cmsy-10x-x-109">&#x2264; </span><span 
+class="cmmi-10x-x-109">r &#x003C; n</span>. A type error occurs if
+the value of the argument is not a positive integer in algebraic mode, or positive number
+in symbolic mode. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-88">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;random(5)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;random(1000)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;191
+</div>
+<!--l. 152--><p class="nopar" > whereas <span 
+class="pcrr8t-x-x-109">random(a) </span>gives a type error.
+<!--l. 155--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.11    </span> <a 
+ id="x38-650007.1.11"></a>RANDOM_NEW_SEED</h4>
+<a 
+ id="dx38-65001"></a>
+<!--l. 156--><p class="noindent" ><a 
+ id="operator:RANDOM_NEW_SEED"></a>
+<!--l. 158--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">random_new_seed(</span><span 
+class="ptmri8t-x-x-109">n</span><span 
+class="pcrr8t-x-x-109">) </span>reseeds the random number generator to a sequence
+determined by the integer argument <span 
+class="cmmi-10x-x-109">n</span>. It can be used to ensure that a repeatable
+pseudo-random sequence will be delivered regardless of any previous use of <span 
+class="pcrr8t-x-x-109">RANDOM</span>, or
+can be called early in a run with an argument derived from something variable (such as
+the time of day) to arrange that different runs of a REDUCE program will use different
+random sequences. When a fresh copy of REDUCE is first created it is as if
+<span 
+class="pcrr8t-x-x-109">random_new_seed(1) </span>has been obeyed.
+<!--l. 168--><p class="noindent" >A type error occurs if the value of the argument is not a positive integer.
+<!--l. 170--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.12    </span> <a 
+ id="x38-660007.1.12"></a>REPART</h4>
+<a 
+ id="dx38-66001"></a>
+<!--l. 171--><p class="noindent" ><a 
+ id="operator:REPART"></a> This returns the real part of an expression, if that argument has an numerical value. A
+non-numerical argument is returned as an expression in the operators <span 
+class="pcrr8t-x-x-109">REPART </span>and
+<span 
+class="pcrr8t-x-x-109">IMPART</span><a 
+ id="dx38-66002"></a>. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-89">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;repart(1+i)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;repart(a+i*b)&#x00A0;-&#x003E;&#x00A0;REPART(A)&#x00A0;-&#x00A0;IMPART(B)
+</div>
+<!--l. 179--><p class="nopar" >
+<!--l. 181--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.13    </span> <a 
+ id="x38-670007.1.13"></a>ROUND</h4>
+<a 
+ id="dx38-67001"></a>
+<!--l. 182--><p class="noindent" ><a 
+ id="operator:ROUND"></a> This operator returns the rounded value (i.e, the nearest integer) of its single argument if
+that argument has a numerical value. A non-numeric argument is returned as an
+expression in the original operator. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-90">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;round(-5/4)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;round(a)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;ROUND(A)
+</div>
+<!--l. 190--><p class="nopar" >
+<!--l. 192--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.1.14    </span> <a 
+ id="x38-680007.1.14"></a>SIGN</h4>
+<a 
+ id="dx38-68001"></a>
+<!--l. 193--><p class="noindent" ><a 
+ id="operator:SIGN"></a> <span 
+class="pcrr8t-x-x-109">SIGN </span>tries to evaluate the sign of its argument. If this is possible <span 
+class="pcrr8t-x-x-109">SIGN </span>returns one of 1,
+0 or -1. Otherwise, the result is the original form or a simplified variant. For
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-91">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sign(-5)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sign(-a^2*b)&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-SIGN(B)
+</div>
+<!--l. 200--><p class="nopar" > Note that even powers of formal expressions are assumed to be positive only as long as
+the switch <span 
+class="pcrr8t-x-x-109">COMPLEX </span>is off.
+                                                                     
+
+                                                                     
+<!--l. 204--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse27.html" >Up</a></td><td class="clinks"><a 
+href="manualse28.html" >Next</a></td><td class="clinks"><a 
+href="manualse27.html" >Front</a></td></tr></table><a 
+ id="tailmanualse27.html"></a>   
+</body></html> 

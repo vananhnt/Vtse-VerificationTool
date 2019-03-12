@@ -1,7 +1,6 @@
 package cfg.utils;
 
 import org.objenesis.strategy.StdInstantiatorStrategy;
-
 import com.esotericsoftware.kryo.Kryo;
 
 /**
@@ -11,8 +10,9 @@ import com.esotericsoftware.kryo.Kryo;
 public class Cloner  {
 	
 	@SuppressWarnings("deprecation")
+
 	public static <T> T clone(T object) {
-		
+
 		Kryo kryo = new Kryo();
 		try {
 			kryo.setAsmEnabled(true);
@@ -21,7 +21,6 @@ public class Cloner  {
 			return kryo.copy(object);
 		}
 		finally {
-			
 			kryo = null;
 		}
 	}

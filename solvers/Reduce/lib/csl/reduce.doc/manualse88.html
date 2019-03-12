@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Matrix-valued Procedures</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch15.html#manualse88.html" >Up</a></td><td class="clinks"><a 
+href="manualse89.html" >Next</a></td><td class="clinks"><a 
+href="manualse87.html" >Prev</a></td><td class="clinks"><a 
+href="manualse87.html#tailmanualse87.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse88.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">15.3    </span> <a 
+ id="x108-19900015.3"></a>Matrix-valued Procedures</h3>
+<a 
+ id="dx108-199001"></a>
+<!--l. 186--><p class="noindent" ><a 
+ id="command:MATRIXPROC"></a>
+<!--l. 188--><p class="noindent" >Normally, procedures can only return scalar values. In order for a procedure to return a
+matrix, it has to be declared of type <span 
+class="ptmb8t-x-x-109">MATRIXPROC</span>:<a 
+ id="dx108-199002"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-379">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;matrixproc&#x00A0;SkewSym1&#x00A0;(w);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mat((0,-w(3,1),w(2,1)),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(w(3,1),0,-w(1,1)),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-w(2,1),&#x00A0;w(1,1),&#x00A0;0));
+</div>
+<!--l. 196--><p class="nopar" > Following this declaration, the call to <span 
+class="pcrr8t-x-x-109">SkewSym1 </span>can be used as a matrix,
+e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-380">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;:=&#x00A0;SkewSym1(mat((qx),(qy),(qz)));
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;qz&#x00A0;&#x00A0;&#x00A0;qy&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;:=&#x00A0;[&#x00A0;qz&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;qx]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;-&#x00A0;qy&#x00A0;&#x00A0;&#x00A0;qx&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;*&#x00A0;mat((rx),(ry),(rz));
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;qy*rz&#x00A0;-&#x00A0;qz*ry&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;-&#x00A0;qx*rz&#x00A0;+&#x00A0;qz*rx]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;qx*ry&#x00A0;-&#x00A0;qy*rx&#x00A0;&#x00A0;]
+</div>
+<!--l. 216--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 219--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch15.html#manualse88.html" >Up</a></td><td class="clinks"><a 
+href="manualse89.html" >Next</a></td><td class="clinks"><a 
+href="manualse87.html" >Prev</a></td><td class="clinks"><a 
+href="manualse87.html#tailmanualse87.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse88.html" >Front</a></td></tr></table><a 
+ id="tailmanualse88.html"></a>  
+</body></html> 

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Referencing Previous Results</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch13.html#manualse77.html" >Up</a></td><td class="clinks"><a 
+href="manualse78.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse77.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">13.1    </span> <a 
+ id="x95-17900013.1"></a>Referencing Previous Results</h3>
+<!--l. 36--><p class="noindent" ><a 
+ id="reserved:INPUT"></a> <a 
+ id="reserved:WS"></a> It is often useful to be able to reference results of previous computations during a
+REDUCE session. For this purpose, REDUCE maintains a history<a 
+ id="dx95-179001"></a> of all interactive
+inputs and the results of all interactive computations during a given session. These results
+                                                                     
+
+                                                                     
+are referenced by the command number that REDUCE prints automatically in
+interactive mode. To use an input expression in a new computation, one writes
+<span 
+class="pcrr8t-x-x-109">input(</span><span 
+class="cmmi-10x-x-109">n</span><span 
+class="pcrr8t-x-x-109">)</span>,<a 
+ id="dx95-179002"></a> where <span 
+class="cmmi-10x-x-109">n </span>is the command number. To use an output expression,
+one writes <span 
+class="pcrr8t-x-x-109">WS(</span><span 
+class="cmmi-10x-x-109">n</span><span 
+class="pcrr8t-x-x-109">)</span>.<a 
+ id="dx95-179003"></a> <span 
+class="pcrr8t-x-x-109">WS </span>references the previous command. E.g., if command
+number 1 was <span 
+class="pcrr8t-x-x-109">INT(X-1,X)</span>; and the result of command number 7 was <span 
+class="pcrr8t-x-x-109">X-1</span>,
+then
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-345">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*input(1)-ws(7)^2;
+</div>
+<!--l. 51--><p class="nopar" > would give the result <span 
+class="pcrr8t-x-x-109">-1</span>, whereas
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-346">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*ws(1)-ws(7)^2;
+</div>
+<!--l. 55--><p class="nopar" > would yield the same result, but <span 
+class="ptmri8t-x-x-109">without </span>a recomputation of the integral.
+<!--l. 59--><p class="noindent" ><a 
+ id="operator:DISPLAY"></a> The operator <span 
+class="pcrr8t-x-x-109">DISPLAY</span><a 
+ id="dx95-179004"></a> is available to display previous inputs. If its argument is a
+positive integer, <span 
+class="cmmi-10x-x-109">n </span>say, then the previous n inputs are displayed. If its argument is
+<span 
+class="pcrr8t-x-x-109">ALL </span>(or in fact any non-numerical expression), then all previous inputs are
+displayed.
+                                                                     
+
+                                                                     
+<!--l. 65--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch13.html#manualse77.html" >Up</a></td><td class="clinks"><a 
+href="manualse78.html" >Next</a></td><td class="clinks"><a 
+href="manualse77.html" >Front</a></td></tr></table><a 
+ id="tailmanualse77.html"></a>  
+</body></html> 

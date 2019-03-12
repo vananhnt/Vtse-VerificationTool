@@ -1,0 +1,893 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>RATAPRX: Rational Approximations Package for REDUCE</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse141.html" >Up</a></td><td class="clinks"><a 
+href="manualse142.html" >Next</a></td><td class="clinks"><a 
+href="manualse140.html" >Prev</a></td><td class="clinks"><a 
+href="manualse140.html#tailmanualse140.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse141.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.50    </span> <a 
+ id="x193-77600016.50"></a>RATAPRX: Rational Approximations Package for
+REDUCE</h3>
+<a 
+ id="dx193-776001"></a>
+<a 
+ id="dx193-776002"></a>
+<!--l. 889--><p class="noindent" >Authors: Lisa Temme and Wolfram Koepf
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.50.1    </span> <a 
+ id="x193-77700016.50.1"></a>Periodic Decimal Representation</h4>
+<a 
+ id="dx193-777001"></a>
+<!--l. 5--><p class="noindent" >The division of one integer by another often results in a period in the decimal
+part. The <span 
+class="pcrr8t-x-x-109">rational2periodic </span>function in this package can recognise and
+represent such an answer in a periodic representation. The inverse function,
+<span 
+class="pcrr8t-x-x-109">periodic2rational</span>, can also convert a periodic representation back to a rational
+number.
+<!--l. 12--><p class="noindent" ><a 
+ id="operator:RATIONAL2PERIODIC"></a> <a 
+ id="operator:PERIODIC2RATIONAL"></a> <a 
+ id="operator:RATIONAL"></a>
+<a 
+ id="dx193-777002"></a>
+<a 
+ id="dx193-777003"></a>
+<a 
+ id="dx193-777004"></a>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span class="underline"><span 
+class="ptmb8t-x-x-109">Periodic Representation of a Rational Number</span></span>
+</td></tr></table>
+<!--l. 20--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">SYNTAX:     </span></td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">rational2periodic(n);</span>
+</td></tr></table>
+<!--l. 24--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">INPUT:         </span></td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">n  </span>is a rational number
+</td></tr></table>
+<!--l. 27--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">RESULT:      </span></td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">periodic({a,b} , {c1,...,cn})</span>
+</td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 30--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">            </td><td  
+class="tabbing">where <span 
+class="pcrr8t-x-x-109">a/b </span>is the non-periodic part
+</td></tr></table>
+<!--l. 31--><p class="noindent" >              <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">                       </td><td  
+class="tabbing">and <span 
+class="pcrr8t-x-x-109">c1,...,cn </span>are the digits of the periodic part.</td></tr></table>
+<!--l. 32--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">EXAMPLE: </span></td><td  
+class="tabbing"><span 
+class="cmr-10x-x-109">59</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">70 </span>written as <span 
+class="cmr-10x-x-109">0</span><span 
+class="cmmi-10x-x-109">.</span><span 
+class="cmr-10x-x-109">8</span><span class="overline"><span 
+class="cmr-10x-x-109">428571</span></span>
+</td></tr></table>
+<!--l. 36--><p class="noindent" >                      <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">                 </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">1: rational2periodic(59/70);</span></td></tr></table>
+<!--l. 37--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">            </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">periodic({8,10},{4,2,8,5,7,1})</span>
+</td></tr></table>
+<!--l. 38--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span class="underline"><span 
+class="ptmb8t-x-x-109">Rational Number of a Periodic Representation</span></span>
+</td></tr></table>
+<!--l. 41--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">SYNTAX:     </span></td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">periodic2rational(periodic({a,b},{c1,...,cn}))</span>
+</td></tr></table>
+<!--l. 45--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">         </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">periodic2rational({a,b},{c1,...,cn})</span></td></tr></table>
+<!--l. 46--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">INPUT:         </span></td><td style="width:119;" 
+class="tabbing">&#x00A0;&#x00A0;&#x00A0;                 <span 
+class="pcrr8t-x-x-109">a  </span></td><td  
+class="tabbing">is an integer
+</td></tr></table>
+<!--l. 50--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">                       </td><td style="width:119;" 
+class="tabbing">&#x00A0;&#x00A0;&#x00A0;                 <span 
+class="pcrr8t-x-x-109">b  </span></td><td  
+class="tabbing">is <span 
+class="cmr-10x-x-109">1</span>, <span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1 </span>or an integer multiple of <span 
+class="cmr-10x-x-109">10</span></td></tr></table>
+<!--l. 52--><p class="noindent" >                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">                 </td><td style="width:119;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-109">c1,...,cn   </span></td><td  
+class="tabbing">is a list of positive digits</td></tr></table>
+<!--l. 53--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">RESULT:      </span></td><td  
+class="tabbing">A rational number.
+</td></tr></table>
+<!--l. 56--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">EXAMPLE: </span></td><td  
+class="tabbing"><span 
+class="cmr-10x-x-109">0</span><span 
+class="cmmi-10x-x-109">.</span><span 
+class="cmr-10x-x-109">8</span><span class="overline"><span 
+class="cmr-10x-x-109">428571</span></span> written as <span 
+class="cmr-10x-x-109">59</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">70</span>
+</td></tr></table>
+<!--l. 59--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">            </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">2: periodic2rational(periodic({8,10},{4,2,8,5,7,1}));</span></td></tr></table>
+<!--l. 61--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">            </td><td  
+class="tabbing"> <span 
+class="pcrr8t-x-x-109">59</span>
+</td></tr></table>
+<!--l. 62--><p class="noindent" >                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">         </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">&#8212;-</span></td></tr></table>
+<!--l. 63--><p class="noindent" >                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">         </td><td  
+class="tabbing"> <span 
+class="pcrr8t-x-x-109">70</span></td></tr></table>
+<!--l. 64--><p class="noindent" >
+                                                                     
+
+                                                                     
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">            </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">3: periodic2rational({8,10},{4,2,8,5,7,1});</span>
+</td></tr></table>
+<!--l. 66--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">            </td><td  
+class="tabbing"> <span 
+class="pcrr8t-x-x-109">59</span>
+</td></tr></table>
+<!--l. 67--><p class="noindent" >                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">         </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">&#8212;-</span></td></tr></table>
+<!--l. 68--><p class="noindent" >                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:92;" 
+class="tabbing">         </td><td  
+class="tabbing"> <span 
+class="pcrr8t-x-x-109">70</span></td></tr></table>
+<!--l. 70--><p class="noindent" >
+<!--l. 72--><p class="noindent" >Note that if <span 
+class="pcrr8t-x-x-109">a </span>is zero, <span 
+class="pcrr8t-x-x-109">b </span>will indicate how many places after the decimal point that the
+period occurs. Note also that if the answer is negative then this will be indicated
+by the sign of <span 
+class="pcrr8t-x-x-109">a </span>(unless <span 
+class="pcrr8t-x-x-109">a </span>is zero in which case it is indicated by the sign of
+<span 
+class="pcrr8t-x-x-109">b</span>).<br 
+class="newline" /> <span 
+class="ptmb8t-x-x-109">ERROR MESSAGE</span><br 
+class="newline" /><span 
+class="pcrr8t-x-x-109">***** operator to be used in off rounded mode</span><br 
+class="newline" />The periodicity of a function can only be recognised in the <span 
+class="pcrr8t-x-x-109">off rounded </span>mode. This
+is also true for the inverse procedure.<br 
+class="newline" /> <span 
+class="ptmb8t-x-x-120">EXAMPLES</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1144">
+4:&#x00A0;rational2periodic(1/3);
+&#x00A0;<br />
+&#x00A0;<br />periodic({0,1},{3})
+&#x00A0;<br />
+&#x00A0;<br />5:&#x00A0;periodic2rational(ws);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;1
+&#x00A0;<br />---
+&#x00A0;<br />&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />6:&#x00A0;periodic2rational({0,1},{3});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;1
+&#x00A0;<br />---
+&#x00A0;<br />&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />7:&#x00A0;rational2periodic(-1/6);
+&#x00A0;<br />
+&#x00A0;<br />periodic({-1,10},{6})
+&#x00A0;<br />
+&#x00A0;<br />8:&#x00A0;periodic2rational(ws);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;1
+&#x00A0;<br />------
+&#x00A0;<br />&#x00A0;&#x00A0;6
+&#x00A0;<br />
+&#x00A0;<br />9:&#x00A0;rational2periodic(6/17);
+&#x00A0;<br />
+&#x00A0;<br />periodic({0,1},{3,5,2,9,4,1,1,7,6,4,7,0,5,8,8,2})
+&#x00A0;<br />
+&#x00A0;<br />10:&#x00A0;periodic2rational(ws);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;6
+&#x00A0;<br />----
+&#x00A0;<br />&#x00A0;17
+&#x00A0;<br />
+&#x00A0;<br />11:&#x00A0;rational2periodic(352673/3124);
+&#x00A0;<br />
+&#x00A0;<br />periodic({11289,100},{1,4,8,5,2,7,5,2,8,8,0,9,2,1,8,9,5,0,0,6,
+                                                                     
+
+                                                                     
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4,0,2,0,4,8,6,5,5,5,6,9,7,8,2,3,3,0,3,4,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5,7,1,0,6,2,7,4,0,0,7,6,8,2,4,5,8,3,8,6,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6,8,3,7,3,8,7,9,6,4})
+&#x00A0;<br />
+&#x00A0;<br />12:&#x00A0;periodic2rational(ws);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;352673
+&#x00A0;<br />--------
+&#x00A0;<br />&#x00A0;&#x00A0;3124
+&#x00A0;<br />
+</div>
+<!--l. 139--><p class="nopar" >
+<h4 class="subsectionHead"><span class="titlemark">16.50.2    </span> <a 
+ id="x193-77800016.50.2"></a>Continued Fractions</h4>
+<a 
+ id="dx193-778001"></a>
+<!--l. 144--><p class="noindent" >A continued fraction (see &#x00A0;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> §4.2) has the general form
+<center class="math-display" >
+<img 
+src="manual511x.png" alt="           a1
+b0 +  --------a-----.
+      b1 +  b2+-2a3--
+               b3+...
+" class="math-display" ></center>
+<!--l. 150--><p class="nopar" >
+<!--l. 153--><p class="noindent" >A more compact way of writing this is as
+<center class="math-display" >
+<img 
+src="manual512x.png" alt="    a |   a |   a |
+b0 +-1- + -2-+  -3-+ ....
+    |b1   |b2   |b3
+" class="math-display" ></center>
+<!--l. 154--><p class="nopar" > <br 
+class="newline" /><a 
+ id="dx193-778002"></a> This is represented in <span 
+class="ptmr8t-">REDUCE </span>as
+<center class="math-display" >
+<img 
+src="manual513x.png" alt="contfrac(Rational approximant,{b0,{a1,b1},{a2,b2},.....})
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 162--><p class="nopar" >
+<!--l. 164--><p class="noindent" ><a 
+ id="CONTFRAC:operator"></a> <a 
+ id="CFRAC:operator"></a> <a 
+ id="dx193-778003"></a>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing">
+</td></tr></table>
+<!--l. 168--><p class="noindent" >                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:109;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">SYNTAX: </span>&#x00A0;      </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">cfrac(number);</span></td></tr></table>
+<!--l. 170--><p class="noindent" >                            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:109;" 
+class="tabbing">           </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">cfrac(number,length);</span></td></tr></table>
+<!--l. 171--><p class="noindent" >                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:109;" 
+class="tabbing">           </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">cfrac(f, var);</span></td></tr></table>
+<!--l. 172--><p class="noindent" >                           <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:109;" 
+class="tabbing">           </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">cfrac(f, var, length);</span></td></tr></table>
+<!--l. 173--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:109;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-109">INPUT:             </span></td><td style="width:80;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-109">number  </span></td><td  
+class="tabbing">is any real number
+</td></tr></table>
+<!--l. 176--><p class="noindent" >                                  <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:109;" 
+class="tabbing">                           </td><td style="width:80;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-109">f       </span></td><td  
+class="tabbing">is a function</td></tr></table>
+<!--l. 177--><p class="noindent" >                         <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:109;" 
+class="tabbing">                           </td><td style="width:80;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-109">var     </span></td><td  
+class="tabbing">is the function variable</td></tr></table>
+<!--l. 178--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 181--><p class="noindent" >
+<!--l. 183--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Optional Argument: </span><span 
+class="pcrb8t-x-x-109">length</span><br 
+class="newline" />The <span 
+class="pcrr8t-x-x-109">length </span>argument is optional. For an NON-RATIONAL function input the
+<span 
+class="pcrr8t-x-x-109">length </span>argument specifies the number of ordered pairs, <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">a</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-10x-x-109">,b</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmsy-10x-x-109">}</span>, to be returned. It&#8217;s
+default value is five. For a RATIONAL function input the <span 
+class="pcrr8t-x-x-109">length </span>argument can only
+truncate the answer, it cannot return additional pairs even if the precision is
+increased. The default value is the complete continued fraction of the rational
+input. For a NUMBER input the default value is dependent on the precision of
+the session, and the <span 
+class="pcrr8t-x-x-109">length </span>argument will only take effect if it has a smaller
+value than that of the number of ordered pairs which the default value would
+return.<br 
+class="newline" /> <span 
+class="ptmb8t-x-x-120">EXAMPLES</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1145">
+13:&#x00A0;cfrac(23.696);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2962
+&#x00A0;<br />contfrac(------,{23,{1,1},{1,2},{1,3},{1,2},{1,5}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;125
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />14:&#x00A0;cfrac(23.696,3);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;237
+&#x00A0;<br />contfrac(-----,{23,{1,1},{1,2},{1,3}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;10
+&#x00A0;<br />
+&#x00A0;<br />15:&#x00A0;cfrac&#x00A0;pi;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1146408
+&#x00A0;<br />contfrac(---------,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;364913
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{3,{1,7},{1,15},{1,1},{1,292},{1,1},{1,1},{1,1},{1,2},{1,1}})
+&#x00A0;<br />
+&#x00A0;<br />16:&#x00A0;cfrac(pi,3);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;355
+&#x00A0;<br />contfrac(-----,{3,{1,7},{1,15},{1,1}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;113
+&#x00A0;<br />
+&#x00A0;<br />17:&#x00A0;cfrac(pi*e*sqrt(2),4);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;10978
+&#x00A0;<br />contfrac(-------,{12,{1,12},{1,1},{1,68},{1,1}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;909
+&#x00A0;<br />
+&#x00A0;<br />18:&#x00A0;cfrac((x+2/3)^2/(6*x-5),x,1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9*x&#x00A0;&#x00A0;+&#x00A0;12*x&#x00A0;+&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;6*x&#x00A0;+&#x00A0;13&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;24*x&#x00A0;-&#x00A0;20
+                                                                     
+
+                                                                     
+&#x00A0;<br />contfrac(-----------------,{----------,{1,-----------}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;54*x&#x00A0;-&#x00A0;45&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;36&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9
+&#x00A0;<br />
+&#x00A0;<br />19:&#x00A0;cfrac((x+2/3)^2/(6*x-5),x,10);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9*x&#x00A0;&#x00A0;+&#x00A0;12*x&#x00A0;+&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;6*x&#x00A0;+&#x00A0;13&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;24*x&#x00A0;-&#x00A0;20
+&#x00A0;<br />contfrac(-----------------,{----------,{1,-----------}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;54*x&#x00A0;-&#x00A0;45&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;36&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />20:&#x00A0;cfrac(e^x,x);
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;9*x&#x00A0;&#x00A0;+&#x00A0;36*x&#x00A0;+&#x00A0;60
+&#x00A0;<br />contfrac(-----------------------,{1,{x,1},{&#x00A0;-&#x00A0;x,2},{x,3},{&#x00A0;-&#x00A0;x,2},{x,5}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*x&#x00A0;&#x00A0;-&#x00A0;24*x&#x00A0;+&#x00A0;60
+&#x00A0;<br />
+&#x00A0;<br />21:&#x00A0;cfrac(x^2/(x-1)*e^x,x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;3*x&#x00A0;&#x00A0;+&#x00A0;x
+&#x00A0;<br />contfrac(----------------,{0,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*x&#x00A0;&#x00A0;-&#x00A0;x&#x00A0;&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{&#x00A0;-&#x00A0;x&#x00A0;,1},&#x00A0;{&#x00A0;-&#x00A0;2*x&#x00A0;,1},&#x00A0;{x&#x00A0;,1},&#x00A0;{x&#x00A0;,1},&#x00A0;{x&#x00A0;,1}})
+&#x00A0;<br />
+&#x00A0;<br />22:&#x00A0;cfrac(x^2/(x-1)*e^x,x,2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />contfrac(----------,{0,{&#x00A0;-&#x00A0;x&#x00A0;,1},{&#x00A0;-&#x00A0;2*x&#x00A0;,1}})
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*x&#x00A0;&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+</div>
+<!--l. 282--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 285--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.50.3    </span></span> <a 
+ id="x193-77900016.50.3"></a><span 
+class="ptmr8t-x-x-120">Pad</span><span 
+class="ptmr8t-x-x-120">é Approximation</span></h4>
+<a 
+ id="dx193-779001"></a>
+<!--l. 288--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The Pad</span><span 
+class="ptmr8t-x-x-120">é approximant represents a function by the ratio of two polynomials. The</span>
+<span 
+class="ptmr8t-x-x-120">coefficients of the powers occuring in the polynomials are determined by the</span>
+<span 
+class="ptmr8t-x-x-120">coefficients in the Taylor series expansion of the function (see </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">). Given a</span>
+<span 
+class="ptmr8t-x-x-120">power series</span>
+<center class="math-display" >
+<img 
+src="manual514x.png" alt="                                2
+f(x) = c0 + c1(x - h) + c2(x - h ) ...
+" class="math-display" ></center>
+<!--l. 292--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and the degree of numerator, </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">, and of the denominator, </span><span 
+class="cmmi-12">d</span><span 
+class="ptmr8t-x-x-120">, the </span><span 
+class="pcrr8t-x-x-120">pade </span><span 
+class="ptmr8t-x-x-120">function</span>
+<span 
+class="ptmr8t-x-x-120">finds the unique coefficients </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-12">,</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmmi-12">b</span><sub><span 
+class="cmmi-8">i</span></sub> <span 
+class="ptmr8t-x-x-120">in the Pad</span><span 
+class="ptmr8t-x-x-120">é approximant</span>
+<center class="math-display" >
+<img 
+src="manual515x.png" alt="a0 + a1x + &#x22C5;&#x22C5;&#x22C5; + anxn
+--------------------d .
+ b0 + b1x + &#x22C5;&#x22C5;&#x22C5; + bdx
+" class="math-display" ></center>
+<!--l. 296--><p class="nopar" ><br 
+class="newline" /> <a 
+ id="PADE:operator"></a> <a 
+ id="dx193-779002"></a>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">SYNTAX: </span><span 
+class="ptmr8t-x-x-120">&#x00A0;     </span></td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-120">pade(f, x, h, n, d);</span>
+</td></tr></table>
+<!--l. 302--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">INPUT:            </span></td><td style="width:32;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-120">f  </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">is the funtion to be approximated</span>
+</td></tr></table>
+<!--l. 305--><p class="noindent" >                             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing">                         </td><td style="width:32;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-120">x  </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">is the function variable</span></td></tr></table>
+<!--l. 306--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing">                         </td><td style="width:32;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-120">h  </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">is the point at which the approximation is</span></td></tr></table>
+<!--l. 307--><p class="noindent" >                                         <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing">                         </td><td style="width:32;" 
+class="tabbing">       </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">evaluated</span></td></tr></table>
+<!--l. 308--><p class="noindent" >             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing">                         </td><td style="width:32;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-120">n  </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">is the (specified) degree of the numerator</span></td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 309--><p class="noindent" >          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing">                         </td><td style="width:32;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-120">d  </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">is the (specified) degree of the denominator</span></td></tr></table>
+<!--l. 310--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:113;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">RESULT:        </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">Pad</span><span 
+class="ptmr8t-x-x-120">é Approximant, ie. a rational function.</span>
+</td></tr></table>
+<!--l. 314--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing">
+</td></tr></table>
+<!--l. 315--><p class="noindent" >
+<!--l. 318--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">ERROR MESSAGES</span><br 
+class="newline" /><span 
+class="pcrr8t-x-x-120">***** not yet implemented</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">The Taylor series expansion for the function, f, has not yet been implemented in</span>
+<span 
+class="ptmr8t-x-x-120">the </span><span 
+class="ptmr8t-">REDUCE </span><span 
+class="ptmr8t-x-x-120">Taylor Package.</span><br 
+class="newline" /> <span 
+class="pcrr8t-x-x-120">***** no Pade Approximation exists</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">A Pad</span><span 
+class="ptmr8t-x-x-120">é Approximant of this function does not exist.</span><br 
+class="newline" /> <span 
+class="pcrr8t-x-x-120">***** Pade Approximation of this order does not</span>
+<span 
+class="pcrr8t-x-x-120">exist</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">A Pad</span><span 
+class="ptmr8t-x-x-120">é Approximant of this order (ie. the specified numerator and denominator</span>
+<span 
+class="ptmr8t-x-x-120">orders) does not exist but one of a different order may exist.</span><br 
+class="newline" /> <span 
+class="ptmb8t-x-x-120">EXAMPLES</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1146">
+&#x00A0;<br />23:&#x00A0;pade(sin(x),x,0,3,3);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;x*(&#x00A0;-&#x00A0;7*x&#x00A0;&#x00A0;+&#x00A0;60)
+&#x00A0;<br />------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;3*(x&#x00A0;&#x00A0;+&#x00A0;20)
+&#x00A0;<br />
+&#x00A0;<br />24:&#x00A0;pade(tanh(x),x,0,5,5);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;x*(x&#x00A0;&#x00A0;+&#x00A0;105*x&#x00A0;&#x00A0;+&#x00A0;945)
+&#x00A0;<br />-----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;15*(x&#x00A0;&#x00A0;+&#x00A0;28*x&#x00A0;&#x00A0;+&#x00A0;63)
+&#x00A0;<br />
+&#x00A0;<br />25:&#x00A0;pade(atan(x),x,0,5,5);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;x*(64*x&#x00A0;&#x00A0;+&#x00A0;735*x&#x00A0;&#x00A0;+&#x00A0;945)
+&#x00A0;<br />--------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;15*(15*x&#x00A0;&#x00A0;+&#x00A0;70*x&#x00A0;&#x00A0;+&#x00A0;63)
+&#x00A0;<br />
+&#x00A0;<br />26:&#x00A0;pade(exp(1/x),x,0,5,5);
+&#x00A0;<br />
+&#x00A0;<br />*****&#x00A0;no&#x00A0;Pade&#x00A0;Approximation&#x00A0;exists
+&#x00A0;<br />
+&#x00A0;<br />27:&#x00A0;pade(factorial(x),x,1,3,3);
+&#x00A0;<br />
+&#x00A0;<br />*****&#x00A0;not&#x00A0;yet&#x00A0;implemented
+&#x00A0;<br />
+&#x00A0;<br />28:&#x00A0;pade(asech(x),x,0,3,3);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />-&#x00A0;3*log(x)*x&#x00A0;&#x00A0;+&#x00A0;8*log(x)&#x00A0;+&#x00A0;3*log(2)*x&#x00A0;&#x00A0;-&#x00A0;8*log(2)&#x00A0;+&#x00A0;2*x
+&#x00A0;<br />--------------------------------------------------------
+                                                                     
+
+                                                                     
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*x&#x00A0;&#x00A0;-&#x00A0;8
+&#x00A0;<br />
+&#x00A0;<br />29:&#x00A0;taylor(ws-asech(x),x,0,10);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;11
+&#x00A0;<br />log(x)*(0&#x00A0;+&#x00A0;O(x&#x00A0;&#x00A0;))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;13&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;43&#x00A0;&#x00A0;&#x00A0;&#x00A0;8&#x00A0;&#x00A0;&#x00A0;&#x00A0;1611&#x00A0;&#x00A0;&#x00A0;&#x00A0;10&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;11
+&#x00A0;<br />&#x00A0;+&#x00A0;(-----*x&#x00A0;&#x00A0;+&#x00A0;------*x&#x00A0;&#x00A0;+&#x00A0;-------*x&#x00A0;&#x00A0;&#x00A0;+&#x00A0;O(x&#x00A0;&#x00A0;))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;768&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2048&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;81920
+&#x00A0;<br />
+&#x00A0;<br />30:&#x00A0;pade(sin(x)/x^2,x,0,10,0);
+&#x00A0;<br />
+&#x00A0;<br />*****&#x00A0;Pade&#x00A0;Approximation&#x00A0;of&#x00A0;this&#x00A0;order&#x00A0;does&#x00A0;not&#x00A0;exist
+&#x00A0;<br />
+&#x00A0;<br />31:&#x00A0;&#x00A0;pade(sin(x)/x^2,x,0,10,2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;10&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />(&#x00A0;-&#x00A0;x&#x00A0;&#x00A0;&#x00A0;+&#x00A0;110*x&#x00A0;&#x00A0;-&#x00A0;7920*x&#x00A0;&#x00A0;+&#x00A0;332640*x&#x00A0;&#x00A0;-&#x00A0;6652800*x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;+&#x00A0;39916800)/(39916800*x)
+&#x00A0;<br />
+&#x00A0;<br />32:&#x00A0;pade(exp(x),x,0,10,10);
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;10&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;7&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6
+&#x00A0;<br />(x&#x00A0;&#x00A0;&#x00A0;+&#x00A0;110*x&#x00A0;&#x00A0;+&#x00A0;5940*x&#x00A0;&#x00A0;+&#x00A0;205920*x&#x00A0;&#x00A0;+&#x00A0;5045040*x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;+&#x00A0;90810720*x&#x00A0;&#x00A0;+&#x00A0;1210809600*x&#x00A0;&#x00A0;+&#x00A0;11762150400*x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;+&#x00A0;79394515200*x&#x00A0;&#x00A0;+&#x00A0;335221286400*x&#x00A0;+&#x00A0;670442572800)/
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;10&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;7&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(x&#x00A0;&#x00A0;&#x00A0;-&#x00A0;110*x&#x00A0;&#x00A0;+&#x00A0;5940*x&#x00A0;&#x00A0;-&#x00A0;205920*x&#x00A0;&#x00A0;+&#x00A0;5045040*x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;90810720*x&#x00A0;&#x00A0;+&#x00A0;1210809600*x
+&#x00A0;<br />
+                                                                     
+
+                                                                     
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;11762150400*x&#x00A0;+&#x00A0;79394515200*x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;335221286400*x&#x00A0;+&#x00A0;670442572800)
+&#x00A0;<br />
+&#x00A0;<br />33:&#x00A0;pade(sin(sqrt(x)),x,0,3,3);
+&#x00A0;<br />
+&#x00A0;<br />(sqrt(x)*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;(56447*x&#x00A0;&#x00A0;-&#x00A0;4851504*x&#x00A0;&#x00A0;+&#x00A0;132113520*x&#x00A0;-&#x00A0;885487680))\
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(7*(179*x&#x00A0;&#x00A0;-&#x00A0;7200*x&#x00A0;&#x00A0;-&#x00A0;2209680*x&#x00A0;-&#x00A0;126498240))
+</div>
+<!--l. 434--><p class="nopar" >
+<!--l. 437--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x193-780000"></a><span 
+class="ptmr8t-x-x-120">Bibliography</span></h4>
+<!--l. 437--><p class="noindent" >
+    <div class="thebibliography">
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[1]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XPA"></a><span 
+class="ptmr8t-x-x-120">Baker(Jr.), George A. and Graves-Morris, Peter:</span><br 
+class="newline" /><span 
+class="ptmri8t-x-x-120">Pad</span><span 
+class="ptmri8t-x-x-120">é                                      Approximants,                                      Part</span>
+    <span 
+class="ptmri8t-x-x-120">I:  Basic  Theory</span><span 
+class="ptmr8t-x-x-120">,  (Encyclopedia  of  mathematics  and  its  applications,</span>
+    <span 
+class="ptmr8t-x-x-120">Vol 13, Section: Mathematics of physics), Addison-Wesley Publishing</span>
+    <span 
+class="ptmr8t-x-x-120">Company, Reading, Massachusetts, 1981.</span></p></div>
+<!--l. 893--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 895--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse141.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse142.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse140.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse140.html#tailmanualse140.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse141.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse141.html"></a>   
+</body></html> 

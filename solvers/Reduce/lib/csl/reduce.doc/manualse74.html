@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>IN Command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch12.html#manualse74.html" >Up</a></td><td class="clinks"><a 
+href="manualse75.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse74.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">12.1    </span> <a 
+ id="x91-17500012.1"></a>IN Command</h3>
+<a 
+ id="dx91-175001"></a>
+<!--l. 11--><p class="noindent" ><a 
+ id="command:IN"></a> <a 
+ id="switch:ECHO"></a> <a 
+ id="reserved:_LINE_"></a> This command takes a list of file names as argument and directs the system to input<a 
+ id="dx91-175002"></a>
+each file (that should contain REDUCE statements and commands) into the system. File
+names can either be an identifier or a string. The explicit format of these will be system
+dependent and, in many cases, site dependent. The explicit instructions for the
+implementation being used should therefore be consulted for further details. For
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-343">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;in&#x00A0;f1,~ggg.rr.s~;
+</div>
+<!--l. 23--><p class="nopar" > will first load file <span 
+class="pcrr8t-x-x-109">f1</span>, then <span 
+class="pcrr8t-x-x-109">ggg.rr.s</span>. When a semicolon is used as the terminator of
+the IN statement, the statements in the file are echoed on the terminal or written on the
+current output file. If <span 
+class="pcrr8t-x-x-109">$</span><a 
+ id="dx91-175003"></a>is used as the terminator, the input is not shown. Echoing of all or
+part of the input file can be prevented, even if a semicolon was used, by placing an <span 
+class="pcrr8t-x-x-109">off</span>
+<span 
+class="pcrr8t-x-x-109">echo;</span><a 
+ id="dx91-175004"></a><a 
+ id="dx91-175005"></a><a 
+ id="dx91-175006"></a> command in the input file.
+<!--l. 32--><p class="noindent" >Files to be read using <span 
+class="pcrr8t-x-x-109">IN </span>should end with <span 
+class="pcrr8t-x-x-109">;END;</span>. Note the two semicolons! First of all,
+this is protection against obscure difficulties the user will have if there are, by mistake,
+more <span 
+class="pcrr8t-x-x-109">BEGIN</span>s than <span 
+class="pcrr8t-x-x-109">END</span>s on the file. Secondly, it triggers some file control book-keeping
+which may improve system efficiency. If <span 
+class="pcrr8t-x-x-109">END </span>is omitted, an error message
+<span 
+class="pcrr8t-x-x-109">~End-of-file read~ </span>will occur.
+<!--l. 39--><p class="noindent" >While a file is being loaded, the special identifier <span 
+class="pcrr8t-x-x-109">_LINE_</span><a 
+ id="dx91-175007"></a> is replaced by the number of
+the current line in the file currently being read.
+                                                                     
+
+                                                                     
+<!--l. 44--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch12.html#manualse74.html" >Up</a></td><td class="clinks"><a 
+href="manualse75.html" >Next</a></td><td class="clinks"><a 
+href="manualse74.html" >Front</a></td></tr></table><a 
+ id="tailmanualse74.html"></a>  
+</body></html> 

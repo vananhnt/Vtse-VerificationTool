@@ -1,0 +1,514 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>NCPOLY: Non&#8211;commutative polynomial ideals</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse132.html" >Up</a></td><td class="clinks"><a 
+href="manualse133.html" >Next</a></td><td class="clinks"><a 
+href="manualse131.html" >Prev</a></td><td class="clinks"><a 
+href="manualse131.html#tailmanualse131.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse132.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.41    </span> <a 
+ id="x175-66300016.41"></a>NCPOLY: Non&#8211;commutative polynomial ideals</h3>
+<a 
+ id="dx175-663001"></a>
+<a 
+ id="dx175-663002"></a>
+<!--l. 696--><p class="noindent" >This package allows the user to set up automatically a consistent environment for
+computing in an algebra where the non&#8211;commutativity is defined by Lie-bracket
+commutators. The package uses the REDUCE <span 
+class="ptmb8t-x-x-109">noncom </span>mechanism for elementary
+polynomial arithmetic; the commutator rules are automatically computed from the Lie
+brackets.
+<!--l. 702--><p class="noindent" >Authors: Herbert Melenk and Joachim Apel.
+<a 
+ id="dx175-663003"></a>
+<!--l. 3--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.41.1    </span> <a 
+ id="x175-66400016.41.1"></a>Introduction</h4>
+<!--l. 5--><p class="noindent" ><span 
+class="ptmr8t-">REDUCE </span>supports a very general mechanism for computing with objects under a
+non&#8211;commutative multiplication, where commutator relations must be introduced
+explicitly by rule sets when needed. The package <span 
+class="ptmb8t-x-x-109">NCPOLY </span>allows you to set up
+automatically a consistent environment for computing in an algebra where the
+non&#8211;commutativity is defined by Lie-bracket commutators. The package uses the
+<span 
+class="ptmr8t-">REDUCE </span><span 
+class="ptmb8t-x-x-109">noncom </span>mechanism for elementary polynomial arithmetic; the commutator
+rules are automatically computed from the Lie brackets. You can perform polynomial
+arithmetic directly, including <span 
+class="ptmb8t-x-x-109">division </span>and <span 
+class="ptmb8t-x-x-109">factorization</span>. Additionally <span 
+class="ptmb8t-x-x-109">NCPOLY</span>
+supports computations in a one sided ideal (left or right), especially one sided <span 
+class="ptmb8t-x-x-109">Gr</span><span 
+class="ptmb8t-x-x-109">öbner</span>
+bases and <span 
+class="ptmb8t-x-x-109">polynomial reduction</span>.
+<!--l. 19--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.41.2    </span> <a 
+ id="x175-66500016.41.2"></a>Setup, Cleanup</h4>
+<!--l. 21--><p class="noindent" >Before the computations can start the environment for a non&#8211;commutative computation
+must be defined by a call to <span 
+class="ptmb8t-x-x-109">nc_setup</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1043">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;nc_setup(&#x003C;vars&#x003E;[,&#x003C;comms&#x003E;][,&#x003C;dir&#x003E;]);
+</div>
+<!--l. 26--><p class="nopar" > where
+<!--l. 29--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x003C; vars &#x003E; </span>is a list of variables; these must include the non&#8211;commutative quantities.
+<!--l. 32--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x003C; comms &#x003E; </span>is a list of equations <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">&#x003C;u&#x003E;*&#x003C;v&#x003E;</span><span 
+class="pcrr8t-x-x-109">&#x00A0;-</span><span 
+class="pcrr8t-x-x-109">&#x00A0;&#x003C;v&#x003E;*&#x003C;u&#x003E;=&#x003C;rh&#x003E;</span></span></span> where <span 
+class="cmmi-10x-x-109">&#x003C; u &#x003E; </span>and
+<span 
+class="cmmi-10x-x-109">&#x003C; v &#x003E; </span>are members of <span 
+class="cmmi-10x-x-109">&#x003C; vars &#x003E;</span>, and <span 
+class="cmmi-10x-x-109">&#x003C; rh &#x003E; </span>is a polynomial.
+<!--l. 36--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x003C; dir &#x003E; </span>is either <span 
+class="cmmi-10x-x-109">left </span>or <span 
+class="cmmi-10x-x-109">right </span>selecting a left or a right one sided ideal. The initial
+direction is <span 
+class="cmmi-10x-x-109">left</span>.
+<!--l. 39--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">nc_setup </span>generates from <span 
+class="cmmi-10x-x-109">&#x003C; comms &#x003E; </span>the necessary rules to support an algebra where
+all monomials are ordered corresponding to the given variable sequence. All pairs of
+variables which are not explicitly covered in the commutator set are considered as
+commutative and the corresponding rules are also activated.
+<!--l. 46--><p class="noindent" >The second parameter in <span 
+class="ptmb8t-x-x-109">nc_setup </span>may be omitted if the operator is called for the second
+time, e.g. with a reordered variable sequence. In such a case the last commutator set is
+used again.
+<!--l. 51--><p class="noindent" >Remarks:
+     <ul class="itemize1">
+     <li class="itemize">The  variables  need  not  be  declared  <span 
+class="ptmb8t-x-x-109">noncom  </span>-  <span 
+class="ptmb8t-x-x-109">nc_setup  </span>performs  all
+     necessary declarations.
+     </li>
+     <li class="itemize">The   variables   need   not   be   formal   operator   expressions;   <span 
+class="ptmb8t-x-x-109">nc_setup</span>
+     encapsulates  a  variable  <span 
+class="cmmi-10x-x-109">x </span>internally  as  <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">nc!*(!_x)</span></span></span> expressions  anyway
+     where the operator <span 
+class="cmmi-10x-x-109">nc</span><span 
+class="cmr-10x-x-109">!</span><span 
+class="cmsy-10x-x-109">* </span>keeps the noncom property.
+     </li>
+     <li class="itemize">The commands <span 
+class="ptmb8t-x-x-109">order </span>and <span 
+class="ptmb8t-x-x-109">korder </span>should be avoided because <span 
+class="ptmb8t-x-x-109">nc_setup </span>sets
+     these such that the computation results are printed in the correct term order.</li></ul>
+<!--l. 63--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1044">
+&#x00A0;&#x00A0;&#x00A0;nc_setup({KK,NN,k,n},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{NN*n-n*NN=&#x00A0;NN,&#x00A0;KK*k-k*KK=&#x00A0;KK});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NN*n;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;NN*n
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;n*NN;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;NN*n&#x00A0;-&#x00A0;NN
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;nc_setup({k,n,KK,NN});
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;NN*n&#x00A0;-&#x00A0;NN&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;n*NN;
+&#x00A0;<br />
+</div>
+<!--l. 73--><p class="nopar" > Here <span 
+class="cmmi-10x-x-109">KK,NN,k,n </span>are non&#8211;commutative variables where the commutators are
+described as <span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">NN,n</span><span 
+class="cmr-10x-x-109">] = </span><span 
+class="cmmi-10x-x-109">NN</span>, <span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">KK,k</span><span 
+class="cmr-10x-x-109">] = </span><span 
+class="cmmi-10x-x-109">KK</span>.
+<!--l. 77--><p class="noindent" >The current term order must be compatible with the commutators: the product
+<span 
+class="cmmi-10x-x-109">&#x003C; u &#x003E; </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmmi-10x-x-109">&#x003C; v &#x003E; </span>must precede all terms on the right hand side <span 
+class="cmmi-10x-x-109">&#x003C; rh &#x003E; </span>under the current
+term order. Consequently
+     <ul class="itemize1">
+     <li class="itemize">the maximal degree of <span 
+class="cmmi-10x-x-109">&#x003C; u &#x003E; </span>or <span 
+class="cmmi-10x-x-109">&#x003C; v &#x003E; </span>in <span 
+class="cmmi-10x-x-109">&#x003C; rh &#x003E; </span>is 1,
+     </li>
+     <li class="itemize">in a total degree ordering the total degree of <span 
+class="cmmi-10x-x-109">&#x003C; rh &#x003E; </span>may be not higher than
+     1,
+     </li>
+     <li class="itemize">in an elimination degree order (e.g. <span 
+class="cmmi-10x-x-109">lex</span>) all variables in <span 
+class="cmmi-10x-x-109">&#x003C; rh &#x003E; </span>must be
+     below the minimum of <span 
+class="cmmi-10x-x-109">&#x003C; u &#x003E; </span>and <span 
+class="cmmi-10x-x-109">&#x003C; v &#x003E;</span>.
+     </li>
+     <li class="itemize">If <span 
+class="cmmi-10x-x-109">&#x003C; rh &#x003E; </span>does not contain any variables or has at most <span 
+class="cmmi-10x-x-109">&#x003C; u &#x003E; </span>or <span 
+class="cmmi-10x-x-109">&#x003C; v &#x003E;</span>,
+     any term order can be selected.</li></ul>
+<!--l. 90--><p class="noindent" >If you want to use the non&#8211;commutative variables or results from non&#8211;commutative
+computations later in commutative operations it might be necessary to switch off the
+non&#8211;commutative evaluation mode because not all operators in REDUCE are prepared
+for that environment. In such a case use the command
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1045">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;nc_cleanup;
+</div>
+<!--l. 98--><p class="nopar" > without parameters. It removes all internal rules and definitions which <span 
+class="ptmb8t-x-x-109">nc_setup </span>had
+introduced. To reactive non&#8211;commutative call <span 
+class="ptmb8t-x-x-109">nc_setup </span>again.
+<!--l. 103--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.41.3    </span> <a 
+ id="x175-66600016.41.3"></a>Left and right ideals</h4>
+<!--l. 105--><p class="noindent" >A (polynomial) left ideal <span 
+class="cmmi-10x-x-109">L </span>is defined by the axioms
+<!--l. 107--><p class="noindent" ><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">L,v </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">L</span><img 
+src="manual438x.png" alt="=&#x21D2;"  class="Longrightarrow" ><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">L</span>
+<!--l. 109--><p class="noindent" ><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">L</span><img 
+src="manual439x.png" alt="=&#x21D2;"  class="Longrightarrow" ><span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">L </span>for an arbitrary polynomial <span 
+class="cmmi-10x-x-109">k</span>
+<!--l. 111--><p class="noindent" >where &#8220;*&#8221; is the non&#8211;commutative multiplication. Correspondingly, a right ideal <span 
+class="cmmi-10x-x-109">R </span>is
+defined by
+<!--l. 114--><p class="noindent" ><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">R,v </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">R</span><img 
+src="manual440x.png" alt="= &#x21D2;"  class="Longrightarrow" ><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">v </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">R</span>
+<!--l. 116--><p class="noindent" ><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">R</span><img 
+src="manual441x.png" alt="=&#x21D2;"  class="Longrightarrow" ><span 
+class="cmmi-10x-x-109">u </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmsy-10x-x-109">&#x2208; </span><span 
+class="cmmi-10x-x-109">R </span>for an arbitrary polynomial <span 
+class="cmmi-10x-x-109">k</span>
+<!--l. 118--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.41.4    </span> <a 
+ id="x175-66700016.41.4"></a>Gröbner bases</h4>
+<!--l. 120--><p class="noindent" >When a non&#8211;commutative environment has been set up by <span 
+class="ptmb8t-x-x-109">nc_setup</span>, a basis for a left or
+right polynomial ideal can be transformed into a Gröbner basis by the operator
+<span 
+class="ptmb8t-x-x-109">nc_groebner</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1046">
+&#x00A0;&#x00A0;&#x00A0;nc_groebner(&#x003C;plist&#x003E;);
+</div>
+<!--l. 126--><p class="nopar" > Note that the variable set and variable sequence must be defined before in the <span 
+class="ptmb8t-x-x-109">nc_setup </span>call.
+The term order for the Gröbner calculation can be set by using the <span 
+class="ptmb8t-x-x-109">torder </span>declaration. The
+internal steps of the Gröbner calculation can be watched by setting the switches <span 
+class="ptmb8t-x-x-109">trgroeb</span>
+(=list all internal basis polynomials) or <span 
+class="ptmb8t-x-x-109">trgroebs </span>(=list additionally the <span 
+class="cmmi-10x-x-109">S</span>-polynomials)
+<span class="footnote-mark"><a 
+href="manual176.html#fn23x16"><sup class="textsuperscript">23</sup></a></span><a 
+ id="x175-667001f23"></a>.
+<!--l. 138--><p class="noindent" >For details about <span 
+class="ptmb8t-x-x-109">torder</span>, <span 
+class="ptmb8t-x-x-109">trgroeb </span>and <span 
+class="ptmb8t-x-x-109">trgroebs </span>see the <span 
+class="ptmb8t-">REDUCE </span><span 
+class="ptmb8t-x-x-109">GROEBNER</span>
+manual.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1047">
+2:&#x00A0;nc_setup({k,n,NN,KK},{NN*n-n*NN=NN,KK*k-k*KK=KK},left);
+&#x00A0;<br />
+&#x00A0;<br />3:&#x00A0;p1&#x00A0;:=&#x00A0;(n-k+1)*NN&#x00A0;-&#x00A0;(n+1);
+&#x00A0;<br />
+&#x00A0;<br />p1&#x00A0;:=&#x00A0;&#x00A0;-&#x00A0;k*nn&#x00A0;+&#x00A0;n*nn&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;nn&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />4:&#x00A0;p2&#x00A0;:=&#x00A0;(k+1)*KK&#x00A0;-(n-k);
+&#x00A0;<br />
+&#x00A0;<br />p2&#x00A0;:=&#x00A0;k*kk&#x00A0;+&#x00A0;k&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;kk
+&#x00A0;<br />
+&#x00A0;<br />5:&#x00A0;nc_groebner&#x00A0;({p1,p2});
+&#x00A0;<br />
+&#x00A0;<br />{k*nn&#x00A0;-&#x00A0;n*nn&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;nn&#x00A0;+&#x00A0;1,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;k*kk&#x00A0;+&#x00A0;k&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;kk,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;n*nn*kk&#x00A0;-&#x00A0;n*kk&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;nn*kk&#x00A0;-&#x00A0;kk&#x00A0;-&#x00A0;1}
+&#x00A0;<br />
+</div>
+<!--l. 159--><p class="nopar" > Important: Do not use the operators of the GROEBNER package directly as they would
+not consider the non&#8211;commutative multiplication.
+<h4 class="subsectionHead"><span class="titlemark">16.41.5    </span> <a 
+ id="x175-66800016.41.5"></a>Left or right polynomial division</h4>
+<!--l. 166--><p class="noindent" >The operator <span 
+class="ptmb8t-x-x-109">nc_divide </span>computes the one sided quotient and remainder of two
+polynomials:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1048">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;nc_divide(&#x003C;p1&#x003E;,&#x003C;p2&#x003E;);
+</div>
+<!--l. 170--><p class="nopar" > The result is a list with quotient and remainder. The division is performed as a
+pseudo&#8211;division, multiplying <span 
+class="cmmi-10x-x-109">&#x003C; p</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&#x003E; </span>by coefficients if necessary. The result
+<span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">&#x003C; q &#x003E;,&#x003C; r &#x003E;</span><span 
+class="cmsy-10x-x-109">} </span>is defined by the relation
+<!--l. 176--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x003C; c &#x003E; </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmmi-10x-x-109">&#x003C; p</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&#x003E;</span><span 
+class="cmr-10x-x-109">=</span><span 
+class="cmmi-10x-x-109">&#x003C; q &#x003E; </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmmi-10x-x-109">&#x003C; p</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&#x003E; </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">&#x003C; r &#x003E; </span>for direction <span 
+class="cmmi-10x-x-109">left </span>and
+<!--l. 178--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x003C; c &#x003E; </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmmi-10x-x-109">&#x003C; p</span><span 
+class="cmr-10x-x-109">1 </span><span 
+class="cmmi-10x-x-109">&#x003E;</span><span 
+class="cmr-10x-x-109">=</span><span 
+class="cmmi-10x-x-109">&#x003C; p</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&#x003E; </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmmi-10x-x-109">&#x003C; q &#x003E; </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">&#x003C; r &#x003E; </span>for direction <span 
+class="cmmi-10x-x-109">right</span>,
+<!--l. 180--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">&#x003C; c &#x003E; </span>is an expression that does not contain any of the ideal variables, and the
+leading term of <span 
+class="cmmi-10x-x-109">&#x003C; r &#x003E; </span>is lower than the leading term of <span 
+class="cmmi-10x-x-109">&#x003C; p</span><span 
+class="cmr-10x-x-109">2 </span><span 
+class="cmmi-10x-x-109">&#x003E; </span>according to the actual
+term order.
+<!--l. 184--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.41.6    </span> <a 
+ id="x175-66900016.41.6"></a>Left or right polynomial reduction</h4>
+<!--l. 186--><p class="noindent" >For the computation of the one sided remainder of a polynomial modulo a given set of
+other polynomials the operator <span 
+class="ptmb8t-x-x-109">nc_preduce </span>may be used:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1049">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;nc_preduce(&#x003C;polynomial&#x003E;,&#x003C;plist&#x003E;);
+</div>
+<!--l. 191--><p class="nopar" > The result of the reduction is unique (canonical) if and only if <span 
+class="cmmi-10x-x-109">&#x003C; plist &#x003E; </span>is a
+one sided Gröbner basis. Then the computation is at the same time an ideal
+membership test: if the result is zero, the polynomial is member of the ideal, otherwise
+not.
+<!--l. 198--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.41.7    </span> <a 
+ id="x175-67000016.41.7"></a>Factorization</h4>
+<!--l. 200--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.41.7.1    </span> <a 
+ id="x175-67100016.41.7.1"></a>Technique</h5>
+<!--l. 202--><p class="noindent" >Polynomials in a non&#8211;commutative ring cannot be factored using the ordinary <span 
+class="ptmb8t-x-x-109">factorize</span>
+command of <span 
+class="ptmr8t-">REDUCE</span>. Instead one of the operators of this section must be
+used:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1050">
+&#x00A0;&#x00A0;&#x00A0;nc_factorize(&#x003C;polynomial&#x003E;);
+</div>
+<!--l. 207--><p class="nopar" > The result is a list of factors of <span 
+class="cmmi-10x-x-109">&#x003C; polynomial &#x003E;</span>. A list with the input expression is
+returned if it is irreducible.
+<!--l. 211--><p class="noindent" >As non&#8211;commutative factorization is not unique, there is an additional operator which
+computes all possible factorizations
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1051">
+&#x00A0;&#x00A0;&#x00A0;nc_factorize_all(&#x003C;polynomial&#x003E;);
+</div>
+<!--l. 215--><p class="nopar" > The result is a list of factor decompositions of <span 
+class="cmmi-10x-x-109">&#x003C; polynomial &#x003E;</span>. If there are no factors
+at all the result list has only one member which is a list containing the input
+polynomial.
+<!--l. 220--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.41.7.2    </span> <a 
+ id="x175-67200016.41.7.2"></a>Control of the factorization</h5>
+<!--l. 222--><p class="noindent" >In contrast to factoring in commutative polynomial rings, the non&#8211;commutative
+factorization is rather time consuming. Therefore two additional operators allow you to
+reduce the amount of computing time when you look only for isolated factors in special
+context, e.g. factors with a limited degree or factors which contain only explicitly
+specified variables:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1052">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;left_factor(&#x003C;polynomial&#x003E;[,&#x003C;deg&#x003E;[,&#x003C;vars&#x003E;]])
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;right_factor(&#x003C;polynomial&#x003E;[,&#x003C;deg&#x003E;[,&#x003C;vars&#x003E;]])
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;left_factors(&#x003C;polynomial&#x003E;[,&#x003C;deg&#x003E;[,&#x003C;vars&#x003E;]])
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;right_factors(&#x003C;polynomial&#x003E;[,&#x003C;deg&#x003E;[,&#x003C;vars&#x003E;]])
+</div>
+<!--l. 233--><p class="nopar" > where <span 
+class="cmmi-10x-x-109">&#x003C; polynomial &#x003E; </span>is the form under investigation, <span 
+class="cmmi-10x-x-109">&#x003C; vars &#x003E; </span>is an optional list of
+variables which must appear in the factor, and <span 
+class="cmmi-10x-x-109">&#x003C; deg &#x003E; </span>is an optional integer degree
+bound for the total degree of the factor, a zero for an unbounded search, or a monomial
+(product of powers of the variables) where each exponent is an individual degree bound
+for its base variable; unmentioned variables are allowed in arbitrary degree. The
+operators <span 
+class="cmsy-10x-x-109">*</span><span 
+class="cmmi-10x-x-109">factor </span>stop when they have found one factor, while the operators <span 
+class="cmsy-10x-x-109">*</span><span 
+class="cmmi-10x-x-109">factors</span>
+select all one&#8211;sided factors within the given range. If there is no factor of the desired
+type, an empty list is returned by <span 
+class="cmsy-10x-x-109">*</span><span 
+class="cmmi-10x-x-109">factors </span>while the routines <span 
+class="cmsy-10x-x-109">*</span><span 
+class="cmmi-10x-x-109">factor </span>return the input
+polynomial.
+<!--l. 248--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.41.7.3    </span> <a 
+ id="x175-67300016.41.7.3"></a>Time of the factorization</h5>
+<!--l. 250--><p class="noindent" >The share variable <span 
+class="cmmi-10x-x-109">nc</span>_<span 
+class="cmmi-10x-x-109">factor</span>_<span 
+class="cmmi-10x-x-109">time </span>sets an upper limit for the time to be spent for a call
+to the non&#8211;commutative factorizer. If the value is a positive integer, a factorization is
+terminated with an error message as soon as the time limit is reached. The time units are
+milliseconds.
+<!--l. 256--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.41.7.4    </span> <a 
+ id="x175-67400016.41.7.4"></a>Usage of SOLVE</h5>
+<!--l. 258--><p class="noindent" >The factorizer internally uses <span 
+class="cmmi-10x-x-109">solve</span>, which is controlled by the REDUCE&#x00A0;switch
+<span 
+class="cmmi-10x-x-109">varopt</span>. This switch (which per default is set <span 
+class="cmmi-10x-x-109">on</span>) allows, to reorder the variable
+sequence, which is favourable for the normal system. It should be avoided to set <span 
+class="cmmi-10x-x-109">varopt</span>
+<span 
+class="cmmi-10x-x-109">off</span>, when using the non&#8211;commutative factorizer, unless very small polynomials are
+used.
+<!--l. 265--><p class="noindent" >
+                                                                     
+
+                                                                     
+<h4 class="subsectionHead"><span class="titlemark">16.41.8    </span> <a 
+ id="x175-67500016.41.8"></a>Output of expressions</h4>
+<!--l. 267--><p class="noindent" >It is often desirable to have the commutative parts (coefficients) in a non&#8211;commutative
+operation condensed by factorization. The operator
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1053">
+&#x00A0;&#x00A0;&#x00A0;nc_compact(&#x003C;polynomial&#x003E;)
+</div>
+<!--l. 271--><p class="nopar" > collects the coefficients to the powers of the lowest possible non-commutative
+variable.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1054">
+load&#x00A0;ncpoly;
+&#x00A0;<br />
+&#x00A0;<br />nc_setup({n,NN},{NN*n-n*NN=NN})$
+&#x00A0;<br />p1&#x00A0;:=&#x00A0;n**4&#x00A0;+&#x00A0;n**2*nn&#x00A0;+&#x00A0;4*n**2&#x00A0;+&#x00A0;4*n*nn&#x00A0;+&#x00A0;4*nn&#x00A0;+&#x00A0;4;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />p1&#x00A0;:=&#x00A0;n&#x00A0;&#x00A0;+&#x00A0;n&#x00A0;*nn&#x00A0;+&#x00A0;4*n&#x00A0;&#x00A0;+&#x00A0;4*n*nn&#x00A0;+&#x00A0;4*nn&#x00A0;+&#x00A0;4
+&#x00A0;<br />
+&#x00A0;<br />nc_compact&#x00A0;p1;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />(n&#x00A0;&#x00A0;+&#x00A0;2)&#x00A0;&#x00A0;+&#x00A0;(n&#x00A0;+&#x00A0;2)&#x00A0;*nn
+</div>
+<!--l. 287--><p class="nopar" >
+<!--l. 706--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 708--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse132.html" >Up</a></td><td class="clinks"><a 
+href="manualse133.html" >Next</a></td><td class="clinks"><a 
+href="manualse131.html" >Prev</a></td><td class="clinks"><a 
+href="manualse131.html#tailmanualse131.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse132.html" >Front</a></td></tr></table><a 
+ id="tailmanualse132.html"></a>   
+</body></html> 

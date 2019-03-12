@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>XCOLOR: Color factor in some field theories</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse165.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse166.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse164.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse164.html#tailmanualse164.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse165.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.74    </span></span> <a 
+ id="x221-96300016.74"></a><span 
+class="ptmr8t-x-x-120">XCOLOR: Color factor in some field</span>
+<span 
+class="ptmr8t-x-x-120">theories</span></h3>
+<a 
+ id="dx221-963001"></a>
+<a 
+ id="dx221-963002"></a>
+<!--l. 1387--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package calculates the color factor in non-abelian gauge field theories using</span>
+<span 
+class="ptmr8t-x-x-120">an algorithm due to Cvitanovich.</span>
+<!--l. 1390--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Documentation for this package is in plain text.</span>
+<!--l. 1392--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: A. Kryukov.</span>
+<!--l. 3--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Program "xCOLOR" is intended for calculation the colour factor in non-abelian</span>
+<span 
+class="ptmr8t-x-x-120">gauge field theories. It is realized Cvitanovich algorithm [1]. In comparision with</span>
+<span 
+class="ptmr8t-x-x-120">"COLOR" program [2] it was made many improvements. The package was</span>
+<span 
+class="ptmr8t-x-x-120">writen by symbolic mode. This version is faster then [2] more then 10</span>
+<span 
+class="ptmr8t-x-x-120">times.</span>
+<!--l. 12--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">After load the program by the following command     </span><span 
+class="pcrr8t-x-x-120">load xcolor</span><span 
+class="ptmr8t-x-x-120">;</span>
+<br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">user can be able to use the next additional commands and operators.</span>
+<!--l. 15--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x221-96400016.74"></a><span 
+class="ptmr8t-x-x-120">Command SUdim.</span></h4>
+<!--l. 17--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Format: </span><span 
+class="pcrr8t-x-x-120">SUdim &#x003C;any expression&#x003E;</span><span 
+class="ptmr8t-x-x-120">; </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Set the order of SU group. </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">The default value is 3, i.e. SU(3).</span>
+<!--l. 23--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x221-96500016.74"></a><span 
+class="ptmr8t-x-x-120">Command SpTT.</span></h4>
+<!--l. 25--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Format: </span><span 
+class="pcrr8t-x-x-120">SpTT &#x003C;any expression&#x003E;</span><span 
+class="ptmr8t-x-x-120">; </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Set the normalization coefficient A: Sp(TiTj) = A*Delta(i,j). Default value is</span>
+<span 
+class="ptmr8t-x-x-120">1/2.</span>
+                                                                     
+
+                                                                     
+<!--l. 30--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x221-96600016.74"></a><span 
+class="ptmr8t-x-x-120">Operator QG.</span></h4>
+<!--l. 32--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Format: </span><span 
+class="pcrr8t-x-x-120">QG(inQuark,outQuark,Gluon)</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Describe the quark-gluon vertex. Parameters may be any identifiers. First and</span>
+<span 
+class="ptmr8t-x-x-120">second of then must be in- and out- quarks correspondently. Third one is a</span>
+<span 
+class="ptmr8t-x-x-120">gluon.</span>
+<!--l. 38--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x221-96700016.74"></a><span 
+class="ptmr8t-x-x-120">Operator G3.</span></h4>
+<!--l. 40--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Format: </span><span 
+class="pcrr8t-x-x-120">G3(Gluon1,Gluon2,Gluon3)</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Describe the three-gluon vertex. Parameters may be any identifiers. The order of</span>
+<span 
+class="ptmr8t-x-x-120">gluons must be clock. </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">In terms of QG and G3 operators you input diagram in "color" space as a product</span>
+<span 
+class="ptmr8t-x-x-120">of these operators. For example.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1294">
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;Diagram:&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;REDUCE&#x00A0;expression:
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;e1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;----&#x003E;---
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;\
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;e2&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;v1*..........*v2&#x00A0;&#x00A0;&#x003C;===&#x003E;&#x00A0;&#x00A0;QG(e3,e1,e2)*QG(e1,e3,e2)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;\&#x00A0;&#x00A0;&#x00A0;e3&#x00A0;&#x00A0;&#x00A0;/
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;----&#x003C;---
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />Here:&#x00A0;---&#x003E;---&#x00A0;quark
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;.......&#x00A0;gluon
+&#x00A0;<br />
+</div>
+<!--l. 68--><p class="nopar" >
+<!--l. 70--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">More detail see [2]. </span><br 
+class="newline" /><span class="underline"><span 
+class="ptmr8t-x-x-120">References.</span></span> <br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">[1] P.Cvitanovic, Phys. Rev. D14(1976), p.1536.</span>
+<!--l. 77--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">[2] A.Kryukov &amp; A.Rodionov, Comp. Phys. Comm., 48(1988), pp.327-334.</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Please send any remarks to my address above! </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Good luck!</span>
+<!--l. 1396--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1398--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse165.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse166.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse164.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse164.html#tailmanualse164.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse165.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse165.html"></a>   
+</body></html> 

@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>CVIT: Fast calculation of Dirac gamma matrix traces</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse108.html" >Up</a></td><td class="clinks"><a 
+href="manualse109.html" >Next</a></td><td class="clinks"><a 
+href="manualse107.html" >Prev</a></td><td class="clinks"><a 
+href="manualse107.html#tailmanualse107.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse108.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.17    </span> <a 
+ id="x140-37300016.17"></a>CVIT: Fast calculation of Dirac gamma matrix
+traces</h3>
+<a 
+ id="dx140-373001"></a>
+<a 
+ id="dx140-373002"></a>
+<!--l. 323--><p class="noindent" >This package provides an alternative method for computing traces of Dirac gamma
+matrices, based on an algorithm by Cvitanovich that treats gamma matrices as 3-j
+symbols.
+<!--l. 327--><p class="noindent" >Authors: V.Ilyin, A.Kryukov, A.Rodionov, A.Taranov.
+<!--l. 2--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x140-37400016.17"></a>Abstract</h4>
+<!--l. 4--><p class="noindent" >In modern high energy physics the calculation of Feynman diagrams are still very
+important. One of the difficulties of these calculations are trace calculations. So the
+calculation of traces of Dirac&#8217;s <span 
+class="cmmi-10x-x-109">&#x03B3;</span>-matrices were one of first task of computer algebra
+systems. All available algorithms are based on the fact that gamma-matrices constitute a
+basis of a Clifford algebra:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-812">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{Gm,Gn}&#x00A0;=&#x00A0;2gmn.
+</div>
+<!--l. 12--><p class="nopar" >
+<!--l. 14--><p class="noindent" >We present the implementation of an alternative algorithm based on treating of
+gamma-matrices as 3-j symbols (details may be found in [1,2]).
+<!--l. 18--><p class="noindent" >The program consists of 5 modules described below.
+<!--l. 20--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-813">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;MODULES&#x00A0;CROSS&#x00A0;REFERENCES
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;+--------+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;|&#x00A0;REDUCE&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;|________|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|ISIMP1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ISIMP2|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+-----------------------+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;-----|&#x00A0;RED_TO_CVIT_INTERFACE&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|_______________________|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;CALC_SPUR|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|REPLACE_BY_VECTOR
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|REPLACE_BY_VECTORP
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|GAMMA5P
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;^&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;V
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+--------------+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;CVITMAPPING&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|______________|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;^
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|PRE-CALC-MAP
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|CALC_MAP_TAR
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|CALC_DENTAR
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+-------------+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;INTERFIERZ&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|_____________|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|MK-NUMR
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|STRAND-ALG-TOP
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;^
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;MAP-TO-STRAND|&#x00A0;&#x00A0;&#x00A0;&#x00A0;+------------+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;INCIDENT1|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;EVAL-MAPS&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|____________|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;^&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|DELETEZ1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|CONTRACT-STRAND
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+----------------+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|COLOR-STRAND
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;MAP-TO-STRAND&#x00A0;&#x00A0;|----&#x003E;---+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|________________|
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Requires&#x00A0;of&#x00A0;REDUCE&#x00A0;version:&#x00A0;3.2,&#x00A0;3.3.
+&#x00A0;<br />
+</div>
+                                                                     
+
+                                                                     
+<!--l. 60--><p class="nopar" >
+<h4 class="likesubsectionHead"><a 
+ id="x140-37500016.17"></a>Module RED_TO_CVIT_INTERFACE</h4>
+<div class="center" 
+>
+<!--l. 65--><p class="noindent" >
+<!--l. 66--><p class="noindent" >Author: A.P.Kryukov<br />
+Purpose:interface REDUCE and CVIT package</div>
+<!--l. 70--><p class="noindent" >RED_TO_CVIT_INTERFACE module is intended for connection of REDUCE with
+main module of CVIT package. The main idea is to preserve standard REDUCE syntax
+for high energy calculations. For realization of this we redefine &#x00A0;SYMBOLIC
+PROCEDURE ISIMP1 from HEPhys module of REDUCE system.
+<!--l. 76--><p class="noindent" >After loading CVIT package user may use switch CVIT which is <span 
+class="pcrr8t-x-x-109">ON </span>by default. If switch
+CVIT is <span 
+class="pcrr8t-x-x-109">OFF </span>then calculations of Diracs matrices traces are performed using
+standard REDUCE facilities. If CVIT switch is <span 
+class="pcrr8t-x-x-109">ON </span>then CVIT package will be
+active.
+<!--l. 81--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">RED_TO_CVIT_INTERFACE </span>module performs some primitive simplification and
+control input data independently. For example it remove <span 
+class="cmmi-10x-x-109">G</span><sub><span 
+class="cmmi-8">m</span></sub><span 
+class="cmmi-10x-x-109">G</span><sub><span 
+class="cmmi-8">m</span></sub>, check parity of the
+number of Dirac matrices in each trace <span 
+class="ptmri8t-x-x-109">etc</span>. There is one principal restriction concerning
+G5-matrix. There are no closed form for trace in non-integer dimension case
+when trace include G5-matrix. The next restriction is that if the space-time
+dimension is integer then it must be even (2,4,6,...). If these and other restrictions are
+violated then the user get corresponding error message. List of messages is
+included.
+<div class="center" 
+>
+<!--l. 91--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-814">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;LIST&#x00A0;OF&#x00A0;IMPORTED&#x00A0;FUNCTIONS
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;Function&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;From&#x00A0;module
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;ISIMP2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;HEPhys
+&#x00A0;<br />&#x00A0;CALC_SPUR&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;CVITMAPPING
+&#x00A0;<br />-------------------------------------------------
+</div>
+<!--l. 100--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-815">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;LIST&#x00A0;OF&#x00A0;EXPORTED&#x00A0;FUNCTION
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;Function&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;To&#x00A0;module
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;ISIMP1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;HEPhys&#x00A0;(redefine)
+&#x00A0;<br />&#x00A0;REPLACE_BY_VECTOR&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;EVAL_MAP
+&#x00A0;<br />&#x00A0;REPLACE_BY_VECTORP&#x00A0;&#x00A0;&#x00A0;&#x00A0;EVAL__MAP
+&#x00A0;<br />&#x00A0;GAMMA5P&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;CVITMAPPING,&#x00A0;EVAL_MAP
+&#x00A0;<br />-------------------------------------------------
+</div>
+<!--l. 112--><p class="nopar" ></div>
+<!--l. 117--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x140-37600016.17"></a>Module CVITMAPPING</h4>
+<div class="center" 
+>
+<!--l. 119--><p class="noindent" >
+<!--l. 120--><p class="noindent" >Author: A.Ya.Rodionov<br />
+Purpose: graphs reduction</div>
+<!--l. 124--><p class="noindent" >CVITMAPPING module is intended for diagrams calculation according to
+Cvitanovic - Kennedy algorithm. The top function of this module CALC_SPUR is
+called from RED_TO_CVIT_INTERFACE interface module. The main idea of
+the algorithm consists in diagram simplification according to rules (1.9&#8217;) and
+(1.14) from [1]. The input data - trace of Diracs gamma matrices (G-matrices)
+has a form of a list of identifiers lists with cyclic order. Some of identifiers
+may be identical. In this case we assume summation over dummy indices. So
+trace Sp(GbGr).Sp(GwGbGcGwGcGr) is represented as list ((b r) (w b c w c
+r)).
+<!--l. 135--><p class="noindent" >The first step is to transform the input data to &#8220;map&#8221; structure and then to reduce the map
+to a &#8220;simple&#8221; one. This transformation is made by function TRANSFORM_MAP_ (top
+function). Transformation is made in three steps. At the first step the input data are
+transformed to the internal form - a map (by function PREPARE_MAP_). At the second
+                                                                     
+
+                                                                     
+step a map is subjected to Fierz transformations (1.14) (function MK_SIMPLE_MAP_).
+At this step of optimization can be maid (if switch CVITOP is on) by function
+MK_FIRZ_OP. In this case Fierzing starts with linked vertices with minimal
+distance (number of vertices) between them. After Fierz transformations map
+is further reduced by vertex simplification routine MK_SIMPLE_VERTEX
+using (1.9&#8217;). Vertices reduced to primitive ones, that is to vertices with three or
+less edges. This is the last (third) step in transformation from input to internal
+data.
+<!--l. 150--><p class="noindent" >The next step is optional. If switch CVITBTR is on factorisation of bubble
+(function FIND_BUBBLES1) and triangle (function FIND_TRIANGLES1)
+submaps is made. This factorisation is very efficient for &#8220;wheel&#8221; diagrams and
+unnecessary for &#8220;lattice&#8221; diagrams. Factorisation is made recursively by substituting
+composed edges for bubbles and composed vertices for triangles. So check (function
+SORT_ATLAS) must be done to test possibility of future marking procedure. If
+the check fails then a new attempt to reorganize atlas (so we call complicated
+structure witch consists of MAP, COEFFicient and DENOMinator) is made. This
+cause backtracking (but very seldom). Backtracking can be traced by turning
+on switch CVITRACE. FIND_BUBLTR is the top function of this program&#8217;s
+branch.
+<!--l. 163--><p class="noindent" >Then atlases must be prepared (top function WORLD_FROM_ATLAS) for final
+algebraic calculations. The resulted object called &#8220;world&#8221; consists of edges
+names list (EDGELIST), their marking variants (VARIANTS) and WORLD1
+structure. WORLD1 structure differs from WORLD structure in one point. It
+contains MAP2 structure instead of MAP structure. MAP2 is very complicated
+structure and consist of VARIANTS, marking plan and GSTRAND. (GSTRAND
+constructed by PRE!-CALC!-MAP_ from INTERFIERZ module.) By marking we
+understand marking of edges with numbers according to Cvitanovic - Kennedy
+algorithm.
+<!--l. 173--><p class="noindent" >The last step is performed by function CALC_WORLD. At this step algebraic
+calculations are done. Two functions CALC_MAP_TAR and CALC_DENTAR from
+INTERFIERZ module make algebraic expressions in the prefix form. This expressions
+are further simplified by function <span 
+class="pcrr8t-x-x-109">REVAL</span>. This is the REDUCE system general function
+for algebraic expressions simplification. <span 
+class="pcrr8t-x-x-109">REVAL </span>and <span 
+class="pcrr8t-x-x-109">SIMP!* </span>are the only REDUCE
+functions used in this module.
+<!--l. 181--><p class="noindent" >There are also some functions for printing several internal structures: PRINT_ATLAS,
+PRINT_VERTEX, PRINT_EDGE, PRINT_COEFF, PRINT_DENOM. This functions
+can be used for debugging.
+<!--l. 185--><p class="noindent" >If an error occur in module CVITMAPPING the error message &#8220;ERROR IN MAP
+CREATING ROUTINES&#8221; is displayed. Error has number 55. The switch CVITERROR
+allows to give full information about error: name of function where error occurs and
+names and values of function&#8217;s arguments. If CVITERROR switch is on and
+                                                                     
+
+                                                                     
+backtracking fails message about error in SORT_ATLAS function is printed. The result
+of computation however will be correct because in this case factorized structure is not
+used. This happens extremely seldom.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-816">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x00A0;of&#x00A0;imported&#x00A0;function
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;function&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;from&#x00A0;module
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;REVAL&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;REDUCE
+&#x00A0;<br />&#x00A0;SIMP!*&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;REDUCE
+&#x00A0;<br />&#x00A0;CALC_MAP_TAR&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;INTERFIERZ
+&#x00A0;<br />&#x00A0;CALC_DENTAR&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;INTERFIERZ
+&#x00A0;<br />&#x00A0;PRE!-CALC!-MAP_&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;INTERFIERZ
+&#x00A0;<br />&#x00A0;GAMMA5P&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;RED_TO_CVIT_INTERFACE
+&#x00A0;<br />-------------------------------------------------
+</div>
+<!--l. 207--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-817">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x00A0;of&#x00A0;exported&#x00A0;function
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;function&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;to&#x00A0;module
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;CALC_SPUR&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;REDUCE&#x00A0;-&#x00A0;CVIT&#x00A0;interface
+&#x00A0;<br />-------------------------------------------------
+</div>
+<!--l. 216--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-818">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Data&#x00A0;structure
+&#x00A0;<br />&#x00A0;WORLD&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(EDGELIST,VARIANTS,WORLD1)
+&#x00A0;<br />&#x00A0;WORLD1&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(MAP2,COEFF,DENOM)
+&#x00A0;<br />&#x00A0;MAP2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(MAPS,VARIANTS,PLAN)
+&#x00A0;<br />&#x00A0;MAPS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(EDGEPAIR&#x00A0;.&#x00A0;GSTRAND)
+&#x00A0;<br />&#x00A0;MAP1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(EDGEPAIR&#x00A0;.&#x00A0;MAP)
+&#x00A0;<br />&#x00A0;MAP&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;list&#x00A0;of&#x00A0;VERTICES&#x00A0;(unordered)
+&#x00A0;<br />&#x00A0;EDGEPAIR&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(OLDEDGELIST&#x00A0;.&#x00A0;NEWEDGELIST)
+&#x00A0;<br />&#x00A0;COEFF&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;list&#x00A0;of&#x00A0;WORLDS&#x00A0;(unordered)
+&#x00A0;<br />&#x00A0;ATLAS&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(MAP,COEFF,DENOM)
+&#x00A0;<br />&#x00A0;GSTRAND&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(STRAND*,MAP,TADPOLES,DELTAS)
+&#x00A0;<br />&#x00A0;VERTEX&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;list&#x00A0;of&#x00A0;EDGEs&#x00A0;(with&#x00A0;cyclic&#x00A0;order)
+&#x00A0;<br />&#x00A0;EDGE&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(NAME,PROPERTY,TYPE)
+&#x00A0;<br />&#x00A0;NAME&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;ATOM
+&#x00A0;<br />&#x00A0;PROPERTY&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;(FIRSTPAIR&#x00A0;.&#x00A0;SECONDPAIR)
+&#x00A0;<br />&#x00A0;TYPE&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;::=&#x00A0;&#x00A0;T&#x00A0;or&#x00A0;NIL
+&#x00A0;<br />&#x00A0;------------------------------------------------
+&#x00A0;<br />&#x00A0;*Define&#x00A0;in&#x00A0;module&#x00A0;MAP!-TO!-STRAND.
+&#x00A0;<br />
+</div>
+<!--l. 238--><p class="nopar" >
+<!--l. 240--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x140-37700016.17"></a>Modules INTERFIERZ, EVAL_MAPS, AND MAP-TO-STRAND.</h4>
+<div class="center" 
+>
+<!--l. 242--><p class="noindent" >
+<!--l. 243--><p class="noindent" >Author: A.Taranov<br />
+Purpose: evaluate single Map</div>
+<!--l. 247--><p class="noindent" >Module INTERFIERZ exports to module CVITMAPPING three functions:
+PRE-CALC-MAP_, CALC-MAP_TAR, CALC-DENTAR.
+<!--l. 250--><p class="noindent" >Function PRE-CALC-MAP_ is used for preliminary processing of a map. It returns a list
+                                                                     
+
+                                                                     
+of the form (STRAND NEWMAP TADEPOLES DELTAS) where STRAND is strand
+structure described in MAP-TO-STRAND module. NEWMAP is a map structure
+without &#8220;tadepoles&#8221; and &#8220;deltas&#8221;. &#8220;Tadepole&#8221; is a loop connected with map with only
+one line (edge). &#8220;Delta&#8221; is a single line disconnected from a map. TADEPOLES is a list
+of &#8220;tadepole&#8221; submaps. DELTAS is a list (CONS E1 E2) where E1 and E2
+are
+<!--l. 258--><p class="noindent" >Function CALC_MAP_TAR takes a list of the same form as returned by
+PRE-CALC-MAP_, a-list, of the form (... edge . weight ... ) and returns a prefix form of
+algebraic expression corresponding to the map numerator.
+<!--l. 263--><p class="noindent" >Function CALC-DENTAR returns a prefix form of algebraic expression corresponding to
+the map denominator.
+<!--l. 266--><p class="noindent" >Module EVAL-MAP exports to module INTERFIERZ functions MK-NUMR and
+STRAND-ALG-TOP.
+<!--l. 269--><p class="noindent" >Function MK-NUMR returns a prefix form for some combinatorial coefficient
+(Pohgammer symbol).
+<!--l. 272--><p class="noindent" >Function STRAND-ALG-TOP performs an actual computation of a prefix form of
+algebraic expression corresponding to the map numerator. This computation is based on
+a &#8220;strand&#8221; structure constructed from the &#8220;map&#8221; structure.
+<!--l. 277--><p class="noindent" >Module MAP-TO-STRAND exports functions MAP-TO-STRAND, INCIDENT1 to
+module INTERFIERZ and functions DELETEZ1, CONTRACT-STRAND,
+COLOR-STRAND to module EVAL-MAPS.
+<!--l. 281--><p class="noindent" >Function INCIDENT1 is a selector in &#8220;strand&#8221; structure. DELETEZ1 performs auxiliary
+optimization of &#8220;strand&#8221;. MAP-TO-STRAND transforms &#8220;map&#8221; to &#8220;strand&#8221; structure.
+The latter is describe in program module.
+<!--l. 286--><p class="noindent" >CONTRACT-STRAND do strand vertex simplifications of &#8220;strand&#8221; and COLOR-STRAND
+finishes strand generation.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-819">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Description&#x00A0;of&#x00A0;STRAND&#x00A0;&#x00A0;data&#x00A0;structure.
+&#x00A0;<br />&#x00A0;STRAND&#x00A0;::=&#x003C;LIST&#x00A0;OF&#x00A0;VERTEX&#x003E;
+&#x00A0;<br />&#x00A0;VERTEX&#x00A0;::=&#x003C;NAME&#x003E;&#x00A0;.&#x00A0;(&#x003C;LIST&#x00A0;OF&#x00A0;ROAD&#x003E;&#x00A0;&#x003C;LIST&#x00A0;OF&#x00A0;ROAD&#x003E;)
+&#x00A0;<br />&#x00A0;ROAD&#x00A0;&#x00A0;&#x00A0;::=&#x003C;ID&#x003E;&#x00A0;.&#x00A0;NUMBER
+&#x00A0;<br />&#x00A0;NAME&#x00A0;&#x00A0;&#x00A0;::=NUMBER
+</div>
+<!--l. 296--><p class="nopar" >
+<!--l. 299--><p class="noindent" >
+<h5 class="likesubsubsectionHead"><a 
+ id="x140-37800016.17"></a> LIST OF MESSAGES</h5>
+     <ul class="itemize1">
+     <li class="itemize">CALC_SPUR: <span 
+class="cmmi-10x-x-109">&#x003C;</span>vecdim<span 
+class="cmmi-10x-x-109">&#x003E; </span>IS NOT EVEN SPACE-TIME DIMENSION The
+     dimension of space-time <span 
+class="cmmi-10x-x-109">&#x003C;</span>vecdimis integer but not even. Only even numeric
+     dimensions are allowed.
+     </li>
+     <li class="itemize">NOSPUR  NOT  YET  IMPLEMENTED  Attempt  to  calculate  trace  when
+     NOSPUR switch is on. This facility is not implemented now.
+     </li>
+     <li class="itemize">G5  INVALID  FOR  VECDIM  NEQ  4  Attempt  to  calculate  trace  with
+     gamma5-matrix for space-time dimension not equal to 4.
+     </li>
+     <li class="itemize">CALC_SPUR:  <span 
+class="cmmi-10x-x-109">&#x003C;</span>expr<span 
+class="cmmi-10x-x-109">&#x003E; </span>HAS  NON-UNIT  DENOMINATOR  The  &#x003C;expr&#x003E;
+     has non-unit denominator.
+     </li>
+     <li class="itemize">THREE  INDICES  HAVE  NAME  <span 
+class="cmmi-10x-x-109">&#x003C;</span>name<span 
+class="cmmi-10x-x-109">&#x003E; </span>There  are  three  indices  with
+     equal names in evaluated expression.
+     </li></ul>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-820">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x00A0;of&#x00A0;switches
+&#x00A0;<br />------------------------------------------------------------
+&#x00A0;<br />&#x00A0;switch&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;default&#x00A0;&#x00A0;&#x00A0;&#x00A0;comment
+&#x00A0;<br />------------------------------------------------------------
+&#x00A0;<br />&#x00A0;CVIT&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ON&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;If&#x00A0;it&#x00A0;is&#x00A0;on&#x00A0;then&#x00A0;use&#x00A0;Kennedy-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Cvitanovic&#x00A0;algorithm&#x00A0;else&#x00A0;use
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;standard&#x00A0;facilities.
+&#x00A0;<br />&#x00A0;CVITOP&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;OFF&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Fierz&#x00A0;optimization&#x00A0;switch
+&#x00A0;<br />&#x00A0;CVITBTR&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ON&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Bubbles&#x00A0;and&#x00A0;triangles
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorisation&#x00A0;switch
+&#x00A0;<br />&#x00A0;CVITRACE&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;OFF&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Backtracking&#x00A0;tracing&#x00A0;switch
+&#x00A0;<br />------------------------------------------------------------
+</div>
+<!--l. 336--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-821">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Functions&#x00A0;cross&#x00A0;references*.
+&#x00A0;<br />
+&#x00A0;<br />CALC_SPUR
+&#x00A0;<br />&#x00A0;|
+&#x00A0;<br />&#x00A0;+--&#x003E;SIMP!*&#x00A0;(REDUCE)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+--&#x003E;CALC_SPUR0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;TRANSFORM_MAP_
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;MK_SIMPLE_VERTEX
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;MK_SIMPLE_MAP_
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;MK_SIMPLE_MAP_1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;MK_FIERS_OP
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;WORLD_FROM_ATLAS
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;CONSTR_WORLDS
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+----&#x003E;MK_WORLD1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;MAP_2_FROM_MAP_1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;MARK_EDGES
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;MAP_1_TO_STRAND
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+--&#x003E;PRE!-CALC!-MAP_
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(INTERFIRZ)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;CALC_WORLD
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;CALC!-MAP_TAR&#x00A0;(INTERFIRZ)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;CALC!-DENTAR&#x00A0;(INTERFIRZ)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;REVAL&#x00A0;(REDUCE)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;FIND_BUBLTR
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+                                                                     
+
+                                                                     
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;FIND_BUBLTR0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;SORT_ATLAS
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;FIND_BUBLTR1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;|---&#x003E;FIND_BUBLES1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+---&#x003E;FIND_TRIANGLES1
+&#x00A0;<br />*Unmarked&#x00A0;functions&#x00A0;are&#x00A0;from&#x00A0;CVITMPPING&#x00A0;module.
+&#x00A0;<br />
+</div>
+<!--l. 388--><p class="nopar" >
+<!--l. 391--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x140-37900016.17"></a>References</h4>
+     <ul class="itemize1">
+     <li class="itemize">1. Ilyin V.A., Kryukov A.P., Rodionov A.Ya., Taranov A.Yu. Fast algorithm
+     for calculation of Diracs gamma-matrices traces. SIGSAM Bull., 1989, v.23,
+     no.4, pp.15-24.
+     </li>
+     <li class="itemize">2. Kennedy A.D. Phys.Rev., 1982, D26, p.1936.</li></ul>
+<!--l. 404--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x140-38000016.17"></a>Keywords</h4>
+<!--l. 406--><p class="noindent" >REDUCE, GAMMA-MATRIX, TRACE, SPACE-TIME DIMENSION, HIGH
+ENERGY PHYSICS.
+<!--l. 331--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 333--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse108.html" >Up</a></td><td class="clinks"><a 
+href="manualse109.html" >Next</a></td><td class="clinks"><a 
+href="manualse107.html" >Prev</a></td><td class="clinks"><a 
+href="manualse107.html#tailmanualse107.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse108.html" >Front</a></td></tr></table><a 
+ id="tailmanualse108.html"></a>   
+</body></html> 

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Asymptotic Commands</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch11.html#manualse73.html" >Up</a></td><td class="clinks"><a 
+href="manualse72.html" >Prev</a></td><td class="clinks"><a 
+href="manualse72.html#tailmanualse72.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse73.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">11.4    </span> <a 
+ id="x89-17300011.4"></a>Asymptotic Commands</h3>
+<a 
+ id="dx89-173001"></a>
+<!--l. 742--><p class="noindent" >In expansions of polynomials involving variables that are known to be small, it is often
+desirable to throw away all powers of these variables beyond a certain point to avoid
+unnecessary computation. The command <span 
+class="pcrr8t-x-x-109">LET </span>may be used to do this. For example, if
+only powers of <span 
+class="pcrr8t-x-x-109">X </span>up to <span 
+class="pcrr8t-x-x-109">x^7 </span>are needed, the command
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-341">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;x^8&#x00A0;=&#x00A0;0;
+</div>
+<!--l. 749--><p class="nopar" > will cause the system to delete all powers of <span 
+class="pcrr8t-x-x-109">X </span>higher than 7.
+<!--l. 752--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">CAUTION: </span>This particular simplification works differently from most substitution
+mechanisms in REDUCE in that it is applied during polynomial manipulation rather than
+to the whole evaluated expression. Thus, with the above rule in effect, <span 
+class="pcrr8t-x-x-109">x^10/x^5 </span>would
+give the result zero, since the numerator would simplify to zero. Similarly <span 
+class="pcrr8t-x-x-109">x^20/x^10</span>
+would give a <span 
+class="pcrr8t-x-x-109">Zero divisor </span>error message, since both numerator and denominator
+would first simplify to zero.
+<!--l. 762--><p class="noindent" ><a 
+ id="command:WEIGHT"></a> The method just described is not adequate when expressions involve several variables
+having different degrees of smallness. In this case, it is necessary to supply
+an asymptotic weight to each variable and count up the total weight of each
+product in an expanded expression before deciding whether to keep the term or
+not. There are two associated commands in the system to permit this type of
+asymptotic constraint. The command <span 
+class="pcrr8t-x-x-109">WEIGHT</span><a 
+ id="dx89-173002"></a> takes a list of equations of the
+form
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">kernel form</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="pcrr8t-x-x-109">=</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">number</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div>
+<!--l. 774--><p class="noindent" >where <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">number</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> must be a positive integer (not just evaluate to a positive integer). This
+command assigns the weight <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">number</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> to the relevant kernel form. A check is then made
+in all algebraic evaluations to see if the total weight of the term is greater than the weight
+level assigned to the calculation. If it is, the term is deleted. To compute the total weight
+of a product, the individual weights of each kernel form are multiplied by their
+corresponding powers and then added.
+<!--l. 782--><p class="noindent" ><a 
+ id="command:WTLEVEL"></a> The weight level of the system is initially set to 1. The user may change this setting by
+the command<a 
+ id="dx89-173003"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-342">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;wtlevel&#x00A0;&#x003C;number&#x003E;;
+</div>
+<!--l. 787--><p class="nopar" > which sets <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">number</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> as the new weight level of the system. <span 
+class="pcrr8t-x-x-109">meta </span>must evaluate to a
+positive integer. WTLEVEL will also allow NIL as an argument, in which case the
+current weight level is returned.
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch11.html#manualse73.html" >Up</a></td><td class="clinks"><a 
+href="manualse72.html" >Prev</a></td><td class="clinks"><a 
+href="manualse72.html#tailmanualse72.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse73.html" >Front</a></td></tr></table><a 
+ id="tailmanualse73.html"></a>  
+</body></html> 

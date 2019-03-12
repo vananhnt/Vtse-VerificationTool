@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>C  Changes  since  Version  3.8</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualap3.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualli4.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualap2.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualap2.html#tailmanualap2.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualap3.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h2 class="appendixHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">Appendix</span><span 
+class="ptmr8t-x-x-120">&#x00A0;C</span></span><br /><a 
+ id="x256-1051000C"></a><span 
+class="ptmr8t-x-x-120">Changes  since  Version  3.8</span></h2>
+<div class="likeparagraphTOCS">
+</div>
+<!--l. 3--><p class="noindent" ><span class="likeparagraphHead"><a 
+ id="x256-1052000C"></a><span 
+class="ptmr8t-x-x-120">New  packages</span></span>
+<span 
+class="ptmr8t-x-x-120">assert  bibasis  breduce  cde  cdiff  clprl  gcref  guardian  lalr  lessons  libreduce</span>
+<span 
+class="ptmr8t-x-x-120">listvecops  lpdo  redfront  reduce4  sstools  utf8</span>
+<!--l. 23--><p class="noindent" ><span class="likeparagraphHead"><a 
+ id="x256-1053000C"></a><span 
+class="ptmr8t-x-x-120">Core  package  rlisp</span></span>
+<span 
+class="ptmr8t-x-x-120">Support  for  namespaces  (::)</span>
+<!--l. 27--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Default  value  in  switch  statement</span>
+<!--l. 29--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Support  for  utf8  characters</span>
+<!--l. 31--><p class="noindent" ><span class="likeparagraphHead"><a 
+ id="x256-1054000C"></a><span 
+class="ptmr8t-x-x-120">Core  package  poly</span></span>
+<span 
+class="ptmr8t-x-x-120">Improvements  for  differentiation:  new  switches  </span><span 
+class="pcrr8t-x-x-120">expanddf</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">allowdfint</span>
+<span 
+class="ptmr8t-x-x-120">etc  (from  odesolve)</span>
+<!--l. 36--><p class="noindent" ><span class="likeparagraphHead"><a 
+ id="x256-1055000C"></a><span 
+class="ptmr8t-x-x-120">Core  package  alg</span></span>
+<span 
+class="ptmr8t-x-x-120">New  switch  </span><span 
+class="pcrr8t-x-x-120">precise_complex</span>
+<!--l. 40--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Improvements  for  switch  </span><span 
+class="pcrr8t-x-x-120">combineexpt </span><span 
+class="ptmr8t-x-x-120">(exptchk.red)</span>
+<!--l. 42--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">New  command  </span><span 
+class="pcrr8t-x-x-120">unset</span>
+<!--l. 44--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">New  operators  </span><span 
+class="pcrr8t-x-x-120">continued_fraction</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">totaldeg</span>
+<!--l. 46--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Operators  now  defined  in  the  REDUCE  core:</span><br 
+class="newline" /><span 
+class="pcrr8t-x-x-120">changevar</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">divide</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">pseudo_divide</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">pseudo_div</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">pseudo_quotient</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">pseudo_remainder</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">si</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">ci</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">gamma</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">igamma</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">psi</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">polygamma</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">beta</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">ibeta</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">euler</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">bernoulli</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">pochhammer</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">lerch_phi</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">polylog</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">zeta</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">besselj</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">bessely</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">besseli</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">besselk</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">hankel1</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">hankel2</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">kummerM</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">kummerU</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">struveh</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">struvel</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">lommel1</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">lommel2</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">whittakerm</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">whittakerw</span><span 
+class="ptmr8t-x-x-120">,</span>
+                                                                     
+
+                                                                     
+<span 
+class="pcrr8t-x-x-120">Airy_Ai</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">Airy_Bi</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">Airy_AiPrime</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">Airy_biprime</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">binomial</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">solidharmonic</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">sphericalharmonic</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">fibonacci</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="pcrr8t-x-x-120">fibonaccip</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">motzkin</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">hypergeometric</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">MeijerG</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 77--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Constants  now  part  of  the  core:</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">now  known  as  part  of  the  core,  as  well  as  constants  </span><span 
+class="pcrr8t-x-x-120">catalan</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">euler_gamma</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">golden_ratio</span><span 
+class="ptmr8t-x-x-120">,  </span><span 
+class="pcrr8t-x-x-120">khinchin</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 82--><p class="noindent" ><span class="likeparagraphHead"><a 
+ id="x256-1056000C"></a><span 
+class="ptmr8t-x-x-120">Core  Package  solve</span></span>
+<span 
+class="ptmr8t-x-x-120">New  boolean  operator  </span><span 
+class="pcrr8t-x-x-120">polyp</span><span 
+class="ptmr8t-x-x-120">(p,var),  to  determine  whether  p  is  a</span>
+<span 
+class="ptmr8t-x-x-120">pure  polynomial  in  var,  ie.  the  coefficients  of  p  do  not  contain</span>
+<span 
+class="ptmr8t-x-x-120">var.</span>
+<!--l. 87--><p class="noindent" ><span class="likeparagraphHead"><a 
+ id="x256-1057000C"></a><span 
+class="ptmr8t-x-x-120">Core  Package  matrix</span></span>
+<span 
+class="ptmr8t-x-x-120">New  keyword  </span><span 
+class="ptmb8t-x-x-120">matrixproc  </span><span 
+class="ptmr8t-x-x-120">for  declaration  of  matrix-valued  procedures.</span>
+<!--l. 91--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x256-1058000C"></a><span 
+class="ptmb8t-x-x-120">Package defint</span></span>
+<span 
+class="ptmr8t-x-x-120">Added  </span><span 
+class="pcrr8t-x-x-120">trdefint </span><span 
+class="ptmr8t-x-x-120">switch  for  tracing.</span>
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualap3.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualli4.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualap2.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualap2.html#tailmanualap2.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualap3.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualap3.html"></a>     
+</body></html> 
