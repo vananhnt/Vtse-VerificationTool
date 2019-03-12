@@ -1,0 +1,1112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>TAYLOR: Manipulation of Taylor series</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse159.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse160.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse158.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse158.html#tailmanualse158.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse159.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.68    </span></span> <a 
+ id="x215-91500016.68"></a><span 
+class="ptmr8t-x-x-120">TAYLOR: Manipulation of Taylor series</span></h3>
+<a 
+ id="dx215-915001"></a>
+<a 
+ id="dx215-915002"></a>
+<a 
+ id="dx215-915003"></a>
+<a 
+ id="dx215-915004"></a>
+<a 
+ id="dx215-915005"></a>
+<!--l. 1293--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package carries out the Taylor expansion of an expression in one or</span>
+<span 
+class="ptmr8t-x-x-120">more variables and efficient manipulation of the resulting Taylor series.</span>
+<span 
+class="ptmr8t-x-x-120">Capabilities include basic operations (addition, subtraction, multiplication and</span>
+<span 
+class="ptmr8t-x-x-120">division) and also application of certain algebraic and transcendental</span>
+<span 
+class="ptmr8t-x-x-120">functions.</span>
+<!--l. 1299--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Rainer Sch</span><span 
+class="ptmr8t-x-x-120">öpf.</span>
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.68.1    </span></span> <a 
+ id="x215-91600016.68.1"></a><span 
+class="ptmr8t-x-x-120">Basic Use</span></h4>
+<!--l. 4--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The most important operator is &#8216;</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">TAYLOR</span></span></span><span 
+class="ptmr8t-x-x-120">&#8217;.</span> <a 
+ id="dx215-916001"></a> <span 
+class="ptmr8t-x-x-120">It is used as follows: </span><a 
+ id="operator:TAYLOR"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1227">
+&#x00A0;&#x00A0;TAYLOR(EXP:algebraic,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;VAR:kernel,VAR0:algebraic,ORDER:integer[,...])
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:algebraic.
+</div>
+<!--l. 11--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">where </span><span 
+class="pcrr8t-x-x-120">EXP </span><span 
+class="ptmr8t-x-x-120">is the expression to be expanded. It can be any REDUCE object,</span>
+<span 
+class="ptmr8t-x-x-120">even an expression containing other Taylor kernels. </span><span 
+class="pcrr8t-x-x-120">VAR </span><span 
+class="ptmr8t-x-x-120">is the kernel with</span>
+<span 
+class="ptmr8t-x-x-120">respect to which </span><span 
+class="pcrr8t-x-x-120">EXP </span><span 
+class="ptmr8t-x-x-120">is to be expanded. </span><span 
+class="pcrr8t-x-x-120">VAR0 </span><span 
+class="ptmr8t-x-x-120">denotes the point about which and</span>
+<span 
+class="pcrr8t-x-x-120">ORDER </span><span 
+class="ptmr8t-x-x-120">the order up to which expansion is to take place. If more than one</span>
+<span 
+class="pcrr8t-x-x-120">(VAR, VAR0, ORDER) </span><span 
+class="ptmr8t-x-x-120">triple is specified </span><span 
+class="pcrr8t-x-x-120">TAYLOR </span><span 
+class="ptmr8t-x-x-120">will expand its</span>
+<span 
+class="ptmr8t-x-x-120">first argument independently with respect to each variable in turn. For</span>
+<span 
+class="ptmr8t-x-x-120">example,</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1228">
+&#x00A0;&#x00A0;taylor(e^(x^2+y^2),x,0,2,y,0,2);
+</div>
+<!--l. 21--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">will calculate the Taylor expansion up to order </span><span 
+class="cmmi-12">X</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">* </span><span 
+class="cmmi-12">Y</span> <sup><span 
+class="cmr-8">2</span></sup><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1229">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;1&#x00A0;+&#x00A0;y&#x00A0;&#x00A0;+&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;y&#x00A0;*x&#x00A0;&#x00A0;+&#x00A0;O(x&#x00A0;,y&#x00A0;)
+</div>
+<!--l. 26--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Note that once the expansion has been done it is not possible to calculate higher</span>
+<span 
+class="ptmr8t-x-x-120">orders. Instead of a kernel, </span><span 
+class="pcrr8t-x-x-120">VAR </span><span 
+class="ptmr8t-x-x-120">may also be a list of kernels. In this</span>
+<span 
+class="ptmr8t-x-x-120">case expansion will take place in a way so that the </span><span 
+class="ptmri8t-x-x-120">sum </span><span 
+class="ptmr8t-x-x-120">of the degrees of</span>
+<span 
+class="ptmr8t-x-x-120">the kernels does not exceed </span><span 
+class="pcrr8t-x-x-120">ORDER</span><span 
+class="ptmr8t-x-x-120">. If </span><span 
+class="pcrr8t-x-x-120">VAR0 </span><span 
+class="ptmr8t-x-x-120">evaluates to the special</span>
+<span 
+class="ptmr8t-x-x-120">identifier </span><span 
+class="pcrr8t-x-x-120">INFINITY</span><span 
+class="ptmr8t-x-x-120">, expansion is done in a series in 1/VAR instead of</span>
+<span 
+class="pcrr8t-x-x-120">VAR</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 36--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The expansion is performed variable per variable, i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;in the example above by</span>
+<span 
+class="ptmr8t-x-x-120">first expanding</span> <span 
+class="cmr-12">exp</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">y</span><sup><span 
+class="cmr-8">2</span></sup><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">with respect to </span><span 
+class="cmmi-12">x </span><span 
+class="ptmr8t-x-x-120">and then expanding every</span>
+<span 
+class="ptmr8t-x-x-120">coefficient with respect to </span><span 
+class="cmmi-12">y</span><span 
+class="ptmr8t-x-x-120">.</span>
+<a 
+ id="dx215-916002"></a>
+<!--l. 41--><p class="noindent" ><a 
+ id="operator:IMPLICIT_TAYLOR"></a> <span 
+class="ptmr8t-x-x-120">There are two extra operators to compute the Taylor expansions of implicit and</span>
+<span 
+class="ptmr8t-x-x-120">inverse functions:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1230">
+&#x00A0;&#x00A0;IMPLICIT_TAYLOR(F:algebraic,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;VAR:kernel,DEPVAR:kernel,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;VAR0:algebraic,DEPVAR0:algebraic,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ORDER:integer)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:algebraic
+</div>
+<!--l. 51--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">takes a function F depending on two variables VAR and DEPVAR and computes</span>
+<span 
+class="ptmr8t-x-x-120">the Taylor series of the implicit function DEPVAR(VAR) given by the</span>
+<span 
+class="ptmr8t-x-x-120">equation F(VAR,DEPVAR) = 0, around the point VAR0. (Violation of</span>
+<span 
+class="ptmr8t-x-x-120">the necessary condition F(VAR0,DEPVAR0)=0 causes an error.) For</span>
+<span 
+class="ptmr8t-x-x-120">example,</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1231">
+&#x00A0;&#x00A0;implicit_taylor(x^2&#x00A0;+&#x00A0;y^2&#x00A0;-&#x00A0;1,x,y,0,1,5);
+</div>
+<!--l. 59--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">gives the output</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1232">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6
+&#x00A0;<br />&#x00A0;&#x00A0;1&#x00A0;-&#x00A0;---*x&#x00A0;&#x00A0;-&#x00A0;---*x&#x00A0;&#x00A0;+&#x00A0;O(x&#x00A0;)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8
+</div>
+<!--l. 65--><p class="nopar" >
+<!--l. 67--><p class="noindent" ><a 
+ id="operator:INVERSE_TAYLOR"></a> <span 
+class="ptmr8t-x-x-120">The operator</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1233">
+&#x00A0;&#x00A0;INVERSE_TAYLOR(F:algebraic,VAR:kernel,DEPVAR:kernel,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;VAR0:algebraic,ORDER:integer)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:&#x00A0;algebraic
+</div>
+<!--l. 73--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">takes a function F depending on VAR1 and computes the Taylor series of the</span>
+<span 
+class="ptmr8t-x-x-120">inverse of F with respect to VAR2. For example,</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1234">
+&#x00A0;&#x00A0;inverse_taylor(exp(x)-1,x,y,0,8);
+</div>
+<!--l. 78--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">yields</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1235">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;9
+&#x00A0;<br />&#x00A0;&#x00A0;y&#x00A0;-&#x00A0;---*y&#x00A0;&#x00A0;+&#x00A0;---*y&#x00A0;&#x00A0;-&#x00A0;---*y&#x00A0;&#x00A0;+&#x00A0;---*y&#x00A0;&#x00A0;+&#x00A0;(3&#x00A0;terms)&#x00A0;+&#x00A0;O(y&#x00A0;)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5
+</div>
+<!--l. 84--><p class="nopar" >
+<a 
+ id="dx215-916003"></a>
+<!--l. 87--><p class="noindent" ><a 
+ id="reserved:TAYLORPRINTTERMS"></a> <span 
+class="ptmr8t-x-x-120">When a Taylor kernel is printed, only a certain number of (non-zero) coefficients</span>
+<span 
+class="ptmr8t-x-x-120">are shown. If there are more, an expression of the form </span><span 
+class="pcrr8t-x-x-120">(</span><span 
+class="cmmi-12">n  </span><span 
+class="pcrr8t-x-x-120">terms) </span><span 
+class="ptmr8t-x-x-120">is printed to</span>
+<span 
+class="ptmr8t-x-x-120">indicate how many non-zero terms have been suppressed. The number</span>
+<span 
+class="ptmr8t-x-x-120">of terms printed is given by the value of the shared algebraic variable</span>
+<span 
+class="pcrr8t-x-x-120">TAYLORPRINTTERMS</span><span 
+class="ptmr8t-x-x-120">. Allowed values are integers and the special identifier</span>
+<span 
+class="pcrr8t-x-x-120">ALL</span><span 
+class="ptmr8t-x-x-120">. The latter setting specifies that all terms are to be printed. The default</span>
+<span 
+class="ptmr8t-x-x-120">setting is </span><span 
+class="cmr-12">5</span><span 
+class="ptmr8t-x-x-120">.</span>
+<a 
+ id="dx215-916004"></a>
+<!--l. 98--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">PART </span><span 
+class="ptmr8t-x-x-120">operator can be used to extract subexpressions of a Taylor expansion</span>
+<span 
+class="ptmr8t-x-x-120">in the usual way. All terms can be accessed, irregardless of the value of the</span>
+<span 
+class="ptmr8t-x-x-120">variable </span><span 
+class="pcrr8t-x-x-120">TAYLORPRINTTERMS</span><span 
+class="ptmr8t-x-x-120">.</span>
+<a 
+ id="dx215-916005"></a>
+<a 
+ id="dx215-916006"></a>
+<a 
+ id="dx215-916007"></a>
+<!--l. 104--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the switch </span><a 
+href="#switch:TAYLORKEEPORIGINAL"><span 
+class="pcrr8t-x-x-120">TAYLORKEEPORIGINAL</span></a> <span 
+class="ptmr8t-x-x-120">is set to </span><span 
+class="pcrr8t-x-x-120">ON </span><span 
+class="ptmr8t-x-x-120">the original expression EXP</span>
+<span 
+class="ptmr8t-x-x-120">is kept for later reference. It can be recovered by means of the operator</span>
+<!--l. 109--><p class="noindent" ><a 
+ id="operator:TAYLORORIGINAL"></a> <span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">TAYLORORIGINAL</span><span 
+class="ptmr8t-x-x-120">(EXP:</span><span 
+class="ptmri8t-x-x-120">exprn</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">exprn</span>
+<!--l. 112--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">An error is signalled if EXP is not a Taylor kernel or if the original expression</span>
+<span 
+class="ptmr8t-x-x-120">was not kept, i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;if </span><span 
+class="pcrr8t-x-x-120">TAYLORKEEPORIGINAL </span><span 
+class="ptmr8t-x-x-120">was </span><span 
+class="pcrr8t-x-x-120">OFF </span><span 
+class="ptmr8t-x-x-120">during expansion. The</span>
+<span 
+class="ptmr8t-x-x-120">template of a Taylor kernel, i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;the list of all variables with respect to which</span>
+<span 
+class="ptmr8t-x-x-120">expansion took place together with expansion point and order can be extracted</span>
+<span 
+class="ptmr8t-x-x-120">using</span> <a 
+ id="dx215-916008"></a><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 119--><p class="noindent" ><a 
+ id="operator:TAYLORTEMPLATE"></a> <span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">TAYLORTEMPLATE</span><span 
+class="ptmr8t-x-x-120">(EXP:</span><span 
+class="ptmri8t-x-x-120">exprn</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">list</span>
+<!--l. 122--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This returns a list of lists with the three elements (VAR,VAR0,ORDER). As</span>
+<span 
+class="ptmr8t-x-x-120">with </span><span 
+class="pcrr8t-x-x-120">TAYLORORIGINAL</span><span 
+class="ptmr8t-x-x-120">, an error is signalled if EXP is not a Taylor</span>
+<span 
+class="ptmr8t-x-x-120">kernel.</span>
+<!--l. 126--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><a 
+ id="operator:TAYLORTOSTANDARD"></a><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">TAYLORTOSTANDARD</span><span 
+class="ptmr8t-x-x-120">(EXP:</span><span 
+class="ptmri8t-x-x-120">exprn</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">exprn</span>
+                                                                     
+
+                                                                     
+<!--l. 130--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">converts all Taylor kernels in EXP into standard form and</span> <a 
+ id="dx215-916009"></a> <span 
+class="ptmr8t-x-x-120">resimplifies the</span>
+<span 
+class="ptmr8t-x-x-120">result.</span>
+<!--l. 133--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The boolean operator </span><a 
+ id="operator:TAYLORSERIESP"></a><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">TAYLORSERIESP</span><span 
+class="ptmr8t-x-x-120">(EXP:</span><span 
+class="ptmri8t-x-x-120">exprn</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">boolean</span>
+<!--l. 137--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">may be used to determine if EXP is a Taylor kernel.</span> <a 
+ id="dx215-916010"></a> <span 
+class="ptmr8t-x-x-120">(Note that this operator is</span>
+<span 
+class="ptmr8t-x-x-120">subject to the same restrictions as, e.g., </span><span 
+class="pcrr8t-x-x-120">ORDP </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">NUMBERP</span><span 
+class="ptmr8t-x-x-120">, i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;it may only be</span>
+<span 
+class="ptmr8t-x-x-120">used in boolean expressions in </span><span 
+class="pcrr8t-x-x-120">IF </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">LET </span><span 
+class="ptmr8t-x-x-120">statements.</span>
+<!--l. 142--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Finally there is</span>
+<!--l. 144--><p class="noindent" ><a 
+ id="operator:TAYLORCOMBINE"></a> <span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">TAYLORCOMBINE</span><span 
+class="ptmr8t-x-x-120">(EXP:</span><span 
+class="ptmri8t-x-x-120">exprn</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">exprn</span>
+<!--l. 147--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">which tries to combine all Taylor kernels found in EXP into one.</span> <a 
+ id="dx215-916011"></a> <span 
+class="ptmr8t-x-x-120">Operations</span>
+<span 
+class="ptmr8t-x-x-120">currently possible are:</span> <a 
+ id="dx215-916012"></a>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Addition, subtraction, multiplication, and division.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Roots, exponentials, and logarithms.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">Trigonometric and hyperbolic functions and their inverses.</span></li></ul>
+<!--l. 156--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Application of unary operators like </span><span 
+class="pcrr8t-x-x-120">LOG </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">ATAN </span><span 
+class="ptmr8t-x-x-120">will nearly always succeed.</span>
+<span 
+class="ptmr8t-x-x-120">For binary operations their arguments have to be Taylor kernels with the same</span>
+<span 
+class="ptmr8t-x-x-120">template. This means that the expansion variable and the expansion point must</span>
+<span 
+class="ptmr8t-x-x-120">match. Expansion order is not so important, different order usually means that</span>
+<span 
+class="ptmr8t-x-x-120">one of them is truncated before doing the operation.</span>
+<a 
+ id="dx215-916013"></a>
+<a 
+ id="dx215-916014"></a>
+<a 
+ id="dx215-916015"></a>
+<a 
+ id="dx215-916016"></a>
+<!--l. 164--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If </span><a 
+href="#switch:TAYLORKEEPORIGINAL"><span 
+class="pcrr8t-x-x-120">TAYLORKEEPORIGINAL</span></a> <span 
+class="ptmr8t-x-x-120">is set to </span><span 
+class="pcrr8t-x-x-120">ON </span><span 
+class="ptmr8t-x-x-120">and if all Taylor kernels in</span>
+<span 
+class="pcrr8t-x-x-120">exp </span><span 
+class="ptmr8t-x-x-120">have their original expressions kept </span><a 
+href="#operator:TAYLORCOMBINE"><span 
+class="pcrr8t-x-x-120">TAYLORCOMBINE</span></a> <span 
+class="ptmr8t-x-x-120">will also</span>
+<span 
+class="ptmr8t-x-x-120">combine these and store the result as the original expression of the resulting</span>
+<span 
+class="ptmr8t-x-x-120">Taylor kernel.</span> <a 
+ id="dx215-916017"></a><a 
+ id="dx215-916018"></a><a 
+ id="dx215-916019"></a> <span 
+class="ptmr8t-x-x-120">There is also the switch </span><a 
+href="#switch:TAYLORAUTOEXPAND"><span 
+class="pcrr8t-x-x-120">TAYLORAUTOEXPAND</span></a> <span 
+class="ptmr8t-x-x-120">(see</span>
+<span 
+class="ptmr8t-x-x-120">below).</span>
+<!--l. 171--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">There are a few restrictions to avoid mathematically undefined expressions: it is</span>
+<span 
+class="ptmr8t-x-x-120">not possible to take the logarithm of a Taylor kernel which has no terms (i.e. is</span>
+<span 
+class="ptmr8t-x-x-120">zero), or to divide by such a beast. There are some provisions made to detect</span>
+<span 
+class="ptmr8t-x-x-120">singularities during expansion: poles that arise because the denominator has</span>
+<span 
+class="ptmr8t-x-x-120">zeros at the expansion point are detected and properly treated, i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;the</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">Taylor kernel will start with a negative power. (This is accomplished by</span>
+<span 
+class="ptmr8t-x-x-120">expanding numerator and denominator separately and combining the results.)</span>
+<span 
+class="ptmr8t-x-x-120">Essential singularities of the known functions (see above) are handled</span>
+<span 
+class="ptmr8t-x-x-120">correctly.</span>
+<a 
+ id="dx215-916020"></a>
+<!--l. 183--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Differentiation of a Taylor expression is possible. If you differentiate</span>
+<span 
+class="ptmr8t-x-x-120">with respect to one of the Taylor variables the order will decrease by</span>
+<span 
+class="ptmr8t-x-x-120">one.</span>
+<a 
+ id="dx215-916021"></a>
+<!--l. 188--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Substitution is a bit restricted: Taylor variables can only be replaced</span>
+<span 
+class="ptmr8t-x-x-120">by other kernels. There is one exception to this rule: you can always</span>
+<span 
+class="ptmr8t-x-x-120">substitute a Taylor variable by an expression that evaluates to a constant. Note</span>
+<span 
+class="ptmr8t-x-x-120">that REDUCE will not always be able to determine that an expression is</span>
+<span 
+class="ptmr8t-x-x-120">constant.</span>
+<a 
+ id="dx215-916022"></a>
+<!--l. 195--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Only simple taylor kernels can be integrated. More complicated expressions that</span>
+<span 
+class="ptmr8t-x-x-120">contain Taylor kernels as parts of themselves are automatically converted into a</span>
+<span 
+class="ptmr8t-x-x-120">standard representation by means of the </span><a 
+href="#operator:TAYLORTOSTANDARD"><span 
+class="pcrr8t-x-x-120">TAYLORTOSTANDARD</span></a> <span 
+class="ptmr8t-x-x-120">operator. In this</span>
+<span 
+class="ptmr8t-x-x-120">case a suitable warning is printed.</span>
+<a 
+ id="dx215-916023"></a>
+<!--l. 201--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It is possible to revert a Taylor series of a function </span><span 
+class="cmmi-12">f</span><span 
+class="ptmr8t-x-x-120">, i.e., to compute the first</span>
+<span 
+class="ptmr8t-x-x-120">terms of the expansion of the inverse of </span><span 
+class="cmmi-12">f </span><span 
+class="ptmr8t-x-x-120">from the expansion of </span><span 
+class="cmmi-12">f</span><span 
+class="ptmr8t-x-x-120">. This is done</span>
+<span 
+class="ptmr8t-x-x-120">by the operator</span>
+<!--l. 206--><p class="noindent" ><a 
+ id="operator:TAYLORREVERT"></a> <a 
+ id="dx215-916024"></a> <span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">TAYLORREVERT</span><span 
+class="ptmr8t-x-x-120">(EXP:</span><span 
+class="ptmri8t-x-x-120">exprn</span><span 
+class="ptmr8t-x-x-120">,OLDVAR:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">, NEWVAR:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">exprn</span>
+<!--l. 211--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">EXP must evaluate to a Taylor kernel with OLDVAR being one of its expansion</span>
+<span 
+class="ptmr8t-x-x-120">variables. Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1236">
+&#x00A0;&#x00A0;taylor&#x00A0;(u&#x00A0;-&#x00A0;u**2,&#x00A0;u,&#x00A0;0,&#x00A0;5)$
+&#x00A0;<br />&#x00A0;&#x00A0;taylorrevert&#x00A0;(ws,&#x00A0;u,&#x00A0;x);
+</div>
+<!--l. 216--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">gives</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1237">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6
+&#x00A0;<br />&#x00A0;&#x00A0;x&#x00A0;+&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;2*x&#x00A0;&#x00A0;+&#x00A0;5*x&#x00A0;&#x00A0;+&#x00A0;14*x&#x00A0;&#x00A0;+&#x00A0;O(x&#x00A0;)
+</div>
+<!--l. 221--><p class="nopar" >
+<!--l. 223--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package introduces a number of new switches:</span>
+<a 
+ id="dx215-916025"></a>
+<a 
+ id="dx215-916026"></a>
+<a 
+ id="dx215-916027"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="pcrr8t-x-x-120">TAYLORAUTOCOMBINE</span> </dt><dd 
+class="description"><a 
+ id="switch:TAYLORAUTOCOMBINE"></a><span 
+class="ptmr8t-x-x-120">causes  Taylor  expressions  to  be  automatically</span>
+     <span 
+class="ptmr8t-x-x-120">combined  during  the  simplification  process.  This  is  equivalent  to</span>
+     <span 
+class="ptmr8t-x-x-120">applying </span><span 
+class="pcrr8t-x-x-120">TAYLORCOMBINE </span><span 
+class="ptmr8t-x-x-120">to every expression that contains Taylor</span>
+     <span 
+class="ptmr8t-x-x-120">kernels. Default is </span><span 
+class="pcrr8t-x-x-120">ON</span><span 
+class="ptmr8t-x-x-120">.</span>
+<a 
+ id="dx215-916028"></a>
+<a 
+ id="dx215-916029"></a>
+<a 
+ id="dx215-916030"></a>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">TAYLORAUTOEXPAND</span> </dt><dd 
+class="description"><a 
+ id="switch:TAYLORAUTOEXPAND"></a> <span 
+class="ptmr8t-x-x-120">makes  Taylor  expressions  &#8220;contagious&#8221;  in  the</span>
+     <span 
+class="ptmr8t-x-x-120">sense that </span><span 
+class="pcrr8t-x-x-120">TAYLORCOMBINE </span><span 
+class="ptmr8t-x-x-120">tries to Taylor expand all non-Taylor</span>
+     <span 
+class="ptmr8t-x-x-120">subexpressions and to combine the result with the rest. Default is </span><span 
+class="pcrr8t-x-x-120">OFF</span><span 
+class="ptmr8t-x-x-120">.</span>
+<a 
+ id="dx215-916031"></a>
+<a 
+ id="dx215-916032"></a>
+<a 
+ id="dx215-916033"></a>
+     <!--l. 239--><p class="noindent" ><a 
+ id="switch:TAYLORKEEPORIGINAL"></a>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">TAYLORKEEPORIGINAL</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">forces   the   package   to   keep   the   original</span>
+     <span 
+class="ptmr8t-x-x-120">expression,   i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;the   expression   that   was   Taylor   expanded.   All</span>
+     <span 
+class="ptmr8t-x-x-120">operations   performed   on   the   Taylor   kernels   are   also   applied</span>
+     <span 
+class="ptmr8t-x-x-120">to   this   expression   which   can   be   recovered   using   the   operator</span>
+     <span 
+class="pcrr8t-x-x-120">TAYLORORIGINAL</span><span 
+class="ptmr8t-x-x-120">. Default is </span><span 
+class="pcrr8t-x-x-120">OFF</span><span 
+class="ptmr8t-x-x-120">.</span>
+<a 
+ id="dx215-916034"></a>
+<a 
+ id="dx215-916035"></a>
+<a 
+ id="dx215-916036"></a>
+     <!--l. 247--><p class="noindent" ><a 
+ id="switch:TAYLORPRINTORDER"></a>
+                                                                     
+
+                                                                     
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">TAYLORPRINTORDER</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">causes  the  remainder  to  be  printed  in  big-</span><span 
+class="cmmi-12">O</span>
+     <span 
+class="ptmr8t-x-x-120">notation. Otherwise, three dots are printed. Default is </span><span 
+class="pcrr8t-x-x-120">ON</span><span 
+class="ptmr8t-x-x-120">.</span>
+<a 
+ id="dx215-916037"></a>
+<a 
+ id="dx215-916038"></a>
+<a 
+ id="dx215-916039"></a>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">VERBOSELOAD</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">will cause REDUCE to print some information when the</span>
+     <span 
+class="ptmr8t-x-x-120">Taylor  package  is  loaded.  This  switch  is  already  present  in  </span><span 
+class="phvr8t-x-x-120">PSL</span>
+     <span 
+class="ptmr8t-x-x-120">systems. Default is </span><span 
+class="pcrr8t-x-x-120">OFF</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </dd></dl>
+<a 
+ id="dx215-916040"></a>
+<!--l. 261--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.68.2    </span></span> <a 
+ id="x215-91700016.68.2"></a><span 
+class="ptmr8t-x-x-120">Caveats</span></h4>
+<a 
+ id="dx215-917001"></a>
+<!--l. 264--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">TAYLOR </span><span 
+class="ptmr8t-x-x-120">should always detect non-analytical expressions in its first argument.</span>
+<span 
+class="ptmr8t-x-x-120">As an example, consider the function </span><span 
+class="cmmi-12">xy&#x2215;</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">y</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">that is not analytical in the</span>
+<span 
+class="ptmr8t-x-x-120">neighborhood of </span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x,y</span><span 
+class="cmr-12">) = (0</span><span 
+class="cmmi-12">, </span><span 
+class="cmr-12">0)</span><span 
+class="ptmr8t-x-x-120">: Trying to calculate</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1238">
+&#x00A0;&#x00A0;taylor(x*y/(x+y),x,0,2,y,0,2);
+</div>
+<!--l. 270--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">causes an error</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1239">
+*****&#x00A0;Not&#x00A0;a&#x00A0;unit&#x00A0;in&#x00A0;argument&#x00A0;to&#x00A0;QUOTTAYLOR
+</div>
+<!--l. 274--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Note that it is not generally possible to apply the standard REDUCE operators to</span>
+<span 
+class="ptmr8t-x-x-120">a Taylor kernel. For example, </span><span 
+class="pcrr8t-x-x-120">PART</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">COEFF</span><span 
+class="ptmr8t-x-x-120">, or </span><span 
+class="pcrr8t-x-x-120">COEFFN </span><span 
+class="ptmr8t-x-x-120">cannot be used.</span>
+<span 
+class="ptmr8t-x-x-120">Instead, the expression at hand has to be converted to standard form first using</span>
+<span 
+class="ptmr8t-x-x-120">the </span><span 
+class="pcrr8t-x-x-120">TAYLORTOSTANDARD </span><span 
+class="ptmr8t-x-x-120">operator.</span>
+<!--l. 281--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.68.3    </span></span> <a 
+ id="x215-91800016.68.3"></a><span 
+class="ptmr8t-x-x-120">Warning messages</span></h4>
+<a 
+ id="dx215-918001"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="pcrr8t-x-x-120">*** Cannot expand further... truncation done</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">You will get this warning if you try to expand a Taylor kernel to a</span>
+     <span 
+class="ptmr8t-x-x-120">higher order.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">*** Converting Taylor kernels to standard representation</span> </dt><dd 
+class="description">
+     <br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">This warning appears if you try to integrate an expression containing</span>
+     <span 
+class="ptmr8t-x-x-120">Taylor kernels.</span>
+     </dd></dl>
+<!--l. 295--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.68.4    </span></span> <a 
+ id="x215-91900016.68.4"></a><span 
+class="ptmr8t-x-x-120">Error messages</span></h4>
+<a 
+ id="dx215-919001"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Branch point detected in ...</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">This occurs if you take a rational power of a Taylor kernel and raising</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">the lowest order term of the kernel to this power yields a non analytical</span>
+     <span 
+class="ptmr8t-x-x-120">term (i.e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;a fractional power).</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Cannot replace part ... in Taylor kernel</span> </dt><dd 
+class="description"><br 
+class="newline" /><a 
+ id="dx215-919002"></a><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">PART </span><span 
+class="ptmr8t-x-x-120">operator can only be used to either replace the template</span>
+     <span 
+class="ptmr8t-x-x-120">of a Taylor kernel (part 2) or the original expression that is kept for</span>
+     <span 
+class="ptmr8t-x-x-120">reference (part 3).</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Computation loops (recursive definition?): ...</span> </dt><dd 
+class="description">
+     <br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Most  probably  the  expression  to  be  expanded  contains  an  operator</span>
+     <span 
+class="ptmr8t-x-x-120">whose derivative involves the operator itself.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Error during expansion (possible singularity)</span> </dt><dd 
+class="description">
+     <br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">The expression you are trying to expand caused an error. As far as</span>
+     <span 
+class="ptmr8t-x-x-120">I know this can only happen if it contains a function with a pole or</span>
+     <span 
+class="ptmr8t-x-x-120">an essential singularity at the expansion point. (But one can never be</span>
+     <span 
+class="ptmr8t-x-x-120">sure.)</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Essential singularity in ...</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">An  essential  singularity  was  detected  while  applying  a  special</span>
+     <span 
+class="ptmr8t-x-x-120">function to a Taylor kernel.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Expansion point lies on branch cut in ...</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">The  only  functions  with  branch  cuts  this  package  knows  of  are</span>
+     <span 
+class="ptmr8t-x-x-120">(natural)  logarithm,  inverse  circular  and  hyperbolic  tangent  and</span>
+     <span 
+class="ptmr8t-x-x-120">cotangent. The branch cut of the logarithm is assumed to lie on the</span>
+     <span 
+class="ptmr8t-x-x-120">negative real axis. Those of the arc tangent and arc cotangent functions</span>
+     <span 
+class="ptmr8t-x-x-120">are chosen to be compatible with this: both have essential singularities</span>
+     <span 
+class="ptmr8t-x-x-120">at  the  points  </span><span 
+class="cmsy-10x-x-120">±</span><span 
+class="cmmi-12">i</span><span 
+class="ptmr8t-x-x-120">.  The  branch  cut  of  arc  tangent  is  the  straight  line</span>
+     <span 
+class="ptmr8t-x-x-120">along  the  imaginary  axis  connecting  </span><span 
+class="cmr-12">+1 </span><span 
+class="ptmr8t-x-x-120">to  </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmr-12">1 </span><span 
+class="ptmr8t-x-x-120">going  through  </span><span 
+class="cmsy-10x-x-120">&#x221E;</span>
+     <span 
+class="ptmr8t-x-x-120">whereas that of arc cotangent goes through the origin. Consequently,</span>
+     <span 
+class="ptmr8t-x-x-120">the branch cut of the inverse hyperbolic tangent resp.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;cotangent lies</span>
+     <span 
+class="ptmr8t-x-x-120">on the real axis and goes from </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmr-12">1 </span><span 
+class="ptmr8t-x-x-120">to </span><span 
+class="cmr-12">+1</span><span 
+class="ptmr8t-x-x-120">, that of the latter across </span><span 
+class="cmr-12">0</span><span 
+class="ptmr8t-x-x-120">,</span>
+     <span 
+class="ptmr8t-x-x-120">the other across </span><span 
+class="cmsy-10x-x-120">&#x221E;</span><span 
+class="ptmr8t-x-x-120">.</span>
+     <!--l. 338--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The error message can currently only appear when you try to calculate</span>
+     <span 
+class="ptmr8t-x-x-120">the inverse tangent or cotangent of a Taylor kernel that starts with a</span>
+     <span 
+class="ptmr8t-x-x-120">negative  degree.  The  case  of  a  logarithm  of  a  Taylor  kernel  whose</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">constant term is a negative real number is not caught since it is difficult</span>
+     <span 
+class="ptmr8t-x-x-120">to detect this in general.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Input expression non-zero at given point</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Violation of the necessary condition F(VAR0,DEPVAR0)=0 for the</span>
+     <span 
+class="ptmr8t-x-x-120">arguments of </span><span 
+class="pcrr8t-x-x-120">IMPLICIT_TAYLOR</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Invalid substitution in Taylor kernel: ...</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">You tried to substitute a variable that is already present in the Taylor</span>
+     <span 
+class="ptmr8t-x-x-120">kernel or on which one of the Taylor variables depend.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Not a unit in ...</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">This will happen if you try to divide by or take the logarithm of a</span>
+     <span 
+class="ptmr8t-x-x-120">Taylor series whose constant term vanishes.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Not implemented yet (...)</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Sorry, but I haven&#8217;t had the time to implement this feature. Tell me if</span>
+     <span 
+class="ptmr8t-x-x-120">you really need it, maybe I have already an improved version of the</span>
+     <span 
+class="ptmr8t-x-x-120">package.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Reversion of Taylor series not possible: ...</span> </dt><dd 
+class="description">
+     <br 
+class="newline" /><a 
+ id="dx215-919003"></a> <span 
+class="ptmr8t-x-x-120">You tried to call the </span><span 
+class="pcrr8t-x-x-120">TAYLORREVERT </span><span 
+class="ptmr8t-x-x-120">operator with inappropriate</span>
+     <span 
+class="ptmr8t-x-x-120">arguments. The second half of this error message tells you why this</span>
+     <span 
+class="ptmr8t-x-x-120">operation is not possible.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Taylor kernel doesn&#8217;t have an original part</span> </dt><dd 
+class="description"><br 
+class="newline" /><a 
+ id="dx215-919004"></a> <a 
+ id="dx215-919005"></a><a 
+ id="dx215-919006"></a><a 
+ id="dx215-919007"></a> <span 
+class="ptmr8t-x-x-120">The Taylor kernel upon which you try to use </span><span 
+class="pcrr8t-x-x-120">TAYLORORIGINAL</span>
+     <span 
+class="ptmr8t-x-x-120">was created with the switch </span><span 
+class="pcrr8t-x-x-120">TAYLORKEEPORIGINAL </span><span 
+class="ptmr8t-x-x-120">set to </span><span 
+class="pcrr8t-x-x-120">OFF </span><span 
+class="ptmr8t-x-x-120">and</span>
+     <span 
+class="ptmr8t-x-x-120">does therefore not keep the original expression.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Wrong number of arguments to TAYLOR</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">You  try  to  use  the  operator  </span><span 
+class="pcrr8t-x-x-120">TAYLOR </span><span 
+class="ptmr8t-x-x-120">with  a  wrong  number  of</span>
+     <span 
+class="ptmr8t-x-x-120">arguments.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Zero divisor in TAYLOREXPAND</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">A zero divisor was found while an expression was being expanded.</span>
+     <span 
+class="ptmr8t-x-x-120">This should not normally occur.</span>
+                                                                     
+
+                                                                     
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** Zero divisor in Taylor substitution</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">That&#8217;s  exactly  what  the  message  says.  As  an  example  consider  the</span>
+     <span 
+class="ptmr8t-x-x-120">case  of  a  Taylor  kernel  containing  the  term  </span><span 
+class="pcrr8t-x-x-120">1/x </span><span 
+class="ptmr8t-x-x-120">and  you  try  to</span>
+     <span 
+class="ptmr8t-x-x-120">substitute </span><span 
+class="pcrr8t-x-x-120">x </span><span 
+class="ptmr8t-x-x-120">by </span><span 
+class="pcrr8t-x-x-120">0</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** ... invalid as kernel</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">You tried to expand with respect to an expression that is not a kernel.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** ... invalid as order of Taylor expansion</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">The order parameter you gave to </span><span 
+class="pcrr8t-x-x-120">TAYLOR </span><span 
+class="ptmr8t-x-x-120">is not an integer.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** ... invalid as Taylor kernel</span> </dt><dd 
+class="description"><br 
+class="newline" /><a 
+ id="dx215-919008"></a> <a 
+ id="dx215-919009"></a> <span 
+class="ptmr8t-x-x-120">You tried to apply </span><span 
+class="pcrr8t-x-x-120">TAYLORORIGINAL </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">TAYLORTEMPLATE </span><span 
+class="ptmr8t-x-x-120">to</span>
+     <span 
+class="ptmr8t-x-x-120">an expression that is not a Taylor kernel.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** ... invalid as Taylor Template element</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">You tried to substitute the </span><span 
+class="pcrr8t-x-x-120">TAYLORTEMPLATE </span><span 
+class="ptmr8t-x-x-120">part of a Taylor kernel</span>
+     <span 
+class="ptmr8t-x-x-120">with a list a incorrect form. For the correct form see the description of</span>
+     <span 
+class="ptmr8t-x-x-120">the </span><span 
+class="pcrr8t-x-x-120">TAYLORTEMPLATE </span><span 
+class="ptmr8t-x-x-120">operator.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** ... invalid as Taylor variable</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">You tried to substitute a Taylor variable by an expression that is not a</span>
+     <span 
+class="ptmr8t-x-x-120">kernel.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">***** ... invalid as value of TaylorPrintTerms</span> </dt><dd 
+class="description"><br 
+class="newline" /><a 
+ id="dx215-919010"></a> <span 
+class="ptmr8t-x-x-120">You  have  assigned  an  invalid  value  to  </span><a 
+href="#reserved:TAYLORPRINTTERMS"><span 
+class="pcrr8t-x-x-120">TAYLORPRINTTERMS</span></a><span 
+class="ptmr8t-x-x-120">.</span>
+     <span 
+class="ptmr8t-x-x-120">Allowed values are: an integer or the special identifier </span><span 
+class="pcrr8t-x-x-120">ALL</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">TAYLOR PACKAGE (...): this can&#8217;t happen ...</span> </dt><dd 
+class="description"><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">This message shows that an internal inconsistency was detected. This</span>
+     <span 
+class="ptmr8t-x-x-120">is not your fault, at least as long as you did not try to work with the</span>
+     <span 
+class="ptmr8t-x-x-120">internal data structures of REDUCE. Send input and output to me,</span>
+     <span 
+class="ptmr8t-x-x-120">together with the version information that is printed out.</span>
+     </dd></dl>
+                                                                     
+
+                                                                     
+<!--l. 424--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.68.5    </span></span> <a 
+ id="x215-92000016.68.5"></a><span 
+class="ptmr8t-x-x-120">Comparison to other packages</span></h4>
+<!--l. 426--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">At the moment there is only one REDUCE package that I know of: the truncated</span>
+<span 
+class="ptmr8t-x-x-120">power series package by Alan Barnes and Julian Padget. In my opinion there are</span>
+<span 
+class="ptmr8t-x-x-120">two major differences:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The interface. They use the domain mechanism for their power series,</span>
+     <span 
+class="ptmr8t-x-x-120">I  decided  to  invent  a  special  kind  of  kernel.  Both  approaches  have</span>
+     <span 
+class="ptmr8t-x-x-120">advantages and disadvantages: with domain modes, it is easier to do</span>
+     <span 
+class="ptmr8t-x-x-120">certain things automatically, e.g., conversions.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">The  concept  of  a  truncated  series.  Their  idea  is  to  remember  the</span>
+     <span 
+class="ptmr8t-x-x-120">original expression and to compute more coefficients when more of</span>
+     <span 
+class="ptmr8t-x-x-120">them are needed. My approach is to truncate at a certain order and</span>
+     <span 
+class="ptmr8t-x-x-120">forget how the unexpanded expression looked like. I think that their</span>
+     <span 
+class="ptmr8t-x-x-120">method is more widely usable, whereas mine is more efficient when</span>
+     <span 
+class="ptmr8t-x-x-120">you know in advance exactly how many terms you need.</span></li></ul>
+<!--l. 1303--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1305--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse159.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse160.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse158.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse158.html#tailmanualse158.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse159.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse159.html"></a>   
+</body></html> 

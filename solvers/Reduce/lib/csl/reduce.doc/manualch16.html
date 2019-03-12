@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>16 User Contributed Packages</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch16.html" >Up</a></td><td class="clinks"><a 
+href="manualch17.html" >Next</a></td><td class="clinks"><a 
+href="manualch15.html" >Prev</a></td><td class="clinks"><a 
+href="manualch15.html#tailmanualch15.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualch16.html">Tail</a></td></tr></table><h2 class="ChapterHead"> 16&#x00A0;<a 
+ id="x112-20300016"></a>User Contributed Packages</h2>
+<a 
+ id="dx112-203001"></a>
+<!--l. 24--><p class="noindent" >The complete REDUCE system includes a number of packages contributed by users that
+are provided as a service to the user community. Questions regarding these packages
+should be directed to their individual authors.
+<!--l. 28--><p class="noindent" >All such packages have been precompiled as part of the installation process. However,
+many must be specifically loaded before they can be used. (Those that are loaded
+automatically are so noted in their description.) You should also consult the user notes
+for your particular implementation for further information on whether this is necessary. If
+it is, the relevant command is <span 
+class="pcrr8t-x-x-109">LOAD_PACKAGE</span>,<a 
+ id="dx112-203002"></a> which takes a list of one or more
+package names as argument, for example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-392">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;load_package&#x00A0;algint;
+</div>
+<!--l. 38--><p class="nopar" > although this syntax may vary from implementation to implementation.
+<!--l. 41--><p class="noindent" >Nearly all these packages come with separate documentation and test files (except those
+noted here that have no additional documentation), which is included, along
+with the source of the package, in the REDUCE system distribution. These
+items should be studied for any additional details on the use of a particular
+package.
+<!--l. 54--><p class="noindent" >The packages available in the current release of REDUCE are as follows:
+<!--l. 56--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="sectionTOCS">
+&#x00A0;<span class="sectionToc" >16.1 <a 
+href="manualse92.html#x113-20400016.1">ALGINT: Integration of square roots</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.2 <a 
+href="manualse93.html#x114-20500016.2">APPLYSYM: Infinitesimal symmetries of differential equations</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.3 <a 
+href="manualse94.html#x115-22600016.3">ARNUM: An algebraic number package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.4 <a 
+href="manualse95.html#x116-22800016.4">ASSERT: Dynamic Verification of Assertions on Function Types</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.5 <a 
+href="manualse96.html#x118-23600016.5">ASSIST: Useful utilities for various applications</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.6 <a 
+href="manualse97.html#x119-25100016.6">AVECTOR: A vector algebra and calculus package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.7 <a 
+href="manualse98.html#x121-25900016.7">BIBASIS: A Package for Calculating Boolean Involutive Bases</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.8 <a 
+href="manualse99.html#x122-26600016.8">BOOLEAN: A package for boolean algebra</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.9 <a 
+href="manualse100.html#x123-27100016.9">CALI: A package for computational commutative algebra</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.10 <a 
+href="manualse101.html#x124-27200016.10">CAMAL: Calculations in celestial mechanics</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.11 <a 
+href="manualse102.html#x125-29400016.11">CANTENS: A Package for Manipulations and Simplifications of Indexed Objects</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.12 <a 
+href="manualse103.html#x131-31500016.12">CDE: A package for integrability of PDEs</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.13 <a 
+href="manualse104.html#x135-34500016.13">CDIFF: A package for computations in geometry of Differential Equations</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.14 <a 
+href="manualse105.html#x137-35500016.14">CGB: Computing Comprehensive Gröbner Bases</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.15 <a 
+href="manualse106.html#x138-37100016.15">COMPACT: Package for compacting expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.16 <a 
+href="manualse107.html#x139-37200016.16">CRACK: Solving overdetermined systems of PDEs or ODEs</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.17 <a 
+href="manualse108.html#x140-37300016.17">CVIT: Fast calculation of Dirac gamma matrix traces</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.18 <a 
+href="manualse109.html#x141-38100016.18">DEFINT: A definite integration interface</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.19 <a 
+href="manualse110.html#x142-40000016.19">DESIR: Differential linear homogeneous equation solutions in the
+neighborhood of irregular and regular singular points</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.20 <a 
+href="manualse111.html#x143-41300016.20">DFPART: Derivatives of generic functions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.21 <a 
+href="manualse112.html#x144-41700016.21">DUMMY: Canonical form of expressions with dummy variables</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.22 <a 
+href="manualse113.html#x145-42300016.22">EXCALC: A differential geometry package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.23 <a 
+href="manualse114.html#x146-44000016.23">FIDE: Finite difference method for partial differential equations</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.24 <a 
+href="manualse115.html#x147-47600016.24">FPS: Automatic calculation of formal power series</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.25 <a 
+href="manualse116.html#x148-48200016.25">GCREF: A Graph Cross Referencer</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.26 <a 
+href="manualse117.html#x149-48600016.26">GENTRAN: A code generation package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.27 <a 
+href="manualse118.html#x150-48700016.27">GNUPLOT: Display of functions and surfaces</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.28 <a 
+href="manualse119.html#x151-50000016.28">GROEBNER: A Gröbner basis package</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >16.29 <a 
+href="manualse120.html#x152-52800016.29">GUARDIAN: Guarded Expressions in Practice</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.30 <a 
+href="manualse121.html#x153-55500016.30">IDEALS: Arithmetic for polynomial ideals</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.31 <a 
+href="manualse122.html#x154-56200016.31">INEQ: Support for solving inequalities</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.32 <a 
+href="manualse123.html#x156-56300016.32">INVBASE: A package for computing involutive bases</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.33 <a 
+href="manualse124.html#x158-56900016.33">LALR: A parser generator</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.34 <a 
+href="manualse125.html#x159-57200016.34">LAPLACE: Laplace transforms</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.35 <a 
+href="manualse126.html#x160-57300016.35">LIE: Functions for the classification of real n-dimensional Lie algebras</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.36 <a 
+href="manualse127.html#x161-57500016.36">LIMITS: A package for finding limits</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.37 <a 
+href="manualse128.html#x162-57800016.37">LINALG: Linear algebra package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.38 <a 
+href="manualse129.html#x172-64700016.38">LISTVECOPS: Vector operations on lists</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.39 <a 
+href="manualse130.html#x173-64800016.39">LPDO: Linear Partial Differential Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.40 <a 
+href="manualse131.html#x174-66200016.40">MODSR: Modular solve and roots</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.41 <a 
+href="manualse132.html#x175-66300016.41">NCPOLY: Non&#8211;commutative polynomial ideals</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.42 <a 
+href="manualse133.html#x177-67600016.42">NORMFORM: Computation of matrix normal forms</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.43 <a 
+href="manualse134.html#x178-68900016.43">NUMERIC: Solving numerical problems</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.44 <a 
+href="manualse135.html#x179-70200016.44">ODESOLVE: Ordinary differential equations solver</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.45 <a 
+href="manualse136.html#x180-71700016.45">ORTHOVEC: Manipulation of scalars and vectors</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.46 <a 
+href="manualse137.html#x181-72600016.46">PHYSOP: Operator calculus in quantum theory</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.47 <a 
+href="manualse138.html#x187-73800016.47">PM: A REDUCE pattern matcher</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.48 <a 
+href="manualse139.html#x188-75100016.48">QSUM: Indefinite and Definite Summation of <span 
+class="ptmro8t-x-x-109">q</span>-hypergeometric Terms</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.49 <a 
+href="manualse140.html#x190-76200016.49">RANDPOLY: A random polynomial generator</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.50 <a 
+href="manualse141.html#x193-77600016.50">RATAPRX: Rational Approximations Package for REDUCE</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.51 <a 
+href="manualse142.html#x194-78100016.51">REACTEQN: Support for chemical reaction equation systems</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.52 <a 
+href="manualse143.html#x195-78200016.52">REDLOG: Extend REDUCE to a computer logic system</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.53 <a 
+href="manualse144.html#x196-78300016.53">RESET: Code to reset REDUCE to its initial state</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.54 <a 
+href="manualse145.html#x197-78400016.54">RESIDUE: A residue package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.55 <a 
+href="manualse146.html#x198-78500016.55">RLFI: REDUCE <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span> formula interface</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.56 <a 
+href="manualse147.html#x199-78800016.56">ROOTS: A REDUCE root finding package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.57 <a 
+href="manualse148.html#x200-80100016.57">RSOLVE: Rational/integer polynomial solvers</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.58 <a 
+href="manualse149.html#x201-80600016.58">RTRACE: Tracing in REDUCE</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >16.59 <a 
+href="manualse150.html#x202-81400016.59">SCOPE: REDUCE source code optimization package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.60 <a 
+href="manualse151.html#x203-81500016.60">SETS: A basic set theory package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.61 <a 
+href="manualse152.html#x204-82700016.61">SPARSE: Sparse Matrix Calculations</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.62 <a 
+href="manualse153.html#x209-89500016.62">SPDE: Finding symmetry groups of PDE&#8217;s</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.63 <a 
+href="manualse154.html#x210-89900016.63">SPECFN: Package for special functions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.64 <a 
+href="manualse155.html#x211-90000016.64">SPECFN2: Package for special special functions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.65 <a 
+href="manualse156.html#x212-90500016.65">SSTOOLS: Computations with supersymmetric algebraic and differential
+expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.66 <a 
+href="manualse157.html#x213-90800016.66">SUM: A package for series summation</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.67 <a 
+href="manualse158.html#x214-90900016.67">SYMMETRY: Operations on symmetric matrices</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.68 <a 
+href="manualse159.html#x215-91500016.68">TAYLOR: Manipulation of Taylor series</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.69 <a 
+href="manualse160.html#x216-92100016.69">TPS: A truncated power series package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.70 <a 
+href="manualse161.html#x217-94300016.70">TRI: TeX REDUCE interface</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.71 <a 
+href="manualse162.html#x218-94400016.71">TRIGSIMP: Simplification and factorization of trigonometric and
+hyperbolic functions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.72 <a 
+href="manualse163.html#x219-95100016.72">TURTLE: Turtle Graphics Interface for REDUCE</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.73 <a 
+href="manualse164.html#x220-96200016.73">WU: Wu algorithm for polynomial systems</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.74 <a 
+href="manualse165.html#x221-96300016.74">XCOLOR: Color factor in some field theories</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.75 <a 
+href="manualse166.html#x222-96800016.75">XIDEAL: Gröbner Bases for exterior algebra</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.76 <a 
+href="manualse167.html#x223-98600016.76">ZEILBERG: Indefinite and definite summation</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.77 <a 
+href="manualse168.html#x226-100200016.77">ZTRANS: <span 
+class="cmmi-10x-x-109">Z</span>-transform package</a></span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                     
+
+                                                                     
+<table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch16.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualch17.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualch15.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualch15.html#tailmanualch15.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualch16.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualch16.html"></a>  
+</body></html> 

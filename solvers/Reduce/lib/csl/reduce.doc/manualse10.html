@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Boolean Expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch3.html#manualse10.html" >Up</a></td><td class="clinks"><a 
+href="manualse11.html" >Next</a></td><td class="clinks"><a 
+href="manualse9.html" >Prev</a></td><td class="clinks"><a 
+href="manualse9.html#tailmanualse9.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse10.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">3.3    </span> <a 
+ id="x17-190003.3"></a>Boolean Expressions</h3>
+<!--l. 98--><p class="noindent" >A boolean expression<a 
+ id="dx17-19001"></a><a 
+ id="dx17-19002"></a> returns a truth value. In the algebraic mode of REDUCE, boolean
+expressions have the syntactical form:
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">relational operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div>
+<!--l. 104--><p class="noindent" >or
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">boolean operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">arguments</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span></div>
+<!--l. 108--><p class="noindent" >or
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">boolean expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">logical operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">boolean expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">.</span></div>
+<!--l. 113--><p class="noindent" >Parentheses can also be used to control the precedence of expressions.
+<!--l. 115--><p class="noindent" ><a 
+ id="operator:EVENP"></a> <a 
+ id="operator:FIXP"></a> <a 
+ id="operator:FREEOF"></a> <a 
+ id="operator:NUMBERP"></a> <a 
+ id="operator:ORDP"></a> <a 
+ id="operator:PRIMEP"></a> In addition to the logical and relational operators defined earlier as infix operators, the
+following boolean operators are also defined:<br 
+class="newline" /><br 
+class="newline" /><a 
+ id="dx17-19003"></a><a 
+ id="dx17-19004"></a> <a 
+ id="dx17-19005"></a><a 
+ id="dx17-19006"></a> <a 
+ id="dx17-19007"></a><a 
+ id="dx17-19008"></a> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-7" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-7-1g"><col 
+id="TBL-7-1"><col 
+id="TBL-7-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-7-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">EVENP(U)   </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-7-1-2"  
+class="td11"><!--l. 129--><p class="noindent" >determines if the number <span 
+class="pcrr8t-x-x-109">U </span>is even or not;                         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-2-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">FIXP(U)    </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-7-2-2"  
+class="td11"><!--l. 131--><p class="noindent" >determines if the expression <span 
+class="pcrr8t-x-x-109">U </span>is integer or not;                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-3-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">FREEOF(U,V)</span></td><td  style="white-space:wrap; text-align:left;" id="TBL-7-3-2"  
+class="td11"><!--l. 133--><p class="noindent" >determines if the expression <span 
+class="pcrr8t-x-x-109">U </span>does not contain the kernel
+<span 
+class="pcrr8t-x-x-109">V </span>anywhere in its structure;                                                 </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-4-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">NUMBERP(U) </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-7-4-2"  
+class="td11"><!--l. 137--><p class="noindent" >determines if <span 
+class="pcrr8t-x-x-109">U </span>is a number or not;                                     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-5-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">ORDP(U,V)  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-7-5-2"  
+class="td11"><!--l. 139--><p class="noindent" >determines if <span 
+class="pcrr8t-x-x-109">U </span>is ordered ahead of <span 
+class="pcrr8t-x-x-109">V </span>by some canonical
+ordering (based on the expression structure and an internal
+ordering of identifiers);                                                       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-6-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">PRIMEP(U)  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-7-6-2"  
+class="td11"><!--l. 143--><p class="noindent" >true if <span 
+class="pcrr8t-x-x-109">U </span>is a prime object, i.e., any object other than 0 and
+plus or minus 1 which is only exactly divisible by itself or
+a unit.                                                                                  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-7-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-7-7-1"  
+class="td11">           </td></tr></table>
+</div>
+<!--l. 149--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-29">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;j&#x003C;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x003E;0&#x00A0;&#x00A0;or&#x00A0;&#x00A0;x=-2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;numberp&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fixp&#x00A0;x&#x00A0;and&#x00A0;evenp&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;numberp&#x00A0;x&#x00A0;and&#x00A0;x&#x00A0;neq&#x00A0;0
+</div>
+<!--l. 156--><p class="nopar" > Boolean expressions can only appear directly within <span 
+class="pcrr8t-x-x-109">IF</span>, <span 
+class="pcrr8t-x-x-109">FOR</span>, <span 
+class="pcrr8t-x-x-109">WHILE</span>, and <span 
+class="pcrr8t-x-x-109">UNTIL</span>
+statements, as described in other sections. Such expressions cannot be used in place of
+ordinary algebraic expressions, or assigned to a variable.
+<!--l. 162--><p class="noindent" >NB: For those familiar with symbolic mode, the meaning of some of these operators is
+different in that mode. For example, <span 
+class="pcrr8t-x-x-109">NUMBERP </span>is true only for integers and reals in
+symbolic mode.
+<!--l. 166--><p class="noindent" ><a 
+ id="operator:AND"></a> <a 
+ id="dx17-19009"></a>When two or more boolean expressions are combined with <span 
+class="pcrr8t-x-x-109">AND</span>, they are evaluated one
+by one until a <span 
+class="ptmri8t-x-x-109">false </span>expression is found. The rest are not evaluated. Thus
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-30">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;numberp&#x00A0;x&#x00A0;and&#x00A0;numberp&#x00A0;y&#x00A0;and&#x00A0;x&#x003E;y
+</div>
+<!--l. 173--><p class="nopar" > does not attempt to make the <span 
+class="pcrr8t-x-x-109">x&#x003E;y </span>comparison unless <span 
+class="pcrr8t-x-x-109">X </span>and <span 
+class="pcrr8t-x-x-109">Y </span>are both verified to be
+numbers.
+<!--l. 177--><p class="noindent" ><a 
+ id="operator:OR"></a> <a 
+ id="dx17-19010"></a>Similarly, evaluation of a sequence of boolean expressions connected by <span 
+class="pcrr8t-x-x-109">OR </span>stops as
+soon as a <span 
+class="ptmri8t-x-x-109">true </span>expression is found.
+<!--l. 182--><p class="noindent" >NB: In a boolean expression, and in a place where a boolean expression is expected, the
+algebraic value 0 is interpreted as <span 
+class="ptmri8t-x-x-109">false</span>, while all other algebraic values are converted to
+<span 
+class="ptmri8t-x-x-109">true</span>. So in algebraic mode a procedure can be written for direct usage in boolean
+expressions, returning say 1 or 0 as its value as in
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-31">
+&#x00A0;&#x00A0;&#x00A0;procedure&#x00A0;polynomialp(u,x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;den(u)=1&#x00A0;and&#x00A0;deg(u,x)&#x003E;=1&#x00A0;then&#x00A0;1&#x00A0;else&#x00A0;0;
+</div>
+<!--l. 191--><p class="nopar" >
+<!--l. 193--><p class="noindent" >One can then use this in a boolean construct, such as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-32">
+&#x00A0;&#x00A0;&#x00A0;if&#x00A0;polynomialp(q,z)&#x00A0;and&#x00A0;not&#x00A0;polynomialp(q,y)&#x00A0;then&#x00A0;...
+</div>
+<!--l. 196--><p class="nopar" >
+<!--l. 198--><p class="noindent" >In addition, any procedure that does not have a defined return value (for example, a block
+without a <span 
+class="pcrr8t-x-x-109">RETURN </span>statement in it) has the boolean value <span 
+class="ptmri8t-x-x-109">false</span>.
+                                                                     
+
+                                                                     
+<!--l. 202--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch3.html#manualse10.html" >Up</a></td><td class="clinks"><a 
+href="manualse11.html" >Next</a></td><td class="clinks"><a 
+href="manualse9.html" >Prev</a></td><td class="clinks"><a 
+href="manualse9.html#tailmanualse9.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse10.html" >Front</a></td></tr></table><a 
+ id="tailmanualse10.html"></a>  
+</body></html> 

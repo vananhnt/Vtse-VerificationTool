@@ -1,0 +1,1327 @@
+(setq transform_lst (quote nil))
+(aeval (operator (list (quote f1))))
+(aeval (operator (list (quote f2))))
+(fluid (quote (mellincoef)))
+(progn (put (quote defint_gw) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gw) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gw) (quote defined!-on!-line) 44) (
+progn (de defint_gw (u) (caar u)) (put (quote defint_gw) (quote number!-of!-args
+) 1) (putc (quote defint_gw) (quote inline) (quote (lambda (u) (caar u))))))
+(progn (put (quote defint_gl) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gl) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gl) (quote defined!-on!-line) 48) (
+progn (de defint_gl (u) (caadar u)) (put (quote defint_gl) (quote 
+number!-of!-args) 1) (putc (quote defint_gl) (quote inline) (quote (lambda (u) (
+caadar u))))))
+(progn (put (quote defint_gk) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gk) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gk) (quote defined!-on!-line) 52) (
+progn (de defint_gk (u) (cdadar u)) (put (quote defint_gk) (quote 
+number!-of!-args) 1) (putc (quote defint_gk) (quote inline) (quote (lambda (u) (
+cdadar u))))))
+(progn (put (quote defint_gr) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gr) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gr) (quote defined!-on!-line) 56) (
+progn (de defint_gr (u) (cadar u)) (put (quote defint_gr) (quote 
+number!-of!-args) 1) (putc (quote defint_gr) (quote inline) (quote (lambda (u) (
+cadar u))))))
+(progn (put (quote defint_gm) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gm) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gm) (quote defined!-on!-line) 60) (
+progn (de defint_gm (u) (caadr u)) (put (quote defint_gm) (quote 
+number!-of!-args) 1) (putc (quote defint_gm) (quote inline) (quote (lambda (u) (
+caadr u))))))
+(progn (put (quote defint_gn) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gn) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gn) (quote defined!-on!-line) 64) (
+progn (de defint_gn (u) (cadadr u)) (put (quote defint_gn) (quote 
+number!-of!-args) 1) (putc (quote defint_gn) (quote inline) (quote (lambda (u) (
+cadadr u))))))
+(progn (put (quote defint_gp) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gp) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gp) (quote defined!-on!-line) 68) (
+progn (de defint_gp (u) (caddr (cadr u))) (put (quote defint_gp) (quote 
+number!-of!-args) 1) (putc (quote defint_gp) (quote inline) (quote (lambda (u) (
+caddr (cadr u)))))))
+(progn (put (quote defint_gq) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gq) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gq) (quote defined!-on!-line) 72) (
+progn (de defint_gq (u) (cadddr (cadr u))) (put (quote defint_gq) (quote 
+number!-of!-args) 1) (putc (quote defint_gq) (quote inline) (quote (lambda (u) (
+cadddr (cadr u)))))))
+(progn (put (quote defint_ga) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_ga) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_ga) (quote defined!-on!-line) 76) (
+progn (de defint_ga (u) (caddr u)) (put (quote defint_ga) (quote 
+number!-of!-args) 1) (putc (quote defint_ga) (quote inline) (quote (lambda (u) (
+caddr u))))))
+(progn (put (quote defint_gb) (quote procedure_type) (quote (arrow general 
+general))) (put (quote defint_gb) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote defint_gb) (quote defined!-on!-line) 80) (
+progn (de defint_gb (u) (cadddr u)) (put (quote defint_gb) (quote 
+number!-of!-args) 1) (putc (quote defint_gb) (quote inline) (quote (lambda (u) (
+cadddr u))))))
+(put (quote intgg) (quote simpfn) (quote simpintgg))
+(progn (put (quote simpintgg) (quote procedure_type) (quote (arrow general 
+general))) (put (quote simpintgg) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote simpintgg) (quote defined!-on!-line) 134) (
+progn (put (quote simpintgg) (quote number!-of!-args) 1) (de simpintgg (u) (
+progn (setq u (intggg (car u) (cadr u) (caddr u) (cadddr u))) (simp (prepsq u)))
+)))
+(progn (put (quote intggg) (quote procedure_type) (quote (arrow (times general 
+general general general) general))) (put (quote intggg) (quote defined!-in!-file
+) (quote defint!/definta!.red)) (put (quote intggg) (quote defined!-on!-line) 
+138) (progn (put (quote intggg) (quote number!-of!-args) 4) (de intggg (u1 u2 u3
+u4) (prog (v v1 v2 s1 s2 s3 coef uu1 uu2 test_1 test_1a test_2 m n p q delta xi
+eta test temp temp1 temp2 var var1 var2 !*allfac) (cond (!*trdefint (progn (
+prin2t "Entering main procedure intggg with parameters") (mathprint (list (quote
+setq) (quote u1) u1)) (mathprint (list (quote setq) (quote u2) u2)) (mathprint (
+list (quote setq) (quote u3) u3)) (mathprint (list (quote setq) (quote u4) u4))
+nil))) (setq uu1 (cadr u1)) (setq uu1 (prepsq (cadr (aeval uu1)))) (setq uu2 (
+cadr u2)) (setq uu2 (prepsq (cadr (aeval uu2)))) (setq u1 (cond ((null (cddr u1)
+) (list (quote f1) uu1)) (t (cons (quote f1) (cons uu1 (cddr u1)))))) (setq u2 (
+cond ((null (cddr u2)) (list (quote f2) uu2)) (t (cons (quote f2) (cons uu2 (
+cddr u2)))))) (cond ((and (equal (get (quote f1) (quote g)) (quote (1 . 1))) (
+equal (get (quote f2) (quote g)) (quote (1 . 1)))) (return (simp (quote unknown)
+))) ((equal (get (quote f1) (quote g)) (quote (1 . 1))) (progn (setq s1 (bastab
+(car u2) (cddr u2))) (setq v (trpar (car (cddddr s1)) (cadr u2) u4)) (cond ((
+equal v (quote fail)) (return (simp (quote fail))))) (setq temp (car (cddddr s1)
+)) (setq var (cadr u2)) (setq temp (reval (aeval (list (quote sub) (list (quote
+equal) (quote x) var) temp)))) (setq s1 (list (car s1) (cadr s1) (caddr s1) (
+cadddr s1) temp)) (setq s1 (simp_expt u3 s1 u4)) (setq u3 (car s1)) (setq s1 (
+cdr s1)) (setq test_1 (test_1 nil u3 s1)) (setq test_1a (test_1 (quote a) u3 s1)
+) (setq test_2 (test2 u3 (cadr s1) (caddr s1))) (setq m (caar s1)) (setq n (
+cadar s1)) (setq p (caddar s1)) (setq q (car (cdddar s1))) (setq delta (reval (
+aeval (list (quote plus) m (list (quote difference) n (list (quote times) (list
+(quote quotient) 1 2) (list (quote plus) p q))))))) (setq xi (reval (aeval (list
+(quote plus) m (list (quote difference) n p))))) (setq eta (car (cddddr s1))) (
+setq eta (reval (aeval (list (quote quotient) eta u4)))) (setq test (list (quote
+test_cases) m n p q delta xi eta test_1 test_1a test_2)) (cond (!*trdefint (
+progn (prin2t "Checking test cases:") (mathprint test) nil))) (setq test (reval
+test)) (cond (!*trdefint (progn (prin2t "Result returned is:") (mathprint test)
+nil))) (cond ((equal transform_tst (quote t)) (setq test (quote t)))) (cond ((
+neq test (quote t)) (return (simp (quote unknown))))) (setq coef (simp!* (cadddr
+s1))) (setq s1 (list v (car s1) (prog (uu forall!-result forall!-endptr) (setq 
+uu (cadr s1)) (cond ((null uu) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq
+uu (cdr uu)) (cond ((null uu) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (uu) (simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel)) (prog (uu forall!-result forall!-endptr) (setq
+uu (caddr s1)) (cond ((null uu) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq
+uu (cdr uu)) (cond ((null uu) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (uu) (simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel)) (simp!* (subpref (cadr u2) 1 u4)))) (setq s3 (
+addsq (simp!* u3) (quote (1 . 1)))) (return (intg s1 s3 coef)))) ((equal (get (
+quote f2) (quote g)) (quote (1 . 1))) (progn (setq s1 (bastab (car u1) (cddr u1)
+)) (setq v (trpar (car (cddddr s1)) (cadr u1) u4)) (cond ((equal v (quote fail))
+(return (simp (quote fail))))) (setq temp (car (cddddr s1))) (setq var (cadr u1)
+) (setq temp (reval (aeval (list (quote sub) (list (quote equal) (quote x) var)
+temp)))) (setq s1 (list (car s1) (cadr s1) (caddr s1) (cadddr s1) temp)) (setq 
+s1 (simp_expt u3 s1 u4)) (setq u3 (car s1)) (setq s1 (cdr s1)) (setq test_1 (
+test_1 nil u3 s1)) (setq test_1a (test_1 (quote a) u3 s1)) (setq test_2 (test2 
+u3 (cadr s1) (caddr s1))) (setq m (caar s1)) (setq n (cadar s1)) (setq p (caddar
+s1)) (setq q (car (cdddar s1))) (setq delta (reval (aeval (list (quote plus) m (
+list (quote difference) n (list (quote times) (list (quote quotient) 1 2) (list
+(quote plus) p q))))))) (setq xi (reval (aeval (list (quote plus) m (list (quote
+difference) n p))))) (setq eta (car (cddddr s1))) (setq eta (reval (aeval (list
+(quote quotient) eta u4)))) (setq test (list (quote test_cases) m n p q delta xi
+eta test_1 test_1a test_2)) (cond (!*trdefint (progn (prin2t 
+"Checking test cases:") (mathprint test) nil))) (setq test (reval test)) (cond (
+!*trdefint (progn (prin2t "Result returned is:") (mathprint test) nil))) (cond (
+(equal transform_tst (quote t)) (setq test (quote t)))) (cond ((neq test (quote
+t)) (return (simp (quote unknown))))) (setq coef (simp!* (cadddr s1))) (setq s1
+(list v (car s1) (prog (uu forall!-result forall!-endptr) (setq uu (cadr s1)) (
+cond ((null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons (
+(lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((
+null uu) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (
+simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel)) (prog (uu forall!-result forall!-endptr) (setq uu (caddr s1)) (cond
+((null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((
+lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((
+null uu) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (
+simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel)) (simp!* (subpref (cadr u1) 1 u4)))) (setq s3 (addsq (simp!* u3) (
+quote (1 . 1)))) (return (intg s1 s3 coef))))) (setq s1 (bastab (car u1) (cddr 
+u1))) (setq s2 (bastab (car u2) (cddr u2))) (cond (!*trdefint (progn (prin2t 
+"MeijerG representations of the first factor is:") (prin2!* "MeijerG<") (prin2!*
+(car (car s1))) (prin2!* ",") (prin2!* (cadr (car s1))) (prin2!* ",") (prin2!* (
+caddr (car s1))) (prin2!* ",") (prin2!* (cadddr (car s1))) (prin2!* ">") (maprin
+(cons (quote list) (cadr s1))) (prin2!* "|") (maprin (cons (quote list) (caddr 
+s1))) (prin2!* "|") (maprin (car (cddddr s1))) (terpri!* t) (cond ((neq (cadddr
+s1) 1) (progn (prin2!* "times a factor of") (mathprint (cadddr s1))))) (prin2t 
+"MeijerG representations of the second factor is:") (prin2!* "MeijerG<") (
+prin2!* (car (car s2))) (prin2!* ",") (prin2!* (cadr (car s2))) (prin2!* ",") (
+prin2!* (caddr (car s2))) (prin2!* ",") (prin2!* (cadddr (car s2))) (prin2!* ">"
+) (maprin (cons (quote list) (cadr s2))) (prin2!* "|") (maprin (cons (quote list
+) (caddr s2))) (prin2!* "|") (maprin (car (cddddr s2))) (terpri!* t) (cond ((neq
+(cadddr s2) 1) (progn (prin2!* "times a coefficient of") (mathprint (cadddr s2))
+))) nil))) (setq coef (multsq (simp!* (cadddr s1)) (simp!* (cadddr s2)))) (cond
+(!*trdefint (progn (prin2t "Product of coefficients is") (printsq coef) nil))) (
+setq v1 (trpar (car (cddddr s1)) (cadr u1) u4)) (cond ((equal v1 (quote fail)) (
+return (simp (quote fail))))) (cond (!*trdefint (progn (prin2t 
+"Argument of first MeijerG function is") (mathprint (list (quote times) (prepsq
+(car v1)) (list (quote expt) u4 (prepsq (cadr v1))))) nil))) (setq v2 (trpar (
+car (cddddr s2)) (cadr u2) u4)) (cond ((equal v2 (quote fail)) (return (simp (
+quote fail))))) (cond (!*trdefint (progn (prin2t 
+"Argument of second MeijerG function is") (mathprint (list (quote times) (prepsq
+(car v2)) (list (quote expt) u4 (prepsq (cadr v2))))) nil))) (setq !*allfac t) (
+setq temp1 (car (cddddr s1))) (setq var1 (cadr u1)) (setq temp1 (reval (aeval (
+list (quote sub) (list (quote equal) (quote x) var1) temp1)))) (cond (!*trdefint
+(progn (prin2t 
+"After substituting the current expression the argument to the first MeijerG function is"
+) (mathprint temp1) nil))) (setq s1 (list (car s1) (cadr s1) (caddr s1) (cadddr
+s1) temp1)) (setq temp2 (car (cddddr s2))) (setq var2 (cadr u2)) (setq temp2 (
+reval (aeval (list (quote sub) (list (quote equal) (quote x) var2) temp2)))) (
+cond (!*trdefint (progn (prin2t 
+"After substituting the current expression the argument to the second MeijerG function is"
+) (mathprint temp2) nil))) (setq s2 (list (car s2) (cadr s2) (caddr s2) (cadddr
+s2) temp2)) (setq s1 (list v1 (car s1) (prog (uu forall!-result forall!-endptr)
+(setq uu (cadr s1)) (cond ((null uu) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq
+uu (cdr uu)) (cond ((null uu) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (uu) (simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel)) (prog (uu forall!-result forall!-endptr) (setq
+uu (caddr s1)) (cond ((null uu) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq
+uu (cdr uu)) (cond ((null uu) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (uu) (simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel)) (simp!* (subpref (cadr u1) 1 u4)))) (setq s2 (
+list v2 (car s2) (prog (uu forall!-result forall!-endptr) (setq uu (cadr s2)) (
+cond ((null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons (
+(lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((
+null uu) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (
+simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel)) (prog (uu forall!-result forall!-endptr) (setq uu (caddr s2)) (cond
+((null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((
+lambda (uu) (simp!* uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((
+null uu) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (
+simp!* uu)) (car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel)) (simp!* (subpref (cadr u2) 1 u4)))) (setq s3 (addsq (simp!* u3) (
+quote (1 . 1)))) (cond ((or (not (numberp (caadar s1))) (not (numberp (caadar s2
+)))) (return (simp (quote fail)))) ((lessp (caadar s1) 0) (setq s1 (cong s1))) (
+(lessp (caadar s2) 0) (setq s2 (cong s2))) ((equal (caadar s1) (cdadar s1)) (go
+a)) ((equal (caadar s2) (cdadar s2)) (progn (setq v s1) (setq s1 s2) (setq s2 v)
+(cond (!*trdefint (prin2t "Exchanging the two MeijerG functions"))) (go a)))) (
+setq coef (multsq coef (invsq (cadar s1)))) (setq v (modintgg s3 s1 s2)) (setq 
+s3 (car v)) (setq s1 (cadr v)) (setq s2 (caddr v)) a (setq test (validity_check
+s1 s2 u3)) (cond ((neq test (quote t)) (return (simp (quote unknown))))) (setq 
+coef (multsq (cond ((numberp mellincoef) (simp mellincoef)) (t (cadr mellincoef)
+)) (multsq coef (coefintg s1 s2 s3)))) (cond (!*trdefint (progn (prin2t 
+"Overall coefficient is") (printsq coef) nil))) (setq v (deltagg s1 s2 s3)) (
+cond (!*trdefint (progn (prin2t 
+"Parameter list of resulting single MeijerG function is") (mathprint (cons (
+quote list) (prog (sq forall!-result forall!-endptr) (setq sq (car v)) (cond ((
+null sq) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda
+(sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (cond ((null sq)
+(return forall!-result))) (rplacd forall!-endptr (cons ((lambda (sq) (prepsq sq)
+) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel)))) (
+mathprint (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq (
+cadr v)) (cond ((null sq) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq
+sq (cdr sq)) (cond ((null sq) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (sq) (prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel)))) nil))) (setq v (redpargf (list (arggf s1 s2)
+(indgf s1 s2) (car v) (cadr v)))) (setq v (cons (quote meijerg) (mgretro (cadr v
+) (caddr v) (car v)))) (cond (!*trdefint (progn (prin2t 
+"Resulting single MeijerG function is") (mathprint v) nil))) (setq v (aeval v))
+(cond (!*trdefint (progn (prin2t 
+"Simplification of the resulting single MeijerG function yields") (mathprint v)
+nil))) (cond ((eqcar v (quote !*sq)) (setq v (cadr v))) ((fixp v) (setq v (simp
+v)))) (cond ((equal v (quote fail)) (return (simp (quote fail)))) (t (return (
+multsq coef v))))))))
+(progn (put (quote mgretro) (quote procedure_type) (quote (arrow (times general
+general general) general))) (put (quote mgretro) (quote defined!-in!-file) (
+quote defint!/definta!.red)) (put (quote mgretro) (quote defined!-on!-line) 470)
+(progn (put (quote mgretro) (quote number!-of!-args) 3) (de mgretro (u v w) (
+prog (caru carv cdru cdrv) (setq caru (car u)) (setq cdru (cdr u)) (setq carv (
+car v)) (setq cdrv (cdr v)) (return (list (cons (quote list) (cons (cons (quote
+list) (prog (aa forall!-result forall!-endptr) (setq aa caru) (cond ((null aa) (
+return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda (aa) (
+prepsq aa)) (car aa)) nil))) looplabel (setq aa (cdr aa)) (cond ((null aa) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (aa) (prepsq aa))
+(car aa)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))) (
+prog (aa forall!-result forall!-endptr) (setq aa cdru) (cond ((null aa) (return
+nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda (aa) (prepsq aa)
+) (car aa)) nil))) looplabel (setq aa (cdr aa)) (cond ((null aa) (return 
+forall!-result))) (rplacd forall!-endptr (cons ((lambda (aa) (prepsq aa)) (car 
+aa)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel)))) (cons (
+quote list) (cons (cons (quote list) (prog (aa forall!-result forall!-endptr) (
+setq aa carv) (cond ((null aa) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (aa) (prepsq aa)) (car aa)) nil))) looplabel (setq
+aa (cdr aa)) (cond ((null aa) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (aa) (prepsq aa)) (car aa)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel))) (prog (aa forall!-result forall!-endptr) (setq
+aa cdrv) (cond ((null aa) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (aa) (prepsq aa)) (car aa)) nil))) looplabel (setq
+aa (cdr aa)) (cond ((null aa) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (aa) (prepsq aa)) (car aa)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel)))) (prepsq w)))))))
+(progn (put (quote intg) (quote procedure_type) (quote (arrow (times general 
+general general) general))) (put (quote intg) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote intg) (quote defined!-on!-line) 484) (progn (
+put (quote intg) (quote number!-of!-args) 3) (de intg (u1 u2 u3) (prog (v) (cond
+((and (numberp (caadar u1)) (lessp (caadar u1) 0)) (setq u1 (cong u1)))) (setq v
+(modintg u2 u1)) (setq u1 (cadr v)) (setq v ((lambda (p) (progn (prog (pp) (setq
+pp (list u3 (expdeg (caar u1) (negsq u2)) (quotsq ((lambda (p) (progn (prog (pp)
+(setq pp (append (specfn!-listplus (car (redpar1 (cadddr u1) (caadr u1))) u2) (
+specfn!-listplus (prog (uu forall!-result forall!-endptr) (setq uu (car (redpar1
+(caddr u1) (cadadr u1)))) (cond ((null uu) (return nil))) (setq forall!-result (
+setq forall!-endptr (cons ((lambda (uu) (negsq uu)) (car uu)) nil))) looplabel (
+setq uu (cdr uu)) (cond ((null uu) (return forall!-result))) (rplacd 
+forall!-endptr (cons ((lambda (uu) (negsq uu)) (car uu)) nil)) (setq 
+forall!-endptr (cdr forall!-endptr)) (go looplabel)) (addsq (quote (1 . 1)) (
+negsq u2))))) lab (cond ((null pp) (return nil))) ((lambda (pp) (progn (setq p (
+multsq (cons (list (cons (cons (car (fkern (list (quote gamma) (prepsq pp)))) 1)
+1)) 1) p)))) (car pp)) (setq pp (cdr pp)) (go lab)) p)) (quote (1 . 1))) ((
+lambda (p) (progn (prog (pp) (setq pp (append (specfn!-listplus (cdr (redpar1 (
+caddr u1) (cadadr u1))) u2) (specfn!-listplus (prog (uu forall!-result 
+forall!-endptr) (setq uu (cdr (redpar1 (cadddr u1) (caadr u1)))) (cond ((null uu
+) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda (uu) (
+negsq uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((null uu) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (negsq uu))
+(car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel)) (
+addsq (quote (1 . 1)) (negsq u2))))) lab (cond ((null pp) (return nil))) ((
+lambda (pp) (progn (setq p (multsq (cons (list (cons (cons (car (fkern (list (
+quote gamma) (prepsq pp)))) 1) 1)) 1) p)))) (car pp)) (setq pp (cdr pp)) (go lab
+)) p)) (quote (1 . 1)))))) lab (cond ((null pp) (return nil))) ((lambda (pp) (
+progn (setq p (multsq pp p)))) (car pp)) (setq pp (cdr pp)) (go lab)) p)) (quote
+(1 . 1)))) (return (multsq (cond ((numberp mellincoef) (simp mellincoef)) (t (
+cadr mellincoef))) v))))))
+(share (list (quote intggg!-rules1)))
+(progn (setq intggg!-rules1 (progn (setq alglist!* (cons nil nil)) (aeval (list
+(quote list) (list (quote replaceby) (list (quote list) (list (quote times) (
+list (quote !~) (list (quote !~) (quote c))) (list (quote expt) (quote 
+!*intvar!*) (list (quote !~) (quote a))))) (list (quote when) (list (quote list)
+(quote a) (list (quote times) (quote c) (quote !*intvar!*))) (list (quote and) (
+list (quote freeof) (quote c) (quote !*intvar!*)) (list (quote freeof) (quote a)
+(quote !*intvar!*))))) (list (quote replaceby) (list (quote list) (list (quote 
+quotient) (list (quote times) (list (quote !~) (quote c)) (list (quote expt) (
+quote !*intvar!*) (list (quote !~) (quote a)))) (list (quote !~) (quote d)))) (
+list (quote when) (list (quote list) (quote a) (list (quote times) (list (quote
+quotient) (quote c) (quote d)) (quote !*intvar!*))) (list (quote and) (list (
+quote freeof) (quote c) (quote !*intvar!*)) (list (quote freeof) (quote d) (
+quote !*intvar!*)) (list (quote freeof) (quote a) (quote !*intvar!*))))) (list (
+quote replaceby) (list (quote list) (list (quote quotient) (list (quote !~) (
+quote c)) (list (quote expt) (quote !*intvar!*) (list (quote !~) (quote a))))) (
+list (quote when) (list (quote list) (quote a) (list (quote quotient) (quote c)
+(quote !*intvar!*))) (list (quote and) (list (quote freeof) (quote c) (quote 
+!*intvar!*)) (list (quote freeof) (quote a) (quote !*intvar!*))))) (list (quote
+replaceby) (list (quote list) (list (quote quotient) (list (quote expt) (quote 
+!*intvar!*) (list (quote !~) (quote a))) (list (quote !~) (quote c)))) (list (
+quote when) (list (quote list) (quote a) (list (quote quotient) (quote 
+!*intvar!*) (quote c))) (list (quote and) (list (quote freeof) (quote c) (quote
+!*intvar!*)) (list (quote freeof) (quote a) (quote !*intvar!*))))) (list (quote
+replaceby) (list (quote list) (list (quote quotient) 1 (list (quote times) (list
+(quote !~) (list (quote !~) (quote c))) (list (quote expt) (quote !*intvar!*) (
+list (quote !~) (quote a)))))) (list (quote when) (list (quote list) (quote a) (
+list (quote quotient) 1 (list (quote times) (quote c) (quote !*intvar!*)))) (
+list (quote and) (list (quote freeof) (quote c) (quote !*intvar!*)) (list (quote
+freeof) (quote a) (quote !*intvar!*))))) (list (quote replaceby) (list (quote 
+list) (list (quote times) (list (quote !~) (list (quote !~) (quote c))) (list (
+quote expt) (quote !*intvar!*) (list (quote !~) (quote a))) (list (quote sqrt) (
+quote !*intvar!*)))) (list (quote when) (list (quote list) (list (quote plus) (
+quote a) (list (quote quotient) 1 2)) (list (quote times) (quote c) (quote 
+!*intvar!*))) (list (quote and) (list (quote freeof) (quote c) (quote !*intvar!*
+)) (list (quote freeof) (quote a) (quote !*intvar!*))))) (list (quote replaceby)
+(list (quote list) (list (quote times) (list (quote !~) (list (quote !~) (quote
+c))) (list (quote quotient) (list (quote sqrt) (quote !*intvar!*)) (list (quote
+expt) (quote !*intvar!*) (list (quote !~) (quote a)))))) (list (quote when) (
+list (quote list) (list (quote difference) (quote a) (list (quote quotient) 1 2)
+) (list (quote quotient) (quote c) (quote !*intvar!*))) (list (quote and) (list
+(quote freeof) (quote c) (quote !*intvar!*)) (list (quote freeof) (quote a) (
+quote !*intvar!*))))) (list (quote replaceby) (list (quote list) (list (quote 
+quotient) (list (quote times) (list (quote expt) (quote !*intvar!*) (list (quote
+!~) (quote a))) (list (quote sqrt) (quote !*intvar!*))) (list (quote !~) (quote
+c)))) (list (quote when) (list (quote list) (list (quote plus) (quote a) (list (
+quote quotient) 1 2)) (list (quote quotient) (quote !*intvar!*) (quote c))) (
+list (quote and) (list (quote freeof) (quote c) (quote !*intvar!*)) (list (quote
+freeof) (quote a) (quote !*intvar!*))))) (list (quote replaceby) (list (quote 
+list) (list (quote quotient) (list (quote sqrt) (quote !*intvar!*)) (list (quote
+times) (list (quote !~) (list (quote !~) (quote c))) (list (quote expt) (quote 
+!*intvar!*) (list (quote !~) (quote a)))))) (list (quote when) (list (quote list
+) (list (quote difference) (quote a) (list (quote quotient) 1 2)) (list (quote 
+quotient) 1 (list (quote times) (quote c) (quote !*intvar!*)))) (list (quote and
+) (list (quote freeof) (quote c) (quote !*intvar!*)) (list (quote freeof) (quote
+a) (quote !*intvar!*))))))))) (aeval (quote nil)))
+(progn (put (quote simp_expt) (quote procedure_type) (quote (arrow (times 
+general general general) general))) (put (quote simp_expt) (quote 
+defined!-in!-file) (quote defint!/definta!.red)) (put (quote simp_expt) (quote 
+defined!-on!-line) 542) (progn (put (quote simp_expt) (quote number!-of!-args) 3
+) (de simp_expt (u v intvar) (prog (var m n coef alpha beta alpha1 alpha2 
+expt_flag k temp1 temp2 varcoef varnew) (setq var (car (cddddr v))) (setq beta 1
+) (cond ((equal (length var) 0) (return (cons u v))) (t (progn (setq k u) (setq
+coef (cadddr v)) (setq temp1 (subst intvar (quote !*intvar!*) intggg!-rules1)) (
+setq temp2 (prepsq (evalletsub (list (list temp1) (list (quote simp!*) (mkquote
+(list (quote list) var)))) nil))) (cond ((greaterp (length temp2) 2) (progn (
+setq alpha (cadr temp2)) (setq var (caddr temp2)) (setq expt_flag t)))) (cond ((
+equal expt_flag nil) (return (cons u v))) (t (progn (cond (!*trdefint (progn (
+prin2t "Substituting ") (mathprint (list (quote expt) intvar (reval (list (quote
+quotient) m n))))))) (setq k (reval (aeval (list (quote difference) (list (quote
+quotient) (list (quote plus) k 1) alpha) 1)))) (setq coef (reval (aeval (list (
+quote quotient) coef alpha)))) (return (list k (car v) (cadr v) (caddr v) coef 
+var))))) nil)))))))
+(progn (put (quote test_1) (quote procedure_type) (quote (arrow (times general 
+general general) general))) (put (quote test_1) (quote defined!-in!-file) (quote
+defint!/definta!.red)) (put (quote test_1) (quote defined!-on!-line) 669) (progn
+(put (quote test_1) (quote number!-of!-args) 3) (de test_1 (aa u v) (prog (s m n
+a b ai bj a_max b_min temp temp1 rnd dmode!* result) (setq rnd !*rounded) (cond
+(rnd (!~off (list (quote rounded))))) (setq transform_tst (reval (aeval (quote 
+transform_tst)))) (cond ((neq transform_tst (quote t)) (progn (setq s (aeval (
+list (quote repart) (list (quote plus) 1 u)))) (setq s (simp!* s)) (setq m (caar
+v)) (setq n (cadar v)) (setq a (cadr v)) (setq b (caddr v)) (cond (!*trdefint (
+progn (prin2t 
+"Checking test_1: -min Re{bj} < Re{s} < 1 - max Re{ai}    i=1..n, j=1..m") (
+mathprint (list (quote equal) (quote s) (prepsq s))) (prin2!* (length a)) (
+prin2!* " upper parameters: ") (mathprint (list (quote equal) (quote a) (cons (
+quote list) (prog (sq forall!-result forall!-endptr) (setq sq a) (cond ((null sq
+) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda (sq) (
+prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (cond ((null sq) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (sq) (prepsq sq))
+(car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))))) (
+prin2!* (length b)) (prin2!* " lower parameters: ") (mathprint (list (quote 
+equal) (quote b) (cons (quote list) (prog (sq forall!-result forall!-endptr) (
+setq sq b) (cond ((null sq) (return nil))) (setq forall!-result (setq 
+forall!-endptr (cons ((lambda (sq) sq) (car sq)) nil))) looplabel (setq sq (cdr
+sq)) (cond ((null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((
+lambda (sq) sq) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel))))) nil))) (cond ((equal aa nil) (progn (prog (i) (setq i 1) lab (
+cond ((minusp (difference n i)) (return nil))) (progn (cond ((equal (car a) (
+quote nil)) (setcar a 0))) (setq ai (append ai (list (car a)))) (setq a (cdr a))
+) (setq i (plus2 i 1)) (go lab)) (cond ((neq ai (quote nil)) (progn (setq a_max
+(simpmax (list (cons (quote list) ai)))) (setq a_max (simprepart (list (mk!*sq 
+a_max))))))) nil)) ((equal aa (quote a)) (progn (cond ((neq a (quote nil)) (
+progn (setq a_max (simpmax (list (cons (quote list) a)))) (setq a_max (
+simprepart (list (mk!*sq a_max))))))) nil))) (prog (j) (setq j 1) lab (cond ((
+minusp (difference m j)) (return nil))) (progn (cond ((equal (car b) (quote nil)
+) (setcar b 0))) (setq bj (append bj (list (car b)))) (setq b (cdr b))) (setq j
+(plus2 j 1)) (go lab)) (cond ((neq bj (quote nil)) (progn (setq b_min (simpmin (
+list (cons (quote list) bj)))) (setq b_min (simprepart (list (mk!*sq (negsq 
+b_min)))))))) (cond ((and (neq a_max nil) (neq b_min nil)) (progn (setq temp (
+addsq s (negsq (diffsq a_max 1)))) (setq temp1 (addsq b_min (negsq s))) (cond ((
+and (equal (sign!-of (mk!*sq temp)) (minus 1)) (equal (sign!-of (mk!*sq temp1))
+(minus 1))) (progn (cond (rnd (!~on (list (quote rounded))))) (setq result (
+test2 (prepsq s) (cadr v) (caddr v))))) (t (progn (cond (rnd (!~on (list (quote
+rounded))))) (setq result (quote fail))))))) ((null a_max) (progn (setq temp (
+addsq b_min (negsq s))) (cond ((equal (sign!-of (mk!*sq temp)) (minus 1)) (progn
+(cond (rnd (!~on (list (quote rounded))))) (setq result (quote t)))) (t (progn (
+cond (rnd (!~on (list (quote rounded))))) (setq result (quote fail))))))) ((null
+b_min) (progn (setq temp (addsq s (negsq (diffsq a_max 1)))) (cond ((equal (
+sign!-of (mk!*sq temp)) (minus 1)) (progn (cond (rnd (!~on (list (quote rounded)
+)))) (setq result (quote t)))) (t (progn (cond (rnd (!~on (list (quote rounded))
+))) (setq result (quote fail))))) nil))) (cond (!*trdefint (progn (prin2t 
+"Result of test1 is ") (prin2!* result) (terpri!* t)))) (return result) nil)) (t
+(progn (setq transform_lst (cons (cons (quote tst1) (quote (list (quote lessp) (
+list (quote lessp) (list (quote minus) (list (quote min) (list (quote repart) (
+quote bj)))) (list (quote repart) (quote s))) (list (quote difference) 1 (list (
+quote max) (list (quote repart) (quote ai))))))) transform_lst)) (cond (rnd (
+!~off (list (quote rounded))))) (return (quote t)))))))))
+(progn (put (quote test2) (quote procedure_type) (quote (arrow (times general 
+general general) general))) (put (quote test2) (quote defined!-in!-file) (quote
+defint!/definta!.red)) (put (quote test2) (quote defined!-on!-line) 793) (progn
+(put (quote test2) (quote number!-of!-args) 3) (de test2 (s a b) (prog (p q 
+sum_a sum_b diff_sum temp1 temp2 temp diff result) (setq transform_tst (reval (
+aeval (quote transform_tst)))) (cond ((neq transform_tst (quote t)) (progn (setq
+s (aeval (list (quote repart) (list (quote plus) 1 s)))) (setq p (length a)) (
+setq q (length b)) (cond (!*trdefint (progn (prin2t 
+"Checking test_2: Re{Sum(ai) - Sum(bj)} + 1/2 * (q + 1 - p) > (q - p) * Re{s}, i=1..p, j=1..q"
+) (mathprint (list (quote equal) (quote s) s)) (prin2!* p) (prin2!* 
+" upper parameters: ") (mathprint (list (quote equal) (quote a) (cons (quote 
+list) (prog (sq forall!-result forall!-endptr) (setq sq a) (cond ((null sq) (
+return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda (sq) (
+prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (cond ((null sq) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (sq) (prepsq sq))
+(car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))))) (
+prin2!* q) (prin2!* " lower parameters: ") (mathprint (list (quote equal) (quote
+b) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq b) (cond
+((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((
+lambda (sq) sq) (car sq)) nil))) looplabel (setq sq (cdr sq)) (cond ((null sq) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (sq) sq) (car sq)
+) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))))) nil))) (
+prog (i) (setq i a) lab (cond ((null i) (return nil))) ((lambda (i) (progn (setq
+sum_a (reval (aeval (list (quote plus) sum_a i)))))) (car i)) (setq i (cdr i)) (
+go lab)) (prog (j) (setq j b) lab (cond ((null j) (return nil))) ((lambda (j) (
+progn (setq sum_b (reval (aeval (list (quote plus) sum_b j)))))) (car j)) (setq
+j (cdr j)) (go lab)) (setq diff_sum (reval (aeval (list (quote repart) (list (
+quote difference) sum_a sum_b))))) (setq temp (reval (aeval (list (quote times)
+(list (quote quotient) 1 2) (list (quote plus) q (list (quote difference) 1 p)))
+))) (setq temp1 (reval (aeval (list (quote plus) diff_sum temp)))) (setq temp2 (
+reval (aeval (list (quote times) (list (quote difference) q p) s)))) (setq diff
+(simp!* (reval (aeval (list (quote difference) temp1 temp2))))) (setq result (
+cond ((equal (sign!-of (mk!*sq diff)) 1) t) (t (quote fail)))) (cond (!*trdefint
+(progn (prin2t "Result of test2 is ") (prin2!* result) (terpri!* t)))) (return 
+result) nil)) (t (progn (setq transform_lst (cons (cons (quote tst2) (quote (
+list (quote greaterp) (list (quote plus) (list (quote repart) (list (quote 
+difference) (list (quote sum) (quote ai)) (list (quote sum) (quote bj)))) (list
+(quote times) (list (quote quotient) 1 2) (list (quote plus) (quote q) (list (
+quote difference) 1 (quote p))))) (list (quote times) (list (quote difference) (
+quote q) (quote p)) (list (quote repart) (quote s)))))) transform_lst)) (return
+(quote t)) nil)))))))
+(progn (put (quote validity_check) (quote procedure_type) (quote (arrow (times 
+general general general) general))) (put (quote validity_check) (quote 
+defined!-in!-file) (quote defint!/definta!.red)) (put (quote validity_check) (
+quote defined!-on!-line) 857) (progn (put (quote validity_check) (quote 
+number!-of!-args) 3) (de validity_check (s1 s2 u3) (prog (alpha m n p q k l u v
+delta epsilon sigma omega r a b c d b_sum a_sum d_sum c_sum mu rho phi eta r1 r2
+test_1a test_1b test_2 test_3 test_4 test_5 test_6 test_7 test_8 test_9 test_10
+test_11 test_12 test_13 test_14 test_15 test) (setq transform_lst (quote nil)) (
+setq alpha (reval (aeval (list (quote plus) 1 u3)))) (setq m (caadr s1)) (setq n
+(cadadr s1)) (setq p (car (cddadr s1))) (setq q (cadr (cddadr s1))) (setq 
+epsilon (reval (aeval (list (quote plus) m (list (quote difference) n (list (
+quote times) (list (quote quotient) 1 2) (list (quote plus) p q))))))) (setq k (
+caadr s2)) (setq l (cadadr s2)) (setq u (car (cddadr s2))) (setq v (cadr (cddadr
+s2))) (setq delta (reval (aeval (list (quote plus) k (list (quote difference) l
+(list (quote times) (list (quote quotient) 1 2) (list (quote plus) u v))))))) (
+setq sigma (prepsq (caar s1))) (setq omega (prepsq (caar s2))) (setq r (prepsq (
+cadar s2))) (setq a (caddr s1)) (setq b (cadddr s1)) (setq c (caddr s2)) (setq d
+(cadddr s2)) (prog (i) (setq i b) lab (cond ((null i) (return nil))) ((lambda (i
+) (progn (setq i (prepsq i)) (setq b_sum (reval (aeval (list (quote plus) b_sum
+i)))))) (car i)) (setq i (cdr i)) (go lab)) (prog (j) (setq j a) lab (cond ((
+null j) (return nil))) ((lambda (j) (progn (setq j (prepsq j)) (setq a_sum (
+reval (aeval (list (quote plus) a_sum j)))))) (car j)) (setq j (cdr j)) (go lab)
+) (prog (i) (setq i d) lab (cond ((null i) (return nil))) ((lambda (i) (progn (
+setq i (prepsq i)) (setq d_sum (reval (aeval (list (quote plus) d_sum i)))))) (
+car i)) (setq i (cdr i)) (go lab)) (prog (j) (setq j c) lab (cond ((null j) (
+return nil))) ((lambda (j) (progn (setq j (prepsq j)) (setq c_sum (reval (aeval
+(list (quote plus) c_sum j)))))) (car j)) (setq j (cdr j)) (go lab)) (setq mu (
+reval (aeval (list (quote plus) (list (quote difference) b_sum a_sum) (list (
+quote times) (list (quote quotient) 1 2) (list (quote difference) p q)) 1)))) (
+setq rho (reval (aeval (list (quote plus) (list (quote difference) d_sum c_sum)
+(list (quote times) (list (quote quotient) 1 2) (list (quote difference) u v)) 1
+)))) (setq phi (reval (aeval (list (quote difference) (list (quote difference) q
+p) (list (quote times) r (list (quote difference) v u)))))) (setq eta (reval (
+aeval (list (quote difference) (list (quote difference) (list (quote difference)
+1 (list (quote times) alpha (list (quote difference) v u))) mu) rho)))) (cond ((
+listp r) (progn (setq r1 (cadr r)) (setq r2 (caddr r)))) (t (progn (setq r1 r) (
+setq r2 1)))) (cond (!*trdefint (prin2t "Checking test cases:"))) (setq test_1a
+(tst1a m n a b)) (setq test_1b (tst1b k l c d)) (setq test_2 (tst2 m k b d alpha
+r)) (setq test_3 (tst3 n l a c alpha r)) (setq test_4 (tst4 l p q c alpha r mu))
+(setq test_5 (tst5 k p q d alpha r mu)) (setq test_6 (tst6 n u v a alpha r rho))
+(setq test_7 (tst7 m u v b alpha r rho)) (setq test_8 (tst8 p q u v alpha r mu 
+rho phi)) (setq test_9 (tst9 p q u v alpha r mu rho phi)) (setq test_10 (tst10 
+sigma delta)) (setq test_11 (tst11 sigma delta)) (setq test_12 (tst12 omega 
+epsilon)) (setq test_13 (tst13 omega epsilon)) (setq test_14 (tst14 u v alpha mu
+rho delta epsilon sigma omega r phi r1 r2)) (cond ((equal test_14 (quote fail))
+(setq test_14 (tst14 p q alpha mu rho epsilon delta omega sigma r phi r2 r1))))
+(cond ((or (equal p q) (equal u v)) (setq test_15 (quote fail))) (t (setq 
+test_15 (tst15 m n p q k l u v sigma omega eta)))) (setq test (list (quote 
+test_cases2) m n p q k l u v delta epsilon sigma omega rho eta mu r1 r2 phi 
+test_1a test_1b test_2 test_3 test_4 test_5 test_6 test_7 test_8 test_9 test_10
+test_11 test_12 test_13 test_14 test_15)) (cond (!*trdefint (progn (terpri!* t)
+(prin2t "Checking test cases:") (mathprint test) nil))) (setq test (reval test))
+(cond (!*trdefint (progn (prin2t "Result returned is:") (mathprint test) nil)))
+(cond ((and (equal transform_tst t) (neq spec_cond nil)) (setq test t))) (return
+test)))))
+(progn (put (quote tst1a) (quote procedure_type) (quote (arrow (times general 
+general general general) general))) (put (quote tst1a) (quote defined!-in!-file)
+(quote defint!/definta!.red)) (put (quote tst1a) (quote defined!-on!-line) 966)
+(progn (put (quote tst1a) (quote number!-of!-args) 4) (de tst1a (m n a b) (prog
+(a_new b_new temp fail_test) (cond (!*trdefint (progn (prin2t 
+"Checking tst1a: any difference between an upper and a lower parameter must not be a positive integer"
+) (prin2!* n) (prin2!* " upper parameters: ") (mathprint (list (quote equal) (
+quote a) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq a)
+(cond ((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (cons
+((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (cond (
+(null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda (sq) (
+prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel))))) (prin2!* m) (prin2!* " lower parameters: ") (mathprint (list (
+quote equal) (quote b) (cons (quote list) (prog (sq forall!-result 
+forall!-endptr) (setq sq b) (cond ((null sq) (return nil))) (setq forall!-result
+(setq forall!-endptr (cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel
+(setq sq (cdr sq)) (cond ((null sq) (return forall!-result))) (rplacd 
+forall!-endptr (cons ((lambda (sq) (prepsq sq)) (car sq)) nil)) (setq 
+forall!-endptr (cdr forall!-endptr)) (go looplabel))))) nil))) (prog (i) (setq i
+1) lab (cond ((minusp (difference n i)) (return nil))) (progn (setq a_new (
+append a_new (list (car a)))) (setq a (cdr a))) (setq i (plus2 i 1)) (go lab)) (
+prog (j) (setq j 1) lab (cond ((minusp (difference m j)) (return nil))) (progn (
+setq b_new (append b_new (list (car b)))) (setq b (cdr b))) (setq j (plus2 j 1))
+(go lab)) (prog (i) (setq i a_new) lab (cond ((null i) (return nil))) ((lambda (
+i) (progn (prog (j) (setq j b_new) lab (cond ((null j) (return nil))) ((lambda (
+j) (progn (setq temp (addsq i (negsq j))) (cond ((and (neq (car temp) (quote nil
+)) (greaterp (car temp) 0) (equal (cdr temp) 1)) (setq fail_test t))))) (car j))
+(setq j (cdr j)) (go lab)) nil)) (car i)) (setq i (cdr i)) (go lab)) (cond (
+!*trdefint (progn (prin2!* "Result of tst1a is ") (prin2!* (cond (fail_test (
+quote fail)) (t t))) (terpri!* t)))) (cond ((equal fail_test t) (return (quote 
+fail))) (t (return t)))))))
+(progn (put (quote tst1b) (quote procedure_type) (quote (arrow (times general 
+general general general) general))) (put (quote tst1b) (quote defined!-in!-file)
+(quote defint!/definta!.red)) (put (quote tst1b) (quote defined!-on!-line) 1004)
+(progn (put (quote tst1b) (quote number!-of!-args) 4) (de tst1b (k l c d) (prog
+(c_new d_new temp fail_test) (cond (!*trdefint (progn (prin2t 
+"Checking tst1b: any difference between an upper and a lower parameter must not be a positive integer"
+) (prin2!* l) (prin2!* " upper parameters: ") (mathprint (list (quote equal) (
+quote c) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq c)
+(cond ((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (cons
+((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (cond (
+(null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda (sq) (
+prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel))))) (prin2!* k) (prin2!* " lower parameters: ") (mathprint (list (
+quote equal) (quote d) (cons (quote list) (prog (sq forall!-result 
+forall!-endptr) (setq sq d) (cond ((null sq) (return nil))) (setq forall!-result
+(setq forall!-endptr (cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel
+(setq sq (cdr sq)) (cond ((null sq) (return forall!-result))) (rplacd 
+forall!-endptr (cons ((lambda (sq) (prepsq sq)) (car sq)) nil)) (setq 
+forall!-endptr (cdr forall!-endptr)) (go looplabel))))) nil))) (prog (i) (setq i
+1) lab (cond ((minusp (difference l i)) (return nil))) (progn (setq c_new (
+append c_new (list (car c)))) (setq c (cdr c))) (setq i (plus2 i 1)) (go lab)) (
+prog (j) (setq j 1) lab (cond ((minusp (difference k j)) (return nil))) (progn (
+setq d_new (append d_new (list (car d)))) (setq d (cdr d))) (setq j (plus2 j 1))
+(go lab)) (prog (i) (setq i c_new) lab (cond ((null i) (return nil))) ((lambda (
+i) (progn (prog (j) (setq j d_new) lab (cond ((null j) (return nil))) ((lambda (
+j) (progn (setq temp (addsq i (negsq j))) (cond ((and (neq (car temp) (quote nil
+)) (greaterp (car temp) 0) (equal (cdr temp) 1)) (setq fail_test t))))) (car j))
+(setq j (cdr j)) (go lab)) nil)) (car i)) (setq i (cdr i)) (go lab)) (cond (
+!*trdefint (progn (prin2!* "Result of tst1b is ") (prin2!* (cond (fail_test (
+quote fail)) (t t))) (terpri!* t)))) (cond ((equal fail_test t) (return (quote 
+fail))) (t (return t)))))))
+(progn (put (quote tst2) (quote procedure_type) (quote (arrow (times general 
+general general general general general) general))) (put (quote tst2) (quote 
+defined!-in!-file) (quote defint!/definta!.red)) (put (quote tst2) (quote 
+defined!-on!-line) 1041) (progn (put (quote tst2) (quote number!-of!-args) 6) (
+de tst2 (m k b d alpha r) (prog (b_new d_new temp temp1 temp2 fail_test) (setq 
+transform_tst (reval (aeval (quote transform_tst)))) (cond ((neq transform_tst t
+) (progn (prog (i) (setq i 1) lab (cond ((minusp (difference m i)) (return nil))
+) (progn (setq temp1 (prepsq (car b))) (setq b_new (append b_new (list temp1)))
+(setq b (cdr b))) (setq i (plus2 i 1)) (go lab)) (prog (j) (setq j 1) lab (cond
+((minusp (difference k j)) (return nil))) (progn (setq temp2 (prepsq (car d))) (
+setq d_new (append d_new (list temp2))) (setq d (cdr d))) (setq j (plus2 j 1)) (
+go lab)) (prog (k) (setq k b_new) lab (cond ((null k) (return nil))) ((lambda (k
+) (progn (prog (h) (setq h d_new) lab (cond ((null h) (return nil))) ((lambda (h
+) (progn (setq temp (simp!* (reval (aeval (list (quote repart) (list (quote plus
+) alpha (list (quote times) r k) h)))))) (cond ((or (equal (car temp) (quote nil
+)) (lessp (car temp) 0)) (setq fail_test (quote t)))))) (car h)) (setq h (cdr h)
+) (go lab)) nil)) (car k)) (setq k (cdr k)) (go lab)) (cond (!*trdefint (progn (
+prin2t "Result of tst2 is ") (prin2!* (cond (fail_test (quote fail)) (t t))) (
+terpri!* t)))) (cond ((equal fail_test t) (return (quote fail))) (t (return t)))
+)) (t (progn (setq transform_lst (cons (cons (quote test2) (quote (list (quote 
+greaterp) (list (quote repart) (list (quote plus) (quote alpha) (list (quote 
+times) (quote r) (quote bi)) (quote dj))) 0))) transform_lst)) (return t))))))))
+(progn (put (quote tst3) (quote procedure_type) (quote (arrow (times general 
+general general general general general) general))) (put (quote tst3) (quote 
+defined!-in!-file) (quote defint!/definta!.red)) (put (quote tst3) (quote 
+defined!-on!-line) 1085) (progn (put (quote tst3) (quote number!-of!-args) 6) (
+de tst3 (n l a c alpha r) (prog (a_new c_new temp temp1 temp2 fail_test) (setq 
+transform_tst (reval (aeval (quote transform_tst)))) (cond (!*trdefint (progn (
+prin2t "Checking tst3: Re{alpha + r*ai + cj} < r + 1,          i=1..n, j=1..l")
+(prin2!* n) (prin2!* " first upper parameters: ") (mathprint (list (quote equal)
+(quote a) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq a
+) (cond ((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (
+cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (
+cond ((null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda
+(sq) (prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go
+looplabel))))) (prin2!* l) (prin2!* " second upper parameters: ") (mathprint (
+list (quote equal) (quote c) (cons (quote list) (prog (sq forall!-result 
+forall!-endptr) (setq sq c) (cond ((null sq) (return nil))) (setq forall!-result
+(setq forall!-endptr (cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel
+(setq sq (cdr sq)) (cond ((null sq) (return forall!-result))) (rplacd 
+forall!-endptr (cons ((lambda (sq) (prepsq sq)) (car sq)) nil)) (setq 
+forall!-endptr (cdr forall!-endptr)) (go looplabel))))) (mathprint (list (quote
+equal) (quote alpha) alpha)) (mathprint (list (quote equal) (quote r) r)) nil)))
+(cond ((neq transform_tst (quote t)) (progn (prog (i) (setq i 1) lab (cond ((
+minusp (difference n i)) (return nil))) (progn (setq temp1 (prepsq (car a))) (
+setq a_new (append a_new (list temp1))) (setq a (cdr a))) (setq i (plus2 i 1)) (
+go lab)) (prog (j) (setq j 1) lab (cond ((minusp (difference l j)) (return nil))
+) (progn (setq temp2 (prepsq (car c))) (setq c_new (append c_new (list temp2)))
+(setq c (cdr c))) (setq j (plus2 j 1)) (go lab)) (prog (k) (setq k a_new) lab (
+cond ((null k) (return nil))) ((lambda (k) (progn (prog (h) (setq h c_new) lab (
+cond ((null h) (return nil))) ((lambda (h) (progn (setq temp (simp!* (reval (
+aeval (list (quote difference) (list (quote difference) (list (quote repart) (
+list (quote plus) alpha (list (quote times) r k) h)) r) 1))))) (cond ((or (equal
+(car temp) (quote nil)) (greaterp (car temp) 0)) (setq fail_test (quote t))))))
+(car h)) (setq h (cdr h)) (go lab)) nil)) (car k)) (setq k (cdr k)) (go lab)) (
+cond (!*trdefint (progn (prin2t "Result of tst3 is ") (prin2!* (cond (fail_test
+(quote fail)) (t t))) (terpri!* t)))) (cond ((equal fail_test (quote t)) (return
+(quote fail))) (t (return t))))) (t (progn (setq transform_lst (cons (cons (
+quote test3) (quote (list (quote lessp) (list (quote repart) (list (quote plus)
+(quote alpha) (list (quote times) (quote r) (quote ai)) (quote cj))) (list (
+quote plus) (quote r) 1)))) transform_lst)) (return (quote t)))))))))
+(progn (put (quote tst4) (quote procedure_type) (quote (arrow (times general 
+general general general general general general) general))) (put (quote tst4) (
+quote defined!-in!-file) (quote defint!/definta!.red)) (put (quote tst4) (quote
+defined!-on!-line) 1139) (progn (put (quote tst4) (quote number!-of!-args) 7) (
+de tst4 (l p q c alpha r mu) (prog (c_new temp1 temp fail_test) (setq 
+transform_tst (reval (aeval (quote transform_tst)))) (cond ((neq transform_tst (
+quote t)) (progn (cond (!*trdefint (progn (prin2t 
+"Checking tst4: (p - q)*Re{alpha + cj - 1} - r*Re{mu} > -3*r/2,   j=1..l") (
+terpri!* t) (prin2!* "p=") (prin2!* p) (prin2!* ",q=") (prin2!* q) (terpri!* t)
+(prin2!* l) (prin2!* " second upper parameters: ") (mathprint (list (quote equal
+) (quote c) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq
+c) (cond ((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (
+cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (
+cond ((null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda
+(sq) (prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go
+looplabel))))) (mathprint (list (quote equal) (quote alpha) alpha)) (mathprint (
+list (quote equal) (quote r) r)) (mathprint (list (quote equal) (quote mu) mu))
+nil))) (prog (j) (setq j 1) lab (cond ((minusp (difference l j)) (return nil)))
+(progn (setq temp1 (prepsq (car c))) (setq c_new (append c_new (list temp1))) (
+setq c (cdr c))) (setq j (plus2 j 1)) (go lab)) (prog (i) (setq i c_new) lab (
+cond ((null i) (return nil))) ((lambda (i) (progn (setq temp (simp!* (reval (
+aeval (list (quote plus) (list (quote difference) (list (quote times) (list (
+quote difference) p q) (list (quote repart) (list (quote plus) alpha (list (
+quote difference) i 1)))) (list (quote times) r (list (quote repart) mu))) (list
+(quote times) (list (quote quotient) 3 2) r)))))) (cond ((or (equal (car temp) (
+quote nil)) (lessp (car temp) 0)) (setq fail_test t))) nil)) (car i)) (setq i (
+cdr i)) (go lab)) (cond (!*trdefint (progn (prin2t "Result of tst4 is ") (
+prin2!* (cond (fail_test (quote fail)) (t t))) (terpri!* t)))) (cond ((equal 
+fail_test t) (return (quote fail))) (t (return t))))) (t (progn (setq 
+transform_lst (cons (cons (quote test4) (quote (list (quote greaterp) (list (
+quote difference) (list (quote times) (list (quote difference) (quote p) (quote
+q)) (list (quote repart) (list (quote plus) (quote alpha) (list (quote 
+difference) (quote cj) 1)))) (list (quote times) (quote r) (list (quote repart)
+(list (quote plus) (list (quote difference) (list (quote sum) (quote bj)) (list
+(quote sum) (quote ai))) (list (quote times) (list (quote quotient) 1 2) (list (
+quote difference) (quote p) (quote q))) 1)))) (list (quote minus) (list (quote 
+times) 3 (list (quote quotient) (quote r) 2)))))) transform_lst)) (return (quote
+t)))))))))
+(progn (put (quote tst5) (quote procedure_type) (quote (arrow (times general 
+general general general general general general) general))) (put (quote tst5) (
+quote defined!-in!-file) (quote defint!/definta!.red)) (put (quote tst5) (quote
+defined!-on!-line) 1190) (progn (put (quote tst5) (quote number!-of!-args) 7) (
+de tst5 (k p q d alpha r mu) (prog (d_new temp1 temp fail_test) (setq 
+transform_tst (reval (aeval (quote transform_tst)))) (cond ((neq transform_tst t
+) (progn (cond (!*trdefint (progn (prin2t 
+"Checking tst5: (p - q)*Re{alpha + dj} - r*Re{mu} > -3*r/2,  j=1..k") (terpri!*
+t) (prin2!* "p=") (prin2!* p) (prin2!* ",q=") (prin2!* q) (terpri!* t) (prin2!*
+k) (prin2!* " second lower parameters: ") (mathprint (list (quote equal) (quote
+d) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq d) (cond
+((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((
+lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (cond ((
+null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda (sq) (
+prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go 
+looplabel))))) (mathprint (list (quote equal) (quote alpha) alpha)) (mathprint (
+list (quote equal) (quote r) r)) (mathprint (list (quote equal) (quote mu) mu))
+nil))) (prog (j) (setq j 1) lab (cond ((minusp (difference k j)) (return nil)))
+(progn (setq temp1 (prepsq (car d))) (setq d_new (append d_new (list temp1))) (
+setq d (cdr d))) (setq j (plus2 j 1)) (go lab)) (prog (i) (setq i d_new) lab (
+cond ((null i) (return nil))) ((lambda (i) (progn (setq temp (simp!* (reval (
+aeval (list (quote plus) (list (quote difference) (list (quote times) (list (
+quote difference) p q) (list (quote repart) (list (quote plus) alpha i))) (list
+(quote times) r (list (quote repart) mu))) (list (quote times) (list (quote 
+quotient) 3 2) r)))))) (cond ((or (equal (car temp) (quote nil)) (lessp (car 
+temp) 0)) (setq fail_test (quote t)))) nil)) (car i)) (setq i (cdr i)) (go lab))
+(cond (!*trdefint (progn (prin2t "Result of tst5 is ") (prin2!* (cond (fail_test
+(quote fail)) (t t))) (terpri!* t)))) (cond ((equal fail_test t) (return (quote
+fail))) (t (return t))))) (t (progn (setq transform_lst (cons (cons (quote test5
+) (quote (list (quote greaterp) (list (quote difference) (list (quote times) (
+list (quote difference) (quote p) (quote q)) (list (quote repart) (list (quote 
+plus) (quote alpha) (quote dj)))) (list (quote times) (quote r) (list (quote 
+repart) (list (quote plus) (list (quote difference) (list (quote sum) (quote bj)
+) (list (quote sum) (quote ai))) (list (quote quotient) (list (quote difference)
+(quote p) (quote q)) 2) 1)))) (list (quote minus) (list (quote times) 3 (list (
+quote quotient) (quote r) 2)))))) transform_lst)) (return t))))))))
+(progn (put (quote tst6) (quote procedure_type) (quote (arrow (times general 
+general general general general general general) general))) (put (quote tst6) (
+quote defined!-in!-file) (quote defint!/definta!.red)) (put (quote tst6) (quote
+defined!-on!-line) 1244) (progn (put (quote tst6) (quote number!-of!-args) 7) (
+de tst6 (n u v a alpha r rho) (prog (a_new temp1 temp fail_test) (setq 
+transform_tst (reval (aeval (quote transform_tst)))) (cond ((neq transform_tst (
+quote t)) (progn (cond (!*trdefint (progn (prin2t 
+"Checking tst6: (u - v)*Re{alpha + r*ai - r} - Re{rho} > -3/2 ,  i=1..n") (
+terpri!* t) (prin2!* "u=") (prin2!* u) (prin2!* ",v=") (prin2!* v) (terpri!* t)
+(prin2!* n) (prin2!* " first upper parameters: ") (mathprint (list (quote equal)
+(quote a) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq a
+) (cond ((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (
+cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (
+cond ((null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda
+(sq) (prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go
+looplabel))))) (mathprint (list (quote equal) (quote alpha) alpha)) (mathprint (
+list (quote equal) (quote r) r)) (mathprint (list (quote equal) (quote r) rho))
+nil))) (prog (j) (setq j 1) lab (cond ((minusp (difference n j)) (return nil)))
+(progn (setq temp1 (prepsq (car a))) (setq a_new (append a_new (list temp1))) (
+setq a (cdr a))) (setq j (plus2 j 1)) (go lab)) (prog (i) (setq i a_new) lab (
+cond ((null i) (return nil))) ((lambda (i) (progn (setq temp (simp!* (reval (
+aeval (list (quote plus) (list (quote difference) (list (quote times) (list (
+quote difference) u v) (list (quote repart) (list (quote plus) alpha (list (
+quote difference) (list (quote times) r i) r)))) (list (quote repart) rho)) (
+list (quote quotient) 3 2)))))) (cond ((or (equal (car temp) (quote nil)) (lessp
+(car temp) 0)) (setq fail_test (quote t)))) nil)) (car i)) (setq i (cdr i)) (go
+lab)) (cond (!*trdefint (progn (prin2t "Result of tst6 is ") (prin2!* (cond (
+fail_test (quote fail)) (t t))) (terpri!* t)))) (cond ((equal fail_test (quote t
+)) (return (quote fail))) (t (return (quote t)))))) (t (progn (setq 
+transform_lst (cons (cons (quote test6) (quote (list (quote greaterp) (list (
+quote difference) (list (quote times) (list (quote difference) (quote u) (quote
+v)) (list (quote repart) (list (quote plus) (quote alpha) (list (quote 
+difference) (list (quote times) (quote r) (quote ai)) (quote r))))) (list (quote
+repart) (list (quote plus) (list (quote difference) (list (quote sum) (quote dj)
+) (list (quote sum) (quote ci))) (list (quote times) (list (quote quotient) 1 2)
+(list (quote difference) (quote u) (quote v))) 1))) (list (quote minus) (list (
+quote quotient) 3 2))))) transform_lst)) (return (quote t)))))))))
+(progn (put (quote tst7) (quote procedure_type) (quote (arrow (times general 
+general general general general general general) general))) (put (quote tst7) (
+quote defined!-in!-file) (quote defint!/definta!.red)) (put (quote tst7) (quote
+defined!-on!-line) 1297) (progn (put (quote tst7) (quote number!-of!-args) 7) (
+de tst7 (m u v b alpha r rho) (prog (b_new temp1 temp fail_test) (setq 
+transform_tst (reval (aeval (quote transform_tst)))) (cond ((neq transform_tst (
+quote t)) (progn (cond (!*trdefint (progn (prin2t 
+"Checking tst7: (u - v)*Re{alpha + r*bi} - Re{rho} > -3/2,     i=1..m") (
+terpri!* t) (prin2!* "u=") (prin2!* u) (prin2!* ",v=") (prin2!* v) (terpri!* t)
+(prin2!* m) (prin2!* " first lower parameters: ") (mathprint (list (quote equal)
+(quote b) (cons (quote list) (prog (sq forall!-result forall!-endptr) (setq sq b
+) (cond ((null sq) (return nil))) (setq forall!-result (setq forall!-endptr (
+cons ((lambda (sq) (prepsq sq)) (car sq)) nil))) looplabel (setq sq (cdr sq)) (
+cond ((null sq) (return forall!-result))) (rplacd forall!-endptr (cons ((lambda
+(sq) (prepsq sq)) (car sq)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go
+looplabel))))) (mathprint (list (quote equal) (quote alpha) alpha)) (mathprint (
+list (quote equal) (quote r) r)) (mathprint (list (quote equal) (quote r) rho))
+nil))) (prog (j) (setq j 1) lab (cond ((minusp (difference m j)) (return nil)))
+(progn (setq temp1 (prepsq (car b))) (setq b_new (append b_new (list temp1))) (
+setq b (cdr b))) (setq j (plus2 j 1)) (go lab)) (prog (i) (setq i b_new) lab (
+cond ((null i) (return nil))) ((lambda (i) (progn (setq temp (simp!* (reval (
+aeval (list (quote plus) (list (quote difference) (list (quote times) (list (
+quote difference) u v) (list (quote repart) (list (quote plus) alpha (list (
+quote times) r i)))) (list (quote repart) rho)) (list (quote quotient) 3 2))))))
+(cond ((or (equal (car temp) (quote nil)) (lessp (car temp) 0)) (setq fail_test
+(quote t)))) nil)) (car i)) (setq i (cdr i)) (go lab)) (cond (!*trdefint (progn
+(prin2t "Result of tst7 is ") (prin2!* (cond (fail_test (quote fail)) (t t))) (
+terpri!* t)))) (cond ((equal fail_test t) (return (quote fail))) (t (return t)))
+)) (t (progn (setq transform_lst (cons (cons (quote test7) (quote (list (quote 
+greaterp) (list (quote difference) (list (quote times) (list (quote difference)
+(quote u) (quote v)) (list (quote repart) (list (quote plus) (quote alpha) (list
+(quote times) (quote r) (quote bi))))) (list (quote repart) (list (quote plus) (
+list (quote difference) (list (quote sum) (quote dj)) (list (quote sum) (quote 
+ci))) (list (quote quotient) (list (quote difference) (quote u) (quote v)) 2) 1)
+)) (list (quote minus) (list (quote quotient) 3 2))))) transform_lst)) (return (
+quote t)))))))))
+(progn (put (quote tst8) (quote procedure_type) (quote (arrow (times general 
+general general general general general general general general) general))) (put
+(quote tst8) (quote defined!-in!-file) (quote defint!/definta!.red)) (put (quote
+tst8) (quote defined!-on!-line) 1351) (progn (put (quote tst8) (quote 
+number!-of!-args) 9) (de tst8 (p q u v alpha r mu rho phi) (prog (sum temp 
+fail_test) (setq transform_tst (reval (aeval (quote transform_tst)))) (cond ((
+neq transform_tst (quote t)) (progn (cond (!*trdefint (progn (prin2t 
+"Checking tst8: abs(phi) + 2*Re{(q - p)*(v - u)*alpha + r*(v - u)*(mu - 1) + (q - p)*(rho - 1)} > 0"
+) (terpri!* t) (prin2!* "p=") (prin2!* p) (prin2!* ",q=") (prin2!* q) (prin2!* 
+",u=") (prin2!* u) (prin2!* ",v=") (prin2!* v) (terpri!* t) (mathprint (list (
+quote equal) (quote alpha) alpha)) (mathprint (list (quote equal) (quote r) r))
+(mathprint (list (quote equal) (quote mu) mu)) (mathprint (list (quote equal) (
+quote rho) rho)) nil))) (setq sum (reval (aeval (list (quote times) 2 (list (
+quote repart) (list (quote plus) (list (quote times) (list (quote difference) q
+p) (list (quote difference) v u) alpha) (list (quote times) r (list (quote 
+difference) v u) (list (quote difference) mu 1)) (list (quote times) (list (
+quote difference) q p) (list (quote difference) rho 1)))))))) (setq temp (simp!*
+(reval (aeval (list (quote plus) (list (quote abs) phi) sum))))) (cond ((or (
+equal (car temp) (quote nil)) (lessp (car temp) 0)) (setq fail_test (quote t))))
+(cond (!*trdefint (progn (prin2t "Result of tst8 is ") (prin2!* (cond (fail_test
+(quote fail)) (t t))) (terpri!* t)))) (cond ((equal fail_test t) (return (quote
+fail))) (t (return t))))) (t (progn (setq transform_lst (cons (cons (quote test8
+) (quote (list (quote greaterp) (list (quote plus) (list (quote abs) (list (
+quote difference) (list (quote difference) (quote q) (quote p)) (list (quote 
+times) (quote r) (list (quote difference) (quote v) (quote u))))) (list (quote 
+times) 2 (list (quote repart) (list (quote plus) (list (quote times) (list (
+quote difference) (quote q) (quote p)) (list (quote difference) (quote v) (quote
+u)) (quote alpha)) (list (quote times) (quote r) (list (quote difference) (quote
+v) (quote u)) (list (quote plus) (list (quote difference) (list (quote sum) (
+quote bj)) (list (quote sum) (quote ai))) (list (quote quotient) (list (quote 
+difference) (quote p) (quote q)) 2))) (list (quote times) (list (quote 
+difference) (quote q) (quote p)) (list (quote plus) (list (quote difference) (
+list (quote sum) (quote dj)) (list (quote sum) (quote ci))) (list (quote 
+quotient) (list (quote difference) (quote u) (quote v)) 2))))))) 0))) 
+transform_lst)) (return (quote t)))))))))
+(progn (put (quote tst9) (quote procedure_type) (quote (arrow (times general 
+general general general general general general general general) general))) (put
+(quote tst9) (quote defined!-in!-file) (quote defint!/definta!.red)) (put (quote
+tst9) (quote defined!-on!-line) 1406) (progn (put (quote tst9) (quote 
+number!-of!-args) 9) (de tst9 (p q u v alpha r mu rho phi) (prog (sum temp 
+fail_test) (setq transform_tst (reval (aeval (quote transform_tst)))) (cond ((
+neq transform_tst (quote t)) (progn (cond (!*trdefint (progn (prin2t 
+"Checking tst9: abs(phi) - 2*Re{(q - p)*(v - u)*alpha + r*(v - u)*(mu - 1) + (q - p)*(rho - 1)} > 0"
+) (terpri!* t) (prin2!* "p=") (prin2!* p) (prin2!* ",q=") (prin2!* q) (prin2!* 
+",u=") (prin2!* u) (prin2!* ",v=") (prin2!* v) (terpri!* t) (mathprint (list (
+quote equal) (quote alpha) alpha)) (mathprint (list (quote equal) (quote r) r))
+(mathprint (list (quote equal) (quote mu) mu)) (mathprint (list (quote equal) (
+quote rho) rho)) nil))) (setq sum (reval (aeval (list (quote times) 2 (list (
+quote repart) (list (quote plus) (list (quote times) (list (quote difference) q
+p) (list (quote difference) v u) alpha) (list (quote times) r (list (quote 
+difference) v u) (list (quote difference) mu 1)) (list (quote times) (list (
+quote difference) q p) (list (quote difference) rho 1)))))))) (setq temp (simp!*
+(reval (aeval (list (quote difference) (list (quote abs) phi) sum))))) (cond ((
+or (equal (car temp) (quote nil)) (lessp (car temp) 0)) (setq fail_test (quote t
+)))) (cond (!*trdefint (progn (prin2t "Result of tst9 is ") (prin2!* (cond (
+fail_test (quote fail)) (t t))) (terpri!* t)))) (cond ((equal fail_test t) (
+return (quote fail))) (t (return t))))) (t (progn (setq transform_lst (cons (
+cons (quote test9) (quote (list (quote greaterp) (list (quote difference) (list
+(quote abs) (list (quote difference) (list (quote difference) (quote q) (quote p
+)) (list (quote times) (quote r) (list (quote difference) (quote v) (quote u))))
+) (list (quote times) 2 (list (quote repart) (list (quote plus) (list (quote 
+times) (list (quote difference) (quote q) (quote p)) (list (quote difference) (
+quote v) (quote u)) (quote alpha)) (list (quote times) (quote r) (list (quote 
+difference) (quote v) (quote u)) (list (quote plus) (list (quote difference) (
+list (quote sum) (quote bj)) (list (quote sum) (quote ai))) (list (quote 
+quotient) (list (quote difference) (quote p) (quote q)) 2))) (list (quote times)
+(list (quote difference) (quote q) (quote p)) (list (quote plus) (list (quote 
+difference) (list (quote sum) (quote dj)) (list (quote sum) (quote ci))) (list (
+quote quotient) (list (quote difference) (quote u) (quote v)) 2))))))) 0))) 
+transform_lst)) (return (quote t)))))))))
+(progn (aeval (put (quote tst10) (quote procedure_type) (quote (arrow (times 
+general general) general)))) (aeval (put (quote tst10) (quote defined!-in!-file)
+(quote defint!/definta!.red))) (aeval (put (quote tst10) (quote 
+defined!-on!-line) 1461)) (progn (put (quote tst10) (quote number!-of!-args) 2)
+(flag (quote (tst10)) (quote opfn)) (de tst10 (sigma delta) (prog (arg_sigma pro
+temp fail_test !*rounded dmode!*) (cond ((evalneq (aeval (quote transform_tst))
+(aeval (quote t))) (progn (cond ((boolvalue!* (revalx !*trdefint)) (progn (
+assgnpri (aeval "Checking tst10: abs(arg sigma) < delta*pi") nil (quote only)) (
+progn (assgnpri (aeval "sigma=") nil (quote first)) (assgnpri (aeval sigma) nil
+(quote last))) (progn (assgnpri (aeval "delta=") nil (quote first)) (assgnpri (
+aeval delta) nil (quote last))) (aeval (quote nil))))) (aeval (!~on (list (quote
+rounded)))) (setq arg_sigma (aeval (list (quote abs) (list (quote atan2) (list (
+quote impart) sigma) (list (quote repart) sigma))))) (setq pro (aeval (list (
+quote times) delta (quote pi)))) (setq temp (aeval (list (quote difference) pro
+arg_sigma))) (cond ((and (evalnumberp (aeval temp)) (evalleq (aeval temp) 0)) (
+setq fail_test (aeval (quote t))))) (aeval (!~off (list (quote rounded)))) (cond
+((boolvalue!* (revalx !*trdefint)) (progn (progn (assgnpri (aeval 
+"Result of tst10 is ") nil (quote first)) (assgnpri (cond ((boolvalue!* (revalx
+fail_test)) (aeval (quote fail))) (t (aeval (quote t)))) nil (quote last))) (
+aeval (quote nil))))) (cond ((evalequal (aeval fail_test) (aeval (quote t))) (
+return (reval (quote fail)))) (t (return (aeval (list (quote reval) (quote t))))
+)))) (t (progn (setq transform_lst (cons (cons (quote test10) (quote (list (
+quote lessp) (list (quote abs) (list (quote arg) (quote sigma))) (list (quote 
+times) (list (quote plus) (quote k) (list (quote difference) (quote l) (list (
+quote quotient) (list (quote plus) (quote u) (quote v)) 2))) (quote pi))))) 
+transform_lst)) (return (reval (quote t))))))))))
+(progn (aeval (put (quote tst11) (quote procedure_type) (quote (arrow (times 
+general general) general)))) (aeval (put (quote tst11) (quote defined!-in!-file)
+(quote defint!/definta!.red))) (aeval (put (quote tst11) (quote 
+defined!-on!-line) 1513)) (progn (put (quote tst11) (quote number!-of!-args) 2)
+(flag (quote (tst11)) (quote opfn)) (de tst11 (sigma delta) (prog (arg_sigma pro
+fail_test) (cond ((evalneq (aeval (quote transform_tst)) (aeval (quote t))) (
+progn (cond ((boolvalue!* (revalx !*trdefint)) (progn (assgnpri (aeval 
+"Checking tst11: abs(arg sigma) = delta*pi") nil (quote only)) (progn (assgnpri
+(aeval "sigma=") nil (quote first)) (assgnpri (aeval sigma) nil (quote last))) (
+progn (assgnpri (aeval "delta=") nil (quote first)) (assgnpri (aeval delta) nil
+(quote last))) (aeval (quote nil))))) (setq arg_sigma (aeval (list (quote abs) (
+list (quote atan2) (list (quote impart) sigma) (list (quote repart) sigma))))) (
+setq pro (aeval (list (quote times) delta (quote pi)))) (cond ((evalneq (aeval 
+arg_sigma) (aeval pro)) (setq fail_test (quote t)))) (cond ((boolvalue!* (revalx
+!*trdefint)) (progn (progn (assgnpri (aeval "Result of tst11 is ") nil (quote 
+first)) (assgnpri (cond ((boolvalue!* (revalx fail_test)) (aeval (quote fail)))
+(t (aeval (quote t)))) nil (quote last))) (aeval (quote nil))))) (cond ((
+evalequal (aeval fail_test) (aeval (quote t))) (return (reval (quote fail)))) (t
+(return (reval (quote t))))))) (t (progn (setq transform_lst (cons (cons (quote
+test11) (quote (list (quote equal) (list (quote abs) (list (quote arg) (quote 
+sigma))) (list (quote times) (list (quote plus) (quote k) (list (quote 
+difference) (quote l) (list (quote quotient) (list (quote plus) (quote u) (quote
+v)) 2))) (quote pi))))) transform_lst)) (return (reval (quote t))))))))))
+(progn (aeval (put (quote tst12) (quote procedure_type) (quote (arrow (times 
+general general) general)))) (aeval (put (quote tst12) (quote defined!-in!-file)
+(quote defint!/definta!.red))) (aeval (put (quote tst12) (quote 
+defined!-on!-line) 1550)) (progn (put (quote tst12) (quote number!-of!-args) 2)
+(flag (quote (tst12)) (quote opfn)) (de tst12 (omega epsilon) (prog (arg_omega 
+pro temp fail_test !*rounded dmode!*) (cond ((evalneq (aeval (quote 
+transform_tst)) (aeval (quote t))) (progn (aeval (!~on (list (quote rounded))))
+(cond ((boolvalue!* (revalx !*trdefint)) (progn (assgnpri (aeval 
+"Checking tst12: abs(arg omega) < epsilon*pi") nil (quote only)) (progn (
+assgnpri (aeval "omega=") nil (quote first)) (assgnpri (aeval omega) nil (quote
+last))) (progn (assgnpri (aeval "epsilon=") nil (quote first)) (assgnpri (aeval
+epsilon) nil (quote last))) (aeval (quote nil))))) (setq arg_omega (aeval (list
+(quote abs) (list (quote atan2) (list (quote impart) omega) (list (quote repart)
+omega))))) (setq pro (aeval (list (quote times) epsilon (quote pi)))) (setq temp
+(aeval (list (quote difference) pro arg_omega))) (cond ((and (evalnumberp (aeval
+temp)) (evalleq (aeval temp) 0)) (setq fail_test (quote t)))) (aeval (!~off (
+list (quote rounded)))) (cond ((boolvalue!* (revalx !*trdefint)) (progn (progn (
+assgnpri (aeval "Result of tst12 is ") nil (quote first)) (assgnpri (cond ((
+boolvalue!* (revalx fail_test)) (aeval (quote fail))) (t (aeval (quote t)))) nil
+(quote last))) (aeval (quote nil))))) (cond ((evalequal (aeval fail_test) (aeval
+(quote t))) (return (reval (quote fail)))) (t (return (reval (quote t))))))) (t
+(progn (setq transform_lst (cons (cons (quote test12) (quote (list (quote lessp)
+(list (quote abs) (list (quote arg) (quote omega))) (list (quote times) (list (
+quote plus) (quote m) (list (quote difference) (quote n) (list (quote times) (
+list (quote quotient) 1 2) (list (quote plus) (quote p) (quote q))))) (quote pi)
+)))) transform_lst)) (return (reval (quote t))))))))))
+(progn (aeval (put (quote tst13) (quote procedure_type) (quote (arrow (times 
+general general) general)))) (aeval (put (quote tst13) (quote defined!-in!-file)
+(quote defint!/definta!.red))) (aeval (put (quote tst13) (quote 
+defined!-on!-line) 1595)) (progn (put (quote tst13) (quote number!-of!-args) 2)
+(flag (quote (tst13)) (quote opfn)) (de tst13 (omega epsilon) (prog (arg_omega 
+pro fail_test) (cond ((evalneq (aeval (quote transform_tst)) (aeval (quote t)))
+(progn (cond ((boolvalue!* (revalx !*trdefint)) (progn (assgnpri (aeval 
+"Checking tst13: abs(arg omega) = epsilon*pi") nil (quote only)) (progn (
+assgnpri (aeval "omega=") nil (quote first)) (assgnpri (aeval omega) nil (quote
+last))) (progn (assgnpri (aeval "epsilon=") nil (quote first)) (assgnpri (aeval
+epsilon) nil (quote last))) (aeval (quote nil))))) (setq arg_omega (aeval (list
+(quote abs) (list (quote atan2) (list (quote impart) omega) (list (quote repart)
+omega))))) (setq pro (aeval (list (quote times) epsilon (quote pi)))) (cond ((
+evalneq (aeval arg_omega) (aeval pro)) (setq fail_test (quote t)))) (cond ((
+boolvalue!* (revalx !*trdefint)) (progn (progn (assgnpri (aeval 
+"Result of tst13 is ") nil (quote first)) (assgnpri (cond ((boolvalue!* (revalx
+fail_test)) (aeval (quote fail))) (t (aeval (quote t)))) nil (quote last))) (
+aeval (quote nil))))) (cond ((evalequal (aeval fail_test) (aeval (quote t))) (
+return (reval (quote fail)))) (t (return (reval (quote t))))))) (t (progn (setq
+transform_lst (cons (cons (quote test13) (quote (list (quote equal) (list (quote
+abs) (list (quote arg) (quote omega))) (list (quote times) (list (quote plus) (
+quote m) (list (quote difference) (quote n) (list (quote times) (list (quote 
+quotient) 1 2) (list (quote plus) (quote p) (quote q))))) (quote pi))))) 
+transform_lst)) (return (reval (quote t))))))))))
+(progn (aeval (put (quote tst14) (quote procedure_type) (quote (arrow (times 
+general general general general general general general general general general
+general general general) general)))) (aeval (put (quote tst14) (quote 
+defined!-in!-file) (quote defint!/definta!.red))) (aeval (put (quote tst14) (
+quote defined!-on!-line) 1632)) (progn (put (quote tst14) (quote 
+number!-of!-args) 13) (flag (quote (tst14)) (quote opfn)) (de tst14 (u v alpha 
+mu rho delta epsilon sigma omega r phi r1 r2) (prog (temp z arg arg_test 
+!*rounded dmode!*) (cond ((evalneq (aeval (quote transform_tst)) (aeval (quote t
+))) (progn (aeval (!~on (list (quote rounded)))) (cond ((boolvalue!* (revalx 
+!*trdefint)) (progn (assgnpri (aeval 
+"Checking tst14: Compute z = r^[r1*(v - u)]*exp[-(r1*delta + r2*epsilon)*pi*i]")
+nil (quote only)) (assgnpri (aeval 
+"                  abs(arg(1 - z*sigma^(-r1)*omega^r2)) < pi when phi = 0 and epsilon + r*(delta - 1) <= 0"
+) nil (quote only)) (assgnpri (aeval "                 or") nil (quote only)) (
+assgnpri (aeval 
+"                   z = sigma^r1*omega^(-r2) when Re{mu + rho + alpha*(v - u)}<1"
+) nil (quote only)) (progn (assgnpri (aeval "u=") nil (quote first)) (assgnpri (
+aeval u) nil nil) (assgnpri (aeval ",v=") nil nil) (assgnpri (aeval v) nil (
+quote last))) (progn (assgnpri (aeval "alpha=") nil (quote first)) (assgnpri (
+aeval alpha) nil (quote last))) (progn (assgnpri (aeval "mu=") nil (quote first)
+) (assgnpri (aeval mu) nil (quote last))) (progn (assgnpri (aeval "rho=") nil (
+quote first)) (assgnpri (aeval rho) nil (quote last))) (progn (assgnpri (aeval 
+"sigma=") nil (quote first)) (assgnpri (aeval sigma) nil (quote last))) (progn (
+assgnpri (aeval "delta=") nil (quote first)) (assgnpri (aeval delta) nil (quote
+last))) (progn (assgnpri (aeval "omega=") nil (quote first)) (assgnpri (aeval 
+omega) nil (quote last))) (progn (assgnpri (aeval "epsilon=") nil (quote first))
+(assgnpri (aeval epsilon) nil (quote last))) (aeval (quote nil))))) (setq temp (
+aeval (list (quote plus) epsilon (list (quote times) r (list (quote difference)
+delta 1))))) (cond ((and (evalequal (aeval phi) 0) (evalleq (aeval temp) 0)) (
+progn (setq z (aeval (list (quote times) (list (quote expt) r (list (quote times
+) r2 (list (quote difference) v u))) (list (quote expt) (quote e) (list (quote 
+minus) (list (quote times) (list (quote plus) (list (quote times) r2 delta) (
+list (quote times) r1 epsilon)) (quote pi) (quote i))))))) (cond ((boolvalue!* (
+revalx !*trdefint)) (progn (assgnpri (aeval "Case 1: z=") nil (quote first)) (
+assgnpri (aeval z) nil (quote last))))) (aeval (quote nil)))) ((and (evalnumberp
+(aeval (list (quote plus) mu rho (list (quote times) alpha (list (quote 
+difference) v u))))) (evallessp (aeval (list (quote repart) (list (quote plus) 
+mu rho (list (quote times) alpha (list (quote difference) v u))))) 1)) (progn (
+setq z (aeval (list (quote times) (list (quote expt) sigma r2) (list (quote expt
+) omega (list (quote minus) r1))))) (cond ((boolvalue!* (revalx !*trdefint)) (
+progn (assgnpri (aeval "Case 2: z=") nil (quote first)) (assgnpri (aeval z) nil
+(quote last))))))) (t (progn (cond ((boolvalue!* (revalx !*trdefint)) (assgnpri
+(aeval "Result of tst14 is fail") nil (quote only)))) (return (reval (quote fail
+)))))) (setq arg (aeval (list (quote difference) 1 (list (quote times) z (list (
+quote expt) sigma (list (quote minus) r2)) (list (quote expt) omega r1))))) (
+cond ((evalequal (aeval arg) 0) (setq arg_test (aeval 0))) (t (setq arg_test (
+aeval (list (quote abs) (list (quote atan2) (list (quote impart) arg) (list (
+quote repart) arg))))))) (cond ((and (evalnumberp (aeval arg_test)) (evallessp (
+aeval arg_test) (aeval (quote pi)))) (progn (aeval (!~off (list (quote rounded))
+)) (cond ((boolvalue!* (revalx !*trdefint)) (assgnpri (aeval 
+"Result of tst14 is t") nil (quote only)))) (return (reval (quote t))))) (t (
+progn (aeval (!~off (list (quote rounded)))) (cond ((boolvalue!* (revalx 
+!*trdefint)) (assgnpri (aeval "Result of tst14 is fail") nil (quote only)))) (
+return (reval (quote fail)))))) (aeval (quote nil)))) (t (progn (setq 
+transform_lst (cons (cons (quote test14) (quote (list (quote or) (list (quote 
+and) (list (quote abs) (list (quote arg) (list (quote difference) 1 (list (quote
+times) (list (quote times) (list (quote expt) (quote r) (list (quote times) (
+quote r1) (list (quote difference) (quote v) (quote u)))) (list (quote exp) (
+list (quote minus) (list (quote times) (list (quote plus) (list (quote times) (
+quote r1) (list (quote plus) (quote k) (list (quote difference) (quote l) (list
+(quote times) (list (quote quotient) 1 2) (list (quote plus) (quote u) (quote v)
+))))) (list (quote times) (quote r2) (list (quote plus) (quote m) (list (quote 
+difference) (quote n) (list (quote times) (list (quote quotient) 1 2) (list (
+quote difference) (quote p) (quote q))))))) (quote pi) (quote i))))) (list (
+quote expt) (quote sigma) (list (quote minus) (quote r1))) (list (quote expt) (
+quote omega) (quote r2)))))) (list (quote equal) (quote phi) 0) (list (quote leq
+) (list (quote plus) (quote k) (list (quote difference) (quote l) (list (quote 
+times) (list (quote quotient) 1 2) (list (quote plus) (quote u) (quote v)))) (
+list (quote times) (quote r) (list (quote plus) (quote m) (list (quote 
+difference) (list (quote difference) (quote n) (list (quote times) (list (quote
+quotient) 1 2) (list (quote plus) (quote p) (quote q)))) 1)))) 0)) (list (quote
+and) (list (quote lessp) (list (quote repart) (list (quote plus) (list (quote 
+difference) (list (quote sum) (quote bj)) (list (quote sum) (quote ai))) (list (
+quote times) (list (quote quotient) 1 2) (list (quote difference) (quote p) (
+quote q))) 1 (list (quote difference) (list (quote sum) (quote dj)) (list (quote
+sum) (quote ci))) (list (quote times) (list (quote quotient) 1 2) (list (quote 
+difference) (quote u) (quote v))) 1 (list (quote times) (quote alpha) (list (
+quote difference) (quote v) (quote u))))) 0) (list (quote equal) (quote phi) 0)
+(list (quote leq) (list (quote plus) (quote k) (list (quote difference) (quote l
+) (list (quote times) (list (quote quotient) 1 2) (list (quote plus) (quote u) (
+quote v)))) (list (quote times) (quote r) (list (quote plus) (quote m) (list (
+quote difference) (list (quote difference) (quote n) (list (quote times) (list (
+quote quotient) 1 2) (list (quote plus) (quote p) (quote q)))) 1)))) 0))))) 
+transform_lst)) (return (reval (quote t))))))))))
+(progn (aeval (put (quote tst15) (quote procedure_type) (quote (arrow (times 
+general general general general general general general general general general
+general) general)))) (aeval (put (quote tst15) (quote defined!-in!-file) (quote
+defint!/definta!.red))) (aeval (put (quote tst15) (quote defined!-on!-line) 1725
+)) (progn (put (quote tst15) (quote number!-of!-args) 11) (flag (quote (tst15))
+(quote opfn)) (de tst15 (m n p q k l u v sigma omega eta) (prog (lc ls temp_ls 
+psi theta arg_omega arg_sigma !*rounded dmode!*) (cond ((evalneq (aeval (quote 
+transform_tst)) (aeval (quote t))) (progn (cond ((boolvalue!* (revalx !*trdefint
+)) (progn (assgnpri (aeval "Checking tst15:") nil (quote only)) (progn (assgnpri
+(aeval "m=") nil (quote first)) (assgnpri (aeval m) nil nil) (assgnpri (aeval 
+",n=") nil nil) (assgnpri (aeval n) nil nil) (assgnpri (aeval ",p=") nil nil) (
+assgnpri (aeval p) nil nil) (assgnpri (aeval ",q=") nil nil) (assgnpri (aeval q)
+nil nil) (assgnpri (aeval ",k=") nil nil) (assgnpri (aeval k) nil nil) (assgnpri
+(aeval ",l=") nil nil) (assgnpri (aeval l) nil nil) (assgnpri (aeval ",u=") nil
+nil) (assgnpri (aeval u) nil nil) (assgnpri (aeval ",v=") nil nil) (assgnpri (
+aeval v) nil (quote last))) (progn (assgnpri (aeval "sigma=") nil (quote first))
+(assgnpri (aeval sigma) nil (quote last))) (progn (assgnpri (aeval "omega=") nil
+(quote first)) (assgnpri (aeval omega) nil (quote last))) (progn (assgnpri (
+aeval "eta=") nil (quote first)) (assgnpri (aeval eta) nil (quote last))) (aeval
+(quote nil))))) (setq arg_omega (aeval (list (quote atan2) (list (quote impart)
+omega) (list (quote repart) omega)))) (setq arg_sigma (aeval (list (quote atan2)
+(list (quote impart) sigma) (list (quote repart) sigma)))) (setq psi (aeval (
+list (quote quotient) (list (quote plus) (list (quote abs) arg_omega) (list (
+quote times) (list (quote difference) (list (quote difference) q m) n) (quote pi
+))) (list (quote difference) q p)))) (setq theta (aeval (list (quote quotient) (
+list (quote plus) (list (quote abs) arg_sigma) (list (quote times) (list (quote
+difference) (list (quote difference) v k) l) (quote pi))) (list (quote 
+difference) v u)))) (setq lc (aeval (list (quote plus) (list (quote times) (list
+(quote difference) q p) (list (quote expt) (list (quote abs) omega) (list (quote
+quotient) 1 (list (quote difference) q p))) (list (quote cos) psi)) (list (quote
+times) (list (quote difference) v u) (list (quote expt) (list (quote abs) sigma)
+(list (quote quotient) 1 (list (quote difference) v u))) (list (quote cos) theta
+))))) (setq lc (aeval lc)) (setq temp_ls (aeval (list (quote plus) (list (quote
+times) (list (quote difference) q p) (list (quote expt) (list (quote abs) omega)
+(list (quote quotient) 1 (list (quote difference) q p))) (list (quote sign) 
+arg_omega) (list (quote sin) psi)) (list (quote times) (list (quote difference)
+v u) (list (quote expt) (list (quote abs) sigma) (list (quote quotient) 1 (list
+(quote difference) v u))) (list (quote sign) arg_sigma) (list (quote sin) theta)
+)))) (cond ((evalneq (aeval (list (quote times) arg_sigma arg_omega)) 0) (setq 
+ls (aeval temp_ls))) (t (return (reval (quote fail))))) (aeval (!~on (list (
+quote rounded)))) (cond ((or (and (evalnumberp (aeval lc)) (evalgreaterp (aeval
+lc) 0)) (and (evalequal (aeval lc) 0) (evalequal (aeval ls) 0) (evalgreaterp (
+aeval (list (quote repart) eta)) (minus 1))) (and (evalequal (aeval lc) 0) (
+evalequal (aeval ls) 0) (evalgreaterp (aeval (list (quote repart) eta)) 0))) (
+progn (aeval (!~off (list (quote rounded)))) (cond ((boolvalue!* (revalx 
+!*trdefint)) (assgnpri (aeval "Result of tst14 is t") nil (quote only)))) (
+return (reval (quote t))))) (t (progn (aeval (!~off (list (quote rounded)))) (
+cond ((boolvalue!* (revalx !*trdefint)) (assgnpri (aeval 
+"Result of tst15 is fail") nil (quote only)))) (return (reval (quote fail)))))))
+) (t (progn (setq transform_lst (cons (cons (quote test15) (quote (list (quote 
+or) (list (quote greaterp) (quote lambda_c) 0) (list (quote and) (list (quote 
+equal) (quote lambda_c) 0) (list (quote neq) (quote lambda_s) 0) (list (quote 
+greaterp) (list (quote repart) (quote eta)) (list (quote minus) 1))) (list (
+quote and) (list (quote equal) (quote lambda_c) 0) (list (quote equal) (quote 
+lambda_s) 0) (list (quote greaterp) (list (quote repart) (quote eta)) 0))))) 
+transform_lst)) (return (reval (quote t))))))))))
+(progn (put (quote bastab) (quote procedure_type) (quote (arrow (times general 
+general) general))) (put (quote bastab) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote bastab) (quote defined!-on!-line) 1780) (
+progn (put (quote bastab) (quote number!-of!-args) 2) (de bastab (u v) (cond ((
+eq u (quote f1)) (subpar (get (quote f1) (quote g)) v)) ((eq u (quote f2)) (
+subpar (get (quote f2) (quote g)) v))))))
+(progn (put (quote subpar) (quote procedure_type) (quote (arrow (times general 
+general) general))) (put (quote subpar) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote subpar) (quote defined!-on!-line) 1784) (
+progn (put (quote subpar) (quote number!-of!-args) 2) (de subpar (u v) (cond ((
+null v) (list (cadr u) (caddr u) (cadddr u) (car (cddddr u)) (cadr (cddddr u))))
+(t (list (cadr u) (sublist1 (caddr u) v (car u)) (sublist1 (cadddr u) v (car u))
+(subpref1 (car (cddddr u)) v (car u)) (cadr (cddddr u))))))))
+(progn (put (quote sublist1) (quote procedure_type) (quote (arrow (times general
+general general) general))) (put (quote sublist1) (quote defined!-in!-file) (
+quote defint!/definta!.red)) (put (quote sublist1) (quote defined!-on!-line) 
+1791) (progn (put (quote sublist1) (quote number!-of!-args) 3) (de sublist1 (u v
+z) (cond ((or (null (cdr v)) (null (cdr z))) (defint_sublist u (car v) (car z)))
+(t (sublist1 (defint_sublist u (car v) (car z)) (cdr v) (cdr z)))))))
+(progn (put (quote subpref1) (quote procedure_type) (quote (arrow (times general
+general general) general))) (put (quote subpref1) (quote defined!-in!-file) (
+quote defint!/definta!.red)) (put (quote subpref1) (quote defined!-on!-line) 
+1799) (progn (put (quote subpref1) (quote number!-of!-args) 3) (de subpref1 (u v
+z) (cond ((or (null (cdr v)) (null (cdr z))) (subpref u (car v) (car z))) (t (
+subpref (subpref1 u (cdr v) (cdr z)) (car v) (car z)))))))
+(progn (put (quote subpref) (quote procedure_type) (quote (arrow (times general
+general general) general))) (put (quote subpref) (quote defined!-in!-file) (
+quote defint!/definta!.red)) (put (quote subpref) (quote defined!-on!-line) 1805
+) (progn (put (quote subpref) (quote number!-of!-args) 3) (de subpref (u v z) (
+prepsq (subsqnew (simp!* u) (simp!* v) z)))))
+(progn (put (quote defint_sublist) (quote procedure_type) (quote (arrow (times 
+general general general) general))) (put (quote defint_sublist) (quote 
+defined!-in!-file) (quote defint!/definta!.red)) (put (quote defint_sublist) (
+quote defined!-on!-line) 1809) (progn (put (quote defint_sublist) (quote 
+number!-of!-args) 3) (de defint_sublist (u v z) (cond ((null u) nil) (t (cons (
+subpref (car u) v z) (defint_sublist (cdr u) v z)))))))
+(progn (put (quote trpar) (quote procedure_type) (quote (arrow (times general 
+general general) general))) (put (quote trpar) (quote defined!-in!-file) (quote
+defint!/definta!.red)) (put (quote trpar) (quote defined!-on!-line) 1815) (progn
+(put (quote trpar) (quote number!-of!-args) 3) (de trpar (u1 u2 u3) (cond ((
+eqcar u2 (quote plus)) (quote fail)) (t (prog (a3 l1 v1 v2 v3 v4) (cond ((or (
+equal (setq v1 (dubdeg (car (simp u1)) (quote x))) (quote fail)) (equal (setq v2
+(dubdeg (cdr (simp u1)) (quote x))) (quote fail)) (equal (setq v3 (dubdeg (car (
+simp u2)) u3)) (quote fail)) (equal (setq v4 (dubdeg (cdr (simp u2)) u3)) (quote
+fail))) (return (quote fail)))) (setq a3 (multsq (addsq v1 (negsq v2)) (addsq v3
+(negsq v4)))) (setq l1 (subpref u1 u2 (quote x))) (setq l1 (subpref l1 1 u3)) (
+return (list (simp!* l1) a3))))))))
+(progn (put (quote modintgg) (quote procedure_type) (quote (arrow (times general
+general general) general))) (put (quote modintgg) (quote defined!-in!-file) (
+quote defint!/definta!.red)) (put (quote modintgg) (quote defined!-on!-line) 
+1835) (progn (put (quote modintgg) (quote number!-of!-args) 3) (de modintgg (u1
+u2 u3) (list (multsq u1 (invsq (cadar u2))) (defint_change u2 (list (cons (caar
+u2) (list (quote (1 . 1))))) (quote (1))) (defint_change u3 (list (cons (caar u3
+) (list (quotsq (cadar u3) (cadar u2))))) (quote (1)))))))
+(progn (put (quote defint_change) (quote procedure_type) (quote (arrow (times 
+general general general) general))) (put (quote defint_change) (quote 
+defined!-in!-file) (quote defint!/definta!.red)) (put (quote defint_change) (
+quote defined!-on!-line) 1841) (progn (put (quote defint_change) (quote 
+number!-of!-args) 3) (de defint_change (u1 u2 u3) (prog (v k) (setq k 0) (prog 
+nil whilelabel (cond ((not u1) (return nil))) (prog nil (cond ((and u3 (equal (
+car u3) (setq k (plus2 k 1)))) (progn (setq v (append v (list (car u2)))) (cond
+(u2 (setq u2 (cdr u2)))) (cond (u3 (setq u3 (cdr u3)))))) (t (setq v (append v (
+list (car u1)))))) (setq u1 (cdr u1)) (cond ((null u3) (progn (setq v (append v
+u1)) (setq u1 nil))))) (go whilelabel)) (return v)))))
+(progn (put (quote cong) (quote procedure_type) (quote (arrow general general)))
+(put (quote cong) (quote defined!-in!-file) (quote defint!/definta!.red)) (put (
+quote cong) (quote defined!-on!-line) 1857) (progn (put (quote cong) (quote 
+number!-of!-args) 1) (de cong (u) (list (list (invsq (caar u)) (negsq (cadar u))
+) (list (cadadr u) (caadr u) (cadddr (cadr u)) (caddr (cadr u))) (prog (uu 
+forall!-result forall!-endptr) (setq uu (prog (uu forall!-result forall!-endptr)
+(setq uu (cadddr u)) (cond ((null uu) (return nil))) (setq forall!-result (setq
+forall!-endptr (cons ((lambda (uu) (negsq uu)) (car uu)) nil))) looplabel (setq
+uu (cdr uu)) (cond ((null uu) (return forall!-result))) (rplacd forall!-endptr (
+cons ((lambda (uu) (negsq uu)) (car uu)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel))) (cond ((null uu) (return nil))) (setq 
+forall!-result (setq forall!-endptr (cons ((lambda (uu) (addsq uu (negsq (quote
+(-1 . 1))))) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((null uu) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (addsq uu (
+negsq (quote (-1 . 1))))) (car uu)) nil)) (setq forall!-endptr (cdr 
+forall!-endptr)) (go looplabel)) (prog (uu forall!-result forall!-endptr) (setq
+uu (prog (uu forall!-result forall!-endptr) (setq uu (caddr u)) (cond ((null uu)
+(return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda (uu) (
+negsq uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((null uu) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (negsq uu))
+(car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))) (
+cond ((null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons (
+(lambda (uu) (addsq uu (negsq (quote (-1 . 1))))) (car uu)) nil))) looplabel (
+setq uu (cdr uu)) (cond ((null uu) (return forall!-result))) (rplacd 
+forall!-endptr (cons ((lambda (uu) (addsq uu (negsq (quote (-1 . 1))))) (car uu)
+) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))))))
+(progn (put (quote modintg) (quote procedure_type) (quote (arrow (times general
+general) general))) (put (quote modintg) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote modintg) (quote defined!-on!-line) 1864) (
+progn (put (quote modintg) (quote number!-of!-args) 2) (de modintg (u1 u2) (list
+(multsq u1 (invsq (cadar u2))) (defint_change u2 (list (cons (caar u2) (list (
+quote (1 . 1))))) (quote (1)))))))
+(progn (put (quote ccgf) (quote procedure_type) (quote (arrow general general)))
+(put (quote ccgf) (quote defined!-in!-file) (quote defint!/definta!.red)) (put (
+quote ccgf) (quote defined!-on!-line) 1871) (progn (put (quote ccgf) (quote 
+number!-of!-args) 1) (de ccgf (u) (quotsq (simp (plus2 (times2 2 (caadr u)) (
+difference (difference (times2 2 (cadadr u)) (caddr (cadr u))) (cadddr (cadr u))
+))) (quote (2 . 1))))))
+(progn (put (quote vgg) (quote procedure_type) (quote (arrow (times general 
+general) general))) (put (quote vgg) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote vgg) (quote defined!-on!-line) 1876) (progn (
+put (quote vgg) (quote number!-of!-args) 2) (de vgg (u1 u2) (addsq (simp (
+difference (cadddr (cadr u2)) (caddr (cadr u2)))) (negsq (multsq (cadar u2) (
+simp (difference (cadddr (cadr u1)) (caddr (cadr u1))))))))))
+(progn (put (quote nugg) (quote procedure_type) (quote (arrow (times general 
+general general) general))) (put (quote nugg) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote nugg) (quote defined!-on!-line) 1881) (progn
+(put (quote nugg) (quote number!-of!-args) 3) (de nugg (u1 u2 u3) (addsq (addsq
+(quote (1 . 1)) (negsq (multsq u3 (simp (difference (cadddr (cadr u1)) (caddr (
+cadr u1))))))) (negsq (addsq (mugf u2) (mugf u1)))))))
+(progn (put (quote sumlistsq) (quote procedure_type) (quote (arrow general 
+general))) (put (quote sumlistsq) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote sumlistsq) (quote defined!-on!-line) 1885) (
+progn (de sumlistsq (u) ((lambda (p) (progn (prog (pp) (setq pp u) lab (cond ((
+null pp) (return nil))) ((lambda (pp) (progn (setq p (addsq pp p)))) (car pp)) (
+setq pp (cdr pp)) (go lab)) p)) (quote (nil . 1)))) (put (quote sumlistsq) (
+quote number!-of!-args) 1) (putc (quote sumlistsq) (quote inline) (quote (lambda
+(u) ((lambda (p) (progn (prog (pp) (setq pp u) lab (cond ((null pp) (return nil)
+)) ((lambda (pp) (progn (setq p (addsq pp p)))) (car pp)) (setq pp (cdr pp)) (go
+lab)) p)) (quote (nil . 1))))))))
+(progn (put (quote mugf) (quote procedure_type) (quote (arrow general general)))
+(put (quote mugf) (quote defined!-in!-file) (quote defint!/definta!.red)) (put (
+quote mugf) (quote defined!-on!-line) 1888) (progn (put (quote mugf) (quote 
+number!-of!-args) 1) (de mugf (u) (addsq (quotsq (simp (plus2 2 (difference (
+caddr (cadr u)) (cadddr (cadr u))))) (quote (2 . 1))) (addsq ((lambda (p) (progn
+(prog (pp) (setq pp (cadddr u)) lab (cond ((null pp) (return nil))) ((lambda (pp
+) (progn (setq p (addsq pp p)))) (car pp)) (setq pp (cdr pp)) (go lab)) p)) (
+quote (nil . 1))) (negsq ((lambda (p) (progn (prog (pp) (setq pp (caddr u)) lab
+(cond ((null pp) (return nil))) ((lambda (pp) (progn (setq p (addsq pp p)))) (
+car pp)) (setq pp (cdr pp)) (go lab)) p)) (quote (nil . 1)))))))))
+(progn (put (quote coefintg) (quote procedure_type) (quote (arrow (times general
+general general) general))) (put (quote coefintg) (quote defined!-in!-file) (
+quote defint!/definta!.red)) (put (quote coefintg) (quote defined!-on!-line) 
+1893) (progn (put (quote coefintg) (quote number!-of!-args) 3) (de coefintg (u1
+u2 u3) ((lambda (p) (progn (prog (pp) (setq pp (list (expdeg (cons (cdadar u2) 1
+) (mugf u2)) (expdeg (cons (caadar u2) 1) (addsq (mugf u1) (addsq (multsq u3 (
+cons (difference (cadddr (cadr u1)) (caddr (cadr u1))) 1)) (negsq (quote (1 . 1)
+))))) (expdeg (caar u1) (negsq u3)) (expdeg (simp (quote (times 2 pi))) (addsq (
+multsq (ccgf u1) (cons (difference 1 (caadar u2)) 1)) (multsq (ccgf u2) (cons (
+difference 1 (cdadar u2)) 1)))))) lab (cond ((null pp) (return nil))) ((lambda (
+pp) (progn (setq p (multsq pp p)))) (car pp)) (setq pp (cdr pp)) (go lab)) p)) (
+quote (1 . 1))))))
+(progn (put (quote deltagg) (quote procedure_type) (quote (arrow (times general
+general general) general))) (put (quote deltagg) (quote defined!-in!-file) (
+quote defint!/definta!.red)) (put (quote deltagg) (quote defined!-on!-line) 1910
+) (progn (put (quote deltagg) (quote number!-of!-args) 3) (de deltagg (u1 u2 u3)
+(list (append (defint_delta (car (redpar1 (caddr u2) (cadadr u2))) (cdadar u2))
+(append (defint_delta ((lambda (g0020) (prog (uu forall!-result forall!-endptr)
+(setq uu (prog (uu forall!-result forall!-endptr) (setq uu (cadddr u1)) (cond ((
+null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda
+(uu) (negsq uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((null uu)
+(return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (negsq uu))
+(car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))) (
+cond ((null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons (
+(lambda (uu) (addsq uu (negsq g0020))) (car uu)) nil))) looplabel (setq uu (cdr
+uu)) (cond ((null uu) (return forall!-result))) (rplacd forall!-endptr (cons ((
+lambda (uu) (addsq uu (negsq g0020))) (car uu)) nil)) (setq forall!-endptr (cdr
+forall!-endptr)) (go looplabel))) (addsq u3 (quote (-1 . 1)))) (caadar u2)) (
+defint_delta (cdr (redpar1 (caddr u2) (cadadr u2))) (cdadar u2)))) (append (
+defint_delta (car (redpar1 (cadddr u2) (caadr u2))) (cdadar u2)) (append (
+defint_delta ((lambda (g0022) (prog (uu forall!-result forall!-endptr) (setq uu
+(prog (uu forall!-result forall!-endptr) (setq uu (caddr u1)) (cond ((null uu) (
+return nil))) (setq forall!-result (setq forall!-endptr (cons ((lambda (uu) (
+negsq uu)) (car uu)) nil))) looplabel (setq uu (cdr uu)) (cond ((null uu) (
+return forall!-result))) (rplacd forall!-endptr (cons ((lambda (uu) (negsq uu))
+(car uu)) nil)) (setq forall!-endptr (cdr forall!-endptr)) (go looplabel))) (
+cond ((null uu) (return nil))) (setq forall!-result (setq forall!-endptr (cons (
+(lambda (uu) (addsq uu (negsq g0022))) (car uu)) nil))) looplabel (setq uu (cdr
+uu)) (cond ((null uu) (return forall!-result))) (rplacd forall!-endptr (cons ((
+lambda (uu) (addsq uu (negsq g0022))) (car uu)) nil)) (setq forall!-endptr (cdr
+forall!-endptr)) (go looplabel))) (addsq u3 (quote (-1 . 1)))) (caadar u2)) (
+defint_delta (cdr (redpar1 (cadddr u2) (caadr u2))) (cdadar u2))))))))
+(progn (put (quote redpargf) (quote procedure_type) (quote (arrow general 
+general))) (put (quote redpargf) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote redpargf) (quote defined!-on!-line) 1919) (
+progn (put (quote redpargf) (quote number!-of!-args) 1) (de redpargf (u) (prog (
+v1 v2) (setq v1 (redpar (car (redpar1 (cadddr u) (caadr u))) (cdr (redpar1 (
+caddr u) (cadadr u))))) (setq v2 (redpar (cdr (redpar1 (cadddr u) (caadr u))) (
+car (redpar1 (caddr u) (cadadr u))))) (return (list (car u) (cons (cadr v2) (
+cadr v1)) (cons (car v1) (car v2))))))))
+(progn (put (quote arggf) (quote procedure_type) (quote (arrow (times general 
+general) general))) (put (quote arggf) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote arggf) (quote defined!-on!-line) 1929) (progn
+(put (quote arggf) (quote number!-of!-args) 2) (de arggf (u1 u2) ((lambda (p) (
+progn (prog (pp) (setq pp (list (expdeg (caar u2) (cons (cdadar u2) 1)) (expdeg
+(cons (cdadar u2) 1) (cons (difference (times2 (cdadar u2) (caddr (cadr u2))) (
+times2 (cdadar u2) (cadddr (cadr u2)))) 1)) (invsq (expdeg (caar u1) (cons (
+caadar u2) 1))) (expdeg (cons (caadar u2) 1) (cons (difference (times2 (caadar 
+u2) (cadddr (cadr u1))) (times2 (caadar u2) (caddr (cadr u1)))) 1)))) lab (cond
+((null pp) (return nil))) ((lambda (pp) (progn (setq p (multsq pp p)))) (car pp)
+) (setq pp (cdr pp)) (go lab)) p)) (quote (1 . 1))))))
+(progn (put (quote indgf) (quote procedure_type) (quote (arrow (times general 
+general) general))) (put (quote indgf) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote indgf) (quote defined!-on!-line) 1940) (progn
+(put (quote indgf) (quote number!-of!-args) 2) (de indgf (u1 u2) (list (plus2 (
+times2 (cdadar u2) (caadr u2)) (times2 (caadar u2) (cadadr u1))) (plus2 (times2
+(cdadar u2) (cadadr u2)) (times2 (caadar u2) (caadr u1))) (plus2 (times2 (cdadar
+u2) (caddr (cadr u2))) (times2 (caadar u2) (cadddr (cadr u1)))) (plus2 (times2 (
+cdadar u2) (cadddr (cadr u2))) (times2 (caadar u2) (caddr (cadr u1))))))))
+(progn (put (quote dubdeg) (quote procedure_type) (quote (arrow (times general 
+general) general))) (put (quote dubdeg) (quote defined!-in!-file) (quote 
+defint!/definta!.red)) (put (quote dubdeg) (quote defined!-on!-line) 1949) (
+progn (put (quote dubdeg) (quote number!-of!-args) 2) (de dubdeg (x y) (prog (c
+b a1 a3) (cond ((or (numberp x) (null x)) (return (quote (nil . 1))))) (cond ((
+not (null (cdr x))) (return (quote fail)))) lb1 (setq a1 (caar x)) (setq a3 (car
+a1)) (cond ((and (atom a3) (equal a3 y)) (setq b (cons (cdr a1) 1)))) (cond ((
+not (atom a3)) (cond ((equal (cadr a3) y) (cond ((null (cddr a3)) (return (quote
+fail))) ((not (nump (simp (caddr a3)))) (return (simp (caddr a3)))) (t (setq c (
+cons (times2 (cdr a1) (cadr (caddr a3))) (caddr (caddr a3)))))))))) (cond ((atom
+(cdar x)) (cond ((null b) (cond ((null c) (return (quote (nil . 1)))) (t (return
+c)))) ((null c) (return b)) (t (return (cons (plus2 (times2 (car b) (cdr c)) (
+car c)) (cdr c))))))) (setq x (cdar x)) (go lb1)))))
+(progn (put (quote defint_delta) (quote procedure_type) (quote (arrow (times 
+general general) general))) (put (quote defint_delta) (quote defined!-in!-file)
+(quote defint!/definta!.red)) (put (quote defint_delta) (quote defined!-on!-line
+) 1973) (progn (put (quote defint_delta) (quote number!-of!-args) 2) (de 
+defint_delta (u n) (cond ((null u) nil) (t (append (cond ((equal n 1) (list (car
+u))) (t (delta0 (quotsq (car u) (simp!* n)) n n))) (defint_delta (cdr u) n))))))
+)
+(progn (put (quote delta0) (quote procedure_type) (quote (arrow (times general 
+general general) general))) (put (quote delta0) (quote defined!-in!-file) (quote
+defint!/definta!.red)) (put (quote delta0) (quote defined!-on!-line) 1983) (
+progn (put (quote delta0) (quote number!-of!-args) 3) (de delta0 (u n k) (cond (
+(equal k 0) nil) (t (cons u (delta0 (addsq u (invsq (simp!* n))) n (difference k
+1))))))))
+(progn (put (quote nump) (quote procedure_type) (quote (arrow general general)))
+(put (quote nump) (quote defined!-in!-file) (quote defint!/definta!.red)) (put (
+quote nump) (quote defined!-on!-line) 1990) (progn (put (quote nump) (quote 
+number!-of!-args) 1) (de nump (x) (or (null (car x)) (and (numberp (car x)) (
+numberp (cdr x)))))))

@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DF Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse34.html" >Up</a></td><td class="clinks"><a 
+href="manualse35.html" >Next</a></td><td class="clinks"><a 
+href="manualse33.html" >Prev</a></td><td class="clinks"><a 
+href="manualse33.html#tailmanualse33.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse34.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.8    </span> <a 
+ id="x45-770007.8"></a>DF Operator</h3>
+<!--l. 754--><p class="noindent" ><a 
+ id="operator:DF"></a> The operator <span 
+class="pcrr8t-x-x-109">DF</span><a 
+ id="dx45-77001"></a> is used to represent partial differentiation<a 
+ id="dx45-77002"></a> with respect to one or more
+variables. It is used with the syntax:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">DF(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VAR:kernel</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="cmmi-10x-x-109">&#x003C;,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">NUM:integer</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span><span 
+class="cmr-10x-x-109">]) : </span><span 
+class="cmmi-10x-x-109">algebraic.</span></div>
+<!--l. 761--><p class="noindent" >The first argument is the expression to be differentiated. The remaining arguments
+specify the differentiation variables and the number of times they are applied.
+<!--l. 765--><p class="noindent" >The number <span 
+class="pcrr8t-x-x-109">NUM </span>may be omitted if it is 1. For example,
+     <div class="quote">
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:181;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-109">df(y,x)           </span></td><td  
+class="tabbing">= <span 
+class="cmmi-10x-x-109">&#x2202;y&#x2215;&#x2202;x</span>
+</td></tr></table>
+     <!--l. 770--><p class="noindent" >                               <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:181;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-109">df(y,x,2)         </span></td><td  
+class="tabbing">= <span 
+class="cmmi-10x-x-109">&#x2202;</span><sup><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-10x-x-109">y&#x2215;&#x2202;x</span><sup><span 
+class="cmr-8">2</span></sup></td></tr></table>
+     <!--l. 771--><p class="noindent" >                             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:181;" 
+class="tabbing"><span 
+class="pcrr8t-x-x-109">df(y,x1,2,x2,x3,2)</span></td><td  
+class="tabbing">= <span 
+class="cmmi-10x-x-109">&#x2202;</span><sup><span 
+class="cmr-8">5</span></sup><span 
+class="cmmi-10x-x-109">y&#x2215;&#x2202;x</span><sub><span 
+class="cmr-8">1</span></sub><sup><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-10x-x-109">&#x00A0;&#x2202;x</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">&#x2202;x</span><sub><span 
+class="cmr-8">3</span></sub><sup><span 
+class="cmr-8">2</span></sup><span 
+class="cmmi-10x-x-109">.</span></td></tr></table>
+     <!--l. 774--><p class="noindent" >
+     </div>
+<!--l. 776--><p class="noindent" >The evaluation of <span 
+class="pcrr8t-x-x-109">df(y,x) </span>proceeds as follows: first, the values of <span 
+class="pcrr8t-x-x-109">Y </span>and <span 
+class="pcrr8t-x-x-109">X </span>are found.
+Let us assume that <span 
+class="pcrr8t-x-x-109">X </span>has no assigned value, so its value is <span 
+class="pcrr8t-x-x-109">X</span>. Each term or other part of
+the value of <span 
+class="pcrr8t-x-x-109">Y </span>that contains the variable <span 
+class="pcrr8t-x-x-109">X </span>is differentiated by the standard rules. If <span 
+class="pcrr8t-x-x-109">Z </span>is
+another variable, not <span 
+class="pcrr8t-x-x-109">X </span>itself, then its derivative with respect to <span 
+class="pcrr8t-x-x-109">X </span>is taken to be 0, unless
+<span 
+class="pcrr8t-x-x-109">Z </span>has previously been declared to <span 
+class="pcrr8t-x-x-109">DEPEND </span>on <span 
+class="pcrr8t-x-x-109">X</span>, in which case the derivative is reported
+as the symbol <span 
+class="pcrr8t-x-x-109">df(z,x)</span>.
+                                                                     
+
+                                                                     
+<!--l. 786--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.8.1    </span> <a 
+ id="x45-780007.8.1"></a>Switches influencing differentiation</h4>
+<!--l. 787--><p class="noindent" ><a 
+ id="switch:COMMUTEDF"></a> <a 
+ id="switch:NOCOMMUTEDF"></a> <a 
+ id="switch:SIMPNONCOMDF"></a>
+<!--l. 791--><p class="noindent" >Consider <span 
+class="pcrr8t-x-x-109">df(u,x,y,z)</span>. If non of <span 
+class="pcrr8t-x-x-109">x,y,z </span>are equal to <span 
+class="pcrr8t-x-x-109">u </span>then the order of
+differentiation is commuted into a canonical form, unless the switch <span 
+class="pcrr8t-x-x-109">NOCOMMUTEDF</span><a 
+ id="dx45-78001"></a><a 
+ id="dx45-78002"></a><a 
+ id="dx45-78003"></a> is
+turned on (default is off). if at least one of <span 
+class="pcrr8t-x-x-109">x,y,z </span>is equal to <span 
+class="pcrr8t-x-x-109">u </span>then the order of
+differentiation is <span 
+class="ptmri8t-x-x-109">not </span>commuted and the derivative is <span 
+class="ptmri8t-x-x-109">not </span>simplified to zero, unless the
+switch <span 
+class="pcrr8t-x-x-109">COMMUTEDF</span><a 
+ id="dx45-78004"></a><a 
+ id="dx45-78005"></a><a 
+ id="dx45-78006"></a> is turned on. It is off by default.
+<!--l. 800--><p class="noindent" >If <span 
+class="pcrr8t-x-x-109">COMMUTEDF </span>is off and the switch <span 
+class="pcrr8t-x-x-109">SIMPNONCOMDF</span><a 
+ id="dx45-78007"></a><a 
+ id="dx45-78008"></a><a 
+ id="dx45-78009"></a> is on then simplify as
+follows:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-114">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DF(U,X,U)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;DF(U,X,2)&#x00A0;/&#x00A0;DF(U,X)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DF(U,X,N,U)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;DF(U,X,N+1)&#x00A0;/&#x00A0;DF(U,X)
+</div>
+<!--l. 805--><p class="nopar" > <span 
+class="ptmri8t-x-x-109">provided </span><span 
+class="pcrr8t-x-x-109">U </span>depends only on the one variable <span 
+class="pcrr8t-x-x-109">X</span>. This simplification removes the
+non-commutative aspect of the derivative.
+<!--l. 809--><p class="noindent" ><a 
+ id="switch:EXPANDDF"></a> If the switch <span 
+class="pcrr8t-x-x-109">EXPANDDF</span><a 
+ id="dx45-78010"></a><a 
+ id="dx45-78011"></a><a 
+ id="dx45-78012"></a> is turned on then REDUCE uses the chain rule to expand
+symbolic derivatives of indirectly dependent variables provided the result is
+unambiguous, i.e. provided there is no direct dependence. It is off by default. Thus, for
+example, given
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-115">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DEPEND&#x00A0;F,U,V;&#x00A0;DEPEND&#x00A0;{U,V},X;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ON&#x00A0;EXPANDDF;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DF(F,X)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;DF(F,U)*DF(U,X)&#x00A0;+&#x00A0;DF(F,V)*DF(V,X)
+</div>
+<!--l. 819--><p class="nopar" > whereas after
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-116">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DEPEND&#x00A0;F,X;
+</div>
+<!--l. 823--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">DF(F,X) </span>does not expand at all (since the result would be ambiguous and the
+algorithm would loop).
+<!--l. 827--><p class="noindent" ><a 
+ id="switch:ALLOWDFINT"></a> <a 
+ id="switch:DFINT"></a> Turning on the switch <span 
+class="pcrr8t-x-x-109">ALLOWDFINT</span><a 
+ id="dx45-78013"></a><a 
+ id="dx45-78014"></a><a 
+ id="dx45-78015"></a> allows &#8220;differentiation under the integral sign&#8221;,
+i.e.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-117">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DF(INT(Y,&#x00A0;X),&#x00A0;V)&#x00A0;-&#x003E;&#x00A0;INT(DF(Y,&#x00A0;V),&#x00A0;X)
+</div>
+<!--l. 833--><p class="nopar" > if this results in a simplification. If the switch <span 
+class="pcrr8t-x-x-109">DFINT</span><a 
+ id="dx45-78016"></a><a 
+ id="dx45-78017"></a><a 
+ id="dx45-78018"></a> is also turned on then this
+happens regardless of whether the result simplifies. Both switches are off by
+default.
+<h4 class="subsectionHead"><span class="titlemark">7.8.2    </span> <a 
+ id="x45-790007.8.2"></a>Adding Differentiation Rules</h4>
+<!--l. 840--><p class="noindent" ><a 
+ id="command:LETdf"></a>
+<!--l. 842--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">LET</span><a 
+ id="dx45-79001"></a> statement can be used to introduce rules for differentiation of user-defined
+operators. Its general form is
+  <div class="syntax">
+  <div class="array"> <table id="TBL-15" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-15-1g"><col 
+id="TBL-15-1"><col 
+id="TBL-15-2"><col 
+id="TBL-15-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">FOR ALL</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var1</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">varn</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>              </div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11">   <span 
+class="pcrr8t-x-x-109">LET DF(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">varlist</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">vari</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)=</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td></tr></table>           </div></div>
+<!--l. 848--><p class="noindent" >where
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">varlist</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="cmr-10x-x-109">::= (</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var1</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">varn</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">,</span></div>
+<!--l. 852--><p class="noindent" >and <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">var1</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>,&#x2026;,<span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">varn</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> are the dummy variable arguments of <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>.
+<!--l. 856--><p class="noindent" >An analogous form applies to infix operators.
+<!--l. 858--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-118">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;all&#x00A0;x&#x00A0;let&#x00A0;df(tan&#x00A0;x,x)=&#x00A0;1&#x00A0;+&#x00A0;tan(x)^2;
+</div>
+<!--l. 861--><p class="nopar" > (This is how the tan differentiation rule appears in the REDUCE source.)
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-119">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;all&#x00A0;x,y&#x00A0;let&#x00A0;df(f(x,y),x)=2*f(x,y),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;df(f(x,y),y)=x*f(x,y);
+</div>
+<!--l. 867--><p class="nopar" > Notice that all dummy arguments of the relevant operator must be declared arbitrary by
+the <span 
+class="pcrr8t-x-x-109">FOR ALL </span>command, and that rules may be supplied for operators with any number
+of arguments. If no differentiation rule appears for an argument in an operator, the
+differentiation routines will return as result an expression in terms of <span 
+class="pcrr8t-x-x-109">DF</span><a 
+ id="dx45-79002"></a>. For example, if
+the rule for the differentiation with respect to the second argument of <span 
+class="pcrr8t-x-x-109">F </span>is not supplied,
+the evaluation of <span 
+class="pcrr8t-x-x-109">df(f(x,z),z) </span>would leave this expression unchanged. (No
+<span 
+class="pcrr8t-x-x-109">DEPEND </span>declaration is needed here, since <span 
+class="pcrr8t-x-x-109">f(x,z) </span>obviously &#8220;depends on&#8221;
+<span 
+class="pcrr8t-x-x-109">Z</span>.)
+<!--l. 878--><p class="noindent" >Once such a rule has been defined for a given operator, any future differentiation<a 
+ id="dx45-79003"></a> rules for
+that operator must be defined with the same number of arguments for that operator,
+otherwise we get the error message
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-120">
+&#x00A0;&#x00A0;&#x00A0;Incompatible&#x00A0;DF&#x00A0;rule&#x00A0;argument&#x00A0;length&#x00A0;for&#x00A0;&#x003C;operator&#x003E;
+</div>
+<!--l. 884--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 886--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse34.html" >Up</a></td><td class="clinks"><a 
+href="manualse35.html" >Next</a></td><td class="clinks"><a 
+href="manualse33.html" >Prev</a></td><td class="clinks"><a 
+href="manualse33.html#tailmanualse33.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse34.html" >Front</a></td></tr></table><a 
+ id="tailmanualse34.html"></a>   
+</body></html> 

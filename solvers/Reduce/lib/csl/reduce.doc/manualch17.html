@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>17 Symbolic Mode</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch17.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualch18.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualch16.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualch16.html#tailmanualch16.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualch17.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h2 class="ChapterHead"> <span 
+class="ptmr8t-x-x-120">17</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+ id="x227-101000017"></a><span 
+class="ptmr8t-x-x-120">Symbolic Mode</span></h2>
+<a 
+ id="dx227-1010001"></a>
+<!--l. 3--><p class="noindent" ><a 
+ id="target:modes"></a> <a 
+ id="reserved:LISP"></a>
+<!--l. 6--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">At the system level, REDUCE is based on a version of the programming</span>
+<span 
+class="ptmr8t-x-x-120">language Lisp</span><a 
+ id="dx227-1010002"></a> <span 
+class="ptmr8t-x-x-120">known as </span><span 
+class="ptmri8t-x-x-120">Standard Lisp </span><span 
+class="ptmr8t-x-x-120">which is described in J. Marti, Hearn, A.</span>
+<span 
+class="ptmr8t-x-x-120">C., Griss, M. L. and Griss, C., &#8220;Standard LISP Report" SIGPLAN Notices,</span>
+<span 
+class="ptmr8t-x-x-120">ACM, New York, 14, No 10 (1979) 48-68. We shall assume in this section that</span>
+<span 
+class="ptmr8t-x-x-120">the reader is familiar with the material in that paper. This also assumes implicitly</span>
+<span 
+class="ptmr8t-x-x-120">that the reader has a reasonable knowledge about Lisp in general, say at the level</span>
+<span 
+class="ptmr8t-x-x-120">of the LISP 1.5 Programmer&#8217;s Manual (McCarthy, J., Abrahams, P. W., Edwards,</span>
+<span 
+class="ptmr8t-x-x-120">D. J., Hart, T. P. and Levin, M. I., &#8220;LISP 1.5 Programmer&#8217;s Manual&#8221;, M.I.T.</span>
+<span 
+class="ptmr8t-x-x-120">Press, 1965) or any of the books mentioned at the end of this section. Persons</span>
+<span 
+class="ptmr8t-x-x-120">unfamiliar with this material will have some difficulty understanding this</span>
+<span 
+class="ptmr8t-x-x-120">section.</span>
+<!--l. 19--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Although REDUCE is designed primarily for algebraic calculations, its source</span>
+<span 
+class="ptmr8t-x-x-120">language is general enough to allow for a full range of Lisp-like symbolic</span>
+<span 
+class="ptmr8t-x-x-120">calculations. To achieve this generality, however, it is necessary to provide the</span>
+<span 
+class="ptmr8t-x-x-120">user with two modes of evaluation, namely an algebraic mode</span><a 
+ id="dx227-1010003"></a> <span 
+class="ptmr8t-x-x-120">and a</span>
+<span 
+class="ptmr8t-x-x-120">symbolic mode.</span><a 
+ id="dx227-1010004"></a> <span 
+class="ptmr8t-x-x-120">To enter symbolic mode, the user types </span><span 
+class="pcrr8t-x-x-120">symbolic;</span>
+<a 
+ id="dx227-1010005"></a> <span 
+class="ptmr8t-x-x-120">(or </span><span 
+class="pcrr8t-x-x-120">lisp;</span><span 
+class="ptmr8t-x-x-120">)</span><a 
+ id="dx227-1010006"></a> <span 
+class="ptmr8t-x-x-120">and to return to algebraic mode one types </span><span 
+class="pcrr8t-x-x-120">algebraic;</span><span 
+class="ptmr8t-x-x-120">.</span><a 
+ id="dx227-1010007"></a>
+<span 
+class="ptmr8t-x-x-120">Evaluations proceed differently in each mode so the user is advised to check</span>
+<span 
+class="ptmr8t-x-x-120">what mode he is in if a puzzling error arises. He can find his mode by</span>
+<span 
+class="ptmr8t-x-x-120">typing</span><a 
+ id="dx227-1010008"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1350">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;eval_mode;
+</div>
+<!--l. 32--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The current mode will then be printed as </span><span 
+class="pcrr8t-x-x-120">ALGEBRAIC </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">SYMBOLIC</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 35--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Expression evaluation may proceed in either mode at any level of a calculation,</span>
+<span 
+class="ptmr8t-x-x-120">provided the results are passed from mode to mode in a compatible manner. One</span>
+<span 
+class="ptmr8t-x-x-120">simply prefixes the relevant expression by the appropriate mode. If the mode</span>
+<span 
+class="ptmr8t-x-x-120">name prefixes an expression at the top level, it will then be handled as if the</span>
+<span 
+class="ptmr8t-x-x-120">global system mode had been changed for the scope of that particular</span>
+<span 
+class="ptmr8t-x-x-120">calculation.</span>
+<!--l. 42--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For example, if the current mode is </span><span 
+class="pcrr8t-x-x-120">ALGEBRAIC</span><span 
+class="ptmr8t-x-x-120">, then the commands</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1351">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic&#x00A0;car&#x00A0;&#8217;(a);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x+y;
+</div>
+<!--l. 47--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">will cause the first expression to be evaluated and printed in symbolic mode and</span>
+<span 
+class="ptmr8t-x-x-120">the second in algebraic mode. Only the second evaluation will thus affect the</span>
+<span 
+class="ptmr8t-x-x-120">expression workspace. On the other hand, the statement</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1352">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;+&#x00A0;symbolic&#x00A0;car&#x00A0;&#8217;(12);
+</div>
+<!--l. 53--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">will result in the algebraic value </span><span 
+class="pcrr8t-x-x-120">X+12</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 56--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The use of </span><span 
+class="pcrr8t-x-x-120">SYMBOLIC </span><span 
+class="ptmr8t-x-x-120">(and equivalently </span><span 
+class="pcrr8t-x-x-120">ALGEBRAIC</span><span 
+class="ptmr8t-x-x-120">) in this manner is the</span>
+<span 
+class="ptmr8t-x-x-120">same as any operator. That means that parentheses could be omitted in the above</span>
+<span 
+class="ptmr8t-x-x-120">examples since the meaning is obvious. In other cases, parentheses must be used,</span>
+<span 
+class="ptmr8t-x-x-120">as in</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1353">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic(x&#x00A0;:=&#x00A0;&#8217;a);
+</div>
+<!--l. 63--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Omitting the parentheses, as in</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1354">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic&#x00A0;x&#x00A0;:=&#x00A0;a;
+</div>
+<!--l. 67--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">would be wrong, since it would parse as</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1355">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symbolic(x)&#x00A0;:=&#x00A0;a;
+</div>
+<!--l. 71--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">For convenience, it is assumed that any operator whose </span><span 
+class="ptmri8t-x-x-120">first </span><span 
+class="ptmr8t-x-x-120">argument is</span>
+<span 
+class="ptmr8t-x-x-120">quoted is being evaluated in symbolic mode, regardless of the mode in</span>
+<span 
+class="ptmr8t-x-x-120">effect at that time. Thus, the first example above could be equally well</span>
+<span 
+class="ptmr8t-x-x-120">written:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1356">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;car&#x00A0;&#8217;(a);
+</div>
+<!--l. 78--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Except where explicit limitations have been made, most REDUCE algebraic</span>
+<span 
+class="ptmr8t-x-x-120">constructions carry over into symbolic mode.</span><a 
+ id="dx227-1010009"></a> <span 
+class="ptmr8t-x-x-120">However, there are some</span>
+<span 
+class="ptmr8t-x-x-120">differences. First, expression evaluation now becomes Lisp evaluation. Secondly,</span>
+<span 
+class="ptmr8t-x-x-120">assignment statements are handled differently, as we shall discuss shortly.</span>
+<span 
+class="ptmr8t-x-x-120">Thirdly, local variables and array elements are initialized to </span><span 
+class="pcrr8t-x-x-120">NIL </span><span 
+class="ptmr8t-x-x-120">rather than </span><span 
+class="pcrr8t-x-x-120">0</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">(In fact, any variables not explicitly declared </span><span 
+class="pcrr8t-x-x-120">INTEGER </span><span 
+class="ptmr8t-x-x-120">are also initialized</span>
+<span 
+class="ptmr8t-x-x-120">to </span><span 
+class="pcrr8t-x-x-120">NIL </span><span 
+class="ptmr8t-x-x-120">in algebraic mode, but the algebraic evaluator recognizes </span><span 
+class="pcrr8t-x-x-120">NIL</span>
+<span 
+class="ptmr8t-x-x-120">as </span><span 
+class="pcrr8t-x-x-120">0</span><span 
+class="ptmr8t-x-x-120">.) Finally, function definitions follow the conventions of Standard</span>
+<span 
+class="ptmr8t-x-x-120">Lisp.</span>
+<!--l. 91--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">To begin with, we mention a few extensions to our basic syntax which are</span>
+<span 
+class="ptmr8t-x-x-120">designed primarily if not exclusively for symbolic mode.</span>
+<div class="sectionTOCS">
+<span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.1 </span><a 
+href="manualse169.html#x228-101100017.1"><span 
+class="ptmr8t-x-x-120">Symbolic Infix Operators</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.2 </span><a 
+href="manualse170.html#x229-101200017.2"><span 
+class="ptmr8t-x-x-120">Symbolic Expressions</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.3 </span><a 
+href="manualse171.html#x230-101300017.3"><span 
+class="ptmr8t-x-x-120">Quoted Expressions</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.4 </span><a 
+href="manualse172.html#x231-101400017.4"><span 
+class="ptmr8t-x-x-120">Lambda Expressions</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.5 </span><a 
+href="manualse173.html#x232-101500017.5"><span 
+class="ptmr8t-x-x-120">Symbolic Assignment Statements</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.6 </span><a 
+href="manualse174.html#x233-101600017.6"><span 
+class="ptmr8t-x-x-120">FOR EACH Statement</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.7 </span><a 
+href="manualse175.html#x234-101700017.7"><span 
+class="ptmr8t-x-x-120">Symbolic Procedures</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.8 </span><a 
+href="manualse176.html#x235-101800017.8"><span 
+class="ptmr8t-x-x-120">Standard Lisp Equivalent of Reduce Input</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.9 </span><a 
+href="manualse177.html#x236-101900017.9"><span 
+class="ptmr8t-x-x-120">Communicating with Algebraic Mode</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.10 </span><a 
+href="manualse178.html#x237-102400017.10"><span 
+class="ptmr8t-x-x-120">Rlisp &#8217;88</span></a></span>
+<br /><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="sectionToc" ><span 
+class="ptmr8t-x-x-120">17.11 </span><a 
+href="manualse179.html#x238-102500017.11"><span 
+class="ptmr8t-x-x-120">References</span></a></span>
+</div>
+
+
+
+
+
+
+
+
+
+
+                                                                     
+
+                                                                     
+<table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch17.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualch18.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualch16.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualch16.html#tailmanualch16.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualch17.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualch17.html"></a>  
+</body></html> 

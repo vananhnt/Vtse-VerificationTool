@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The Standard Lisp Cross Reference Program</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch19.html#manualse189.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse190.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse188.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse188.html#tailmanualse188.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse189.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">19.3    </span></span> <a 
+ id="x250-104200019.3"></a><span 
+class="ptmr8t-x-x-120">The Standard Lisp Cross Reference Program</span></h3>
+<a 
+ id="dx250-1042001"></a>
+<!--l. 94--><p class="noindent" ><a 
+ id="switch:CREF"></a>
+<!--l. 96--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">CREF</span><a 
+ id="dx250-1042002"></a> <span 
+class="ptmr8t-x-x-120">is a Standard Lisp program for processing a set of Standard LISP function</span>
+<span 
+class="ptmr8t-x-x-120">definitions to produce:</span>
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x250-1042004x1"><span 
+class="ptmr8t-x-x-120">A &#8220;summary&#8221; showing:</span>
+          <ol  class="enumerate2" >
+          <li 
+  class="enumerate" id="x250-1042006x1"><span 
+class="ptmr8t-x-x-120">A list of files processed;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042008x2"><span 
+class="ptmr8t-x-x-120">A list of &#8220;entry points&#8221; (functions which are not called or are</span>
+          <span 
+class="ptmr8t-x-x-120">only called by themselves);</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042010x3"><span 
+class="ptmr8t-x-x-120">A list of undefined functions (functions called but not defined in</span>
+          <span 
+class="ptmr8t-x-x-120">this set of functions);</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042012x4"><span 
+class="ptmr8t-x-x-120">A list of variables that were used non-locally but not declared</span>
+          <span 
+class="pcrr8t-x-x-120">GLOBAL </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">FLUID </span><span 
+class="ptmr8t-x-x-120">before their use;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042014x5"><span 
+class="ptmr8t-x-x-120">A list of variables that were declared </span><span 
+class="pcrr8t-x-x-120">GLOBAL </span><span 
+class="ptmr8t-x-x-120">but not used as</span>
+          <span 
+class="pcrr8t-x-x-120">FLUID</span><span 
+class="ptmr8t-x-x-120">s, i.e., bound in a function;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042016x6"><span 
+class="ptmr8t-x-x-120">A list of </span><span 
+class="pcrr8t-x-x-120">FLUID </span><span 
+class="ptmr8t-x-x-120">variables that were not bound in a function so</span>
+          <span 
+class="ptmr8t-x-x-120">that one might consider declaring them </span><span 
+class="pcrr8t-x-x-120">GLOBAL</span><span 
+class="ptmr8t-x-x-120">s;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042018x7"><span 
+class="ptmr8t-x-x-120">A list of all </span><span 
+class="pcrr8t-x-x-120">GLOBAL </span><span 
+class="ptmr8t-x-x-120">variables present;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042020x8"><span 
+class="ptmr8t-x-x-120">A list of all </span><span 
+class="pcrr8t-x-x-120">FLUID </span><span 
+class="ptmr8t-x-x-120">variables present;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042022x9"><span 
+class="ptmr8t-x-x-120">A list of all functions present.</span></li></ol>
+     </li>
+     <li 
+  class="enumerate" id="x250-1042024x2"><span 
+class="ptmr8t-x-x-120">A &#8220;global variable usage&#8221; table, showing for each non-local variable:</span>
+                                                                     
+
+                                                                     
+          <ol  class="enumerate2" >
+          <li 
+  class="enumerate" id="x250-1042026x1"><span 
+class="ptmr8t-x-x-120">Functions in which it is used as a declared </span><span 
+class="pcrr8t-x-x-120">FLUID </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">GLOBAL</span><span 
+class="ptmr8t-x-x-120">;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042028x2"><span 
+class="ptmr8t-x-x-120">Functions in which it is used but not declared;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042030x3"><span 
+class="ptmr8t-x-x-120">Functions in which it is bound;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042032x4"><span 
+class="ptmr8t-x-x-120">Functions in which it is changed by </span><span 
+class="pcrr8t-x-x-120">SETQ</span><span 
+class="ptmr8t-x-x-120">.</span></li></ol>
+     </li>
+     <li 
+  class="enumerate" id="x250-1042034x3"><span 
+class="ptmr8t-x-x-120">A &#8220;function usage&#8221; table showing for each function:</span>
+          <ol  class="enumerate2" >
+          <li 
+  class="enumerate" id="x250-1042036x1"><span 
+class="ptmr8t-x-x-120">Where it is defined;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042038x2"><span 
+class="ptmr8t-x-x-120">Functions which call this function;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042040x3"><span 
+class="ptmr8t-x-x-120">Functions called by it;</span>
+          </li>
+          <li 
+  class="enumerate" id="x250-1042042x4"><span 
+class="ptmr8t-x-x-120">Non-local variables used.</span></li></ol>
+     </li></ol>
+<!--l. 133--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The program will also check that functions are called with the correct number of</span>
+<span 
+class="ptmr8t-x-x-120">arguments, and print a diagnostic message otherwise.</span>
+<!--l. 136--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The output is alphabetized on the first seven characters of each function</span>
+<span 
+class="ptmr8t-x-x-120">name.</span>
+<!--l. 139--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">19.3.1    </span></span> <a 
+ id="x250-104300019.3.1"></a><span 
+class="ptmr8t-x-x-120">Restrictions</span></h4>
+<!--l. 141--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Algebraic procedures in REDUCE are treated as if they were symbolic, so that</span>
+<span 
+class="ptmr8t-x-x-120">algebraic constructs will actually appear as calls to symbolic functions, such as</span>
+<span 
+class="pcrr8t-x-x-120">AEVAL</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 145--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">19.3.2    </span></span> <a 
+ id="x250-104400019.3.2"></a><span 
+class="ptmr8t-x-x-120">Usage</span></h4>
+                                                                     
+
+                                                                     
+<!--l. 147--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">To invoke the cross reference program, the switch </span><span 
+class="pcrr8t-x-x-120">CREF</span><a 
+ id="dx250-1044001"></a><a 
+ id="dx250-1044002"></a><a 
+ id="dx250-1044003"></a> <span 
+class="ptmr8t-x-x-120">is used. </span><span 
+class="pcrr8t-x-x-120">on</span>
+<span 
+class="pcrr8t-x-x-120">cref </span><span 
+class="ptmr8t-x-x-120">causes the cref program to load and the cross-referencing process</span>
+<span 
+class="ptmr8t-x-x-120">to begin. After all the required definitions are loaded, </span><span 
+class="pcrr8t-x-x-120">off cref </span><span 
+class="ptmr8t-x-x-120">will</span>
+<span 
+class="ptmr8t-x-x-120">cause the cross-reference listing to be produced. For example, if you wish</span>
+<span 
+class="ptmr8t-x-x-120">to cross-reference all functions in the file </span><span 
+class="pcrr8t-x-x-120">tst.red</span><span 
+class="ptmr8t-x-x-120">, and produce the</span>
+<span 
+class="ptmr8t-x-x-120">cross-reference listing in the file </span><span 
+class="pcrr8t-x-x-120">tst.crf</span><span 
+class="ptmr8t-x-x-120">, the following sequence can be</span>
+<span 
+class="ptmr8t-x-x-120">used:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1395">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;out&#x00A0;~tst.crf~;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;cref;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;in&#x00A0;~tst.red~$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;off&#x00A0;cref;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;shut&#x00A0;~tst.crf~;
+</div>
+<!--l. 160--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">To process more than one file, more </span><span 
+class="pcrr8t-x-x-120">IN </span><span 
+class="ptmr8t-x-x-120">statements may be added before</span>
+<span 
+class="ptmr8t-x-x-120">the call of </span><span 
+class="pcrr8t-x-x-120">off cref</span><span 
+class="ptmr8t-x-x-120">, or the </span><span 
+class="pcrr8t-x-x-120">IN </span><span 
+class="ptmr8t-x-x-120">statement changed to include a list of</span>
+<span 
+class="ptmr8t-x-x-120">files.</span>
+<!--l. 165--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">19.3.3    </span></span> <a 
+ id="x250-104500019.3.3"></a><span 
+class="ptmr8t-x-x-120">Options</span></h4>
+<!--l. 167--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Functions with the flag </span><span 
+class="pcrr8t-x-x-120">NOLIST </span><span 
+class="ptmr8t-x-x-120">will not be examined or output. Initially, all</span>
+<span 
+class="ptmr8t-x-x-120">Standard Lisp functions are so flagged. (In fact, they are kept on a list</span>
+<span 
+class="pcrr8t-x-x-120">NOLIST!*</span><span 
+class="ptmr8t-x-x-120">, so if you wish to see references to </span><span 
+class="ptmri8t-x-x-120">all </span><span 
+class="ptmr8t-x-x-120">functions, then </span><span 
+class="pcrr8t-x-x-120">CREF </span><span 
+class="ptmr8t-x-x-120">should</span>
+<span 
+class="ptmr8t-x-x-120">be first loaded with the command </span><span 
+class="pcrr8t-x-x-120">load cref</span><span 
+class="ptmr8t-x-x-120">, and this variable then set to</span>
+<span 
+class="pcrr8t-x-x-120">NIL</span><span 
+class="ptmr8t-x-x-120">).</span>
+<!--l. 172--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It should also be remembered that any macros with the property list flag</span>
+<span 
+class="pcrr8t-x-x-120">EXPAND</span><span 
+class="ptmr8t-x-x-120">, or, if the switch </span><span 
+class="pcrr8t-x-x-120">FORCE </span><span 
+class="ptmr8t-x-x-120">is on, without the property list flag</span>
+<span 
+class="pcrr8t-x-x-120">NOEXPAND</span><span 
+class="ptmr8t-x-x-120">, will be expanded before the definition is seen by the cross-reference</span>
+<span 
+class="ptmr8t-x-x-120">program, so this flag can also be used to select those macros you require</span>
+<span 
+class="ptmr8t-x-x-120">expanded and those you do not.</span>
+                                                                     
+
+                                                                     
+<!--l. 178--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch19.html#manualse189.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse190.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse188.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse188.html#tailmanualse188.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse189.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse189.html"></a>   
+</body></html> 

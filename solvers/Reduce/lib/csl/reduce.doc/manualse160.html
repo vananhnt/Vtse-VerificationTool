@@ -1,0 +1,1231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>TPS: A truncated power series package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse160.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse161.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse159.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse159.html#tailmanualse159.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse160.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69    </span></span> <a 
+ id="x216-92100016.69"></a><span 
+class="ptmr8t-x-x-120">TPS: A truncated power series package</span></h3>
+<a 
+ id="dx216-921001"></a>
+<a 
+ id="dx216-921002"></a>
+<a 
+ id="dx216-921003"></a>
+<!--l. 1309--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package implements formal Laurent series expansions in one variable using</span>
+<span 
+class="ptmr8t-x-x-120">the domain mechanism of REDUCE. This means that power series objects</span>
+<span 
+class="ptmr8t-x-x-120">can be added, multiplied, differentiated etc., like other first class objects</span>
+<span 
+class="ptmr8t-x-x-120">in the system. A lazy evaluation scheme is used and thus terms of the</span>
+<span 
+class="ptmr8t-x-x-120">series are not evaluated until they are required for printing or for use in</span>
+<span 
+class="ptmr8t-x-x-120">calculating terms in other power series. The series are extendible giving the</span>
+<span 
+class="ptmr8t-x-x-120">user the impression that the full infinite series is being manipulated. The</span>
+<span 
+class="ptmr8t-x-x-120">errors that can sometimes occur using series that are truncated at some</span>
+<span 
+class="ptmr8t-x-x-120">fixed depth (for example when a term in the required series depends on</span>
+<span 
+class="ptmr8t-x-x-120">terms of an intermediate series beyond the truncation depth) are thus</span>
+<span 
+class="ptmr8t-x-x-120">avoided.</span>
+<!--l. 1321--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Authors: Alan Barnes and Julian Padget.</span>
+<a 
+ id="dx216-921004"></a>
+<a 
+ id="dx216-921005"></a>
+<a 
+ id="dx216-921006"></a>
+<a 
+ id="dx216-921007"></a>
+<!--l. 4--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.1    </span></span> <a 
+ id="x216-92200016.69.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<a 
+ id="dx216-922001"></a>
+<!--l. 6--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package implements formal power series expansions in one variable using</span>
+<span 
+class="ptmr8t-x-x-120">the domain mechanism of REDUCE. This means that power series objects can be</span>
+<span 
+class="ptmr8t-x-x-120">added, multiplied, differentiated etc. like other first class objects in the system.</span>
+<span 
+class="ptmr8t-x-x-120">A lazy evaluation scheme is used in the package and thus terms of the</span>
+<span 
+class="ptmr8t-x-x-120">series are not evaluated until they are required for printing or for use in</span>
+<span 
+class="ptmr8t-x-x-120">calculating terms in other power series. The series are extendible giving the</span>
+<span 
+class="ptmr8t-x-x-120">user the impression that the full infinite series is being manipulated. The</span>
+<span 
+class="ptmr8t-x-x-120">errors that can sometimes occur using series that are truncated at some</span>
+<span 
+class="ptmr8t-x-x-120">fixed depth (for example when a term in the required series depends on</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">terms of an intermediate series beyond the truncation depth) are thus</span>
+<span 
+class="ptmr8t-x-x-120">avoided.</span>
+<!--l. 18--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Below we give a brief description of the operators available in the power series</span>
+<span 
+class="ptmr8t-x-x-120">package together with some examples of their use.</span>
+<!--l. 21--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.2    </span></span> <a 
+ id="x216-92300016.69.2"></a><span 
+class="ptmr8t-x-x-120">PS Operator</span></h4>
+<!--l. 23--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 25--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">PS</span><span 
+class="ptmr8t-x-x-120">(EXPRN:</span><span 
+class="ptmri8t-x-x-120">algebraic</span><span 
+class="ptmr8t-x-x-120">,DEPVAR:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">, ABOUT:</span><span 
+class="ptmri8t-x-x-120">algebraic</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">ps object</span>
+<a 
+ id="dx216-923001"></a>
+<!--l. 29--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">PS </span><span 
+class="ptmr8t-x-x-120">operator returns a power series object (a tagged domain element)</span>
+<span 
+class="ptmr8t-x-x-120">representing the univariate formal power series expansion of EXPRN with</span>
+<span 
+class="ptmr8t-x-x-120">respect to the dependent variable DEPVAR about the expansion point ABOUT.</span>
+<span 
+class="ptmr8t-x-x-120">EXPRN may itself contain power series objects.</span>
+<!--l. 35--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The algebraic expression ABOUT should simplify to an expression which is</span>
+<span 
+class="ptmr8t-x-x-120">independent of the dependent variable DEPVAR, otherwise an error will result. If</span>
+<span 
+class="ptmr8t-x-x-120">ABOUT is the identifier </span><span 
+class="pcrr8t-x-x-120">INFINITY </span><span 
+class="ptmr8t-x-x-120">then the power series expansion about</span>
+<span 
+class="ptmr8t-x-x-120">DEPVAR = </span><span 
+class="cmsy-10x-x-120">&#x221E; </span><span 
+class="ptmr8t-x-x-120">is obtained in ascending powers of 1/DEPVAR.</span>
+<a 
+ id="dx216-923002"></a>
+<!--l. 42--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the command is terminated by a semi-colon, a power series object representing</span>
+<span 
+class="ptmr8t-x-x-120">EXPRN is compiled and then a number of terms of the power series expansion</span>
+<span 
+class="ptmr8t-x-x-120">are evaluated and printed. The expansion is carried out as far as the value</span>
+<span 
+class="ptmr8t-x-x-120">specified by </span><span 
+class="pcrr8t-x-x-120">PSEXPLIM</span><span 
+class="ptmr8t-x-x-120">. If, subsequently, the value of </span><span 
+class="pcrr8t-x-x-120">PSEXPLIM </span><span 
+class="ptmr8t-x-x-120">is increased,</span>
+<span 
+class="ptmr8t-x-x-120">sufficient information is stored in the power series object to enable the</span>
+<span 
+class="ptmr8t-x-x-120">additional terms to be calculated without recalculating the terms already</span>
+<span 
+class="ptmr8t-x-x-120">obtained.</span>
+<!--l. 51--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the command is terminated by a dollar symbol, a power series object is</span>
+<span 
+class="ptmr8t-x-x-120">compiled, but at most one term is calculated at this stage.</span>
+<!--l. 54--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the function has a pole at the expansion point then the correct Laurent series</span>
+<span 
+class="ptmr8t-x-x-120">expansion will be produced.</span>
+<!--l. 57--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The following examples are valid uses of </span><span 
+class="pcrr8t-x-x-120">PS</span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1240">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;psexplim&#x00A0;6;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(log&#x00A0;x,x,1);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(e**(sin&#x00A0;x),x,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(x/(1+x),x,infinity);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(sin&#x00A0;x/(1-cos&#x00A0;x),x,0);
+</div>
+<!--l. 64--><p class="nopar" >
+<a 
+ id="dx216-923003"></a>
+<!--l. 67--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">New user-defined functions may be expanded provided the user provides LET</span>
+<span 
+class="ptmr8t-x-x-120">rules giving</span>
+<!--l. 70--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x216-923005x1"><span 
+class="ptmr8t-x-x-120">the value of the function at the expansion point</span>
+     </li>
+     <li 
+  class="enumerate" id="x216-923007x2"><span 
+class="ptmr8t-x-x-120">a differentiation rule for the new function.</span></li></ol>
+<!--l. 75--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For example</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1241">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;operator&#x00A0;sech;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;forall&#x00A0;x&#x00A0;let&#x00A0;df(sech&#x00A0;x,x)=&#x00A0;-&#x00A0;sech&#x00A0;x&#x00A0;*&#x00A0;tanh&#x00A0;x;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;sech&#x00A0;0&#x00A0;=&#x00A0;1;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(sech(x**2),x,0);
+</div>
+<!--l. 81--><p class="nopar" >
+<a 
+ id="dx216-923008"></a>
+<!--l. 84--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The power series expansion of an integral may also be obtained (even if</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE cannot evaluate the integral in closed form). An example of this</span>
+<span 
+class="ptmr8t-x-x-120">is</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1242">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(int(e**x/x,x),x,1);
+</div>
+<!--l. 90--><p class="nopar" >
+<!--l. 92--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Note that if the integration variable is the same as the expansion variable then</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE&#8217;s integration package is not called; if on the other hand the two</span>
+<span 
+class="ptmr8t-x-x-120">variables are different then the integrator is called to integrate each of the</span>
+<span 
+class="ptmr8t-x-x-120">coefficients in the power series expansion of the integrand. The constant of</span>
+<span 
+class="ptmr8t-x-x-120">integration is zero by default.</span>
+<!--l. 99--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.3    </span></span> <a 
+ id="x216-92400016.69.3"></a><span 
+class="ptmr8t-x-x-120">PSEXPLIM Operator</span></h4>
+<a 
+ id="dx216-924001"></a>
+<!--l. 102--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 104--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSEXPLIM</span><span 
+class="ptmr8t-x-x-120">(UPTO:</span><span 
+class="ptmri8t-x-x-120">integer</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">integer</span>
+<!--l. 106--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;                 or</span>
+<!--l. 108--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSEXPLIM</span><span 
+class="ptmr8t-x-x-120">():</span><span 
+class="ptmri8t-x-x-120">integer</span>
+<!--l. 110--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Calling this operator sets an internal variable of the TPS package to the value of</span>
+<span 
+class="ptmr8t-x-x-120">UPTO (which should evaluate to an integer).</span>
+<!--l. 113--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This internal variable controls how many terms of a power series are printed. The</span>
+<span 
+class="ptmr8t-x-x-120">value returned by </span><span 
+class="pcrr8t-x-x-120">PSEXPLIM </span><span 
+class="ptmr8t-x-x-120">is the previous value of this variable. The default</span>
+<span 
+class="ptmr8t-x-x-120">value is six.</span>
+<!--l. 117--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If </span><span 
+class="pcrr8t-x-x-120">PSEXPLIM </span><span 
+class="ptmr8t-x-x-120">is called with no argument, the current value for the expansion</span>
+<span 
+class="ptmr8t-x-x-120">limit is returned.</span>
+<!--l. 120--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.4    </span></span> <a 
+ id="x216-92500016.69.4"></a><span 
+class="ptmr8t-x-x-120">PSPRINTORDER Switch</span></h4>
+<a 
+ id="dx216-925001"></a>
+<a 
+ id="dx216-925002"></a>
+<a 
+ id="dx216-925003"></a>
+                                                                     
+
+                                                                     
+<!--l. 123--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 125--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">ON PSPRINTORDER</span>
+<!--l. 127--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;                 or</span>
+<!--l. 129--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">OFF PSPRINTORDER</span>
+<!--l. 131--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">When </span><span 
+class="pcrr8t-x-x-120">ON </span><span 
+class="ptmr8t-x-x-120">this switch causes the remainder of the power series to be printed in</span>
+<span 
+class="ptmr8t-x-x-120">big-O notation. Otherwise, three dots are printed. The default is </span><span 
+class="pcrr8t-x-x-120">ON</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 135--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.5    </span></span> <a 
+ id="x216-92600016.69.5"></a><span 
+class="ptmr8t-x-x-120">PSORDLIM Operator</span></h4>
+<a 
+ id="dx216-926001"></a>
+<!--l. 138--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 140--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSORDLIM</span><span 
+class="ptmr8t-x-x-120">(UPTO:</span><span 
+class="ptmri8t-x-x-120">integer</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">integer</span>
+<!--l. 142--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;                 or</span>
+<!--l. 144--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSORDLIM</span><span 
+class="ptmr8t-x-x-120">():</span><span 
+class="ptmri8t-x-x-120">integer</span>
+<!--l. 146--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">An internal variable is set to the value of </span><span 
+class="pcrr8t-x-x-120">UPTO </span><span 
+class="ptmr8t-x-x-120">(which should evaluate to an</span>
+<span 
+class="ptmr8t-x-x-120">integer). The value returned is the previous value of the variable. The default</span>
+<span 
+class="ptmr8t-x-x-120">value is 15.</span>
+<!--l. 150--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If </span><span 
+class="pcrr8t-x-x-120">PSORDLIM </span><span 
+class="ptmr8t-x-x-120">is called with no argument, the current value is returned.</span>
+<!--l. 153--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The significance of this control is that the system attempts to find the order of the</span>
+<span 
+class="ptmr8t-x-x-120">power series required, that is the order is the degree of the first non-zero term in</span>
+<span 
+class="ptmr8t-x-x-120">the power series. If the order is greater than the value of this variable an error</span>
+<span 
+class="ptmr8t-x-x-120">message is given and the computation aborts. This prevents infinite loops in</span>
+<span 
+class="ptmr8t-x-x-120">examples such as</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1243">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(1&#x00A0;-&#x00A0;(sin&#x00A0;x)**2&#x00A0;-&#x00A0;(cos&#x00A0;x)**2,x,0);
+</div>
+<!--l. 162--><p class="nopar" >
+<!--l. 164--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">where the expression being expanded is identically zero, but is not recognized as</span>
+<span 
+class="ptmr8t-x-x-120">such by REDUCE.</span>
+<!--l. 168--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.6    </span></span> <a 
+ id="x216-92700016.69.6"></a><span 
+class="ptmr8t-x-x-120">PSTERM Operator</span></h4>
+<a 
+ id="dx216-927001"></a>
+<!--l. 171--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 173--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSTERM</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">, NTH:</span><span 
+class="ptmri8t-x-x-120">integer</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">algebraic</span>
+<!--l. 176--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">PSTERM </span><span 
+class="ptmr8t-x-x-120">returns the NTH term of the existing power series object</span>
+<span 
+class="ptmr8t-x-x-120">TPS. If NTH does not evaluate to an integer or TPS to a power series object</span>
+<span 
+class="ptmr8t-x-x-120">an error results. It should be noted that an integer is treated as a power</span>
+<span 
+class="ptmr8t-x-x-120">series.</span>
+<!--l. 182--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.7    </span></span> <a 
+ id="x216-92800016.69.7"></a><span 
+class="ptmr8t-x-x-120">PSORDER Operator</span></h4>
+<a 
+ id="dx216-928001"></a>
+<!--l. 185--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 187--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSORDER</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">integer</span>
+<!--l. 189--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">PSORDER </span><span 
+class="ptmr8t-x-x-120">returns the order, that is the degree of the first non-zero</span>
+<span 
+class="ptmr8t-x-x-120">term, of the power series object TPS. TPS should evaluate to a power series</span>
+<span 
+class="ptmr8t-x-x-120">object or an error results. If TPS is zero, the identifier </span><span 
+class="pcrr8t-x-x-120">UNDEFINED </span><span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">returned.</span>
+<!--l. 194--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.8    </span></span> <a 
+ id="x216-92900016.69.8"></a><span 
+class="ptmr8t-x-x-120">PSSETORDER Operator</span></h4>
+                                                                     
+
+                                                                     
+<a 
+ id="dx216-929001"></a>
+<!--l. 197--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 199--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSSETORDER</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">, ORD:</span><span 
+class="ptmri8t-x-x-120">integer</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">integer</span>
+<!--l. 202--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">PSSETORDER </span><span 
+class="ptmr8t-x-x-120">sets the order of the power series TPS to the value</span>
+<span 
+class="ptmr8t-x-x-120">ORD, which should evaluate to an integer. If TPS does not evaluate to a power</span>
+<span 
+class="ptmr8t-x-x-120">series object, then an error occurs. The value returned by this operator is the</span>
+<span 
+class="ptmr8t-x-x-120">previous order of TPS, or 0 if the order of TPS was undefined. This operator is</span>
+<span 
+class="ptmr8t-x-x-120">useful for setting the order of the power series of a function defined by a</span>
+<span 
+class="ptmr8t-x-x-120">differential equation in cases where the power series package is inadequate to</span>
+<span 
+class="ptmr8t-x-x-120">determine the order automatically.</span>
+<!--l. 212--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.9    </span></span> <a 
+ id="x216-93000016.69.9"></a><span 
+class="ptmr8t-x-x-120">PSDEPVAR Operator</span></h4>
+<a 
+ id="dx216-930001"></a>
+<!--l. 215--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 217--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSDEPVAR</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">) :</span><span 
+class="ptmri8t-x-x-120">identifier</span>
+<!--l. 220--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">PSDEPVAR </span><span 
+class="ptmr8t-x-x-120">returns the expansion variable of the power series</span>
+<span 
+class="ptmr8t-x-x-120">object TPS. TPS should evaluate to a power series object or an integer,</span>
+<span 
+class="ptmr8t-x-x-120">otherwise an error results. If TPS is an integer, the identifier </span><span 
+class="pcrr8t-x-x-120">UNDEFINED </span><span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">returned.</span>
+<!--l. 225--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.10    </span></span> <a 
+ id="x216-93100016.69.10"></a><span 
+class="ptmr8t-x-x-120">PSEXPANSIONPT operator</span></h4>
+<a 
+ id="dx216-931001"></a>
+<!--l. 228--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 230--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSEXPANSIONPT</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">algebraic</span>
+<!--l. 233--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">PSEXPANSIONPT </span><span 
+class="ptmr8t-x-x-120">returns the expansion point of the power series</span>
+<span 
+class="ptmr8t-x-x-120">object TPS. TPS should evaluate to a power series object or an integer,</span>
+<span 
+class="ptmr8t-x-x-120">otherwise an error results. If TPS is integer, the identifier </span><span 
+class="pcrr8t-x-x-120">UNDEFINED </span><span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">returned. If the expansion is about infinity, the identifier </span><span 
+class="pcrr8t-x-x-120">INFINITY </span><span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">returned.</span>
+                                                                     
+
+                                                                     
+<!--l. 240--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.11    </span></span> <a 
+ id="x216-93200016.69.11"></a><span 
+class="ptmr8t-x-x-120">PSFUNCTION Operator</span></h4>
+<a 
+ id="dx216-932001"></a>
+<!--l. 243--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 245--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSFUNCTION</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">algebraic</span>
+<!--l. 248--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">PSFUNCTION </span><span 
+class="ptmr8t-x-x-120">returns the function whose expansion gave rise to</span>
+<span 
+class="ptmr8t-x-x-120">the power series object TPS. TPS should evaluate to a power series object or an</span>
+<span 
+class="ptmr8t-x-x-120">integer, otherwise an error results.</span>
+<!--l. 253--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.12    </span></span> <a 
+ id="x216-93300016.69.12"></a><span 
+class="ptmr8t-x-x-120">PSCHANGEVAR Operator</span></h4>
+<a 
+ id="dx216-933001"></a>
+<!--l. 256--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 258--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSCHANGEVAR</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">, X:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">power series</span>
+<span 
+class="ptmri8t-x-x-120">object</span>
+<!--l. 261--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">PSCHANGEVAR </span><span 
+class="ptmr8t-x-x-120">changes the dependent variable of the power series</span>
+<span 
+class="ptmr8t-x-x-120">object TPS to the variable X. TPS should evaluate to a power series object and X</span>
+<span 
+class="ptmr8t-x-x-120">to a kernel, otherwise an error results. Also X should not appear as a</span>
+<span 
+class="ptmr8t-x-x-120">parameter in TPS. The power series with the new dependent variable is</span>
+<span 
+class="ptmr8t-x-x-120">returned.</span>
+<!--l. 268--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.13    </span></span> <a 
+ id="x216-93400016.69.13"></a><span 
+class="ptmr8t-x-x-120">PSREVERSE Operator</span></h4>
+<a 
+ id="dx216-934001"></a>
+<!--l. 271--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 273--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSREVERSE</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series object</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">power series</span>
+<!--l. 276--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Power series reversion. The power series TPS is functionally inverted. Four cases</span>
+<span 
+class="ptmr8t-x-x-120">arise:</span>
+<!--l. 279--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x216-934003x1"><span 
+class="ptmr8t-x-x-120">If the order of the series is 1, then the expansion point of the inverted</span>
+     <span 
+class="ptmr8t-x-x-120">series is 0.</span>
+                                                                     
+
+                                                                     
+     </li>
+     <li 
+  class="enumerate" id="x216-934005x2"><span 
+class="ptmr8t-x-x-120">If the order is 0 </span><span 
+class="ptmri8t-x-x-120">and </span><span 
+class="ptmr8t-x-x-120">if the first order term in TPS is non-zero, then the</span>
+     <span 
+class="ptmr8t-x-x-120">expansion point of the inverted series is taken to be the coefficient of</span>
+     <span 
+class="ptmr8t-x-x-120">the zeroth order term in TPS.</span>
+     </li>
+     <li 
+  class="enumerate" id="x216-934007x3"><span 
+class="ptmr8t-x-x-120">If the order is -1 the expansion point of the inverted series is the point</span>
+     <span 
+class="ptmr8t-x-x-120">at infinity. In all other cases a REDUCE error is reported because the</span>
+     <span 
+class="ptmr8t-x-x-120">series cannot be inverted as a power series. Puiseux</span> <a 
+ id="dx216-934008"></a><span 
+class="ptmr8t-x-x-120">expansion would</span>
+     <span 
+class="ptmr8t-x-x-120">be required to handle these cases.</span>
+     </li>
+     <li 
+  class="enumerate" id="x216-934010x4"><span 
+class="ptmr8t-x-x-120">If the expansion point of TPS is finite it becomes the zeroth order term</span>
+     <span 
+class="ptmr8t-x-x-120">in the inverted series. For expansion about 0 or the point at infinity the</span>
+     <span 
+class="ptmr8t-x-x-120">order of the inverted series is one.</span></li></ol>
+<!--l. 298--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If TPS is not a power series object after evaluation an error results.</span>
+<!--l. 300--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Here are some examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1244">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(sin&#x00A0;x,x,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;psreverse(ws);&#x00A0;%&#x00A0;produces&#x00A0;series&#x00A0;for&#x00A0;asin&#x00A0;x&#x00A0;about&#x00A0;x=0.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(exp&#x00A0;x,x,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;psreverse&#x00A0;ws;&#x00A0;%&#x00A0;produces&#x00A0;series&#x00A0;for&#x00A0;log&#x00A0;x&#x00A0;about&#x00A0;x=1.
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ps(sin(1/x),x,infinity);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;psreverse(ws);&#x00A0;%&#x00A0;series&#x00A0;for&#x00A0;1/asin(x)&#x00A0;about&#x00A0;x=0.
+</div>
+<!--l. 308--><p class="nopar" >
+<!--l. 310--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.14    </span></span> <a 
+ id="x216-93500016.69.14"></a><span 
+class="ptmr8t-x-x-120">PSCOMPOSE Operator</span></h4>
+<a 
+ id="dx216-935001"></a>
+<!--l. 313--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 315--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSCOMPOSE</span><span 
+class="ptmr8t-x-x-120">(TPS1:</span><span 
+class="ptmri8t-x-x-120">power series</span><span 
+class="ptmr8t-x-x-120">, TPS2:</span><span 
+class="ptmri8t-x-x-120">power series</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">power</span>
+<span 
+class="ptmri8t-x-x-120">series</span>
+<a 
+ id="dx216-935002"></a>
+<!--l. 319--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">PSCOMPOSE </span><span 
+class="ptmr8t-x-x-120">performs power series composition. The power series TPS1 and</span>
+<span 
+class="ptmr8t-x-x-120">TPS2 are functionally composed. That is to say that TPS2 is substituted for the</span>
+<span 
+class="ptmr8t-x-x-120">expansion variable in TPS1 and the result expressed as a power series. The</span>
+<span 
+class="ptmr8t-x-x-120">dependent variable and expansion point of the result coincide with those of</span>
+<span 
+class="ptmr8t-x-x-120">TPS2. The following conditions apply to power series composition:</span>
+<!--l. 327--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x216-935004x1"><span 
+class="ptmr8t-x-x-120">If the expansion point of TPS1 is 0 then the order of the TPS2 must</span>
+     <span 
+class="ptmr8t-x-x-120">be at least 1.</span>
+     </li>
+     <li 
+  class="enumerate" id="x216-935006x2"><span 
+class="ptmr8t-x-x-120">If the expansion point of TPS1 is finite, it should coincide with the</span>
+     <span 
+class="ptmr8t-x-x-120">coefficient of the zeroth order term in TPS2. The order of TPS2 should</span>
+     <span 
+class="ptmr8t-x-x-120">also be non-negative in this case.</span>
+     </li>
+     <li 
+  class="enumerate" id="x216-935008x3"><span 
+class="ptmr8t-x-x-120">If the expansion point of TPS1 is the point at infinity then the order of</span>
+     <span 
+class="ptmr8t-x-x-120">TPS2 must be less than or equal to -1.</span>
+                                                                     
+
+                                                                     
+     </li></ol>
+<!--l. 340--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If these conditions do not hold the series cannot be composed (with the current</span>
+<span 
+class="ptmr8t-x-x-120">algorithm terms of the inverted series would involve infinite sums) and a</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE error occurs.</span>
+<!--l. 344--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Examples of power series composition include the following.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1245">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;a:=ps(exp&#x00A0;y,y,0);&#x00A0;&#x00A0;b:=ps(sin&#x00A0;x,x,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pscompose(a,b);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Produces&#x00A0;the&#x00A0;power&#x00A0;series&#x00A0;expansion&#x00A0;of&#x00A0;exp(sin&#x00A0;x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;about&#x00A0;x=0.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;a:=ps(exp&#x00A0;z,z,1);&#x00A0;b:=ps(cos&#x00A0;x,x,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pscompose(a,b);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Produces&#x00A0;the&#x00A0;power&#x00A0;series&#x00A0;expansion&#x00A0;of&#x00A0;exp(cos&#x00A0;x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;about&#x00A0;x=0.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;a:=ps(cos(1/x),x,infinity);&#x00A0;&#x00A0;b:=ps(1/sin&#x00A0;x,x,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pscompose(a,b);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Produces&#x00A0;the&#x00A0;power&#x00A0;series&#x00A0;expansion&#x00A0;of&#x00A0;cos(sin&#x00A0;x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;about&#x00A0;x=0.
+</div>
+<!--l. 361--><p class="nopar" >
+<!--l. 363--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.15    </span></span> <a 
+ id="x216-93600016.69.15"></a><span 
+class="ptmr8t-x-x-120">PSSUM Operator</span></h4>
+<a 
+ id="dx216-936001"></a>
+<!--l. 366--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:118;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSSUM</span><span 
+class="ptmr8t-x-x-120">(</span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">J:</span><span 
+class="ptmri8t-x-x-120">kernel </span><span 
+class="ptmr8t-x-x-120">= LOWLIM:</span><span 
+class="ptmri8t-x-x-120">integer</span><span 
+class="ptmr8t-x-x-120">, COEFF:</span><span 
+class="ptmri8t-x-x-120">algebraic</span><span 
+class="ptmr8t-x-x-120">, X:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">,</span>
+</td></tr></table>
+<!--l. 370--><p class="noindent" >     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:118;" 
+class="tabbing">                          </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">ABOUT:</span><span 
+class="ptmri8t-x-x-120">algebraic</span><span 
+class="ptmr8t-x-x-120">, POWER:</span><span 
+class="ptmri8t-x-x-120">algebraic</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">power series</span></td></tr></table>
+<!--l. 372--><p class="noindent" >
+<!--l. 374--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The formal power series sum for J from LOWLIM to </span><span 
+class="pcrr8t-x-x-120">INFINITY </span><span 
+class="ptmr8t-x-x-120">of</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1246">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;COEFF*(X-ABOUT)**POWER
+</div>
+<!--l. 378--><p class="nopar" >
+<!--l. 380--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">or if ABOUT is given as </span><span 
+class="pcrr8t-x-x-120">INFINITY</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1247">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;COEFF*(1/X)**POWER
+</div>
+<!--l. 384--><p class="nopar" >
+<!--l. 386--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is constructed and returned. This enables power series whose general term is</span>
+<span 
+class="ptmr8t-x-x-120">known to be constructed and manipulated using the other procedures of the</span>
+<span 
+class="ptmr8t-x-x-120">power series package.</span>
+<!--l. 390--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">J and X should be distinct simple kernels. The algebraics ABOUT, COEFF and</span>
+<span 
+class="ptmr8t-x-x-120">POWER should not depend on the expansion variable X, similarly the algebraic</span>
+<span 
+class="ptmr8t-x-x-120">ABOUT should not depend on the summation variable J. The algebraic POWER</span>
+<span 
+class="ptmr8t-x-x-120">should be a strictly increasing integer valued function of J for J in the range</span>
+<span 
+class="ptmr8t-x-x-120">LOWLIM to </span><span 
+class="pcrr8t-x-x-120">INFINITY</span><span 
+class="ptmr8t-x-x-120">.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1248">
+&#x00A0;&#x00A0;&#x00A0;pssum(n=0,1,x,0,n*n);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Produces&#x00A0;the&#x00A0;power&#x00A0;series&#x00A0;summation&#x00A0;for&#x00A0;n=0&#x00A0;to
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;infinity&#x00A0;of&#x00A0;x**(n*n).
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;pssum(m=1,(-1)**(m-1)/(2m-1),y,1,2m-1);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Produces&#x00A0;the&#x00A0;power&#x00A0;series&#x00A0;expansion&#x00A0;of&#x00A0;atan(y-1)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;about&#x00A0;y=1.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;pssum(j=1,-1/j,x,infinity,j);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Produces&#x00A0;the&#x00A0;power&#x00A0;series&#x00A0;expansion&#x00A0;of&#x00A0;log(1-1/x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;about&#x00A0;the&#x00A0;point&#x00A0;at&#x00A0;infinity.
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;pssum(n=0,1,x,0,2n**2+3n)&#x00A0;+&#x00A0;pssum(n=1,1,x,0,2n**2-3n);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Produces&#x00A0;the&#x00A0;power&#x00A0;series&#x00A0;summation&#x00A0;for&#x00A0;n=-infinity
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;to&#x00A0;+infinity&#x00A0;of&#x00A0;x**(2n**2+3n).
+</div>
+<!--l. 413--><p class="nopar" >
+<!--l. 416--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.16    </span></span> <a 
+ id="x216-93700016.69.16"></a><span 
+class="ptmr8t-x-x-120">PSTAYLOR Operator</span></h4>
+<a 
+ id="dx216-937001"></a>
+<!--l. 419--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 421--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">PSTAYLOR</span><span 
+class="ptmr8t-x-x-120">(EXPRN:</span><span 
+class="ptmri8t-x-x-120">algebraic</span><span 
+class="ptmr8t-x-x-120">,DEPVAR:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">, ABOUT:</span><span 
+class="ptmri8t-x-x-120">algebraic</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">ps</span>
+<span 
+class="ptmri8t-x-x-120">object</span>
+<!--l. 424--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">PSTAYLOR </span><span 
+class="ptmr8t-x-x-120">operator returns a power series object (a tagged domain</span>
+<span 
+class="ptmr8t-x-x-120">element) representing the univariate formal Taylor series expansion of EXPRN</span>
+<span 
+class="ptmr8t-x-x-120">with respect to the dependent variable DEPVAR about the expansion point</span>
+<span 
+class="ptmr8t-x-x-120">ABOUT. Unlike the operator PS it directly evaluates the nth derivative of the</span>
+<span 
+class="ptmr8t-x-x-120">expression EXPRN wrt the variable DEPVAR at the expansion point ABOUT to</span>
+<span 
+class="ptmr8t-x-x-120">find the nth term of the series. Poles (and other singularities) at the expansion</span>
+<span 
+class="ptmr8t-x-x-120">point will cause an error &#8211; PS and TAYLOR are more robust in this respect.</span>
+<span 
+class="ptmr8t-x-x-120">The PSTAYLOR operator may be useful in contexts where PS fails to</span>
+<span 
+class="ptmr8t-x-x-120">build a suitable recurrence relation automatically and reports too deep a</span>
+<span 
+class="ptmr8t-x-x-120">recursion in </span><span 
+class="pcrr8t-x-x-120">ps!:unknown!-crule</span><span 
+class="ptmr8t-x-x-120">. A typical example is the expansion</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">of the </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function about an expansion point which is not a non-positive</span>
+<span 
+class="ptmr8t-x-x-120">integer.</span>
+<!--l. 437--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The algebraic expression ABOUT should simplify to an expression which is</span>
+<span 
+class="ptmr8t-x-x-120">independent of the dependent variable DEPVAR, otherwise an error will</span>
+<span 
+class="ptmr8t-x-x-120">result.</span>
+<!--l. 441--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If ABOUT is the identifier </span><span 
+class="pcrr8t-x-x-120">INFINITY </span><span 
+class="ptmr8t-x-x-120">then the power series expansion about</span>
+<span 
+class="ptmr8t-x-x-120">DEPVAR = </span><span 
+class="cmsy-10x-x-120">&#x221E; </span><span 
+class="ptmr8t-x-x-120">is obtained in ascending powers of 1/DEPVAR.</span>
+<!--l. 446--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.17    </span></span> <a 
+ id="x216-93800016.69.17"></a><span 
+class="ptmr8t-x-x-120">PSCOPY Operator</span></h4>
+<a 
+ id="dx216-938001"></a>
+<!--l. 449--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 451--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSCOPY</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series</span><span 
+class="ptmr8t-x-x-120">):</span><span 
+class="ptmri8t-x-x-120">power series</span>
+<!--l. 453--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This procedure returns a copy of the power series </span><span 
+class="pcrr8t-x-x-120">TPS</span><span 
+class="ptmr8t-x-x-120">. The copy has no shared</span>
+<span 
+class="ptmr8t-x-x-120">sub-structures in common with the original series. This enables substitutions to</span>
+<span 
+class="ptmr8t-x-x-120">be performed on the series without side-effects on previously computed objects.</span>
+<span 
+class="ptmr8t-x-x-120">For example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1249">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;clear&#x00A0;a;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;:=&#x00A0;ps(sin(a*x)),&#x00A0;x,&#x00A0;0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;where&#x00A0;a&#x00A0;=&#x003E;&#x00A0;1;
+</div>
+<!--l. 462--><p class="nopar" >
+<!--l. 464--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">will result in </span><span 
+class="pcrr8t-x-x-120">a </span><span 
+class="ptmr8t-x-x-120">being set to 1 in each of the terms of the power series and the</span>
+<span 
+class="ptmr8t-x-x-120">resulting expressions being simplified. Owing to the way power series objects are</span>
+<span 
+class="ptmr8t-x-x-120">implemented using Lisp vectors, this has the side-effect that the value of </span><span 
+class="pcrr8t-x-x-120">b </span><span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">changed. This may be avoided by copying the series with </span><span 
+class="pcrr8t-x-x-120">PSCOPY </span><span 
+class="ptmr8t-x-x-120">before</span>
+<span 
+class="ptmr8t-x-x-120">applying the substitution, thus:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1250">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;:=&#x00A0;ps(sin(a*x)),&#x00A0;x,&#x00A0;0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pscopy&#x00A0;b&#x00A0;where&#x00A0;a&#x00A0;=&#x003E;&#x00A0;1;
+</div>
+<!--l. 474--><p class="nopar" >
+<!--l. 476--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.18    </span></span> <a 
+ id="x216-93900016.69.18"></a><span 
+class="ptmr8t-x-x-120">PSTRUNCATE Operator</span></h4>
+<a 
+ id="dx216-939001"></a>
+<!--l. 479--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 481--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">PSTRUNCATE</span><span 
+class="ptmr8t-x-x-120">(TPS:</span><span 
+class="ptmri8t-x-x-120">power series </span><span 
+class="ptmr8t-x-x-120">POWER: </span><span 
+class="ptmri8t-x-x-120">integer) </span><span 
+class="ptmr8t-x-x-120">:</span><span 
+class="ptmri8t-x-x-120">algebraic</span>
+<!--l. 484--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This procedure truncates the power series </span><span 
+class="pcrr8t-x-x-120">TPS </span><span 
+class="ptmr8t-x-x-120">discarding terms of order higher</span>
+<span 
+class="ptmr8t-x-x-120">than </span><span 
+class="pcrr8t-x-x-120">POWER</span><span 
+class="ptmr8t-x-x-120">. The series is extended automtically if the value of </span><span 
+class="pcrr8t-x-x-120">POWER </span><span 
+class="ptmr8t-x-x-120">is greater</span>
+<span 
+class="ptmr8t-x-x-120">than the order of last term calculated to date.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1251">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;:=&#x00A0;ps(sin&#x00A0;x,&#x00A0;x,&#x00A0;0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;a&#x00A0;:=&#x00A0;pstruncate(b,&#x00A0;11);
+</div>
+<!--l. 492--><p class="nopar" >
+<!--l. 494--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">will result in </span><span 
+class="pcrr8t-x-x-120">a </span><span 
+class="ptmr8t-x-x-120">being set to the eleventh order polynomial resulting in truncating</span>
+<span 
+class="ptmr8t-x-x-120">the series for </span><span 
+class="cmmi-12">sinx </span><span 
+class="ptmr8t-x-x-120">after the term involving </span><span 
+class="cmmi-12">x</span><sup><span 
+class="cmr-8">11</span></sup><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 498--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If </span><span 
+class="pcrr8t-x-x-120">POWER </span><span 
+class="ptmr8t-x-x-120">is less than the order of the series then </span><span 
+class="cmr-12">0 </span><span 
+class="ptmr8t-x-x-120">is returned. If </span><span 
+class="pcrr8t-x-x-120">POWER </span><span 
+class="ptmr8t-x-x-120">does not</span>
+<span 
+class="ptmr8t-x-x-120">simplify to an integer or if </span><span 
+class="pcrr8t-x-x-120">TPS </span><span 
+class="ptmr8t-x-x-120">is not a power series object then Reduce errors</span>
+<span 
+class="ptmr8t-x-x-120">result.</span>
+<!--l. 502--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.19    </span></span> <a 
+ id="x216-94000016.69.19"></a><span 
+class="ptmr8t-x-x-120">Arithmetic Operations</span></h4>
+<a 
+ id="dx216-940001"></a>
+<!--l. 505--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">As power series objects are domain elements they may be combined together</span>
+<span 
+class="ptmr8t-x-x-120">in algebraic expressions in algebraic mode of REDUCE in the normal</span>
+<span 
+class="ptmr8t-x-x-120">way.</span>
+<!--l. 509--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For example if A and B are power series objects then the commands such</span>
+<span 
+class="ptmr8t-x-x-120">as:</span>
+<a 
+ id="dx216-940002"></a>
+<a 
+ id="dx216-940003"></a>
+<a 
+ id="dx216-940004"></a>
+<a 
+ id="dx216-940005"></a>
+<a 
+ id="dx216-940006"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1252">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;a*b;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;a/b;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;a**2+b**2;
+</div>
+<!--l. 521--><p class="nopar" >
+<!--l. 523--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">will produce power series objects representing the product,quotient and the sum</span>
+<span 
+class="ptmr8t-x-x-120">of the squares of the power series objects A and B respectively.</span>
+<!--l. 527--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.20    </span></span> <a 
+ id="x216-94100016.69.20"></a><span 
+class="ptmr8t-x-x-120">Differentiation</span></h4>
+<a 
+ id="dx216-941001"></a>
+<!--l. 530--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If A is a power series object depending on X then the input </span><span 
+class="pcrr8t-x-x-120">df(a, x); </span><span 
+class="ptmr8t-x-x-120">will</span>
+<span 
+class="ptmr8t-x-x-120">produce the power series expansion of the derivative of A with respect to</span>
+<span 
+class="ptmr8t-x-x-120">X.</span>
+<!--l. 534--><p class="noindent" ><span 
+class="ptmri8t-x-x-120">Note </span><span 
+class="ptmr8t-x-x-120">however that currently the input </span><span 
+class="pcrr8t-x-x-120">int(a, x); </span><span 
+class="ptmr8t-x-x-120">will not work as intended;</span>
+<span 
+class="ptmr8t-x-x-120">instead one must input </span><span 
+class="pcrr8t-x-x-120">ps(int(a, x),x,0); </span><span 
+class="ptmr8t-x-x-120">in order to obtain the power</span>
+<span 
+class="ptmr8t-x-x-120">series expansion of the integral of </span><span 
+class="pcrr8t-x-x-120">a</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 540--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.69.21    </span></span> <a 
+ id="x216-94200016.69.21"></a><span 
+class="ptmr8t-x-x-120">Restrictions and Known Bugs</span></h4>
+<!--l. 542--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If A is a power series object and X is a variable which evaluates to itself then</span>
+<span 
+class="ptmr8t-x-x-120">currently expressions such as </span><span 
+class="pcrr8t-x-x-120">a*x </span><span 
+class="ptmr8t-x-x-120">do not evaluate to a single power series</span>
+<span 
+class="ptmr8t-x-x-120">object (although the result is formally valid). Instead use </span><span 
+class="pcrr8t-x-x-120">ps(a*x,x,0)</span>
+<span 
+class="ptmri8t-x-x-120">etc.</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 547--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Similarly expressions such as </span><span 
+class="pcrr8t-x-x-120">sin(A) </span><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="pcrr8t-x-x-120">A </span><span 
+class="ptmr8t-x-x-120">is a PS object currently will not</span>
+<span 
+class="ptmr8t-x-x-120">be expanded. For example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1253">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;a:=ps(1/(1+x),x,0);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;b:=sin&#x00A0;a;
+</div>
+<!--l. 553--><p class="nopar" >
+<!--l. 555--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">will not expand </span><span 
+class="pcrr8t-x-x-120">sin(1/(1+x)) </span><span 
+class="ptmr8t-x-x-120">as a power series. In fact</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1254">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SIN(1&#x00A0;-&#x00A0;X&#x00A0;+&#x00A0;X**2&#x00A0;-&#x00A0;X**3&#x00A0;+&#x00A0;.....)
+</div>
+<!--l. 559--><p class="nopar" >
+<!--l. 561--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">will be returned. However,</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1255">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;b:=ps(sin(a),x,0);
+</div>
+<!--l. 565--><p class="nopar" >
+<!--l. 567--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">or</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1256">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;b:=ps(sin(1/(1+x)),x,0);
+</div>
+<!--l. 571--><p class="nopar" >
+<!--l. 573--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">should work as intended.</span>
+<!--l. 575--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The handling of functions with essential singularities is currently erratic: usually</span>
+<span 
+class="ptmr8t-x-x-120">an error message</span>
+<!--l. 578--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">***** Essential Singularity</span>
+<!--l. 580--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">or</span>
+<!--l. 582--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;         </span><span 
+class="pcrr8t-x-x-120">***** Logarithmic Singularity</span>
+<!--l. 584--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">occurs but occasionally a division by zero error or some drastic error like (for</span>
+<span 
+class="ptmr8t-x-x-120">PSL) binding stack overflow may occur.</span>
+<!--l. 588--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">There is no simple way to write the results of power series calculation to a file</span>
+<span 
+class="ptmr8t-x-x-120">and read them back into REDUCE at a later stage.</span>
+<!--l. 1325--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1327--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse160.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse161.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse159.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse159.html#tailmanualse159.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse160.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse160.html"></a>   
+</body></html> 

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The Pochhammer Notation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse39.html" >Up</a></td><td class="clinks"><a 
+href="manualse40.html" >Next</a></td><td class="clinks"><a 
+href="manualse38.html" >Prev</a></td><td class="clinks"><a 
+href="manualse38.html#tailmanualse38.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse39.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.13    </span> <a 
+ id="x50-870007.13"></a>The Pochhammer Notation</h3>
+<a 
+ id="dx50-87001"></a>
+<a 
+ id="dx50-87002"></a>
+<a 
+ id="dx50-87003"></a>
+<!--l. 1108--><p class="noindent" >The Pochhammer notation <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">)</span><sub><span 
+class="cmmi-8">k</span></sub> (also called Pochhammer&#8217;s symbol) is supported by the
+binary operator <span 
+class="pcrr8t-x-x-109">POCHHAMMER(A,K)</span>. For a non-negative integer <span 
+class="cmmi-10x-x-109">k</span>, it is defined as
+(<a 
+href="http://dlmf.nist.gov/5.2.iii" class="url" ><span 
+class="pcrr8t-x-x-109">http://dlmf.nist.gov/5.2.iii</span></a>)
+<table 
+class="align-star">
+                 <tr><td 
+class="align-odd"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">)</span><sub><span 
+class="cmr-8">0</span></sub></td>                 <td 
+class="align-even"> <span 
+class="cmr-10x-x-109">= 1</span><span 
+class="cmmi-10x-x-109">,</span></td>                                           <td 
+class="align-label"></td>                 <td 
+class="align-label">
+                 </td></tr><tr><td 
+class="align-odd"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">)</span><sub><span 
+class="cmmi-8">k</span></sub></td>                 <td 
+class="align-even"> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">+ 1)(</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">+ 2)</span><img 
+src="manual21x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1)</span><span 
+class="cmmi-10x-x-109">.</span></td>                 <td 
+class="align-label"></td>                 <td 
+class="align-label">
+</td></tr><tr><td colspan="4" class="intertext">For <span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmsy-10x-x-109">&#x2044;</span><span 
+class="cmr-10x-x-109">= 0</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">±</span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">±</span><span 
+class="cmr-10x-x-109">2</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span style="margin-left:0.3em" class="thinspace"></span>, this is equivalent to</td></tr><tr><td>
+                 </td></tr><tr><td 
+class="align-odd"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">)</span><sub><span 
+class="cmmi-8">k</span></sub></td>                 <td 
+class="align-even"> <span 
+class="cmr-10x-x-109">=</span> <img 
+src="manual22x.png" alt="&#x0393; (a+-k-)
+ &#x0393; (a)"  class="frac" align="middle"></td>                                    <td 
+class="align-label"></td>                 <td 
+class="align-label"></td></tr></table>
+<!--l. 1116--><p class="noindent" >With <span 
+class="pcrr8t-x-x-109">ROUNDED </span>off, this expression is evaluated numerically if <span 
+class="cmmi-10x-x-109">a </span>and <span 
+class="cmmi-10x-x-109">k </span>are both integral,
+and otherwise may be simplified where appropriate. The simplification rules are based
+upon algorithms supplied by Wolfram Koepf.
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1122--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse39.html" >Up</a></td><td class="clinks"><a 
+href="manualse40.html" >Next</a></td><td class="clinks"><a 
+href="manualse38.html" >Prev</a></td><td class="clinks"><a 
+href="manualse38.html#tailmanualse38.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse39.html" >Front</a></td></tr></table><a 
+ id="tailmanualse39.html"></a>  
+</body></html> 

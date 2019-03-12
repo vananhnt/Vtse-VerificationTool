@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>20 Maintaining REDUCE</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch20.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualap1.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualch19.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualch19.html#tailmanualch19.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualch20.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h2 class="ChapterHead"> <span 
+class="ptmr8t-x-x-120">20</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+ id="x253-104800020"></a><span 
+class="ptmr8t-x-x-120">Maintaining REDUCE</span></h2>
+<!--l. 3--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Since January 1, 2009 REDUCE is Open Source Software. It is hosted</span>
+<span 
+class="ptmr8t-x-x-120">at</span>
+     <div class="quote">
+     <!--l. 5--><p class="noindent" ><a 
+href="http://reduce-algebra.sourceforge.net/" class="url" ><span 
+class="pcrr8t-x-x-120">http://reduce-algebra.sourceforge.net/</span></a></div>
+<!--l. 7--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">We mention here three ways in which REDUCE is maintained. The first is the</span>
+<span 
+class="ptmr8t-x-x-120">collection of queries, observations and bug-reports. All users are encouraged to</span>
+<span 
+class="ptmr8t-x-x-120">subscribe to the </span><a 
+href="https://sourceforge.net/mail/?group_id=248416" ><span 
+class="ptmr8t-x-x-120">mailing list</span></a> <span 
+class="ptmr8t-x-x-120">that Sourceforge.net provides so that they will</span>
+<span 
+class="ptmr8t-x-x-120">receive information about updates and concerns. Also on SourceForge there is a</span>
+<a 
+href="https://sourceforge.net/tracker/?group_id=248416" ><span 
+class="ptmr8t-x-x-120">bug tracker</span></a> <span 
+class="ptmr8t-x-x-120">and a </span><a 
+href="https://sourceforge.net/forum/?group_id=248416" ><span 
+class="ptmr8t-x-x-120">forum</span></a><span 
+class="ptmr8t-x-x-120">. The expectation is that the maintainers and keen users</span>
+<span 
+class="ptmr8t-x-x-120">of REDUCE will monitor those and try to respond to issues. However these</span>
+<span 
+class="ptmr8t-x-x-120">resources are not there to seek answers to Maths homework problems - they</span>
+<span 
+class="ptmr8t-x-x-120">are intended specifically for issues to do with the use and support of</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE.</span>
+<!--l. 21--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The second level of support is provided by the fact that all the sources of</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE are available, so any user who is having difficulty either with a bug</span>
+<span 
+class="ptmr8t-x-x-120">or understanding system behaviour can consult the code to see if (for</span>
+<span 
+class="ptmr8t-x-x-120">instance) comments in it clarify something that was unclear from the regular</span>
+<span 
+class="ptmr8t-x-x-120">documentation.</span>
+<!--l. 27--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The source files for REDUCE are available on SourceForge in the </span><a 
+href="https://sourceforge.net/svn/?group_id=248416" ><span 
+class="ptmr8t-x-x-120">Subversion</span>
+<span 
+class="ptmr8t-x-x-120">repository</span></a><span 
+class="ptmr8t-x-x-120">. Check the "code/SVN" tab on the SourceForge page to find</span>
+<span 
+class="ptmr8t-x-x-120">instructions for using a Subversion client to fetch the most up to date</span>
+<span 
+class="ptmr8t-x-x-120">copy of everything. From time to time there may be one-file archives of a</span>
+<span 
+class="ptmr8t-x-x-120">snapshot of the sources placed in the download area on SourceForge,</span>
+<span 
+class="ptmr8t-x-x-120">and eventually some of these mat be marked as &#8220;stable&#8221; releases, but at</span>
+<span 
+class="ptmr8t-x-x-120">present it is recommended that developers use a copy from the Subversion</span>
+<span 
+class="ptmr8t-x-x-120">repository.</span>
+<!--l. 37--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The files fetched there come with a directory called &#8220;trunk&#8221; that holds the main</span>
+<span 
+class="ptmr8t-x-x-120">current REDUCE, and one called &#8220;branches&#8221; that is reserved for future</span>
+<span 
+class="ptmr8t-x-x-120">experimental versions. All the files that we have for creating help files and</span>
+<span 
+class="ptmr8t-x-x-120">manuals should also be present in the files you fetch.</span>
+<!--l. 42--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The packages that make up the source for the algebraic capabilities of REDUCE</span>
+<span 
+class="ptmr8t-x-x-120">are in the &#8220;packages&#8221; sub-directory, and often there are test files for a package</span>
+<span 
+class="ptmr8t-x-x-120">present there and especially for contributed packages there will be documentation</span>
+<span 
+class="ptmr8t-x-x-120">in the form of a </span><span class="LATEX"><span 
+class="ptmr8t-x-x-120">L</span><span class="A"><span 
+class="ptmr8t-x-x-120">A</span></span><span class="TEX"><span 
+class="ptmr8t-x-x-120">T</span><span 
+class="E"><span 
+class="ptmr8t-x-x-120">E</span></span><span 
+class="ptmr8t-x-x-120">X</span></span></span> <span 
+class="ptmr8t-x-x-120">file. Although REDUCE is coded in its own language</span>
+<span 
+class="ptmr8t-x-x-120">many people in the past have found that it does not take too long to start to get</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">used to it.</span>
+<!--l. 49--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In various cases even fairly &#8220;ordinary end users&#8221; may wish to fetch the source</span>
+<span 
+class="ptmr8t-x-x-120">version of REDUCE and compile it all for themselves. This may either be</span>
+<span 
+class="ptmr8t-x-x-120">because they need the benefit of a bug-fix only recently checked into the</span>
+<span 
+class="ptmr8t-x-x-120">subversion repository or because no pre-compiled binary is available for the</span>
+<span 
+class="ptmr8t-x-x-120">particular computer and operating system they use. This latter is to some extent</span>
+<span 
+class="ptmr8t-x-x-120">unavoidable since REDUCE can run on both 32 and 64-bit Windows, the various</span>
+<span 
+class="ptmr8t-x-x-120">MacOSX options (eg Intel and Powerpc), many different distributions of Linux,</span>
+<span 
+class="ptmr8t-x-x-120">some BSD variants and Solaris (at least). It is not practically feasible for us</span>
+<span 
+class="ptmr8t-x-x-120">to provide a constant stream of up to date ready-built binaries for all</span>
+<span 
+class="ptmr8t-x-x-120">these.</span>
+<!--l. 60--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">There are instructions for compiling REDUCE present at the top of the</span>
+<span 
+class="ptmr8t-x-x-120">trunk source tree. Usually the hardest issue seems to be encuring that</span>
+<span 
+class="ptmr8t-x-x-120">your computer has an adequate set of development tools and libraries</span>
+<span 
+class="ptmr8t-x-x-120">installled before you start, but once that is sorted out the hope is that</span>
+<span 
+class="ptmr8t-x-x-120">the compilation of REDUCE should proceed uneventfully if sometimes</span>
+<span 
+class="ptmr8t-x-x-120">tediously.</span>
+<!--l. 66--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In a typical Open Source way the hope is that some of those who build REDUCE</span>
+<span 
+class="ptmr8t-x-x-120">from source or explore the source (out of general interest or to pursue an</span>
+<span 
+class="ptmr8t-x-x-120">understanding of some bug or detail) will transform themselves into contributors</span>
+<span 
+class="ptmr8t-x-x-120">or developers which moves on to the third level of support.</span>
+<!--l. 71--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">At this third level any user can contribute proposals for bug fixes or extensions to</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE or its documentation. It might be valuable to collect a library of</span>
+<span 
+class="ptmr8t-x-x-120">additional user-contributed examples illustrating the use of the system too. To do</span>
+<span 
+class="ptmr8t-x-x-120">this first ensure that you have a fully up to date copy of the sources from</span>
+<span 
+class="ptmr8t-x-x-120">Subversion, and then depending on just what sort of change is being proposed</span>
+<span 
+class="ptmr8t-x-x-120">provide the updates to the developers via the SourceForge bug tracker or other</span>
+<span 
+class="ptmr8t-x-x-120">route. In time we may give more concrete guidance about the format of changes</span>
+<span 
+class="ptmr8t-x-x-120">that will be easiest to handle. It is obviously important that proposed changes</span>
+<span 
+class="ptmr8t-x-x-120">have been properly tested and that they are accompanied with a clear explanation</span>
+<span 
+class="ptmr8t-x-x-120">of why they are of benefit. A specific concern here is that in the past</span>
+<span 
+class="ptmr8t-x-x-120">fixes to a bug in one part of REDUCE have had bad effects on some</span>
+<span 
+class="ptmr8t-x-x-120">other applications and packages, so some degree of caution is called for.</span>
+<span 
+class="ptmr8t-x-x-120">Anybody who develops a significant whole new package for REDUCE is</span>
+<span 
+class="ptmr8t-x-x-120">encouraged to make the developers aware so that it can be considered for</span>
+<span 
+class="ptmr8t-x-x-120">inclusion.</span>
+<!--l. 88--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">So the short form explanation about Support and Maintenance is that it is</span>
+<span 
+class="ptmr8t-x-x-120">mainly focussed around the SourceForge system. That if discussions</span>
+<span 
+class="ptmr8t-x-x-120">about bugs, requirements or issues are conducted there then all users and</span>
+<span 
+class="ptmr8t-x-x-120">potential users of REDUCE will be able to benefit from reviewing them, and</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">the Sourceforge mailing lists, tracker, forums and wiki will grow to be</span>
+<span 
+class="ptmr8t-x-x-120">both a static repository of answers to common questions, an active set of</span>
+<span 
+class="ptmr8t-x-x-120">locations to to get new issues looked at and a focus for guiding future</span>
+<span 
+class="ptmr8t-x-x-120">development.</span>
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch20.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualap1.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualch19.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualch19.html#tailmanualch19.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualch20.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualch20.html"></a>  
+</body></html> 

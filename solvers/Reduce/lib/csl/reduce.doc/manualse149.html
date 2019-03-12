@@ -1,0 +1,744 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>RTRACE: Tracing in REDUCE</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse149.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse150.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse148.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse148.html#tailmanualse148.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse149.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58    </span></span> <a 
+ id="x201-80600016.58"></a><span 
+class="ptmr8t-x-x-120">RTRACE: Tracing in REDUCE</span></h3>
+<a 
+ id="dx201-806001"></a>
+<a 
+ id="dx201-806002"></a>
+<!--l. 1016--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Authors: Herbert Melenk and Francis J. Wright</span>
+<!--l. 6--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58.1    </span></span> <a 
+ id="x201-80700016.58.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<!--l. 8--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The package </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">provides portable tracing facilities for REDUCE</span>
+<span 
+class="ptmr8t-x-x-120">programming. These include</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">entry-exit tracing of procedures,</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">assignment tracing of procedures,</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">tracing of rules when they fire.</span></li></ul>
+<!--l. 17--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In contrast to conventional Lisp-level tracing, values are printed in algebraic style</span>
+<span 
+class="ptmr8t-x-x-120">whenever possible if the switch </span><span 
+class="pcrr8t-x-x-120">rtrace</span><a 
+ id="dx201-807001"></a><a 
+ id="dx201-807002"></a><a 
+ id="dx201-807003"></a> <span 
+class="ptmr8t-x-x-120">is on, which it is by default. The output</span>
+<span 
+class="ptmr8t-x-x-120">has been specially tailored for the needs of algebraic-mode programming. Most</span>
+<span 
+class="ptmr8t-x-x-120">features can be applied without explicitly modifying the target program, and they</span>
+<span 
+class="ptmr8t-x-x-120">can be turned on and off dynamically at run time. If the switch </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">turned off then values are printed in conventional Lisp style, and the</span>
+<span 
+class="ptmr8t-x-x-120">result should be similar to the tracing provided by the underlying Lisp</span>
+<span 
+class="ptmr8t-x-x-120">system.</span>
+<!--l. 28--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">To make the facilities available, load the package using the command</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1159">
+load_package&#x00A0;rtrace;
+</div>
+<!--l. 31--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Alternatively, the package can be set up to auto load by putting appropriate code</span>
+<span 
+class="ptmr8t-x-x-120">in your REDUCE initialisation file. An example is provided in the file</span>
+<span 
+class="pcrr8t-x-x-120">reduce.rc </span><span 
+class="ptmr8t-x-x-120">in the </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">source directory.</span>
+<!--l. 37--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58.2    </span></span> <a 
+ id="x201-80800016.58.2"></a><span 
+class="ptmr8t-x-x-120">RTrace versus RDebug</span></h4>
+<!--l. 39--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">package is a modification (by FJW) of the </span><span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">package</span>
+<span 
+class="ptmr8t-x-x-120">(written by HM, and included in the </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">source directory). The</span>
+<span 
+class="ptmr8t-x-x-120">modifications are as follows. The procedure-tracing facilities in </span><span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">rely</span>
+<span 
+class="ptmr8t-x-x-120">upon the low-level tracing facilities in PSL; in </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">these low-level facilities</span>
+<span 
+class="ptmr8t-x-x-120">have been (partly) re-implemented portably. The names of the tracing</span>
+<span 
+class="ptmr8t-x-x-120">commands that have been re-implemented portably have been changed to avoid</span>
+<span 
+class="ptmr8t-x-x-120">conflicting with those provided by the underlying Lisp system by preceding</span>
+<span 
+class="ptmr8t-x-x-120">them with the letter &#8220;r&#8221;, and they provide a generalized interface that</span>
+<span 
+class="ptmr8t-x-x-120">supports algebraic mode better. An additional set of rule tracing facilities for</span>
+<span 
+class="ptmr8t-x-x-120">inactive rules has been provided. Beware that the </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">package is still</span>
+<span 
+class="ptmr8t-x-x-120">experimental!</span>
+<!--l. 52--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package is intended to be portable, and has been tested with both CSL- and</span>
+<span 
+class="ptmr8t-x-x-120">PSL-based REDUCE. However, it is intended not as a replacement for </span><span 
+class="pcrr8t-x-x-120">rdebug</span>
+<span 
+class="ptmr8t-x-x-120">but as a partial re-implementation of </span><span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">that works with CSL-REDUCE,</span>
+<span 
+class="ptmr8t-x-x-120">and it is assumed that PSL users will continue to use </span><span 
+class="pcrr8t-x-x-120">rdebug</span><span 
+class="ptmr8t-x-x-120">. It should, in</span>
+<span 
+class="ptmr8t-x-x-120">principle, be possible to use both. Any </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">functions with the same names</span>
+<span 
+class="ptmr8t-x-x-120">as </span><span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">functions should either be identical or compatible; </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">should</span>
+<span 
+class="ptmr8t-x-x-120">be loaded after </span><span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">in order to retain any enhancements provided by</span>
+<span 
+class="pcrr8t-x-x-120">rtrace</span><span 
+class="ptmr8t-x-x-120">. Perhaps at some future time the two packages should be merged.</span>
+<span 
+class="ptmr8t-x-x-120">However, note that </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">currently provides </span><span 
+class="ptmri8t-x-x-120">only tracing </span><span 
+class="ptmr8t-x-x-120">(hence the name)</span>
+<span 
+class="ptmr8t-x-x-120">and does not support break points. (The current version also does not support</span>
+<span 
+class="ptmr8t-x-x-120">conditional tracing.)</span>
+<!--l. 66--><p class="noindent" >
+                                                                     
+
+                                                                     
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58.3    </span></span> <a 
+ id="x201-80900016.58.3"></a><span 
+class="ptmr8t-x-x-120">Procedure tracing: RTR, UNRTR</span></h4>
+<a 
+ id="dx201-809001"></a>
+<a 
+ id="dx201-809002"></a>
+<!--l. 70--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Tracing of one or more procedures is initiated by the command </span><span 
+class="pcrr8t-x-x-120">rtr</span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1160">
+rtr&#x00A0;&#x003C;proc1&#x003E;,&#x00A0;&#x003C;proc2&#x003E;,&#x00A0;...,&#x00A0;&#x003C;procn&#x003E;;
+</div>
+<!--l. 74--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and cancelled by the command </span><span 
+class="pcrr8t-x-x-120">unrtr</span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1161">
+unrtr&#x00A0;&#x003C;proc1&#x003E;,&#x00A0;&#x003C;proc2&#x003E;,&#x00A0;...,&#x00A0;&#x003C;procn&#x003E;;
+</div>
+<!--l. 78--><p class="nopar" >
+<!--l. 80--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Every time a traced procedure is executed, a message is printed when the</span>
+<span 
+class="ptmr8t-x-x-120">procedure is entered or exited. The entry message displays the actual procedure</span>
+<span 
+class="ptmr8t-x-x-120">arguments equated to the dummy parameter names, and the exit message displays</span>
+<span 
+class="ptmr8t-x-x-120">the value returned by the procedure. Recursive calls are marked by a level</span>
+<span 
+class="ptmr8t-x-x-120">number. Here is a (simplistic) example, using first the default algebraic display</span>
+<span 
+class="ptmr8t-x-x-120">and second conventional Lisp display:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1162">
+algebraic&#x00A0;procedure&#x00A0;power(x,&#x00A0;n);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;if&#x00A0;n&#x00A0;=&#x00A0;0&#x00A0;then&#x00A0;1&#x00A0;else&#x00A0;x*power(x,&#x00A0;n-1)$
+&#x00A0;<br />
+&#x00A0;<br />rtr&#x00A0;power;
+&#x00A0;<br />
+&#x00A0;<br />(power)
+&#x00A0;<br />
+&#x00A0;<br />power(x+1,&#x00A0;2);
+&#x00A0;<br />
+&#x00A0;<br />Enter&#x00A0;(1)&#x00A0;power
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x:&#x00A0;&#x00A0;x&#x00A0;+&#x00A0;1$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;n:&#x00A0;&#x00A0;2$
+&#x00A0;<br />Enter&#x00A0;(2)&#x00A0;power
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x:&#x00A0;&#x00A0;x&#x00A0;+&#x00A0;1$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;n:&#x00A0;&#x00A0;1$
+&#x00A0;<br />Enter&#x00A0;(3)&#x00A0;power
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x:&#x00A0;&#x00A0;x&#x00A0;+&#x00A0;1$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;n:&#x00A0;&#x00A0;0$
+&#x00A0;<br />Leave&#x00A0;(3)&#x00A0;power&#x00A0;=&#x00A0;1$
+&#x00A0;<br />Leave&#x00A0;(2)&#x00A0;power&#x00A0;=&#x00A0;x&#x00A0;+&#x00A0;1$
+&#x00A0;<br />Leave&#x00A0;(1)&#x00A0;power&#x00A0;=&#x00A0;x**2&#x00A0;+&#x00A0;2*x&#x00A0;+&#x00A0;1$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;2
+&#x00A0;<br />x&#x00A0;&#x00A0;+&#x00A0;2*x&#x00A0;+&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />off&#x00A0;rtrace;
+&#x00A0;<br />
+&#x00A0;<br />power(x+1,&#x00A0;2);
+&#x00A0;<br />
+&#x00A0;<br />Enter&#x00A0;(1)&#x00A0;power
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x:&#x00A0;&#x00A0;(plus&#x00A0;x&#x00A0;1)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;n:&#x00A0;&#x00A0;2
+&#x00A0;<br />Enter&#x00A0;(2)&#x00A0;power
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x:&#x00A0;&#x00A0;(plus&#x00A0;x&#x00A0;1)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;n:&#x00A0;&#x00A0;1
+&#x00A0;<br />Enter&#x00A0;(3)&#x00A0;power
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x:&#x00A0;&#x00A0;(plus&#x00A0;x&#x00A0;1)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;n:&#x00A0;&#x00A0;0
+                                                                     
+
+                                                                     
+&#x00A0;<br />Leave&#x00A0;(3)&#x00A0;power&#x00A0;=&#x00A0;1
+&#x00A0;<br />Leave&#x00A0;(2)&#x00A0;power&#x00A0;=&#x00A0;(!*sq&#x00A0;((((x&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;1)&#x00A0;t)
+&#x00A0;<br />Leave&#x00A0;(1)&#x00A0;power&#x00A0;=&#x00A0;(!*sq&#x00A0;((((x&#x00A0;.&#x00A0;2)&#x00A0;.&#x00A0;1)&#x00A0;((x&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;2)&#x00A0;.&#x00A0;1)&#x00A0;.&#x00A0;1)&#x00A0;t)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;2
+&#x00A0;<br />x&#x00A0;&#x00A0;+&#x00A0;2*x&#x00A0;+&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />on&#x00A0;rtrace;
+&#x00A0;<br />
+&#x00A0;<br />unrtr&#x00A0;power;
+&#x00A0;<br />
+&#x00A0;<br />(power)
+</div>
+<!--l. 139--><p class="nopar" >
+<!--l. 141--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Many algebraic-mode operators are implemented as internal procedures with</span>
+<span 
+class="ptmr8t-x-x-120">different names. If an internal procedure with the specified name does</span>
+<span 
+class="ptmr8t-x-x-120">not exist then </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">tracing automatically applies to the appropriate</span>
+<span 
+class="ptmr8t-x-x-120">internal procedure and returns a list of the names of the internal procedures,</span>
+<span 
+class="ptmr8t-x-x-120">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1163">
+rtr&#x00A0;int;
+&#x00A0;<br />
+&#x00A0;<br />(simpint)
+</div>
+<!--l. 150--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">This facility is an extension of the </span><span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">package.</span>
+<!--l. 153--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Tracing of </span><span 
+class="ptmri8t-x-x-120">compiled </span><span 
+class="ptmr8t-x-x-120">procedures by the </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">package is not completely</span>
+<span 
+class="ptmr8t-x-x-120">reliable, in that recursive calls may not be traced. This is essentially because</span>
+<span 
+class="ptmr8t-x-x-120">tracing works only when the procedure is called by name and not when it is</span>
+<span 
+class="ptmr8t-x-x-120">called directly via an internal compiled pointer. It may not be possible to avoid</span>
+<span 
+class="ptmr8t-x-x-120">this restriction in a portable way. Also, arguments of compiled procedures are not</span>
+<span 
+class="ptmr8t-x-x-120">displayed using the names given to them in the source code, because these names</span>
+<span 
+class="ptmr8t-x-x-120">are no longer available. Instead, they are displayed using the names </span><span 
+class="pcrr8t-x-x-120">Arg1</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="pcrr8t-x-x-120">Arg2</span><span 
+class="ptmr8t-x-x-120">, etc.</span>
+<!--l. 163--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58.4    </span></span> <a 
+ id="x201-81000016.58.4"></a><span 
+class="ptmr8t-x-x-120">Assignment tracing: RTRST, UNRTRST</span></h4>
+<a 
+ id="dx201-810001"></a>
+<a 
+ id="dx201-810002"></a>
+<!--l. 167--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">One often needs information about the internal behaviour of a procedure,</span>
+<span 
+class="ptmr8t-x-x-120">especially if it is a longer piece of code. For an interpreted procedure declared in</span>
+<span 
+class="ptmr8t-x-x-120">an </span><span 
+class="pcrr8t-x-x-120">rtrst </span><span 
+class="ptmr8t-x-x-120">command:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1164">
+rtrst&#x00A0;&#x003C;proc1&#x003E;,&#x00A0;&#x003C;proc2&#x003E;,&#x00A0;...,&#x00A0;&#x003C;procn&#x003E;;
+</div>
+<!--l. 172--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">all explicit assignments executed (as either the symbolic-mode </span><span 
+class="pcrr8t-x-x-120">setq </span><span 
+class="ptmr8t-x-x-120">or</span>
+<span 
+class="ptmr8t-x-x-120">the algebraic-mode </span><span 
+class="pcrr8t-x-x-120">setk</span><span 
+class="ptmr8t-x-x-120">) inside these procedures are displayed during</span>
+<span 
+class="ptmr8t-x-x-120">procedure execution. All procedure tracing (assignment and entry-exit) is</span>
+<span 
+class="ptmr8t-x-x-120">removed by the command </span><span 
+class="pcrr8t-x-x-120">unrtrst </span><span 
+class="ptmr8t-x-x-120">(or </span><span 
+class="pcrr8t-x-x-120">unrtr</span><span 
+class="ptmr8t-x-x-120">, for which it is just a</span>
+<span 
+class="ptmr8t-x-x-120">synonym):</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1165">
+unrtrst&#x00A0;&#x003C;proc1&#x003E;,&#x00A0;&#x003C;proc2&#x003E;,&#x00A0;...,&#x00A0;&#x003C;procn&#x003E;;
+</div>
+<!--l. 182--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Assignment tracing is not possible if a procedure is compiled, either because it</span>
+<span 
+class="ptmr8t-x-x-120">was loaded from a &#8220;fasl&#8221; file or image, or because it was compiled as it was</span>
+<span 
+class="ptmr8t-x-x-120">read in as source code. This is because assignment tracing works by</span>
+<span 
+class="ptmr8t-x-x-120">modifying the interpreted code of the procedure, which must therefore be</span>
+<span 
+class="ptmr8t-x-x-120">available.</span>
+<!--l. 189--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Applying </span><span 
+class="pcrr8t-x-x-120">rtr </span><span 
+class="ptmr8t-x-x-120">to a procedure that has been declared in an </span><span 
+class="pcrr8t-x-x-120">rtrst </span><span 
+class="ptmr8t-x-x-120">command, or</span>
+<span 
+class="ptmr8t-x-x-120">vice versa, toggles the type of tracing applied (and displays an explanatory</span>
+<span 
+class="ptmr8t-x-x-120">message).</span>
+<!--l. 193--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Note that when a program contains a </span><span 
+class="pcrr8t-x-x-120">for </span><span 
+class="ptmr8t-x-x-120">loop, REDUCE translates this to a</span>
+<span 
+class="ptmr8t-x-x-120">sequence of Lisp instructions. When using </span><span 
+class="pcrr8t-x-x-120">rtrst</span><span 
+class="ptmr8t-x-x-120">, the printout is driven</span>
+<span 
+class="ptmr8t-x-x-120">by the &#8220;unfolded&#8221; code. When the code contains a </span><span 
+class="pcrr8t-x-x-120">for each </span><span 
+class="pcrr8t-x-x-120">&#x2026; in</span>
+<span 
+class="ptmr8t-x-x-120">statement, the name of the control variable is internally used to keep the</span>
+<span 
+class="ptmr8t-x-x-120">remainder of the list during the loop, and you will see the corresponding</span>
+<span 
+class="ptmr8t-x-x-120">assignments in the trace rather than the individual values in the loop steps,</span>
+<span 
+class="ptmr8t-x-x-120">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1166">
+procedure&#x00A0;fold&#x00A0;u;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;for&#x00A0;each&#x00A0;x&#x00A0;in&#x00A0;u&#x00A0;sum&#x00A0;x$
+&#x00A0;<br />
+&#x00A0;<br />rtrst&#x00A0;fold;
+&#x00A0;<br />
+&#x00A0;<br />(fold)
+&#x00A0;<br />
+&#x00A0;<br />fold&#x00A0;{z,&#x00A0;z*y,&#x00A0;y};
+</div>
+<!--l. 210--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">produces the following output (using CSL-REDUCE):</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1167">
+Enter&#x00A0;(1)&#x00A0;fold
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;u:&#x00A0;&#x00A0;{z,y*z,y}$
+&#x00A0;<br />x&#x00A0;:=&#x00A0;[z,y*z,y]$
+&#x00A0;<br />G0&#x00A0;:=&#x00A0;0$
+&#x00A0;<br />G0&#x00A0;:=&#x00A0;z$
+&#x00A0;<br />x&#x00A0;:=&#x00A0;[y*z,y]$
+&#x00A0;<br />G0&#x00A0;:=&#x00A0;z*(y&#x00A0;+&#x00A0;1)$
+&#x00A0;<br />x&#x00A0;:=&#x00A0;[y]$
+&#x00A0;<br />G0&#x00A0;:=&#x00A0;y*z&#x00A0;+&#x00A0;y&#x00A0;+&#x00A0;z$
+&#x00A0;<br />x&#x00A0;:=&#x00A0;[]$
+&#x00A0;<br />Leave&#x00A0;(1)&#x00A0;fold&#x00A0;=&#x00A0;y*z&#x00A0;+&#x00A0;y&#x00A0;+&#x00A0;z$
+&#x00A0;<br />
+&#x00A0;<br />y*z&#x00A0;+&#x00A0;y&#x00A0;+&#x00A0;z
+&#x00A0;<br />
+&#x00A0;<br />unrtrst&#x00A0;fold;
+&#x00A0;<br />
+&#x00A0;<br />(fold)
+</div>
+<!--l. 230--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">In this example, the printed assignments for </span><span 
+class="pcrr8t-x-x-120">x </span><span 
+class="ptmr8t-x-x-120">show the various stages of the</span>
+<span 
+class="ptmr8t-x-x-120">loop. The variable </span><span 
+class="pcrr8t-x-x-120">G0 </span><span 
+class="ptmr8t-x-x-120">is an internally generated place-holder for the sum, and</span>
+<span 
+class="ptmr8t-x-x-120">may have a slightly different name depending on the underlying Lisp</span>
+<span 
+class="ptmr8t-x-x-120">systems.</span>
+<!--l. 236--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58.5    </span></span> <a 
+ id="x201-81100016.58.5"></a><span 
+class="ptmr8t-x-x-120">Tracing active rules: TRRL, UNTRRL</span></h4>
+<a 
+ id="dx201-811001"></a>
+<a 
+ id="dx201-811002"></a>
+<!--l. 240--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The command </span><span 
+class="pcrr8t-x-x-120">trrl </span><span 
+class="ptmr8t-x-x-120">initiates tracing when they fire of individual rules or rule</span>
+<span 
+class="ptmr8t-x-x-120">lists that have been activated using </span><span 
+class="pcrr8t-x-x-120">let</span><span 
+class="ptmr8t-x-x-120">.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1168">
+trrl&#x00A0;&#x003C;rl1&#x003E;,&#x00A0;&#x003C;rl2&#x003E;,&#x00A0;...,&#x00A0;&#x003C;rln&#x003E;;
+</div>
+<!--l. 245--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">where each of the </span><span 
+class="cmmi-12">&#x003C; rl</span><sub><span 
+class="cmmi-8">i</span></sub> <span 
+class="cmmi-12">&#x003E; </span><span 
+class="ptmr8t-x-x-120">is:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">a rule or rule list;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">the name of a rule or rule list (that is, a non-indexed variable which is</span>
+     <span 
+class="ptmr8t-x-x-120">bound to a rule or rule list);</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">an operator name, representing the rules assigned to this operator.</span></li></ul>
+<!--l. 254--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The specified rules are (re-) activated in REDUCE such that each of them prints a</span>
+<span 
+class="ptmr8t-x-x-120">report every time it fires. The report is composed of the name of the rule or the</span>
+<span 
+class="ptmr8t-x-x-120">name of the rule list together with the number of the rule in the list, the form</span>
+<span 
+class="ptmr8t-x-x-120">matching the left side (&#8220;input&#8221;) and the resulting right side (&#8220;output&#8221;). For</span>
+<span 
+class="ptmr8t-x-x-120">an explicitly given rule or rule list, </span><span 
+class="pcrr8t-x-x-120">trrl </span><span 
+class="ptmr8t-x-x-120">assigns a unique generated</span>
+<span 
+class="ptmr8t-x-x-120">name.</span>
+<!--l. 262--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Note, however, that </span><span 
+class="pcrr8t-x-x-120">trrl </span><span 
+class="ptmr8t-x-x-120">does not trace rules with constant expressions on the</span>
+<span 
+class="ptmr8t-x-x-120">left, on the assumption that they are not particularly interesting. [This behaviour</span>
+<span 
+class="ptmr8t-x-x-120">may be made user-controllable in a future version.]</span>
+<!--l. 267--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The command </span><span 
+class="pcrr8t-x-x-120">untrrl </span><span 
+class="ptmr8t-x-x-120">removes the tracing from rules:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1169">
+untrrl&#x00A0;&#x003C;rl1&#x003E;,&#x00A0;&#x003C;rl2&#x003E;,&#x00A0;...,&#x00A0;&#x003C;rln&#x003E;;
+</div>
+<!--l. 270--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">where each of the </span><span 
+class="cmmi-12">&#x003C; rl</span><sub><span 
+class="cmmi-8">i</span></sub> <span 
+class="cmmi-12">&#x003E; </span><span 
+class="ptmr8t-x-x-120">is:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">a rule or rule list;</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">the name of a rule or rule list (that is, a non-indexed variable which is</span>
+     <span 
+class="ptmr8t-x-x-120">bound to a rule or rule list or a unique name generated by </span><span 
+class="pcrr8t-x-x-120">trrl</span><span 
+class="ptmr8t-x-x-120">);</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">an operator name, representing the rules assigned to this operator.</span></li></ul>
+<!--l. 280--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The rules are reactivated in their original form. Alternatively you can use the</span>
+<span 
+class="ptmr8t-x-x-120">command </span><span 
+class="pcrr8t-x-x-120">clearrules </span><span 
+class="ptmr8t-x-x-120">to remove the rules totally from the system. Please do</span>
+<span 
+class="ptmr8t-x-x-120">not modify the rules between </span><span 
+class="pcrr8t-x-x-120">trrl </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">untrrl </span><span 
+class="ptmr8t-x-x-120">&#8211; the result may be</span>
+<span 
+class="ptmr8t-x-x-120">unpredictable.</span>
+<!--l. 285--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Here are two simple examples that show tracing via the rule name and via the</span>
+<span 
+class="ptmr8t-x-x-120">operator name:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1170">
+trigrules&#x00A0;:=&#x00A0;{sin(~x)^2&#x00A0;=&#x003E;&#x00A0;1&#x00A0;-&#x00A0;cos(x)^2};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />trigrules&#x00A0;:=&#x00A0;{sin(~x)&#x00A0;&#x00A0;=&#x003E;&#x00A0;1&#x00A0;-&#x00A0;cos(x)&#x00A0;}
+&#x00A0;<br />
+&#x00A0;<br />let&#x00A0;trigrules;
+&#x00A0;<br />trrl&#x00A0;trigrules;
+&#x00A0;<br />
+&#x00A0;<br />1&#x00A0;-&#x00A0;sin(x)^2;
+&#x00A0;<br />
+&#x00A0;<br />Rule&#x00A0;trigrules.1:&#x00A0;sin(x)**2&#x00A0;=&#x003E;&#x00A0;1&#x00A0;-&#x00A0;cos(x)**2$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />cos(x)
+&#x00A0;<br />
+&#x00A0;<br />untrrl&#x00A0;trigrules;
+&#x00A0;<br />trrl&#x00A0;sin;
+&#x00A0;<br />
+&#x00A0;<br />1&#x00A0;-&#x00A0;sin(x)^2;
+&#x00A0;<br />
+&#x00A0;<br />Rule&#x00A0;sin.23:&#x00A0;sin(x)**2&#x00A0;=&#x003E;&#x00A0;1&#x00A0;-&#x00A0;cos(x)**2$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />cos(x)
+&#x00A0;<br />
+&#x00A0;<br />untrrl&#x00A0;sin;
+&#x00A0;<br />clearrules&#x00A0;trigrules;
+</div>
+<!--l. 315--><p class="nopar" >
+<!--l. 317--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58.6    </span></span> <a 
+ id="x201-81200016.58.6"></a><span 
+class="ptmr8t-x-x-120">Tracing inactive rules: TRRLID, UNTRRLID</span></h4>
+<a 
+ id="dx201-812001"></a>
+<a 
+ id="dx201-812002"></a>
+<!--l. 321--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The command </span><span 
+class="pcrr8t-x-x-120">trrlid </span><span 
+class="ptmr8t-x-x-120">initiates tracing of individual rule lists that have been</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">assigned to variables, but have not been activated using </span><span 
+class="pcrr8t-x-x-120">let</span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1171">
+trrlid&#x00A0;&#x003C;rlid1&#x003E;,&#x00A0;&#x003C;rlid2&#x003E;,&#x00A0;...,&#x00A0;&#x003C;rlidn&#x003E;;
+</div>
+<!--l. 326--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">where each of the </span><span 
+class="cmmi-12">&#x003C; rlid</span><sub><span 
+class="cmmi-8">i</span></sub> <span 
+class="cmmi-12">&#x003E; </span><span 
+class="ptmr8t-x-x-120">is an identifier of a rule list (that is, a non-indexed</span>
+<span 
+class="ptmr8t-x-x-120">variable which is bound to a rule list). It is assumed that they will be activated</span>
+<span 
+class="ptmr8t-x-x-120">later, either via a </span><span 
+class="pcrr8t-x-x-120">let </span><span 
+class="ptmr8t-x-x-120">command or by using the </span><span 
+class="pcrr8t-x-x-120">where </span><span 
+class="ptmr8t-x-x-120">operator. When they are</span>
+<span 
+class="ptmr8t-x-x-120">activated and fire, tracing output will be as if they had been traced using </span><span 
+class="pcrr8t-x-x-120">trrl</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">The command </span><span 
+class="pcrr8t-x-x-120">untrrlid </span><span 
+class="ptmr8t-x-x-120">clears the tracing. This facility is an extension of the</span>
+<span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">package.</span>
+<!--l. 335--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Here is a simple example that continues the example above:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1172">
+trrlid&#x00A0;trigrules;
+&#x00A0;<br />
+&#x00A0;<br />1&#x00A0;-&#x00A0;sin(x)^2&#x00A0;where&#x00A0;trigrules;
+&#x00A0;<br />
+&#x00A0;<br />Rule&#x00A0;trigrules.1:&#x00A0;sin(x)**2&#x00A0;=&#x003E;&#x00A0;1&#x00A0;-&#x00A0;cos(x)**2$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />cos(x)
+&#x00A0;<br />
+&#x00A0;<br />untrrlid&#x00A0;trigrules;
+</div>
+<!--l. 347--><p class="nopar" >
+<!--l. 349--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.58.7    </span></span> <a 
+ id="x201-81300016.58.7"></a><span 
+class="ptmr8t-x-x-120">Output control: RTROUT</span></h4>
+<a 
+ id="dx201-813001"></a>
+<!--l. 352--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The trace output (only) can be redirected to a separate file by using the command</span>
+<span 
+class="pcrr8t-x-x-120">rtrout</span><span 
+class="ptmr8t-x-x-120">, followed by a file name in string quotes. A second call of </span><span 
+class="pcrr8t-x-x-120">rtrout</span>
+<span 
+class="ptmr8t-x-x-120">closes any current output file and opens a new one. The file name </span><span 
+class="pcrr8t-x-x-120">NIL </span><span 
+class="ptmr8t-x-x-120">(without</span>
+<span 
+class="ptmr8t-x-x-120">string quotes) closes any current output file and causes the trace output to be</span>
+<span 
+class="ptmr8t-x-x-120">redirected to the standard output device.</span>
+<a 
+ id="dx201-813002"></a>
+<a 
+ id="dx201-813003"></a>
+<a 
+ id="dx201-813004"></a>
+<!--l. 360--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">rdebug </span><span 
+class="ptmr8t-x-x-120">variables </span><span 
+class="pcrr8t-x-x-120">trlimit </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">trprinter!* </span><span 
+class="ptmr8t-x-x-120">are not implemented in</span>
+<span 
+class="pcrr8t-x-x-120">rtrace</span><span 
+class="ptmr8t-x-x-120">. If you want to select Lisp-style tracing then turn off the switch</span>
+<span 
+class="pcrr8t-x-x-120">rtrace</span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1173">
+off&#x00A0;rtrace;
+</div>
+<!--l. 365--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">after loading the </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">package. Note that the </span><span 
+class="pcrr8t-x-x-120">rtrace </span><span 
+class="ptmr8t-x-x-120">switch controls the</span>
+<span 
+class="ptmr8t-x-x-120">display format of both procedure and rule tracing.</span>
+<!--l. 1020--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1022--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse149.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse150.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse148.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse148.html#tailmanualse148.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse149.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse149.html"></a>   
+</body></html> 

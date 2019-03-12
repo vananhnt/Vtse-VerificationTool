@@ -1,0 +1,1138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>NUMERIC: Solving numerical problems</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse134.html" >Up</a></td><td class="clinks"><a 
+href="manualse135.html" >Next</a></td><td class="clinks"><a 
+href="manualse133.html" >Prev</a></td><td class="clinks"><a 
+href="manualse133.html#tailmanualse133.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse134.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.43    </span> <a 
+ id="x178-68900016.43"></a>NUMERIC: Solving numerical problems</h3>
+<a 
+ id="dx178-689001"></a>
+<a 
+ id="dx178-689002"></a>
+<a 
+ id="dx178-689003"></a>
+<a 
+ id="dx178-689004"></a>
+<a 
+ id="dx178-689005"></a>
+<a 
+ id="dx178-689006"></a>
+<a 
+ id="dx178-689007"></a>
+<a 
+ id="dx178-689008"></a>
+<a 
+ id="dx178-689009"></a>
+<a 
+ id="dx178-689010"></a>
+<a 
+ id="dx178-689011"></a>
+<!--l. 734--><p class="noindent" >This package implements basic algorithms of numerical analysis. These include:
+     <ul class="itemize1">
+     <li class="itemize">solution of algebraic equations by Newton&#8217;s method
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1056">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;num_solve({sin&#x00A0;x=cos&#x00A0;y,&#x00A0;x&#x00A0;+&#x00A0;y&#x00A0;=&#x00A0;1},{x=1,y=2})
+</div>
+     <!--l. 740--><p class="nopar" >
+     </li>
+     <li class="itemize">solution of ordinary differential equations
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1057">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;num_odesolve(df(y,x)=y,y=1,x=(0&#x00A0;..&#x00A0;1),&#x00A0;iterations=5)
+</div>
+     <!--l. 744--><p class="nopar" >
+     </li>
+     <li class="itemize">bounds of a function over an interval
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1058">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;bounds(sin&#x00A0;x+x,x=(1&#x00A0;..&#x00A0;2));
+</div>
+     <!--l. 748--><p class="nopar" >
+     </li>
+     <li class="itemize">minimizing a function (Fletcher Reeves steepest descent)
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1059">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;num_min(sin(x)+x/5,&#x00A0;x);
+</div>
+     <!--l. 752--><p class="nopar" >
+     </li>
+     <li class="itemize">Chebyshev curve fitting
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1060">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;chebyshev_fit(sin&#x00A0;x/x,x=(1&#x00A0;..&#x00A0;3),5);
+</div>
+     <!--l. 756--><p class="nopar" >
+     </li>
+     <li class="itemize">numerical quadrature
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1061">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;num_int(sin&#x00A0;x,x=(0&#x00A0;..&#x00A0;pi));
+</div>
+     <!--l. 760--><p class="nopar" ></li></ul>
+<!--l. 763--><p class="noindent" >Author: Herbert Melenk.
+<a 
+ id="dx178-689012"></a>
+<!--l. 3--><p class="noindent" >The <span 
+class="ptmr8t-">NUMERIC </span>package implements some numerical (approximative) algorithms for
+REDUCE, based on the REDUCE&#x00A0;rounded mode arithmetic. These algorithms are
+implemented for standard cases. They should not be called for ill-conditioned problems;
+please use standard mathematical libraries for these.
+<!--l. 9--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.1    </span> <a 
+ id="x178-69000016.43.1"></a>Syntax</h4>
+<!--l. 11--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.43.1.1    </span> <a 
+ id="x178-69100016.43.1.1"></a>Intervals, Starting Points</h5>
+<a 
+ id="dx178-691001"></a>
+<!--l. 14--><p class="noindent" >Intervals are generally coded as lower bound and upper bound connected by the operator
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">&#8216;..&#8217;</span></span></span>, usually associated to a variable in an equation. E.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1062">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x=&#x00A0;(2.5&#x00A0;..&#x00A0;3.5)
+</div>
+<!--l. 20--><p class="nopar" > means that the variable x is taken in the range from 2.5 up to 3.5. Note, that the bounds
+can be algebraic expressions, which, however, must evaluate to numeric results. In cases
+where an interval is returned as the result, the lower and upper bounds can be extracted
+by the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">PART</span></span></span> operator as the first and second part respectively. A starting point is
+specified by an equation with a numeric righthand side, e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1063">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x=3.0
+</div>
+<!--l. 31--><p class="nopar" > If for multivariate applications several coordinates must be specified by intervals or as a
+starting point, these specifications can be collected in one parameter (which is then a list)
+or they can be given as separate parameters alternatively. The list form is more
+appropriate when the parameters are built from other REDUCE calculations in an
+automatic style, while the flat form is more convenient for direct interactive
+input.
+<!--l. 41--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.43.1.2    </span> <a 
+ id="x178-69200016.43.1.2"></a>Accuracy Control</h5>
+<!--l. 43--><p class="noindent" >The keyword parameters <span 
+class="cmmi-10x-x-109">accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a </span>and <span 
+class="cmmi-10x-x-109">iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span>, where <span 
+class="cmmi-10x-x-109">a </span>and <span 
+class="cmmi-10x-x-109">i </span>must be
+positive integer numbers, control the iterative algorithms: the iteration is continued until
+the local error is below <span 
+class="cmr-10x-x-109">10</span><sup><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">a</span></sup>; if that is impossible within <span 
+class="cmmi-10x-x-109">i </span>steps, the iteration is
+terminated with an error message. The values reached so far are then returned as the
+result.
+<!--l. 51--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.43.1.3    </span> <a 
+ id="x178-69300016.43.1.3"></a>tracing</h5>
+<a 
+ id="dx178-693001"></a>
+<a 
+ id="dx178-693002"></a>
+<a 
+ id="dx178-693003"></a>
+<!--l. 53--><p class="noindent" >Normally the algorithms produce only a minimum of printed output during their
+operation. In cases of an unsuccessful or unexpected long operation a trace of the
+iteration can be printed by setting
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1064">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;trnumeric;
+</div>
+<!--l. 59--><p class="nopar" >
+<!--l. 62--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.2    </span> <a 
+ id="x178-69400016.43.2"></a>Minima</h4>
+<a 
+ id="dx178-694001"></a>
+<!--l. 65--><p class="noindent" >The Fletcher Reeves version of the <span 
+class="cmmi-10x-x-109">steepest</span><span 
+class="cmmi-10x-x-109">&#x00A0;descent </span>algorithms is used to find the
+minimum of a function of one or more variables. The function must have continuous
+partial derivatives with respect to all variables. The starting point of the search can be
+specified; if not, random values are taken instead. The steepest descent algorithms in
+general find only local minima.
+<!--l. 74--><p class="noindent" >Syntax:
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_MIN</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">exp,var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmr-10x-x-109">]</span>
+     <!--l. 79--><p class="noindent" ><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span><span 
+class="cmr-10x-x-109">])</span>
+     <!--l. 81--><p class="noindent" >or
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_MIN</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">exp,</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmsy-10x-x-109">}</span>
+     <!--l. 85--><p class="noindent" ><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span><span 
+class="cmr-10x-x-109">])</span>
+     <!--l. 88--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">exp </span>is a function expression,
+     <!--l. 90--><p class="noindent" ><span 
+class="cmmi-10x-x-109">var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> are  the  variables  in  <span 
+class="cmmi-10x-x-109">exp </span>and  <span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,val</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> are  the  (optional)
+     start values.
+     <!--l. 93--><p class="noindent" >NUM_MIN tries to find the next local minimum along the descending path
+     starting at the given point. The result is a list with the minimum function
+     value as first element followed by a list of equations, where the variables are
+     equated to the coordinates of the result point.</dd></dl>
+<!--l. 100--><p class="noindent" >Examples:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1065">
+&#x00A0;&#x00A0;&#x00A0;num_min(sin(x)+x/5,&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{4.9489585606,{X=29.643767785}}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;num_min(sin(x)+x/5,&#x00A0;x=0);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{&#x00A0;-&#x00A0;1.3342267466,{X=&#x00A0;-&#x00A0;1.7721582671}}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;%&#x00A0;Rosenbrock&#x00A0;function&#x00A0;(well&#x00A0;known&#x00A0;as&#x00A0;hard&#x00A0;to&#x00A0;minimize).
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;fktn&#x00A0;:=&#x00A0;100*(x1**2-x2)**2&#x00A0;+&#x00A0;(1-x1)**2;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;num_min(fktn,&#x00A0;x1=-1.2,&#x00A0;x2=1,&#x00A0;iterations=200);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{0.00000021870228295,{X1=0.99953284494,X2=0.99906807238}}
+&#x00A0;<br />
+</div>
+<!--l. 117--><p class="nopar" >
+<!--l. 119--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.3    </span> <a 
+ id="x178-69500016.43.3"></a>Roots of Functions/ Solutions of Equations</h4>
+<a 
+ id="dx178-695001"></a>
+<!--l. 122--><p class="noindent" >An adaptively damped Newton iteration is used to find an approximative zero of a
+function, a function vector or the solution of an equation or an equation system.
+Equations are internally converted to a difference of lhs and rhs such that the Newton
+method (=zero detection) can be applied. The expressions must have continuous
+derivatives for all variables. A starting point for the iteration can be given. If not given,
+random values are taken instead. If the number of forms is not equal to the number of
+variables, the Newton method cannot be applied. Then the minimum of the sum of
+absolute squares is located instead.
+<!--l. 134--><p class="noindent" >With ON COMPLEX solutions with imaginary parts can be found, if either the
+expression(s) or the starting point contain a nonzero imaginary part.
+<!--l. 138--><p class="noindent" >Syntax:
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_SOLVE</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">exp</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span><span 
+class="cmr-10x-x-109">])</span>
+                                                                     
+
+                                                                     
+     <!--l. 143--><p class="noindent" >or
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_SOLVE</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">exp</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,exp</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">]</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span><span 
+class="cmr-10x-x-109">])</span>
+     <!--l. 149--><p class="noindent" >or
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_SOLVE</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">exp</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,exp</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">[= </span><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmsy-10x-x-109">}</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span><span 
+class="cmr-10x-x-109">])</span>
+     <!--l. 155--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">exp</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,exp</span><sub><span 
+class="cmmi-8">n</span></sub> are function expressions,
+     <!--l. 157--><p class="noindent" ><span 
+class="cmmi-10x-x-109">var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmmi-8">n</span></sub> are the variables,
+     <!--l. 159--><p class="noindent" ><span 
+class="cmmi-10x-x-109">val</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,val</span><sub><span 
+class="cmmi-8">n</span></sub> are optional start values.
+     <!--l. 161--><p class="noindent" >NUM_SOLVE tries to find a zero/solution of the expression(s). Result is a
+     list of equations, where the variables are equated to the coordinates of the
+     result point.
+     <!--l. 165--><p class="noindent" >The  Jacobian  matrix  is  stored  as  a  side  effect  in  the  shared  variable
+     JACOBIAN.
+     </dd></dl>
+<!--l. 170--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1066">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;num_solve({sin&#x00A0;x=cos&#x00A0;y,&#x00A0;x&#x00A0;+&#x00A0;y&#x00A0;=&#x00A0;1},{x=1,y=2});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{X=&#x00A0;-&#x00A0;1.8561957251,Y=2.856195584}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;jacobian;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;[COS(X)&#x00A0;&#x00A0;SIN(Y)]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;]
+</div>
+<!--l. 181--><p class="nopar" >
+<!--l. 183--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.4    </span> <a 
+ id="x178-69600016.43.4"></a>Integrals</h4>
+<a 
+ id="dx178-696001"></a>
+<!--l. 186--><p class="noindent" >For the numerical evaluation of univariate integrals over a finite interval the following
+strategy is used:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x178-696003x1">If the function has an antiderivative in close form which is bounded in the
+     integration interval, this is used.
+     </li>
+     <li 
+  class="enumerate" id="x178-696005x2">Otherwise a Chebyshev approximation is computed, starting with order 20,
+     eventually  up  to  order  80.  If  that  is  recognized  as  sufficiently  convergent
+     it is used for computing the integral by directly integrating the coefficient
+     sequence.
+     </li>
+     <li 
+  class="enumerate" id="x178-696007x3">If  none  of  these  methods  is  successful,  an  adaptive  multilevel  quadrature
+     algorithm is used.</li></ol>
+<!--l. 200--><p class="noindent" >For multivariate integrals only the adaptive quadrature is used. This algorithm tolerates
+isolated singularities. The value <span 
+class="cmmi-10x-x-109">iterations </span>here limits the number of local interval
+intersection levels. <span 
+class="cmmi-10x-x-109">Accuracy </span>is a measure for the relative total discretization error
+(comparison of order 1 and order 2 approximations).
+<!--l. 207--><p class="noindent" >Syntax:
+                                                                     
+
+                                                                     
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_INT</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">exp,var</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">..u</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">)[</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">..u</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmr-10x-x-109">]</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span><span 
+class="ptmb8t-x-x-109">&#x00A0;</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span><span 
+class="cmr-10x-x-109">])</span>
+     <!--l. 213--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">exp </span>is the function to be integrated,
+     <!--l. 215--><p class="noindent" ><span 
+class="cmmi-10x-x-109">var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> are the integration variables,
+     <!--l. 217--><p class="noindent" ><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,l</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> are the lower bounds,
+     <!--l. 219--><p class="noindent" ><span 
+class="cmmi-10x-x-109">u</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,u</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> are the upper bounds.
+     <!--l. 221--><p class="noindent" >Result is the value of the integral.
+     </dd></dl>
+<!--l. 225--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1067">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;num_int(sin&#x00A0;x,x=(0&#x00A0;..&#x00A0;pi));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2.0000010334
+</div>
+<!--l. 231--><p class="nopar" >
+<!--l. 233--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.5    </span> <a 
+ id="x178-69700016.43.5"></a>Ordinary Differential Equations</h4>
+<a 
+ id="dx178-697001"></a>
+<!--l. 236--><p class="noindent" >A Runge-Kutta method of order 3 finds an approximate graph for the solution of a
+ordinary differential equation real initial value problem.
+<!--l. 240--><p class="noindent" >Syntax:
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_ODESOLVE</span> </dt><dd 
+class="description">(<span 
+class="cmmi-10x-x-109">exp</span>,<span 
+class="cmmi-10x-x-109">depvar </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">dv</span>,<span 
+class="cmmi-10x-x-109">indepvar</span>=<span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">from..to</span><span 
+class="cmr-10x-x-109">)</span>
+     <!--l. 244--><p class="noindent" ><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,accuracy </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">][</span><span 
+class="cmmi-10x-x-109">,iterations </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">i</span><span 
+class="cmr-10x-x-109">])</span>
+     <!--l. 246--><p class="noindent" >where
+     <!--l. 248--><p class="noindent" ><span 
+class="cmmi-10x-x-109">exp </span>is the differential expression/equation,
+     <!--l. 250--><p class="noindent" ><span 
+class="cmmi-10x-x-109">depvar </span>is an identifier representing the dependent variable (function to be
+     found),
+     <!--l. 253--><p class="noindent" ><span 
+class="cmmi-10x-x-109">indepvar </span>is an identifier representing the independent variable,
+     <!--l. 255--><p class="noindent" ><span 
+class="cmmi-10x-x-109">exp </span>is an equation (or an expression implicitly set to zero) which contains
+     the first derivative of <span 
+class="cmmi-10x-x-109">depvar </span>wrt <span 
+class="cmmi-10x-x-109">indepvar</span>,
+     <!--l. 258--><p class="noindent" ><span 
+class="cmmi-10x-x-109">from </span>is the starting point of integration,
+     <!--l. 260--><p class="noindent" ><span 
+class="cmmi-10x-x-109">to </span>is the endpoint of integration (allowed to be below <span 
+class="cmmi-10x-x-109">from</span>),
+     <!--l. 262--><p class="noindent" ><span 
+class="cmmi-10x-x-109">dv </span>is the initial value of <span 
+class="cmmi-10x-x-109">depvar </span>in the point <span 
+class="cmmi-10x-x-109">indepvar </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">from</span>.
+     <!--l. 264--><p class="noindent" >The ODE <span 
+class="cmmi-10x-x-109">exp </span>is converted into an explicit form, which then is used for a
+     Runge Kutta iteration over the given range. The number of steps is controlled
+     by the value of <span 
+class="cmmi-10x-x-109">i </span>(default: 20). If the steps are too coarse to reach the desired
+     accuracy in the neighborhood of the starting point, the number is increased
+     automatically.
+     <!--l. 272--><p class="noindent" >Result is a list of pairs, each representing a point of the approximate solution
+     of the ODE problem.</dd></dl>
+                                                                     
+
+                                                                     
+<!--l. 277--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1068">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;num_odesolve(df(y,x)=y,y=1,x=(0&#x00A0;..&#x00A0;1),&#x00A0;iterations=5);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;{{0.0,1.0},{0.2,1.2214},{0.4,1.49181796},{0.6,1.8221064563},
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;{0.8,2.2255208258},{1.0,2.7182511366}}
+&#x00A0;<br />
+</div>
+<!--l. 286--><p class="nopar" > Remarks:
+<!--l. 289--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x178-697002x16.43.5">If in <span 
+class="cmmi-10x-x-109">exp </span>the differential is not isolated on the lefthand side, please ensure
+     that the dependent variable is explicitly declared using a <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">DEPEND</span></span></span> statement,
+     e.g.
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1069">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;depend&#x00A0;y,x;
+</div>
+     <!--l. 297--><p class="nopar" >
+     <!--l. 299--><p class="noindent" >otherwise the formal derivative will be computed to zero by REDUCE.
+     </li>
+     <li 
+  class="enumerate" id="x178-697003x16.43.5">The REDUCE package SOLVE is used to convert the form into an explicit ODE. If
+     that process fails or has no unique result, the evaluation is stopped with an error
+     message.
+     </li></ol>
+<!--l. 307--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.6    </span> <a 
+ id="x178-69800016.43.6"></a>Bounds of a Function</h4>
+<a 
+ id="dx178-698001"></a>
+<!--l. 310--><p class="noindent" >Upper and lower bounds of a real valued function over an interval or a rectangular
+multivariate domain are computed by the operator BOUNDS. The algorithmic basis is
+the computation with inequalities: starting from the interval(s) of the variables, the
+bounds are propagated in the expression using the rules for inequality computation.
+Some knowledge about the behavior of special functions like ABS, SIN, COS, EXP,
+LOG, fractional exponentials etc. is integrated and can be evaluated if the operator
+BOUNDS is called with rounded mode on (otherwise only algebraic evaluation rules are
+available).
+<!--l. 321--><p class="noindent" >If BOUNDS finds a singularity within an interval, the evaluation is stopped with an error
+message indicating the problem part of the expression.
+<!--l. 325--><p class="noindent" >Syntax:
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-109">BOUNDS</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">exp,var</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">..u</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">)[</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">..u</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmr-10x-x-109">])</span>
+     </dd><dt class="description">
+<span 
+class="ptmri8t-x-x-109">BOUNDS</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">exp,</span><span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">var</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">..u</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">)[</span><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">..u</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmr-10x-x-109">]</span><span 
+class="cmsy-10x-x-109">}</span><span 
+class="cmr-10x-x-109">)</span>
+     <!--l. 333--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">exp </span>is the function to be investigated,
+     <!--l. 335--><p class="noindent" ><span 
+class="cmmi-10x-x-109">var</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,var</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> are the variables of exp,
+                                                                     
+
+                                                                     
+     <!--l. 337--><p class="noindent" ><span 
+class="cmmi-10x-x-109">l</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,l</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> and <span 
+class="cmmi-10x-x-109">u</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,u</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> specify the area (intervals).
+     <!--l. 339--><p class="noindent" ><span 
+class="cmmi-10x-x-109">BOUNDS </span>computes  upper  and  lower  bounds  for  the  expression  in  the
+     given area. An interval is returned.
+     </dd></dl>
+<!--l. 344--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1070">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;bounds(sin&#x00A0;x,x=(1&#x00A0;..&#x00A0;2));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{-1,1}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;rounded;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;bounds(sin&#x00A0;x,x=(1&#x00A0;..&#x00A0;2));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;0.84147098481&#x00A0;..&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;bounds(x**2+x,x=(-0.5&#x00A0;..&#x00A0;0.5));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;0.25&#x00A0;..&#x00A0;0.75
+&#x00A0;<br />
+</div>
+<!--l. 361--><p class="nopar" >
+<!--l. 363--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.7    </span> <a 
+ id="x178-69900016.43.7"></a>Chebyshev Curve Fitting</h4>
+<a 
+ id="dx178-699001"></a>
+<a 
+ id="dx178-699002"></a>
+<a 
+ id="dx178-699003"></a>
+<a 
+ id="dx178-699004"></a>
+<!--l. 369--><p class="noindent" >The operator family <span 
+class="cmmi-10x-x-109">Chebyshev</span>_<span 
+class="cmmi-10x-x-109">&#x2026;</span> implements approximation and evaluation of
+functions by the Chebyshev method. Let <span 
+class="cmmi-10x-x-109">T</span><sub><span 
+class="cmmi-8">n</span></sub><sup><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">a,b</span><span 
+class="cmr-8">)</span></sup><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">) </span>be the Chebyshev polynomial of
+order <span 
+class="cmmi-10x-x-109">n </span>transformed to the interval <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a,b</span><span 
+class="cmr-10x-x-109">)</span>. Then a function <span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">) </span>can be approximated in
+<span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a,b</span><span 
+class="cmr-10x-x-109">) </span>by a series
+<!--l. 375--><p class="noindent" ><span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">) </span><span 
+class="cmsy-10x-x-109">&#x2248;</span><span 
+class="cmex-10x-x-109">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">i</span><span 
+class="cmr-8">=0</span></sub><sup><span 
+class="cmmi-8">N</span></sup><span 
+class="cmmi-10x-x-109">c</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-10x-x-109">T</span><sub><span 
+class="cmmi-8">i</span></sub><sup><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">a,b</span><span 
+class="cmr-8">)</span></sup><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">)</span>
+<!--l. 377--><p class="noindent" >The operator <span 
+class="cmmi-10x-x-109">Chebyshev</span>_<span 
+class="cmmi-10x-x-109">fit </span>computes this approximation and returns a list, which has
+as first element the sum expressed as a polynomial and as second element the sequence
+of Chebyshev coefficients <span 
+class="cmmi-10x-x-109">c</span><sub><span 
+class="cmmi-8">i</span></sub>. <span 
+class="cmmi-10x-x-109">Chebyshev</span>_<span 
+class="cmmi-10x-x-109">df </span>and <span 
+class="cmmi-10x-x-109">Chebyshev</span>_<span 
+class="cmmi-10x-x-109">int </span>transform a
+Chebyshev coefficient list into the coefficients of the corresponding derivative or integral
+respectively. For evaluating a Chebyshev approximation at a given point in the basic
+interval the operator <span 
+class="cmmi-10x-x-109">Chebyshev</span>_<span 
+class="cmmi-10x-x-109">eval </span>can be used. Note that <span 
+class="cmmi-10x-x-109">Chebyshev</span>_<span 
+class="cmmi-10x-x-109">eval </span>is based
+on a recurrence relation which is in general more stable than a direct evaluation of the
+                                                                     
+
+                                                                     
+complete polynomial.
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-109">CHEBYSHEV_FIT</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">fcn,var </span><span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">lo..hi</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">,n</span><span 
+class="cmr-10x-x-109">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">CHEBYSHEV_EVAL</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">coeffs,var </span><span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">lo..hi</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">,var </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">pt</span><span 
+class="cmr-10x-x-109">)</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">CHEBYSHEV_DF</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">coeffs,var </span><span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">lo..hi</span><span 
+class="cmr-10x-x-109">))</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">CHEBYSHEV_INT</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">coeffs,var </span><span 
+class="cmr-10x-x-109">= (</span><span 
+class="cmmi-10x-x-109">lo..hi</span><span 
+class="cmr-10x-x-109">))</span>
+     <!--l. 399--><p class="noindent" >where  <span 
+class="cmmi-10x-x-109">fcn </span>is  an  algebraic  expression  (the  function  to  be  fitted),  <span 
+class="cmmi-10x-x-109">var </span>is
+     the variable of <span 
+class="cmmi-10x-x-109">fcn</span>, <span 
+class="cmmi-10x-x-109">lo </span>and <span 
+class="cmmi-10x-x-109">hi </span>are numerical real values which describe an
+     interval (<span 
+class="cmmi-10x-x-109">lo &#x003C; hi</span>), <span 
+class="cmmi-10x-x-109">n </span>is the approximation order,an integer <span 
+class="cmmi-10x-x-109">&#x003E; </span><span 
+class="cmr-10x-x-109">0</span>, set to 20
+     if missing, <span 
+class="cmmi-10x-x-109">pt </span>is a numerical value in the interval and <span 
+class="cmmi-10x-x-109">coeffs </span>is a series of
+     Chebyshev coefficients, computed by one of <span 
+class="cmmi-10x-x-109">CHEBY SHEV</span> _<span 
+class="cmmi-10x-x-109">COEFF </span>,
+     _<span 
+class="cmmi-10x-x-109">DF </span>or _<span 
+class="cmmi-10x-x-109">INT </span>.</dd></dl>
+<!--l. 408--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1071">
+&#x00A0;<br />on&#x00A0;rounded;
+&#x00A0;<br />
+&#x00A0;<br />w:=chebyshev_fit(sin&#x00A0;x/x,x=(1&#x00A0;..&#x00A0;3),5);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />w&#x00A0;:=&#x00A0;{0.03824*x&#x00A0;&#x00A0;-&#x00A0;0.2398*x&#x00A0;&#x00A0;+&#x00A0;0.06514*x&#x00A0;+&#x00A0;0.9778,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{0.8991,-0.4066,-0.005198,0.009464,-0.00009511}}
+&#x00A0;<br />
+&#x00A0;<br />chebyshev_eval(second&#x00A0;w,&#x00A0;x=(1&#x00A0;..&#x00A0;3),&#x00A0;x=2.1);
+&#x00A0;<br />
+&#x00A0;<br />0.4111
+&#x00A0;<br />
+</div>
+<!--l. 425--><p class="nopar" >
+<!--l. 427--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.8    </span> <a 
+ id="x178-70000016.43.8"></a>General Curve Fitting</h4>
+<a 
+ id="dx178-700001"></a>
+<!--l. 430--><p class="noindent" >The operator <span 
+class="cmmi-10x-x-109">NUM</span>_<span 
+class="cmmi-10x-x-109">FIT </span>finds for a set of points the linear combination of a given
+set of functions (function basis) which approximates the points best under the
+objective of the least squares criterion (minimum of the sum of the squares of the
+deviation). The solution is found as zero of the gradient vector of the sum of squared
+errors.
+<!--l. 438--><p class="noindent" >Syntax:
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-109">NUM_FIT</span> </dt><dd 
+class="description"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">vals,basis,var </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">pts</span><span 
+class="cmr-10x-x-109">)</span>
+     <!--l. 443--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">vals </span>is a list of numeric values,
+     <!--l. 445--><p class="noindent" ><span 
+class="cmmi-10x-x-109">var </span>is a variable used for the approximation,
+     <!--l. 447--><p class="noindent" ><span 
+class="cmmi-10x-x-109">pts </span>is a list of coordinate values which correspond to <span 
+class="cmmi-10x-x-109">var</span>,
+     <!--l. 449--><p class="noindent" ><span 
+class="cmmi-10x-x-109">basis  </span>is   a   set   of   functions   varying   in   <span 
+class="cmmi-10x-x-109">var  </span>which   is   used   for   the
+                                                                     
+
+                                                                     
+     approximation.
+     </dd></dl>
+<!--l. 454--><p class="noindent" >The result is a list containing as first element the function which approximates the given
+values, and as second element a list of coefficients which were used to build this function
+from the basis.
+<!--l. 459--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1072">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;approximate&#x00A0;a&#x00A0;set&#x00A0;of&#x00A0;factorials&#x00A0;by&#x00A0;a&#x00A0;polynomial
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pts:=for&#x00A0;i:=1&#x00A0;step&#x00A0;1&#x00A0;until&#x00A0;5&#x00A0;collect&#x00A0;i$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;vals:=for&#x00A0;i:=1&#x00A0;step&#x00A0;1&#x00A0;until&#x00A0;5&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;j:=1:i&#x00A0;product&#x00A0;j$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;num_fit(vals,{1,x,x**2},x=pts);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{14.571428571*X&#x00A0;&#x00A0;-&#x00A0;61.428571429*X&#x00A0;+&#x00A0;54.6,{54.6,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;61.428571429,14.571428571}}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;num_fit(vals,{1,x,x**2,x**3,x**4},x=pts);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{2.2083333234*X&#x00A0;&#x00A0;-&#x00A0;20.249999879*X
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;67.791666154*X&#x00A0;&#x00A0;-&#x00A0;93.749999133*X
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;44.999999525,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{44.999999525,&#x00A0;-&#x00A0;93.749999133,67.791666154,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;20.249999879,2.2083333234}}
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+<!--l. 490--><p class="nopar" >
+<!--l. 492--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.43.9    </span> <a 
+ id="x178-70100016.43.9"></a>Function Bases</h4>
+<a 
+ id="dx178-701001"></a>
+<a 
+ id="dx178-701002"></a>
+<a 
+ id="dx178-701003"></a>
+<a 
+ id="dx178-701004"></a>
+                                                                     
+
+                                                                     
+<a 
+ id="dx178-701005"></a>
+<a 
+ id="dx178-701006"></a>
+<a 
+ id="dx178-701007"></a>
+<a 
+ id="dx178-701008"></a>
+<!--l. 502--><p class="noindent" >The following procedures compute sets of functions e.g. to be used for approximation.
+All procedures have two parameters, the expression to be used as <span 
+class="cmmi-10x-x-109">variable </span>(an identifier
+in most cases) and the order of the desired system. The functions are not scaled to a
+specific interval, but the <span 
+class="cmmi-10x-x-109">variable </span>can be accompanied by a scale factor and/or a
+translation in order to map the generic interval of orthogonality to another (e.g.
+<span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1</span><span 
+class="cmmi-10x-x-109">&#x2215;</span><span 
+class="cmr-10x-x-109">2) </span><span 
+class="cmsy-10x-x-109">* </span><span 
+class="cmr-10x-x-109">2</span><span 
+class="cmmi-10x-x-109">pi</span>). The result is a function list with ascending order, such that the first
+element is the function of order zero and (for the polynomial systems) the function of
+order <span 
+class="cmmi-10x-x-109">n </span>is the <span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmr-10x-x-109">+ 1</span>-th element.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1073">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;monomial_base(x,n)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{1,x,...,x**n}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;trigonometric_base(x,n)&#x00A0;&#x00A0;{1,sin&#x00A0;x,cos&#x00A0;x,sin(2x),cos(2x)...}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Bernstein_base(x,n)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Bernstein&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Legendre_base(x,n)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Legendre&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Laguerre_base(x,n)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Laguerre&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Hermite_base(x,n)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Hermite&#x00A0;polynomials
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Chebyshev_base_T(x,n)&#x00A0;&#x00A0;&#x00A0;&#x00A0;Chebyshev&#x00A0;polynomials&#x00A0;first&#x00A0;kind
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Chebyshev_base_U(x,n)&#x00A0;&#x00A0;&#x00A0;&#x00A0;Chebyshev&#x00A0;polynomials&#x00A0;second&#x00A0;kind
+&#x00A0;<br />
+</div>
+<!--l. 529--><p class="nopar" >
+<!--l. 531--><p class="noindent" >Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1074">
+&#x00A0;Bernstein_base(x,5);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{&#x00A0;-&#x00A0;X&#x00A0;&#x00A0;+&#x00A0;5*X&#x00A0;&#x00A0;-&#x00A0;10*X&#x00A0;&#x00A0;+&#x00A0;10*X&#x00A0;&#x00A0;-&#x00A0;5*X&#x00A0;+&#x00A0;1,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5*X*(X&#x00A0;&#x00A0;-&#x00A0;4*X&#x00A0;&#x00A0;+&#x00A0;6*X&#x00A0;&#x00A0;-&#x00A0;4*X&#x00A0;+&#x00A0;1),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;10*X&#x00A0;*(&#x00A0;-&#x00A0;X&#x00A0;&#x00A0;+&#x00A0;3*X&#x00A0;&#x00A0;-&#x00A0;3*X&#x00A0;+&#x00A0;1),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;10*X&#x00A0;*(X&#x00A0;&#x00A0;-&#x00A0;2*X&#x00A0;+&#x00A0;1),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5*X&#x00A0;*(&#x00A0;-&#x00A0;X&#x00A0;+&#x00A0;1),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;}
+&#x00A0;<br />
+</div>
+<!--l. 553--><p class="nopar" >
+<!--l. 767--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 769--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse134.html" >Up</a></td><td class="clinks"><a 
+href="manualse135.html" >Next</a></td><td class="clinks"><a 
+href="manualse133.html" >Prev</a></td><td class="clinks"><a 
+href="manualse133.html#tailmanualse133.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse134.html" >Front</a></td></tr></table><a 
+ id="tailmanualse134.html"></a>   
+</body></html> 

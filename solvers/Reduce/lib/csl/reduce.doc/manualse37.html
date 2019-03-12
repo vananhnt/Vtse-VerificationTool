@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>MAP Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse37.html" >Up</a></td><td class="clinks"><a 
+href="manualse38.html" >Next</a></td><td class="clinks"><a 
+href="manualse36.html" >Prev</a></td><td class="clinks"><a 
+href="manualse36.html#tailmanualse36.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse37.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.11    </span> <a 
+ id="x48-850007.11"></a>MAP Operator</h3>
+<a 
+ id="dx48-85001"></a>
+<!--l. 1022--><p class="noindent" ><a 
+ id="operator:MAP"></a>
+<!--l. 1024--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">MAP </span>operator applies a uniform evaluation pattern to all members of a composite
+structure: a matrix, a list, or the arguments of an operator expression. The evaluation
+pattern can be a unary procedure, an operator, or an algebraic expression with one free
+variable.
+<!--l. 1029--><p class="noindent" >It is used with the syntax:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-124">
+&#x00A0;&#x00A0;&#x00A0;MAP(FNC:function,OBJ:object)
+</div>
+<!--l. 1032--><p class="nopar" > Here <span 
+class="pcrr8t-x-x-109">OBJ </span>is a list, a matrix or an operator expression. <span 
+class="pcrr8t-x-x-109">FNC </span>can be one of the
+following:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x48-85003x1">the name of an operator with a single argument: the operator is evaluated
+     once with each element of <span 
+class="pcrr8t-x-x-109">OBJ </span>as its single argument;
+     </li>
+     <li 
+  class="enumerate" id="x48-85005x2">an  algebraic  expression  with  exactly  one  free  variable,  i.e.  a  variable
+     preceded by the tilde symbol. The expression is evaluated for each element
+     of <span 
+class="pcrr8t-x-x-109">OBJ</span>, with the element substituted for the free variable;
+     </li>
+     <li 
+  class="enumerate" id="x48-85007x3">a replacement rule of the form <span 
+class="pcrr8t-x-x-109">var =&#x003E; rep </span>where <span 
+class="pcrr8t-x-x-109">var </span>is a variable (a
+     kernel without a subscript) and <span 
+class="pcrr8t-x-x-109">rep </span>is an expression that contains <span 
+class="pcrr8t-x-x-109">var</span>. The
+     replacement expression <span 
+class="pcrr8t-x-x-109">rep </span>is evaluated for each element of <span 
+class="pcrr8t-x-x-109">OBJ </span>with the
+     element substituted for <span 
+class="pcrr8t-x-x-109">var</span>. The variable <span 
+class="pcrr8t-x-x-109">var </span>may be optionally preceded
+     by a tilde.</li></ol>
+<!--l. 1050--><p class="noindent" >The rule form for <span 
+class="pcrr8t-x-x-109">FNC </span>is needed when more than one free variable occurs.
+<!--l. 1053--><p class="noindent" >Examples:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-125">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;map(abs,{1,-2,a,-a})&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;{1,2,ABS(A),ABS(A)}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;map(int(~w,x),&#x00A0;mat((x^2,x^5),(x^4,x^5)))&#x00A0;-&#x003E;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[----&#x00A0;&#x00A0;----]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[----&#x00A0;&#x00A0;----]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;map(~w*6,&#x00A0;x^2/3&#x00A0;=&#x00A0;y^3/2&#x00A0;-1)&#x00A0;-&#x003E;&#x00A0;2*X^2=3*(Y^3-2)
+</div>
+<!--l. 1069--><p class="nopar" >
+<!--l. 1071--><p class="noindent" >You can use <span 
+class="pcrr8t-x-x-109">MAP </span>in nested expressions. However, you cannot apply <span 
+class="pcrr8t-x-x-109">MAP </span>to a
+non-composite object, e.g. an identifier or a number.
+                                                                     
+
+                                                                     
+<!--l. 1075--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse37.html" >Up</a></td><td class="clinks"><a 
+href="manualse38.html" >Next</a></td><td class="clinks"><a 
+href="manualse36.html" >Prev</a></td><td class="clinks"><a 
+href="manualse36.html#tailmanualse36.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse37.html" >Front</a></td></tr></table><a 
+ id="tailmanualse37.html"></a>  
+</body></html> 

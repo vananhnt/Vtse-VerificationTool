@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Trace Calculations</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch18.html#manualse183.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse184.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse182.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse182.html#tailmanualse182.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse183.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">18.4    </span></span> <a 
+ id="x243-103500018.4"></a><span 
+class="ptmr8t-x-x-120">Trace Calculations</span></h3>
+<a 
+ id="dx243-1035001"></a>
+<!--l. 186--><p class="noindent" ><a 
+ id="command:NOSPUR"></a> <a 
+ id="command:SPUR"></a>
+<!--l. 189--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">When a Dirac expression is evaluated, the system computes one quarter of the</span>
+<span 
+class="ptmr8t-x-x-120">trace of each </span><span 
+class="cmmi-12">&#x03B3; </span><span 
+class="ptmr8t-x-x-120">matrix product in the expansion of the expression. One quarter of</span>
+<span 
+class="ptmr8t-x-x-120">each trace is taken in order to avoid confusion between the trace of the scalar </span><span 
+class="pcrr8t-x-x-120">M</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="ptmr8t-x-x-120">say, and </span><span 
+class="pcrr8t-x-x-120">M </span><span 
+class="ptmr8t-x-x-120">representing </span><span 
+class="pcrr8t-x-x-120">M *</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="pcrro8t-x-x-120">unit 4 by 4 matrix</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="ptmr8t-x-x-120">. Contraction over</span>
+<span 
+class="ptmr8t-x-x-120">indices occurring in such expressions is also performed. If an unmatched index is</span>
+<span 
+class="ptmr8t-x-x-120">found in such an expression, an error occurs.</span>
+<!--l. 198--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The algorithms used for trace calculations are the best available at the time this</span>
+<span 
+class="ptmr8t-x-x-120">system was produced. For example, in addition to the algorithm developed</span>
+<span 
+class="ptmr8t-x-x-120">by Chisholm for contracting indices in products of traces, REDUCE</span>
+<span 
+class="ptmr8t-x-x-120">uses the elegant algorithm of Kahane for contracting indices in </span><span 
+class="cmmi-12">&#x03B3; </span><span 
+class="ptmr8t-x-x-120">matrix</span>
+<span 
+class="ptmr8t-x-x-120">products. These algorithms are described in Chisholm, J. S. R., Il Nuovo</span>
+<span 
+class="ptmr8t-x-x-120">Cimento X, 30, 426 (1963) and Kahane, J., Journal Math. Phys. 9, 1732</span>
+<span 
+class="ptmr8t-x-x-120">(1968).</span>
+<!--l. 206--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It is possible to prevent the trace calculation over any line identifier by the</span>
+<span 
+class="ptmr8t-x-x-120">declaration </span><span 
+class="pcrr8t-x-x-120">NOSPUR</span><span 
+class="ptmr8t-x-x-120">.</span><a 
+ id="dx243-1035002"></a> <span 
+class="ptmr8t-x-x-120">For example,</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1388">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;nospur&#x00A0;l1,l2;
+</div>
+<!--l. 210--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">will mean that no traces are taken of </span><span 
+class="cmmi-12">&#x03B3; </span><span 
+class="ptmr8t-x-x-120">matrix terms involving the line numbers</span>
+<span 
+class="pcrr8t-x-x-120">L1 </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">L2</span><span 
+class="ptmr8t-x-x-120">. However, in some calculations involving more than one line, a</span>
+<span 
+class="ptmr8t-x-x-120">catastrophic error</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1389">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;This&#x00A0;NOSPUR&#x00A0;option&#x00A0;not&#x00A0;implemented
+</div>
+<!--l. 216--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">can occur (for the reason stated!) If you encounter this error, please let us</span>
+<span 
+class="ptmr8t-x-x-120">know!</span>
+<!--l. 220--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">A trace of a </span><span 
+class="cmmi-12">&#x03B3; </span><span 
+class="ptmr8t-x-x-120">matrix expression involving a line identifier which has</span>
+<span 
+class="ptmr8t-x-x-120">been declared </span><span 
+class="pcrr8t-x-x-120">NOSPUR </span><span 
+class="ptmr8t-x-x-120">may be later taken by making the declaration</span>
+<span 
+class="pcrr8t-x-x-120">SPUR</span><span 
+class="ptmr8t-x-x-120">.</span><a 
+ id="dx243-1035003"></a>
+<!--l. 224--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">See also the CVIT package for an alternative mechanism (chapter</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+href="manualse108.html#x140-37300016.17"><span 
+class="ptmr8t-x-x-120">16.17</span><!--tex4ht:ref: CVIT --></a><span 
+class="ptmr8t-x-x-120">).</span>
+                                                                     
+
+                                                                     
+<!--l. 227--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch18.html#manualse183.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse184.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse182.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse182.html#tailmanualse182.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse183.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse183.html"></a>  
+</body></html> 

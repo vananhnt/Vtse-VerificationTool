@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>7 Built-in Prefix Operators</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch7.html" >Up</a></td><td class="clinks"><a 
+href="manualch8.html" >Next</a></td><td class="clinks"><a 
+href="manualch6.html" >Prev</a></td><td class="clinks"><a 
+href="manualch6.html#tailmanualch6.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualch7.html">Tail</a></td></tr></table><h2 class="ChapterHead"> 7&#x00A0;<a 
+ id="x37-530007"></a>Built-in Prefix Operators</h2>
+<!--l. 2--><p class="noindent" >In the following subsections are descriptions of the most useful prefix <a 
+ id="dx37-53001"></a>operators built into
+REDUCE that are not defined in other sections (such as substitution operators). Some are
+fully defined internally as procedures; others are more nearly abstract operators, with
+only some of their properties known to the system.
+<!--l. 9--><p class="noindent" >In many cases, an operator is described by a prototypical header line as follows. Each
+formal parameter is given a name and followed by its allowed type. The names of classes
+referred to in the definition are printed in lower case, and parameter names in upper case.
+If a parameter type is not commonly used, it may be a specific set enclosed in brackets <span 
+class="pcrr8t-x-x-109">{</span>
+&#x2026; <span 
+class="pcrr8t-x-x-109">}</span>. Operators that accept formal parameter lists of arbitrary length have the parameter
+and type class enclosed in square brackets indicating that zero or more occurrences of
+that argument are permitted. Optional parameters and their type classes are enclosed in
+angle brackets.
+<div class="sectionTOCS">
+&#x00A0;<span class="sectionToc" >7.1 <a 
+href="manualse27.html#x38-540007.1">Numerical Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.2 <a 
+href="manualse28.html#x39-690007.2">Mathematical Functions</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.3 <a 
+href="manualse29.html#x40-700007.3">Bernoulli Numbers and Euler Numbers</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.4 <a 
+href="manualse30.html#x41-710007.4">Fibonacci Numbers and Fibonacci Polynomials</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.5 <a 
+href="manualse31.html#x42-720007.5">Motzkin numbers</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.6 <a 
+href="manualse32.html#x43-730007.6">CHANGEVAR operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.7 <a 
+href="manualse33.html#x44-760007.7">CONTINUED_FRACTION Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.8 <a 
+href="manualse34.html#x45-770007.8">DF Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.9 <a 
+href="manualse35.html#x46-800007.9">INT Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.10 <a 
+href="manualse36.html#x47-840007.10">LENGTH Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.11 <a 
+href="manualse37.html#x48-850007.11">MAP Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.12 <a 
+href="manualse38.html#x49-860007.12">MKID Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.13 <a 
+href="manualse39.html#x50-870007.13">The Pochhammer Notation</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.14 <a 
+href="manualse40.html#x51-880007.14">PF Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.15 <a 
+href="manualse41.html#x52-890007.15">SELECT Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.16 <a 
+href="manualse42.html#x53-900007.16">SOLVE Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.17 <a 
+href="manualse43.html#x55-950007.17">Even and Odd Operators</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >7.18 <a 
+href="manualse44.html#x56-960007.18">Linear Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.19 <a 
+href="manualse45.html#x57-970007.19">Non-Commuting Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.20 <a 
+href="manualse46.html#x58-980007.20">Symmetric and Antisymmetric Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.21 <a 
+href="manualse47.html#x59-990007.21">Declaring New Prefix Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.22 <a 
+href="manualse48.html#x60-1000007.22">Declaring New Infix Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.23 <a 
+href="manualse49.html#x61-1010007.23">Creating/Removing Variable Dependency</a></span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                     
+
+                                                                     
+<table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch7.html" >Up</a></td><td class="clinks"><a 
+href="manualch8.html" >Next</a></td><td class="clinks"><a 
+href="manualch6.html" >Prev</a></td><td class="clinks"><a 
+href="manualch6.html#tailmanualch6.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualch7.html" >Front</a></td></tr></table><a 
+ id="tailmanualch7.html"></a>  
+</body></html> 

@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Compound Statements</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse20.html" >Up</a></td><td class="clinks"><a 
+href="manualse19.html" >Prev</a></td><td class="clinks"><a 
+href="manualse19.html#tailmanualse19.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse20.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">5.7    </span> <a 
+ id="x29-420005.7"></a>Compound Statements</h3>
+<!--l. 409--><p class="noindent" ><a 
+ id="command:BEGIN"></a>
+<a 
+ id="dx29-42001"></a>
+<a 
+ id="dx29-42002"></a>
+<!--l. 411--><p class="noindent" >Often the desired process can best (or only) be described as a series of steps to be carried
+out one after the other. In many cases, this can be achieved by use of the group statement<a 
+ id="dx29-42003"></a>.
+However, each step often provides some intermediate result, until at the end we have the
+final result wanted. Alternatively, iterations on the steps are needed that are
+not possible with constructs such as <span 
+class="pcrr8t-x-x-109">WHILE</span><a 
+ id="dx29-42004"></a> or <span 
+class="pcrr8t-x-x-109">REPEAT</span><a 
+ id="dx29-42005"></a> statements. In such
+cases the steps of the process must be enclosed between the words <span 
+class="pcrr8t-x-x-109">BEGIN </span>and
+<span 
+class="pcrr8t-x-x-109">END</span><a 
+ id="dx29-42006"></a> forming what is technically called a <span 
+class="ptmri8t-x-x-109">block</span><a 
+ id="dx29-42007"></a> or <span 
+class="ptmri8t-x-x-109">compound </span>statement. Such a
+compound statement can in fact be used wherever a group statement appears.
+The converse is not true: <span 
+class="pcrr8t-x-x-109">BEGIN </span><span 
+class="pcrr8t-x-x-109">&#x2026;END </span>can be used in ways that <span 
+class="pcrr8t-x-x-109">&#x003C;&#x003C;</span>&#x2026; <span 
+class="pcrr8t-x-x-109">&#x003E;&#x003E;</span>
+cannot.
+<!--l. 427--><p class="noindent" ><a 
+ id="command:SCALAR"></a> <a 
+ id="command:INTEGER"></a> <a 
+ id="command:REAL"></a>
+<!--l. 431--><p class="noindent" >If intermediate results must be formed, local variables must be provided in which to store
+them. <span 
+class="ptmri8t-x-x-109">Local </span>means that their values are deleted as soon as the block&#8217;s operations are
+complete, and there is no conflict with variables outside the block that happen to have the
+same name. Local variables are created by a <span 
+class="pcrr8t-x-x-109">SCALAR</span><a 
+ id="dx29-42008"></a> declaration immediately after the
+<span 
+class="pcrr8t-x-x-109">BEGIN</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-64">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;scalar&#x00A0;a,b,c,z;
+</div>
+<!--l. 439--><p class="nopar" > If more convenient, several <span 
+class="pcrr8t-x-x-109">SCALAR </span>declarations can be given one after another:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-65">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;scalar&#x00A0;a,b,c;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;scalar&#x00A0;z;
+</div>
+<!--l. 445--><p class="nopar" > In place of <span 
+class="pcrr8t-x-x-109">SCALAR </span>one can also use the declarations <span 
+class="pcrr8t-x-x-109">INTEGER</span><a 
+ id="dx29-42009"></a> or <span 
+class="pcrr8t-x-x-109">REAL</span><a 
+ id="dx29-42010"></a>. In the present
+version of REDUCE variables declared <span 
+class="pcrr8t-x-x-109">INTEGER </span>are expected to have only integer
+values, and are initialized to 0. <span 
+class="pcrr8t-x-x-109">REAL </span>variables on the other hand are currently treated as
+algebraic mode <span 
+class="pcrr8t-x-x-109">SCALAR</span>s.
+<!--l. 453--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">CAUTION: </span><span 
+class="pcrr8t-x-x-109">INTEGER</span>, <span 
+class="pcrr8t-x-x-109">REAL </span>and <span 
+class="pcrr8t-x-x-109">SCALAR </span>declarations can only be given immediately
+after a <span 
+class="pcrr8t-x-x-109">BEGIN</span>. An error will result if they are used after other statements in a
+block (including <span 
+class="pcrr8t-x-x-109">ARRAY </span>and <span 
+class="pcrr8t-x-x-109">OPERATOR </span>declarations, which are global in
+scope), or outside the top-most block (e.g., at the top level). All variables declared
+<span 
+class="pcrr8t-x-x-109">SCALAR </span>are automatically initialized to zero in algebraic mode (<span 
+class="pcrr8t-x-x-109">NIL </span>in symbolic
+mode).
+<!--l. 461--><p class="noindent" >Any symbols not declared as local variables in a block refer to the variables of the same
+name in the current calling environment. In particular, if they are not so declared at a
+higher level (e.g., in a surrounding block or as parameters in a calling procedure), their
+values can be permanently changed.
+<!--l. 467--><p class="noindent" >Following the <span 
+class="pcrr8t-x-x-109">SCALAR</span><a 
+ id="dx29-42011"></a> declaration(s), if any, write the statements to be executed, one
+after the other, separated by delimiters (e.g., <span 
+class="pcrr8t-x-x-109">; </span>or <span 
+class="pcrr8t-x-x-109">$</span>) (it doesn&#8217;t matter which). However,
+from a stylistic point of view, <span 
+class="pcrr8t-x-x-109">; </span>is preferred.
+<!--l. 472--><p class="noindent" >The last statement in the body, just before <span 
+class="pcrr8t-x-x-109">END</span>, need not have a terminator (since the
+<span 
+class="pcrr8t-x-x-109">BEGIN</span>&#x2026; <span 
+class="pcrr8t-x-x-109">END </span>are in a sense brackets confining the block statements). The last statement
+must also be the command <span 
+class="pcrr8t-x-x-109">RETURN</span><a 
+ id="dx29-42012"></a> followed by the variable or expression whose value
+is to be the value returned by the procedure. If the <span 
+class="pcrr8t-x-x-109">RETURN </span>is omitted (or nothing is
+written after the word <span 
+class="pcrr8t-x-x-109">RETURN</span>) the procedure will have no value or the value zero,
+depending on how it is used (and <span 
+class="pcrr8t-x-x-109">NIL </span>in symbolic mode). Remember to put a terminator
+after the <span 
+class="pcrr8t-x-x-109">END</span>.
+<!--l. 482--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 484--><p class="noindent" >Given a previously assigned integer value for <span 
+class="pcrr8t-x-x-109">N</span>, the following block will compute the
+Legendre polynomial of degree <span 
+class="pcrr8t-x-x-109">N </span>in the variable <span 
+class="pcrr8t-x-x-109">X</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-66">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;begin&#x00A0;scalar&#x00A0;seed,deriv,top,fact;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;seed:=1/(y^2&#x00A0;-&#x00A0;2*x*y&#x00A0;+1)^(1/2);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;deriv:=df(seed,y,n);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;top:=sub(y=0,deriv);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fact:=for&#x00A0;i:=1:n&#x00A0;product&#x00A0;i;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;top/fact
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;end;
+</div>
+<!--l. 495--><p class="nopar" >
+<!--l. 497--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">5.7.1    </span> <a 
+ id="x29-430005.7.1"></a>Compound Statements with GO TO</h4>
+<a 
+ id="dx29-43001"></a>
+<a 
+ id="dx29-43002"></a>
+<!--l. 500--><p class="noindent" >It is possible to have more complicated structures inside the <span 
+class="pcrr8t-x-x-109">BEGIN</span>&#x2026; <span 
+class="pcrr8t-x-x-109">END</span><a 
+ id="dx29-43003"></a> brackets than
+indicated in the previous example. That the individual lines of the program need not
+be assignment<a 
+ id="dx29-43004"></a> statements, but could be almost any other kind of statement or
+command, needs no explanation. For example, conditional statements, and <span 
+class="pcrr8t-x-x-109">WHILE</span><a 
+ id="dx29-43005"></a>
+and <span 
+class="pcrr8t-x-x-109">REPEAT</span><a 
+ id="dx29-43006"></a> constructions, have an obvious role in defining more intricate
+blocks.
+<!--l. 509--><p class="noindent" >If these structured constructs don&#8217;t suffice, it is possible to use labels <a 
+ id="dx29-43007"></a>and <span 
+class="pcrr8t-x-x-109">GO</span>
+<span 
+class="pcrr8t-x-x-109">TO</span>s<a 
+ id="dx29-43008"></a> within a compound statement,<a 
+ id="dx29-43009"></a> and also to use <span 
+class="pcrr8t-x-x-109">RETURN</span><a 
+ id="dx29-43010"></a> in places within
+the block other than just before the <span 
+class="pcrr8t-x-x-109">END</span>. The following subsections discuss
+these matters in detail. For many readers the following example, presenting one
+possible definition of a process to calculate the factorial of <span 
+class="pcrr8t-x-x-109">N </span>for preassigned <span 
+class="pcrr8t-x-x-109">N </span>will
+suffice:
+<!--l. 518--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-67">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;begin&#x00A0;scalar&#x00A0;m;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m:=1;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;l:&#x00A0;if&#x00A0;n=0&#x00A0;then&#x00A0;return&#x00A0;m;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;m:=m*n;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n:=n-1;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;go&#x00A0;to&#x00A0;l
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;end;
+</div>
+<!--l. 527--><p class="nopar" >
+<!--l. 529--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">5.7.2    </span> <a 
+ id="x29-440005.7.2"></a>Labels and GO TO Statements</h4>
+<!--l. 530--><p class="noindent" ><a 
+ id="command:GOTO"></a>
+<a 
+ id="dx29-44001"></a>
+<a 
+ id="dx29-44002"></a>
+<!--l. 532--><p class="noindent" >Within a <span 
+class="pcrr8t-x-x-109">BEGIN </span><span 
+class="pcrr8t-x-x-109">&#x2026;END </span>compound statement it is possible to label statements, and
+transfer to them out of sequence using <span 
+class="pcrr8t-x-x-109">GOTO </span>statements. Only statements on the top
+level inside compound statements can be labeled, not ones inside subsidiary
+constructions like <span 
+class="cmmi-10x-x-109">&#x003C;&#x003C; </span>&#x2026;<span 
+class="cmmi-10x-x-109">&#x003E;&#x003E;</span>, <span 
+class="pcrr8t-x-x-109">IF</span>&#x2026;<span 
+class="pcrr8t-x-x-109">THEN</span>&#x2026;, <span 
+class="pcrr8t-x-x-109">WHILE</span>&#x2026;<span 
+class="pcrr8t-x-x-109">DO</span>&#x2026;, etc.
+<!--l. 539--><p class="noindent" >Labels and <span 
+class="pcrr8t-x-x-109">GO TO </span>statements have the syntax:
+  <div class="syntax">
+  <div class="array"> <table id="TBL-9" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-9-1g"><col 
+id="TBL-9-1"><col 
+id="TBL-9-2"><col 
+id="TBL-9-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">go to statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">GO TO</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">label</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="pcrr8t-x-x-109">GOTO</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">label</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">label</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>       </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">identifier</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>           </div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">labeled statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">label</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">:</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>      </div></td></tr></table>          </div></div>
+<!--l. 546--><p class="noindent" >Note that statement names cannot be used as labels.
+<!--l. 548--><p class="noindent" >While <span 
+class="pcrr8t-x-x-109">GO TO </span>is an unconditional transfer, it is frequently used in conditional statements
+such as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-68">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;x&#x003E;5&#x00A0;then&#x00A0;go&#x00A0;to&#x00A0;abcd;
+</div>
+<!--l. 552--><p class="nopar" > giving the effect of a conditional transfer.
+<!--l. 555--><p class="noindent" >Transfers using <span 
+class="pcrr8t-x-x-109">GO TO</span>s can only occur within the block in which the <span 
+class="pcrr8t-x-x-109">GO TO </span>is used. In
+other words, you cannot transfer from an inner block to an outer block using a <span 
+class="pcrr8t-x-x-109">GO TO</span>.
+However, if a group statement occurs within a compound statement, it is possible to jump
+out of that group statement to a point within the compound statement using a <span 
+class="pcrr8t-x-x-109">GO</span>
+<span 
+class="pcrr8t-x-x-109">TO</span>.
+<!--l. 561--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">5.7.3    </span> <a 
+ id="x29-450005.7.3"></a>RETURN Statements</h4>
+<!--l. 562--><p class="noindent" ><a 
+ id="command:RETURN"></a>
+<!--l. 564--><p class="noindent" >The value corresponding to a <span 
+class="pcrr8t-x-x-109">BEGIN</span>&#x2026; <span 
+class="pcrr8t-x-x-109">END </span>compound statement,<a 
+ id="dx29-45001"></a><a 
+ id="dx29-45002"></a> <a 
+ id="dx29-45003"></a> such as a procedure
+body, is normally 0 (<span 
+class="pcrr8t-x-x-109">NIL </span>in symbolic mode). By executing a <span 
+class="pcrr8t-x-x-109">RETURN</span><a 
+ id="dx29-45004"></a> statement in
+the compound statement a different value can be returned. After a <span 
+class="pcrr8t-x-x-109">RETURN</span>
+statement is executed, no further statements within the compound statement are
+executed.
+<!--l. 572--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-69">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;x+y;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;m;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;return;
+</div>
+<!--l. 577--><p class="nopar" > Note that parentheses are not required around the <span 
+class="pcrr8t-x-x-109">x+y</span>, although they are permitted. The
+last example is equivalent to <span 
+class="pcrr8t-x-x-109">return 0 </span>or <span 
+class="pcrr8t-x-x-109">return nil</span>, depending on whether the
+block is used as part of an expression or not.
+<!--l. 583--><p class="noindent" >Since <span 
+class="pcrr8t-x-x-109">RETURN</span><a 
+ id="dx29-45005"></a> actually moves up only one block<a 
+ id="dx29-45006"></a> level, in a sense the casual
+user is not expected to understand, we tabulate some cautions concerning its
+use.
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x29-45008x1"><span 
+class="pcrr8t-x-x-109">RETURN </span>can be used on the top level inside the compound statement, i.e. as
+     one of the statements bracketed together by the <span 
+class="pcrr8t-x-x-109">BEGIN</span>&#x2026; <span 
+class="pcrr8t-x-x-109">END</span><a 
+ id="dx29-45009"></a>
+     </li>
+     <li 
+  class="enumerate" id="x29-45011x2"><span 
+class="pcrr8t-x-x-109">RETURN </span>can be used within a top level <span 
+class="pcrr8t-x-x-109">&#x003C;&#x003C; </span>&#x2026; <span 
+class="pcrr8t-x-x-109">&#x003E;&#x003E; </span>construction within the
+     compound statement. In this case, the <span 
+class="pcrr8t-x-x-109">RETURN </span>transfers control out of both
+     the group statement and the compound statement.
+     </li>
+     <li 
+  class="enumerate" id="x29-45013x3"><span 
+class="pcrr8t-x-x-109">RETURN </span>can be used within an <span 
+class="pcrr8t-x-x-109">IF</span>&#x2026; <span 
+class="pcrr8t-x-x-109">THEN</span>&#x2026; <span 
+class="pcrr8t-x-x-109">ELSE</span>&#x2026; on the top level within
+     the compound statement.</li></ol>
+<!--l. 600--><p class="noindent" >NOTE: At present, there is no construct provided to permit early termination of a <span 
+class="pcrr8t-x-x-109">FOR</span><a 
+ id="dx29-45014"></a>,
+<span 
+class="pcrr8t-x-x-109">WHILE</span><a 
+ id="dx29-45015"></a>, or <span 
+class="pcrr8t-x-x-109">REPEAT</span><a 
+ id="dx29-45016"></a> statement. In particular, the use of <span 
+class="pcrr8t-x-x-109">RETURN </span>in such cases results in
+a syntax error. For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-70">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;begin&#x00A0;scalar&#x00A0;y;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;:=&#x00A0;for&#x00A0;i:=0:99&#x00A0;do&#x00A0;if&#x00A0;a(i)=x&#x00A0;then&#x00A0;return&#x00A0;b(i);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;...
+</div>
+<!--l. 608--><p class="nopar" > will lead to an error.
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse20.html" >Up</a></td><td class="clinks"><a 
+href="manualse19.html" >Prev</a></td><td class="clinks"><a 
+href="manualse19.html#tailmanualse19.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse20.html" >Front</a></td></tr></table><a 
+ id="tailmanualse20.html"></a>   
+</body></html> 

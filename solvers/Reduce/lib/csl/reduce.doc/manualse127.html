@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>LIMITS: A package for finding limits</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse127.html" >Up</a></td><td class="clinks"><a 
+href="manualse128.html" >Next</a></td><td class="clinks"><a 
+href="manualse126.html" >Prev</a></td><td class="clinks"><a 
+href="manualse126.html#tailmanualse126.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse127.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.36    </span> <a 
+ id="x161-57500016.36"></a>LIMITS: A package for finding limits</h3>
+<a 
+ id="dx161-575001"></a>
+<a 
+ id="dx161-575002"></a>
+<!--l. 619--><p class="noindent" >This package loads automatically.
+<!--l. 621--><p class="noindent" >Author: Stanley L. Kameny.
+<a 
+ id="dx161-575003"></a>
+<!--l. 3--><p class="noindent" >LIMITS is a fast limit package for REDUCE for functions which are continuous
+except for computable poles and singularities, based on some earlier work by
+Ian Cohen and John P. Fitch. The Truncated Power Series package is used for
+non-critical points, at which the value of the function is the constant term in
+the expansion around that point. <a 
+ id="dx161-575004"></a>l&#8217;Hôpital&#8217;s rule is used in critical cases, with
+preprocessing of <span 
+class="cmsy-10x-x-109">&#x221E;-&#x221E; </span>forms and reformatting of product forms in order to apply
+l&#8217;Hôpital&#8217;s rule. A limited amount of bounded arithmetic is also employed where
+applicable.
+<!--l. 14--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.36.1    </span> <a 
+ id="x161-57600016.36.1"></a>Normal entry points</h4>
+<a 
+ id="dx161-576001"></a>
+<!--l. 15--><p class="noindent" ><a 
+ id="operator:LIMIT"></a>
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">LIMIT(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VAR:kernel</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">LIMPOINT:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmr-10x-x-109">)            :</span>
+  <span 
+class="cmmi-10x-x-109">algebraic</span></div>
+<!--l. 21--><p class="noindent" >This is the standard way of calling limit, applying all of the methods. The result is the
+limit of EXPRN as VAR approaches LIMPOINT.
+<!--l. 25--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.36.2    </span> <a 
+ id="x161-57700016.36.2"></a>Direction-dependent limits</h4>
+<a 
+ id="dx161-577001"></a>
+<a 
+ id="dx161-577002"></a>
+                                                                     
+
+                                                                     
+<!--l. 28--><p class="noindent" ><a 
+ id="operator:LIMIT+"></a> <a 
+ id="operator:LIMIT-"></a>
+  <div class="syntax">
+  <div class="array"> <table id="TBL-56" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-56-1g"><col 
+id="TBL-56-1"><col 
+id="TBL-56-2"><col 
+id="TBL-56-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">LIMIT!+(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VAR:kernel</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">LIMPOINT:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span> <span 
+class="cmr-10x-x-109">: </span><span 
+class="cmmi-10x-x-109">algebraic</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">LIMIT!-(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VAR:kernel</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">LIMPOINT:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span> <span 
+class="cmr-10x-x-109">: </span><span 
+class="cmmi-10x-x-109">algebraic </span></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11">                                                         </div></td></tr></table>  </div></div>
+<!--l. 37--><p class="noindent" >If the limit depends upon the direction of approach to the <span 
+class="pcrr8t-x-x-109">LIMPOINT</span>, the functions
+<span 
+class="pcrr8t-x-x-109">LIMIT!+ </span>and <span 
+class="pcrr8t-x-x-109">LIMIT!- </span>may be used. They are defined by:
+     <div class="quote">
+     <div class="tabular"> <table id="TBL-57" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-57-1g"><col 
+id="TBL-57-1"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-57-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-57-1-1"  
+class="td11"><span 
+class="pcrr8t-x-x-109">LIMIT!+ (LIMIT!-) </span>(EXP,VAR,LIMPOINT) <span 
+class="cmsy-10x-x-109">&#x2192;</span><span 
+class="pcrr8t-x-x-109">LIMIT</span>(EXP*,<span 
+class="cmmi-10x-x-109">&#x03F5;</span>,0),</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-57-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-57-2-1"  
+class="td11">   EXP*=sub(VAR=VAR+(-)<span 
+class="cmmi-10x-x-109">&#x03F5;</span><sup><span 
+class="cmr-8">2</span></sup>,EXP)                                                     </td></tr></table>
+     </div></div>
+<!--l. 625--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 627--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse127.html" >Up</a></td><td class="clinks"><a 
+href="manualse128.html" >Next</a></td><td class="clinks"><a 
+href="manualse126.html" >Prev</a></td><td class="clinks"><a 
+href="manualse126.html#tailmanualse126.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse127.html" >Front</a></td></tr></table><a 
+ id="tailmanualse127.html"></a>   
+</body></html> 

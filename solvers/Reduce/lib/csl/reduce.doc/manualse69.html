@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Declaring Expressions Positive or Negative</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch10.html#manualse69.html" >Up</a></td><td class="clinks"><a 
+href="manualse68.html" >Prev</a></td><td class="clinks"><a 
+href="manualse68.html#tailmanualse68.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse69.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">10.2    </span> <a 
+ id="x84-16000010.2"></a>Declaring Expressions Positive or Negative</h3>
+<!--l. 69--><p class="noindent" >Detailed knowlege about the sign of expressions allows REDUCE to simplify
+expressions involving exponentials or <span 
+class="pcrr8t-x-x-109">ABS</span><a 
+ id="dx84-160001"></a>. You can express assumptions about the
+<span 
+class="ptmri8t-x-x-109">positivity</span><a 
+ id="dx84-160002"></a> or <span 
+class="ptmri8t-x-x-109">negativity</span><a 
+ id="dx84-160003"></a> of expressions by rules for the operator <span 
+class="pcrr8t-x-x-109">SIGN</span><a 
+ id="dx84-160004"></a>. Examples:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-289">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(a*b*c);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(a*b*c);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;sign(a)=&#x003E;1,sign(b)=&#x003E;1;&#x00A0;abs(a*b*c);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(c)*a*b
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;precise;&#x00A0;sqrt(x^2-2x+1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(x&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ws&#x00A0;where&#x00A0;sign(x-1)=&#x003E;1;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;-&#x00A0;1
+</div>
+<!--l. 91--><p class="nopar" > Here factors with known sign are factored out of an <span 
+class="pcrr8t-x-x-109">ABS </span>expression.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-290">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;precise;&#x00A0;on&#x00A0;factor;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(q*x-2q)^w;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;((x&#x00A0;-&#x00A0;2)*q)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ws&#x00A0;where&#x00A0;sign(x-2)=&#x003E;1;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;q&#x00A0;*(x&#x00A0;-&#x00A0;2)
+&#x00A0;<br />
+</div>
+<!--l. 106--><p class="nopar" >
+<!--l. 108--><p class="noindent" >In this case the factor <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">2)</span><sup><span 
+class="cmmi-8">w</span></sup> may be extracted from the base of the exponential
+because it is known to be positive.
+<!--l. 111--><p class="noindent" >Note that REDUCE knows a lot about sign propagation. For example, with <span 
+class="cmmi-10x-x-109">x </span>and <span 
+class="cmmi-10x-x-109">y </span>also
+<span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">y</span>, <span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">y </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">&#x03C0; </span>and <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">e</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2215;y</span><sup><span 
+class="cmr-8">2</span></sup> are known as positive. Nevertheless, it is often
+necessary to declare additionally the sign of a combined expression. E.g.&#x00A0;at present a
+positivity declaration of <span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">2 </span>does not automatically lead to sign evaluation for <span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1 </span>or
+for <span 
+class="cmmi-10x-x-109">x</span>.
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch10.html#manualse69.html" >Up</a></td><td class="clinks"><a 
+href="manualse68.html" >Prev</a></td><td class="clinks"><a 
+href="manualse68.html#tailmanualse68.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse69.html" >Front</a></td></tr></table><a 
+ id="tailmanualse69.html"></a>  
+</body></html> 

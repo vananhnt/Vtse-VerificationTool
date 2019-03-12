@@ -1,0 +1,826 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>TRIGSIMP: Simplification and factorization of trigonometric and hyperbolic
+functions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse162.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse163.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse161.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse161.html#tailmanualse161.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse162.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.71    </span></span> <a 
+ id="x218-94400016.71"></a><span 
+class="ptmr8t-x-x-120">TRIGSIMP: Simplification and factorization of</span>
+<span 
+class="ptmr8t-x-x-120">trigonometric and hyperbolic functions</span></h3>
+<a 
+ id="dx218-944001"></a>
+<a 
+ id="dx218-944002"></a>
+<!--l. 1353--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Wolfram Koepf.</span>
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.71.1    </span></span> <a 
+ id="x218-94500016.71.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<!--l. 4--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The REDUCE package TRIGSIMP is a useful tool for all kinds of problems</span>
+<span 
+class="ptmr8t-x-x-120">related to trigonometric and hyperbolic simplification and factorization. There</span>
+<span 
+class="ptmr8t-x-x-120">are three operators included in TRIGSIMP: trigsimp, trigfactorize and triggcd.</span>
+<span 
+class="ptmr8t-x-x-120">The first is for simplifying trigonometric or hyperbolic expressions and has many</span>
+<span 
+class="ptmr8t-x-x-120">options, the second is for factorizing them and the third is for finding the</span>
+<span 
+class="ptmr8t-x-x-120">greatest common divisor of two trigonometric or hyperbolic polynomials.</span>
+<span 
+class="ptmr8t-x-x-120">This package is automatically loaded when one of these operators is</span>
+<span 
+class="ptmr8t-x-x-120">used.</span>
+<!--l. 15--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.71.2    </span></span> <a 
+ id="x218-94600016.71.2"></a><span 
+class="ptmr8t-x-x-120">Simplifying trigonometric expressions</span></h4>
+<a 
+ id="dx218-946001"></a>
+<!--l. 18--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">As there is no normal form for trigonometric and hyperbolic expressions, the same</span>
+<span 
+class="ptmr8t-x-x-120">function can convert in many different directions, e.g.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmr-12">sin</span><span 
+class="cmr-12">(2</span><span 
+class="cmmi-12">x</span><span 
+class="cmr-12">) </span><span 
+class="cmsy-10x-x-120">&#x2194; </span><span 
+class="cmr-12">2</span> <span 
+class="cmr-12">sin</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x</span><span 
+class="cmr-12">)</span> <span 
+class="cmr-12">cos</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x</span><span 
+class="cmr-12">)</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">The user has the possibility to give several parameters to the operator</span>
+<span 
+class="pcrr8t-x-x-120">trigsimp </span><span 
+class="ptmr8t-x-x-120">in order to influence the transformations. It is possible to decide</span>
+<span 
+class="ptmr8t-x-x-120">whether or not a rational expression involving trigonometric and hyperbolic</span>
+<span 
+class="ptmr8t-x-x-120">functions vanishes.</span>
+<!--l. 26--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">To simplify an expression </span><span 
+class="pcrr8t-x-x-120">f</span><span 
+class="ptmr8t-x-x-120">, one uses </span><span 
+class="pcrr8t-x-x-120">trigsimp(f[,options])</span><span 
+class="ptmr8t-x-x-120">. For</span>
+<span 
+class="ptmr8t-x-x-120">example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1257">
+trigsimp(sin(x)^2+cos(x)^2);
+&#x00A0;<br />
+&#x00A0;<br />1
+</div>
+<!--l. 32--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The possible options (where</span> <sup><span 
+class="cmsy-8">*</span></sup> <span 
+class="ptmr8t-x-x-120">denotes the default) are:</span>
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x218-946003x1"><span 
+class="pcrr8t-x-x-120">sin</span><sup><span 
+class="cmsy-8">*</span></sup> <span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">cos</span><span 
+class="ptmr8t-x-x-120">;</span>
+     </li>
+     <li 
+  class="enumerate" id="x218-946005x2"><span 
+class="pcrr8t-x-x-120">sinh</span><sup><span 
+class="cmsy-8">*</span></sup> <span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">cosh</span><span 
+class="ptmr8t-x-x-120">;</span>
+     </li>
+     <li 
+  class="enumerate" id="x218-946007x3"><span 
+class="pcrr8t-x-x-120">expand</span><sup><span 
+class="cmsy-8">*</span></sup><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">combine </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">compact</span><span 
+class="ptmr8t-x-x-120">;</span>
+     </li>
+     <li 
+  class="enumerate" id="x218-946009x4"><span 
+class="pcrr8t-x-x-120">hyp</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">trig </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">expon</span><span 
+class="ptmr8t-x-x-120">;</span>
+     </li>
+     <li 
+  class="enumerate" id="x218-946011x5"><span 
+class="pcrr8t-x-x-120">keepalltrig</span><span 
+class="ptmr8t-x-x-120">;</span>
+     </li>
+     <li 
+  class="enumerate" id="x218-946013x6"><span 
+class="pcrr8t-x-x-120">tan </span><span 
+class="ptmr8t-x-x-120">and/or </span><span 
+class="pcrr8t-x-x-120">tanh</span><span 
+class="ptmr8t-x-x-120">;</span>
+     </li>
+     <li 
+  class="enumerate" id="x218-946015x7"><span 
+class="ptmr8t-x-x-120">target arguments of the form </span><span 
+class="ptmri8t-x-x-120">variable </span><span 
+class="ptmr8t-x-x-120">/ </span><span 
+class="ptmri8t-x-x-120">positive integer</span><span 
+class="ptmr8t-x-x-120">.</span></li></ol>
+<!--l. 44--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">From each of the first four groups one can use at most one option, otherwise an</span>
+<span 
+class="ptmr8t-x-x-120">error message will occur. Options can be given in any order.</span>
+<!--l. 48--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The first group fixes the preference used while transforming a trigonometric</span>
+<span 
+class="ptmr8t-x-x-120">expression:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1258">
+trigsimp(sin(x)^2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />sin(x)
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(sin(x)^2,&#x00A0;cos);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;-&#x00A0;cos(x)&#x00A0;&#x00A0;+&#x00A0;1
+</div>
+<!--l. 60--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The second group is the equivalent for the hyperbolic functions.</span>
+<!--l. 63--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The third group determines the type of transformation. With the default,</span>
+<span 
+class="pcrr8t-x-x-120">expand</span><span 
+class="ptmr8t-x-x-120">, an expression is transformed to use only simple variables as</span>
+<span 
+class="ptmr8t-x-x-120">arguments:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1259">
+trigsimp(sin(2x+y));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />2*cos(x)*cos(y)*sin(x)&#x00A0;-&#x00A0;2*sin(x)&#x00A0;*sin(y)&#x00A0;+&#x00A0;sin(y)
+</div>
+<!--l. 71--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">With </span><span 
+class="pcrr8t-x-x-120">combine</span><span 
+class="ptmr8t-x-x-120">, products of trigonometric functions are transformed to</span>
+<span 
+class="ptmr8t-x-x-120">trigonometric functions involving sums of variables:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1260">
+trigsimp(sin(x)*cos(y),&#x00A0;combine);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;sin(x&#x00A0;-&#x00A0;y)&#x00A0;+&#x00A0;sin(x&#x00A0;+&#x00A0;y)
+&#x00A0;<br />-------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 80--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">With </span><span 
+class="pcrr8t-x-x-120">compact</span><span 
+class="ptmr8t-x-x-120">, the REDUCE operator </span><span 
+class="pcrr8t-x-x-120">compact</span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span> <span 
+class="ptmr8t-x-x-120">is applied to </span><span 
+class="pcrr8t-x-x-120">f</span><span 
+class="ptmr8t-x-x-120">. This often</span>
+<span 
+class="ptmr8t-x-x-120">leads to a simple form, but in contrast to </span><span 
+class="pcrr8t-x-x-120">expand </span><span 
+class="ptmr8t-x-x-120">one does not get a normal</span>
+<span 
+class="ptmr8t-x-x-120">form. For example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1261">
+trigsimp((1-sin(x)^2)^20*(1-cos(x)^2)^20,&#x00A0;compact);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;40&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;40
+&#x00A0;<br />cos(x)&#x00A0;&#x00A0;*sin(x)
+</div>
+<!--l. 90--><p class="nopar" >
+<!--l. 92--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">With an option from the fourth group, the input expression is transformed to</span>
+<span 
+class="ptmr8t-x-x-120">trigonometric, hyperbolic or exponential form respectively:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1262">
+trigsimp(sin(x),&#x00A0;hyp);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;-&#x00A0;sinh(i*x)*i
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(sinh(x),&#x00A0;expon);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;2*x
+&#x00A0;<br />&#x00A0;e&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;1
+&#x00A0;<br />----------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;2*e
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(e^x,&#x00A0;trig);
+&#x00A0;<br />
+&#x00A0;<br />cos(i*x)&#x00A0;-&#x00A0;sin(i*x)*i
+</div>
+<!--l. 111--><p class="nopar" >
+<!--l. 113--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Usually, </span><span 
+class="pcrr8t-x-x-120">tan</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">cot</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">sec</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">csc </span><span 
+class="ptmr8t-x-x-120">are expressed in terms of </span><span 
+class="pcrr8t-x-x-120">sin </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">cos</span><span 
+class="ptmr8t-x-x-120">. It</span>
+<span 
+class="ptmr8t-x-x-120">can sometimes be useful to avoid this, which is handled by the option</span>
+<span 
+class="pcrr8t-x-x-120">keepalltrig</span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1263">
+trigsimp(tan(x+y),&#x00A0;keepalltrig);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;(tan(x)&#x00A0;+&#x00A0;tan(y))
+&#x00A0;<br />----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;tan(x)*tan(y)&#x00A0;-&#x00A0;1
+</div>
+<!--l. 123--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Alternatively, the options </span><span 
+class="pcrr8t-x-x-120">tan </span><span 
+class="ptmr8t-x-x-120">and/or </span><span 
+class="pcrr8t-x-x-120">tanh </span><span 
+class="ptmr8t-x-x-120">can be given to convert the output to</span>
+<span 
+class="ptmr8t-x-x-120">the specified form as far as possible:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1264">
+trigsimp(tan(x+y),&#x00A0;tan);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;(tan(x)&#x00A0;+&#x00A0;tan(y))
+&#x00A0;<br />----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;tan(x)*tan(y)&#x00A0;-&#x00A0;1
+</div>
+<!--l. 132--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">By default, the other functions used will be </span><span 
+class="pcrr8t-x-x-120">cos </span><span 
+class="ptmr8t-x-x-120">and/or </span><span 
+class="pcrr8t-x-x-120">cosh</span><span 
+class="ptmr8t-x-x-120">, unless the other</span>
+<span 
+class="ptmr8t-x-x-120">desired functions are also specified in which case this choice will be</span>
+<span 
+class="ptmr8t-x-x-120">respected.</span>
+<!--l. 137--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The final possibility is to specify additional target arguments for the trigonometric or</span>
+<span 
+class="ptmr8t-x-x-120">hyperbolic functions, each of which should have the form of a variable divided</span>
+<span 
+class="ptmr8t-x-x-120">by a positive integer. These additional arguments are treated as if they had</span>
+<span 
+class="ptmr8t-x-x-120">occurred within the expression to be simplified, and their denominators are used</span>
+<span 
+class="ptmr8t-x-x-120">in determining the overall denominator to use for each variable in the simplified</span>
+<span 
+class="ptmr8t-x-x-120">form:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1265">
+trigsimp(csc&#x00A0;x&#x00A0;-&#x00A0;cot&#x00A0;x&#x00A0;+&#x00A0;csc&#x00A0;y&#x00A0;-&#x00A0;cot&#x00A0;y,&#x00A0;x/2,&#x00A0;y/2,&#x00A0;tan);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y
+&#x00A0;<br />tan(---)&#x00A0;+&#x00A0;tan(---)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 150--><p class="nopar" >
+<!--l. 152--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It is possible to use the options of different groups simultaneously:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1266">
+trigsimp(sin(x)^4,&#x00A0;cos,&#x00A0;combine);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;cos(4*x)&#x00A0;-&#x00A0;4*cos(2*x)&#x00A0;+&#x00A0;3
+&#x00A0;<br />---------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8
+</div>
+<!--l. 159--><p class="nopar" >
+<!--l. 161--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Sometimes, it is necessary to handle an expression in separate steps:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1267">
+trigsimp((sinh(x)+cosh(x))^n+(cosh(x)-sinh(x))^n,&#x00A0;expon);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;n*x
+&#x00A0;<br />(----)&#x00A0;&#x00A0;+&#x00A0;e
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;e
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(ws,&#x00A0;hyp);
+&#x00A0;<br />
+&#x00A0;<br />2*cosh(n*x)
+&#x00A0;<br />
+&#x00A0;<br />trigsimp((cosh(a*n)*sinh(a)*sinh(p)+cosh(a)*sinh(a*n)*sinh(p)+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;sinh(a&#x00A0;-&#x00A0;p)*sinh(a*n))/sinh(a));
+&#x00A0;<br />
+&#x00A0;<br />cosh(a*n)*sinh(p)&#x00A0;+&#x00A0;cosh(p)*sinh(a*n)
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(ws,&#x00A0;combine);
+&#x00A0;<br />
+&#x00A0;<br />sinh(a*n&#x00A0;+&#x00A0;p)
+</div>
+<!--l. 182--><p class="nopar" >
+<!--l. 184--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">trigsimp </span><span 
+class="ptmr8t-x-x-120">operator can be applied to equations, lists and matrices (and</span>
+<span 
+class="ptmr8t-x-x-120">compositions thereof) as well as scalar expressions, and automatically maps itself</span>
+<span 
+class="ptmr8t-x-x-120">recursively over such non-scalar data structures:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1268">
+trigsimp(&#x00A0;{&#x00A0;sin(2x)&#x00A0;=&#x00A0;cos(2x)&#x00A0;}&#x00A0;);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />{2*cos(x)*sin(x)=&#x00A0;-&#x00A0;2*sin(x)&#x00A0;&#x00A0;+&#x00A0;1}
+</div>
+<!--l. 193--><p class="nopar" >
+<!--l. 196--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.71.3    </span></span> <a 
+ id="x218-94700016.71.3"></a><span 
+class="ptmr8t-x-x-120">Factorizing trigonometric expressions</span></h4>
+<!--l. 198--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">With </span><span 
+class="pcrr8t-x-x-120">trigfactorize(p,x) </span><span 
+class="ptmr8t-x-x-120">one can factorize the trigonometric or</span>
+<span 
+class="ptmr8t-x-x-120">hyperbolic polynomial </span><span 
+class="pcrr8t-x-x-120">p </span><span 
+class="ptmr8t-x-x-120">in terms of trigonometric functions of the argument </span><span 
+class="pcrr8t-x-x-120">x</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">The output has the same format as that from the standard REDUCE operator</span>
+<span 
+class="pcrr8t-x-x-120">factorize</span><span 
+class="ptmr8t-x-x-120">. For example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1269">
+trigfactorize(sin(x),&#x00A0;x/2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />{{2,1},{sin(---),1},{cos(---),1}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 209--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">If the polynomial is not coordinated or balanced </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, the output will equal the</span>
+<span 
+class="ptmr8t-x-x-120">input. In this case, changing the value for </span><span 
+class="pcrr8t-x-x-120">x </span><span 
+class="ptmr8t-x-x-120">can help to find a factorization,</span>
+<span 
+class="ptmr8t-x-x-120">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1270">
+trigfactorize(1+cos(x),&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />{{cos(x)&#x00A0;+&#x00A0;1,1}}
+&#x00A0;<br />
+&#x00A0;<br />trigfactorize(1+cos(x),&#x00A0;x/2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />{{2,1},{cos(---),2}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 223--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The polynomial can consist of both trigonometric and hyperbolic functions:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1271">
+trigfactorize(sin(2x)*sinh(2x),&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />{{4,1},&#x00A0;{sinh(x),1},&#x00A0;{cosh(x),1},&#x00A0;{sin(x),1},&#x00A0;{cos(x),1}}
+</div>
+<!--l. 229--><p class="nopar" >
+<!--l. 231--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">trigfactorize </span><span 
+class="ptmr8t-x-x-120">operator respects the standard REDUCE </span><span 
+class="pcrr8t-x-x-120">factorize</span>
+<span 
+class="ptmr8t-x-x-120">switch </span><span 
+class="pcrr8t-x-x-120">nopowers </span><span 
+class="ptmr8t-x-x-120">&#8211; see the REDUCE manual for details. Turning it on gives the</span>
+<span 
+class="ptmr8t-x-x-120">behaviour that was standard before REDUCE</span><span 
+class="ptmr8t-x-x-120">&#x00A0;3.7:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1272">
+on&#x00A0;nopowers;
+&#x00A0;<br />
+&#x00A0;<br />trigfactorize(1+cos(x),&#x00A0;x/2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />{2,cos(---),cos(---)}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 243--><p class="nopar" >
+<!--l. 246--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.71.4    </span></span> <a 
+ id="x218-94800016.71.4"></a><span 
+class="ptmr8t-x-x-120">GCDs of trigonometric expressions</span></h4>
+<!--l. 248--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">triggcd </span><span 
+class="ptmr8t-x-x-120">is essentially an application of the algorithm</span>
+<span 
+class="ptmr8t-x-x-120">behind </span><span 
+class="pcrr8t-x-x-120">trigfactorize</span><span 
+class="ptmr8t-x-x-120">. With its help the user can find the greatest</span>
+<span 
+class="ptmr8t-x-x-120">common divisor of two trigonometric or hyperbolic polynomials. It uses the</span>
+<span 
+class="ptmr8t-x-x-120">method described in </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">. The syntax is </span><span 
+class="pcrr8t-x-x-120">triggcd(p,q,x)</span><span 
+class="ptmr8t-x-x-120">, where </span><span 
+class="pcrr8t-x-x-120">p </span><span 
+class="ptmr8t-x-x-120">and</span>
+<span 
+class="pcrr8t-x-x-120">q </span><span 
+class="ptmr8t-x-x-120">are the trigonometric polynomials and </span><span 
+class="pcrr8t-x-x-120">x </span><span 
+class="ptmr8t-x-x-120">is the argument to use. For</span>
+<span 
+class="ptmr8t-x-x-120">example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1273">
+triggcd(sin(x),&#x00A0;1+cos(x),&#x00A0;x/2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />cos(---)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />triggcd(sin(x),&#x00A0;1+cos(x),&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />1
+</div>
+<!--l. 265--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The polynomials </span><span 
+class="cmmi-12">p </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmmi-12">q </span><span 
+class="ptmr8t-x-x-120">can consist of both trigonometric and hyperbolic</span>
+<span 
+class="ptmr8t-x-x-120">functions:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1274">
+triggcd(sin(2x)*sinh(2x),&#x00A0;(1-cos(2x))*(1+cosh(2x)),&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />cosh(x)*sin(x)
+</div>
+<!--l. 272--><p class="nopar" >
+<!--l. 275--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.71.5    </span></span> <a 
+ id="x218-94900016.71.5"></a><span 
+class="ptmr8t-x-x-120">Further Examples</span></h4>
+<!--l. 277--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">With the help of this package the user can create identities:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1275">
+trigsimp(tan(x)*tan(y));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;sin(x)*sin(y)
+&#x00A0;<br />---------------
+&#x00A0;<br />&#x00A0;cos(x)*cos(y)
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(ws,&#x00A0;combine);
+</div>
+<!--l. 286--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1276">
+&#x00A0;cos(x&#x00A0;-&#x00A0;y)&#x00A0;-&#x00A0;cos(x&#x00A0;+&#x00A0;y)
+&#x00A0;<br />-------------------------
+&#x00A0;<br />&#x00A0;cos(x&#x00A0;-&#x00A0;y)&#x00A0;+&#x00A0;cos(x&#x00A0;+&#x00A0;y)
+</div>
+<!--l. 293--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1277">
+trigsimp((sin(x-a)+sin(x+a))/(cos(x-a)+cos(x+a)));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;sin(x)
+&#x00A0;<br />--------
+&#x00A0;<br />&#x00A0;cos(x)
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(cosh(n*acosh(x))-cos(n*acos(x)),&#x00A0;trig);
+&#x00A0;<br />
+&#x00A0;<br />0
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(sec(a-b),&#x00A0;keepalltrig);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;csc(a)*csc(b)*sec(a)*sec(b)
+&#x00A0;<br />-------------------------------
+&#x00A0;<br />&#x00A0;csc(a)*csc(b)&#x00A0;+&#x00A0;sec(a)*sec(b)
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(tan(a+b),&#x00A0;keepalltrig);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;(tan(a)&#x00A0;+&#x00A0;tan(b))
+&#x00A0;<br />----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;tan(a)*tan(b)&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(ws,&#x00A0;keepalltrig,&#x00A0;combine);
+&#x00A0;<br />
+&#x00A0;<br />tan(a&#x00A0;+&#x00A0;b)
+</div>
+<!--l. 321--><p class="nopar" >
+<!--l. 323--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Some difficult expressions can be simplified:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1278">
+df(sqrt(1+cos(x)),&#x00A0;x,&#x00A0;4);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />(&#x00A0;-&#x00A0;4*cos(x)&#x00A0;&#x00A0;-&#x00A0;4*cos(x)&#x00A0;&#x00A0;-&#x00A0;20*cos(x)&#x00A0;*sin(x)&#x00A0;&#x00A0;+&#x00A0;12*cos(x)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;24*cos(x)&#x00A0;*sin(x)&#x00A0;&#x00A0;+&#x00A0;20*cos(x)&#x00A0;&#x00A0;-&#x00A0;15*cos(x)*sin(x)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;+&#x00A0;12*cos(x)*sin(x)&#x00A0;&#x00A0;+&#x00A0;8*cos(x)&#x00A0;-&#x00A0;15*sin(x)&#x00A0;&#x00A0;+&#x00A0;16*sin(x)&#x00A0;)/
+&#x00A0;<br />
+&#x00A0;<br />(16*sqrt(cos(x)&#x00A0;+&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;*(cos(x)&#x00A0;&#x00A0;+&#x00A0;4*cos(x)&#x00A0;&#x00A0;+&#x00A0;6*cos(x)&#x00A0;&#x00A0;+&#x00A0;4*cos(x)&#x00A0;+&#x00A0;1))
+&#x00A0;<br />
+&#x00A0;<br />on&#x00A0;rationalize;
+&#x00A0;<br />trigsimp(ws);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;sqrt(cos(x)&#x00A0;+&#x00A0;1)
+&#x00A0;<br />------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;16
+&#x00A0;<br />
+&#x00A0;<br />off&#x00A0;rationalize;
+&#x00A0;<br />load_package&#x00A0;taylor;
+&#x00A0;<br />
+&#x00A0;<br />taylor(sin(x+a)*cos(x+b),&#x00A0;x,&#x00A0;0,&#x00A0;4);
+&#x00A0;<br />
+&#x00A0;<br />cos(b)*sin(a)&#x00A0;+&#x00A0;(cos(a)*cos(b)&#x00A0;-&#x00A0;sin(a)*sin(b))*x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;-&#x00A0;(cos(a)*sin(b)&#x00A0;+&#x00A0;cos(b)*sin(a))*x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*(&#x00A0;-&#x00A0;cos(a)*cos(b)&#x00A0;+&#x00A0;sin(a)*sin(b))&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;+&#x00A0;--------------------------------------*x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(a)*sin(b)&#x00A0;+&#x00A0;cos(b)*sin(a)&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5
+                                                                     
+
+                                                                     
+&#x00A0;<br />&#x00A0;+&#x00A0;-------------------------------*x&#x00A0;&#x00A0;+&#x00A0;O(x&#x00A0;)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />trigsimp(ws,&#x00A0;combine);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;sin(a&#x00A0;-&#x00A0;b)&#x00A0;+&#x00A0;sin(a&#x00A0;+&#x00A0;b)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />-------------------------&#x00A0;+&#x00A0;cos(a&#x00A0;+&#x00A0;b)*x&#x00A0;-&#x00A0;sin(a&#x00A0;+&#x00A0;b)*x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*cos(a&#x00A0;+&#x00A0;b)&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;sin(a&#x00A0;+&#x00A0;b)&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5
+&#x00A0;<br />&#x00A0;-&#x00A0;--------------*x&#x00A0;&#x00A0;+&#x00A0;------------*x&#x00A0;&#x00A0;+&#x00A0;O(x&#x00A0;)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+</div>
+<!--l. 375--><p class="nopar" >
+<!--l. 377--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Certain integrals whose evaluation was not possible in REDUCE (without</span>
+<span 
+class="ptmr8t-x-x-120">preprocessing) are now computable:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1279">
+int(trigsimp(sin(x+y)*cos(x-y)*tan(x)),&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />(cos(x)&#x00A0;*x&#x00A0;-&#x00A0;cos(x)*sin(x)&#x00A0;-&#x00A0;2*cos(y)*log(cos(x))*sin(y)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;+&#x00A0;sin(x)&#x00A0;*x)/2
+&#x00A0;<br />
+&#x00A0;<br />int(trigsimp(sin(x+y)*cos(x-y)/tan(x)),&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;2
+&#x00A0;<br />(cos(x)*sin(x)&#x00A0;-&#x00A0;2*cos(y)*log(tan(---)&#x00A0;&#x00A0;+&#x00A0;1)*sin(y)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;+&#x00A0;2*cos(y)*log(tan(---))*sin(y)&#x00A0;+&#x00A0;x)/2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 397--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Without the package, the integration fails, and in the second case one does not</span>
+<span 
+class="ptmr8t-x-x-120">receive an answer for many hours.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1280">
+trigfactorize(sin(2x)*cos(y)^2,&#x00A0;y/2);
+&#x00A0;<br />
+&#x00A0;<br />{{2*cos(x)*sin(x),1},
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y
+&#x00A0;<br />&#x00A0;{cos(---)&#x00A0;-&#x00A0;sin(---),2},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y
+&#x00A0;<br />&#x00A0;{cos(---)&#x00A0;+&#x00A0;sin(---),2}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 413--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1281">
+trigfactorize(sin(y)^4-x^2,&#x00A0;y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />{{sin(y)&#x00A0;&#x00A0;+&#x00A0;x,1},{sin(y)&#x00A0;&#x00A0;-&#x00A0;x,1}}
+&#x00A0;<br />
+&#x00A0;<br />trigfactorize(sin(x)*sinh(x),&#x00A0;x/2);
+&#x00A0;<br />
+&#x00A0;<br />{{4,1},
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;{sinh(---),1},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;{cosh(---),1},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;{sin(---),1},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;{cos(---),1}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />triggcd(-5+cos(2x)-6sin(x),&#x00A0;-7+cos(2x)-8sin(x),&#x00A0;x/2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />2*cos(---)*sin(---)&#x00A0;+&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />triggcd(1-2cosh(x)+cosh(2x),&#x00A0;1+2cosh(x)+cosh(2x),&#x00A0;x/2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;2
+&#x00A0;<br />2*sinh(---)&#x00A0;&#x00A0;+&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 451--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 453--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x218-950000"></a><span 
+class="ptmr8t-x-x-120">Bibliography</span></h4>
+<!--l. 453--><p class="noindent" >
+     <div class="thebibliography">
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[1]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="Xart"></a><span 
+class="ptmr8t-x-x-120">Roach, Kelly: Difficulties with Trigonometrics. Notes of a talk.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[2]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="Xhearns"></a><span 
+class="ptmr8t-x-x-120">Hearn, A.C.: COMPACT User Manual.</span>
+</p>
+     </div>
+<!--l. 1357--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1359--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse162.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse163.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse161.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse161.html#tailmanualse161.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse162.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse162.html"></a>   
+</body></html> 

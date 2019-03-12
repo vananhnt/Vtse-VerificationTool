@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Conditional Statements</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse16.html" >Up</a></td><td class="clinks"><a 
+href="manualse17.html" >Next</a></td><td class="clinks"><a 
+href="manualse15.html" >Prev</a></td><td class="clinks"><a 
+href="manualse15.html#tailmanualse15.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse16.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">5.3    </span> <a 
+ id="x25-380005.3"></a>Conditional Statements</h3>
+<!--l. 148--><p class="noindent" ><a 
+ id="command:IF"></a> <a 
+ id="reserved:THEN"></a> <a 
+ id="reserved:ELSE"></a>
+<!--l. 152--><p class="noindent" >The conditional statement<a 
+ id="dx25-38001"></a><a 
+ id="dx25-38002"></a> has the following syntax:
+  <div class="syntax">
+  <div class="array"> <table id="TBL-8" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-8-1g"><col 
+id="TBL-8-1"><col 
+id="TBL-8-2"><col 
+id="TBL-8-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">conditional statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">::=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">IF</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">boolean expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="pcrr8t-x-x-109">THEN</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11">                </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11">  </div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmr-10x-x-109">[</span><span 
+class="pcrr8t-x-x-109">ELSE</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmr-10x-x-109">]                               </span></div></td></tr></table></div></div>
+<!--l. 159--><p class="noindent" >The boolean expression is evaluated. If this is <span 
+class="ptmri8t-x-x-109">true</span>, the first <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> is executed. If it
+is <span 
+class="ptmri8t-x-x-109">false</span>, the second is.
+<!--l. 162--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-47">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;x=5&#x00A0;then&#x00A0;a:=b+c&#x00A0;else&#x00A0;d:=e+f
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;x=5&#x00A0;and&#x00A0;numberp&#x00A0;y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;then&#x00A0;&#x003C;&#x003C;ff:=q1;&#x00A0;a:=b+c&#x003E;&#x003E;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;else&#x00A0;&#x003C;&#x003C;ff:=q2;&#x00A0;d:=e+f&#x003E;&#x003E;
+</div>
+<!--l. 169--><p class="nopar" > Note the use of the group statement<a 
+ id="dx25-38003"></a>.
+<!--l. 172--><p class="noindent" >Conditional statements associate to the right; i.e.,<a 
+ id="dx25-38004"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-48">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;IF&#x00A0;&#x003C;a&#x003E;&#x00A0;THEN&#x00A0;&#x003C;b&#x003E;&#x00A0;ELSE&#x00A0;IF&#x00A0;&#x003C;c&#x003E;&#x00A0;THEN&#x00A0;&#x003C;d&#x003E;&#x00A0;ELSE&#x00A0;&#x003C;e&#x003E;
+</div>
+<!--l. 175--><p class="nopar" > is equivalent to:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-49">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;IF&#x00A0;&#x003C;a&#x003E;&#x00A0;THEN&#x00A0;&#x003C;b&#x003E;&#x00A0;ELSE&#x00A0;(IF&#x00A0;&#x003C;c&#x003E;&#x00A0;THEN&#x00A0;&#x003C;d&#x003E;&#x00A0;ELSE&#x00A0;&#x003C;e&#x003E;)
+</div>
+<!--l. 179--><p class="nopar" > In addition, the construction
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-50">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;IF&#x00A0;&#x003C;a&#x003E;&#x00A0;THEN&#x00A0;IF&#x00A0;&#x003C;b&#x003E;&#x00A0;THEN&#x00A0;&#x003C;c&#x003E;&#x00A0;ELSE&#x00A0;&#x003C;d&#x003E;
+</div>
+<!--l. 183--><p class="nopar" > parses as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-51">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;IF&#x00A0;&#x003C;a&#x003E;&#x00A0;THEN&#x00A0;(IF&#x00A0;&#x003C;b&#x003E;&#x00A0;THEN&#x00A0;&#x003C;c&#x003E;&#x00A0;ELSE&#x00A0;&#x003C;d&#x003E;).
+</div>
+<!--l. 187--><p class="nopar" > If the value of the conditional statement<a 
+ id="dx25-38005"></a> is of primary interest, it is often called a
+conditional expression instead. Its value is the value of whichever statement was
+executed. (If the executed statement has no value, the conditional expression has no value
+or the value 0, depending on how it is used.)
+<!--l. 194--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-52">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a:=if&#x00A0;x&#x003C;5&#x00A0;then&#x00A0;123&#x00A0;else&#x00A0;456;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b:=u&#x00A0;+&#x00A0;v^(if&#x00A0;numberp&#x00A0;z&#x00A0;then&#x00A0;10*z&#x00A0;&#x00A0;else&#x00A0;1)&#x00A0;+&#x00A0;w;
+</div>
+<!--l. 198--><p class="nopar" > If the value is of no concern, the <span 
+class="pcrr8t-x-x-109">ELSE </span>clause may be omitted if no action is required in
+the <span 
+class="ptmri8t-x-x-109">false </span>case.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-53">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;x=5&#x00A0;then&#x00A0;a:=b+c;
+</div>
+<!--l. 203--><p class="nopar" > Note: As explained in Section&#x00A0;<a 
+href="manualse10.html#x17-190003.3">3.3<!--tex4ht:ref: sec-boolean --></a>, if a scalar or numerical expression is used in place of
+the boolean expression &#8211; for example, a variable is written there &#8211; the <span 
+class="ptmri8t-x-x-109">true </span>alternative is
+followed unless the expression has the value 0.
+                                                                     
+
+                                                                     
+<!--l. 209--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse16.html" >Up</a></td><td class="clinks"><a 
+href="manualse17.html" >Next</a></td><td class="clinks"><a 
+href="manualse15.html" >Prev</a></td><td class="clinks"><a 
+href="manualse15.html#tailmanualse15.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse16.html" >Front</a></td></tr></table><a 
+ id="tailmanualse16.html"></a>  
+</body></html> 

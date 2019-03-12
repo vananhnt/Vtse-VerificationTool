@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Using LET Inside Procedures</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch15.html#manualse89.html" >Up</a></td><td class="clinks"><a 
+href="manualse90.html" >Next</a></td><td class="clinks"><a 
+href="manualse88.html" >Prev</a></td><td class="clinks"><a 
+href="manualse88.html#tailmanualse88.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse89.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">15.4    </span> <a 
+ id="x109-20000015.4"></a>Using LET Inside Procedures</h3>
+<!--l. 221--><p class="noindent" >By using <span 
+class="pcrr8t-x-x-109">LET</span><a 
+ id="dx109-200001"></a> instead of an assignment in the procedure body<a 
+ id="dx109-200002"></a> it is possible to bypass the
+call-by-value <a 
+ id="dx109-200003"></a>protection. If <span 
+class="pcrr8t-x-x-109">X </span>is a formal parameter or local variable of the procedure (i.e.
+is in the heading or in a local declaration), and <span 
+class="pcrr8t-x-x-109">LET </span>is used instead of <span 
+class="pcrr8t-x-x-109">:= </span>to make an
+assignment to <span 
+class="pcrr8t-x-x-109">X</span>, e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-381">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;x&#x00A0;=&#x00A0;123;
+</div>
+<!--l. 230--><p class="nopar" > then it is the variable that is the value of <span 
+class="pcrr8t-x-x-109">X </span>that is changed. This effect also occurs with
+local variables defined in a block. If the value of <span 
+class="pcrr8t-x-x-109">X </span>is not a variable, but a more general
+expression, then it is that expression that is used on the left-hand side of the <span 
+class="pcrr8t-x-x-109">LET</span>
+statement. For example, if <span 
+class="pcrr8t-x-x-109">X </span>had the value <span 
+class="pcrr8t-x-x-109">p*q</span>, it is as if <span 
+class="pcrr8t-x-x-109">let p*q = 123 </span>had been
+executed.
+                                                                     
+
+                                                                     
+<!--l. 238--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch15.html#manualse89.html" >Up</a></td><td class="clinks"><a 
+href="manualse90.html" >Next</a></td><td class="clinks"><a 
+href="manualse88.html" >Prev</a></td><td class="clinks"><a 
+href="manualse88.html#tailmanualse88.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse89.html" >Front</a></td></tr></table><a 
+ id="tailmanualse89.html"></a>  
+</body></html> 

@@ -1,0 +1,602 @@
+(aeval (null (setq !*mode (quote algebraic))))
+(clearrules (list (quote trig_imag_rules)))
+(setk (quote trig_normalize2sin!*) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote expt) (list (quote cos) (list (quote !~) (quote a))) 2)
+(list (quote difference) 1 (list (quote expt) (list (quote sin) (quote a)) 2))))
+))
+(setk (quote trig_normalize2cos!*) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote expt) (list (quote sin) (list (quote !~) (quote a))) 2)
+(list (quote difference) 1 (list (quote expt) (list (quote cos) (quote a)) 2))))
+))
+(setk (quote trig_normalize2sinh!*) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote expt) (list (quote cosh) (list (quote !~) (quote a))) 2)
+(list (quote plus) 1 (list (quote expt) (list (quote sinh) (quote a)) 2))))))
+(setk (quote trig_normalize2cosh!*) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote expt) (list (quote sinh) (list (quote !~) (quote a))) 2)
+(list (quote difference) (list (quote expt) (list (quote cosh) (quote a)) 2) 1))
+)))
+(setk (quote trig_expand_addition!*) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote sin) (list (quote quotient) (list (quote plus) (list (
+quote !~) (quote a)) (list (quote !~) (quote b))) (list (quote !~) (list (quote
+!~) (quote m))))) (list (quote plus) (list (quote times) (list (quote sin) (list
+(quote quotient) (quote a) (quote m))) (list (quote cos) (list (quote quotient)
+(quote b) (quote m)))) (list (quote times) (list (quote cos) (list (quote 
+quotient) (quote a) (quote m))) (list (quote sin) (list (quote quotient) (quote
+b) (quote m)))))) (list (quote replaceby) (list (quote cos) (list (quote 
+quotient) (list (quote plus) (list (quote !~) (quote a)) (list (quote !~) (quote
+b))) (list (quote !~) (list (quote !~) (quote m))))) (list (quote difference) (
+list (quote times) (list (quote cos) (list (quote quotient) (quote a) (quote m))
+) (list (quote cos) (list (quote quotient) (quote b) (quote m)))) (list (quote 
+times) (list (quote sin) (list (quote quotient) (quote a) (quote m))) (list (
+quote sin) (list (quote quotient) (quote b) (quote m)))))) (list (quote 
+replaceby) (list (quote tan) (list (quote quotient) (list (quote plus) (list (
+quote !~) (quote a)) (list (quote !~) (quote b))) (list (quote !~) (list (quote
+!~) (quote m))))) (list (quote quotient) (list (quote plus) (list (quote tan) (
+list (quote quotient) (quote a) (quote m))) (list (quote tan) (list (quote 
+quotient) (quote b) (quote m)))) (list (quote difference) 1 (list (quote times)
+(list (quote tan) (list (quote quotient) (quote a) (quote m))) (list (quote tan)
+(list (quote quotient) (quote b) (quote m))))))) (list (quote replaceby) (list (
+quote cot) (list (quote quotient) (list (quote plus) (list (quote !~) (quote a))
+(list (quote !~) (quote b))) (list (quote !~) (list (quote !~) (quote m))))) (
+list (quote quotient) (list (quote difference) (list (quote times) (list (quote
+cot) (list (quote quotient) (quote a) (quote m))) (list (quote cot) (list (quote
+quotient) (quote b) (quote m)))) 1) (list (quote plus) (list (quote cot) (list (
+quote quotient) (quote a) (quote m))) (list (quote cot) (list (quote quotient) (
+quote b) (quote m)))))) (list (quote replaceby) (list (quote sec) (list (quote 
+quotient) (list (quote plus) (list (quote !~) (quote a)) (list (quote !~) (quote
+b))) (list (quote !~) (list (quote !~) (quote m))))) (list (quote quotient) 1 (
+list (quote difference) (list (quote quotient) 1 (list (quote times) (list (
+quote sec) (list (quote quotient) (quote a) (quote m))) (list (quote sec) (list
+(quote quotient) (quote b) (quote m))))) (list (quote quotient) 1 (list (quote 
+times) (list (quote csc) (list (quote quotient) (quote a) (quote m))) (list (
+quote csc) (list (quote quotient) (quote b) (quote m)))))))) (list (quote 
+replaceby) (list (quote csc) (list (quote quotient) (list (quote plus) (list (
+quote !~) (quote a)) (list (quote !~) (quote b))) (list (quote !~) (list (quote
+!~) (quote m))))) (list (quote quotient) 1 (list (quote plus) (list (quote 
+quotient) 1 (list (quote times) (list (quote sec) (list (quote quotient) (quote
+b) (quote m))) (list (quote csc) (list (quote quotient) (quote a) (quote m)))))
+(list (quote quotient) 1 (list (quote times) (list (quote sec) (list (quote 
+quotient) (quote a) (quote m))) (list (quote csc) (list (quote quotient) (quote
+b) (quote m)))))))) (list (quote replaceby) (list (quote tanh) (list (quote 
+quotient) (list (quote plus) (list (quote !~) (quote a)) (list (quote !~) (quote
+b))) (list (quote !~) (list (quote !~) (quote m))))) (list (quote quotient) (
+list (quote plus) (list (quote tanh) (list (quote quotient) (quote a) (quote m))
+) (list (quote tanh) (list (quote quotient) (quote b) (quote m)))) (list (quote
+plus) 1 (list (quote times) (list (quote tanh) (list (quote quotient) (quote a)
+(quote m))) (list (quote tanh) (list (quote quotient) (quote b) (quote m)))))))
+(list (quote replaceby) (list (quote coth) (list (quote quotient) (list (quote 
+plus) (list (quote !~) (quote a)) (list (quote !~) (quote b))) (list (quote !~)
+(list (quote !~) (quote m))))) (list (quote quotient) (list (quote plus) (list (
+quote times) (list (quote coth) (list (quote quotient) (quote a) (quote m))) (
+list (quote coth) (list (quote quotient) (quote b) (quote m)))) 1) (list (quote
+plus) (list (quote coth) (list (quote quotient) (quote a) (quote m))) (list (
+quote coth) (list (quote quotient) (quote b) (quote m)))))) (list (quote 
+replaceby) (list (quote sinh) (list (quote quotient) (list (quote plus) (list (
+quote !~) (quote a)) (list (quote !~) (quote b))) (list (quote !~) (list (quote
+!~) (quote m))))) (list (quote plus) (list (quote times) (list (quote sinh) (
+list (quote quotient) (quote a) (quote m))) (list (quote cosh) (list (quote 
+quotient) (quote b) (quote m)))) (list (quote times) (list (quote cosh) (list (
+quote quotient) (quote a) (quote m))) (list (quote sinh) (list (quote quotient)
+(quote b) (quote m)))))) (list (quote replaceby) (list (quote cosh) (list (quote
+quotient) (list (quote plus) (list (quote !~) (quote a)) (list (quote !~) (quote
+b))) (list (quote !~) (list (quote !~) (quote m))))) (list (quote plus) (list (
+quote times) (list (quote cosh) (list (quote quotient) (quote a) (quote m))) (
+list (quote cosh) (list (quote quotient) (quote b) (quote m)))) (list (quote 
+times) (list (quote sinh) (list (quote quotient) (quote a) (quote m))) (list (
+quote sinh) (list (quote quotient) (quote b) (quote m)))))) (list (quote 
+replaceby) (list (quote sech) (list (quote quotient) (list (quote plus) (list (
+quote !~) (quote a)) (list (quote !~) (quote b))) (list (quote !~) (list (quote
+!~) (quote m))))) (list (quote quotient) 1 (list (quote plus) (list (quote 
+quotient) 1 (list (quote times) (list (quote sech) (list (quote quotient) (quote
+a) (quote m))) (list (quote sech) (list (quote quotient) (quote b) (quote m)))))
+(list (quote quotient) 1 (list (quote times) (list (quote csch) (list (quote 
+quotient) (quote a) (quote m))) (list (quote csch) (list (quote quotient) (quote
+b) (quote m)))))))) (list (quote replaceby) (list (quote csch) (list (quote 
+quotient) (list (quote plus) (list (quote !~) (quote a)) (list (quote !~) (quote
+b))) (list (quote !~) (list (quote !~) (quote m))))) (list (quote quotient) 1 (
+list (quote plus) (list (quote quotient) 1 (list (quote times) (list (quote sech
+) (list (quote quotient) (quote a) (quote m))) (list (quote csch) (list (quote 
+quotient) (quote b) (quote m))))) (list (quote quotient) 1 (list (quote times) (
+list (quote sech) (list (quote quotient) (quote b) (quote m))) (list (quote csch
+) (list (quote quotient) (quote a) (quote m)))))))))))
+(setk (quote trig_expand_multiplication!*) (aeval (list (quote list) (list (
+quote replaceby) (list (quote sin) (list (quote times) (list (quote !~) (quote n
+)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (
+quote !~) (quote m)))))) (list (quote when) (list (quote plus) (list (quote 
+times) (list (quote sin) (list (quote quotient) (quote a) (quote m))) (list (
+quote cos) (list (quote times) (list (quote difference) (quote n) 1) (list (
+quote quotient) (quote a) (quote m))))) (list (quote times) (list (quote cos) (
+list (quote quotient) (quote a) (quote m))) (list (quote sin) (list (quote times
+) (list (quote difference) (quote n) 1) (list (quote quotient) (quote a) (quote
+m)))))) (list (quote and) (list (quote fixp) (quote n)) (list (quote greaterp) (
+quote n) 1) (list (quote leq) (quote n) 15)))) (list (quote replaceby) (list (
+quote sin) (list (quote times) (list (quote !~) (quote n)) (list (quote quotient
+) (list (quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (
+list (quote when) (list (quote times) 2 (list (quote sin) (list (quote times) (
+list (quote quotient) (quote n) 2) (list (quote quotient) (quote a) (quote m))))
+(list (quote cos) (list (quote times) (list (quote quotient) (quote n) 2) (list
+(quote quotient) (quote a) (quote m))))) (list (quote and) (list (quote fixp) (
+quote n)) (list (quote equal) (list (quote mod) (quote n) 2) 0) (list (quote 
+greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote sin) (list (
+quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (quote !~)
+(quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (
+list (quote plus) (list (quote times) (list (quote sin) (list (quote times) (
+list (quote quotient) (list (quote difference) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))) (list (quote cos) (list (quote times) (list (
+quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote quotient) (quote
+a) (quote m))))) (list (quote times) (list (quote sin) (list (quote times) (list
+(quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote quotient) (
+quote a) (quote m)))) (list (quote cos) (list (quote times) (list (quote 
+quotient) (list (quote difference) (quote n) 1) 2) (list (quote quotient) (quote
+a) (quote m)))))) (list (quote and) (list (quote fixp) (quote n)) (list (quote 
+equal) (list (quote mod) (quote n) 2) 1) (list (quote greaterp) (quote n) 15))))
+(list (quote replaceby) (list (quote cos) (list (quote times) (list (quote !~) (
+quote n)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (
+list (quote !~) (quote m)))))) (list (quote when) (list (quote difference) (list
+(quote times) (list (quote cos) (list (quote quotient) (quote a) (quote m))) (
+list (quote cos) (list (quote times) (list (quote difference) (quote n) 1) (list
+(quote quotient) (quote a) (quote m))))) (list (quote times) (list (quote sin) (
+list (quote quotient) (quote a) (quote m))) (list (quote sin) (list (quote times
+) (list (quote difference) (quote n) 1) (list (quote quotient) (quote a) (quote
+m)))))) (list (quote and) (list (quote fixp) (quote n)) (list (quote greaterp) (
+quote n) 1) (list (quote leq) (quote n) 15)))) (list (quote replaceby) (list (
+quote cos) (list (quote times) (list (quote !~) (quote n)) (list (quote quotient
+) (list (quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (
+list (quote when) (list (quote difference) (list (quote times) 2 (list (quote 
+expt) (list (quote cos) (list (quote times) (list (quote quotient) (quote n) 2)
+(list (quote quotient) (quote a) (quote m)))) 2)) 1) (list (quote and) (list (
+quote fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n) 2) 0) (
+list (quote greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote cos)
+(list (quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (
+quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (
+quote when) (list (quote difference) (list (quote times) (list (quote cos) (list
+(quote times) (list (quote quotient) (list (quote difference) (quote n) 1) 2) (
+list (quote quotient) (quote a) (quote m)))) (list (quote cos) (list (quote 
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m))))) (list (quote times) (list (quote sin) (list (
+quote times) (list (quote quotient) (list (quote difference) (quote n) 1) 2) (
+list (quote quotient) (quote a) (quote m)))) (list (quote sin) (list (quote 
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))))) (list (quote and) (list (quote fixp) (quote n
+)) (list (quote equal) (list (quote mod) (quote n) 2) 1) (list (quote greaterp)
+(quote n) 15)))) (list (quote replaceby) (list (quote sinh) (list (quote times)
+(list (quote !~) (quote n)) (list (quote quotient) (list (quote !~) (quote a)) (
+list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (list (quote
+plus) (list (quote times) (list (quote sinh) (list (quote quotient) (quote a) (
+quote m))) (list (quote cosh) (list (quote times) (list (quote difference) (
+quote n) 1) (list (quote quotient) (quote a) (quote m))))) (list (quote times) (
+list (quote cosh) (list (quote quotient) (quote a) (quote m))) (list (quote sinh
+) (list (quote times) (list (quote difference) (quote n) 1) (list (quote 
+quotient) (quote a) (quote m)))))) (list (quote and) (list (quote fixp) (quote n
+)) (list (quote leq) (quote n) 15) (list (quote greaterp) (quote n) 1)))) (list
+(quote replaceby) (list (quote sinh) (list (quote times) (list (quote !~) (quote
+n)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (
+quote !~) (quote m)))))) (list (quote when) (list (quote times) 2 (list (quote 
+sinh) (list (quote times) (list (quote quotient) (quote n) 2) (list (quote 
+quotient) (quote a) (quote m)))) (list (quote cosh) (list (quote times) (list (
+quote quotient) (quote n) 2) (list (quote quotient) (quote a) (quote m))))) (
+list (quote and) (list (quote fixp) (quote n)) (list (quote equal) (list (quote
+mod) (quote n) 2) 0) (list (quote greaterp) (quote n) 15)))) (list (quote 
+replaceby) (list (quote sinh) (list (quote times) (list (quote !~) (quote n)) (
+list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (quote
+!~) (quote m)))))) (list (quote when) (list (quote plus) (list (quote times) (
+list (quote sinh) (list (quote times) (list (quote quotient) (list (quote 
+difference) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))) (list
+(quote cosh) (list (quote times) (list (quote quotient) (list (quote plus) (
+quote n) 1) 2) (list (quote quotient) (quote a) (quote m))))) (list (quote times
+) (list (quote sinh) (list (quote times) (list (quote quotient) (list (quote 
+plus) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))) (list (quote
+cosh) (list (quote times) (list (quote quotient) (list (quote difference) (quote
+n) 1) 2) (list (quote quotient) (quote a) (quote m)))))) (list (quote and) (list
+(quote fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n) 2) 1) (
+list (quote greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote cosh
+) (list (quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (
+quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (
+quote when) (list (quote plus) (list (quote times) (list (quote cosh) (list (
+quote quotient) (quote a) (quote m))) (list (quote cosh) (list (quote times) (
+list (quote difference) (quote n) 1) (list (quote quotient) (quote a) (quote m))
+))) (list (quote times) (list (quote sinh) (list (quote quotient) (quote a) (
+quote m))) (list (quote sinh) (list (quote times) (list (quote difference) (
+quote n) 1) (list (quote quotient) (quote a) (quote m)))))) (list (quote and) (
+list (quote fixp) (quote n)) (list (quote greaterp) (quote n) 1) (list (quote 
+leq) (quote n) 15)))) (list (quote replaceby) (list (quote cosh) (list (quote 
+times) (list (quote !~) (quote n)) (list (quote quotient) (list (quote !~) (
+quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (
+list (quote difference) (list (quote times) 2 (list (quote expt) (list (quote 
+cosh) (list (quote times) (list (quote quotient) (quote n) 2) (list (quote 
+quotient) (quote a) (quote m)))) 2)) 1) (list (quote and) (list (quote fixp) (
+quote n)) (list (quote equal) (list (quote mod) (quote n) 2) 0) (list (quote 
+greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote cosh) (list (
+quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (quote !~)
+(quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (
+list (quote plus) (list (quote times) (list (quote cosh) (list (quote times) (
+list (quote quotient) (list (quote difference) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))) (list (quote cosh) (list (quote times) (list (
+quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote quotient) (quote
+a) (quote m))))) (list (quote times) (list (quote sinh) (list (quote times) (
+list (quote quotient) (list (quote difference) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))) (list (quote sinh) (list (quote times) (list (
+quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote quotient) (quote
+a) (quote m)))))) (list (quote and) (list (quote fixp) (quote n)) (list (quote 
+equal) (list (quote mod) (quote n) 2) 1) (list (quote greaterp) (quote n) 15))))
+(list (quote replaceby) (list (quote tan) (list (quote times) (list (quote !~) (
+quote n)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (
+list (quote !~) (quote m)))))) (list (quote when) (list (quote quotient) (list (
+quote plus) (list (quote tan) (list (quote quotient) (quote a) (quote m))) (list
+(quote tan) (list (quote times) (list (quote difference) (quote n) 1) (list (
+quote quotient) (quote a) (quote m))))) (list (quote difference) 1 (list (quote
+times) (list (quote tan) (list (quote quotient) (quote a) (quote m))) (list (
+quote tan) (list (quote times) (list (quote difference) (quote n) 1) (list (
+quote quotient) (quote a) (quote m))))))) (list (quote and) (list (quote fixp) (
+quote n)) (list (quote greaterp) (quote n) 1) (list (quote leq) (quote n) 15))))
+(list (quote replaceby) (list (quote tan) (list (quote times) (list (quote !~) (
+quote n)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (
+list (quote !~) (quote m)))))) (list (quote when) (list (quote times) 2 (list (
+quote quotient) (list (quote tan) (list (quote times) (list (quote quotient) (
+quote n) 2) (list (quote quotient) (quote a) (quote m)))) (list (quote 
+difference) 1 (list (quote expt) (list (quote tan) (list (quote times) (list (
+quote quotient) (quote n) 2) (list (quote quotient) (quote a) (quote m)))) 2))))
+(list (quote and) (list (quote fixp) (quote n)) (list (quote equal) (list (quote
+mod) (quote n) 2) 0) (list (quote greaterp) (quote n) 15)))) (list (quote 
+replaceby) (list (quote tan) (list (quote times) (list (quote !~) (quote n)) (
+list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (quote
+!~) (quote m)))))) (list (quote when) (list (quote quotient) (list (quote plus)
+(list (quote tan) (list (quote times) (list (quote quotient) (list (quote 
+difference) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))) (list
+(quote tan) (list (quote times) (list (quote quotient) (list (quote plus) (quote
+n) 1) 2) (list (quote quotient) (quote a) (quote m))))) (list (quote difference)
+1 (list (quote times) (list (quote tan) (list (quote times) (list (quote 
+quotient) (list (quote difference) (quote n) 1) 2) (list (quote quotient) (quote
+a) (quote m)))) (list (quote tan) (list (quote times) (list (quote quotient) (
+list (quote plus) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))))
+)) (list (quote and) (list (quote fixp) (quote n)) (list (quote equal) (list (
+quote mod) (quote n) 2) 1) (list (quote greaterp) (quote n) 15)))) (list (quote
+replaceby) (list (quote tanh) (list (quote times) (list (quote !~) (quote n)) (
+list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (quote
+!~) (quote m)))))) (list (quote when) (list (quote quotient) (list (quote plus)
+(list (quote tanh) (list (quote quotient) (quote a) (quote m))) (list (quote 
+tanh) (list (quote times) (list (quote difference) (quote n) 1) (list (quote 
+quotient) (quote a) (quote m))))) (list (quote plus) 1 (list (quote times) (list
+(quote tanh) (list (quote quotient) (quote a) (quote m))) (list (quote tanh) (
+list (quote times) (list (quote difference) (quote n) 1) (list (quote quotient)
+(quote a) (quote m))))))) (list (quote and) (list (quote fixp) (quote n)) (list
+(quote greaterp) (quote n) 1) (list (quote leq) (quote n) 15)))) (list (quote 
+replaceby) (list (quote tanh) (list (quote times) (list (quote !~) (quote n)) (
+list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (quote
+!~) (quote m)))))) (list (quote when) (list (quote times) 2 (list (quote 
+quotient) (list (quote tanh) (list (quote times) (list (quote quotient) (quote n
+) 2) (list (quote quotient) (quote a) (quote m)))) (list (quote plus) 1 (list (
+quote expt) (list (quote tanh) (list (quote times) (list (quote quotient) (quote
+n) 2) (list (quote quotient) (quote a) (quote m)))) 2)))) (list (quote and) (
+list (quote fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n) 2)
+0) (list (quote greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote
+tanh) (list (quote times) (list (quote !~) (quote n)) (list (quote quotient) (
+list (quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (
+list (quote when) (list (quote quotient) (list (quote plus) (list (quote tanh) (
+list (quote times) (list (quote quotient) (list (quote difference) (quote n) 1)
+2) (list (quote quotient) (quote a) (quote m)))) (list (quote tanh) (list (quote
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m))))) (list (quote plus) 1 (list (quote times) (list
+(quote tanh) (list (quote times) (list (quote quotient) (list (quote difference)
+(quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))) (list (quote tanh)
+(list (quote times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (
+list (quote quotient) (quote a) (quote m))))))) (list (quote and) (list (quote 
+fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n) 2) 1) (list (
+quote greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote cot) (list
+(quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (quote !~
+) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (quote when)
+(list (quote quotient) (list (quote difference) (list (quote times) (list (quote
+cot) (list (quote quotient) (quote a) (quote m))) (list (quote cot) (list (quote
+times) (list (quote difference) (quote n) 1) (list (quote quotient) (quote a) (
+quote m))))) 1) (list (quote plus) (list (quote cot) (list (quote quotient) (
+quote a) (quote m))) (list (quote cot) (list (quote times) (list (quote 
+difference) (quote n) 1) (list (quote quotient) (quote a) (quote m)))))) (list (
+quote and) (list (quote fixp) (quote n)) (list (quote greaterp) (quote n) 1) (
+list (quote leq) (quote n) 15)))) (list (quote replaceby) (list (quote cot) (
+list (quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (
+quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (
+quote when) (list (quote quotient) (list (quote difference) (list (quote expt) (
+list (quote cot) (list (quote times) (list (quote quotient) (quote n) 2) (list (
+quote quotient) (quote a) (quote m)))) 2) 1) (list (quote times) 2 (list (quote
+cot) (list (quote times) (list (quote quotient) (quote n) 2) (list (quote 
+quotient) (quote a) (quote m)))))) (list (quote and) (list (quote fixp) (quote n
+)) (list (quote equal) (list (quote mod) (quote n) 2) 0) (list (quote greaterp)
+(quote n) 15)))) (list (quote replaceby) (list (quote cot) (list (quote times) (
+list (quote !~) (quote n)) (list (quote quotient) (list (quote !~) (quote a)) (
+list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (list (quote
+quotient) (list (quote difference) (list (quote times) (list (quote cot) (list (
+quote times) (list (quote quotient) (list (quote difference) (quote n) 1) 2) (
+list (quote quotient) (quote a) (quote m)))) (list (quote cot) (list (quote 
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m))))) 1) (list (quote plus) (list (quote cot) (list
+(quote times) (list (quote quotient) (list (quote difference) (quote n) 1) 2) (
+list (quote quotient) (quote a) (quote m)))) (list (quote cot) (list (quote 
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))))) (list (quote and) (list (quote fixp) (quote n
+)) (list (quote equal) (list (quote mod) (quote n) 2) 1) (list (quote greaterp)
+(quote n) 15)))) (list (quote replaceby) (list (quote coth) (list (quote times)
+(list (quote !~) (quote n)) (list (quote quotient) (list (quote !~) (quote a)) (
+list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (list (quote
+quotient) (list (quote plus) (list (quote times) (list (quote coth) (list (quote
+quotient) (quote a) (quote m))) (list (quote coth) (list (quote times) (list (
+quote difference) (quote n) 1) (list (quote quotient) (quote a) (quote m))))) 1)
+(list (quote plus) (list (quote coth) (list (quote quotient) (quote a) (quote m)
+)) (list (quote coth) (list (quote times) (list (quote difference) (quote n) 1)
+(list (quote quotient) (quote a) (quote m)))))) (list (quote and) (list (quote 
+fixp) (quote n)) (list (quote greaterp) (quote n) 1) (list (quote leq) (quote n)
+15)))) (list (quote replaceby) (list (quote coth) (list (quote times) (list (
+quote !~) (quote n)) (list (quote quotient) (list (quote !~) (quote a)) (list (
+quote !~) (list (quote !~) (quote m)))))) (list (quote when) (list (quote 
+quotient) (list (quote plus) (list (quote expt) (list (quote coth) (list (quote
+times) (list (quote quotient) (quote n) 2) (list (quote quotient) (quote a) (
+quote m)))) 2) 1) (list (quote times) 2 (list (quote coth) (list (quote times) (
+list (quote quotient) (quote n) 2) (list (quote quotient) (quote a) (quote m))))
+)) (list (quote and) (list (quote fixp) (quote n)) (list (quote equal) (list (
+quote mod) (quote n) 2) 0) (list (quote greaterp) (quote n) 15)))) (list (quote
+replaceby) (list (quote coth) (list (quote times) (list (quote !~) (quote n)) (
+list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (quote
+!~) (quote m)))))) (list (quote when) (list (quote quotient) (list (quote plus)
+(list (quote times) (list (quote coth) (list (quote times) (list (quote quotient
+) (list (quote difference) (quote n) 1) 2) (list (quote quotient) (quote a) (
+quote m)))) (list (quote coth) (list (quote times) (list (quote quotient) (list
+(quote plus) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m))))) 1) (
+list (quote plus) (list (quote coth) (list (quote times) (list (quote quotient)
+(list (quote difference) (quote n) 1) 2) (list (quote quotient) (quote a) (quote
+m)))) (list (quote coth) (list (quote times) (list (quote quotient) (list (quote
+plus) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))))) (list (
+quote and) (list (quote fixp) (quote n)) (list (quote equal) (list (quote mod) (
+quote n) 2) 1) (list (quote greaterp) (quote n) 15)))) (list (quote replaceby) (
+list (quote sec) (list (quote times) (list (quote !~) (quote n)) (list (quote 
+quotient) (list (quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m
+)))))) (list (quote when) (list (quote quotient) 1 (list (quote difference) (
+list (quote quotient) 1 (list (quote times) (list (quote sec) (list (quote 
+quotient) (quote a) (quote m))) (list (quote sec) (list (quote times) (list (
+quote difference) (quote n) 1) (list (quote quotient) (quote a) (quote m)))))) (
+list (quote quotient) 1 (list (quote times) (list (quote csc) (list (quote 
+quotient) (quote a) (quote m))) (list (quote csc) (list (quote times) (list (
+quote difference) (quote n) 1) (list (quote quotient) (quote a) (quote m))))))))
+(list (quote and) (list (quote fixp) (quote n)) (list (quote greaterp) (quote n)
+1) (list (quote leq) (quote n) 15)))) (list (quote replaceby) (list (quote sec)
+(list (quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (
+quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (
+quote when) (list (quote quotient) 1 (list (quote difference) (list (quote 
+quotient) 1 (list (quote expt) (list (quote sec) (list (quote times) (list (
+quote quotient) (quote n) 2) (list (quote quotient) (quote a) (quote m)))) 2)) (
+list (quote quotient) 1 (list (quote expt) (list (quote csc) (list (quote times)
+(list (quote quotient) (quote n) 2) (list (quote quotient) (quote a) (quote m)))
+) 2)))) (list (quote and) (list (quote fixp) (quote n)) (list (quote equal) (
+list (quote mod) (quote n) 2) 0) (list (quote greaterp) (quote n) 15)))) (list (
+quote replaceby) (list (quote sec) (list (quote times) (list (quote !~) (quote n
+)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (
+quote !~) (quote m)))))) (list (quote when) (list (quote quotient) 1 (list (
+quote difference) (list (quote quotient) 1 (list (quote times) (list (quote sec)
+(list (quote times) (list (quote quotient) (list (quote difference) (quote n) 1)
+2) (list (quote quotient) (quote a) (quote m)))) (list (quote sec) (list (quote
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))))) (list (quote quotient) 1 (list (quote times)
+(list (quote csc) (list (quote times) (list (quote quotient) (list (quote 
+difference) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))) (list
+(quote csc) (list (quote times) (list (quote quotient) (list (quote plus) (quote
+n) 1) 2) (list (quote quotient) (quote a) (quote m)))))))) (list (quote and) (
+list (quote fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n) 2)
+1) (list (quote greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote
+csc) (list (quote times) (list (quote !~) (quote n)) (list (quote quotient) (
+list (quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (
+list (quote when) (list (quote quotient) 1 (list (quote plus) (list (quote 
+quotient) 1 (list (quote times) (list (quote sec) (list (quote quotient) (quote
+a) (quote m))) (list (quote csc) (list (quote times) (list (quote difference) (
+quote n) 1) (list (quote quotient) (quote a) (quote m)))))) (list (quote 
+quotient) 1 (list (quote times) (list (quote csc) (list (quote quotient) (quote
+a) (quote m))) (list (quote sec) (list (quote times) (list (quote difference) (
+quote n) 1) (list (quote quotient) (quote a) (quote m)))))))) (list (quote and)
+(list (quote fixp) (quote n)) (list (quote greaterp) (quote n) 1) (list (quote 
+leq) (quote n) 15)))) (list (quote replaceby) (list (quote csc) (list (quote 
+times) (list (quote !~) (quote n)) (list (quote quotient) (list (quote !~) (
+quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (
+list (quote times) (list (quote sec) (list (quote times) (list (quote quotient)
+(quote n) 2) (list (quote quotient) (quote a) (quote m)))) (list (quote quotient
+) (list (quote csc) (list (quote times) (list (quote quotient) (quote n) 2) (
+list (quote quotient) (quote a) (quote m)))) 2)) (list (quote and) (list (quote
+fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n) 2) 0)))) (list
+(quote replaceby) (list (quote csc) (list (quote times) (list (quote !~) (quote
+n)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (list (
+quote !~) (quote m)))))) (list (quote when) (list (quote quotient) 1 (list (
+quote plus) (list (quote quotient) 1 (list (quote times) (list (quote sec) (list
+(quote times) (list (quote quotient) (list (quote difference) (quote n) 1) 2) (
+list (quote quotient) (quote a) (quote m)))) (list (quote csc) (list (quote 
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))))) (list (quote quotient) 1 (list (quote times)
+(list (quote csc) (list (quote times) (list (quote quotient) (list (quote 
+difference) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))) (list
+(quote sec) (list (quote times) (list (quote quotient) (list (quote plus) (quote
+n) 1) 2) (list (quote quotient) (quote a) (quote m)))))))) (list (quote and) (
+list (quote fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n) 2)
+1) (list (quote greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote
+sech) (list (quote times) (list (quote !~) (quote n)) (list (quote quotient) (
+list (quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (
+list (quote when) (list (quote quotient) 1 (list (quote plus) (list (quote 
+quotient) 1 (list (quote times) (list (quote sech) (list (quote quotient) (quote
+a) (quote m))) (list (quote sech) (list (quote times) (list (quote difference) (
+quote n) 1) (list (quote quotient) (quote a) (quote m)))))) (list (quote 
+quotient) 1 (list (quote times) (list (quote csch) (list (quote quotient) (quote
+a) (quote m))) (list (quote csch) (list (quote times) (list (quote difference) (
+quote n) 1) (list (quote quotient) (quote a) (quote m)))))))) (list (quote and)
+(list (quote fixp) (quote n)) (list (quote greaterp) (quote n) 1) (list (quote 
+leq) (quote n) 15)))) (list (quote replaceby) (list (quote sech) (list (quote 
+times) (list (quote !~) (quote n)) (list (quote quotient) (list (quote !~) (
+quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (
+list (quote quotient) 1 (list (quote plus) (list (quote quotient) 1 (list (quote
+expt) (list (quote sech) (list (quote times) (list (quote quotient) (quote n) 2)
+(list (quote quotient) (quote a) (quote m)))) 2)) (list (quote quotient) 1 (list
+(quote expt) (list (quote csch) (list (quote times) (list (quote quotient) (
+quote n) 2) (list (quote quotient) (quote a) (quote m)))) 2)))) (list (quote and
+) (list (quote fixp) (quote n)) (list (quote equal) (list (quote mod) (quote n)
+2) 0) (list (quote greaterp) (quote n) 15)))) (list (quote replaceby) (list (
+quote sech) (list (quote times) (list (quote !~) (quote n)) (list (quote 
+quotient) (list (quote !~) (quote a)) (list (quote !~) (list (quote !~) (quote m
+)))))) (list (quote when) (list (quote quotient) 1 (list (quote plus) (list (
+quote quotient) 1 (list (quote times) (list (quote sech) (list (quote times) (
+list (quote quotient) (list (quote difference) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))) (list (quote sech) (list (quote times) (list (
+quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote quotient) (quote
+a) (quote m)))))) (list (quote quotient) 1 (list (quote times) (list (quote csch
+) (list (quote times) (list (quote quotient) (list (quote difference) (quote n)
+1) 2) (list (quote quotient) (quote a) (quote m)))) (list (quote csch) (list (
+quote times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (
+quote quotient) (quote a) (quote m)))))))) (list (quote and) (list (quote fixp)
+(quote n)) (list (quote equal) (list (quote mod) (quote n) 2) 1) (list (quote 
+greaterp) (quote n) 15)))) (list (quote replaceby) (list (quote csch) (list (
+quote times) (list (quote !~) (quote n)) (list (quote quotient) (list (quote !~)
+(quote a)) (list (quote !~) (list (quote !~) (quote m)))))) (list (quote when) (
+list (quote quotient) 1 (list (quote plus) (list (quote quotient) 1 (list (quote
+times) (list (quote sech) (list (quote quotient) (quote a) (quote m))) (list (
+quote csch) (list (quote times) (list (quote difference) (quote n) 1) (list (
+quote quotient) (quote a) (quote m)))))) (list (quote quotient) 1 (list (quote 
+times) (list (quote csch) (list (quote quotient) (quote a) (quote m))) (list (
+quote sech) (list (quote times) (list (quote difference) (quote n) 1) (list (
+quote quotient) (quote a) (quote m)))))))) (list (quote and) (list (quote fixp)
+(quote n)) (list (quote greaterp) (quote n) 1) (list (quote leq) (quote n) 15)))
+) (list (quote replaceby) (list (quote csch) (list (quote times) (list (quote !~
+) (quote n)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~)
+(list (quote !~) (quote m)))))) (list (quote when) (list (quote times) (list (
+quote sech) (list (quote times) (list (quote quotient) (quote n) 2) (list (quote
+quotient) (quote a) (quote m)))) (list (quote quotient) (list (quote csch) (list
+(quote times) (list (quote quotient) (quote n) 2) (list (quote quotient) (quote
+a) (quote m)))) 2)) (list (quote and) (list (quote fixp) (quote n)) (list (quote
+equal) (list (quote mod) (quote n) 2) 0) (list (quote greaterp) (quote n) 15))))
+(list (quote replaceby) (list (quote csch) (list (quote times) (list (quote !~)
+(quote n)) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~) (
+list (quote !~) (quote m)))))) (list (quote when) (list (quote quotient) 1 (list
+(quote plus) (list (quote quotient) 1 (list (quote times) (list (quote sech) (
+list (quote times) (list (quote quotient) (list (quote difference) (quote n) 1)
+2) (list (quote quotient) (quote a) (quote m)))) (list (quote csch) (list (quote
+times) (list (quote quotient) (list (quote plus) (quote n) 1) 2) (list (quote 
+quotient) (quote a) (quote m)))))) (list (quote quotient) 1 (list (quote times)
+(list (quote csch) (list (quote times) (list (quote quotient) (list (quote 
+difference) (quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))) (list
+(quote sech) (list (quote times) (list (quote quotient) (list (quote plus) (
+quote n) 1) 2) (list (quote quotient) (quote a) (quote m)))))))) (list (quote 
+and) (list (quote fixp) (quote n)) (list (quote equal) (list (quote mod) (quote
+n) 2) 1) (list (quote greaterp) (quote n) 15)))))))
+(setk (quote trig_combine!*) (aeval (list (quote list) (list (quote replaceby) (
+list (quote times) (list (quote sin) (list (quote !~) (quote a))) (list (quote 
+sin) (list (quote !~) (quote b)))) (list (quote times) (list (quote quotient) 1
+2) (list (quote difference) (list (quote cos) (list (quote difference) (quote a)
+(quote b))) (list (quote cos) (list (quote plus) (quote a) (quote b)))))) (list
+(quote replaceby) (list (quote times) (list (quote cos) (list (quote !~) (quote
+a))) (list (quote cos) (list (quote !~) (quote b)))) (list (quote times) (list (
+quote quotient) 1 2) (list (quote plus) (list (quote cos) (list (quote 
+difference) (quote a) (quote b))) (list (quote cos) (list (quote plus) (quote a)
+(quote b)))))) (list (quote replaceby) (list (quote times) (list (quote sin) (
+list (quote !~) (quote a))) (list (quote cos) (list (quote !~) (quote b)))) (
+list (quote times) (list (quote quotient) 1 2) (list (quote plus) (list (quote 
+sin) (list (quote difference) (quote a) (quote b))) (list (quote sin) (list (
+quote plus) (quote a) (quote b)))))) (list (quote replaceby) (list (quote expt)
+(list (quote sin) (list (quote !~) (quote a))) 2) (list (quote times) (list (
+quote quotient) 1 2) (list (quote difference) 1 (list (quote cos) (list (quote 
+times) 2 (quote a)))))) (list (quote replaceby) (list (quote expt) (list (quote
+cos) (list (quote !~) (quote a))) 2) (list (quote times) (list (quote quotient)
+1 2) (list (quote plus) 1 (list (quote cos) (list (quote times) 2 (quote a))))))
+(list (quote replaceby) (list (quote times) (list (quote sinh) (list (quote !~)
+(quote a))) (list (quote sinh) (list (quote !~) (quote b)))) (list (quote times)
+(list (quote quotient) 1 2) (list (quote difference) (list (quote cosh) (list (
+quote plus) (quote a) (quote b))) (list (quote cosh) (list (quote difference) (
+quote a) (quote b)))))) (list (quote replaceby) (list (quote times) (list (quote
+cosh) (list (quote !~) (quote a))) (list (quote cosh) (list (quote !~) (quote b)
+))) (list (quote times) (list (quote quotient) 1 2) (list (quote plus) (list (
+quote cosh) (list (quote difference) (quote a) (quote b))) (list (quote cosh) (
+list (quote plus) (quote a) (quote b)))))) (list (quote replaceby) (list (quote
+times) (list (quote sinh) (list (quote !~) (quote a))) (list (quote cosh) (list
+(quote !~) (quote b)))) (list (quote times) (list (quote quotient) 1 2) (list (
+quote plus) (list (quote sinh) (list (quote difference) (quote a) (quote b))) (
+list (quote sinh) (list (quote plus) (quote a) (quote b)))))) (list (quote 
+replaceby) (list (quote expt) (list (quote sinh) (list (quote !~) (quote a))) 2)
+(list (quote times) (list (quote quotient) 1 2) (list (quote difference) (list (
+quote cosh) (list (quote times) 2 (quote a))) 1))) (list (quote replaceby) (list
+(quote expt) (list (quote cosh) (list (quote !~) (quote a))) 2) (list (quote 
+times) (list (quote quotient) 1 2) (list (quote plus) 1 (list (quote cosh) (list
+(quote times) 2 (quote a)))))))))
+(setk (quote trig_standardize!*) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote tan) (list (quote !~) (quote a))) (list (quote quotient)
+(list (quote sin) (quote a)) (list (quote cos) (quote a)))) (list (quote 
+replaceby) (list (quote cot) (list (quote !~) (quote a))) (list (quote quotient)
+(list (quote cos) (quote a)) (list (quote sin) (quote a)))) (list (quote 
+replaceby) (list (quote tanh) (list (quote !~) (quote a))) (list (quote quotient
+) (list (quote sinh) (quote a)) (list (quote cosh) (quote a)))) (list (quote 
+replaceby) (list (quote coth) (list (quote !~) (quote a))) (list (quote quotient
+) (list (quote cosh) (quote a)) (list (quote sinh) (quote a)))) (list (quote 
+replaceby) (list (quote sec) (list (quote !~) (quote a))) (list (quote quotient)
+1 (list (quote cos) (quote a)))) (list (quote replaceby) (list (quote csc) (list
+(quote !~) (quote a))) (list (quote quotient) 1 (list (quote sin) (quote a)))) (
+list (quote replaceby) (list (quote sech) (list (quote !~) (quote a))) (list (
+quote quotient) 1 (list (quote cosh) (quote a)))) (list (quote replaceby) (list
+(quote csch) (list (quote !~) (quote a))) (list (quote quotient) 1 (list (quote
+sinh) (quote a)))))))
+(setk (quote trig2exp!*) (aeval (list (quote list) (list (quote replaceby) (list
+(quote cos) (list (quote !~) (quote a))) (list (quote quotient) (list (quote 
+plus) (list (quote expt) (quote e) (list (quote times) (quote i) (quote a))) (
+list (quote expt) (quote e) (list (quote minus) (list (quote times) (quote i) (
+quote a))))) 2)) (list (quote replaceby) (list (quote sin) (list (quote !~) (
+quote a))) (list (quote minus) (list (quote times) (quote i) (list (quote 
+quotient) (list (quote difference) (list (quote expt) (quote e) (list (quote 
+times) (quote i) (quote a))) (list (quote expt) (quote e) (list (quote minus) (
+list (quote times) (quote i) (quote a))))) 2)))) (list (quote replaceby) (list (
+quote cosh) (list (quote !~) (quote a))) (list (quote quotient) (list (quote 
+plus) (list (quote expt) (quote e) (quote a)) (list (quote expt) (quote e) (list
+(quote minus) (quote a)))) 2)) (list (quote replaceby) (list (quote sinh) (list
+(quote !~) (quote a))) (list (quote quotient) (list (quote difference) (list (
+quote expt) (quote e) (quote a)) (list (quote expt) (quote e) (list (quote minus
+) (quote a)))) 2)))))
+(setk (quote pow2quot!*) (aeval (list (quote list) (list (quote replaceby) (list
+(quote expt) (list (quote quotient) (list (quote !~) (quote a)) (list (quote !~)
+(quote b))) (list (quote !~) (quote c))) (list (quote quotient) (list (quote 
+expt) (quote a) (quote c)) (list (quote expt) (quote b) (quote c)))))))
+(setk (quote exp2trig1!*) (aeval (list (quote list) (list (quote replaceby) (
+list (quote expt) (quote e) (list (quote !~) (quote x))) (list (quote plus) (
+list (quote cos) (list (quote quotient) (quote x) (quote i))) (list (quote times
+) (quote i) (list (quote sin) (list (quote quotient) (quote x) (quote i)))))))))
+(setk (quote exp2trig2!*) (aeval (list (quote list) (list (quote replaceby) (
+list (quote expt) (quote e) (list (quote !~) (quote x))) (list (quote quotient)
+1 (list (quote difference) (list (quote cos) (list (quote quotient) (quote x) (
+quote i))) (list (quote times) (quote i) (list (quote sin) (list (quote quotient
+) (quote x) (quote i))))))))))
+(setk (quote trig2hyp!*) (aeval (list (quote list) (list (quote replaceby) (list
+(quote sin) (list (quote !~) (quote a))) (list (quote minus) (list (quote times)
+(quote i) (list (quote sinh) (list (quote times) (quote i) (quote a)))))) (list
+(quote replaceby) (list (quote cos) (list (quote !~) (quote a))) (list (quote 
+cosh) (list (quote times) (quote i) (quote a)))) (list (quote replaceby) (list (
+quote tan) (list (quote !~) (quote a))) (list (quote minus) (list (quote times)
+(quote i) (list (quote tanh) (list (quote times) (quote i) (quote a)))))) (list
+(quote replaceby) (list (quote cot) (list (quote !~) (quote a))) (list (quote 
+times) (quote i) (list (quote coth) (list (quote times) (quote i) (quote a)))))
+(list (quote replaceby) (list (quote sec) (list (quote !~) (quote a))) (list (
+quote sech) (list (quote times) (quote i) (quote a)))) (list (quote replaceby) (
+list (quote csc) (list (quote !~) (quote a))) (list (quote times) (quote i) (
+list (quote csch) (list (quote times) (quote i) (quote a))))) (list (quote 
+replaceby) (list (quote asin) (list (quote !~) (quote a))) (list (quote minus) (
+list (quote times) (quote i) (list (quote asinh) (list (quote times) (quote i) (
+quote a)))))) (list (quote replaceby) (list (quote acos) (list (quote !~) (quote
+a))) (list (quote minus) (list (quote times) (quote i) (list (quote acosh) (
+quote a))))))))
+(setk (quote hyp2trig!*) (aeval (list (quote list) (list (quote replaceby) (list
+(quote sinh) (list (quote !~) (quote a))) (list (quote minus) (list (quote times
+) (quote i) (list (quote sin) (list (quote times) (quote i) (quote a)))))) (list
+(quote replaceby) (list (quote cosh) (list (quote !~) (quote a))) (list (quote 
+cos) (list (quote times) (quote i) (quote a)))) (list (quote replaceby) (list (
+quote asinh) (list (quote !~) (quote a))) (list (quote times) (quote i) (list (
+quote asin) (list (quote minus) (list (quote times) (quote i) (quote a)))))) (
+list (quote replaceby) (list (quote acosh) (list (quote !~) (quote a))) (list (
+quote times) (quote i) (list (quote acos) (quote a)))))))
+(setk (quote subtan!*) (aeval (list (quote list) (list (quote replaceby) (list (
+quote sin) (list (quote !~) (quote x))) (list (quote when) (list (quote times) (
+list (quote cos) (quote x)) (list (quote tan) (quote x))) (list (quote equal) (
+quote trig_preference) (quote cos)))) (list (quote replaceby) (list (quote cos)
+(list (quote !~) (quote x))) (list (quote when) (list (quote quotient) (list (
+quote sin) (quote x)) (list (quote tan) (quote x))) (list (quote equal) (quote 
+trig_preference) (quote sin)))) (list (quote replaceby) (list (quote sinh) (list
+(quote !~) (quote x))) (list (quote when) (list (quote times) (list (quote cosh)
+(quote x)) (list (quote tanh) (quote x))) (list (quote equal) (quote 
+hyp_preference) (quote cosh)))) (list (quote replaceby) (list (quote cosh) (list
+(quote !~) (quote x))) (list (quote when) (list (quote quotient) (list (quote 
+sinh) (quote x)) (list (quote tanh) (quote x))) (list (quote equal) (quote 
+hyp_preference) (quote sinh)))))))

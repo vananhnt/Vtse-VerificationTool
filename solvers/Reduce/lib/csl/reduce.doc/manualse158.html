@@ -1,0 +1,568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SYMMETRY: Operations on symmetric matrices</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse158.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse159.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse157.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse157.html#tailmanualse157.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse158.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.67    </span></span> <a 
+ id="x214-90900016.67"></a><span 
+class="ptmr8t-x-x-120">SYMMETRY: Operations on symmetric</span>
+<span 
+class="ptmr8t-x-x-120">matrices</span></h3>
+<a 
+ id="dx214-909001"></a>
+<a 
+ id="dx214-909002"></a>
+<!--l. 1276--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package computes symmetry-adapted bases and block diagonal forms</span>
+<span 
+class="ptmr8t-x-x-120">of matrices which have the symmetry of a group. The package is the</span>
+<span 
+class="ptmr8t-x-x-120">implementation of the theory of linear representations for small finite groups</span>
+<span 
+class="ptmr8t-x-x-120">such as the dihedral groups.</span>
+<!--l. 1281--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Karin Gatermann.</span>
+<a 
+ id="dx214-909003"></a>
+<!--l. 13--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.67.1    </span></span> <a 
+ id="x214-91000016.67.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<!--l. 15--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The exploitation of symmetry is a very important principle in mathematics,</span>
+<span 
+class="ptmr8t-x-x-120">physics and engineering sciences. The aim of the SYMMETRY package is to</span>
+<span 
+class="ptmr8t-x-x-120">give an easy access to the underlying theory of linear representations for small</span>
+<span 
+class="ptmr8t-x-x-120">groups. For example the dihedral groups </span><span 
+class="cmmi-12">D</span><sub><span 
+class="cmr-8">3</span></sub><span 
+class="cmmi-12">,D</span><sub><span 
+class="cmr-8">4</span></sub><span 
+class="cmmi-12">,D</span><sub><span 
+class="cmr-8">5</span></sub><span 
+class="cmmi-12">,D</span><sub><span 
+class="cmr-8">6</span></sub> <span 
+class="ptmr8t-x-x-120">are included. For an</span>
+<span 
+class="ptmr8t-x-x-120">introduction to the theory see </span><span 
+class="ptmrc8t-x-x-120">S<span 
+class="small-caps">E</span><span 
+class="small-caps">R</span><span 
+class="small-caps">R</span><span 
+class="small-caps">E</span> </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span> <span 
+class="ptmr8t-x-x-120">or </span><span 
+class="ptmrc8t-x-x-120">S<span 
+class="small-caps">T</span><span 
+class="small-caps">I</span><span 
+class="small-caps">E</span><span 
+class="small-caps">F</span><span 
+class="small-caps">E</span><span 
+class="small-caps">L</span> </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="ptmrc8t-x-x-120">F</span><span 
+class="ptmrc8t-x-x-120">ä<span 
+class="small-caps">S</span><span 
+class="small-caps">S</span><span 
+class="small-caps">L</span><span 
+class="small-caps">E</span><span 
+class="small-caps">R</span> </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">. For a</span>
+<span 
+class="ptmr8t-x-x-120">given orthogonal (or unitarian) linear representation</span>
+<center class="math-display" >
+<img 
+src="manual585x.png" alt="&#x03D1; : G -&#x2192;  GL (Kn ),     K  = R, C.
+" class="math-display" ></center>
+<!--l. 26--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">the character </span><span 
+class="cmmi-12">&#x03C8; </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmmi-12">K</span><span 
+class="ptmr8t-x-x-120">, the canonical decomposition or the bases of the isotypic</span>
+<span 
+class="ptmr8t-x-x-120">components are computed. A matrix </span><span 
+class="cmmi-12">A </span><span 
+class="ptmr8t-x-x-120">having the symmetry of a linear</span>
+<span 
+class="ptmr8t-x-x-120">representation,e.g.</span>
+<center class="math-display" >
+<img 
+src="manual586x.png" alt="&#x03D1;tA =  A &#x03D1;t  &#x2200;t &#x2208; G,
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 33--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">is transformed to block diagonal form by a coordinate transformation. The</span>
+<span 
+class="ptmr8t-x-x-120">dependence of the algorithm on the field of real or complex numbers is</span>
+<span 
+class="ptmr8t-x-x-120">controled by the switch </span><span 
+class="pcrr8t-x-x-120">complex</span><span 
+class="ptmr8t-x-x-120">. An example for this is given in the testfile</span>
+<span 
+class="ptmri8t-x-x-120">symmetry.tst</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 40--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">As the algorithm needs information concerning the irreducible representations</span>
+<span 
+class="ptmr8t-x-x-120">this information is stored for some groups (see the operators in Section 3). It is</span>
+<span 
+class="ptmr8t-x-x-120">assumed that only orthogonal (unitar) representations are given.</span>
+<!--l. 44--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The package is loaded by</span>
+<!--l. 46--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">load symmetry;</span>
+<!--l. 48--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.67.2    </span></span> <a 
+ id="x214-91100016.67.2"></a><span 
+class="ptmr8t-x-x-120">Operators for linear representations</span></h4>
+<a 
+ id="dx214-911001"></a>
+<a 
+ id="dx214-911002"></a>
+<a 
+ id="dx214-911003"></a>
+<a 
+ id="dx214-911004"></a>
+<a 
+ id="dx214-911005"></a>
+<a 
+ id="dx214-911006"></a>
+<!--l. 56--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">First the data structure for a linear representation has to be explained.</span>
+<span 
+class="ptmri8t-x-x-120">representation </span><span 
+class="ptmr8t-x-x-120">is a list consisting of the group identifier and equations which</span>
+<span 
+class="ptmr8t-x-x-120">assign matrices to the generators of the group.</span>
+<!--l. 60--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1222">
+&#x00A0;&#x00A0;&#x00A0;rr:=mat((0,1,0,0),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(0,0,1,0),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(0,0,0,1),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1,0,0,0));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;sp:=mat((0,1,0,0),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(1,0,0,0),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(0,0,0,1),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(0,0,1,0));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;representation:={D4,rD4=rr,sD4=sp};
+</div>
+<!--l. 73--><p class="nopar" >
+<!--l. 75--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For orthogonal (unitarian) representations the following operators are</span>
+<span 
+class="ptmr8t-x-x-120">available.</span>
+<!--l. 78--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">canonicaldecomposition(representation);</span>
+<!--l. 80--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns an equation giving the canonical decomposition of the linear</span>
+<span 
+class="ptmr8t-x-x-120">representation.</span>
+<!--l. 83--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">character(representation);</span>
+<!--l. 85--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">computes the character of the linear representation. The result is a list of the</span>
+<span 
+class="ptmr8t-x-x-120">group identifier and of lists consisting of a list of group elements in one</span>
+<span 
+class="ptmr8t-x-x-120">equivalence class and a real or complex number.</span>
+<!--l. 89--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">symmetrybasis(representation,nr);</span>
+<!--l. 91--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">computes the basis of the isotypic component corresponding to the irreducible</span>
+<span 
+class="ptmr8t-x-x-120">representation of type nr. If the nr-th irreducible representation is multidimensional,</span>
+<span 
+class="ptmr8t-x-x-120">the basis is symmetry adapted. The output is a matrix.</span>
+<!--l. 95--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">symmetrybasispart(representation,nr);</span>
+<!--l. 97--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is similar as </span><span 
+class="pcrr8t-x-x-120">symmetrybasis</span><span 
+class="ptmr8t-x-x-120">, but for multidimensional irreducible</span>
+<span 
+class="ptmr8t-x-x-120">representations only the first part of the symmetry adapted basis is computed.</span>
+<!--l. 101--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">allsymmetrybases(representation);</span>
+<!--l. 103--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is similar as </span><span 
+class="pcrr8t-x-x-120">symmetrybasis </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">symmetrybasispart</span><span 
+class="ptmr8t-x-x-120">, but the bases of</span>
+<span 
+class="ptmr8t-x-x-120">all isotypic components are computed and thus a complete coordinate</span>
+<span 
+class="ptmr8t-x-x-120">transformation is returned.</span>
+                                                                     
+
+                                                                     
+<!--l. 108--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">diagonalize(matrix,representation);</span>
+<!--l. 110--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns the block diagonal form of matrix which has the symmetry of the given</span>
+<span 
+class="ptmr8t-x-x-120">linear representation. Otherwise an error message occurs.</span>
+<!--l. 113--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">on complex;</span>
+<!--l. 115--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Of course the property of irreducibility depends on the field </span><span 
+class="cmmi-12">K </span><span 
+class="ptmr8t-x-x-120">of real or complex</span>
+<span 
+class="ptmr8t-x-x-120">numbers. This is why the algorithm depends on </span><span 
+class="cmmi-12">K</span><span 
+class="ptmr8t-x-x-120">. The type of computation is</span>
+<span 
+class="ptmr8t-x-x-120">set by the switch </span><span 
+class="ptmri8t-x-x-120">complex</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 119--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.67.3    </span></span> <a 
+ id="x214-91200016.67.3"></a><span 
+class="ptmr8t-x-x-120">Display Operators</span></h4>
+<a 
+ id="dx214-912001"></a>
+<a 
+ id="dx214-912002"></a>
+<a 
+ id="dx214-912003"></a>
+<a 
+ id="dx214-912004"></a>
+<a 
+ id="dx214-912005"></a>
+<a 
+ id="dx214-912006"></a>
+<!--l. 127--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In this section the operators are described which give access to the stored</span>
+<span 
+class="ptmr8t-x-x-120">information for a group. First the operators for the abstract groups are</span>
+<span 
+class="ptmr8t-x-x-120">given. Then it is described how to get the irreducible representations for a</span>
+<span 
+class="ptmr8t-x-x-120">group.</span>
+<!--l. 133--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">availablegroups();</span>
+<!--l. 135--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns the list of all groups for which the information such as irreducible</span>
+<span 
+class="ptmr8t-x-x-120">representations is stored. In the following </span><span 
+class="pcrr8t-x-x-120">group </span><span 
+class="ptmr8t-x-x-120">is always one of these group</span>
+<span 
+class="ptmr8t-x-x-120">identifiers.</span>
+<!--l. 139--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">printgroup(group);</span>
+<!--l. 141--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns the list of all group elements;</span>
+<!--l. 143--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">generators(group);</span>
+<!--l. 145--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns a list of group elements which generates the group. For the definition of a</span>
+<span 
+class="ptmr8t-x-x-120">linear representation matrices for these generators have to be defined.</span>
+<!--l. 149--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">charactertable(group);</span>
+<!--l. 151--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns a list of the characters corresponding to the irreducible representations of</span>
+<span 
+class="ptmr8t-x-x-120">this group.</span>
+<!--l. 154--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">charactern(group,nr);</span>
+<!--l. 156--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns the character corresponding to the nr-th irreducible representation of this</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">group as a list (see also </span><span 
+class="pcrr8t-x-x-120">character</span><span 
+class="ptmr8t-x-x-120">).</span>
+<!--l. 159--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">irreduciblereptable(group);</span>
+<!--l. 161--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns the list of irreducible representations of the group.</span>
+<!--l. 163--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">irreduciblerepnr(group,nr);</span>
+<!--l. 165--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">returns an irreducible representation of the group. The output is a list of the group</span>
+<span 
+class="ptmr8t-x-x-120">identifier and equations assigning the representation matrices to group</span>
+<span 
+class="ptmr8t-x-x-120">elements.</span>
+<!--l. 169--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.67.4    </span></span> <a 
+ id="x214-91300016.67.4"></a><span 
+class="ptmr8t-x-x-120">Storing a new group</span></h4>
+<a 
+ id="dx214-913001"></a>
+<a 
+ id="dx214-913002"></a>
+<a 
+ id="dx214-913003"></a>
+<a 
+ id="dx214-913004"></a>
+<a 
+ id="dx214-913005"></a>
+<a 
+ id="dx214-913006"></a>
+<a 
+ id="dx214-913007"></a>
+<a 
+ id="dx214-913008"></a>
+<!--l. 179--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the user wants to do computations for a group for which information is not</span>
+<span 
+class="ptmr8t-x-x-120">predefined, the package SYMMETRY offers the possibility to supply</span>
+<span 
+class="ptmr8t-x-x-120">information for this group.</span>
+<!--l. 184--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For this the following data structures are used.</span>
+<!--l. 186--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">elemlist </span><span 
+class="ptmr8t-x-x-120">= list of identifiers.</span>
+<!--l. 188--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">relationlist </span><span 
+class="ptmr8t-x-x-120">= list of equations with identifiers and operators </span><span 
+class="cmr-12">@ </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmsy-10x-x-120">**</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 191--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">grouptable </span><span 
+class="ptmr8t-x-x-120">= matrix with the (1,1)-entry grouptable.</span>
+<!--l. 193--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">filename </span><span 
+class="ptmr8t-x-x-120">= "myfilename.new".</span>
+<!--l. 196--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The following operators have to be used in this order.</span>
+<!--l. 198--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">setgenerators(group,elemlist,relationlist);</span>
+<!--l. 200--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1223">
+&#x00A0;&#x00A0;&#x00A0;setgenerators(K4,{s1K4,s2K4},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{s1K4^2=id,s2K4^2=id,s1K4@s2K4=s2K4@s1K4});
+</div>
+<!--l. 204--><p class="nopar" >
+<!--l. 206--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">setelements(group,relationlist);</span>
+<!--l. 208--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The group elements except the neutral element are given as product of the</span>
+<span 
+class="ptmr8t-x-x-120">defined generators. The neutral element is always called </span><span 
+class="pcrr8t-x-x-120">id</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 212--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1224">
+&#x00A0;&#x00A0;&#x00A0;setelements(K4,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{s1K4=s1K4,s2K4=s2K4,rK4=s1K4@s2K4});
+</div>
+<!--l. 216--><p class="nopar" >
+<!--l. 218--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">setgrouptable(group,grouptable);</span>
+<!--l. 220--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">installs the group table.</span>
+<!--l. 222--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1225">
+&#x00A0;&#x00A0;&#x00A0;tab:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;mat((grouptable,&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;id,&#x00A0;&#x00A0;&#x00A0;&#x00A0;s1K4,&#x00A0;s2K4,&#x00A0;rK4),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(id&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;,&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;id,&#x00A0;&#x00A0;&#x00A0;&#x00A0;s1K4,&#x00A0;s2K4,&#x00A0;rK4),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(s1K4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;,&#x00A0;&#x00A0;&#x00A0;&#x00A0;s1K4,&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;id,&#x00A0;&#x00A0;rK4,s2K4),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(s2K4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;,&#x00A0;&#x00A0;&#x00A0;&#x00A0;s2K4,&#x00A0;&#x00A0;&#x00A0;&#x00A0;rK4,&#x00A0;&#x00A0;&#x00A0;id,s1K4),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(rK4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;,&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rK4,&#x00A0;&#x00A0;&#x00A0;s2K4,&#x00A0;s1K4,&#x00A0;&#x00A0;id));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;setgrouptable(K4,tab);
+</div>
+<!--l. 232--><p class="nopar" >
+<!--l. 234--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Rsetrepresentation(representation,type);</span>
+<!--l. 236--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is used to define the real irreducible representations of the group. The variable</span>
+<span 
+class="pcrr8t-x-x-120">type </span><span 
+class="ptmr8t-x-x-120">is either </span><span 
+class="ptmri8t-x-x-120">realtype </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="ptmri8t-x-x-120">complextype </span><span 
+class="ptmr8t-x-x-120">which indicates the type of the real</span>
+<span 
+class="ptmr8t-x-x-120">irreducible representation.</span>
+<!--l. 240--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1226">
+&#x00A0;&#x00A0;&#x00A0;eins:=mat((1));
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;mineins:=mat((-1));
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;rep3:={K4,s1K4=eins,s2K4=mineins};
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;Rsetrepresentation(rep3,realtype);
+</div>
+<!--l. 246--><p class="nopar" >
+<!--l. 248--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">Csetrepresentation(representation);</span>
+<!--l. 250--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This defines the complex irreducible representations.</span>
+<!--l. 252--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">setavailable(group);</span>
+<!--l. 254--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">terminates the installation of the group203. It checks some properties of the</span>
+<span 
+class="ptmr8t-x-x-120">irreducible representations and makes the group available for the operators in</span>
+<span 
+class="ptmr8t-x-x-120">Sections 2 and 3.</span>
+<!--l. 258--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">storegroup(group,filename);</span>
+<!--l. 260--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">writes the information concerning the group to the file with name </span><span 
+class="ptmri8t-x-x-120">filename</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 263--><p class="noindent" ><span 
+class="ptmb8t-x-x-120">loadgroups(filename);</span>
+<!--l. 265--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">loads a user defined group from the file </span><span 
+class="ptmri8t-x-x-120">filename </span><span 
+class="ptmr8t-x-x-120">into the system.</span>
+<!--l. 268--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x214-914000"></a><span 
+class="ptmr8t-x-x-120">Bibliography</span></h4>
+<!--l. 268--><p class="noindent" >
+    <div class="thebibliography">
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[1]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XJaKer81"></a><span 
+class="ptmr8t-x-x-120">G.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;James,  A.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Kerber:  </span><span 
+class="ptmri8t-x-x-120">Representation  Theory  of  the  Symmetric</span>
+    <span 
+class="ptmri8t-x-x-120">Group. </span><span 
+class="ptmr8t-x-x-120">Addison, Wesley (1981).</span>
+    </p>
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[2]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XLuFal88"></a><span 
+class="ptmr8t-x-x-120">W.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Ludwig,  C.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Falter:  </span><span 
+class="ptmri8t-x-x-120">Symmetries  in  Physics.  </span><span 
+class="ptmr8t-x-x-120">Springer,  Berlin,</span>
+    <span 
+class="ptmr8t-x-x-120">Heidelberg, New York (1988).</span>
+    </p>
+                                                                     
+
+                                                                     
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[3]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XSe77"></a><span 
+class="ptmr8t-x-x-120">J.&#8211;P.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Serre,  </span><span 
+class="ptmri8t-x-x-120">Linear  Representations  of  Finite  Groups</span><span 
+class="ptmr8t-x-x-120">.  Springer,</span>
+    <span 
+class="ptmr8t-x-x-120">New</span><span 
+class="ptmr8t-x-x-120">&#x00A0;York (1977).</span>
+    </p>
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[4]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XStFae79"></a><span 
+class="ptmr8t-x-x-120">E.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Stiefel,  A.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;F</span><span 
+class="ptmr8t-x-x-120">ässler,  </span><span 
+class="ptmri8t-x-x-120">Gruppentheoretische  Methoden  und  ihre</span>
+    <span 
+class="ptmri8t-x-x-120">Anwendung</span><span 
+class="ptmr8t-x-x-120">. Teubner, Stuttgart (1979). (English translation to appear</span>
+    <span 
+class="ptmr8t-x-x-120">by Birkh</span><span 
+class="ptmr8t-x-x-120">äuser (1992)).</span>
+</p>
+    </div>
+<!--l. 1285--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1287--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse158.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse159.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse157.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse157.html#tailmanualse157.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse158.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse158.html"></a>   
+</body></html> 

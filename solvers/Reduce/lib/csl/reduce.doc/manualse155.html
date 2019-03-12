@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SPECFN2: Package for special special functions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse155.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse156.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse154.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse154.html#tailmanualse154.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse155.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.64    </span></span> <a 
+ id="x211-90000016.64"></a><span 
+class="ptmr8t-x-x-120">SPECFN2: Package for special special</span>
+<span 
+class="ptmr8t-x-x-120">functions</span></h3>
+<a 
+ id="dx211-900001"></a>
+<a 
+ id="dx211-900002"></a>
+<a 
+ id="dx211-900003"></a>
+<a 
+ id="dx211-900004"></a>
+<!--l. 1166--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package provides algebraic manipulations of generalized hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">functions and Meijer&#8217;s G function. Generalized hypergeometric functions are</span>
+<span 
+class="ptmr8t-x-x-120">simplified towards special functions and Meijer&#8217;s G function is simplified</span>
+<span 
+class="ptmr8t-x-x-120">towards special functions or generalized hypergeometric functions.</span>
+<!--l. 1172--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Victor Adamchik, with major updates by Winfried Neun.</span>
+<!--l. 2--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The (generalised) hypergeometric functions</span>
+<center class="math-display" >
+<img 
+src="manual576x.png" alt="   (           || )
+ F   a1,...,ap |z
+p q   b1,...,bq ||
+" class="math-display" ></center>
+<!--l. 5--><p class="nopar" >
+<span 
+class="ptmr8t-x-x-120">are defined in textbooks on special functions as</span>
+<center class="math-display" >
+<img 
+src="manual577x.png" alt="    (          | )
+      a1,...,ap||      &#x2211;&#x221E;  (a1)n...(ap)n zn
+pFq            |z   =     -----------------
+      b1,...,bq|      n=0 (b1)n...(bq)n n!
+" class="math-display" ></center>
+<!--l. 10--><p class="nopar" >
+<span 
+class="ptmr8t-x-x-120">w where </span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">a</span><span 
+class="cmr-12">)</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="ptmr8t-x-x-120">is the Pochhammer symbol</span>
+<center class="math-display" >
+<img 
+src="manual578x.png" alt="       n&#x220F;-1
+(a )n =    (a + k )
+       k=0
+" class="math-display" ></center>
+<!--l. 14--><p class="nopar" >
+<!--l. 16--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The function</span>
+<center class="math-display" >
+<img 
+src="manual579x.png" alt="     (  ||     )
+  mn    | (ap)
+G pq   z|| (bq)
+" class="math-display" ></center>
+<!--l. 19--><p class="nopar" >
+<span 
+class="ptmr8t-x-x-120">has been studied by C.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;S.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Meijer beginning in 1936 and has been called Meijer&#8217;s</span>
+<span 
+class="ptmr8t-x-x-120">G function later on. The complete definition of Meijer&#8217;s G function can be found</span>
+<span 
+class="ptmr8t-x-x-120">in </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">. Many well-known functions can be written as G functions, e.g.</span>
+<span 
+class="ptmr8t-x-x-120">exponentials, logarithms, trigonometric functions, Bessel functions and</span>
+<span 
+class="ptmr8t-x-x-120">hypergeometric functions.</span>
+<!--l. 27--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Several hundreds of particular values can be found in </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 30--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.64.1    </span></span> <a 
+ id="x211-90100016.64.1"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator HYPERGEOMETRIC</span></h4>
+<!--l. 31--><p class="noindent" ><a 
+ id="operator:HYPERGEOMETRIC"></a>
+<!--l. 33--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">hypergeometric </span><span 
+class="ptmr8t-x-x-120">expects 3 arguments, namely the list of upper</span>
+<span 
+class="ptmr8t-x-x-120">parameters (which may be empty), the list of lower parameters (which may be</span>
+<span 
+class="ptmr8t-x-x-120">empty too), and the argument, e.g the input:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1214">
+hypergeometric&#x00A0;({},{},z);
+</div>
+<!--l. 38--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">yields the output</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1215">
+&#x00A0;z
+&#x00A0;<br />e
+</div>
+<!--l. 43--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and the input</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1216">
+hypergeometric&#x00A0;({1/2,1},{3/2},-x^2);
+</div>
+<!--l. 47--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">gives</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1217">
+&#x00A0;atan(abs(x))
+&#x00A0;<br />--------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(x)
+</div>
+<!--l. 53--><p class="nopar" >
+<!--l. 56--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.64.2    </span></span> <a 
+ id="x211-90200016.64.2"></a><span 
+class="ptmr8t-x-x-120">Extending the HYPERGEOMETRIC operator</span></h4>
+<!--l. 58--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Since hundreds of particular cases for the generalised hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">functions can be found in the literature, one cannot expect that all cases</span>
+<span 
+class="ptmr8t-x-x-120">are known to the </span><span 
+class="pcrr8t-x-x-120">hypergeometric </span><span 
+class="ptmr8t-x-x-120">operator. Nevertheless the set of</span>
+<span 
+class="ptmr8t-x-x-120">special cases can be augmented by adding rules to the REDUCE system,</span>
+<span 
+class="ptmri8t-x-x-120">e.g.</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1218">
+let&#x00A0;{hypergeometric({1/2,1/2},{3/2},-(~x)^2)&#x00A0;=&#x003E;&#x00A0;asinh(x)/x};
+</div>
+<!--l. 65--><p class="nopar" >
+<!--l. 68--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.64.3    </span></span> <a 
+ id="x211-90300016.64.3"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">meijerg</span></h4>
+<!--l. 69--><p class="noindent" ><a 
+ id="operator:MEIJERG"></a>
+<!--l. 71--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">meijerg </span><span 
+class="ptmr8t-x-x-120">expects 3 arguments, namely the list of upper parameters</span>
+<span 
+class="ptmr8t-x-x-120">(which may be empty), the list of lower parameters (which may be empty too),</span>
+<span 
+class="ptmr8t-x-x-120">and the argument.</span>
+<!--l. 75--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The first element of the lists has to be the list of the first n or m respective</span>
+<span 
+class="ptmr8t-x-x-120">parameters, e.g. to describe</span>
+<center class="math-display" >
+<img 
+src="manual580x.png" alt="    (   || )
+  10    |1
+G 11  x ||0
+" class="math-display" ></center>
+<!--l. 79--><p class="nopar" >
+<span 
+class="ptmr8t-x-x-120">one has to write</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1219">
+&#x00A0;<br />MeijerG({{},1},{{0}},x);&#x00A0;%&#x00A0;and&#x00A0;the&#x00A0;result&#x00A0;is:
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;sign(&#x00A0;-&#x00A0;x&#x00A0;+&#x00A0;1)&#x00A0;+&#x00A0;sign(x&#x00A0;+&#x00A0;1)
+&#x00A0;<br />------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+</div>
+<!--l. 89--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and for</span>
+<center class="math-display" >
+<img 
+src="manual581x.png" alt="    (    ||            )
+  10  x2-|
+G 02   4 || 1 + 1,1 - 1
+               4     4
+" class="math-display" ></center>
+<!--l. 94--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1220">
+&#x00A0;<br />MeijerG({{}},{{1+1/4},1-1/4},(x^2)/4)&#x00A0;*&#x00A0;sqrt&#x00A0;pi;
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;sqrt(pi)*sqrt(-----------)*sin(abs(x))*x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(x)*pi
+&#x00A0;<br />-------------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+<!--l. 107--><p class="nopar" >
+<!--l. 109--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x211-904000"></a><span 
+class="ptmr8t-x-x-120">Bibliography</span></h4>
+<!--l. 109--><p class="noindent" >
+    <div class="thebibliography">
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[1]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XPrudnikov:90"></a><span 
+class="ptmr8t-x-x-120">A.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;P.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Prudnikov, Yu.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;A.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Brychkov, O.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;I.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Marichev, </span><span 
+class="ptmri8t-x-x-120">Integrals and</span>
+    <span 
+class="ptmri8t-x-x-120">Series, Volume 3: More special functions</span><span 
+class="ptmr8t-x-x-120">, Gordon and Breach Science</span>
+    <span 
+class="ptmr8t-x-x-120">Publishers (1990).</span>
+    </p>
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[2]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XGraham:89"></a><span 
+class="ptmr8t-x-x-120">R.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;L.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Graham,        D.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;E.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Knuth,        O.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Patashnik,        </span><span 
+class="ptmri8t-x-x-120">Concrete</span>
+    <span 
+class="ptmri8t-x-x-120">Mathematics</span><span 
+class="ptmr8t-x-x-120">, Addison-Wesley Publishing Company (1989).</span>
+</p>
+    </div>
+<!--l. 1176--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1178--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse155.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse156.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse154.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse154.html#tailmanualse154.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse155.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse155.html"></a>   
+</body></html> 

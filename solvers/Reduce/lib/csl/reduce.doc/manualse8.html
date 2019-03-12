@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Scalar Expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch3.html#manualse8.html" >Up</a></td><td class="clinks"><a 
+href="manualse9.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse8.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">3.1    </span> <a 
+ id="x15-170003.1"></a>Scalar Expressions</h3>
+<a 
+ id="dx15-17001"></a>
+<!--l. 9--><p class="noindent" >Using the arithmetic operations <span 
+class="pcrr8t-x-x-109">+ - * / ^</span><a 
+ id="dx15-17002"></a><a 
+ id="dx15-17003"></a><a 
+ id="dx15-17004"></a><a 
+ id="dx15-17005"></a><a 
+ id="dx15-17006"></a> (power) and parentheses, scalar
+expressions are composed from numbers, ordinary &#8220;scalar&#8221; variables (identifiers), array
+names with subscripts, operator or procedure names with arguments and statement
+expressions.
+<!--l. 19--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-24">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x^3&#x00A0;-&#x00A0;2*y/(2*z^2&#x00A0;-&#x00A0;df(x,z))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(p^2&#x00A0;+&#x00A0;m^2)^(1/2)*log&#x00A0;(y/m)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a(5)&#x00A0;+&#x00A0;b(i,q)
+</div>
+<!--l. 25--><p class="nopar" > The symbol <span 
+class="pcrr8t-x-x-109">** </span>may be used as an alternative to the caret symbol <a 
+ id="dx15-17007"></a> (<span 
+class="pcrr8t-x-x-109">^</span>) for forming
+powers, particularly in those systems that do not support a caret symbol.
+<!--l. 32--><p class="noindent" >Statement expressions, usually in parentheses, can also form part of a scalar<a 
+ id="dx15-17008"></a> expression,
+as in the example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-25">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;w&#x00A0;+&#x00A0;(c:=x+y)&#x00A0;+&#x00A0;z&#x00A0;.
+</div>
+<!--l. 36--><p class="nopar" > When the algebraic value of an expression is needed, REDUCE determines it, starting
+with the algebraic values of the parts, roughly as follows:
+<!--l. 40--><p class="noindent" >Variables and operator symbols with an argument list have the algebraic values they were
+last assigned, or if never assigned stand for themselves. However, array elements have
+the algebraic values they were last assigned, or, if never assigned, are taken to be
+0.
+<!--l. 45--><p class="noindent" >Procedures are evaluated with the values of their actual parameters.
+<!--l. 47--><p class="noindent" >In evaluating expressions, the standard rules of algebra are applied. Unfortunately, this
+algebraic evaluation of an expression is not as unambiguous as is numerical
+evaluation. This process is generally referred to as &#8220;simplification&#8221;<a 
+ id="dx15-17009"></a> in the sense
+that the evaluation usually but not always produces a simplified form for the
+expression.
+<!--l. 54--><p class="noindent" >There are many options available to the user for carrying out such simplification<a 
+ id="dx15-17010"></a>. If
+the user doesn&#8217;t specify any method, the default method is used. The default
+evaluation of an expression involves expansion of the expression and collection of
+like terms, ordering of the terms, evaluation of derivatives and other functions
+and substitution for any expressions which have values assigned or declared
+(see assignments and <span 
+class="pcrr8t-x-x-109">LET </span>statements). In many cases, this is all that the user
+needs.
+<!--l. 63--><p class="noindent" >The declarations by which the user can exercise some control over the way in which the
+evaluation is performed are explained in other sections. For example, if a real (floating
+point) number is encountered during evaluation, the system will normally convert it into
+a ratio of two integers. If the user wants to use real arithmetic, he can effect this by the
+command <span 
+class="pcrr8t-x-x-109">on rounded;</span>.<a 
+ id="dx15-17011"></a><a 
+ id="dx15-17012"></a><a 
+ id="dx15-17013"></a> Other modes for coefficient arithmetic are described
+elsewhere.
+<!--l. 71--><p class="noindent" >If an illegal action occurs during evaluation (such as division by zero) or functions are
+called with the wrong number of arguments, and so on, an appropriate error message is
+generated.
+                                                                     
+
+                                                                     
+<!--l. 76--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch3.html#manualse8.html" >Up</a></td><td class="clinks"><a 
+href="manualse9.html" >Next</a></td><td class="clinks"><a 
+href="manualse8.html" >Front</a></td></tr></table><a 
+ id="tailmanualse8.html"></a>  
+</body></html> 

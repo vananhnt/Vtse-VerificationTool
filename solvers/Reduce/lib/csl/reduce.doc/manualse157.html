@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SUM: A package for series summation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse157.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse158.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse156.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse156.html#tailmanualse156.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse157.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.66    </span></span> <a 
+ id="x213-90800016.66"></a><span 
+class="ptmr8t-x-x-120">SUM: A package for series summation</span></h3>
+<a 
+ id="dx213-908001"></a>
+<a 
+ id="dx213-908002"></a>
+<!--l. 1257--><p class="noindent" ><a 
+ id="operator:SUM"></a> <a 
+ id="operator:PROD"></a>
+<!--l. 1260--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package implements the Gosper algorithm for the summation of series. It</span>
+<span 
+class="ptmr8t-x-x-120">defines operators </span><span 
+class="pcrr8t-x-x-120">SUM </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">PROD</span><span 
+class="ptmr8t-x-x-120">. The operator </span><span 
+class="pcrr8t-x-x-120">SUM </span><span 
+class="ptmr8t-x-x-120">returns the indefinite or</span>
+<span 
+class="ptmr8t-x-x-120">definite summation of a given expression, and </span><span 
+class="pcrr8t-x-x-120">PROD </span><span 
+class="ptmr8t-x-x-120">returns the product of the</span>
+<span 
+class="ptmr8t-x-x-120">given expression.</span>
+<!--l. 1265--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package loads automatically.</span>
+<!--l. 1267--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Fujio Kako.</span>
+<a 
+ id="dx213-908003"></a>
+<a 
+ id="dx213-908004"></a>
+<a 
+ id="dx213-908005"></a>
+<!--l. 3--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package implements the Gosper algorithm for the summation of series.</span>
+<span 
+class="ptmr8t-x-x-120">It defines operators SUM and PROD. The operator SUM returns the</span>
+<span 
+class="ptmr8t-x-x-120">indefinite or definite summation of a given expression, and the operator</span>
+<span 
+class="ptmr8t-x-x-120">PROD returns the product of the given expression. These are used with the</span>
+<span 
+class="ptmr8t-x-x-120">syntax:</span>
+<!--l. 9--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">SUM</span><span 
+class="ptmr8t-x-x-120">(EXPR:</span><span 
+class="ptmri8t-x-x-120">expression</span><span 
+class="ptmr8t-x-x-120">, K:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">, [LOLIM:</span><span 
+class="ptmri8t-x-x-120">expression </span><span 
+class="ptmr8t-x-x-120">[, UPLIM:</span><span 
+class="ptmri8t-x-x-120">expression</span><span 
+class="ptmr8t-x-x-120">]])</span>
+<span 
+class="pcrr8t-x-x-120">PROD</span><span 
+class="ptmr8t-x-x-120">(EXPR:</span><span 
+class="ptmri8t-x-x-120">expression</span><span 
+class="ptmr8t-x-x-120">, K:</span><span 
+class="ptmri8t-x-x-120">kernel</span><span 
+class="ptmr8t-x-x-120">, [LOLIM:</span><span 
+class="ptmri8t-x-x-120">expression </span><span 
+class="ptmr8t-x-x-120">[, UPLIM:</span><span 
+class="ptmri8t-x-x-120">expression</span><span 
+class="ptmr8t-x-x-120">]])</span>
+<!--l. 15--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If there is no closed form solution, these operators return the input unchanged.</span>
+<span 
+class="ptmr8t-x-x-120">UPLIM and LOLIM are optional parameters specifying the lower limit</span>
+<span 
+class="ptmr8t-x-x-120">and upper limit of the summation (or product), respectively. If UPLIM</span>
+<span 
+class="ptmr8t-x-x-120">is not supplied, the upper limit is taken as K (the summation variable</span>
+<span 
+class="ptmr8t-x-x-120">itself).</span>
+<!--l. 21--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1221">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sum(n**3,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sum(a+k*r,k,0,n-1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sum(1/((p+(k-1)*q)*(p+k*q)),k,1,n+1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;prod(k/(k-2),k);
+</div>
+<!--l. 31--><p class="nopar" >
+<!--l. 33--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Gosper&#8217;s algorithm succeeds whenever the ratio</span>
+<center class="par-math-display" >
+<img 
+src="manual582x.png" alt="&#x2211;
+  n   f (k)
+&#x2211;nk=-n10------
+  k=n0 f (k)
+" class="par-math-display" ></center>
+<!--l. 35--><p class="nopar" >
+<!--l. 37--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">is a rational function of </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">. The function SUM!-SQ handles basic functions such</span>
+<span 
+class="ptmr8t-x-x-120">as polynomials, rational functions and exponentials.</span> <a 
+ id="dx213-908006"></a>
+<!--l. 41--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The trigonometric functions sin, cos, etc. are converted to exponentials and then</span>
+<span 
+class="ptmr8t-x-x-120">Gosper&#8217;s algorithm is applied. The result is converted back into sin, cos, sinh and</span>
+<span 
+class="ptmr8t-x-x-120">cosh.</span>
+<!--l. 45--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Summations of logarithms or products of exponentials are treated by the</span>
+<span 
+class="ptmr8t-x-x-120">formula:</span>
+<!--l. 49--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span>
+<center class="math-display" >
+<img 
+src="manual583x.png" alt="&#x2211;n                &#x220F;n
+    logf (k ) = log     f (k )
+k=n0              k=n0
+" class="math-display" ></center>
+<!--l. 49--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span>
+<center class="math-display" >
+                                                                     
+
+                                                                     
+<img 
+src="manual584x.png" alt=" &#x220F;n                 &#x2211;n
+    exp f (k ) = exp     f(k)
+k=n                k=n
+   0                   0
+" class="math-display" ></center>
+<!--l. 51--><p class="nopar" >
+<!--l. 54--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Other functions, as shown in the test file for the case of binomials and</span>
+<span 
+class="ptmr8t-x-x-120">formal products, can be summed by providing LET rules which must</span>
+<span 
+class="ptmr8t-x-x-120">relate the functions evaluated at </span><span 
+class="cmmi-12">k </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1 </span><span 
+class="ptmr8t-x-x-120">(</span><span 
+class="cmmi-12">k </span><span 
+class="ptmr8t-x-x-120">being the summation</span>
+<span 
+class="ptmr8t-x-x-120">variable).</span>
+<a 
+ id="dx213-908007"></a>
+<a 
+ id="dx213-908008"></a>
+<a 
+ id="dx213-908009"></a>
+<a 
+ id="dx213-908010"></a>
+<!--l. 59--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">There is a switch TRSUM (default OFF). If this switch is on, trace messages are</span>
+<span 
+class="ptmr8t-x-x-120">printed out during the course of Gosper&#8217;s algorithm.</span>
+<!--l. 1271--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1273--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse157.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse158.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse156.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse156.html#tailmanualse156.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse157.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse157.html"></a>  
+</body></html> 

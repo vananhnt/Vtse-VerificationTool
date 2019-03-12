@@ -1,0 +1,483 @@
+(progn (aeval (operator (list (quote case20) (quote case21) (quote case22) (
+quote case23) (quote case24) (quote case25) (quote case26) (quote case27) (quote
+case28) (quote case29) (quote case30) (quote case31) (quote case32) (quote 
+case33) (quote case34) (quote case35)))) (setk (quote case20_rules) (aeval (list
+(quote list) (list (quote replaceby) (list (quote case20) (list (quote !~) (
+quote m)) (list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote 
+!~) (quote q)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (
+quote !~) (quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta))
+(list (quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote 
+!~) (quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (
+list (quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote
+r2)) (list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (
+quote !~) (quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (
+quote test_3)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5))
+(list (quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote 
+!~) (quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote 
+test_10)) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (
+list (quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote
+!~) (quote test_15))) (list (quote when) (quote t) (list (quote and) (list (
+quote equal) (quote n) 0) (list (quote greaterp) (quote m) 0) (list (quote 
+greaterp) (quote epsilon) 0) (list (quote lessp) (quote phi) 0) (list (quote 
+equal) (quote test_1a) (quote (quote t))) (list (quote equal) (quote test_1b) (
+quote (quote t))) (list (quote equal) (quote test_2) (quote (quote t))) (list (
+quote equal) (quote test_12) (quote (quote t))) (list (quote equal) (list (quote
+transform_test) (quote (quote test2)) (quote (quote test12)) nil nil nil nil nil
+nil) (quote (quote t))))))))) (aeval (!~let (quote (case20_rules)))) (setk (
+quote case21_rules) (aeval (list (quote list) (list (quote replaceby) (list (
+quote case21) (list (quote !~) (quote m)) (list (quote !~) (quote n)) (list (
+quote !~) (quote p)) (list (quote !~) (quote q)) (list (quote !~) (quote k)) (
+list (quote !~) (quote l)) (list (quote !~) (quote u)) (list (quote !~) (quote v
+)) (list (quote !~) (quote delta)) (list (quote !~) (quote epsilon)) (list (
+quote !~) (quote sigma)) (list (quote !~) (quote omega)) (list (quote !~) (quote
+rho)) (list (quote !~) (quote eta)) (list (quote !~) (quote mu)) (list (quote !~
+) (quote r1)) (list (quote !~) (quote r2)) (list (quote !~) (quote phi)) (list (
+quote !~) (quote test_1a)) (list (quote !~) (quote test_1b)) (list (quote !~) (
+quote test_2)) (list (quote !~) (quote test_3)) (list (quote !~) (quote test_4))
+(list (quote !~) (quote test_5)) (list (quote !~) (quote test_6)) (list (quote 
+!~) (quote test_7)) (list (quote !~) (quote test_8)) (list (quote !~) (quote 
+test_9)) (list (quote !~) (quote test_10)) (list (quote !~) (quote test_11)) (
+list (quote !~) (quote test_12)) (list (quote !~) (quote test_13)) (list (quote
+!~) (quote test_14)) (list (quote !~) (quote test_15))) (list (quote when) (
+quote t) (list (quote and) (list (quote equal) (quote m) 0) (list (quote 
+greaterp) (quote n) 0) (list (quote greaterp) (quote epsilon) 0) (list (quote 
+greaterp) (quote phi) 0) (list (quote equal) (quote test_1a) (quote (quote t)))
+(list (quote equal) (quote test_1b) (quote (quote t))) (list (quote equal) (
+quote test_3) (quote (quote t))) (list (quote equal) (quote test_12) (quote (
+quote t))) (list (quote equal) (list (quote transform_test) (quote (quote test12
+)) nil nil nil nil nil nil nil) (quote (quote t))))))))) (aeval (!~let (quote (
+case21_rules)))) (setk (quote case22_rules) (aeval (list (quote list) (list (
+quote replaceby) (list (quote case22) (list (quote !~) (quote m)) (list (quote 
+!~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q)) (list (
+quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (quote u)) (
+list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (quote !~) (
+quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (quote omega))
+(list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list (quote !~) (
+quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2)) (list (
+quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~) (quote
+test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3)) (
+list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (quote !~
+) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (quote 
+test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)) (
+list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (quote
+!~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (quote 
+test_15))) (list (quote when) (quote t) (list (quote and) (list (quote equal) (
+list (quote times) (quote k) (quote l)) 0) (list (quote greaterp) (quote delta)
+0) (list (quote greaterp) (quote epsilon) 0) (list (quote equal) (quote test_1a)
+(quote (quote t))) (list (quote equal) (quote test_1b) (quote (quote t))) (list
+(quote equal) (quote test_2) (quote (quote t))) (list (quote equal) (quote 
+test_3) (quote (quote t))) (list (quote equal) (quote test_10) (quote (quote t))
+) (list (quote equal) (quote test_12) (quote (quote t))) (list (quote equal) (
+list (quote transform_test) (quote (quote test2)) (quote (quote test3)) (quote (
+quote test10)) (quote (quote test12)) nil nil nil nil) (quote (quote t)))))))))
+(aeval (!~let (quote (case22_rules)))) (setk (quote case23_rules) (aeval (list (
+quote list) (list (quote replaceby) (list (quote case23) (list (quote !~) (quote
+m)) (list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (
+quote q)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote 
+!~) (quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list
+(quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+equal) (list (quote times) (quote m) (quote n)) 0) (list (quote greaterp) (quote
+delta) 0) (list (quote greaterp) (quote epsilon) 0) (list (quote equal) (quote 
+test_1a) (quote (quote t))) (list (quote equal) (quote test_1b) (quote (quote t)
+)) (list (quote equal) (quote test_2) (quote (quote t))) (list (quote equal) (
+quote test_3) (quote (quote t))) (list (quote equal) (quote test_10) (quote (
+quote t))) (list (quote equal) (quote test_12) (quote (quote t))) (list (quote 
+equal) (list (quote transform_test) (quote (quote test2)) (quote (quote test3))
+(quote (quote test10)) (quote (quote test12)) nil nil nil nil) (quote (quote t))
+))))))) (aeval (!~let (quote (case23_rules)))) (setk (quote case24_rules) (aeval
+(list (quote list) (list (quote replaceby) (list (quote case24) (list (quote !~)
+(quote m)) (list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote
+!~) (quote q)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (
+quote !~) (quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta))
+(list (quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote 
+!~) (quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (
+list (quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote
+r2)) (list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (
+quote !~) (quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (
+quote test_3)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5))
+(list (quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote 
+!~) (quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote 
+test_10)) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (
+list (quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote
+!~) (quote test_15))) (list (quote when) (quote t) (list (quote and) (list (
+quote greaterp) (list (quote plus) (quote m) (quote n)) (quote p)) (list (quote
+equal) (quote l) 0) (list (quote equal) (quote phi) 0) (list (quote greaterp) (
+quote k) 0) (list (quote greaterp) (quote delta) 0) (list (quote lessp) (quote 
+epsilon) 0) (list (quote mylessp) (list (quote abs) (list (quote atan2) (list (
+quote impart) (quote omega)) (list (quote repart) (quote omega)))) (list (quote
+plus) (quote m) (list (quote difference) (quote n) (quote p)) 1)) (list (quote 
+equal) (quote test_1a) (quote (quote t))) (list (quote equal) (quote test_1b) (
+quote (quote t))) (list (quote equal) (quote test_2) (quote (quote t))) (list (
+quote equal) (quote test_10) (quote (quote t))) (list (quote equal) (quote 
+test_14) (quote (quote t))) (list (quote equal) (quote test_15) (quote (quote t)
+)) (list (quote equal) (list (quote transform_test) (quote (quote test2)) (quote
+(quote test10)) (quote (quote test14)) (quote (quote test15)) nil nil nil nil) (
+quote (quote t))))))))) (aeval (!~let (quote (case24_rules)))) (setk (quote 
+case25_rules) (aeval (list (quote list) (list (quote replaceby) (list (quote 
+case25) (list (quote !~) (quote m)) (list (quote !~) (quote n)) (list (quote !~)
+(quote p)) (list (quote !~) (quote q)) (list (quote !~) (quote k)) (list (quote
+!~) (quote l)) (list (quote !~) (quote u)) (list (quote !~) (quote v)) (list (
+quote !~) (quote delta)) (list (quote !~) (quote epsilon)) (list (quote !~) (
+quote sigma)) (list (quote !~) (quote omega)) (list (quote !~) (quote rho)) (
+list (quote !~) (quote eta)) (list (quote !~) (quote mu)) (list (quote !~) (
+quote r1)) (list (quote !~) (quote r2)) (list (quote !~) (quote phi)) (list (
+quote !~) (quote test_1a)) (list (quote !~) (quote test_1b)) (list (quote !~) (
+quote test_2)) (list (quote !~) (quote test_3)) (list (quote !~) (quote test_4))
+(list (quote !~) (quote test_5)) (list (quote !~) (quote test_6)) (list (quote 
+!~) (quote test_7)) (list (quote !~) (quote test_8)) (list (quote !~) (quote 
+test_9)) (list (quote !~) (quote test_10)) (list (quote !~) (quote test_11)) (
+list (quote !~) (quote test_12)) (list (quote !~) (quote test_13)) (list (quote
+!~) (quote test_14)) (list (quote !~) (quote test_15))) (list (quote when) (
+quote t) (list (quote and) (list (quote greaterp) (list (quote plus) (quote m) (
+quote n)) (quote q)) (list (quote equal) (quote k) 0) (list (quote equal) (quote
+phi) 0) (list (quote greaterp) (quote l) 0) (list (quote greaterp) (quote delta)
+0) (list (quote lessp) (quote epsilon) 0) (list (quote mylessp) (list (quote abs
+) (list (quote atan2) (list (quote impart) (quote omega)) (list (quote repart) (
+quote omega)))) (list (quote plus) (quote m) (list (quote difference) (quote n)
+(quote q)) 1)) (list (quote equal) (quote test_1a) (quote (quote t))) (list (
+quote equal) (quote test_1b) (quote (quote t))) (list (quote equal) (quote 
+test_3) (quote (quote t))) (list (quote equal) (quote test_10) (quote (quote t))
+) (list (quote equal) (quote test_14) (quote (quote t))) (list (quote equal) (
+quote test_15) (quote (quote t))) (list (quote equal) (list (quote 
+transform_test) (quote (quote test3)) (quote (quote test10)) (quote (quote 
+test14)) (quote (quote test15)) nil nil nil nil) (quote (quote t))))))))) (aeval
+(!~let (quote (case25_rules)))) (setk (quote case26_rules) (aeval (list (quote 
+list) (list (quote replaceby) (list (quote case26) (list (quote !~) (quote m)) (
+list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (
+quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (
+quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+equal) (quote p) (list (quote difference) (quote q) 1)) (list (quote equal) (
+quote l) 0) (list (quote equal) (quote phi) 0) (list (quote greaterp) (quote k)
+0) (list (quote greaterp) (quote delta) 0) (list (quote geq) (quote epsilon) 0)
+(list (quote test_arg) (list (quote abs) (list (quote atan2) (list (quote impart
+) (quote omega)) (list (quote repart) (quote omega)))) (quote epsilon) (list (
+quote plus) (quote epsilon) 1)) (list (quote equal) (quote test_1a) (quote (
+quote t))) (list (quote equal) (quote test_1b) (quote (quote t))) (list (quote 
+equal) (quote test_2) (quote (quote t))) (list (quote equal) (quote test_10) (
+quote (quote t))) (list (quote equal) (quote test_14) (quote (quote t))) (list (
+quote equal) (quote test_15) (quote (quote t))) (list (quote equal) (list (quote
+transform_test) (quote (quote test2)) (quote (quote test10)) (quote (quote 
+test14)) (quote (quote test15)) nil nil nil nil) (quote (quote t))))))))) (aeval
+(!~let (quote (case26_rules)))) (setk (quote case27_rules) (aeval (list (quote 
+list) (list (quote replaceby) (list (quote case27) (list (quote !~) (quote m)) (
+list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (
+quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (
+quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+equal) (quote p) (list (quote plus) (quote q) 1)) (list (quote equal) (quote k)
+0) (list (quote equal) (quote phi) 0) (list (quote greaterp) (quote l) 0) (list
+(quote greaterp) (quote delta) 0) (list (quote geq) (quote epsilon) 0) (list (
+quote test_arg) (list (quote abs) (list (quote atan2) (list (quote impart) (
+quote omega)) (list (quote repart) (quote omega)))) (quote epsilon) (list (quote
+plus) (quote epsilon) 1)) (list (quote equal) (quote test_1a) (quote (quote t)))
+(list (quote equal) (quote test_1b) (quote (quote t))) (list (quote equal) (
+quote test_3) (quote (quote t))) (list (quote equal) (quote test_10) (quote (
+quote t))) (list (quote equal) (quote test_14) (quote (quote t))) (list (quote 
+equal) (quote test_15) (quote (quote t))) (list (quote equal) (list (quote 
+transform_test) (quote (quote test3)) (quote (quote test10)) (quote (quote 
+test14)) (quote (quote test15)) nil nil nil nil) (quote (quote t))))))))) (aeval
+(!~let (quote (case27_rules)))) (setk (quote case28_rules) (aeval (list (quote 
+list) (list (quote replaceby) (list (quote case28) (list (quote !~) (quote m)) (
+list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (
+quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (
+quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+lessp) (quote p) (list (quote difference) (quote q) 1)) (list (quote equal) (
+quote l) 0) (list (quote equal) (quote phi) 0) (list (quote greaterp) (quote k)
+0) (list (quote greaterp) (quote delta) 0) (list (quote geq) (quote epsilon) 0)
+(list (quote test_arg) (list (quote abs) (list (quote atan2) (list (quote impart
+) (quote omega)) (list (quote repart) (quote omega)))) (quote epsilon) (list (
+quote plus) (quote m) (list (quote difference) (quote n) (quote p)) 1)) (list (
+quote equal) (quote test_1a) (quote (quote t))) (list (quote equal) (quote 
+test_1b) (quote (quote t))) (list (quote equal) (quote test_2) (quote (quote t))
+) (list (quote equal) (quote test_10) (quote (quote t))) (list (quote equal) (
+quote test_14) (quote (quote t))) (list (quote equal) (quote test_15) (quote (
+quote t))) (list (quote equal) (list (quote transform_test) (quote (quote test2)
+) (quote (quote test10)) (quote (quote test14)) (quote (quote test15)) nil nil 
+nil nil) (quote (quote t))))))))) (aeval (!~let (quote (case28_rules)))) (setk (
+quote case29_rules) (aeval (list (quote list) (list (quote replaceby) (list (
+quote case29) (list (quote !~) (quote m)) (list (quote !~) (quote n)) (list (
+quote !~) (quote p)) (list (quote !~) (quote q)) (list (quote !~) (quote k)) (
+list (quote !~) (quote l)) (list (quote !~) (quote u)) (list (quote !~) (quote v
+)) (list (quote !~) (quote delta)) (list (quote !~) (quote epsilon)) (list (
+quote !~) (quote sigma)) (list (quote !~) (quote omega)) (list (quote !~) (quote
+rho)) (list (quote !~) (quote eta)) (list (quote !~) (quote mu)) (list (quote !~
+) (quote r1)) (list (quote !~) (quote r2)) (list (quote !~) (quote phi)) (list (
+quote !~) (quote test_1a)) (list (quote !~) (quote test_1b)) (list (quote !~) (
+quote test_2)) (list (quote !~) (quote test_3)) (list (quote !~) (quote test_4))
+(list (quote !~) (quote test_5)) (list (quote !~) (quote test_6)) (list (quote 
+!~) (quote test_7)) (list (quote !~) (quote test_8)) (list (quote !~) (quote 
+test_9)) (list (quote !~) (quote test_10)) (list (quote !~) (quote test_11)) (
+list (quote !~) (quote test_12)) (list (quote !~) (quote test_13)) (list (quote
+!~) (quote test_14)) (list (quote !~) (quote test_15))) (list (quote when) (
+quote t) (list (quote and) (list (quote greaterp) (quote p) (list (quote plus) (
+quote q) 1)) (list (quote equal) (quote k) 0) (list (quote equal) (quote phi) 0)
+(list (quote greaterp) (quote l) 0) (list (quote greaterp) (quote delta) 0) (
+list (quote geq) (quote epsilon) 0) (list (quote test_arg) (list (quote abs) (
+list (quote atan2) (list (quote impart) (quote omega)) (list (quote repart) (
+quote omega)))) (quote epsilon) (list (quote plus) (quote m) (list (quote 
+difference) (quote n) (quote q)) 1)) (list (quote equal) (quote test_1a) (quote
+(quote t))) (list (quote equal) (quote test_1b) (quote (quote t))) (list (quote
+equal) (quote test_3) (quote (quote t))) (list (quote equal) (quote test_10) (
+quote (quote t))) (list (quote equal) (quote test_14) (quote (quote t))) (list (
+quote equal) (quote test_15) (quote (quote t))) (list (quote equal) (list (quote
+transform_test) (quote (quote test3)) (quote (quote test10)) (quote (quote 
+test14)) (quote (quote test15)) nil nil nil nil) (quote (quote t))))))))) (aeval
+(!~let (quote (case29_rules)))) (setk (quote case30_rules) (aeval (list (quote 
+list) (list (quote replaceby) (list (quote case30) (list (quote !~) (quote m)) (
+list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (
+quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (
+quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+equal) (quote n) 0) (list (quote equal) (quote phi) 0) (list (quote greaterp) (
+list (quote plus) (quote k) (quote l)) (quote u)) (list (quote greaterp) (quote
+m) 0) (list (quote greaterp) (quote epsilon) 0) (list (quote lessp) (quote delta
+) 0) (list (quote mylessp) (list (quote abs) (list (quote atan2) (list (quote 
+impart) (quote sigma)) (list (quote repart) (quote sigma)))) (list (quote plus)
+(quote k) (list (quote difference) (quote l) (quote u)) 1)) (list (quote equal)
+(quote test_1a) (quote (quote t))) (list (quote equal) (quote test_1b) (quote (
+quote t))) (list (quote equal) (quote test_2) (quote (quote t))) (list (quote 
+equal) (quote test_12) (quote (quote t))) (list (quote equal) (quote test_14) (
+quote (quote t))) (list (quote equal) (quote test_15) (quote (quote t))) (list (
+quote equal) (list (quote transform_test) (quote (quote test2)) (quote (quote 
+test12)) (quote (quote test14)) (quote (quote test15)) nil nil nil nil) (quote (
+quote t))))))))) (aeval (!~let (quote (case30_rules)))) (setk (quote 
+case31_rules) (aeval (list (quote list) (list (quote replaceby) (list (quote 
+case31) (list (quote !~) (quote m)) (list (quote !~) (quote n)) (list (quote !~)
+(quote p)) (list (quote !~) (quote q)) (list (quote !~) (quote k)) (list (quote
+!~) (quote l)) (list (quote !~) (quote u)) (list (quote !~) (quote v)) (list (
+quote !~) (quote delta)) (list (quote !~) (quote epsilon)) (list (quote !~) (
+quote sigma)) (list (quote !~) (quote omega)) (list (quote !~) (quote rho)) (
+list (quote !~) (quote eta)) (list (quote !~) (quote mu)) (list (quote !~) (
+quote r1)) (list (quote !~) (quote r2)) (list (quote !~) (quote phi)) (list (
+quote !~) (quote test_1a)) (list (quote !~) (quote test_1b)) (list (quote !~) (
+quote test_2)) (list (quote !~) (quote test_3)) (list (quote !~) (quote test_4))
+(list (quote !~) (quote test_5)) (list (quote !~) (quote test_6)) (list (quote 
+!~) (quote test_7)) (list (quote !~) (quote test_8)) (list (quote !~) (quote 
+test_9)) (list (quote !~) (quote test_10)) (list (quote !~) (quote test_11)) (
+list (quote !~) (quote test_12)) (list (quote !~) (quote test_13)) (list (quote
+!~) (quote test_14)) (list (quote !~) (quote test_15))) (list (quote when) (
+quote t) (list (quote and) (list (quote equal) (quote m) 0) (list (quote equal)
+(quote phi) 0) (list (quote greaterp) (list (quote plus) (quote k) (quote l)) (
+quote v)) (list (quote greaterp) (quote n) 0) (list (quote greaterp) (quote 
+epsilon) 0) (list (quote lessp) (quote delta) 0) (list (quote mylessp) (list (
+quote abs) (list (quote atan2) (list (quote impart) (quote sigma)) (list (quote
+repart) (quote sigma)))) (list (quote plus) (quote k) (list (quote difference) (
+quote l) (quote v)) 1)) (list (quote equal) (quote test_1a) (quote (quote t))) (
+list (quote equal) (quote test_1b) (quote (quote t))) (list (quote equal) (quote
+test_3) (quote (quote t))) (list (quote equal) (quote test_12) (quote (quote t))
+) (list (quote equal) (quote test_14) (quote (quote t))) (list (quote equal) (
+quote test_15) (quote (quote t))) (list (quote equal) (list (quote 
+transform_test) (quote (quote test3)) (quote (quote test12)) (quote (quote 
+test14)) (quote (quote test15)) nil nil nil nil) (quote (quote t))))))))) (aeval
+(!~let (quote (case31_rules)))) (setk (quote case32_rules) (aeval (list (quote 
+list) (list (quote replaceby) (list (quote case32) (list (quote !~) (quote m)) (
+list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (
+quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (
+quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+equal) (quote n) 0) (list (quote equal) (quote phi) 0) (list (quote equal) (
+quote u) (list (quote difference) (quote v) 1)) (list (quote greaterp) (quote m)
+0) (list (quote greaterp) (quote epsilon) 0) (list (quote geq) (quote delta) 0)
+(list (quote test_arg) (list (quote abs) (list (quote atan2) (list (quote impart
+) (quote sigma)) (list (quote repart) (quote sigma)))) (quote delta) (list (
+quote plus) (quote delta) 1)) (list (quote equal) (quote test_1a) (quote (quote
+t))) (list (quote equal) (quote test_1b) (quote (quote t))) (list (quote equal)
+(quote test_2) (quote (quote t))) (list (quote equal) (quote test_12) (quote (
+quote t))) (list (quote equal) (quote test_14) (quote (quote t))) (list (quote 
+equal) (quote test_15) (quote (quote t))) (list (quote equal) (list (quote 
+transform_test) (quote (quote test2)) (quote (quote test12)) (quote (quote 
+test14)) (quote (quote test15)) nil nil nil nil) (quote (quote t))))))))) (aeval
+(!~let (quote (case32_rules)))) (setk (quote case33_rules) (aeval (list (quote 
+list) (list (quote replaceby) (list (quote case33) (list (quote !~) (quote m)) (
+list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (
+quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (
+quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+equal) (quote m) 0) (list (quote equal) (quote phi) 0) (list (quote equal) (
+quote u) (list (quote plus) (quote v) 1)) (list (quote greaterp) (quote n) 0) (
+list (quote greaterp) (quote epsilon) 0) (list (quote geq) (quote delta) 0) (
+list (quote test_arg) (list (quote abs) (list (quote atan2) (list (quote impart)
+(quote sigma)) (list (quote repart) (quote sigma)))) (quote delta) (list (quote
+plus) (quote delta) 1)) (list (quote equal) (quote test_1a) (quote (quote t))) (
+list (quote equal) (quote test_1b) (quote (quote t))) (list (quote equal) (quote
+test_3) (quote (quote t))) (list (quote equal) (quote test_12) (quote (quote t))
+) (list (quote equal) (quote test_14) (quote (quote t))) (list (quote equal) (
+quote test_15) (quote (quote t))) (list (quote equal) (list (quote 
+transform_test) (quote (quote test3)) (quote (quote test12)) (quote (quote 
+test14)) (quote (quote test15)) nil nil nil nil) (quote (quote t))))))))) (aeval
+(!~let (quote (case33_rules)))) (setk (quote case34_rules) (aeval (list (quote 
+list) (list (quote replaceby) (list (quote case34) (list (quote !~) (quote m)) (
+list (quote !~) (quote n)) (list (quote !~) (quote p)) (list (quote !~) (quote q
+)) (list (quote !~) (quote k)) (list (quote !~) (quote l)) (list (quote !~) (
+quote u)) (list (quote !~) (quote v)) (list (quote !~) (quote delta)) (list (
+quote !~) (quote epsilon)) (list (quote !~) (quote sigma)) (list (quote !~) (
+quote omega)) (list (quote !~) (quote rho)) (list (quote !~) (quote eta)) (list
+(quote !~) (quote mu)) (list (quote !~) (quote r1)) (list (quote !~) (quote r2))
+(list (quote !~) (quote phi)) (list (quote !~) (quote test_1a)) (list (quote !~)
+(quote test_1b)) (list (quote !~) (quote test_2)) (list (quote !~) (quote test_3
+)) (list (quote !~) (quote test_4)) (list (quote !~) (quote test_5)) (list (
+quote !~) (quote test_6)) (list (quote !~) (quote test_7)) (list (quote !~) (
+quote test_8)) (list (quote !~) (quote test_9)) (list (quote !~) (quote test_10)
+) (list (quote !~) (quote test_11)) (list (quote !~) (quote test_12)) (list (
+quote !~) (quote test_13)) (list (quote !~) (quote test_14)) (list (quote !~) (
+quote test_15))) (list (quote when) (quote t) (list (quote and) (list (quote 
+equal) (quote n) 0) (list (quote equal) (quote phi) 0) (list (quote lessp) (
+quote u) (list (quote difference) (quote v) 1)) (list (quote greaterp) (quote m)
+0) (list (quote greaterp) (quote epsilon) 0) (list (quote geq) (quote delta) 0)
+(list (quote test_arg) (list (quote abs) (list (quote atan2) (list (quote impart
+) (quote sigma)) (list (quote repart) (quote sigma)))) (quote delta) (list (
+quote plus) (quote k) (list (quote difference) (quote l) (quote u)) 1)) (list (
+quote equal) (quote test_1a) (quote (quote t))) (list (quote equal) (quote 
+test_1b) (quote (quote t))) (list (quote equal) (quote test_2) (quote (quote t))
+) (list (quote equal) (quote test_12) (quote (quote t))) (list (quote equal) (
+quote test_14) (quote (quote t))) (list (quote equal) (quote test_15) (quote (
+quote t))) (list (quote equal) (list (quote transform_test) (quote (quote test2)
+) (quote (quote test12)) (quote (quote test14)) (quote (quote test15)) nil nil 
+nil nil) (quote (quote t))))))))) (aeval (!~let (quote (case34_rules)))) (setk (
+quote case35_rules) (aeval (list (quote list) (list (quote replaceby) (list (
+quote case35) (list (quote !~) (quote m)) (list (quote !~) (quote n)) (list (
+quote !~) (quote p)) (list (quote !~) (quote q)) (list (quote !~) (quote k)) (
+list (quote !~) (quote l)) (list (quote !~) (quote u)) (list (quote !~) (quote v
+)) (list (quote !~) (quote delta)) (list (quote !~) (quote epsilon)) (list (
+quote !~) (quote sigma)) (list (quote !~) (quote omega)) (list (quote !~) (quote
+rho)) (list (quote !~) (quote eta)) (list (quote !~) (quote mu)) (list (quote !~
+) (quote r1)) (list (quote !~) (quote r2)) (list (quote !~) (quote phi)) (list (
+quote !~) (quote test_1a)) (list (quote !~) (quote test_1b)) (list (quote !~) (
+quote test_2)) (list (quote !~) (quote test_3)) (list (quote !~) (quote test_4))
+(list (quote !~) (quote test_5)) (list (quote !~) (quote test_6)) (list (quote 
+!~) (quote test_7)) (list (quote !~) (quote test_8)) (list (quote !~) (quote 
+test_9)) (list (quote !~) (quote test_10)) (list (quote !~) (quote test_11)) (
+list (quote !~) (quote test_12)) (list (quote !~) (quote test_13)) (list (quote
+!~) (quote test_14)) (list (quote !~) (quote test_15))) (list (quote when) (
+quote t) (list (quote and) (list (quote equal) (quote m) 0) (list (quote equal)
+(quote phi) 0) (list (quote greaterp) (quote u) (list (quote plus) (quote v) 1))
+(list (quote greaterp) (quote n) 0) (list (quote greaterp) (quote epsilon) 0) (
+list (quote geq) (quote delta) 0) (list (quote test_arg) (list (quote abs) (list
+(quote atan2) (list (quote impart) (quote sigma)) (list (quote repart) (quote 
+sigma)))) (quote delta) (list (quote plus) (quote k) (list (quote difference) (
+quote l) (quote v)) 1)) (list (quote equal) (quote test_1a) (quote t)) (list (
+quote equal) (quote test_1b) (quote t)) (list (quote equal) (quote test_3) (
+quote t)) (list (quote equal) (quote test_12) (quote t)) (list (quote equal) (
+quote test_14) (quote t)) (list (quote equal) (quote test_15) (quote t)) (list (
+quote equal) (list (quote transform_test) (quote (quote test3)) (quote (quote 
+test12)) (quote (quote test14)) (quote (quote test15)) nil nil nil nil) (quote t
+)))))))) (aeval (!~let (quote (case35_rules)))) (aeval (flag (quote (test_arg))
+(quote boolean))) (progn (aeval (put (quote test_arg) (quote procedure_type) (
+quote (arrow (times general general general) general)))) (aeval (put (quote 
+test_arg) (quote defined!-in!-file) (quote defint!/defintf!.red))) (aeval (put (
+quote test_arg) (quote defined!-on!-line) 381)) (progn (put (quote test_arg) (
+quote number!-of!-args) 3) (flag (quote (test_arg)) (quote opfn)) (de test_arg (
+a b c) (prog (!*rounded dmode!*) (cond ((evalneq (aeval (quote transform_tst)) (
+aeval (quote t))) (progn (aeval (!~on (list (quote rounded)))) (cond ((and (
+evallessp (aeval (list (quote times) b (quote pi))) (aeval a)) (evallessp (aeval
+a) (aeval (list (quote times) c (quote pi))))) (progn (aeval (!~off (list (quote
+rounded)))) (return (aeval (quote t))))) (t (progn (aeval (!~off (list (quote 
+rounded)))) (return (aeval (quote nil)))))) (aeval (quote nil)))) (t (return (
+aeval (quote t))))))))) (aeval (quote nil)))
+(progn (put (quote transform_test) (quote procedure_type) (quote (arrow (times 
+general general general general general general general general) general))) (put
+(quote transform_test) (quote defined!-in!-file) (quote defint!/defintf!.red)) (
+put (quote transform_test) (quote defined!-on!-line) 394) (progn (put (quote 
+transform_test) (quote number!-of!-args) 8) (de transform_test (n1 n2 n3 n4 n5 
+n6 n7 n8) (prog (lst temp cond_test) (cond ((neq transform_tst t) (return t)) (t
+(progn (setq lst (list n1 n2 n3 n4 n5 n6 n7 n8)) (prog (i) (setq i lst) lab (
+cond ((null i) (return nil))) ((lambda (i) (cond (i (setq temp (cons (lispeval (
+cdr (assoc i transform_lst))) temp))))) (car i)) (setq i (cdr i)) (go lab)) nil
+(setq temp (cons (quote and) temp)) (prog (j) (setq j spec_cond) lab (cond ((
+null j) (return nil))) ((lambda (j) (cond ((equal j temp) (setq cond_test t))))
+(car j)) (setq j (cdr j)) (go lab)) (cond ((neq cond_test t) (setq spec_cond (
+cons temp spec_cond)))) (return nil) nil)))))))
+(flag (quote (transform_test)) (quote opfn))
+(flag (quote (sigma_tst)) (quote boolean))
+(progn (aeval (put (quote sigma_tst) (quote procedure_type) (quote (arrow 
+general general)))) (aeval (put (quote sigma_tst) (quote defined!-in!-file) (
+quote defint!/defintf!.red))) (aeval (put (quote sigma_tst) (quote 
+defined!-on!-line) 415)) (progn (put (quote sigma_tst) (quote number!-of!-args)
+1) (flag (quote (sigma_tst)) (quote opfn)) (de sigma_tst (sigma) (prog (test) (
+cond ((evalneq (aeval (quote transform_tst)) (aeval (quote t))) (progn (cond ((
+evalgreaterp (aeval sigma) 0) (return (aeval (quote t)))) (t (return (aeval (
+quote nil))))))) (t (progn (cond ((evalneq (aeval test) (aeval (quote t))) (
+progn (setq transform_lst (cons (cons (quote sigma_cond) (quote (list (quote 
+greaterp) (quote sigma) 0))) transform_lst)) (setq test (aeval (quote t)))))) (
+return (aeval (list (quote reval) (quote t)))))))))))
+(flag (quote (omega_tst)) (quote boolean))
+(progn (put (quote omega_tst) (quote procedure_type) (quote (arrow general 
+general))) (put (quote omega_tst) (quote defined!-in!-file) (quote 
+defint!/defintf!.red)) (put (quote omega_tst) (quote defined!-on!-line) 430) (
+progn (put (quote omega_tst) (quote number!-of!-args) 1) (de omega_tst (omega) (
+prog (test) (cond ((neq transform_tst t) (progn (cond ((greaterp omega 0) (
+return t)) (t (return nil))))) (t (progn (cond ((neq test t) (progn (setq 
+transform_lst (cons (cons (quote omega_cond) (quote (list (quote greaterp) (
+quote omega) 0))) transform_lst)) (setq test t)))) (return (reval t)))))))))

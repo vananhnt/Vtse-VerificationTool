@@ -1,0 +1,1703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>ZTRANS: Z-transform package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse168.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse167.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse167.html#tailmanualse167.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse168.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.77    </span></span> <a 
+ id="x226-100200016.77"></a><span 
+class="ptmr8t-x-x-120">ZTRANS: </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-transform package</span></h3>
+<a 
+ id="dx226-1002001"></a>
+<a 
+ id="dx226-1002002"></a>
+<!--l. 1436--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package is an implementation of the </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-transform of a sequence. This is the</span>
+<span 
+class="ptmr8t-x-x-120">discrete analogue of the Laplace Transform.</span>
+<!--l. 1439--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Authors: Wolfram Koepf and Lisa Temme.</span>
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.77.1    </span></span> <a 
+ id="x226-100300016.77.1"></a><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform</span></h4>
+<a 
+ id="dx226-1003001"></a>
+<!--l. 4--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform of a sequence </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">is the discrete analogue of the Laplace</span>
+<span 
+class="ptmr8t-x-x-120">Transform, and</span>
+<center class="math-display" >
+<img 
+src="manual633x.png" alt="                 &#x221E;&#x2211;
+Z{fn } = F (z) =    fnz -n.
+                 n=0
+" class="math-display" ></center>
+<!--l. 6--><p class="nopar" > <br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">This series converges in the region outside the circle </span><span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">z</span><span 
+class="cmsy-10x-x-120">| </span><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">z</span><sub><span 
+class="cmr-8">0</span></sub><span 
+class="cmsy-10x-x-120">| </span><span 
+class="cmr-12">=</span> <span 
+class="cmr-12">lim</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmr-12">sup</span> <sub><span 
+class="cmmi-8">n</span><span 
+class="cmsy-8">&#x2192;&#x221E;</span></sub><img 
+src="manual634x.png" alt="&#x2218;  ----
+ n |fn |"  class="root" align="middle" ><span style="margin-left:3.33234pt" class="tmspace"></span><span 
+class="cmmi-12">.</span>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:338;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">SYNTAX:</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="pcrr8t-x-x-120">ztrans(</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="pcrr8t-x-x-120">, n, z)</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="ptmr8t-x-x-120">is an expression, and </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">z</span>
+</td></tr></table>
+<!--l. 14--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:338;" 
+class="tabbing">                                                 </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">are identifiers.</span></td></tr></table>
+<!--l. 15--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 16--><p class="noindent" >
+                                                                     
+
+                                                                     
+<!--l. 19--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.77.2    </span></span> <a 
+ id="x226-100400016.77.2"></a><span 
+class="ptmr8t-x-x-120">Inverse </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform</span></h4>
+<a 
+ id="dx226-1004001"></a>
+<!--l. 21--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The calculation of the Laurent coefficients of a regular function results in the</span>
+<span 
+class="ptmr8t-x-x-120">following inverse formula for the </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform: </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">If </span><span 
+class="cmmi-12">F</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">is a regular function in the region </span><span 
+class="cmsy-10x-x-120">|</span><span 
+class="cmmi-12">z</span><span 
+class="cmsy-10x-x-120">| </span><span 
+class="cmmi-12">&#x003E; &#x03C1; </span><span 
+class="ptmr8t-x-x-120">then </span><span 
+class="cmsy-10x-x-120">&#x2203; </span><span 
+class="ptmr8t-x-x-120">a sequence {</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="ptmr8t-x-x-120">} with</span>
+<span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">F</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">given by</span>
+<center class="math-display" >
+<img 
+src="manual635x.png" alt="         &#x222E;
+      1          n-1
+fn = ----  F (z)z   dz
+     2&#x03C0;i
+" class="math-display" ></center>
+<!--l. 27--><p class="nopar" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:388;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">SYNTAX:</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="pcrr8t-x-x-120">invztrans(</span><span 
+class="cmmi-12">F</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">)</span><span 
+class="pcrr8t-x-x-120">, z, n)</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="cmmi-12">F</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">is an expression,</span>
+</td></tr></table>
+<!--l. 33--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:388;" 
+class="tabbing">                                                 </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmmi-12">z</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">are identifiers.</span></td></tr></table>
+<!--l. 35--><p class="noindent" >
+<!--l. 38--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.77.3    </span></span> <a 
+ id="x226-100500016.77.3"></a><span 
+class="ptmr8t-x-x-120">Input for the </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform</span></h4>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:70;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">This pack</span></td><td style="width:151;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">age can compute the </span></td><td style="width:152;" 
+class="tabbing"><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transforms of the </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">following list of </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="ptmr8t-x-x-120">, and</span>
+</td></tr></table>
+<!--l. 41--><p class="noindent" >                                          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">certain combinations thereof.</span></td></tr></table>
+<!--l. 41--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 41--><p class="noindent" >                <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:70;" 
+class="tabbing">                </td><td style="width:151;" 
+class="tabbing"><span 
+class="cmr-12">1                        </span></td><td style="width:152;" 
+class="tabbing"><span 
+class="cmmi-12">e</span><sup><span 
+class="cmmi-8">&#x03B1;n</span></sup>                         </td><td  
+class="tabbing"><img 
+src="manual636x.png" alt="  1
+(n+k)"  class="frac" align="middle"></td></tr></table>
+<!--l. 45--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 45--><p class="noindent" >               <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:70;" 
+class="tabbing">                 </td><td style="width:151;" 
+class="tabbing"><img 
+src="manual637x.png" alt="-1
+n!"  class="frac" align="middle">                                </td><td style="width:152;" 
+class="tabbing"><img 
+src="manual638x.png" alt="-1--
+(2n)!"  class="frac" align="middle">                            </td><td  
+class="tabbing"><img 
+src="manual639x.png" alt="--1---
+(2n+1 )!"  class="frac" align="middle"></td></tr></table>
+<!--l. 48--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 48--><p class="noindent" >          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:70;" 
+class="tabbing">                 </td><td style="width:151;" 
+class="tabbing"><img 
+src="manual640x.png" alt="sin(&#x03B2;nn!)-"  class="frac" align="middle">                         </td><td style="width:152;" 
+class="tabbing"><span 
+class="cmr-12">sin</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">&#x03B1;n </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">&#x03D5;</span><span 
+class="cmr-12">)           </span></td><td  
+class="tabbing"><span 
+class="cmmi-12">e</span><sup><span 
+class="cmmi-8">&#x03B1;n</span></sup> <span 
+class="cmr-12">sin</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">&#x03B2;n</span><span 
+class="cmr-12">)</span></td></tr></table>
+<!--l. 51--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 51--><p class="noindent" >          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:70;" 
+class="tabbing">            </td><td style="width:151;" 
+class="tabbing"><img 
+src="manual641x.png" alt="cos(&#x03B2;n)
+  n!"  class="frac" align="middle">                         </td><td style="width:152;" 
+class="tabbing"><span 
+class="cmr-12">cos</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">&#x03B1;n </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">&#x03D5;</span><span 
+class="cmr-12">)          </span></td><td  
+class="tabbing"><span 
+class="cmmi-12">e</span><sup><span 
+class="cmmi-8">&#x03B1;n</span></sup> <span 
+class="cmr-12">cos</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">&#x03B2;n</span><span 
+class="cmr-12">)</span></td></tr></table>
+<!--l. 54--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 54--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:70;" 
+class="tabbing">            </td><td style="width:151;" 
+class="tabbing"><img 
+src="manual642x.png" alt="sin(&#x03B2;n(n++11-))"  class="frac" align="middle">                   </td><td style="width:152;" 
+class="tabbing"><span 
+class="cmr-12">sinh</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">&#x03B1;n </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">&#x03D5;</span><span 
+class="cmr-12">)         </span></td><td  
+class="tabbing"><img 
+src="manual643x.png" alt="cos(&#x03B2;n(n++11))"  class="frac" align="middle"></td></tr></table>
+<!--l. 57--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 57--><p class="noindent" >                                   <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:70;" 
+class="tabbing">                 </td><td style="width:151;" 
+class="tabbing"><span 
+class="cmr-12">cosh</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">&#x03B1;n </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">&#x03D5;</span><span 
+class="cmr-12">)         </span></td><td  
+class="tabbing"><img 
+src="manual644x.png" alt="(n+k)
+ m" ></td></tr></table>
+<!--l. 59--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 60--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:158;" 
+class="tabbing"><span class="underline"><span 
+class="ptmb8t-x-x-120">Other Combinations</span></span></td><td  
+class="tabbing">
+</td></tr></table>
+<!--l. 63--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 63--><p class="noindent" >              <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:158;" 
+class="tabbing"><span class="underline"><span 
+class="ptmr8t-x-x-120">Linearity</span></span>                     </td><td  
+class="tabbing"><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">af</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">bg</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">b</span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">}</span></td></tr></table>
+<!--l. 67--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 67--><p class="noindent" >           <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:158;" 
+class="tabbing"><span class="underline"><span 
+class="ptmr8t-x-x-120">Multiplication by </span><span 
+class="cmmi-12">n</span></span>   </td><td  
+class="tabbing"><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">n</span><sup><span 
+class="cmmi-8">k</span></sup> <span 
+class="cmsy-10x-x-120">&#x22C5; </span><span 
+class="cmmi-12">f</span><sub>
+<span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">z</span><img 
+src="manual645x.png" alt="d
+dz-"  class="frac" align="middle"><img 
+src="manual646x.png" alt="(                 )
+ Z {nk-1 &#x22C5; fn,n,z }"  class="left" align="middle"></td></tr></table>
+<!--l. 70--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 70--><p class="noindent" >                             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:158;" 
+class="tabbing"><span class="underline"><span 
+class="ptmr8t-x-x-120">Multiplication by </span><span 
+class="cmmi-12">&#x03BB;</span><sup><span 
+class="cmmi-8">n</span></sup></span>  </td><td  
+class="tabbing"><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">&#x03BB;</span><sup><span 
+class="cmmi-8">n</span></sup> <span 
+class="cmsy-10x-x-120">&#x22C5; </span><span 
+class="cmmi-12">f</span><sub>
+<span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">F</span><img 
+src="manual647x.png" alt="(  )
+  z
+  &#x03BB;"  class="left" align="middle"></td></tr></table>
+<!--l. 73--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 73--><p class="noindent" >               <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:158;" 
+class="tabbing"><span class="underline"><span 
+class="ptmr8t-x-x-120">Shift Equation</span></span>            </td><td  
+class="tabbing"><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+</span><span 
+class="cmmi-8">k</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmmi-8">k</span></sup><img 
+src="manual648x.png" alt="(                 )
+         k-&#x2211; 1   -j
+  F (z) - j=0 fjz"  class="left" align="middle"></td></tr></table>
+<!--l. 77--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 77--><p class="noindent" >                       <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:158;" 
+class="tabbing"><span class="underline"><span 
+class="ptmr8t-x-x-120">Symbolic Sums</span></span>          </td><td  
+class="tabbing"><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" /></span><img 
+src="manual649x.png" alt="{  n    }
+  &#x2211;  f
+  k=0  k"  class="left" align="middle"> <span 
+class="cmr-12">=</span> <img 
+src="manual650x.png" alt="-z-
+z- 1"  class="frac" align="middle"> <span 
+class="cmsy-10x-x-120">&#x22C5;<img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">}</span></td></tr></table>
+<!--l. 81--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 81--><p class="noindent" >          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:158;" 
+class="tabbing">            </td><td  
+class="tabbing"><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" /></span><img 
+src="manual651x.png" alt="{n+q&#x2211;    }
+      fk
+  k=p"  class="left" align="middle"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;combination of the above</span></td></tr></table>
+<!--l. 84--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 84--><p class="noindent" >    <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">&#x03BB; </span><span 
+class="cmsy-10x-x-120">&#x2208; </span><span 
+class="ptmb8t-x-x-120">N</span><span 
+class="cmsy-10x-x-120">-{</span><span 
+class="cmr-12">0</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">; and </span><span 
+class="cmmi-12">a</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">b </span><span 
+class="ptmr8t-x-x-120">are variables or fractions; and </span><span 
+class="cmmi-12">p</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">q </span><span 
+class="cmsy-10x-x-120">&#x2208; </span><span 
+class="ptmb8t-x-x-120">Z </span><span 
+class="ptmr8t-x-x-120">or</span></td></tr></table>
+<!--l. 86--><p class="noindent" >                   <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">are functions of </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">; and </span><span 
+class="cmmi-12">&#x03B1;</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">&#x03B2; </span><span 
+class="ptmr8t-x-x-120">&amp; </span><span 
+class="cmmi-12">&#x03D5; </span><span 
+class="ptmr8t-x-x-120">are angles in radians.</span></td></tr></table>
+<!--l. 89--><p class="noindent" >
+<!--l. 91--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.77.4    </span></span> <a 
+ id="x226-100600016.77.4"></a><span 
+class="ptmr8t-x-x-120">Input for the Inverse </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform</span></h4>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:36;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">This </span></td><td style="width:242;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">package can compute the Inverse </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">Z-Transforms of any rational function,</span>
+</td></tr></table>
+<!--l. 94--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">whose denominator can be factored over </span><span 
+class="cmmi-12">Q</span><span 
+class="ptmr8t-x-x-120">, in addition to the following list</span></td></tr></table>
+<!--l. 95--><p class="noindent" >                                                             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">of </span><span 
+class="cmmi-12">F</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">)</span><span 
+class="ptmr8t-x-x-120">.</span></td></tr></table>
+<!--l. 95--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 95--><p class="noindent" >             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:36;" 
+class="tabbing">        </td><td style="width:242;" 
+class="tabbing"><span 
+class="cmr-12">sin</span> <img 
+src="manual652x.png" alt="(     )
+ sin(&#x03B2;)
+   z"  class="left" align="middle"><span 
+class="cmmi-12">e</span><sup><img 
+src="manual653x.png" alt="(cos(z&#x03B2;) )"  class="left" align="middle"></sup>               </td><td  
+class="tabbing"><span 
+class="cmr-12">cos</span> <img 
+src="manual654x.png" alt="(     )
+ sin(&#x03B2;)
+   z"  class="left" align="middle"><span 
+class="cmmi-12">e</span><sup><img 
+src="manual655x.png" alt="(cos(z&#x03B2;))"  class="left" align="middle"></sup></td></tr></table>
+<!--l. 100--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 100--><p class="noindent" >                       <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:36;" 
+class="tabbing">      </td><td style="width:242;" 
+class="tabbing"><img 
+src="manual656x.png" alt="&#x2218; --
+  z-
+  A"  class="sqrt" > <span 
+class="cmr-12">sin</span> <img 
+src="manual657x.png" alt="(&#x2218; --)
+   z-
+   A"  class="left" align="middle">          </td><td  
+class="tabbing"><span 
+class="cmr-12">cos</span> <img 
+src="manual658x.png" alt="(&#x2218;  --)
+    z-
+    A"  class="left" align="middle"></td></tr></table>
+<!--l. 102--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 102--><p class="noindent" >                      <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:36;" 
+class="tabbing">   </td><td style="width:242;" 
+class="tabbing"><img 
+src="manual659x.png" alt="&#x2218;  z-
+   A"  class="sqrt" > <span 
+class="cmr-12">sinh</span> <img 
+src="manual660x.png" alt="(&#x2218; z-)
+   A"  class="left" align="middle">         </td><td  
+class="tabbing"><span 
+class="cmr-12">cosh</span> <img 
+src="manual661x.png" alt="(&#x2218;  z-)
+    A"  class="left" align="middle"></td></tr></table>
+<!--l. 104--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 104--><p class="noindent" >              <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:36;" 
+class="tabbing">   </td><td style="width:242;" 
+class="tabbing"><span 
+class="cmmi-12">z</span><span 
+class="cmmi-12">&#x00A0;</span> <span 
+class="cmr-12">log</span> <img 
+src="manual662x.png" alt="(           )
+  &#x221A;---z----
+   z2-Az+B"  class="left" align="middle">       </td><td  
+class="tabbing"><span 
+class="cmmi-12">z</span><span 
+class="cmmi-12">&#x00A0;</span> <span 
+class="cmr-12">log</span> <img 
+src="manual663x.png" alt="( &#x221A;--------)
+  -z2+Az+B-
+      z"  class="left" align="middle"></td></tr></table>
+<!--l. 106--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 106--><p class="noindent" >                                               <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:36;" 
+class="tabbing">   </td><td  
+class="tabbing"><span 
+class="cmr-12">arctan</span> <img 
+src="manual664x.png" alt="(       )
+ -sin(&#x03B2;)-
+ z+cos(&#x03B2;)"  class="left" align="middle"></td></tr></table>
+<!--l. 108--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 109--><p class="noindent" >
+                                                                     
+
+                                                                     
+<!--l. 111--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">&#x03BB; </span><span 
+class="cmsy-10x-x-120">&#x2208; </span><span 
+class="ptmb8t-x-x-120">N</span><span 
+class="cmsy-10x-x-120">-{</span><span 
+class="cmr-12">0</span><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmmi-12">A</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">B </span><span 
+class="ptmr8t-x-x-120">are fractions or variables (</span><span 
+class="cmmi-12">B &#x003E; </span><span 
+class="cmr-12">0</span><span 
+class="ptmr8t-x-x-120">) and </span><span 
+class="cmmi-12">&#x03B1;</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="cmmi-12">&#x03B2;</span><span 
+class="ptmr8t-x-x-120">, &amp; </span><span 
+class="cmmi-12">&#x03D5; </span><span 
+class="ptmr8t-x-x-120">are</span>
+<span 
+class="ptmr8t-x-x-120">angles in radians.</span>
+<!--l. 115--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.77.5    </span></span> <a 
+ id="x226-100700016.77.5"></a><span 
+class="ptmr8t-x-x-120">Application of the </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform</span></h4>
+<!--l. 116--><p class="noindent" ><span class="underline"><span 
+class="ptmb8t-x-x-120">Solution of difference equations</span></span>
+<!--l. 118--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In the same way that a Laplace Transform can be used to solve differential</span>
+<span 
+class="ptmr8t-x-x-120">equations, so </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transforms can be used to solve difference equations.</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Given a linear difference equation of </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">-th order</span>
+<table 
+class="equation"><tr><td><a 
+ id="x226-1007001r97"></a>
+<center class="math-display" >
+<img 
+src="manual665x.png" alt="fn+k + a1fn+k-1 + ...+ akfn =  gn
+" class="math-display" ></center></td><td class="equation-label"><span 
+class="ptmr8t-x-x-120">(16.97)</span></td></tr></table>
+<!--l. 125--><p class="nopar" >
+<!--l. 127--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">with initial conditions </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmr-8">0</span></sub><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="ptmr8t-x-x-120">,</span> <span 
+class="cmmi-12">&#x2026;</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> <span 
+class="ptmr8t-x-x-120">(where </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">j</span></sub> <span 
+class="ptmr8t-x-x-120">are given), it</span>
+<span 
+class="ptmr8t-x-x-120">is possible to solve it in the following way. If the coefficients </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmmi-8">k</span></sub>
+<span 
+class="ptmr8t-x-x-120">are constants, then the </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform of (</span><a 
+href="#x226-1007001r97"><span 
+class="ptmr8t-x-x-120">16.97</span><!--tex4ht:ref: eq:1 --></a><span 
+class="ptmr8t-x-x-120">) can be calculated using</span>
+<span 
+class="ptmr8t-x-x-120">the shift equation, and results in a solvable linear equation for </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">Application of the Inverse </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform then results in the solution of</span>
+<span 
+class="ptmr8t-x-x-120">&#x00A0;(</span><a 
+href="#x226-1007001r97"><span 
+class="ptmr8t-x-x-120">16.97</span><!--tex4ht:ref: eq:1 --></a><span 
+class="ptmr8t-x-x-120">).</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">If the coefficients </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">are polynomials in </span><span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">then the </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform of (</span><a 
+href="#x226-1007001r97"><span 
+class="ptmr8t-x-x-120">16.97</span><!--tex4ht:ref: eq:1 --></a><span 
+class="ptmr8t-x-x-120">)</span>
+<span 
+class="ptmr8t-x-x-120">constitutes a differential equation for </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">. If this differential equation can be</span>
+<span 
+class="ptmr8t-x-x-120">solved then the Inverse </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform once again yields the solution of</span>
+<span 
+class="ptmr8t-x-x-120">(</span><a 
+href="#x226-1007001r97"><span 
+class="ptmr8t-x-x-120">16.97</span><!--tex4ht:ref: eq:1 --></a><span 
+class="ptmr8t-x-x-120">). Some examples of these methods of solution can be found in</span>
+<span 
+class="cmsy-10x-x-120">§</span><a 
+href="#x226-100800016.77.6"><span 
+class="ptmr8t-x-x-120">16.77.6</span><!--tex4ht:ref: ztranssec:Examples --></a><span 
+class="ptmr8t-x-x-120">.</span>
+                                                                     
+
+                                                                     
+<!--l. 143--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.77.6    </span></span> <a 
+ id="x226-100800016.77.6"></a><span 
+class="ptmr8t-x-x-120">EXAMPLES</span></h4>
+<!--l. 145--><p class="noindent" ><span class="underline"><span 
+class="ptmb8t-x-x-120">Here are some examples for the </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmb8t-x-x-120">-Transform</span></span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1345">
+1:&#x00A0;ztrans((-1)^n*n^2,n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;z*(&#x00A0;-&#x00A0;z&#x00A0;+&#x00A0;1)
+&#x00A0;<br />---------------------
+&#x00A0;<br />&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;z&#x00A0;&#x00A0;+&#x00A0;3*z&#x00A0;&#x00A0;+&#x00A0;3*z&#x00A0;+&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />2:&#x00A0;ztrans(cos(n*omega*t),n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;z*(cos(omega*t)&#x00A0;-&#x00A0;z)
+&#x00A0;<br />---------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;2*cos(omega*t)*z&#x00A0;-&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />3:&#x00A0;ztrans(cos(b*(n+2))/(n+2),n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z
+&#x00A0;<br />z*(&#x00A0;-&#x00A0;cos(b)&#x00A0;+&#x00A0;log(------------------------------)*z)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sqrt(&#x00A0;-&#x00A0;2*cos(b)*z&#x00A0;+&#x00A0;z&#x00A0;&#x00A0;+&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />4:&#x00A0;ztrans(n*cos(b*n)/factorial(n),n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;cos(b)/z&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sin(b)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sin(b)
+&#x00A0;<br />&#x00A0;e&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*(cos(--------)*cos(b)&#x00A0;-&#x00A0;sin(--------)*sin(b))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z
+&#x00A0;<br />---------------------------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z
+&#x00A0;<br />5:&#x00A0;ztrans(sum(1/factorial(k),k,0,n),n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;1/z
+&#x00A0;<br />&#x00A0;e&#x00A0;&#x00A0;&#x00A0;*z
+&#x00A0;<br />--------
+&#x00A0;<br />&#x00A0;z&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />6:&#x00A0;operator&#x00A0;f$
+&#x00A0;<br />
+&#x00A0;<br />7:&#x00A0;ztrans((1+n)^2*f(n),n,z);
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />df(ztrans(f(n),n,z),z,2)*z&#x00A0;&#x00A0;-&#x00A0;df(ztrans(f(n),n,z),z)*z
+&#x00A0;<br />+&#x00A0;ztrans(f(n),n,z)
+&#x00A0;<br />
+</div>
+<!--l. 190--><p class="nopar" >
+<!--l. 192--><p class="noindent" ><span class="underline"><span 
+class="ptmb8t-x-x-120">Here are some examples for the Inverse </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmb8t-x-x-120">-Transform</span></span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1346">
+&#x00A0;<br />8:&#x00A0;invztrans((z^2-2*z)/(z^2-4*z+1),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;(sqrt(3)&#x00A0;-&#x00A0;2)&#x00A0;*(&#x00A0;-&#x00A0;1)&#x00A0;&#x00A0;+&#x00A0;(sqrt(3)&#x00A0;+&#x00A0;2)
+&#x00A0;<br />-----------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />9:&#x00A0;invztrans(z/((z-a)*(z-b)),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;a&#x00A0;&#x00A0;-&#x00A0;b
+&#x00A0;<br />---------
+&#x00A0;<br />&#x00A0;&#x00A0;a&#x00A0;-&#x00A0;b
+&#x00A0;<br />
+&#x00A0;<br />10:&#x00A0;invztrans(z/((z-a)*(z-b)*(z-c)),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;a&#x00A0;*b&#x00A0;-&#x00A0;a&#x00A0;*c&#x00A0;-&#x00A0;b&#x00A0;*a&#x00A0;+&#x00A0;b&#x00A0;*c&#x00A0;+&#x00A0;c&#x00A0;*a&#x00A0;-&#x00A0;c&#x00A0;*b
+&#x00A0;<br />-----------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;a&#x00A0;*b&#x00A0;-&#x00A0;a&#x00A0;*c&#x00A0;-&#x00A0;a*b&#x00A0;&#x00A0;+&#x00A0;a*c&#x00A0;&#x00A0;+&#x00A0;b&#x00A0;*c&#x00A0;-&#x00A0;b*c
+&#x00A0;<br />
+&#x00A0;<br />11:&#x00A0;invztrans(z*log(z/(z-a)),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;a&#x00A0;*a
+&#x00A0;<br />-------
+&#x00A0;<br />&#x00A0;n&#x00A0;+&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />12:&#x00A0;invztrans(e^(1/(a*z)),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+&#x00A0;<br />-----------------
+&#x00A0;<br />&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;a&#x00A0;*factorial(n)
+&#x00A0;<br />
+&#x00A0;<br />13:&#x00A0;invztrans(z*(z-cosh(a))/(z^2-2*z*cosh(a)+1),z,n);
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />cosh(a*n)
+&#x00A0;<br />
+&#x00A0;<br />
+</div>
+<!--l. 236--><p class="nopar" >
+<!--l. 238--><p class="noindent" ><span class="underline"><span 
+class="ptmb8t-x-x-120">Examples: Solutions of Difference Equations</span></span>
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">I </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">(See </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, p.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;651, Example 1).</span>
+</td></tr></table>
+<!--l. 242--><p class="noindent" >           <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">               </td><td style="width:95;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">Consider the </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">homogeneous linear difference equation</span></td></tr></table>
+<!--l. 243--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 243--><p class="noindent" >        <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">               </td><td style="width:95;" 
+class="tabbing">                     </td><td  
+class="tabbing"><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+5</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">2</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+3</span></sub> <span 
+class="cmr-12">+ 2</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+2</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">3</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+1</span></sub> <span 
+class="cmr-12">+ 2</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-12">= 0</span></td></tr></table>
+<!--l. 244--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 244--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">        </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">with </span><span 
+class="ptmr8t-x-x-120">&#x00A0;initial conditions </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmr-12">= 0</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-12">= 0</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">2</span></sub> <span 
+class="cmr-12">= 9</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">3</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmr-12">2</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">4</span></sub> <span 
+class="cmr-12">= 23</span><span 
+class="ptmr8t-x-x-120">. </span><span 
+class="ptmr8t-x-x-120">&#x00A0;The</span></td></tr></table>
+<!--l. 247--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">        </td><td  
+class="tabbing"><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform of the left hand side can be written as </span><span 
+class="cmmi-12">F</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) = </span><span 
+class="cmmi-12">P</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">)</span><span 
+class="cmmi-12">&#x2215;Q</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">)</span></td></tr></table>
+<!--l. 249--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">        </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">where </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmmi-12">P</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) = 9</span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">3</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">2</span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-12">+ 5</span><span 
+class="cmmi-12">z </span><span 
+class="ptmr8t-x-x-120">&#x00A0;and </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmmi-12">Q</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">) = </span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">5</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">2</span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">3</span></sup> <span 
+class="cmr-12">+ 2</span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">3</span><span 
+class="cmmi-12">z </span><span 
+class="cmr-12">+ 2 </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmr-12">=</span></td></tr></table>
+<!--l. 251--><p class="noindent" >         <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">           </td><td  
+class="tabbing"><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1)</span><sup><span 
+class="cmr-8">2</span></sup><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z </span><span 
+class="cmr-12">+ 2)(</span><span 
+class="cmmi-12">z</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-12">+ 1)</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="ptmr8t-x-x-120">&#x00A0;which can be inverted to give</span></td></tr></table>
+<!--l. 252--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 252--><p class="noindent" >                      <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">               </td><td style="width:95;" 
+class="tabbing">                     </td><td  
+class="tabbing"><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-12">= 2</span><span 
+class="cmmi-12">n </span><span 
+class="cmr-12">+ (</span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmr-12">2)</span><sup><span 
+class="cmmi-8">n</span></sup> <span 
+class="cmsy-10x-x-120">-</span> <span 
+class="cmr-12">cos</span> <img 
+src="manual666x.png" alt="&#x03C0;
+2"  class="frac" align="middle"><span 
+class="cmmi-12">n</span><span style="margin-left:3.33234pt" class="tmspace"></span><span 
+class="cmmi-12">.</span></td></tr></table>
+<!--l. 254--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 254--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">        </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">The following REDUCE session shows how the present package can</span></td></tr></table>
+<!--l. 257--><p class="noindent" >                            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:65;" 
+class="tabbing">               </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">be used to solve the above problem.</span></td></tr></table>
+<!--l. 259--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1347">
+14:&#x00A0;operator&#x00A0;f$&#x00A0;f(0):=0$&#x00A0;f(1):=0$&#x00A0;f(2):=9$&#x00A0;f(3):=-2$&#x00A0;f(4):=23$
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />20:&#x00A0;equation:=ztrans(f(n+5)-2*f(n+3)+2*f(n+2)-3*f(n+1)+2*f(n),n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />equation&#x00A0;:=&#x00A0;ztrans(f(n),n,z)*z&#x00A0;&#x00A0;-&#x00A0;2*ztrans(f(n),n,z)*z
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;2*ztrans(f(n),n,z)*z&#x00A0;&#x00A0;-&#x00A0;3*ztrans(f(n),n,z)*z
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;2*ztrans(f(n),n,z)&#x00A0;-&#x00A0;9*z&#x00A0;&#x00A0;+&#x00A0;2*z&#x00A0;&#x00A0;-&#x00A0;5*z
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />21:&#x00A0;ztransresult:=solve(equation,ztrans(f(n),n,z));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z*(9*z&#x00A0;&#x00A0;-&#x00A0;2*z&#x00A0;+&#x00A0;5)
+&#x00A0;<br />ztransresult&#x00A0;:=&#x00A0;{ztrans(f(n),n,z)=----------------------------}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;2*z&#x00A0;&#x00A0;+&#x00A0;2*z&#x00A0;&#x00A0;-&#x00A0;3*z&#x00A0;+&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />22:&#x00A0;result:=invztrans(part(first(ztransresult),2),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*(&#x00A0;-&#x00A0;2)&#x00A0;&#x00A0;-&#x00A0;i&#x00A0;*(&#x00A0;-&#x00A0;1)&#x00A0;&#x00A0;-&#x00A0;i&#x00A0;&#x00A0;+&#x00A0;4*n
+&#x00A0;<br />result&#x00A0;:=&#x00A0;-----------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+</div>
+<!--l. 291--><p class="nopar" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing">
+</td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 294--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 294--><p class="noindent" >                                <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">II </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">(See </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, p.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;651, Example 2).</span></td></tr></table>
+<!--l. 297--><p class="noindent" >              <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">                </td><td style="width:95;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">Consider the </span></td><td style="width:46;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">inhom</span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">ogeneous difference equation:</span></td></tr></table>
+<!--l. 298--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 298--><p class="noindent" >                        <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">                </td><td style="width:95;" 
+class="tabbing">                     </td><td  
+class="tabbing"><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+2</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">4</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+1</span></sub> <span 
+class="cmr-12">+ 3</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-12">= 1</span></td></tr></table>
+<!--l. 299--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 299--><p class="noindent" >                 <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">            </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">with initial conditions </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmr-12">= 0</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-12">= 1</span><span 
+class="ptmr8t-x-x-120">. Giving</span></td></tr></table>
+<!--l. 301--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 301--><p class="noindent" >              <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">                </td><td style="width:95;" 
+class="tabbing">                     </td><td style="width:46;" 
+class="tabbing"><span 
+class="cmmi-12">F</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">z</span><span 
+class="cmr-12">)  </span></td><td  
+class="tabbing"><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmr-12">1</span><span 
+class="cmsy-10x-x-120">}</span><img 
+src="manual667x.png" alt="(   1         z   )
+ z2-4z+3 + z2-4z+3-"  class="left" align="middle"></td></tr></table>
+<!--l. 302--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 302--><p class="noindent" >                <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">      </td><td style="width:95;" 
+class="tabbing">        </td><td style="width:46;" 
+class="tabbing">    </td><td  
+class="tabbing"><span 
+class="cmr-12">=</span> <img 
+src="manual668x.png" alt="-z-
+z-1"  class="frac" align="middle"><img 
+src="manual669x.png" alt="(                 )
+  2--1---+ -2-z---
+  z-4z+3   z -4z+3"  class="left" align="middle"><span 
+class="ptmr8t-x-x-120">.</span></td></tr></table>
+<!--l. 304--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 304--><p class="noindent" >                <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">                </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">The Inverse </span><span 
+class="cmmi-12">Z</span><span 
+class="ptmr8t-x-x-120">-Transform results in the solution</span></td></tr></table>
+<!--l. 305--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 305--><p class="noindent" >                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">                </td><td style="width:95;" 
+class="tabbing">                     </td><td  
+class="tabbing"><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-12">=</span> <img 
+src="manual670x.png" alt="1
+2"  class="frac" align="middle"><img 
+src="manual671x.png" alt="(                )
+ 3n+1-1 - (n + 1)
+    2"  class="left" align="middle"><span 
+class="ptmr8t-x-x-120">.</span></td></tr></table>
+<!--l. 309--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 309--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">         </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">The following REDUCE session shows how the present package can</span></td></tr></table>
+<!--l. 311--><p class="noindent" >                           <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:72;" 
+class="tabbing">                </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">be used to solve the above problem.</span></td></tr></table>
+<!--l. 314--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1348">
+&#x00A0;<br />23:&#x00A0;clear(f)$&#x00A0;operator&#x00A0;f$&#x00A0;f(0):=0$&#x00A0;f(1):=1$
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />27:&#x00A0;equation:=ztrans(f(n+2)-4*f(n+1)+3*f(n)-1,n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />equation&#x00A0;:=&#x00A0;(ztrans(f(n),n,z)*z&#x00A0;&#x00A0;-&#x00A0;5*ztrans(f(n),n,z)*z
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;7*ztrans(f(n),n,z)*z&#x00A0;-&#x00A0;3*ztrans(f(n),n,z)&#x00A0;-&#x00A0;z&#x00A0;)/(z&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />28:&#x00A0;ztransresult:=solve(equation,ztrans(f(n),n,z));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z
+&#x00A0;<br />result&#x00A0;:=&#x00A0;{ztrans(f(n),n,z)=---------------------}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;z&#x00A0;&#x00A0;-&#x00A0;5*z&#x00A0;&#x00A0;+&#x00A0;7*z&#x00A0;-&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />29:&#x00A0;result:=invztrans(part(first(ztransresult),2),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*3&#x00A0;&#x00A0;-&#x00A0;2*n&#x00A0;-&#x00A0;3
+&#x00A0;<br />result&#x00A0;:=&#x00A0;----------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+</div>
+<!--l. 342--><p class="nopar" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing">
+</td></tr></table>
+<!--l. 345--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 345--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:79;" 
+class="tabbing"><span 
+class="ptmb8t-x-x-120">III </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></td><td style="width:95;" 
+class="tabbing"><span 
+class="ptmr8t-x-x-120">Consider the </span></td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">following difference equation, which has a differential</span></td></tr></table>
+<!--l. 349--><p class="noindent" >                                        <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:79;" 
+class="tabbing">                  </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">equation for </span><span 
+class="cmsy-10x-x-120"><img 
+src="cmsy10-c-5a.png" alt="Z" class="10-120x-x-5a" />{</span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">.</span></td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 350--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 350--><p class="noindent" >                        <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:79;" 
+class="tabbing">                  </td><td style="width:95;" 
+class="tabbing">                     </td><td  
+class="tabbing"><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n </span><span 
+class="cmr-12">+ 1) </span><span 
+class="cmsy-10x-x-120">&#x22C5; </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+1</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmmi-8">n</span></sub> <span 
+class="cmr-12">= 0</span></td></tr></table>
+<!--l. 352--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 352--><p class="noindent" ><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:79;" 
+class="tabbing">          </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">with initial conditions </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">0</span></sub> <span 
+class="cmr-12">= 1</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">f</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-12">= 1</span><span 
+class="ptmr8t-x-x-120">. It can be solved in REDUCE</span></td></tr></table>
+<!--l. 354--><p class="noindent" >               <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:79;" 
+class="tabbing">                  </td><td  
+class="tabbing"><span 
+class="ptmr8t-x-x-120">using the present package in the following way.</span></td></tr></table>
+<!--l. 355--><p class="noindent" >                                                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"></td></tr></table>
+<!--l. 357--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1349">
+30:&#x00A0;clear(f)$&#x00A0;operator&#x00A0;f$&#x00A0;f(0):=1$&#x00A0;f(1):=1$
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />34:&#x00A0;equation:=ztrans((n+1)*f(n+1)-f(n),n,z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />equation&#x00A0;:=&#x00A0;&#x00A0;-&#x00A0;(df(ztrans(f(n),n,z),z)*z&#x00A0;&#x00A0;+&#x00A0;ztrans(f(n),n,z))
+&#x00A0;<br />
+&#x00A0;<br />35:&#x00A0;operator&#x00A0;tmp;
+&#x00A0;<br />
+&#x00A0;<br />36:&#x00A0;equation:=sub(ztrans(f(n),n,z)=tmp(z),equation);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />equation&#x00A0;:=&#x00A0;&#x00A0;-&#x00A0;(df(tmp(z),z)*z&#x00A0;&#x00A0;+&#x00A0;tmp(z))
+&#x00A0;<br />
+&#x00A0;<br />37:&#x00A0;load(odesolve);
+&#x00A0;<br />
+&#x00A0;<br />38:&#x00A0;ztransresult:=odesolve(equation,tmp(z),z);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/z
+&#x00A0;<br />ztransresult&#x00A0;:=&#x00A0;{tmp(z)=e&#x00A0;&#x00A0;&#x00A0;*arbconst(1)}
+&#x00A0;<br />
+&#x00A0;<br />39:&#x00A0;preresult:=invztrans(part(first(ztransresult),2),z,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;arbconst(1)
+&#x00A0;<br />preresult&#x00A0;:=&#x00A0;--------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(n)
+&#x00A0;<br />
+&#x00A0;<br />40:&#x00A0;solve({sub(n=0,preresult)=f(0),sub(n=1,preresult)=f(1)},
+&#x00A0;<br />arbconst(1));
+&#x00A0;<br />
+&#x00A0;<br />{arbconst(1)=1}
+&#x00A0;<br />
+&#x00A0;<br />41:&#x00A0;result:=preresult&#x00A0;where&#x00A0;ws;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+&#x00A0;<br />result&#x00A0;:=&#x00A0;--------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(n)
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+</div>
+<!--l. 398--><p class="nopar" >
+<!--l. 400--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x226-1009000"></a><span 
+class="ptmr8t-x-x-120">Bibliography</span></h4>
+<!--l. 400--><p class="noindent" >
+    <div class="thebibliography">
+    <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[1]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XBS"></a><span 
+class="ptmr8t-x-x-120">Bronstein,</span>
+    <span 
+class="ptmr8t-x-x-120">I.N. and Semedjajew, K.A., </span><span 
+class="ptmri8t-x-x-120">Taschenbuch der Mathematik</span><span 
+class="ptmr8t-x-x-120">, Verlag Harri</span>
+    <span 
+class="ptmr8t-x-x-120">Deutsch, Thun und Frankfurt(Main), 1981.</span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">ISBN 3 87144 492 8.</span></p></div>
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse168.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse167.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse167.html#tailmanualse167.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse168.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse168.html"></a>   
+</body></html> 

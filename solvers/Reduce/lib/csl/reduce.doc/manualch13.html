@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>13 Commands for Interactive Use</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch13.html" >Up</a></td><td class="clinks"><a 
+href="manualch14.html" >Next</a></td><td class="clinks"><a 
+href="manualch12.html" >Prev</a></td><td class="clinks"><a 
+href="manualch12.html#tailmanualch12.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualch13.html">Tail</a></td></tr></table><h2 class="ChapterHead"> 13&#x00A0;<a 
+ id="x94-17800013"></a>Commands for Interactive Use</h2>
+<a 
+ id="dx94-178001"></a>
+<!--l. 4--><p class="noindent" >REDUCE is designed as an interactive system, but naturally it can also operate in a batch
+processing or background mode by taking its input command by command from the
+relevant input stream. There is a basic difference, however, between interactive and batch
+use of the system. In the former case, whenever the system discovers an ambiguity at
+some point in a calculation, such as a forgotten type assignment for instance, it asks
+the user for the correct interpretation. In batch operation, it is not practical to
+terminate the calculation at such points and require resubmission of the job, so the
+system makes the most obvious guess of the user&#8217;s intentions and continues the
+calculation.
+<!--l. 15--><p class="noindent" ><a 
+ id="switch:ERRCONT"></a> There is also a difference in the handling of errors. In the former case, the computation
+can continue since the user has the opportunity to correct the mistake. In batch mode, the
+error may lead to consequent erroneous (and possibly time consuming) computations. So
+in the default case, no further evaluation occurs, although the remainder of the input is
+checked for syntax errors. A message <span 
+class="pcrr8t-x-x-109">~Continuing with parsing only~</span>
+informs the user that this is happening. On the other hand, the switch <span 
+class="pcrr8t-x-x-109">ERRCONT</span>,<a 
+ id="dx94-178002"></a><a 
+ id="dx94-178003"></a><a 
+ id="dx94-178004"></a> if
+on, will cause the system to continue evaluating expressions after such errors
+occur.
+<!--l. 26--><p class="noindent" ><a 
+ id="command:RETRY"></a> When a syntactical error occurs, the place where the system detected the error is marked
+with three dollar signs (<span 
+class="pcrr8t-x-x-109">$$$</span>). In interactive mode, the user can then use <span 
+class="pcrr8t-x-x-109">ED</span><a 
+ id="dx94-178005"></a> to correct the
+error, or retype the command. When a non-syntactical error occurs in interactive mode,
+the command being evaluated at the time the last error occurred is saved, and may later
+be reevaluated by the command <span 
+class="pcrr8t-x-x-109">RETRY</span>.<a 
+ id="dx94-178006"></a>
+<div class="sectionTOCS">
+&#x00A0;<span class="sectionToc" >13.1 <a 
+href="manualse77.html#x95-17900013.1">Referencing Previous Results</a></span>
+<br />&#x00A0;<span class="sectionToc" >13.2 <a 
+href="manualse78.html#x96-18000013.2">Interactive Editing</a></span>
+<br />&#x00A0;<span class="sectionToc" >13.3 <a 
+href="manualse79.html#x97-18100013.3">Interactive File Control</a></span>
+</div>
+
+
+                                                                     
+
+                                                                     
+<table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualch13.html" >Up</a></td><td class="clinks"><a 
+href="manualch14.html" >Next</a></td><td class="clinks"><a 
+href="manualch12.html" >Prev</a></td><td class="clinks"><a 
+href="manualch12.html#tailmanualch12.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualch13.html" >Front</a></td></tr></table><a 
+ id="tailmanualch13.html"></a>  
+</body></html> 

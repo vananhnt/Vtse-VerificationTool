@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>FPS: Automatic calculation of formal power series</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse115.html" >Up</a></td><td class="clinks"><a 
+href="manualse116.html" >Next</a></td><td class="clinks"><a 
+href="manualse114.html" >Prev</a></td><td class="clinks"><a 
+href="manualse114.html#tailmanualse114.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse115.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.24    </span> <a 
+ id="x147-47600016.24"></a>FPS: Automatic calculation of formal power
+series</h3>
+<a 
+ id="dx147-476001"></a>
+<a 
+ id="dx147-476002"></a>
+<!--l. 430--><p class="noindent" >This package can expand a specific class of functions into their corresponding
+Laurent-Puiseux series.
+<!--l. 433--><p class="noindent" >Authors: Wolfram Koepf and Winfried Neun.
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.24.1    </span> <a 
+ id="x147-47700016.24.1"></a>Introduction</h4>
+<!--l. 3--><p class="noindent" >This package can expand functions of certain type into their corresponding
+Laurent-Puiseux series as a sum of terms of the form
+<center class="math-display" >
+<img 
+src="manual231x.png" alt="&#x221E;
+&#x2211;  a (x- x  )mk &#x2215;n+s
+    k      0
+k=0
+" class="math-display" ></center>
+<!--l. 7--><p class="nopar" >
+where <span 
+class="cmmi-10x-x-109">m </span>is the &#8216;symmetry number&#8217;, <span 
+class="cmmi-10x-x-109">s </span>is the &#8216;shift number&#8217;, <span 
+class="cmmi-10x-x-109">n </span>is the &#8216;Puiseux number&#8217;,
+and <span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmr-8">0</span></sub> is the &#8216;point of development&#8217;. The following types are supported:
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmb8t-x-x-109">functions  of  &#8216;rational  type&#8217;</span>,  which  are  either  rational  or  have  a  rational
+     derivative of some order;
+     </li>
+     <li class="itemize"><span 
+class="ptmb8t-x-x-109">functions  of  &#8216;hypergeometric  type&#8217;  </span>where  <span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">m</span><span 
+class="cmr-10x-x-109">)</span><span 
+class="cmmi-10x-x-109">&#x2215;a</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">k</span><span 
+class="cmr-10x-x-109">) </span>is  a  rational
+     function for some integer <span 
+class="cmmi-10x-x-109">m</span>;
+     </li>
+     <li class="itemize"><span 
+class="ptmb8t-x-x-109">functions of &#8216;explike type&#8217; </span>which satisfy a linear homogeneous differential
+     equation with constant coefficients.</li></ul>
+                                                                     
+
+                                                                     
+<!--l. 24--><p class="noindent" >The FPS package is an implementation of the method presented in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. The
+implementations of this package for <span 
+class="ptmrc8t-x-x-109">M<span 
+class="small-caps">A</span><span 
+class="small-caps">P</span><span 
+class="small-caps">L</span><span 
+class="small-caps">E</span> </span>(by D.&#x00A0;Gruntz) and <span 
+class="ptmrc8t-x-x-109">M<span 
+class="small-caps">A</span><span 
+class="small-caps">T</span><span 
+class="small-caps">H</span><span 
+class="small-caps">E</span><span 
+class="small-caps">M</span><span 
+class="small-caps">A</span><span 
+class="small-caps">T</span><span 
+class="small-caps">I</span><span 
+class="small-caps">C</span><span 
+class="small-caps">A</span> </span>(by
+W.&#x00A0;Koepf) served as guidelines for this one.
+<!--l. 29--><p class="noindent" >Numerous examples can be found in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>&#8211;<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>, most of which are contained in the test file
+<span 
+class="pcrr8t-x-x-109">fps.tst</span>. Many more examples can be found in the extensive bibliography of Hansen
+<span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>.
+<!--l. 34--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.24.2    </span> <a 
+ id="x147-47800016.24.2"></a>REDUCE operator <span 
+class="pcrr8t-x-x-109">FPS</span></h4>
+<a 
+ id="dx147-478001"></a>
+<!--l. 37--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">FPS(f,x,x0) </span>tries to find a formal power series expansion for <span 
+class="pcrr8t-x-x-109">f </span>with respect to the
+variable <span 
+class="pcrr8t-x-x-109">x </span>at the point of development <span 
+class="pcrr8t-x-x-109">x0</span>. It also works for formal Laurent (negative
+exponents) and Puiseux series (fractional exponents). If the third argument is omitted,
+then <span 
+class="pcrr8t-x-x-109">x0:=0 </span>is assumed.
+<!--l. 44--><p class="noindent" >Examples: <span 
+class="pcrr8t-x-x-109">FPS(asin(x)</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">2,x) </span>results in
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-946">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*k&#x00A0;&#x00A0;2*k&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;&#x00A0;*2&#x00A0;&#x00A0;&#x00A0;*factorial(k)&#x00A0;*x
+&#x00A0;<br />infsum(----------------------------,k,0,infinity)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(2*k&#x00A0;+&#x00A0;1)*(k&#x00A0;+&#x00A0;1)
+</div>
+<!--l. 51--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">FPS(sin x,x,pi) </span>gives
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-947">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*k&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(&#x00A0;-&#x00A0;pi&#x00A0;+&#x00A0;x)&#x00A0;&#x00A0;&#x00A0;*(&#x00A0;-&#x00A0;1)&#x00A0;*(&#x00A0;-&#x00A0;pi&#x00A0;+&#x00A0;x)
+&#x00A0;<br />infsum(------------------------------------,k,0,infinity)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(2*k&#x00A0;+&#x00A0;1)
+</div>
+<!--l. 58--><p class="nopar" > and <span 
+class="pcrr8t-x-x-109">FPS(sqrt(2-x</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">2),x) </span>yields
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-948">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*k
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;x&#x00A0;&#x00A0;&#x00A0;*sqrt(2)*factorial(2*k)
+&#x00A0;<br />infsum(--------------------------------,k,0,infinity)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;8&#x00A0;*factorial(k)&#x00A0;*(2*k&#x00A0;-&#x00A0;1)
+</div>
+<!--l. 66--><p class="nopar" > Note: The result contains one or more <span 
+class="pcrr8t-x-x-109">infsum </span>terms such that it does not interfere with
+the REDUCE operator <span 
+class="pcrr8t-x-x-109">sum</span>. In graphical oriented REDUCE interfaces this operator
+results in the usual <span 
+class="cmex-10x-x-109">&#x2211;</span>
+  notation.
+<!--l. 71--><p class="noindent" >If possible, the output is given using factorials. In some cases, the use of the
+Pochhammer symbol <span 
+class="pcrr8t-x-x-109">pochhammer(a,k)</span><span 
+class="cmr-10x-x-109">:= </span><span 
+class="cmmi-10x-x-109">a</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">+ 1)</span><img 
+src="manual232x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">a </span><span 
+class="cmr-10x-x-109">+ </span><span 
+class="cmmi-10x-x-109">k </span><span 
+class="cmsy-10x-x-109">- </span><span 
+class="cmr-10x-x-109">1) </span>is necessary.
+<!--l. 75--><p class="noindent" >The operator <span 
+class="pcrr8t-x-x-109">FPS </span>uses the operator <span 
+class="pcrr8t-x-x-109">SimpleDE </span>of the next section.
+<!--l. 77--><p class="noindent" >If an error message of type
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-949">
+Could&#x00A0;not&#x00A0;find&#x00A0;the&#x00A0;limit&#x00A0;of:
+</div>
+<!--l. 80--><p class="nopar" > occurs, you can set the corresponding limit yourself and try a recalculation. In the
+computation of <span 
+class="pcrr8t-x-x-109">FPS(atan(cot(x)),x,0)</span>, REDUCE is not able to find the value
+for the limit <span 
+class="pcrr8t-x-x-109">limit(atan(cot(x)),x,0) </span>since the <span 
+class="pcrr8t-x-x-109">atan </span>function is multi-valued.
+One can choose the branch of <span 
+class="pcrr8t-x-x-109">atan </span>such that this limit equals <span 
+class="cmmi-10x-x-109">&#x03C0;&#x2215;</span><span 
+class="cmr-10x-x-109">2 </span>so that we may
+set
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-950">
+let&#x00A0;limit(atan(cot(~x)),x,0)=&#x003E;pi/2;
+</div>
+<!--l. 89--><p class="nopar" > and a recalculation of <span 
+class="pcrr8t-x-x-109">FPS(atan(cot(x)),x,0) </span>yields the output <span 
+class="pcrr8t-x-x-109">pi - 2*x</span>
+which is the correct local series representation.
+<!--l. 94--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.24.3    </span> <a 
+ id="x147-47900016.24.3"></a>REDUCE operator <span 
+class="pcrr8t-x-x-109">SimpleDE</span></h4>
+<a 
+ id="dx147-479001"></a>
+<!--l. 97--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">SimpleDE(f,x) </span>tries to find a homogeneous linear differential equation with
+polynomial coefficients for <span 
+class="cmmi-10x-x-109">f </span>with respect to <span 
+class="cmmi-10x-x-109">x</span>. Make sure that <span 
+class="cmmi-10x-x-109">y </span>is not a used
+variable. The setting <span 
+class="pcrr8t-x-x-109">factor df; </span>is recommended to receive a nicer output
+form.
+<!--l. 102--><p class="noindent" >Examples: <span 
+class="pcrr8t-x-x-109">SimpleDE(asin(x)</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">2,x) </span>then results in
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-951">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />df(y,x,3)*(x&#x00A0;&#x00A0;-&#x00A0;1)&#x00A0;+&#x00A0;3*df(y,x,2)*x&#x00A0;+&#x00A0;df(y,x)
+</div>
+<!--l. 106--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">SimpleDE(exp(x</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">(1/3)),x) </span>gives
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-952">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />27*df(y,x,3)*x&#x00A0;&#x00A0;+&#x00A0;54*df(y,x,2)*x&#x00A0;+&#x00A0;6*df(y,x)&#x00A0;-&#x00A0;y
+</div>
+<!--l. 111--><p class="nopar" > and <span 
+class="pcrr8t-x-x-109">SimpleDE(sqrt(2-x</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">2),x) </span>yields
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-953">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />df(y,x)*(x&#x00A0;&#x00A0;-&#x00A0;2)&#x00A0;-&#x00A0;x*y
+</div>
+<!--l. 116--><p class="nopar" > The depth for the search of a differential equation for <span 
+class="pcrr8t-x-x-109">f </span>is controlled by the variable
+<span 
+class="pcrr8t-x-x-109">fps</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">search</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">depth</span>; higher values for <span 
+class="pcrr8t-x-x-109">fps</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">search</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">depth </span>will increase the
+chance to find the solution, but increases the complexity as well. The default
+value for <span 
+class="pcrr8t-x-x-109">fps</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">search</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">depth </span>is 5. For <span 
+class="pcrr8t-x-x-109">FPS(sin(x</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">(1/3)),x)</span>, or
+<span 
+class="pcrr8t-x-x-109">SimpleDE(sin(x</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">^</span></span></span><span 
+class="pcrr8t-x-x-109">(1/3)),x) </span>e.&#x00A0;g., a setting <span 
+class="pcrr8t-x-x-109">fps</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">search</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">_</span></span></span><span 
+class="pcrr8t-x-x-109">depth:=6 </span>is
+necessary.
+<!--l. 126--><p class="noindent" >The output of the FPS package can be influenced by the switch <span 
+class="pcrr8t-x-x-109">tracefps</span>. Setting <span 
+class="pcrr8t-x-x-109">on</span>
+<span 
+class="pcrr8t-x-x-109">tracefps </span>causes various prints of intermediate results.
+<!--l. 130--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.24.4    </span> <a 
+ id="x147-48000016.24.4"></a>Problems in the current version</h4>
+<!--l. 131--><p class="noindent" >The handling of logarithmic singularities is not yet implemented.
+<!--l. 133--><p class="noindent" >The rational type implementation is not yet complete.
+<!--l. 135--><p class="noindent" >The support of special functions <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> will be part of the next version.
+<!--l. 138--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x147-481000"></a>Bibliography</h4>
+<!--l. 138--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XHan"></a>E.&#x00A0;R. Hansen, <span 
+class="ptmri8t-x-x-109">A table of series and products. </span>Prentice-Hall, Englewood
+   Cliffs, NJ, 1975.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoepf:92"></a>Wolfram   Koepf,   <span 
+class="ptmri8t-x-x-109">Power   Series   in   Computer   Algebra</span>,   J.&#x00A0;Symbolic
+   Computation 13 (1992)
+                                                                     
+
+                                                                     
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoepf:93a"></a>Wolfram  Koepf,  <span 
+class="ptmri8t-x-x-109">Examples  for  the  Algorithmic  Calculation  of  Formal</span>
+   <span 
+class="ptmri8t-x-x-109">Puiseux, Laurent and Power series</span>, SIGSAM Bulletin 27, 1993, 20-32.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoepf:93b"></a>Wolfram  Koepf,  <span 
+class="ptmri8t-x-x-109">Algorithmic  development  of  power  series.  </span>In:  Artificial
+   intelligence  and  symbolic  mathematical  computing,  ed.&#x00A0;by  J.&#x00A0;Calmet  and
+   J.&#x00A0;A.&#x00A0;Campbell,  International  Conference  AISMC-1,  Karlsruhe,  Germany,
+   August   1992,   Proceedings,   Lecture   Notes   in   Computer   Science   <span 
+class="ptmb8t-x-x-109">737</span>,
+   Springer-Verlag, Berlin&#8211;Heidelberg, 1993, 195&#8211;213.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKoepf:94"></a>Wolfram  Koepf,  <span 
+class="ptmri8t-x-x-109">Algorithmic  work  with  orthogonal  polynomials  and</span>
+   <span 
+class="ptmri8t-x-x-109">special functions. </span>Konrad-Zuse-Zentrum Berlin (ZIB), Preprint SC 94-5, 1994.
+</p>
+   </div>
+<!--l. 437--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 440--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse115.html" >Up</a></td><td class="clinks"><a 
+href="manualse116.html" >Next</a></td><td class="clinks"><a 
+href="manualse114.html" >Prev</a></td><td class="clinks"><a 
+href="manualse114.html#tailmanualse114.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse115.html" >Front</a></td></tr></table><a 
+ id="tailmanualse115.html"></a>   
+</body></html> 

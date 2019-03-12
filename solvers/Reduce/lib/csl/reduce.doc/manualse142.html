@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>REACTEQN: Support for chemical reaction equation systems</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse142.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse143.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse141.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse141.html#tailmanualse141.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse142.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.51    </span></span> <a 
+ id="x194-78100016.51"></a><span 
+class="ptmr8t-x-x-120">REACTEQN: Support for chemical reaction</span>
+<span 
+class="ptmr8t-x-x-120">equation systems</span></h3>
+<a 
+ id="dx194-781001"></a>
+<a 
+ id="dx194-781002"></a>
+<!--l. 899--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package allows a user to transform chemical reaction systems into ordinary</span>
+<span 
+class="ptmr8t-x-x-120">differential equation systems (ODE) corresponding to the laws of pure mass</span>
+<span 
+class="ptmr8t-x-x-120">action.</span>
+<!--l. 905--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Herbert Melenk.</span>
+<!--l. 2--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">A single reaction equation is an expression of the form</span>
+     <div class="quote">
+     <!--l. 4--><p class="noindent" ><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n1</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s1</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n2</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s2</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+ </span><span 
+class="ptmr8t-x-x-120">&#x2026;</span><span 
+class="pcrr8t-x-x-120">-&#x003E;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n3</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s3</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n4</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s4</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+ </span><span 
+class="ptmr8t-x-x-120">&#x2026;</span></div>
+<!--l. 6--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">or</span>
+     <div class="quote">
+     <!--l. 7--><p class="noindent" ><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n1</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s1</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n2</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s2</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+ </span><span 
+class="ptmr8t-x-x-120">&#x2026;</span><span 
+class="pcrr8t-x-x-120">&#x003C;&#x003E;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n3</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s3</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">n4</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">s4</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">+ </span><span 
+class="ptmr8t-x-x-120">&#x2026;</span></div>
+<!--l. 9--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">where the</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">si</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">are arbitrary names of species (REDUCE symbols) and the</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">ni</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span>
+<span 
+class="ptmr8t-x-x-120">are positive integer numbers. The number 1 can be omitted. The connector </span><span 
+class="pcrr8t-x-x-120">-&#x003E;</span>
+<span 
+class="ptmr8t-x-x-120">describes a one way reaction, while </span><span 
+class="pcrr8t-x-x-120">&#x003C;&#x003E; </span><span 
+class="ptmr8t-x-x-120">describes a forward and backward</span>
+<span 
+class="ptmr8t-x-x-120">reaction.</span>
+<!--l. 14--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">A reaction system is a list of reaction equations, each of them optionally followed</span>
+<span 
+class="ptmr8t-x-x-120">by one or two expressions for the rate constants. A rate constant can a number, a</span>
+<span 
+class="ptmr8t-x-x-120">symbol or an arbitrary REDUCE expression. If a rate constant is missing, an</span>
+<span 
+class="ptmr8t-x-x-120">automatic constant of the form RATE(n) (where n is an integer counter) is</span>
+<span 
+class="ptmr8t-x-x-120">generated. For double reactions the first constant is used for the forward</span>
+<span 
+class="ptmr8t-x-x-120">direction, the second one for the backward direction.</span>
+<!--l. 23--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The names of the species are collected in a list bound to the REDUCE variable</span>
+<span 
+class="ptmr8t-x-x-120">SPECIES. This list is automatically filled during the processing of a reaction</span>
+<span 
+class="ptmr8t-x-x-120">system. The species enter in an order corresponding to their appearance in</span>
+<span 
+class="ptmr8t-x-x-120">the reaction system and the resulting ode&#8217;s will be ordered in the same</span>
+<span 
+class="ptmr8t-x-x-120">manner.</span>
+                                                                     
+
+                                                                     
+<!--l. 29--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If a list of species is preassigned to the variable SPECIES either explicitly or</span>
+<span 
+class="ptmr8t-x-x-120">from previous operations, the given order will be maintained and will dominate</span>
+<span 
+class="ptmr8t-x-x-120">the formatting process. So the ordering of the result can be easily influenced by</span>
+<span 
+class="ptmr8t-x-x-120">the user.</span>
+<!--l. 35--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Syntax:</span>
+<!--l. 37--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">reac2ode {</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">reaction</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">[,</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">rate</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">[,</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">rate</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="ptmr8t-x-x-120">]] [,</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">reaction</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">[,</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">rate</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="ptmr8t-x-x-120">[,</span><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="ptmri8t-x-x-120">rate</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span><span 
+class="ptmr8t-x-x-120">]]] ....</span>
+<span 
+class="ptmr8t-x-x-120">};</span>
+<!--l. 42--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">where two rates are applicable only for </span><span 
+class="pcrr8t-x-x-120">&#x003C;&#x003E; </span><span 
+class="ptmr8t-x-x-120">reactions.</span>
+<!--l. 44--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Result is a system of explicit ordinary differential equations with polynomial</span>
+<span 
+class="ptmr8t-x-x-120">righthand sides. As side effect the following variables are set:</span>
+<!--l. 48--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">lists:</span>
+<!--l. 50--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">rates: list of the rates in the system</span>
+<!--l. 52--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">species: list of the species in the system</span>
+<!--l. 54--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">matrices:</span>
+<!--l. 56--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">inputmat: matrix of the input coefficients</span>
+<!--l. 58--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">outputmat: matrix of the output coefficients</span>
+<!--l. 60--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In the matrices the row number corresponds to the input reaction number, while</span>
+<span 
+class="ptmr8t-x-x-120">the column number corresponds to the species index. Note: if the rates are</span>
+<span 
+class="ptmr8t-x-x-120">numerical values, it will be in most cases appropriate to switch on REDUCE</span>
+<span 
+class="ptmr8t-x-x-120">rounded mode for floating point numbers. That is</span>
+<!--l. 67--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">on rounded;</span>
+<!--l. 69--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Inputmat and outputmat can be used for linear algebra type investigations of the</span>
+<span 
+class="ptmr8t-x-x-120">reaction system. The classical reaction matrix is the difference of these matrices;</span>
+<span 
+class="ptmr8t-x-x-120">however, the two matrices contain more information than their differences</span>
+<span 
+class="ptmr8t-x-x-120">because the appearance of a species on both sides is not reflected by the reaction</span>
+<span 
+class="ptmr8t-x-x-120">matrix.</span>
+<!--l. 76--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">EXAMPLES: This input</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1147">
+%&#x00A0;Example&#x00A0;taken&#x00A0;from&#x00A0;Feinberg&#x00A0;(Chemical&#x00A0;Engineering):
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;species&#x00A0;:=&#x00A0;{A1,A2,A3,A4,A5};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;reac2ode&#x00A0;{&#x00A0;A1&#x00A0;+&#x00A0;A4&#x00A0;&#x003C;&#x003E;&#x00A0;2A1,&#x00A0;rho,&#x00A0;beta,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A1&#x00A0;+&#x00A0;A2&#x00A0;&#x003C;&#x003E;&#x00A0;A3,&#x00A0;gamma,&#x00A0;epsilon,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;&#x003E;&#x00A0;A2&#x00A0;+&#x00A0;A5,&#x00A0;theta,&#x00A0;mue};
+</div>
+<!--l. 86--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">gives the output</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1148">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />{DF(A1,T)=RHO*A1*A4&#x00A0;-&#x00A0;BETA*A1&#x00A0;-&#x00A0;GAMMA*A1*A2&#x00A0;+&#x00A0;EPSILON*A3,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;DF(A2,T)=&#x00A0;-&#x00A0;GAMMA*A1*A2&#x00A0;+&#x00A0;EPSILON*A3&#x00A0;+&#x00A0;THETA*A3&#x00A0;-&#x00A0;MUE*A2*A5,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;DF(A3,T)=GAMMA*A1*A2&#x00A0;-&#x00A0;EPSILON*A3&#x00A0;-&#x00A0;THETA*A3&#x00A0;+&#x00A0;MUE*A2*A5,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;DF(A4,T)=&#x00A0;-&#x00A0;RHO*A1*A4&#x00A0;+&#x00A0;BETA*A1&#x00A0;,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;DF(A5,T)=THETA*A3&#x00A0;-&#x00A0;MUE*A2*A5}
+</div>
+<!--l. 100--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The corresponding matrices are</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1149">
+&#x00A0;inputmat;
+&#x00A0;<br />
+&#x00A0;<br />[&#x00A0;1&#x00A0;0&#x00A0;0&#x00A0;1&#x00A0;0&#x00A0;]
+&#x00A0;<br />[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />[&#x00A0;1&#x00A0;1&#x00A0;0&#x00A0;0&#x00A0;0&#x00A0;]
+&#x00A0;<br />[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />[&#x00A0;0&#x00A0;0&#x00A0;1&#x00A0;0&#x00A0;0&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;outputmat;
+&#x00A0;<br />
+&#x00A0;<br />[&#x00A0;2&#x00A0;0&#x00A0;0&#x00A0;0&#x00A0;0&#x00A0;]
+&#x00A0;<br />[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />[&#x00A0;0&#x00A0;0&#x00A0;1&#x00A0;0&#x00A0;0&#x00A0;]
+&#x00A0;<br />[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />[&#x00A0;0&#x00A0;1&#x00A0;0&#x00A0;0&#x00A0;1&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;computation&#x00A0;of&#x00A0;the&#x00A0;classical&#x00A0;reaction&#x00A0;matrix&#x00A0;as&#x00A0;difference
+&#x00A0;<br />%&#x00A0;of&#x00A0;output&#x00A0;and&#x00A0;input&#x00A0;matrix:
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;reactmat&#x00A0;:=&#x00A0;outputmat-inputmat;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;1&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;0&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />REACTMAT&#x00A0;:=&#x00A0;&#x00A0;[&#x00A0;-1&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;0&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;]
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;[&#x00A0;0&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;0&#x00A0;&#x00A0;&#x00A0;1&#x00A0;]
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Example&#x00A0;with&#x00A0;automatic&#x00A0;generation&#x00A0;of&#x00A0;rate&#x00A0;constants
+&#x00A0;<br />%&#x00A0;and&#x00A0;automatic&#x00A0;extraction&#x00A0;of&#x00A0;species
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;species&#x00A0;:=&#x00A0;{};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;reac2ode&#x00A0;{&#x00A0;A1&#x00A0;+&#x00A0;A4&#x00A0;&#x003C;&#x003E;&#x00A0;2A1,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A1&#x00A0;+&#x00A0;A2&#x00A0;&#x003C;&#x003E;&#x00A0;A3,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a3&#x00A0;&#x003C;&#x003E;&#x00A0;A2&#x00A0;+&#x00A0;A5};
+&#x00A0;<br />
+&#x00A0;<br />new&#x00A0;species:&#x00A0;A1
+&#x00A0;<br />new&#x00A0;species:&#x00A0;A4
+                                                                     
+
+                                                                     
+&#x00A0;<br />new&#x00A0;species:&#x00A0;A3
+&#x00A0;<br />new&#x00A0;species:&#x00A0;A2
+&#x00A0;<br />new&#x00A0;species:&#x00A0;A5
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />{DF(A1,T)=&#x00A0;-&#x00A0;A1&#x00A0;*RATE(2)&#x00A0;+&#x00A0;A1*A4*RATE(1)&#x00A0;-&#x00A0;A1*A2*RATE(3)&#x00A0;+
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;A3*RATE(4),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;DF(A4,T)=A1&#x00A0;*RATE(2)&#x00A0;-&#x00A0;A1*A4*RATE(1),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;DF(A2,T)=&#x00A0;-&#x00A0;A1*A2*RATE(3)&#x00A0;-&#x00A0;A2*A5*RATE(6)&#x00A0;+&#x00A0;A3*RATE(5)&#x00A0;+&#x00A0;A3*RATE(4),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;DF(A3,T)=A1*A2*RATE(3)&#x00A0;+&#x00A0;A2*A5*RATE(6)&#x00A0;-&#x00A0;A3*RATE(5)&#x00A0;-&#x00A0;A3*RATE(4),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;DF(A5,T)=&#x00A0;-&#x00A0;A2*A5*RATE(6)&#x00A0;+&#x00A0;A3*RATE(5)\}
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;Example&#x00A0;with&#x00A0;rates&#x00A0;computed&#x00A0;from&#x00A0;numerical&#x00A0;expressions
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;species&#x00A0;:=&#x00A0;{};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;reac2ode&#x00A0;{&#x00A0;A1&#x00A0;+&#x00A0;A4&#x00A0;&#x003C;&#x003E;&#x00A0;2A1,&#x00A0;17.3*&#x00A0;22.4^1.5,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0.04*&#x00A0;22.4^1.5&#x00A0;};
+&#x00A0;<br />
+&#x00A0;<br />new&#x00A0;species:&#x00A0;A1
+&#x00A0;<br />new&#x00A0;species:&#x00A0;A4
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />{DF(A1,T)=&#x00A0;-&#x00A0;4.24065*A1&#x00A0;+&#x00A0;1834.08*A1*A4,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;DF(A4,T)=4.24065*A1&#x00A0;-&#x00A0;1834.08*A1*A4}
+</div>
+<!--l. 175--><p class="nopar" >
+<!--l. 909--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 911--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse142.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse143.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse141.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse141.html#tailmanualse141.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse142.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse142.html"></a>  
+</body></html> 

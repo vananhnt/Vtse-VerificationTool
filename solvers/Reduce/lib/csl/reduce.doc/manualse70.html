@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SUB Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch11.html#manualse70.html" >Up</a></td><td class="clinks"><a 
+href="manualse71.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse70.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">11.1    </span> <a 
+ id="x86-16200011.1"></a>SUB Operator</h3>
+<a 
+ id="dx86-162001"></a>
+<!--l. 8--><p class="noindent" ><a 
+ id="operator:SUB"></a>
+<!--l. 10--><p class="noindent" >Syntax:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">SUB(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">substitution_list</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN1:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span> <span 
+class="cmr-10x-x-109">: </span><span 
+class="cmmi-10x-x-109">algebraic</span></div>
+<!--l. 14--><p class="noindent" >where <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">substitution_list</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> is a list of one or more equations of the form
+  <div class="syntax">
+  <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VAR:kernel</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="pcrr8t-x-x-109">=</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div>
+<!--l. 19--><p class="noindent" >or a kernel that evaluates to such a list.
+<!--l. 21--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">SUB </span>operator gives the algebraic result of replacing every occurrence of the variable
+<span 
+class="pcrr8t-x-x-109">VAR </span>in the expression <span 
+class="pcrr8t-x-x-109">EXPRN1 </span>by the expression <span 
+class="pcrr8t-x-x-109">EXPRN</span>. Specifically, <span 
+class="pcrr8t-x-x-109">EXPRN1 </span>is first
+evaluated using all available rules. Next the substitutions are made, and finally the
+substituted expression is reevaluated. When more than one variable occurs in the
+substitution list, the substitution is performed by recursively walking down the
+tree representing <span 
+class="pcrr8t-x-x-109">EXPRN1</span>, and replacing every <span 
+class="pcrr8t-x-x-109">VAR </span>found by the appropriate
+<span 
+class="pcrr8t-x-x-109">EXPRN</span>. The <span 
+class="pcrr8t-x-x-109">EXPRN </span>are not themselves searched for any occurrences of the
+various <span 
+class="pcrr8t-x-x-109">VAR</span>s. The trivial case <span 
+class="pcrr8t-x-x-109">SUB(EXPRN1) </span>returns the algebraic value of
+                                                                     
+
+                                                                     
+<span 
+class="pcrr8t-x-x-109">EXPRN1</span>.
+<!--l. 33--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-291">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sub({x=a+y,y=y+1},x^2+y^2)&#x00A0;-&#x003E;&#x00A0;A&#x00A0;&#x00A0;+&#x00A0;2*A*Y&#x00A0;+&#x00A0;2*Y&#x00A0;&#x00A0;+&#x00A0;2*Y&#x00A0;+&#x00A0;1
+</div>
+<!--l. 37--><p class="nopar" > and with <span 
+class="pcrr8t-x-x-109">s := {x=a+y,y=y+1}</span>,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-292">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sub(s,x^2+y^2)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;A&#x00A0;&#x00A0;+&#x00A0;2*A*Y&#x00A0;+&#x00A0;2*Y&#x00A0;&#x00A0;+&#x00A0;2*Y&#x00A0;+&#x00A0;1
+</div>
+<!--l. 42--><p class="nopar" > Note that the global assignments <span 
+class="pcrr8t-x-x-109">x:=a+y</span>, etc., do not take place.
+<!--l. 45--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">EXPRN1 </span>can be any valid algebraic expression whose type is such that a substitution
+process is defined for it (e.g., scalar expressions, lists and matrices). An error will occur
+if an expression of an invalid type for substitution occurs either in <span 
+class="pcrr8t-x-x-109">EXPRN </span>or
+<span 
+class="pcrr8t-x-x-109">EXPRN1</span>.
+<!--l. 50--><p class="noindent" >The braces around the substitution list may also be omitted, as in:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-293">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sub(x=a+y,y=y+1,x^2+y^2)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;A&#x00A0;&#x00A0;+&#x00A0;2*A*Y&#x00A0;+&#x00A0;2*Y&#x00A0;&#x00A0;+&#x00A0;2*Y&#x00A0;+&#x00A0;1
+</div>
+<!--l. 54--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 56--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch11.html#manualse70.html" >Up</a></td><td class="clinks"><a 
+href="manualse71.html" >Next</a></td><td class="clinks"><a 
+href="manualse70.html" >Front</a></td></tr></table><a 
+ id="tailmanualse70.html"></a>  
+</body></html> 

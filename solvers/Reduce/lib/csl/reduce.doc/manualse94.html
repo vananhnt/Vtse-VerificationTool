@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>ARNUM: An algebraic number package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse94.html" >Up</a></td><td class="clinks"><a 
+href="manualse95.html" >Next</a></td><td class="clinks"><a 
+href="manualse93.html" >Prev</a></td><td class="clinks"><a 
+href="manualse93.html#tailmanualse93.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse94.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.3    </span> <a 
+ id="x115-22600016.3"></a>ARNUM: An algebraic number package</h3>
+<a 
+ id="dx115-226001"></a>
+<a 
+ id="dx115-226002"></a>
+<!--l. 113--><p class="noindent" >This package provides facilities for handling algebraic numbers as polynomial
+coefficients in REDUCE calculations. It includes facilities for introducing indeterminates
+to represent algebraic numbers, for calculating splitting fields, and for factoring and
+finding greatest common divisors in such domains.
+<!--l. 119--><p class="noindent" >Author: Eberhard Schrüfer.
+<a 
+ id="dx115-226003"></a>
+<a 
+ id="dx115-226004"></a>
+<!--l. 5--><p class="noindent" >Algebraic numbers are the solutions of an irreducible polynomial over some ground
+domain. <a 
+ id="dx115-226005"></a>The algebraic number <span 
+class="cmmi-10x-x-109">i </span>(imaginary unit), <a 
+ id="dx115-226006"></a>for example, would be defined by the
+polynomial <span 
+class="cmmi-10x-x-109">i</span><sup><span 
+class="cmr-8">2</span></sup> <span 
+class="cmr-10x-x-109">+ 1</span>. The arithmetic of algebraic number <span 
+class="cmmi-10x-x-109">s </span>can be viewed as a polynomial
+arithmetic modulo the defining polynomial.
+<!--l. 11--><p class="noindent" >Given a defining polynomial for an algebraic number <span 
+class="cmmi-10x-x-109">a </span><div class="eqnarray">
+<center class="math-display" >
+<img 
+src="manual81x.png" alt=" n         n-1
+a  + pn- 1a    + ... + p0
+" class="math-display" ></center>
+</div>
+<!--l. 16--><p class="noindent" >All algebraic numbers which can be built up from <span 
+class="cmmi-10x-x-109">a </span>are then of the form: <div class="eqnarray">
+<center class="math-display" >
+                                                                     
+
+                                                                     
+<img 
+src="manual82x.png" alt="rn-1an-1 +  rn- 2an-2 + ... + r0
+" class="math-display" ></center>
+</div>where the <span 
+class="cmmi-10x-x-109">r</span><sub><span 
+class="cmmi-8">j</span></sub>&#8217;s are rational numbers.
+<a 
+ id="dx115-226009"></a>
+<!--l. 23--><p class="noindent" >The operation of addition is defined by <div class="eqnarray">
+<center class="math-display" >
+<img 
+src="manual83x.png" alt="      n- 1        n- 2               n- 1        n- 2
+(rn-1a     + rn-2a     + ...) + (sn-1a    +  sn-2a    +  ...) =
+                    (rn- 1 + sn-1)an-1 + (rn-2 + sn- 2)an- 2 + ...
+" class="math-display" ></center>
+</div>
+<a 
+ id="dx115-226011"></a>
+<!--l. 31--><p class="noindent" >Multiplication of two algebraic numbers can be performed by normal polynomial
+multiplication followed by a reduction of the result with the help of the defining
+polynomial.
+<!--l. 35--><p class="noindent" ><div class="eqnarray">
+<center class="math-display" >
+<img 
+src="manual84x.png" alt="      n-1        n-2               n-1       n- 2
+(rn-1a   + rn- 2a   + ...) &#x00D7;  (sn- 1a    + sn-2a    + ...) =
+      rn-1sn-1a2n-2 + ...modulo an  + pn-1an- 1 + ... +  p0
+                           =   qn-1an-1 +  qn-2an-2 +  ...
+" class="math-display" ></center>
+</div>
+<a 
+ id="dx115-226013"></a>
+                                                                     
+
+                                                                     
+<!--l. 44--><p class="noindent" >Division of two algebraic numbers r and s yields another algebraic number
+q.
+<!--l. 46--><p class="noindent" ><img 
+src="manual85x.png" alt="rs"  class="frac" align="middle"> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">q </span>or <span 
+class="cmmi-10x-x-109">r </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">qs</span>.
+<!--l. 48--><p class="noindent" >The last equation written out explicitly reads
+<!--l. 50--><p class="noindent" ><div class="eqnarray">
+<center class="math-display" >
+<img 
+src="manual86x.png" alt="(rn-1an-1 + rn-2an-2 + ...)
+            n-1        n- 2              n-1        n-2
+  =   (qn- 1a   + qn- 2a    + ...)&#x00D7; (sn-1a    + sn-2a    + ...)
+      modulo(an + pn-1an- 1 + ...)
+  =   (tn-1an- 1 + tn-2an-2 + ...)
+" class="math-display" ></center>
+</div>
+<!--l. 58--><p class="noindent" >The <span 
+class="cmmi-10x-x-109">t</span><sub><span 
+class="cmmi-8">i</span></sub> are linear in the <span 
+class="cmmi-10x-x-109">q</span><sub><span 
+class="cmmi-8">j</span></sub>. Equating equal powers of <span 
+class="cmmi-10x-x-109">a </span>yields a linear system for the
+quotient coefficients <span 
+class="cmmi-10x-x-109">q</span><sub><span 
+class="cmmi-8">j</span></sub>.
+<!--l. 61--><p class="noindent" >With this, all field operations for the algebraic numbers are available. The translation into
+algorithms is straightforward. For an implementation we have to decide on a data
+structure for an algebraic number. We have chosen the representation REDUCE normally
+uses for polynomials, the so-called standard form. Since our polynomials have in general
+rational coefficients, we must allow for a rational number domain inside the algebraic
+number.
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">algebraic number</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>::=
+</td></tr></table>
+<!--l. 69--><p class="noindent" >                   <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:39;" 
+class="tabbing">&#x00A0;        </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">:ar: </span>. <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">univariate polynomial over the rationals</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span></td></tr></table>
+<!--l. 71--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">univariate polynomial over the rationals</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>::=
+</td></tr></table>
+<!--l. 73--><p class="noindent" >            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:39;" 
+class="tabbing">          </td><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">variable</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>.** <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">ldeg</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>.* <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">rational</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>.+ <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">reductum</span> <span 
+class="cmmi-10x-x-109">&#x003E;</span></td></tr></table>
+<!--l. 74--><p class="noindent" >
+                                                                     
+
+                                                                     
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">ldeg</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>::= integer
+</td></tr></table>
+<!--l. 76--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">rational</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>::=
+</td></tr></table>
+<!--l. 78--><p class="noindent" >       <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:39;" 
+class="tabbing">          </td><td  
+class="tabbing"><span 
+class="pcrr8t-x-x-109">:rn: </span>. <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">integer numerator</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>. <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">integer denominator</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>: integer</td></tr></table>
+<!--l. 80--><p class="noindent" >
+<table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">reductum</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>::= <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">univariate polynomial</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>: <span 
+class="cmmi-10x-x-109">&#x003C;</span> <span 
+class="ptmri8t-x-x-109">rational</span> <span 
+class="cmmi-10x-x-109">&#x003E; </span>: nil
+</td></tr></table>
+<!--l. 83--><p class="noindent" >
+<!--l. 85--><p class="noindent" >This representation allows us to use the REDUCE functions for adding and
+multiplying polynomials on the tail of the tagged algebraic number. Also, the
+routines for solving linear equations can easily be used for the calculation of
+quotients. We are still left with the problem of introducing a particular algebraic
+number. In the current version this is done by giving the defining polynomial to the
+statement <span 
+class="ptmb8t-x-x-109">defpoly</span>. The <a 
+ id="dx115-226015"></a> algebraic number sqrt(2), for example, can be introduced
+by
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-407">
+&#x00A0;&#x00A0;&#x00A0;defpoly&#x00A0;sqrt2**2&#x00A0;-&#x00A0;2;
+</div>
+<!--l. 95--><p class="nopar" >
+<!--l. 97--><p class="noindent" >This statement associates a simplification function for the translation of the variable in
+the defining polynomial into its tagged internal form and also generates a power
+reduction rule used by the operations <span 
+class="ptmb8t-x-x-109">times </span>and <span 
+class="ptmb8t-x-x-109">quotient </span>for the reduction of
+their result modulo the defining polynomial. A basis for the representation of
+an algebraic number is also set up by the statement. In the working version,
+the basis is a list of powers of the indeterminate of the defining polynomial
+up to one less then its degree. Experiments with integral bases, however, have
+been very encouraging, and these bases might be available in a later version.
+If the defining polynomial is not monic, it will be made so by an appropriate
+substitution.
+<a 
+ id="x115-226016r1"></a>
+<!--l. 110--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 1</span><a 
+ id="dx115-226017"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-408">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;defpoly&#x00A0;sqrt2**2-2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/(sqrt2+1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sqrt2&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(x**2+2*sqrt2*x+2)/(x+sqrt2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;+&#x00A0;sqrt2
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;gcd;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(x**3+(sqrt2-2)*x**2-(2*sqrt2+3)*x-3*sqrt2)/(x**2-2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(x&#x00A0;&#x00A0;-&#x00A0;2*x&#x00A0;-&#x00A0;3)/(x&#x00A0;-&#x00A0;sqrt2)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;off&#x00A0;gcd;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sqrt(x**2-2*sqrt2*x*y+2*y**2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;abs(x&#x00A0;-&#x00A0;sqrt2*y)
+</div>
+<!--l. 135--><p class="nopar" >
+<!--l. 137--><p class="noindent" >Until now we have dealt with only a single algebraic number. In practice this is not
+sufficient as very often several algebraic numbers appear in an expression. There are two
+possibilities for handling this: one can use multivariate extensions <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> or one can
+construct a defining polynomial that contains all specified extensions. This package
+implements the latter case (the so called primitive representation). The algorithm we use
+for the construction of the primitive element is the same as given by Trager <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. In the
+implementation, multiple extensions can be given as a list of equations to the statement
+<span 
+class="ptmb8t-x-x-109">defpoly</span>, which, among other things, adds the new extension to the previously
+defined one. All algebraic numbers are then expressed in terms of the primitive
+element.
+<a 
+ id="x115-226018r2"></a>
+<!--l. 150--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 2</span><a 
+ id="dx115-226019"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-409">
+&#x00A0;&#x00A0;&#x00A0;defpoly&#x00A0;sqrt2**2-2,cbrt5**3-5;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;***&#x00A0;defining&#x00A0;polynomial&#x00A0;for&#x00A0;primitive&#x00A0;element:
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;a1&#x00A0;&#x00A0;-&#x00A0;6*a1&#x00A0;&#x00A0;-&#x00A0;10*a1&#x00A0;&#x00A0;+&#x00A0;12*a1&#x00A0;&#x00A0;-&#x00A0;60*a1&#x00A0;+&#x00A0;17
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;sqrt2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;5&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;48/1187*a1&#x00A0;&#x00A0;+&#x00A0;45/1187*a1&#x00A0;&#x00A0;-&#x00A0;320/1187*a1&#x00A0;&#x00A0;-&#x00A0;780/1187*a1&#x00A0;&#x00A0;+
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;735/1187*a1&#x00A0;-&#x00A0;1820/1187
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;sqrt2**2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 171--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 173--><p class="noindent" >We can provide factorization of polynomials over the algebraic number domain by using
+Trager&#8217;s algorithm. The polynomial to be factored is first mapped to a polynomial over
+the integers by computing the norm of the polynomial, which is the resultant with respect
+to the primitive element of the polynomial and the defining polynomial. After factoring
+over the integers, the factors over the algebraic number field are recovered by GCD
+calculations.
+<a 
+ id="x115-226020r3"></a>
+<!--l. 181--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 3</span><a 
+ id="dx115-226021"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-410">
+&#x00A0;&#x00A0;&#x00A0;defpoly&#x00A0;a**2-5;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;on&#x00A0;factor;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x**2&#x00A0;+&#x00A0;x&#x00A0;-&#x00A0;1;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(x&#x00A0;+&#x00A0;(1/2*a&#x00A0;+&#x00A0;1/2))*(x&#x00A0;-&#x00A0;(1/2*a&#x00A0;-&#x00A0;1/2))
+</div>
+<!--l. 191--><p class="nopar" > <a 
+ id="dx115-226022"></a> We have also incorporated a function <span 
+class="ptmb8t-x-x-109">split_field </span>for the calculation of a primitive
+element of minimal degree for which a given polynomial splits into linear factors. The
+algorithm as described in Trager&#8217;s article is essentially a repeated primitive element
+calculation.
+<a 
+ id="x115-226023r4"></a>
+<!--l. 198--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 4</span><a 
+ id="dx115-226024"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-411">
+&#x00A0;&#x00A0;&#x00A0;split_field(x**3-3*x+7);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;***&#x00A0;Splitting&#x00A0;field&#x00A0;is&#x00A0;generated&#x00A0;by:
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;a2&#x00A0;&#x00A0;-&#x00A0;18*a2&#x00A0;&#x00A0;+&#x00A0;81*a2&#x00A0;&#x00A0;+&#x00A0;1215
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{1/126*a2&#x00A0;&#x00A0;-&#x00A0;5/42*a2&#x00A0;&#x00A0;-&#x00A0;1/2*a2&#x00A0;+&#x00A0;2/7,
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;(1/63*a2&#x00A0;&#x00A0;-&#x00A0;5/21*a2&#x00A0;&#x00A0;+&#x00A0;4/7),
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;1/126*a2&#x00A0;&#x00A0;-&#x00A0;5/42*a2&#x00A0;&#x00A0;+&#x00A0;1/2*a2&#x00A0;+&#x00A0;2/7}
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;for&#x00A0;each&#x00A0;j&#x00A0;in&#x00A0;ws&#x00A0;product&#x00A0;(x-j);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;-&#x00A0;3*x&#x00A0;+&#x00A0;7
+</div>
+<!--l. 226--><p class="nopar" >
+<!--l. 228--><p class="noindent" >A more complete description can be found in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>.
+<h4 class="likesubsectionHead"><a 
+ id="x115-227000"></a>Bibliography</h4>
+<!--l. 230--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XBradford:86"></a>R.&#x00A0;J. Bradford, A.&#x00A0;C. Hearn, J.&#x00A0;A. Padget, and E.&#x00A0;Schrüfer.   Enlarging
+                                                                     
+
+                                                                     
+   the REDUCE domain of computation.  In <span 
+class="ptmri8t-x-x-109">Proceedings of SYMSAC &#8217;86</span>, pages
+   100&#8211;106, 1986.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XDavenport:81"></a>James&#x00A0;Harold Davenport.   On the integration of algebraic functions.   In
+   <span 
+class="ptmri8t-x-x-109">Lecture Notes in Computer Science</span>, volume 102. Springer Verlag, 1981.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XTrager:76"></a>B.&#x00A0;M. Trager.   Algebraic factoring and rational function integration.   In
+   <span 
+class="ptmri8t-x-x-109">Proceedings of SYMSAC &#8217;76</span>, pages 196&#8211;208, 1976.
+</p>
+   </div>
+<!--l. 123--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 125--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse94.html" >Up</a></td><td class="clinks"><a 
+href="manualse95.html" >Next</a></td><td class="clinks"><a 
+href="manualse93.html" >Prev</a></td><td class="clinks"><a 
+href="manualse93.html#tailmanualse93.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse94.html" >Front</a></td></tr></table><a 
+ id="tailmanualse94.html"></a>   
+</body></html> 

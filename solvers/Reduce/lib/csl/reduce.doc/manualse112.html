@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DUMMY: Canonical form of expressions with dummy variables</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse112.html" >Up</a></td><td class="clinks"><a 
+href="manualse113.html" >Next</a></td><td class="clinks"><a 
+href="manualse111.html" >Prev</a></td><td class="clinks"><a 
+href="manualse111.html#tailmanualse111.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse112.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.21    </span> <a 
+ id="x144-41700016.21"></a>DUMMY: Canonical form of expressions with dummy
+variables</h3>
+<a 
+ id="dx144-417001"></a>
+<a 
+ id="dx144-417002"></a>
+<!--l. 378--><p class="noindent" >This package allows a user to find the canonical form of expressions involving dummy
+variables. In that way, the simplification of polynomial expressions can be fully
+done. The indeterminates are general operator objects endowed with as few
+properties as possible. In that way the package may be used in a large spectrum of
+applications.
+<!--l. 384--><p class="noindent" >Author: Alain Dresse.
+<!--l. 3--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.21.1    </span> <a 
+ id="x144-41800016.21.1"></a>Introduction</h4>
+<!--l. 4--><p class="noindent" >The possibility to handle dummy variables and to manipulate dummy summations are
+important features in many applications. In particular, in theoretical physics, the
+possibility to represent complicated expressions concisely and to realize simplifications
+efficiently depend on both capabilities. However, when dummy variables are
+used, there are many more ways to express a given mathematical objects since
+the names of dummy variables may be chosen almost arbitrarily. Therefore,
+from the point of view of computer algebra the simplification problem is much
+more difficult. Given a definite ordering, one is, at least, to find a representation
+which is independent of the names chosen for the dummy variables otherwise,
+simplifications are impossible. The package does handle any number of dummy
+variables and summations present in expressions which are arbitrary multivariate
+polynomials and which have operator objects eventually dependent on one (or several)
+dummy variable(s) as some of their indeterminates. These operators have the
+same generality as the one existing in REDUCE. They can be noncommutative,
+anticommutative or commutative. They can have any kind of symmetry property. Such
+polynomials will be called in the following <span 
+class="ptmri8t-x-x-109">dummy </span>polynomials. Any monomial of
+this kind will be called <span 
+class="ptmri8t-x-x-109">dummy </span>monomial. For any such object, the package
+allows to find a well defined <span 
+class="ptmri8t-x-x-109">normal form </span>in one-to-one correspondance with
+it.
+<!--l. 29--><p class="noindent" >In section 2, the convention for writing dummy summations is explained and the
+                                                                     
+
+                                                                     
+available declarations to introduce or suppress dummy variables are given.
+<!--l. 33--><p class="noindent" >In section 3, the commands allowing to give various algebraic properties to the operators
+are described.
+<!--l. 36--><p class="noindent" >In section 4, the use of the function <span 
+class="pcrr8t-x-x-109">CANONICAL </span>is explained and illustrated.
+<!--l. 39--><p class="noindent" >In section 5, a fairly complete set of references is given.
+<!--l. 41--><p class="noindent" >The use of DUMMY requires that the package <span 
+class="pcrr8t-x-x-109">ASSIST </span>version 2.2 be available. This is
+the case when <span 
+class="pcrr8t-x-x-109">REDUCE 3.6 </span>is used. When loaded, ASSIST is automatically
+loaded.
+<h4 class="subsectionHead"><span class="titlemark">16.21.2    </span> <a 
+ id="x144-41900016.21.2"></a>Dummy variables and dummy summations</h4>
+<!--l. 46--><p class="noindent" >A dummy variable (let us name it <span 
+class="cmmi-10x-x-109">dv</span>) is an identifier which runs from the integer <span 
+class="cmmi-10x-x-109">i</span><sub><span 
+class="cmr-8">1</span></sub> to
+another integer <span 
+class="cmmi-10x-x-109">i</span><sub><span 
+class="cmr-8">2</span></sub>. To the extent that no definite space is defined, <span 
+class="cmmi-10x-x-109">i</span><sub><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-10x-x-109">i</span><sub><span 
+class="cmr-8">2</span></sub> are assumed to
+be some integers which are the <span 
+class="ptmri8t-x-x-109">same </span>for all dummy variables.
+<!--l. 51--><p class="noindent" >If <span 
+class="cmmi-10x-x-109">f </span>is any <span 
+class="pcrr8t-x-x-109">REDUCE </span>operator, then the simplest dummy summation associated to <span 
+class="cmmi-10x-x-109">dv </span>is the
+sum
+<center class="math-display" >
+<img 
+src="manual224x.png" alt="  i2
+ &#x2211;   f(dv)
+
+dv=i1 " class="math-display" ></center> and
+is simply written as
+<center class="math-display" >
+<img 
+src="manual225x.png" alt="f(dv). " class="math-display" ></center> No
+other rules govern the implicit summations. <span 
+class="cmmi-10x-x-109">dv </span>can appear as many times we want since
+                                                                     
+
+                                                                     
+the operator <span 
+class="cmmi-10x-x-109">f </span>may depend on an arbitrary number of variables. So, the package is
+potentially applicable to many contexts. For instance, it is possible to add rules of the
+kind one encounters in tensor calculus.
+<!--l. 66--><p class="noindent" >Obviously, there are as many ways we want to express the <span 
+class="ptmri8t-x-x-109">same </span>quantity. If the
+name of another dummy variable is <span 
+class="cmmi-10x-x-109">dum </span>then the previous expression is written
+as
+<center class="math-display" >
+<img 
+src="manual226x.png" alt="   i2
+  &#x2211;    f(dum )
+dum=i
+      1 " class="math-display" ></center> and
+the computer algebra system should be able to find that the expression
+<center class="math-display" >
+<img 
+src="manual227x.png" alt="f (dv)- f(dum ); " class="math-display" ></center> is
+equal to <span 
+class="cmr-10x-x-109">0</span>. A very special case which is <span 
+class="ptmri8t-x-x-109">allowed </span>is when <span 
+class="cmmi-10x-x-109">f </span>is the identity operator.
+So, a generic dummy polynomial will be a sum of dummy monomials of the
+kind
+<center class="math-display" >
+<img 
+src="manual228x.png" alt="&#x220F;
+    ci *fi(dv1,...,dvki,fr1,...,f rli)
+  i " class="math-display" ></center>
+                                                                     
+
+                                                                     
+where <span 
+class="cmmi-10x-x-109">dv</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">, </span>are dummy variables while <span 
+class="cmmi-10x-x-109">fr</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">, </span>are ordinary or free variables.
+<a 
+ id="dx144-419001"></a>
+<a 
+ id="dx144-419002"></a>
+<!--l. 88--><p class="noindent" >To declare dummy variables, two commands are available:
+     <ul class="itemize1">
+     <li class="itemize">i.
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-853">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dummy_base&#x00A0;&#x003C;idp&#x003E;;
+</div>
+     <!--l. 93--><p class="nopar" > where <span 
+class="pcrr8t-x-x-109">idp </span>is the name of any unassigned identifier.
+     </li>
+     <li class="itemize">ii.
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-854">
+     &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dummy_names&#x00A0;&#x003C;d&#x003E;,&#x003C;dp&#x003E;,&#x003C;dpp&#x003E;&#x00A0;....;
+</div>
+     <!--l. 98--><p class="nopar" ></li></ul>
+<!--l. 100--><p class="noindent" >The first one declares <span 
+class="cmmi-10x-x-109">idp</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,idp</span><sub><span 
+class="cmmi-8">n</span></sub> as dummy variables i.e. all variables of the form
+<span 
+class="cmmi-10x-x-109">idp</span><sub><span 
+class="cmmi-8">xxx</span></sub> where <span 
+class="cmmi-10x-x-109">xxx </span>is a number will be dummy variables, such as <span 
+class="cmmi-10x-x-109">idp</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,idp</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span><span 
+class="cmmi-10x-x-109">,idp</span><sub><span 
+class="cmr-8">23</span></sub>.
+The second one gives special names for dummy variables. All other identifiers which
+may appear are assumed to be <span 
+class="ptmri8t-x-x-109">free</span>. However, there is a restriction: named and base
+dummy variables cannot be declared <span 
+class="ptmri8t-x-x-109">simultaneously</span>. The above declarations are
+mutually <span 
+class="ptmri8t-x-x-109">exclusive</span>. Here is an example showing that:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-855">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dummy_base&#x00A0;dv;&#x00A0;==&#x003E;&#x00A0;dv
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;dummy&#x00A0;indices&#x00A0;are&#x00A0;dv1,&#x00A0;dv2,&#x00A0;dv3,&#x00A0;...
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dummy_names&#x00A0;i,j,k;&#x00A0;==&#x003E;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*****&#x00A0;The&#x00A0;created&#x00A0;dummy&#x00A0;base&#x00A0;dv&#x00A0;must&#x00A0;be&#x00A0;cleared
+</div>
+<!--l. 118--><p class="nopar" > When this is done, an expression like
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-856">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;op(dv1)*sin(dv2)*abs(i)*op(dv2)$
+</div>
+<!--l. 122--><p class="nopar" > means a sum over <span 
+class="cmmi-10x-x-109">dv</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,dv</span><sub><span 
+class="cmr-8">2</span></sub>. To clear the dummy base, and to create the dummy names
+<span 
+class="cmmi-10x-x-109">i,j,k </span>one is to do <a 
+ id="dx144-419003"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-857">
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;clear_dummy_base;&#x00A0;==&#x003E;&#x00A0;t
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;dummy_names&#x00A0;i,j,k;&#x00A0;==&#x003E;&#x00A0;t
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;%&#x00A0;dummy&#x00A0;indices&#x00A0;are&#x00A0;i,j,k.
+</div>
+<!--l. 134--><p class="nopar" > When this is done, an expression like
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-858">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;op(dv1)*sin(dv2)*abs(x)*op(i)^3*op(dv2)$
+</div>
+<!--l. 138--><p class="nopar" > means a sum over <span 
+class="cmmi-10x-x-109">i</span>. One should keep in mind that every application of the above
+commands erases the previous ones. It is also possible to display the declared dummy
+names using <span 
+class="pcrr8t-x-x-109">SHOW_DUMMY_NAMES</span>:<a 
+ id="dx144-419004"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-859">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;show_dummy_names();&#x00A0;==&#x003E;&#x00A0;{i,j,k}
+</div>
+<!--l. 146--><p class="nopar" > To suppress <span 
+class="ptmri8t-x-x-109">all </span>dummy variables one can enter
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-860">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;clear_dummy_names;&#x00A0;clear_dummy_base;
+</div>
+<!--l. 150--><p class="nopar" >
+<!--l. 152--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.21.3    </span> <a 
+ id="x144-42000016.21.3"></a>The Operators and their Properties</h4>
+<!--l. 153--><p class="noindent" >All dummy variables <span 
+class="ptmri8t-x-x-109">should appear at first level </span>as arguments of operators. For instance,
+if <span 
+class="cmmi-10x-x-109">i </span>and <span 
+class="cmmi-10x-x-109">j </span>are dummy variables, the expression
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-861">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;rr:=&#x00A0;&#x00A0;op(i,j)-op(j,j)
+</div>
+<!--l. 158--><p class="nopar" > is allowed but the expression
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-862">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;op(i,op(j))&#x00A0;-&#x00A0;op(j,op(j))
+</div>
+<!--l. 162--><p class="nopar" > is <span 
+class="ptmri8t-x-x-109">not </span>allowed. This is because dummy variables are not detected if they appear at a
+level larger than 1. Apart from that there is no restrictions. Operators may be
+commutative, noncommutative or even anticommutative. Therefore they may be
+elements of an algebra, they may be tensors, spinors, grassman variables, etc. <span 
+class="cmmi-10x-x-109">&#x2026;</span> By
+default they are assumed to be <span 
+class="ptmri8t-x-x-109">commutative </span>and without symmetry properties.
+The <span 
+class="pcrr8t-x-x-109">REDUCE </span>command <span 
+class="pcrr8t-x-x-109">NONCOM </span>is taken into account and, in addition, the
+command
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-863">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;anticom&#x00A0;at1,&#x00A0;at2;
+</div>
+<!--l. 174--><p class="nopar" > makes the operators <span 
+class="cmmi-10x-x-109">at</span><sub><span 
+class="cmr-8">1</span></sub> and <span 
+class="cmmi-10x-x-109">at</span><sub><span 
+class="cmr-8">2</span></sub> anticommutative.
+<!--l. 177--><p class="noindent" >One can also give symmetry properties to them. The usual declarations <span 
+class="pcrr8t-x-x-109">SYMMETRIC</span>
+<span 
+class="pcrr8t-x-x-109">and ANTISYMMETRIC </span>are taken into account. Moreover and most important they can
+be endowed with a <span 
+class="ptmri8t-x-x-109">partial </span>symmetry through the command <span 
+class="pcrr8t-x-x-109">SYMTREE</span>.<a 
+ id="dx144-420001"></a> Here are three
+illustrative examples for the <span 
+class="cmmi-10x-x-109">r </span>operator:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-864">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symtree&#x00A0;(r,{!+,&#x00A0;1,&#x00A0;2,&#x00A0;3,&#x00A0;4});
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symtree&#x00A0;(r,{!*,&#x00A0;1,&#x00A0;{!-,&#x00A0;2,&#x00A0;3,&#x00A0;4}});
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symtree&#x00A0;(r,&#x00A0;{!+,&#x00A0;{!-,&#x00A0;1,&#x00A0;2},&#x00A0;{!-,&#x00A0;3,&#x00A0;4}});
+</div>
+<!--l. 186--><p class="nopar" > The first one makes the operator (fully) symmetric. The second one declares it
+antisymmetric with respect to the three last indices. The symbols !*,&#x00A0;!+&#x00A0;and !-&#x00A0;at the
+beginning of each list mean that the operator has no symmetry, is symmetric or is
+antisymmetric with respect to the indices inside the list. Notice that the indices are not
+denoted by their names but merely by their natural order of appearance. 1 means the first
+written argument of <span 
+class="cmmi-10x-x-109">r</span>, 2 its second argument etc. The first command is equivalent to the
+declaration <span 
+class="pcrr8t-x-x-109">symmetric </span>except that the number of indices of <span 
+class="cmmi-10x-x-109">r </span>is <span 
+class="ptmri8t-x-x-109">restricted </span>to 4 i.e. to
+the number declared in <span 
+class="pcrr8t-x-x-109">SYMTREE</span>. In the second example <span 
+class="cmmi-10x-x-109">r </span>is stated to have no
+symmetry with respect to the first index and is declared to be antisymmetric with
+respect to the three last indices. In the third example, <span 
+class="cmmi-10x-x-109">r </span>is made symmetric with
+respect to the interchange of the pairs of indices 1,2 and 3,4 respectively and
+is made antisymmetric separately within the pairs <span 
+class="cmr-10x-x-109">(1</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">2) </span>and <span 
+class="cmr-10x-x-109">(3</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">4)</span>. It is the
+symmetry of the Riemann tensor. The anticommutation property and the various
+symmetry properties may be suppressed by the commands <span 
+class="pcrr8t-x-x-109">REMANTICOM </span>and
+<span 
+class="pcrr8t-x-x-109">REMSYM</span>. To eliminate partial symmetry properties one can also use <span 
+class="pcrr8t-x-x-109">SYMTREE</span>
+itself. For example, assuming that <span 
+class="cmmi-10x-x-109">r </span>has the Riemann symmetry, to eliminate it
+do<a 
+ id="dx144-420002"></a><a 
+ id="dx144-420003"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-865">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symtree&#x00A0;(r,{!*,&#x00A0;1,&#x00A0;2,&#x00A0;3,&#x00A0;4});
+</div>
+<!--l. 211--><p class="nopar" > However, notice that the number of indices remains fixed and equal to 4 while with
+<span 
+class="pcrr8t-x-x-109">REMSYM </span>it becomes again arbitrary.
+<h4 class="subsectionHead"><span class="titlemark">16.21.4    </span> <a 
+ id="x144-42100016.21.4"></a>The Function <span 
+class="pcrr8t-x-x-109">CANONICAL</span></h4>
+<a 
+ id="dx144-421001"></a>
+<!--l. 216--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">CANONICAL </span>is the most important functionality of the package. It can be applied on any
+polynomial whether it is a dummy polynommial or not. It returns a normal form uniquely
+determined from the current ordering of the system. If the polynomial does not contain
+any dummy index, it is rewriten taking into account the various operator properties or
+symmetries described above. For instance,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-866">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;symtree&#x00A0;(r,&#x00A0;{!+,&#x00A0;{!-,&#x00A0;1,&#x00A0;2},&#x00A0;{!-,&#x00A0;3,&#x00A0;4}});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;aa:=r(x3,x4,x2,x1)$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;canonical&#x00A0;aa;&#x00A0;==&#x003E;&#x00A0;&#x00A0;-&#x00A0;r(x1,x2,x3,x4).
+</div>
+<!--l. 230--><p class="nopar" > If it contains dummy indices, <span 
+class="pcrr8t-x-x-109">CANONICAL </span>takes also into account the various
+dummy summations, makes the relevant simplifications, eventually rename
+the dummy indices and returns the resulting normal form. Here is a simple
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-867">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;operator&#x00A0;at1,at2;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;anticom&#x00A0;at1,at2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;dummy_names&#x00A0;i,j,k;&#x00A0;==&#x003E;&#x00A0;t
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;show_dummy_names();&#x00A0;==&#x003E;&#x00A0;{i,j,k}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;rr:=at1(i)*at2(k)&#x00A0;-at2(k)*at1(i)$
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;canonical&#x00A0;rr;&#x00A0;=&#x003E;&#x00A0;2*at1(i)*at2(j)
+</div>
+<!--l. 247--><p class="nopar" > It is important to notice, in the above example, that in addition to the summations over
+indices <span 
+class="cmmi-10x-x-109">i </span>and <span 
+class="cmmi-10x-x-109">k</span>, and of the anticommutativity property of the operators, <span 
+class="pcrr8t-x-x-109">canonical </span>has
+replaced the index <span 
+class="cmmi-10x-x-109">k </span>by the index <span 
+class="cmmi-10x-x-109">j</span>. This substitution is essential to get full
+simplification. Several other examples are given in the test file and, there, the output of
+<span 
+class="pcrr8t-x-x-109">CANONICAL </span>is explained.
+<!--l. 255--><p class="noindent" >As stated in the previous section, the dependence of operators on dummy indices is
+limited to <span 
+class="ptmri8t-x-x-109">first </span>level. An erroneous result will be generated if it is not the case as the
+subsequent example illustrates:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-868">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;operator&#x00A0;op;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;dummy_names&#x00A0;i,j;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;rr:=op(i,op(j))-op(j,op(j))$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;canonical&#x00A0;rr;&#x00A0;==&#x003E;&#x00A0;0
+</div>
+<!--l. 267--><p class="nopar" > Zero is obtained because, in the second term, <span 
+class="pcrr8t-x-x-109">CANONICAL </span>has replaced <span 
+class="cmmi-10x-x-109">j </span>by <span 
+class="cmmi-10x-x-109">i </span>but has
+left <span 
+class="cmmi-10x-x-109">op</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">j</span><span 
+class="cmr-10x-x-109">) </span>unchanged because it <span 
+class="ptmri8t-x-x-109">does not see </span>the index <span 
+class="cmmi-10x-x-109">j </span>which is inside. This
+fact has also the consequence that it is unable to simplify correctly (or at all)
+expressions which contain some derivatives. For instance (<span 
+class="cmmi-10x-x-109">i </span>and <span 
+class="cmmi-10x-x-109">j </span>are dummy
+indices):
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-869">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;aa:=df(op(x,i),x)&#x00A0;-df(op(x,j),x)$
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;canonical&#x00A0;aa;&#x00A0;==&#x003E;&#x00A0;df(op(x,i),x)&#x00A0;-&#x00A0;df(op(x,j),x)
+</div>
+<!--l. 278--><p class="nopar" > instead of zero. A second limitation is that <span 
+class="pcrr8t-x-x-109">CANONICAL </span>does not add anything to
+the problem of simplifications when side relations (like Bianchi identities) are
+present.
+<h4 class="subsectionHead"><span class="titlemark">16.21.5    </span> <a 
+ id="x144-42200016.21.5"></a>Bibliography</h4>
+<!--l. 284--><p class="noindent" >
+     <dl class="list1"><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 285--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Butler,  G.  and  Lam,  C.  W.  H.</span>,  &#8220;A  general  backtrack  algorithm  for  the
+     isomorphism  problem  of  combinatorial  objects",  J.  Symb.  Comput.  vol.1,
+     (1985) p.363-381.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 289--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Butler,  G.  and  Cannon,  J.  J.</span>,  &#8220;Computing  in  Permutation  and  Matrix
+     Groups I: Normal Closure, Commutator Subgroups, Series", Math. Comp.
+     vol.39, number 60, (1982), p. 663-670.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 293--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Butler, G.</span>, &#8220;Computing in Permutation and Matrix Groups II: Backtrack
+     Algorithm", Math. Comp. vol.39, number 160, (1982), p.671-680.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 297--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Leon, J.S.</span>, &#8220;On an Algorithm for Finding a Base and a Strong Generating
+     Setfor a Group Given by Generating Permutations&#8221;, Math. Comp. vol.35,
+     (1980), p941-974.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 301--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Leon,   J.   S.</span>,   &#8220;Computing   Automorphism   Groups   of   Combinatorial
+     Objects&#8221;,  Proc.  LMS  Symp.  on  Computational  Group  Theory,  Durham,
+     England, editor: Atkinson, M. D., Academic Press, London, (1984).
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+                                                                     
+
+                                                                     
+     <!--l. 306--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Leon, J. S.</span>, &#8220;Permutation Group Algorithms Based on Partitions, I: Theory
+     and Algorithms&#8221;, J.Symb. Comput.vol.12, (1991) p. 533-583.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 309--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Linton,  Stephen  Q.</span>,  &#8220;Double  Coset  Enumeration&#8221;,  J.  Symb.  Comput.,
+     vol.12, (1991) p. 415-426.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 311--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">McKay,                          B.                          D.</span>,                          &#8220;Computing
+     Automorphism Groups and Canonical Labellings of Graphs&#8221;, Proc. Internat.
+     Conf. on Combinatorial Theory, Lecture Notes in Mathematics&#8220; vol. 686,
+     (1977), p.223-232, Springer-Verlag, Berlin.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 316--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Rodionov,  A.  Ya.  and  Taranov,  A.  Yu.</span>,  &#8220;Combinatorial  Aspects  of
+     Simplification of Algebraic Expression&#8221;, Proceedings of Eurocal 87, Lecture
+     Notes in Comp. Sci., vol. 378, (1989), p. 192.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 320--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Sims, C. C.</span>, &#8220;Determining the Conjugacy Classes of a Permutation Group&#8221;,
+     Computers in Algebra and Number Theory, SIAM-AMS Proceedings, vol.
+     4, (1971), p. 191-195, editor G. Birckhoff and M. Hall Jr., Amer. Math. Soc..
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 325--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Sims, C. C.</span>, &#8220;Computation with Permutation Groups&#8221;, Proc. of the Second
+     Symposium  on  Symbolic  and  Algebraic  Manipulation,  (1971),  p.  23-28,
+     editor S. R. Petrick, Assoc. Comput. Mach., New York.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 330--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Burnel A., Caprasse H., Dresse A.</span>, &#8220; Computing the BRST operator used
+     in Quantization of Gauge Theories&#8221; IJMPC vol. 3, (1993) p.321-35.
+     </dd><dt class="list">
+   - </dt><dd 
+class="list">
+     <!--l. 333--><p class="noindent" >&#x00A0;<span 
+class="ptmb8t-x-x-109">Caprasse H.</span>, &#8220;BRST charge and Poisson Algebras&#8221;, Discrete Mathematics
+     and Theoretical Computer Science, Special Issue: Lie Computations papers,
+     http://dmtcs.thomsonscience.com, (1997).</dd></dl>
+<!--l. 388--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 390--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse112.html" >Up</a></td><td class="clinks"><a 
+href="manualse113.html" >Next</a></td><td class="clinks"><a 
+href="manualse111.html" >Prev</a></td><td class="clinks"><a 
+href="manualse111.html#tailmanualse111.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse112.html" >Front</a></td></tr></table><a 
+ id="tailmanualse112.html"></a>   
+</body></html> 

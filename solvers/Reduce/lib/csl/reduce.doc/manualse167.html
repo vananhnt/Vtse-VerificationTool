@@ -1,0 +1,2643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>ZEILBERG: Indefinite and definite summation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse167.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse168.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse166.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse166.html#tailmanualse166.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse167.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76    </span></span> <a 
+ id="x223-98600016.76"></a><span 
+class="ptmr8t-x-x-120">ZEILBERG: Indefinite and definite</span>
+<span 
+class="ptmr8t-x-x-120">summation</span></h3>
+<a 
+ id="dx223-986001"></a>
+<a 
+ id="dx223-986002"></a>
+<!--l. 1419--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package is a careful implementation of the Gosper and Zeilberger</span>
+<span 
+class="ptmr8t-x-x-120">algorithms for indefinite and definite summation of hypergeometric terms,</span>
+<span 
+class="ptmr8t-x-x-120">respectively. Extensions of these algorithms are also included that are valid for</span>
+<span 
+class="ptmr8t-x-x-120">ratios of products of powers, factorials, </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms, binomial coefficients,</span>
+<span 
+class="ptmr8t-x-x-120">and shifted factorials that are rational-linear in their arguments.</span>
+<!--l. 1426--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Authors: Gregor St</span><span 
+class="ptmr8t-x-x-120">ölting and Wolfram Koepf.</span>
+<!--l. 8--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.1    </span></span> <a 
+ id="x223-98700016.76.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<!--l. 10--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package is a careful implementation of the</span>
+<span 
+class="ptmr8t-x-x-120">Gosper</span><span class="footnote-mark"><a 
+href="manual224.html#fn36x16"><sup class="textsuperscript">36</sup></a></span><a 
+ id="x223-987001f36"></a> 
+<span 
+class="ptmr8t-x-x-120">and Zeilberger algorithms for indefinite, and definite summation of hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">terms, respectively. Further, extensions of these algorithms given by the first</span>
+<span 
+class="ptmr8t-x-x-120">author are covered. An expression </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">is called a </span><span 
+class="ptmro8t-x-x-120">hypergeometric term </span><span 
+class="ptmr8t-x-x-120">(or </span><span 
+class="ptmro8t-x-x-120">closed</span>
+<span 
+class="ptmro8t-x-x-120">form</span><span 
+class="ptmr8t-x-x-120">), if </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">&#x2215;a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> <span 
+class="ptmr8t-x-x-120">is a rational function with respect to </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">. Typical hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">terms are ratios of products of powers, factorials, </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms, binomial</span>
+<span 
+class="ptmr8t-x-x-120">coefficients, and shifted factorials (Pochhammer symbols) that are integer-linear</span>
+<span 
+class="ptmr8t-x-x-120">in their arguments.</span>
+<!--l. 22--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The extensions of Gosper&#8217;s and Zeilberger&#8217;s algorithm mentioned in particular</span>
+<span 
+class="ptmr8t-x-x-120">are valid for ratios of products of powers, factorials, </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms,</span>
+<span 
+class="ptmr8t-x-x-120">binomial coefficients, and shifted factorials that are rational-linear in their</span>
+<span 
+class="ptmr8t-x-x-120">arguments.</span>
+                                                                     
+
+                                                                     
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.2    </span></span> <a 
+ id="x223-98800016.76.2"></a><span 
+class="ptmr8t-x-x-120">Gosper Algorithm</span></h4>
+<!--l. 29--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The Gosper algorithm </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span> <span 
+class="ptmr8t-x-x-120">is a </span><span 
+class="ptmro8t-x-x-120">decision procedure</span><span 
+class="ptmr8t-x-x-120">, that decides by algebraic</span>
+<span 
+class="ptmr8t-x-x-120">calculations whether or not a given hypergeometric term </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">has a hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">term antidifference </span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="ptmr8t-x-x-120">, i.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">with rational </span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">&#x2215;g</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub><span 
+class="ptmr8t-x-x-120">, and returns</span>
+<span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">if the procedure is successful, in which case we call </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmro8t-x-x-120">Gosper-summable</span><span 
+class="ptmr8t-x-x-120">.</span>
+<span 
+class="ptmr8t-x-x-120">Otherwise </span><span 
+class="ptmro8t-x-x-120">no hypergeometric term antidifference exists</span><span 
+class="ptmr8t-x-x-120">. Therefore if the Gosper</span>
+<span 
+class="ptmr8t-x-x-120">algorithm does not return a closed form solution, it has </span><span 
+class="ptmro8t-x-x-120">proved </span><span 
+class="ptmr8t-x-x-120">that no such</span>
+<span 
+class="ptmr8t-x-x-120">solution exists, an information that may be quite useful and important. The</span>
+<span 
+class="ptmr8t-x-x-120">Gosper algorithm is the discrete analogue of the Risch algorithm for integration</span>
+<span 
+class="ptmr8t-x-x-120">in terms of elementary functions.</span>
+<!--l. 42--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Any antidifference is uniquely determined up to a constant, and is denoted</span>
+<span 
+class="ptmr8t-x-x-120">by</span>
+<center class="math-display" >
+<img 
+src="manual598x.png" alt="     &#x2211;
+g  =      a .
+ k      k  k
+" class="math-display" ></center>
+<!--l. 47--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Finding </span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">given </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">is called </span><span 
+class="ptmro8t-x-x-120">indefinite summation</span><span 
+class="ptmr8t-x-x-120">. The antidifference operator</span>
+<span 
+class="cmr-12">&#x03A3; </span><span 
+class="ptmr8t-x-x-120">is the inverse of the downward difference operator </span><span 
+class="cmsy-10x-x-120">&#x2207;</span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub><span 
+class="ptmr8t-x-x-120">. There is</span>
+<span 
+class="ptmr8t-x-x-120">an analogous summation theory corresponding to the upward difference operator</span>
+<span 
+class="cmr-12">&#x0394;</span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">+1</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 54--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In case, an antidifference </span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">of </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">is known, any sum</span>
+<center class="math-display" >
+<img 
+src="manual599x.png" alt="&#x2211;n
+    ak = gn - gm- 1
+k=m
+" class="math-display" ></center>
+<!--l. 57--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">can be easily calculated by an evaluation of </span><span 
+class="cmmi-12">g </span><span 
+class="ptmr8t-x-x-120">at the boundary points like in the</span>
+<span 
+class="ptmr8t-x-x-120">integration case. Note, however, that the sum</span>
+<table 
+class="equation"><tr><td><a 
+ id="x223-988001r96"></a>
+<center class="math-display" >
+<img 
+src="manual600x.png" alt="&#x2211;n  (n )
+
+k=0  k
+" class="math-display" ></center></td><td class="equation-label"><span 
+class="ptmr8t-x-x-120">(16.96)</span></td></tr></table>
+<!--l. 63--><p class="nopar" >
+<span 
+class="ptmr8t-x-x-120">e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;g.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;is not of this type since the summand</span> <img 
+src="manual601x.png" alt="( )
+ nk" > <span 
+class="ptmr8t-x-x-120">depends on the upper boundary</span>
+<span 
+class="ptmr8t-x-x-120">point </span><span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">explicitly. This is an example of a definite sum that we consider in the</span>
+<span 
+class="ptmr8t-x-x-120">next section.</span>
+<!--l. 69--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Our package supports the input of powers (</span><span 
+class="pcrr8t-x-x-120">a</span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">^</span></span></span><span 
+class="pcrr8t-x-x-120">k)</span><span 
+class="ptmr8t-x-x-120">, factorials (</span><span 
+class="pcrr8t-x-x-120">factorial(k)</span><span 
+class="ptmr8t-x-x-120">), </span><span 
+class="cmr-12">&#x0393;</span>
+<span 
+class="ptmr8t-x-x-120">function terms (</span><span 
+class="pcrr8t-x-x-120">gamma(a)</span><span 
+class="ptmr8t-x-x-120">), binomial coefficients (</span><span 
+class="pcrr8t-x-x-120">binomial(n,k)</span><span 
+class="ptmr8t-x-x-120">), shifted</span>
+<span 
+class="ptmr8t-x-x-120">factorials (</span><span 
+class="pcrr8t-x-x-120">pochhammer(a,k)</span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">a </span><span 
+class="cmr-12">+ 1)</span><img 
+src="manual602x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">a </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1) = &#x0393;(</span><span 
+class="cmmi-12">a </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">k</span><span 
+class="cmr-12">)</span><span 
+class="cmmi-12">&#x2215;</span><span 
+class="cmr-12">&#x0393;(</span><span 
+class="cmmi-12">a</span><span 
+class="cmr-12">)</span><span 
+class="ptmr8t-x-x-120">),</span>
+<span 
+class="ptmr8t-x-x-120">and partially products (</span><span 
+class="pcrr8t-x-x-120">prod(f,k,k1,k2)</span><span 
+class="ptmr8t-x-x-120">). It takes care of the necessary</span>
+<span 
+class="ptmr8t-x-x-120">simplifications, and therefore provides you with the solution of the decision</span>
+<span 
+class="ptmr8t-x-x-120">problem as long as the memory or time requirements are not too high for the</span>
+<span 
+class="ptmr8t-x-x-120">computer used.</span>
+<!--l. 80--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.3    </span></span> <a 
+ id="x223-98900016.76.3"></a><span 
+class="ptmr8t-x-x-120">Zeilberger Algorithm</span></h4>
+<!--l. 82--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The (fast) Zeilberger algorithm </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">&#8211;</span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span> <span 
+class="ptmr8t-x-x-120">deals with the </span><span 
+class="ptmro8t-x-x-120">definite summation </span><span 
+class="ptmr8t-x-x-120">of</span>
+<span 
+class="ptmr8t-x-x-120">hypergeometric terms. Zeilberger&#8217;s paradigm is to find (and return) a linear</span>
+<span 
+class="ptmr8t-x-x-120">homogeneous recurrence equation with polynomial coefficients (called</span>
+<span 
+class="ptmro8t-x-x-120">holonomic equation</span><span 
+class="ptmr8t-x-x-120">) for an </span><span 
+class="ptmro8t-x-x-120">infinite sum</span>
+<center class="math-display" >
+<img 
+src="manual603x.png" alt="        &#x2211;&#x221E;
+s(n) =       f(n,k ),
+
+       k=- &#x221E;
+" class="math-display" ></center>
+<!--l. 90--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">the summation to be understood over all integers </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">, if </span><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">is a hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">term with respect to both </span><span 
+class="cmmi-12">k </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">. The existence of a holonomic recurrence</span>
+<span 
+class="ptmr8t-x-x-120">equation for </span><span 
+class="cmmi-12">s</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">is then generally guaranteed.</span>
+<!--l. 96--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If one is lucky, and the resulting recurrence equation is of first order</span>
+<center class="math-display" >
+<img 
+src="manual604x.png" alt="p(n)s(n - 1) + q(n)s(n) = 0     (p,qpolynomials),
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 101--><p class="nopar" > <span 
+class="cmmi-12">s</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">turns out to be a hypergeometric term, and a closed form solution can be</span>
+<span 
+class="ptmr8t-x-x-120">easily established using a suitable initial value, and is represented by a ratio</span>
+<span 
+class="ptmr8t-x-x-120">of Pochhammer or </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms if the polynomials </span><span 
+class="cmmi-12">p</span><span 
+class="ptmr8t-x-x-120">, and </span><span 
+class="cmmi-12">q </span><span 
+class="ptmr8t-x-x-120">can be</span>
+<span 
+class="ptmr8t-x-x-120">factored.</span>
+<!--l. 107--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Zeilberger&#8217;s algorithm does not guarantee to find the holonomic equation of</span>
+<span 
+class="ptmr8t-x-x-120">lowest order, but often it does.</span>
+<!--l. 110--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the resulting recurrence equation has order larger than one, this information</span>
+<span 
+class="ptmr8t-x-x-120">can be used for identification purposes: Any other expression satisfying the same</span>
+<span 
+class="ptmr8t-x-x-120">recurrence equation, and the same initial values, represents the same</span>
+<span 
+class="ptmr8t-x-x-120">function.</span>
+<!--l. 115--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Note that a </span><span 
+class="ptmro8t-x-x-120">definite sum</span> <span 
+class="cmex-10x-x-120">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">=</span><span 
+class="cmmi-8">m</span><sub><span 
+class="cmr-6">1</span></sub></sub><sup><span 
+class="cmmi-8">m</span><sub><span 
+class="cmr-6">2</span></sub></sup><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">is an infinite sum if </span><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">) = 0 </span><span 
+class="ptmr8t-x-x-120">for</span>
+<span 
+class="cmmi-12">k &#x003C; m</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmmi-12">k &#x003E; m</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="ptmr8t-x-x-120">. This is often the case, an example of which is the sum</span>
+<span 
+class="ptmr8t-x-x-120">(</span><a 
+href="#x223-988001r96"><span 
+class="ptmr8t-x-x-120">16.96</span><!--tex4ht:ref: eq:nchoosek --></a><span 
+class="ptmr8t-x-x-120">) considered above, for which the hypergeometric recurrence equation</span>
+<span 
+class="cmr-12">2</span><span 
+class="cmmi-12">s</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1) </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">s</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n</span><span 
+class="cmr-12">) = 0 </span><span 
+class="ptmr8t-x-x-120">is generated by Zeilberger&#8217;s algorithm, leading to the</span>
+<span 
+class="ptmr8t-x-x-120">closed form solution </span><span 
+class="cmmi-12">s</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n</span><span 
+class="cmr-12">) = 2</span><sup><span 
+class="cmmi-8">n</span></sup><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 122--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Definite summation is trivial if the corresponding indefinite sum is</span>
+<span 
+class="ptmr8t-x-x-120">Gosper-summable analogously to the fact that definite integration is trivial as</span>
+<span 
+class="ptmr8t-x-x-120">soon as an elementary antiderivative is known. If this is not the case, the</span>
+<span 
+class="ptmr8t-x-x-120">situation is much more difficult, and it is therefore quite remarkable and</span>
+<span 
+class="ptmr8t-x-x-120">non-obvious that Zeilberger&#8217;s method is just a clever application of Gosper&#8217;s</span>
+<span 
+class="ptmr8t-x-x-120">algorithm.</span>
+<!--l. 129--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Our implementation is mainly based on </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span> <span 
+class="ptmr8t-x-x-120">and </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">. More examples can be</span>
+<span 
+class="ptmr8t-x-x-120">found in </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, and </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span> <span 
+class="ptmr8t-x-x-120">many of which are contained in the test file</span>
+<span 
+class="pcrr8t-x-x-120">zeilberg.tst</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 134--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.4    </span></span> <a 
+ id="x223-99000016.76.4"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">GOSPER</span></h4>
+<!--l. 136--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The ZEILBERG package must be loaded by:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1316">
+1:&#x00A0;load&#x00A0;zeilberg;
+</div>
+<!--l. 141--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">gosper </span><span 
+class="ptmr8t-x-x-120">operator</span><a 
+ id="dx223-990001"></a> <span 
+class="ptmr8t-x-x-120">is an implementation of the Gosper algorithm.</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">gosper(a,k) </span><span 
+class="ptmr8t-x-x-120">determines a closed form antidifference. If it does</span>
+     <span 
+class="ptmr8t-x-x-120">not return a closed form solution, then a closed form solution does not</span>
+     <span 
+class="ptmr8t-x-x-120">exist.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">gosper(a,k,m,n) </span><span 
+class="ptmr8t-x-x-120">determines</span>
+     <center class="math-display" >
+     <img 
+src="manual605x.png" alt="&#x2211; n
+    ak
+k=m
+     " class="math-display" ></center>
+     <!--l. 153--><p class="nopar" >  <span 
+class="ptmr8t-x-x-120">using  Gosper&#8217;s  algorithm.  This  is  only  successful  if  Gosper&#8217;s</span>
+     <span 
+class="ptmr8t-x-x-120">algorithm applies.</span></li></ul>
+<!--l. 157--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1317">
+2:&#x00A0;gosper((-1)^(k+1)*(4*k+1)*factorial(2*k)/
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(factorial(k)*4^k*(2*k-1)*factorial(k+1)),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;(&#x00A0;-&#x00A0;1)&#x00A0;*factorial(2*k)
+&#x00A0;<br />------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;2*k
+&#x00A0;<br />&#x00A0;2&#x00A0;&#x00A0;&#x00A0;*factorial(k&#x00A0;+&#x00A0;1)*factorial(k)
+</div>
+<!--l. 169--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">This solves a problem given in SIAM Review (</span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, Problem 94&#8211;2) where it was</span>
+<span 
+class="ptmr8t-x-x-120">asked to determine the infinite sum</span>
+<center class="math-display" >
+<img 
+src="manual606x.png" alt="                         &#x2211;n  (- 1)k+1(4k + 1)(2k - 1)!!
+S =  lim  Sn,       Sn =      ----k--------------------,
+    n&#x2192; &#x221E;                 k=1    2 (2k - 1 )(k + 1)!
+" class="math-display" ></center>
+<!--l. 180--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">(</span><span 
+class="cmr-12">(2</span><span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1)!! = 1 </span><span 
+class="cmsy-10x-x-120">&#x22C5; </span><span 
+class="cmr-12">3</span><img 
+src="manual607x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmr-12">(2</span><span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1) =</span> <img 
+src="manual608x.png" alt="(2k)!
+2kk!"  class="frac" align="middle"><span 
+class="ptmr8t-x-x-120">). The above calculation shows that the</span>
+<span 
+class="ptmr8t-x-x-120">summand is Gosper-summable, and the limit </span><span 
+class="cmmi-12">S </span><span 
+class="cmr-12">= 1 </span><span 
+class="ptmr8t-x-x-120">is easily established using</span>
+<span 
+class="ptmr8t-x-x-120">Stirling&#8217;s formula.</span>
+<!--l. 185--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The implementation solves further deep and difficult problems some examples of</span>
+<span 
+class="ptmr8t-x-x-120">which are:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1318">
+3:&#x00A0;&#x00A0;gosper(sub(n=n+1,binomial(n,k)^2/binomial(2*n,n))-
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;binomial(n,k)^2/binomial(2*n,n),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />((binomial(n&#x00A0;+&#x00A0;1,k)&#x00A0;*binomial(2*n,n)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;-&#x00A0;binomial(2*(n&#x00A0;+&#x00A0;1),n&#x00A0;+&#x00A0;1)*binomial(n,k)&#x00A0;)*(2*k&#x00A0;-&#x00A0;3*n&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;*(k&#x00A0;-&#x00A0;n&#x00A0;-&#x00A0;1)&#x00A0;)/((2*(2*(n&#x00A0;+&#x00A0;1)&#x00A0;-&#x00A0;k)*(2*n&#x00A0;+&#x00A0;1)*k&#x00A0;-&#x00A0;3*n&#x00A0;&#x00A0;-&#x00A0;7*n&#x00A0;&#x00A0;-&#x00A0;5*n
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;1)*binomial(2*(n&#x00A0;+&#x00A0;1),n&#x00A0;+&#x00A0;1)*binomial(2*n,n))
+&#x00A0;<br />
+&#x00A0;<br />4:&#x00A0;gosper(binomial(k,n),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;(k&#x00A0;+&#x00A0;1)*binomial(k,n)
+&#x00A0;<br />-----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;+&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />5:&#x00A0;gosper((-25+15*k+18*k^2-2*k^3-k^4)/
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;(-23+479*k+613*k^2+137*k^3+53*k^4+5*k^5+k^6),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;(2*k&#x00A0;&#x00A0;-&#x00A0;15*k&#x00A0;+&#x00A0;8)*k
+&#x00A0;<br />----------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;23*(k&#x00A0;&#x00A0;+&#x00A0;4*k&#x00A0;&#x00A0;+&#x00A0;27*k&#x00A0;+&#x00A0;23)
+</div>
+<!--l. 218--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The Gosper algorithm is not capable to give antidifferences depending on the</span>
+<span 
+class="ptmr8t-x-x-120">harmonic numbers</span>
+<center class="math-display" >
+<img 
+src="manual609x.png" alt="      &#x2211; k
+Hk :=     1-,
+       j=1 j
+" class="math-display" ></center>
+<!--l. 225--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;g.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmex-10x-x-120">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">H</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmr-12">= (</span><span 
+class="cmmi-12">k </span><span 
+class="cmr-12">+ 1)(</span><span 
+class="cmmi-12">H</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">+1</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1)</span><span 
+class="ptmr8t-x-x-120">, but, is able to give a proof, instead, for the</span>
+<span 
+class="ptmr8t-x-x-120">fact that </span><span 
+class="cmmi-12">H</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">does not possess a closed form evaluation:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1319">
+6:&#x00A0;gosper(1/k,k);
+&#x00A0;<br />
+&#x00A0;<br />*****&#x00A0;Gosper&#x00A0;algorithm:&#x00A0;no&#x00A0;closed&#x00A0;form&#x00A0;solution&#x00A0;exists
+</div>
+<!--l. 234--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The following code gives the solution to a summation problem proposed in</span>
+<span 
+class="ptmr8t-x-x-120">Gosper&#8217;s original paper </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">. Let</span>
+<center class="math-display" >
+<img 
+src="manual610x.png" alt="     &#x220F;k                                &#x220F;k
+fk =    (a + bj + cj2)    and     gk =    (e + bj + cj2).
+     j=1                               j=1
+" class="math-display" ></center>
+<!--l. 243--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Then a closed form solution for</span>
+<center class="math-display" >
+<img 
+src="manual611x.png" alt="&#x2211;
+     fk--1
+    k gk
+" class="math-display" ></center>
+<!--l. 247--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">is found by the definitions</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1320">
+7:&#x00A0;operator&#x00A0;ff,gg$
+&#x00A0;<br />
+&#x00A0;<br />8:&#x00A0;let&#x00A0;{ff(~k+~m)&#x00A0;=&#x003E;&#x00A0;ff(k+m-1)*(c*(k+m)^2+b*(k+m)+a)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;(fixp(m)&#x00A0;and&#x00A0;m&#x003E;0),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;ff(~k+~m)&#x00A0;=&#x003E;&#x00A0;ff(k+m+1)/(c*(k+m+1)^2+b*(k+m+1)+a)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;(fixp(m)&#x00A0;and&#x00A0;m&#x003C;0)}$
+&#x00A0;<br />
+&#x00A0;<br />9:&#x00A0;let&#x00A0;{gg(~k+~m)&#x00A0;=&#x003E;&#x00A0;gg(k+m-1)*(c*(k+m)^2+b*(k+m)+e)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;(fixp(m)&#x00A0;and&#x00A0;m&#x003E;0),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;gg(~k+~m)&#x00A0;=&#x003E;&#x00A0;gg(k+m+1)/(c*(k+m+1)^2+b*(k+m+1)+e)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;(fixp(m)&#x00A0;and&#x00A0;m&#x003C;0)}$
+</div>
+<!--l. 263--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and the calculation</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1321">
+10:&#x00A0;gosper(ff(k-1)/gg(k),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ff(k)
+&#x00A0;<br />---------------
+&#x00A0;<br />&#x00A0;(a&#x00A0;-&#x00A0;e)*gg(k)
+&#x00A0;<br />
+&#x00A0;<br />11:&#x00A0;clear&#x00A0;ff,gg$
+</div>
+<!--l. 276--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Similarly closed form solutions of</span> <span 
+class="cmex-10x-x-120">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span></sub><img 
+src="manual612x.png" alt="fk-m--
+ gk"  class="frac" align="middle"> <span 
+class="ptmr8t-x-x-120">for positive integers </span><span 
+class="cmmi-12">m </span><span 
+class="ptmr8t-x-x-120">can be</span>
+<span 
+class="ptmr8t-x-x-120">obtained, as well as of</span> <span 
+class="cmex-10x-x-120">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span></sub><img 
+src="manual613x.png" alt="fk-1
+ gk"  class="frac" align="middle"> <span 
+class="ptmr8t-x-x-120">for</span>
+<center class="math-display" >
+<img 
+src="manual614x.png" alt="     &#x220F;k                                     &#x220F;k
+fk =    (a + bj + cj2 + dj3)     and    gk =    (e + bj + cj2 + dj3)
+     j=1                                     j=1
+" class="math-display" ></center>
+<!--l. 285--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and for analogous expressions of higher degree polynomials.</span>
+<!--l. 288--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.5    </span></span> <a 
+ id="x223-99100016.76.5"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">EXTENDED_GOSPER</span></h4>
+<a 
+ id="dx223-991001"></a>
+<!--l. 290--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">extended_gosper </span><span 
+class="ptmr8t-x-x-120">operator is an implementation of an extended version</span>
+<span 
+class="ptmr8t-x-x-120">of Gosper&#8217;s algorithm given by Koepf </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">.</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">extended_gosper(a,k) </span><span 
+class="ptmr8t-x-x-120">determines an antidifference </span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">of </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub>
+     <span 
+class="ptmr8t-x-x-120">whenever there is a number </span><span 
+class="cmmi-12">m </span><span 
+class="ptmr8t-x-x-120">such that </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">m</span></sub> <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="ptmr8t-x-x-120">, and </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">is</span>
+     <span 
+class="ptmr8t-x-x-120">an </span><span 
+class="cmmi-12">m</span><span 
+class="ptmro8t-x-x-120">-fold hypergeometric term</span><span 
+class="ptmr8t-x-x-120">, i.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;e.</span>
+     <center class="math-display" >
+     <img 
+src="manual615x.png" alt="hk &#x2215;hk-m   is a rational function with respect to k.
+     " class="math-display" ></center>
+     <!--l. 299--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">If it does not return a solution, then such a solution does not exist.</span>
+                                                                     
+
+                                                                     
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">extended_gosper(a,k,m) </span><span 
+class="ptmr8t-x-x-120">determines an </span><span 
+class="cmmi-12">m</span><span 
+class="ptmro8t-x-x-120">-fold antidifference</span>
+     <span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">of </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="ptmr8t-x-x-120">, i.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmmi-12">h</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">m</span></sub>  <span 
+class="cmr-12">= </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="ptmr8t-x-x-120">, if it is an </span><span 
+class="cmmi-12">m</span><span 
+class="ptmr8t-x-x-120">-fold hypergeometric</span>
+     <span 
+class="ptmr8t-x-x-120">term.</span></li></ul>
+<!--l. 306--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1322">
+12:&#x00A0;extended_gosper(binomial(k/2,n),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;-&#x00A0;1
+&#x00A0;<br />&#x00A0;(k&#x00A0;+&#x00A0;2)*binomial(---,n)&#x00A0;+&#x00A0;(k&#x00A0;+&#x00A0;1)*binomial(-------,n)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />-------------------------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*(n&#x00A0;+&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />13:&#x00A0;extended_gosper(k*factorial(k/7),k,7);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k
+&#x00A0;<br />(k&#x00A0;+&#x00A0;7)*factorial(---)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;7
+</div>
+<!--l. 323--><p class="nopar" >
+<!--l. 326--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.6    </span></span> <a 
+ id="x223-99200016.76.6"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">SUMRECURSION</span></h4>
+<a 
+ id="dx223-992001"></a>
+<!--l. 329--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">sumrecursion </span><span 
+class="ptmr8t-x-x-120">operator is an implementation of the (fast) Zeilberger</span>
+<span 
+class="ptmr8t-x-x-120">algorithm.</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">sumrecursion(f,k,n) </span><span 
+class="ptmr8t-x-x-120">determines   a   holonomic   recurrence</span>
+     <span 
+class="ptmr8t-x-x-120">equation for</span>
+     <center class="math-display" >
+     <img 
+src="manual616x.png" alt="           &#x2211;&#x221E;
+sum (n ) =      f(n,k )
+          k= -&#x221E;
+     " class="math-display" ></center>
+     <!--l. 337--><p class="nopar" >  <span 
+class="ptmr8t-x-x-120">with   respect   to   </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">,   applying   </span><span 
+class="pcrr8t-x-x-120">extended_sumrecursion </span><span 
+class="ptmr8t-x-x-120">if</span>
+     <span 
+class="ptmr8t-x-x-120">necessary, see §</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+href="#x223-99300016.76.7"><span 
+class="ptmr8t-x-x-120">16.76.7</span><!--tex4ht:ref: sec:EXTENDED_SUMRECURSION --></a><span 
+class="ptmr8t-x-x-120">. The resulting expression equals zero.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">sumrecursion(f,k,n,j) </span><span 
+class="ptmr8t-x-x-120">searches for a holonomic recurrence</span>
+     <span 
+class="ptmr8t-x-x-120">equation            of            order            </span><span 
+class="cmmi-12">j</span><span 
+class="ptmr8t-x-x-120">.            This            operator</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">does not use </span><span 
+class="pcrr8t-x-x-120">extended_sumrecursion </span><span 
+class="ptmr8t-x-x-120">automatically. Note that</span>
+     <span 
+class="ptmr8t-x-x-120">if </span><span 
+class="cmmi-12">j </span><span 
+class="ptmr8t-x-x-120">is too large, the recurrence equation may not be unique, and only</span>
+     <span 
+class="ptmr8t-x-x-120">one particular solution is returned.</span></li></ul>
+<!--l. 349--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">A  simple  example  deals  with  Equation</span>
+<span 
+class="ptmr8t-x-x-120">(</span><a 
+href="#x223-988001r96"><span 
+class="ptmr8t-x-x-120">16.96</span><!--tex4ht:ref: eq:nchoosek --></a><span 
+class="ptmr8t-x-x-120">)</span><span class="footnote-mark"><a 
+href="manual225.html#fn37x16"><sup class="textsuperscript">37</sup></a></span><a 
+ id="x223-992002f37"></a> 
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1323">
+14:&#x00A0;sumrecursion(binomial(n,k),k,n);
+&#x00A0;<br />
+&#x00A0;<br />2*sum(n&#x00A0;-&#x00A0;1)&#x00A0;-&#x00A0;sum(n)
+</div>
+<!--l. 358--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">The whole </span><span 
+class="ptmro8t-x-x-120">hypergeometric database </span><span 
+class="ptmr8t-x-x-120">of the </span><span 
+class="ptmro8t-x-x-120">Vandermonde, Gauß, Kummer,</span>
+<span 
+class="ptmro8t-x-x-120">Saalsch</span><span 
+class="ptmro8t-x-x-120">ütz, Dixon, Clausen </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="ptmro8t-x-x-120">Dougall identities </span><span 
+class="ptmr8t-x-x-120">(see </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">), and many more</span>
+<span 
+class="ptmr8t-x-x-120">identities (see e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;g.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">), can be obtained using </span><span 
+class="pcrr8t-x-x-120">sumrecursion</span><span 
+class="ptmr8t-x-x-120">. As examples,</span>
+<span 
+class="ptmr8t-x-x-120">we consider the difficult cases of Clausen and Dougall:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1324">
+15:&#x00A0;summand:=factorial(a+k-1)*factorial(b+k-1)/(factorial(k)*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(-1/2+a+b+k))*factorial(a+n-k-1)*factorial(b+n-k-1)/
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(factorial(n-k)*factorial(-1/2+a+b+n-k))$
+&#x00A0;<br />
+&#x00A0;<br />16:&#x00A0;sumrecursion(summand,k,n);
+&#x00A0;<br />
+&#x00A0;<br />(2*a&#x00A0;+&#x00A0;2*b&#x00A0;+&#x00A0;2*n&#x00A0;-&#x00A0;1)*(2*a&#x00A0;+&#x00A0;2*b&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*sum(n)*n
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;-&#x00A0;2*(2*a&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*(a&#x00A0;+&#x00A0;b&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*(2*b&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*sum(n&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />17:&#x00A0;summand:=pochhammer(d,k)*pochhammer(1+d/2,k)*pochhammer(d+b-a,k)*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pochhammer(d+c-a,k)*pochhammer(1+a-b-c,k)*pochhammer(n+a,k)*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pochhammer(-n,k)/(factorial(k)*pochhammer(d/2,k)*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pochhammer(1+a-b,k)*pochhammer(1+a-c,k)*pochhammer(b+c+d-a,k)*
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;pochhammer(1+d-a-n,k)*pochhammer(1+d+n,k))$
+&#x00A0;<br />
+&#x00A0;<br />18:&#x00A0;sumrecursion(summand,k,n);
+&#x00A0;<br />
+&#x00A0;<br />(2*a&#x00A0;-&#x00A0;b&#x00A0;-&#x00A0;c&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;n)*(b&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*(c&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*(d&#x00A0;+&#x00A0;n)*sum(n&#x00A0;-&#x00A0;1)&#x00A0;+
+&#x00A0;<br />
+&#x00A0;<br />(a&#x00A0;-&#x00A0;b&#x00A0;-&#x00A0;c&#x00A0;-&#x00A0;d&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;1)*(a&#x00A0;-&#x00A0;b&#x00A0;+&#x00A0;n)*(a&#x00A0;-&#x00A0;c&#x00A0;+&#x00A0;n)*(a&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />*sum(n)
+</div>
+<!--l. 391--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">corresponding to the statements</span>
+<center class="math-display" >
+<img 
+src="manual617x.png" alt="    (                                    | )
+ F          a,b,1&#x2215;2 - a - b - n,- n      ||1   = (2a)n(a-+-b)n(2b)n
+4 3     1&#x2215;2 + a + b,1 - a - n,1 - b - n  |      (2a + 2b)n(a)n(b)n
+" class="math-display" ></center>
+<!--l. 410--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and</span>
+<center class="math-display" >
+<img 
+src="manual618x.png" alt="    (       d,1 + d&#x2215;2,d + b - a,d + c - a,1 + a - b - c,n + a, - n    ||  )
+7F6                                                                   || 1
+        d&#x2215;2,1 + a - b,1 + a - c,b + c + d - a,1 + d - a - n,1 + d + n
+" class="math-display" ></center>
+<!--l. 426--><p class="nopar" >
+                                                                     
+
+                                                                     
+<center class="math-display" >
+<img 
+src="manual619x.png" alt="=  -----(d-+-1)n(b)n(c)n(1 +-2a --b --c---d)n-----
+   (a - d)n(1 + a - b)n (1 + a - c)n(b + c + d - a )n
+" class="math-display" ></center>
+<!--l. 430--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">(compare next section), respectively.</span>
+<!--l. 433--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Other applications of the Zeilberger algorithm are connected with the verification</span>
+<span 
+class="ptmr8t-x-x-120">of identities. To prove the identity</span>
+<center class="math-display" >
+<img 
+src="manual620x.png" alt="&#x2211;n  (n )3   &#x2211; n (n )2 (2k )
+          =                ,
+k=0   k      k=0   k     n
+" class="math-display" ></center>
+<!--l. 442--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;g., we may prove that both sums satisfy the same recurrence equation</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1325">
+19:&#x00A0;sumrecursion(binomial(n,k)^3,k,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />(7*n&#x00A0;&#x00A0;-&#x00A0;7*n&#x00A0;+&#x00A0;2)*sum(n&#x00A0;-&#x00A0;1)&#x00A0;+&#x00A0;8*(n&#x00A0;-&#x00A0;1)&#x00A0;*sum(n&#x00A0;-&#x00A0;2)&#x00A0;-&#x00A0;sum(n)*n
+&#x00A0;<br />
+&#x00A0;<br />20:&#x00A0;sumrecursion(binomial(n,k)^2*binomial(2*k,n),k,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />(7*n&#x00A0;&#x00A0;-&#x00A0;7*n&#x00A0;+&#x00A0;2)*sum(n&#x00A0;-&#x00A0;1)&#x00A0;+&#x00A0;8*(n&#x00A0;-&#x00A0;1)&#x00A0;*sum(n&#x00A0;-&#x00A0;2)&#x00A0;-&#x00A0;sum(n)*n
+</div>
+<!--l. 456--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and finally check the initial conditions:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1326">
+21:&#x00A0;sub(n=0,k=0,binomial(n,k)^3);
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />22:&#x00A0;sub(n=0,k=0,binomial(n,k)^2*binomial(2*k,n));
+&#x00A0;<br />
+&#x00A0;<br />1
+&#x00A0;<br />
+&#x00A0;<br />23:&#x00A0;sub(n=1,k=0,binomial(n,k)^3)+sub(n=1,k=1,binomial(n,k)^3);
+&#x00A0;<br />
+&#x00A0;<br />2
+&#x00A0;<br />
+&#x00A0;<br />24:&#x00A0;sub(n=1,k=0,binomial(n,k)^2*binomial(2*k,n))+
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;sub(n=1,k=1,binomial(n,k)^2*binomial(2*k,n));
+&#x00A0;<br />
+&#x00A0;<br />2
+</div>
+<!--l. 478--><p class="nopar" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.7    </span></span> <a 
+ id="x223-99300016.76.7"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">EXTENDED_SUMRECURSION</span></h4>
+<a 
+ id="dx223-993001"></a>
+<!--l. 485--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The </span><span 
+class="pcrr8t-x-x-120">extended_sumrecursion </span><span 
+class="ptmr8t-x-x-120">operator is an implementation of an</span>
+<span 
+class="ptmr8t-x-x-120">extension of the (fast) Zeilberger algorithm given by Koepf </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">.</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">extended_sumrecursion(f,k,n,m,l)       </span><span 
+class="ptmr8t-x-x-120">determines</span>
+     <span 
+class="ptmr8t-x-x-120">a  holonomic  recurrence  equation  for</span>  <span 
+class="cmmi-12">sum</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n</span><span 
+class="cmr-12">)</span>  <span 
+class="cmr-12">=</span>  <span 
+class="cmex-10x-x-120">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">=</span><span 
+class="cmsy-8">-&#x221E;</span></sub><sup><span 
+class="cmsy-8">&#x221E;</span></sup><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">)</span>
+     <span 
+class="ptmr8t-x-x-120">with respect to </span><span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">if </span><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">is an </span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">m,l</span><span 
+class="cmr-12">)</span><span 
+class="ptmro8t-x-x-120">-fold hypergeometric term </span><span 
+class="ptmr8t-x-x-120">with</span>
+     <span 
+class="ptmr8t-x-x-120">respect to </span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">)</span><span 
+class="ptmr8t-x-x-120">, i.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span>
+     <center class="math-display" >
+     <img 
+src="manual621x.png" alt="  F (n,k )            F (n, k)
+------------  and   -----------
+F (n - m, k)        F (n,k - l)
+     " class="math-display" ></center>
+     <!--l. 500--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">are  rational  functions  with  respect  to  both  </span><span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">and  </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">.  The  resulting</span>
+     <span 
+class="ptmr8t-x-x-120">expression equals zero.</span>
+     </li>
+                                                                     
+
+                                                                     
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">sumrecursion(f,k,n)                      </span><span 
+class="ptmr8t-x-x-120">invokes</span>
+     <span 
+class="pcrr8t-x-x-120">extended_sumrecursion(f,k,n,m,l) </span><span 
+class="ptmr8t-x-x-120">with suitable values</span>
+     <span 
+class="cmmi-12">m </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="cmmi-12">l</span><span 
+class="ptmr8t-x-x-120">, and covers therefore the extended algorithm completely.</span></li></ul>
+<!--l. 508--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1327">
+25:&#x00A0;extended_sumrecursion(binomial(n,k)*binomial(k/2,n),k,n,1,2);
+&#x00A0;<br />
+&#x00A0;<br />sum(n&#x00A0;-&#x00A0;1)&#x00A0;+&#x00A0;2*sum(n)
+</div>
+<!--l. 515--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">which can be obtained automatically by</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1328">
+26:&#x00A0;sumrecursion(binomial(n,k)*binomial(k/2,n),k,n);
+&#x00A0;<br />
+&#x00A0;<br />sum(n&#x00A0;-&#x00A0;1)&#x00A0;+&#x00A0;2*sum(n)
+</div>
+<!--l. 523--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Similarly, we get</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1329">
+27:&#x00A0;extended_sumrecursion(binomial(n/2,k),k,n,2,1);
+&#x00A0;<br />
+&#x00A0;<br />2*sum(n&#x00A0;-&#x00A0;2)&#x00A0;-&#x00A0;sum(n)
+&#x00A0;<br />
+&#x00A0;<br />28:&#x00A0;sumrecursion(binomial(n/2,k),k,n);
+&#x00A0;<br />
+&#x00A0;<br />2*sum(n&#x00A0;-&#x00A0;2)&#x00A0;-&#x00A0;sum(n)
+&#x00A0;<br />
+&#x00A0;<br />29:&#x00A0;sumrecursion(hyperterm({a,b,a+1/2-b,1+2*a/3,-n},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{2*a+1-2*b,2*b,2/3*a,1+a+n/2},4,k)/(factorial(n)*2^(-n)/
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(n/2))/hyperterm({a+1,1},{a-b+1,b+1/2},1,n/2),k,n);
+&#x00A0;<br />
+&#x00A0;<br />sum(n&#x00A0;-&#x00A0;2)&#x00A0;-&#x00A0;sum(n)
+</div>
+<!--l. 541--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">In the last example, the progam chooses </span><span 
+class="cmmi-12">m </span><span 
+class="cmr-12">= 2</span><span 
+class="ptmr8t-x-x-120">, and </span><span 
+class="cmmi-12">l </span><span 
+class="cmr-12">= 1 </span><span 
+class="ptmr8t-x-x-120">to derive the resulting</span>
+<span 
+class="ptmr8t-x-x-120">recurrence equation (see </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, Table 3, (1.3)).</span>
+<!--l. 547--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.8    </span></span> <a 
+ id="x223-99400016.76.8"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">HYPERRECURSION</span></h4>
+<a 
+ id="dx223-994001"></a>
+<a 
+ id="dx223-994002"></a>
+<!--l. 550--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Sums to which the Zeilberger algorithm applies, in general are special cases of</span>
+<span 
+class="ptmr8t-x-x-120">the </span><span 
+class="ptmro8t-x-x-120">generalized hypergeometric function</span>
+<center class="math-display" >
+<img 
+src="manual622x.png" alt="   (                    | )     &#x221E;
+      a1,  a2, &#x22C5;&#x22C5;&#x22C5;,  ap ||       &#x2211;   (a1)k &#x22C5;-(a2)k-&#x22C5;&#x22C5;&#x22C5;(ap)k k
+pFq    b1,  b2, &#x22C5;&#x22C5;&#x22C5;,  bq |x   :=      (b )  &#x22C5; (b) &#x22C5;&#x22C5;&#x22C5;(b) k!x
+                                k=0  1 k    2k      qk
+" class="math-display" ><a 
+ id="x223-99400016.76.8"></a></center>
+<!--l. 562--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">with upper parameters </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmmi-8">p</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">, and lower parameters </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmmi-8">q</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">. If a</span>
+<span 
+class="ptmr8t-x-x-120">recursion for a generalized hypergeometric function is to be established, you can</span>
+<span 
+class="ptmr8t-x-x-120">use the following REDUCE operator:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">hyperrecursion(upper,lower,x,n)</span>
+     <span 
+class="ptmr8t-x-x-120">determines  a  holonomic  recurrence  equation  with  respect  to  </span><span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">for</span>
+                                                                     
+
+                                                                     
+     <sub><span 
+class="cmmi-8">p</span></sub><span 
+class="cmmi-12">F</span><sub><span 
+class="cmmi-8">q</span></sub><img 
+src="manual623x.png" alt="                    |
+( a1,  a2, &#x22C5;&#x22C5;&#x22C5; , ap | )
+                    ||x
+  b1,  b2, &#x22C5;&#x22C5;&#x22C5; , bq"  class="left" align="middle"><span 
+class="ptmr8t-x-x-120">, where </span><span 
+class="pcrr8t-x-x-120">upper</span><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmmi-8">p</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">is the</span>
+     <span 
+class="ptmr8t-x-x-120">list  of  upper  parameters,  and  </span><span 
+class="pcrr8t-x-x-120">lower</span><span 
+class="cmr-12">=  </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmmi-8">q</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">is  the  list  of</span>
+     <span 
+class="ptmr8t-x-x-120">lower parameters depending on </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">. If Zeilberger&#8217;s algorithm does not</span>
+     <span 
+class="ptmr8t-x-x-120">apply, </span><span 
+class="pcrr8t-x-x-120">extended_sumrecursion </span><span 
+class="ptmr8t-x-x-120">of §</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><a 
+href="#x223-99300016.76.7"><span 
+class="ptmr8t-x-x-120">16.76.7</span><!--tex4ht:ref: sec:EXTENDED_SUMRECURSION --></a> <span 
+class="ptmr8t-x-x-120">is used.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">hyperrecursion(upper,lower,x,n,j) </span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">j  </span><span 
+class="cmsy-10x-x-120">&#x2208; </span><span 
+class="msbm-10x-x-120">&#x2115;</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">searches</span>
+     <span 
+class="ptmr8t-x-x-120">only for a holonomic recurrence equation of order </span><span 
+class="cmmi-12">j</span><span 
+class="ptmr8t-x-x-120">. This operator</span>
+     <span 
+class="ptmr8t-x-x-120">does not use </span><span 
+class="pcrr8t-x-x-120">extended_sumrecursion </span><span 
+class="ptmr8t-x-x-120">automatically.</span></li></ul>
+<!--l. 586--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Therefore</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1330">
+30:&#x00A0;hyperrecursion({-n,b},{c},1,n);
+&#x00A0;<br />
+&#x00A0;<br />(b&#x00A0;-&#x00A0;c&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;1)*sum(n&#x00A0;-&#x00A0;1)&#x00A0;+&#x00A0;(c&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*sum(n)
+</div>
+<!--l. 593--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">establishes the Vandermonde identity</span>
+<center class="math-display" >
+<img 
+src="manual624x.png" alt="    (           |  )
+        - n,  b |       (c - b)n
+2F1             || 1  =  -------,
+           c              (c)n
+" class="math-display" ></center>
+<!--l. 609--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">whereas</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1331">
+31:&#x00A0;hyperrecursion({d,1+d/2,d+b-a,d+c-a,1+a-b-c,n+a,-n},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{d/2,1+a-b,1+a-c,b+c+d-a,1+d-a-n,1+d+n},1,n);
+&#x00A0;<br />
+&#x00A0;<br />(2*a&#x00A0;-&#x00A0;b&#x00A0;-&#x00A0;c&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;n)*(b&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*(c&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)*(d&#x00A0;+&#x00A0;n)*sum(n&#x00A0;-&#x00A0;1)&#x00A0;+
+&#x00A0;<br />
+&#x00A0;<br />(a&#x00A0;-&#x00A0;b&#x00A0;-&#x00A0;c&#x00A0;-&#x00A0;d&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;1)*(a&#x00A0;-&#x00A0;b&#x00A0;+&#x00A0;n)*(a&#x00A0;-&#x00A0;c&#x00A0;+&#x00A0;n)*(a&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />*sum(n)
+</div>
+<!--l. 622--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">proves Dougall&#8217;s identity, again.</span>
+<!--l. 626--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If a hypergeometric expression is given in hypergeometric notation, then the use</span>
+<span 
+class="ptmr8t-x-x-120">of </span><span 
+class="pcrr8t-x-x-120">hyperrecursion </span><span 
+class="ptmr8t-x-x-120">is more natural than the use of </span><span 
+class="pcrr8t-x-x-120">sumrecursion</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 630--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Moreover you may use the REDUCE operator</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">hyperterm(upper,lower,x,k)    </span><span 
+class="ptmr8t-x-x-120">that         yields         the</span>
+     <span 
+class="ptmr8t-x-x-120">hypergeometric term</span>
+     <center class="math-display" >
+     <img 
+src="manual625x.png" alt="(a1)k &#x22C5; (a2)k &#x22C5;&#x22C5;&#x22C5;(ap)k k
+---------------------x
+(b1)k &#x22C5; (b2)k &#x22C5;&#x22C5;&#x22C5;(bq)kk!
+     " class="math-display" ></center>
+     <!--l. 638--><p class="nopar" >   <span 
+class="ptmr8t-x-x-120">with   upper   parameters   </span><span 
+class="pcrr8t-x-x-120">upper</span><span 
+class="cmr-12">=    </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmmi-8">p</span></sub><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">,   and   lower</span>
+     <span 
+class="ptmr8t-x-x-120">parameters </span><span 
+class="pcrr8t-x-x-120">lower</span><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmmi-8">q</span></sub><span 
+class="cmsy-10x-x-120">}</span></li></ul>
+<!--l. 642--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">in connection with hypergeometric terms.</span>
+<!--l. 644--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The operator </span><span 
+class="pcrr8t-x-x-120">sumrecursion </span><span 
+class="ptmr8t-x-x-120">can also be used to obtain three-term</span>
+<span 
+class="ptmr8t-x-x-120">recurrence equations for systems of orthogonal polynomials with the</span>
+<span 
+class="ptmr8t-x-x-120">aid of known hypergeometric representations. By (</span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">, (2.7.11a)), the</span>
+<span 
+class="ptmr8t-x-x-120">discrete Krawtchouk polynomials </span><span 
+class="cmmi-12">k</span><sub><span 
+class="cmmi-8">n</span></sub><sup><span 
+class="cmr-8">(</span><span 
+class="cmmi-8">p</span><span 
+class="cmr-8">)</span></sup><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x,N</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">have the hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">representation</span>
+<center class="math-display" >
+<img 
+src="manual626x.png" alt="                     (  )     (              | )
+k (p)(x,N ) = (- 1 )npn N    F      - n,  - x  ||1- ,
+ n                     n  2 1       - N      |p
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 663--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and therefore we declare</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1332">
+32:&#x00A0;krawtchoukterm:=
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(-1)^n*p^n*binomial(NN,n)*hyperterm({-n,-x},{-NN},1/p,k)$
+</div>
+<!--l. 670--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and get the three three-term recurrence equations</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1333">
+33:&#x00A0;sumrecursion(krawtchoukterm,k,n);
+&#x00A0;<br />
+&#x00A0;<br />((2*p&#x00A0;-&#x00A0;1)*n&#x00A0;-&#x00A0;nn*p&#x00A0;-&#x00A0;2*p&#x00A0;+&#x00A0;x&#x00A0;+&#x00A0;1)*sum(n&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;-&#x00A0;(n&#x00A0;-&#x00A0;nn&#x00A0;-&#x00A0;2)*(p&#x00A0;-&#x00A0;1)*sum(n&#x00A0;-&#x00A0;2)*p&#x00A0;-&#x00A0;sum(n)*n
+&#x00A0;<br />
+&#x00A0;<br />34:&#x00A0;sumrecursion(krawtchoukterm,k,x);
+&#x00A0;<br />
+&#x00A0;<br />(2*(x&#x00A0;-&#x00A0;1)*p&#x00A0;+&#x00A0;n&#x00A0;-&#x00A0;nn*p&#x00A0;-&#x00A0;x&#x00A0;+&#x00A0;1)*sum(x&#x00A0;-&#x00A0;1)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;-&#x00A0;((x&#x00A0;-&#x00A0;1)&#x00A0;-&#x00A0;nn)*sum(x)*p&#x00A0;-&#x00A0;(p&#x00A0;-&#x00A0;1)*(x&#x00A0;-&#x00A0;1)*sum(x&#x00A0;-&#x00A0;2)
+&#x00A0;<br />
+&#x00A0;<br />35:&#x00A0;sumrecursion(krawtchoukterm,k,NN);
+&#x00A0;<br />
+&#x00A0;<br />((p&#x00A0;-&#x00A0;2)*nn&#x00A0;+&#x00A0;n&#x00A0;+&#x00A0;x&#x00A0;+&#x00A0;1)*sum(nn&#x00A0;-&#x00A0;1)&#x00A0;+&#x00A0;(n&#x00A0;-&#x00A0;nn)*(p&#x00A0;-&#x00A0;1)*sum(nn)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;+&#x00A0;(nn&#x00A0;-&#x00A0;x&#x00A0;-&#x00A0;1)*sum(nn&#x00A0;-&#x00A0;2)
+</div>
+<!--l. 693--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">with respect to the parameters </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="cmmi-12">x</span><span 
+class="ptmr8t-x-x-120">, and </span><span 
+class="cmmi-12">N </span><span 
+class="ptmr8t-x-x-120">respectively.</span>
+<!--l. 697--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.9    </span></span> <a 
+ id="x223-99500016.76.9"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">HYPERSUM</span></h4>
+<a 
+ id="dx223-995001"></a>
+<!--l. 700--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">With the operator </span><span 
+class="pcrr8t-x-x-120">hypersum</span><span 
+class="ptmr8t-x-x-120">, hypergeometric sums are directly evaluated in</span>
+<span 
+class="ptmr8t-x-x-120">closed form whenever the extended Zeilberger algorithm leads to a recurrence</span>
+<span 
+class="ptmr8t-x-x-120">equation containing only two terms:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">hypersum(upper,lower,x,n) </span><span 
+class="ptmr8t-x-x-120">determines   a   closed   form</span>
+     <span 
+class="ptmr8t-x-x-120">representation  for</span>  <sub><span 
+class="cmmi-8">p</span></sub><span 
+class="cmmi-12">F</span><sub><span 
+class="cmmi-8">q</span></sub><img 
+src="manual627x.png" alt="(  a ,  a , &#x22C5;&#x22C5;&#x22C5;,  a  || )
+    1    2         p ||x
+   b1,  b2, &#x22C5;&#x22C5;&#x22C5;,  bq"  class="left" align="middle"><span 
+class="ptmr8t-x-x-120">,  where  </span><span 
+class="pcrr8t-x-x-120">upper</span><span 
+class="cmr-12">=</span>
+     <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmmi-8">p</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">is   the   list   of   upper   parameters,   and   </span><span 
+class="pcrr8t-x-x-120">lower</span><span 
+class="cmr-12">=</span>
+     <span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmmi-8">q</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">is  the  list  of  lower  parameters  depending  on  </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">.  The</span>
+     <span 
+class="ptmr8t-x-x-120">result is given as a hypergeometric term with respect to </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">.</span>
+     <!--l. 718--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If the result is a list of length </span><span 
+class="cmmi-12">m</span><span 
+class="ptmr8t-x-x-120">, we call it </span><span 
+class="cmmi-12">m</span><span 
+class="ptmr8t-x-x-120">-</span><span 
+class="ptmro8t-x-x-120">fold symmetric</span><span 
+class="ptmr8t-x-x-120">, which</span>
+     <span 
+class="ptmr8t-x-x-120">is to be interpreted as follows: Its </span><span 
+class="cmmi-12">j</span><sup><span 
+class="cmmi-8">th</span></sup> <span 
+class="ptmr8t-x-x-120">part is the solution valid for all</span>
+     <span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">of the form </span><span 
+class="cmmi-12">n </span><span 
+class="cmr-12">= </span><span 
+class="cmmi-12">mk </span><span 
+class="cmr-12">+ </span><span 
+class="cmmi-12">j </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1</span><span style="margin-left:3.33234pt" class="tmspace"></span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">k </span><span 
+class="cmsy-10x-x-120">&#x2208; </span><span 
+class="msbm-10x-x-120">&#x2115;</span><sub><span 
+class="cmr-8">0</span></sub><span 
+class="cmr-12">)</span><span 
+class="ptmr8t-x-x-120">. In particular, if the resulting</span>
+     <span 
+class="ptmr8t-x-x-120">list contains two terms, then the first part is the solution for even </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">,</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">and the second part is the solution for odd </span><span 
+class="cmmi-12">n</span><span 
+class="ptmr8t-x-x-120">.</span></li></ul>
+<!--l. 726--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Examples </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1334">
+36:&#x00A0;hypersum({a,1+a/2,c,d,-n},{a/2,1+a-c,1+a-d,1+a+n},1,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;pochhammer(a&#x00A0;-&#x00A0;c&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;1,n)*pochhammer(a&#x00A0;+&#x00A0;1,n)
+&#x00A0;<br />-------------------------------------------------
+&#x00A0;<br />&#x00A0;pochhammer(a&#x00A0;-&#x00A0;c&#x00A0;+&#x00A0;1,n)*pochhammer(a&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;1,n)
+&#x00A0;<br />
+&#x00A0;<br />37:&#x00A0;hypersum({a,1+a/2,d,-n},{a/2,1+a-d,1+a+n},-1,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;pochhammer(a&#x00A0;+&#x00A0;1,n)
+&#x00A0;<br />-------------------------
+&#x00A0;<br />&#x00A0;pochhammer(a&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;1,n)
+</div>
+<!--l. 741--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Note that the operator </span><span 
+class="pcrr8t-x-x-120">togamma </span><span 
+class="ptmr8t-x-x-120">converts expressions given in</span>
+<span 
+class="ptmr8t-x-x-120">factorial-</span><span 
+class="cmr-12">&#x0393;</span><span 
+class="ptmr8t-x-x-120">-binomial-Pochhammer notation into a pure </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function representation:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1335">
+38:&#x00A0;togamma(ws);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;gamma(a&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;1)*gamma(a&#x00A0;+&#x00A0;n&#x00A0;+&#x00A0;1)
+&#x00A0;<br />-----------------------------------
+&#x00A0;<br />&#x00A0;gamma(a&#x00A0;-&#x00A0;d&#x00A0;+&#x00A0;n&#x00A0;+&#x00A0;1)*gamma(a&#x00A0;+&#x00A0;1)
+</div>
+<!--l. 754--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Here are some </span><span 
+class="cmmi-12">m</span><span 
+class="ptmr8t-x-x-120">-fold symmetric results:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1336">
+39:&#x00A0;hypersum({-n,-n,-n},{1,1},1,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n/2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;&#x00A0;(&#x00A0;-&#x00A0;27)&#x00A0;&#x00A0;&#x00A0;*pochhammer(---,---)*pochhammer(---,---)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />{----------------------------------------------------,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;factorial(---)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;0}
+&#x00A0;<br />
+&#x00A0;<br />40:&#x00A0;hypersum({-n,n+3*a,a},{3*a/2,(3*a+1)/2},3/4,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;pochhammer(---,---)*pochhammer(---,---)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />{-----------------------------------------------------,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*a&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*a&#x00A0;+&#x00A0;1&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;&#x00A0;pochhammer(---------,---)*pochhammer(---------,---)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;0,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;0}
+</div>
+<!--l. 783--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">These results correspond to the formulas (compare </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">)</span>
+<center class="math-display" >
+<img 
+src="manual628x.png" alt="     (               |  )   (
+        - n,- n,- n  |      {              0               if nodd
+3F2                  || 1  =     (1-&#x2215;3)n&#x2215;2(2&#x2215;3-)n&#x2215;2-     n&#x2215;2
+            1,1             (       (n&#x2215;2)!2    (- 27)     otherwise
+" class="math-display" ></center>
+<!--l. 804--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">and</span>
+<center class="math-display" >
+<img 
+src="manual629x.png" alt="                                 (
+    (                    |  )    {             0             if n &#x2044;= 0 (mod 3)
+ F       - n,n + 3a, a   || 3- =         (1&#x2215;3)n&#x2215;3(2 &#x2215;3)n&#x2215;3                        .
+3 2     3a&#x2215;2,(3a + 1)&#x2215;2  | 4     (  ------------------------     otherwise
+                                    (a + 1&#x2215;3)n&#x2215;3(a + 2 &#x2215;3)n&#x2215;3
+" class="math-display" ></center>
+                                                                     
+
+                                                                     
+<!--l. 826--><p class="nopar" >
+<!--l. 828--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.10    </span></span> <a 
+ id="x223-99600016.76.10"></a><span 
+class="ptmr8t-x-x-120">REDUCE operator </span><span 
+class="pcrr8t-x-x-120">SUMTOHYPER</span></h4>
+<a 
+ id="dx223-996001"></a>
+<!--l. 831--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">With the operator </span><span 
+class="pcrr8t-x-x-120">sumtohyper</span><span 
+class="ptmr8t-x-x-120">, sums given in factorial-</span><span 
+class="cmr-12">&#x0393;</span><span 
+class="ptmr8t-x-x-120">-binomial-Pochhammer</span>
+<span 
+class="ptmr8t-x-x-120">notation are converted into hypergeometric notation.</span><br 
+class="newline" /><span 
+class="pcrr8t-x-x-120">sumtohyper(f,k) </span><span 
+class="ptmr8t-x-x-120">determines the hypergeometric representation of</span>
+<span 
+class="cmex-10x-x-120">&#x2211;</span>
+  <sub><span 
+class="cmmi-8">k</span><span 
+class="cmr-8">=</span><span 
+class="cmsy-8">-&#x221E;</span></sub><sup><span 
+class="cmsy-8">&#x221E;</span></sup><span 
+class="cmmi-12">f</span><sub>
+<span 
+class="cmmi-8">k</span></sub><span 
+class="ptmr8t-x-x-120">, i.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;e.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;its output is </span><span 
+class="pcrr8t-x-x-120">c*hypergeometric(upper,lower,x)</span><span 
+class="ptmr8t-x-x-120">,</span>
+<span 
+class="ptmr8t-x-x-120">corresponding to the representation</span>
+<center class="math-display" >
+<img 
+src="manual630x.png" alt=" &#x2211;&#x221E;              ( a  , a ,  &#x22C5;&#x22C5;&#x22C5;, a  ||  )
+     fk = c &#x22C5; pFq    1   2         p ||x   ,
+k=-&#x221E;                b1,  b2,  &#x22C5;&#x22C5;&#x22C5;, bq
+" class="math-display" ></center>
+<!--l. 847--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">where </span><span 
+class="pcrr8t-x-x-120">upper</span><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,a</span><sub><span 
+class="cmmi-8">p</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">lower</span><span 
+class="cmr-12">= </span><span 
+class="cmsy-10x-x-120">{</span><span 
+class="cmmi-12">b</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-12">,</span><span 
+class="cmmi-12">&#x2026;</span><span 
+class="cmmi-12">,b</span><sub><span 
+class="cmmi-8">q</span></sub><span 
+class="cmsy-10x-x-120">} </span><span 
+class="ptmr8t-x-x-120">are the lists of upper</span>
+<span 
+class="ptmr8t-x-x-120">and lower parameters. </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1337">
+41:&#x00A0;sumtohyper(binomial(n,k)^3,k);
+&#x00A0;<br />
+&#x00A0;<br />hypergeometric({&#x00A0;-&#x00A0;n,&#x00A0;-&#x00A0;n,&#x00A0;-&#x00A0;n},{1,1},-1)
+&#x00A0;<br />
+&#x00A0;<br />42:&#x00A0;sumtohyper(binomial(n,k)/2^n-sub(n=n-1,binomial(n,k)/2^n),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;n
+&#x00A0;<br />&#x00A0;&#x00A0;-&#x00A0;hypergeometric({----------,&#x00A0;-&#x00A0;n,1},{1,------},-1)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />------------------------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 868--><p class="nopar" >
+<!--l. 872--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.11    </span></span> <a 
+ id="x223-99700016.76.11"></a><span 
+class="ptmr8t-x-x-120">Simplification Operators</span></h4>
+<a 
+ id="dx223-997001"></a>
+<a 
+ id="dx223-997002"></a>
+<a 
+ id="dx223-997003"></a>
+<a 
+ id="dx223-997004"></a>
+<a 
+ id="dx223-997005"></a>
+<!--l. 879--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For the decision that an expression </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">is a hypergeometric term, it is necessary to</span>
+<span 
+class="ptmr8t-x-x-120">find out whether or not </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">&#x2215;a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> <span 
+class="ptmr8t-x-x-120">is a rational function with respect to </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">. For the</span>
+<span 
+class="ptmr8t-x-x-120">purpose to decide whether or not an expression involving powers, factorials,</span>
+<span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms, binomial coefficients, and Pochhammer symbols is</span>
+<span 
+class="ptmr8t-x-x-120">a hypergeometric term, the following simplification operators can be</span>
+<span 
+class="ptmr8t-x-x-120">used:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">simplify_gamma(f) </span><span 
+class="ptmr8t-x-x-120">simplifies  an  expression  </span><span 
+class="pcrr8t-x-x-120">f </span><span 
+class="ptmr8t-x-x-120">involving  only</span>
+     <span 
+class="ptmr8t-x-x-120">rational,  powers  and  </span><span 
+class="cmr-12">&#x0393;  </span><span 
+class="ptmr8t-x-x-120">function  terms  according  to  a  recursive</span>
+     <span 
+class="ptmr8t-x-x-120">application  of  the  simplification  rule  </span><span 
+class="cmr-12">&#x0393;</span><span style="margin-left:2.66638pt" class="tmspace"></span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">a </span><span 
+class="cmr-12">+ 1)  =  </span><span 
+class="cmmi-12">a</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmr-12">&#x0393;</span><span style="margin-left:2.66638pt" class="tmspace"></span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">a</span><span 
+class="cmr-12">)  </span><span 
+class="ptmr8t-x-x-120">to  the</span>
+     <span 
+class="ptmr8t-x-x-120">expression  tree.  Since  all  </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">arguments  with  integer  difference  are</span>
+     <span 
+class="ptmr8t-x-x-120">transformed,  this  gives  a  decision  procedure  for  rationality  for</span>
+     <span 
+class="ptmr8t-x-x-120">integer-linear </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">term product ratios.</span>
+     </li>
+                                                                     
+
+                                                                     
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">simplify_combinatorial(f) </span><span 
+class="ptmr8t-x-x-120">simplifies   an   expression   </span><span 
+class="pcrr8t-x-x-120">f</span>
+     <span 
+class="ptmr8t-x-x-120">involving powers, factorials, </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms, binomial coefficients,</span>
+     <span 
+class="ptmr8t-x-x-120">and   Pochhammer   symbols   by   converting   factorials,   binomial</span>
+     <span 
+class="ptmr8t-x-x-120">coefficients,  and  Pochhammer  symbols  into  </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function  terms,  and</span>
+     <span 
+class="ptmr8t-x-x-120">applying </span><span 
+class="pcrr8t-x-x-120">simplify_gamma </span><span 
+class="ptmr8t-x-x-120">to its result. If the output is not rational,</span>
+     <span 
+class="ptmr8t-x-x-120">it is given in terms of </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">functions. If you prefer factorials you may use</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">gammatofactorial </span><span 
+class="ptmr8t-x-x-120">(rule)   converting   </span><span 
+class="cmr-12">&#x0393;  </span><span 
+class="ptmr8t-x-x-120">function   terms   into</span>
+     <span 
+class="ptmr8t-x-x-120">factorials using </span><span 
+class="cmr-12">&#x0393;</span><span style="margin-left:2.66638pt" class="tmspace"></span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x</span><span 
+class="cmr-12">) </span><span 
+class="cmsy-10x-x-120">&#x2192; </span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">x </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1)!</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">simplify_gamma2(f) </span><span 
+class="ptmr8t-x-x-120">uses  the  duplication  formula  of  the  </span><span 
+class="cmr-12">&#x0393;</span>
+     <span 
+class="ptmr8t-x-x-120">function to simplify </span><span 
+class="cmmi-12">f</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">simplify_gamman(f,n) </span><span 
+class="ptmr8t-x-x-120">uses the multiplication formula of the</span>
+     <span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function to simplify </span><span 
+class="cmmi-12">f</span><span 
+class="ptmr8t-x-x-120">.</span></li></ul>
+<!--l. 913--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The use of </span><span 
+class="pcrr8t-x-x-120">simplify_combinatorial(f) </span><span 
+class="ptmr8t-x-x-120">is a safe way to decide the</span>
+<span 
+class="ptmr8t-x-x-120">rationality for any ratio of products of powers, factorials, </span><span 
+class="cmr-12">&#x0393; </span><span 
+class="ptmr8t-x-x-120">function terms,</span>
+<span 
+class="ptmr8t-x-x-120">binomial coefficients, and Pochhammer symbols.</span>
+<!--l. 917--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1338">
+43:&#x00A0;simplify_combinatorial(sub(k=k+1,krawtchoukterm)/krawtchoukterm);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;(k&#x00A0;-&#x00A0;n)*(k&#x00A0;-&#x00A0;x)
+&#x00A0;<br />--------------------
+&#x00A0;<br />&#x00A0;(k&#x00A0;-&#x00A0;nn)*(k&#x00A0;+&#x00A0;1)*p
+</div>
+<!--l. 926--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">From this calculation, we see again that the upper parameters of the</span>
+<span 
+class="ptmr8t-x-x-120">hypergeometric representation of the Krawtchouk polynomials are given by</span>
+<span 
+class="cmsy-10x-x-120">{-</span><span 
+class="cmmi-12">n,</span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">x</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">, its lower parameter is </span><span 
+class="cmsy-10x-x-120">{-</span><span 
+class="cmmi-12">N</span><span 
+class="cmsy-10x-x-120">}</span><span 
+class="ptmr8t-x-x-120">, and the argument of the hypergeometric</span>
+<span 
+class="ptmr8t-x-x-120">function is </span><span 
+class="cmr-12">1</span><span 
+class="cmmi-12">&#x2215;p</span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 933--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Other examples are</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1339">
+44:&#x00A0;simplify_combinatorial(binomial(n,k)/binomial(2*n,k-1));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;gamma(&#x00A0;-&#x00A0;(k&#x00A0;-&#x00A0;2*n&#x00A0;-&#x00A0;2))*gamma(n&#x00A0;+&#x00A0;1)
+&#x00A0;<br />----------------------------------------
+&#x00A0;<br />&#x00A0;gamma(&#x00A0;-&#x00A0;(k&#x00A0;-&#x00A0;n&#x00A0;-&#x00A0;1))*gamma(2*n&#x00A0;+&#x00A0;1)*k
+&#x00A0;<br />
+&#x00A0;<br />45:&#x00A0;ws&#x00A0;where&#x00A0;gammatofactorial;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;factorial(&#x00A0;-&#x00A0;k&#x00A0;+&#x00A0;2*n&#x00A0;+&#x00A0;1)*factorial(n)
+&#x00A0;<br />----------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;factorial(&#x00A0;-&#x00A0;k&#x00A0;+&#x00A0;n)*factorial(2*n)*k
+&#x00A0;<br />
+&#x00A0;<br />46:&#x00A0;simplify_gamma2(gamma(2*n)/gamma(n));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;2*n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*n&#x00A0;+&#x00A0;1
+&#x00A0;<br />&#x00A0;2&#x00A0;&#x00A0;&#x00A0;*gamma(---------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />-----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*sqrt(pi)
+&#x00A0;<br />
+&#x00A0;<br />47:&#x00A0;simplify_gamman(gamma(3*n)/gamma(n),3);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;3*n&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*n&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*n&#x00A0;+&#x00A0;1
+&#x00A0;<br />&#x00A0;3&#x00A0;&#x00A0;&#x00A0;*gamma(---------)*gamma(---------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />----------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*sqrt(3)*pi
+</div>
+<!--l. 964--><p class="nopar" >
+<!--l. 967--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.12    </span></span> <a 
+ id="x223-99800016.76.12"></a><span 
+class="ptmr8t-x-x-120">Tracing</span></h4>
+<a 
+ id="dx223-998001"></a>
+<a 
+ id="dx223-998002"></a>
+<a 
+ id="dx223-998003"></a>
+<!--l. 970--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If you set</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1340">
+48:&#x00A0;on&#x00A0;zb_trace;
+</div>
+<!--l. 974--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">tracing is enabled, and you get intermediate results, see </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 978--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example for the Gosper algorithm:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1341">
+49:&#x00A0;gosper(pochhammer(k-n,n),k);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;-&#x00A0;1
+&#x00A0;<br />a(k)/a(k-1):=&#x00A0;-----------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k&#x00A0;-&#x00A0;n&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />Gosper&#x00A0;algorithm&#x00A0;applicable
+&#x00A0;<br />
+&#x00A0;<br />p:=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />q:=&#x00A0;k&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />r:=&#x00A0;k&#x00A0;-&#x00A0;n&#x00A0;-&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />degreebound&#x00A0;:=&#x00A0;0
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+&#x00A0;<br />f:=&#x00A0;-------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;+&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />Gosper&#x00A0;algorithm&#x00A0;successful
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;pochhammer(k&#x00A0;-&#x00A0;n,n)*k
+&#x00A0;<br />-----------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n&#x00A0;+&#x00A0;1
+</div>
+<!--l. 1007--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Example for the Zeilberger algorithm:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1342">
+50:&#x00A0;sumrecursion(binomial(n,k)^2,k,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />F(n,k)/F(n-1,k):=&#x00A0;----------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(k&#x00A0;-&#x00A0;n)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(k&#x00A0;-&#x00A0;n&#x00A0;-&#x00A0;1)
+&#x00A0;<br />F(n,k)/F(n,k-1):=&#x00A0;--------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;k
+&#x00A0;<br />
+&#x00A0;<br />Zeilberger&#x00A0;algorithm&#x00A0;applicable
+&#x00A0;<br />
+&#x00A0;<br />applying&#x00A0;Zeilberger&#x00A0;algorithm&#x00A0;for&#x00A0;order:=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />p:=&#x00A0;zb_sigma(1)*k&#x00A0;&#x00A0;-&#x00A0;2*zb_sigma(1)*k*n&#x00A0;+&#x00A0;zb_sigma(1)*n&#x00A0;&#x00A0;+&#x00A0;n
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />q:=&#x00A0;k&#x00A0;&#x00A0;-&#x00A0;2*k*n&#x00A0;-&#x00A0;2*k&#x00A0;+&#x00A0;n&#x00A0;&#x00A0;+&#x00A0;2*n&#x00A0;+&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />r:=&#x00A0;k
+&#x00A0;<br />
+&#x00A0;<br />degreebound&#x00A0;:=&#x00A0;1
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*k&#x00A0;-&#x00A0;3*n&#x00A0;+&#x00A0;2
+&#x00A0;<br />f:=&#x00A0;---------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;4*k&#x00A0;*n&#x00A0;+&#x00A0;2*k&#x00A0;&#x00A0;+&#x00A0;8*k*n&#x00A0;&#x00A0;-&#x00A0;4*k*n&#x00A0;-&#x00A0;3*n&#x00A0;&#x00A0;+&#x00A0;2*n
+&#x00A0;<br />p:=&#x00A0;-------------------------------------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;n
+&#x00A0;<br />
+&#x00A0;<br />Zeilberger&#x00A0;algorithm&#x00A0;successful
+&#x00A0;<br />
+&#x00A0;<br />4*sum(n&#x00A0;-&#x00A0;1)*n&#x00A0;-&#x00A0;2*sum(n&#x00A0;-&#x00A0;1)&#x00A0;-&#x00A0;sum(n)*n
+&#x00A0;<br />
+&#x00A0;<br />51:&#x00A0;off&#x00A0;zb_trace;
+</div>
+                                                                     
+
+                                                                     
+<!--l. 1055--><p class="nopar" >
+<!--l. 1058--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.13    </span></span> <a 
+ id="x223-99900016.76.13"></a><span 
+class="ptmr8t-x-x-120">Global Variables and Switches</span></h4>
+<a 
+ id="dx223-999001"></a>
+<a 
+ id="dx223-999002"></a>
+<a 
+ id="dx223-999003"></a>
+<a 
+ id="dx223-999004"></a>
+<a 
+ id="dx223-999005"></a>
+<a 
+ id="dx223-999006"></a>
+<a 
+ id="dx223-999007"></a>
+<a 
+ id="dx223-999008"></a>
+<a 
+ id="dx223-999009"></a>
+<a 
+ id="dx223-999010"></a>
+<a 
+ id="dx223-999011"></a>
+<a 
+ id="dx223-999012"></a>
+<a 
+ id="dx223-999013"></a>
+<!--l. 1067--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The following global variables and switches can be used in connection with the</span>
+<span 
+class="pcrr8t-x-x-120">ZEILBERG </span><span 
+class="ptmr8t-x-x-120">package:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">zb_trace</span><span 
+class="ptmr8t-x-x-120">, switch; default setting </span><span 
+class="pcrr8t-x-x-120">off</span><span 
+class="ptmr8t-x-x-120">. Turns tracing on and off.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">zb_direction</span><span 
+class="ptmr8t-x-x-120">,   variable;   settings:   </span><span 
+class="pcrr8t-x-x-120">down</span><span 
+class="ptmr8t-x-x-120">,   </span><span 
+class="pcrr8t-x-x-120">up</span><span 
+class="ptmr8t-x-x-120">;   default   setting</span>
+     <span 
+class="pcrr8t-x-x-120">down</span><span 
+class="ptmr8t-x-x-120">.</span>
+     <!--l. 1077--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In the case of the Gosper algorithm, either a downward or a forward</span>
+     <span 
+class="ptmr8t-x-x-120">antidifference is calculated, i.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;e., </span><span 
+class="pcrr8t-x-x-120">gosper </span><span 
+class="ptmr8t-x-x-120">finds </span><span 
+class="cmmi-12">g</span><sub><span 
+class="cmmi-8">k</span></sub> <span 
+class="ptmr8t-x-x-120">with either</span>
+     <center class="math-display" >
+     <img 
+src="manual631x.png" alt="a  =  g - g        or     a =  g   -  g ,
+  k    k   k- 1            k    k+1    k
+     " class="math-display" ></center>
+     <!--l. 1083--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">respectively.</span>
+     <!--l. 1086--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In  the  case  of  the  Zeilberger  algorithm,  either  a  downward  or  an</span>
+     <span 
+class="ptmr8t-x-x-120">upward recurrence equation is returned. Example:</span>
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1343">
+     52:&#x00A0;zb_direction:=up$
+     &#x00A0;<br />
+     &#x00A0;<br />53:&#x00A0;sumrecursion(binomial(n,k)^2,k,n);
+     &#x00A0;<br />
+     &#x00A0;<br />sum(n&#x00A0;+&#x00A0;1)*n&#x00A0;+&#x00A0;sum(n&#x00A0;+&#x00A0;1)&#x00A0;-&#x00A0;4*sum(n)*n&#x00A0;-&#x00A0;2*sum(n)
+     &#x00A0;<br />
+     &#x00A0;<br />54:&#x00A0;zb_direction:=down$
+</div>
+     <!--l. 1098--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">zb_order</span><span 
+class="ptmr8t-x-x-120">,   variable;   settings:   any   nonnegative   integer;   default</span>
+     <span 
+class="ptmr8t-x-x-120">setting</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="pcrr8t-x-x-120">5</span><span 
+class="ptmr8t-x-x-120">. Gives the maximal order for the recurrence equation that</span>
+     <span 
+class="pcrr8t-x-x-120">sumrecursion </span><span 
+class="ptmr8t-x-x-120">searches for.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">zb_factor</span><span 
+class="ptmr8t-x-x-120">, switch; default setting </span><span 
+class="pcrr8t-x-x-120">on</span><span 
+class="ptmr8t-x-x-120">. If </span><span 
+class="pcrr8t-x-x-120">off</span><span 
+class="ptmr8t-x-x-120">, the factorization of</span>
+     <span 
+class="ptmr8t-x-x-120">the output usually producing nicer results is suppressed.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">zb_proof</span><span 
+class="ptmr8t-x-x-120">,   switch;   default   setting   </span><span 
+class="pcrr8t-x-x-120">off</span><span 
+class="ptmr8t-x-x-120">.   If   </span><span 
+class="pcrr8t-x-x-120">on</span><span 
+class="ptmr8t-x-x-120">,   then   several</span>
+     <span 
+class="ptmr8t-x-x-120">intermediate results are stored in global variables:</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">gosper_representation</span><span 
+class="ptmr8t-x-x-120">, variable; default setting </span><span 
+class="pcrr8t-x-x-120">nil</span><span 
+class="ptmr8t-x-x-120">.</span>
+     <!--l. 1115--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If  a  </span><span 
+class="pcrr8t-x-x-120">gosper </span><span 
+class="ptmr8t-x-x-120">command  is  issued,  and  if  the  Gosper  algorithm  is</span>
+     <span 
+class="ptmr8t-x-x-120">applicable, then the variable </span><span 
+class="pcrr8t-x-x-120">gosper_representation </span><span 
+class="ptmr8t-x-x-120">is set to</span>
+     <span 
+class="ptmr8t-x-x-120">the list of polynomials (with respect to </span><span 
+class="cmmi-12">k</span><span 
+class="ptmr8t-x-x-120">) </span><span 
+class="pcrr8t-x-x-120">{p,q,r,f} </span><span 
+class="ptmr8t-x-x-120">corresponding</span>
+     <span 
+class="ptmr8t-x-x-120">to the representation</span>
+     <center class="math-display" >
+     <img 
+src="manual632x.png" alt="-ak--=  -pk-qk ,      gk =  qk+1fkak,
+ak-1    pk-1rk               pk
+     " class="math-display" ></center>
+     <!--l. 1125--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">see </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">. Examples:</span>
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-1344">
+     55:&#x00A0;on&#x00A0;zb_proof;
+     &#x00A0;<br />
+     &#x00A0;<br />56:&#x00A0;gosper(k*factorial(k),k);
+     &#x00A0;<br />
+     &#x00A0;<br />(k&#x00A0;+&#x00A0;1)*factorial(k)
+     &#x00A0;<br />
+     &#x00A0;<br />57:&#x00A0;gosper_representation;
+     &#x00A0;<br />
+     &#x00A0;<br />{k,k,1,1}
+     &#x00A0;<br />
+     &#x00A0;<br />58:&#x00A0;gosper(
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/(k+1)*binomial(2*k,k)/(n-k+1)*binomial(2*n-2*k,n-k),k);
+     &#x00A0;<br />
+     &#x00A0;<br />((2*k&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;1)*(2*k&#x00A0;+&#x00A0;1)*binomial(&#x00A0;-&#x00A0;2*(k&#x00A0;-&#x00A0;n),&#x00A0;-&#x00A0;(k&#x00A0;-&#x00A0;n))
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;*binomial(2*k,k))/((k&#x00A0;+&#x00A0;1)*(n&#x00A0;+&#x00A0;2)*(n&#x00A0;+&#x00A0;1))
+     &#x00A0;<br />
+     &#x00A0;<br />59:&#x00A0;gosper_representation;
+     &#x00A0;<br />
+     &#x00A0;<br />{1,
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;(2*k&#x00A0;-&#x00A0;1)*(k&#x00A0;-&#x00A0;n&#x00A0;-&#x00A0;2),
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;(2*k&#x00A0;-&#x00A0;2*n&#x00A0;-&#x00A0;1)*(k&#x00A0;+&#x00A0;1),
+     &#x00A0;<br />
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;-&#x00A0;(2*k&#x00A0;-&#x00A0;n&#x00A0;+&#x00A0;1)
+     &#x00A0;<br />&#x00A0;------------------}
+     &#x00A0;<br />&#x00A0;&#x00A0;(n&#x00A0;+&#x00A0;2)*(n&#x00A0;+&#x00A0;1)
+</div>
+     <!--l. 1158--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">zeilberger_representation</span><span 
+class="ptmr8t-x-x-120">, variable; default setting </span><span 
+class="pcrr8t-x-x-120">nil</span><span 
+class="ptmr8t-x-x-120">.</span>
+     <!--l. 1163--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If                                                                                                          a</span>
+     <span 
+class="pcrr8t-x-x-120">sumrecursion </span><span 
+class="ptmr8t-x-x-120">command is issued, and if the Zeilberger algorithm</span>
+     <span 
+class="ptmr8t-x-x-120">is successful, then the variable </span><span 
+class="pcrr8t-x-x-120">zeilberger_representation</span>
+     <span 
+class="ptmr8t-x-x-120">is set to the final Gosper representation used, see </span><span class="cite"><span 
+class="ptmr8t-x-x-120">[</span><span 
+class="ptmb8t-x-x-120">?</span><span 
+class="ptmr8t-x-x-120">]</span></span><span 
+class="ptmr8t-x-x-120">.</span></li></ul>
+<!--l. 1169--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.76.14    </span></span> <a 
+ id="x223-100000016.76.14"></a><span 
+class="ptmr8t-x-x-120">Messages</span></h4>
+                                                                     
+
+                                                                     
+<!--l. 1171--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The following messages may occur:</span>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">***** Gosper algorithm:</span><span 
+class="pcrr8t-x-x-120">&#x00A0;no closed form</span>
+     <span 
+class="pcrr8t-x-x-120">solution exists</span>
+     <!--l. 1176--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example input:</span>
+     <!--l. 1178--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">gosper(factorial(k),k)</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">***** Gosper algorithm not applicable</span>
+     <!--l. 1182--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example input:</span>
+     <!--l. 1184--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">gosper(factorial(k/2),k)</span><span 
+class="ptmr8t-x-x-120">.</span>
+     <!--l. 1186--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The term ratio </span><span 
+class="cmmi-12">a</span><sub><span 
+class="cmmi-8">k</span></sub><span 
+class="cmmi-12">&#x2215;a</span><sub><span 
+class="cmmi-8">k</span><span 
+class="cmsy-8">-</span><span 
+class="cmr-8">1</span></sub> <span 
+class="ptmr8t-x-x-120">is not rational.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">***** illegal number of arguments</span>
+     <!--l. 1190--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example input:</span>
+     <!--l. 1192--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">gosper(k)</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">***** Zeilberger algorithm fails.</span><span 
+class="pcrr8t-x-x-120">&#x00A0;Enlarge</span>
+     <span 
+class="pcrr8t-x-x-120">zb_order</span>
+     <!--l. 1196--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example input:</span>
+     <!--l. 1198--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">sumrecursion(binomial(n,k)*binomial(6*k,n),k,n)</span>
+     <!--l. 1200--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For this example a setting </span><span 
+class="pcrr8t-x-x-120">zb_order:=6 </span><span 
+class="ptmr8t-x-x-120">is needed.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">***** Zeilberger algorithm not applicable</span>
+     <!--l. 1204--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Example input:</span>
+     <!--l. 1206--><p class="noindent" ><span 
+class="pcrr8t-x-x-120">sumrecursion(binomial(n/2,k),k,n)</span>
+     <!--l. 1208--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">One of the term ratios </span><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">)</span><span 
+class="cmmi-12">&#x2215;f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1</span><span 
+class="cmmi-12">,k</span><span 
+class="cmr-12">) </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="cmmi-12">f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k</span><span 
+class="cmr-12">)</span><span 
+class="cmmi-12">&#x2215;f</span><span 
+class="cmr-12">(</span><span 
+class="cmmi-12">n,k </span><span 
+class="cmsy-10x-x-120">- </span><span 
+class="cmr-12">1) </span><span 
+class="ptmr8t-x-x-120">is</span>
+     <span 
+class="ptmr8t-x-x-120">not rational.</span>
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-120">***** SOLVE given inconsistent equations</span>
+     <!--l. 1213--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">You can ignore this message that occurs with Version 3.5.</span></li></ul>
+                                                                     
+
+                                                                     
+<!--l. 1216--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x223-1001000"></a><span 
+class="ptmr8t-x-x-120">Bibliography</span></h4>
+<!--l. 1216--><p class="noindent" >
+     <div class="thebibliography">
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[1]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XGos"></a><span 
+class="ptmr8t-x-x-120">Gosper                                                                                         Jr.,</span>
+     <span 
+class="ptmr8t-x-x-120">R.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;W.: Decision procedure for indefinite hypergeometric summation.</span>
+     <span 
+class="ptmr8t-x-x-120">Proc.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Natl.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Acad.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Sci.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;USA </span><span 
+class="ptmb8t-x-x-120">75</span><span 
+class="ptmr8t-x-x-120">, 1978, 40&#8211;42.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[2]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XKoepf"></a><span 
+class="ptmr8t-x-x-120">Koepf, W.: Algorithms for the indefinite and definite summation.</span>
+     <span 
+class="ptmr8t-x-x-120">Konrad-Zuse-Zentrum Berlin (ZIB), Preprint SC 94-33, 1994.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[3]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XKoornwinder"></a><span 
+class="ptmr8t-x-x-120">Koornwinder,                                                                         T.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;H.:</span>
+     <span 
+class="ptmr8t-x-x-120">On Zeilberger&#8217;s algorithm and its </span><span 
+class="cmmi-12">q</span><span 
+class="ptmr8t-x-x-120">-analogue: a rigorous description.</span>
+     <span 
+class="ptmr8t-x-x-120">J.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;of Comput.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;and Appl.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Math.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmb8t-x-x-120">48</span><span 
+class="ptmr8t-x-x-120">, 1993, 91&#8211;111.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[4]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XNSU"></a><span 
+class="ptmr8t-x-x-120">Nikiforov,  A.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;F.,  Suslov,  S.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;K,</span><span 
+class="ptmr8t-x-x-120">&#x00A0;and  Uvarov,  V.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;B.:  </span><span 
+class="ptmro8t-x-x-120">Classical</span>
+     <span 
+class="ptmro8t-x-x-120">orthogonal   polynomials   of   a   discrete   variable.   </span><span 
+class="ptmr8t-x-x-120">Springer-Verlag,</span>
+     <span 
+class="ptmr8t-x-x-120">Berlin&#8211;Heidelberg&#8211;New York, 1991.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[5]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XPS"></a><span 
+class="ptmr8t-x-x-120">Paule,   P.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;and   Schorn,   M.:   A   </span><span 
+class="ptmrc8t-x-x-120">M<span 
+class="small-caps">A</span><span 
+class="small-caps">T</span><span 
+class="small-caps">H</span><span 
+class="small-caps">E</span><span 
+class="small-caps">M</span><span 
+class="small-caps">A</span><span 
+class="small-caps">T</span><span 
+class="small-caps">I</span><span 
+class="small-caps">C</span><span 
+class="small-caps">A</span>   </span><span 
+class="ptmr8t-x-x-120">version   of</span>
+     <span 
+class="ptmr8t-x-x-120">Zeilberger&#8217;s  algorithm  for  proving  binomial  coefficient  identities.</span>
+     <span 
+class="ptmr8t-x-x-120">J.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Symbolic Computation, 1994, to appear.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[6]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XSR"></a><span 
+class="ptmr8t-x-x-120">Problem 94&#8211;2, SIAM Review </span><span 
+class="ptmb8t-x-x-120">36</span><span 
+class="ptmr8t-x-x-120">, March 1994.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[7]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XStrehl2"></a><span 
+class="ptmr8t-x-x-120">Strehl,   V.:   Binomial   sums   and   identities.   Maple   Technical</span>
+     <span 
+class="ptmr8t-x-x-120">Newsletter </span><span 
+class="ptmb8t-x-x-120">10</span><span 
+class="ptmr8t-x-x-120">, 1993, 37&#8211;49.</span>
+                                                                     
+
+                                                                     
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[8]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XWil1"></a><span 
+class="ptmr8t-x-x-120">Wilf,  H.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;S.:  </span><span 
+class="ptmro8t-x-x-120">Generatingfunctionology</span><span 
+class="ptmr8t-x-x-120">.  Academic  Press,  Boston,</span>
+     <span 
+class="ptmr8t-x-x-120">1990.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  <span 
+class="ptmr8t-x-x-120">[9]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XWilf"></a><span 
+class="ptmr8t-x-x-120">Wilf,   H.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;S.:   Identities   and   their   computer   proofs.   &#8220;SPICE&#8221;</span>
+     <span 
+class="ptmr8t-x-x-120">Lecture  Notes,  August  31&#8211;September  2,  1993.  Anonymous  ftp  file</span>
+     <span 
+class="pcrr8t-x-x-120">pub/wilf/lecnotes.ps </span><span 
+class="ptmr8t-x-x-120">on the server </span><span 
+class="pcrr8t-x-x-120">ftp.cis.upenn.edu</span><span 
+class="ptmr8t-x-x-120">.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[10]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XZei2"></a><span 
+class="ptmr8t-x-x-120">Zeilberger,   D.:   A   fast   algorithm   for   proving   terminating</span>
+     <span 
+class="ptmr8t-x-x-120">hypergeometric identities. Discrete Math.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmb8t-x-x-120">80</span><span 
+class="ptmr8t-x-x-120">, 1990, 207&#8211;211.</span>
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+ <span 
+class="ptmr8t-x-x-120">[11]</span><span class="bibsp"><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span></span></span><a 
+ id="XZei3"></a><span 
+class="ptmr8t-x-x-120">Zeilberger, D.: The method of creative telescoping. J.</span><span 
+class="ptmr8t-x-x-120">&#x00A0;Symbolic</span>
+     <span 
+class="ptmr8t-x-x-120">Computation </span><span 
+class="ptmb8t-x-x-120">11</span><span 
+class="ptmr8t-x-x-120">, 1991, 195&#8211;204.</span>
+</p>
+     </div>
+<!--l. 1430--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1432--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse167.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse168.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse166.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse166.html#tailmanualse166.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse167.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse167.html"></a>   
+</body></html> 

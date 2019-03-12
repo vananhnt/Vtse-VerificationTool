@@ -1,0 +1,12 @@
+;; activate interpolation
+(set-option :produce-interpolants true)
+(declare-const xInt)
+(declare-const yInt)
+(declare-const x1Int)
+(declare-const y2Int)
+(declare-const nInt)
+(define-fun A1 () Bool (and (and (and (= x 0) (= y 0)) (>= n 0)) (and  (and (= x1 (+ x 1)) (= y1 (+ y 1))))))
+(define-fun A2 () Bool (and (not (distinct x n)) (not (= y n))))
+(assert (! A1 :interpolation-group g1))
+(assert (! A2 :interpolation-group g2))
+(check-sat)(get-interpolant (g1))

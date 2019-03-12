@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>INEQ: Support for solving inequalities</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse122.html" >Up</a></td><td class="clinks"><a 
+href="manualse123.html" >Next</a></td><td class="clinks"><a 
+href="manualse121.html" >Prev</a></td><td class="clinks"><a 
+href="manualse121.html#tailmanualse121.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse122.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.31    </span> <a 
+ id="x154-56200016.31"></a>INEQ: Support for solving inequalities</h3>
+<a 
+ id="dx154-562001"></a>
+<a 
+ id="dx154-562002"></a>
+<!--l. 553--><p class="noindent" >This package supports the operator <span 
+class="pcrr8t-x-x-109">ineq_solve </span>that tries to solves single inequalities
+and sets of coupled inequalities.
+<!--l. 556--><p class="noindent" >Author: Herbert Melenk.
+<a 
+ id="dx154-562003"></a>
+<!--l. 5--><p class="noindent" >The following types of systems are supported :
+     <ul class="itemize1">
+     <li class="itemize">only numeric coefficients (no parametric system),
+     </li>
+     <li class="itemize">a linear system of mixed equations and <span 
+class="cmmi-10x-x-109">&#x003C;</span><span 
+class="cmr-10x-x-109">= </span>&#8211; <span 
+class="cmmi-10x-x-109">&#x003E;</span><span 
+class="cmr-10x-x-109">= </span>inequalities, applying the
+     method of Fourier and Motzkin <span class="footnote-mark"><a 
+href="manual155.html#fn12x16"><sup class="textsuperscript">12</sup></a></span><a 
+ id="x154-562004f12"></a> ,
+     </li>
+     <li class="itemize">a univariate inequality with <span 
+class="cmmi-10x-x-109">&#x003C;</span><span 
+class="cmr-10x-x-109">=</span>, <span 
+class="cmmi-10x-x-109">&#x003E;</span><span 
+class="cmr-10x-x-109">=</span>, <span 
+class="cmmi-10x-x-109">&#x003E; </span>or <span 
+class="cmmi-10x-x-109">&#x003C; </span>operator and polynomial or
+     rational left&#8211;hand and right&#8211;hand sides, or a system of such inequalities with
+     only one variable.</li></ul>
+<!--l. 16--><p class="noindent" >For linear optimization problems please use the operator <span 
+class="pcrr8t-x-x-109">simplex </span>of the <span 
+class="ptmrc8t-x-x-109">L<span 
+class="small-caps">I</span><span 
+class="small-caps">N</span><span 
+class="small-caps">A</span><span 
+class="small-caps">L</span><span 
+class="small-caps">G</span></span>
+package (cf. section <a 
+href="manualse128.html#x162-57800016.37">16.37<!--tex4ht:ref: LINALG --></a>).
+<!--l. 19--><p class="noindent" >Syntax:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">INEQ_SOLVE(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="pcrro8t-x-x-109">expr</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="pcrr8t-x-x-109">[,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="pcrro8t-x-x-109">vl</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">])</span></div>
+<!--l. 23--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">&#x003C;</span>expr<span 
+class="cmmi-10x-x-109">&#x003E; </span>is an inequality or a list of coupled inequalities and equations, and the
+optional argument <span 
+class="cmmi-10x-x-109">&#x003C;</span>vl<span 
+class="cmmi-10x-x-109">&#x003E; </span>is a single variable (kernel) or a list of variables (kernels). If not
+specified, they are extracted automatically from <span 
+class="cmmi-10x-x-109">&#x003C;</span>expr<span 
+class="cmmi-10x-x-109">&#x003E;</span>. For multivariate input an
+explicit variable list specifies the elimination sequence: the last member is the most
+specific one.
+<!--l. 30--><p class="noindent" >An error message occurs if the input cannot be processed by the currently implemented
+algorithms.
+                                                                     
+
+                                                                     
+<!--l. 33--><p class="noindent" >The result is a list. It is empty if the system has no feasible solution. Otherwise the result
+presents the admissible ranges as set of equations where each variable is equated to one
+expression or to an interval. The most specific variable is the first one in the result list
+and each form contains only preceding variables (resolved form). The interval limits can
+be formal <span 
+class="ptmb8t-x-x-109">max </span>or <span 
+class="ptmb8t-x-x-109">min </span>expressions. Algebraic numbers are encoded as rounded number
+approximations.
+<!--l. 42--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Examples</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1005">
+ineq_solve({(2*x^2+x-1)/(x-1)&#x00A0;&#x003E;=&#x00A0;&#x00A0;(x+1/2)^2,&#x00A0;x&#x003E;0});
+&#x00A0;<br />
+&#x00A0;<br />{x=(0&#x00A0;..&#x00A0;0.326583),x=(1&#x00A0;..&#x00A0;2.56777)}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;reg:=
+&#x00A0;<br />&#x00A0;{a&#x00A0;+&#x00A0;b&#x00A0;-&#x00A0;c&#x003E;=0,&#x00A0;a&#x00A0;-&#x00A0;b&#x00A0;+&#x00A0;c&#x003E;=0,&#x00A0;-&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;+&#x00A0;c&#x003E;=0,&#x00A0;0&#x003E;=0,&#x00A0;2&#x003E;=0,
+&#x00A0;<br />&#x00A0;&#x00A0;2*c&#x00A0;-&#x00A0;2&#x003E;=0,&#x00A0;a&#x00A0;-&#x00A0;b&#x00A0;+&#x00A0;c&#x003E;=0,&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;-&#x00A0;c&#x003E;=0,&#x00A0;-&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;+&#x00A0;c&#x00A0;-&#x00A0;2&#x003E;=0,
+&#x00A0;<br />&#x00A0;&#x00A0;2&#x003E;=0,&#x00A0;0&#x003E;=0,&#x00A0;2*b&#x00A0;-&#x00A0;2&#x003E;=0,&#x00A0;k&#x00A0;+&#x00A0;1&#x003E;=0,&#x00A0;-&#x00A0;a&#x00A0;-&#x00A0;b&#x00A0;-&#x00A0;c&#x00A0;+&#x00A0;k&#x003E;=0,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;-&#x00A0;a&#x00A0;-&#x00A0;b&#x00A0;-&#x00A0;c&#x00A0;+&#x00A0;k&#x00A0;+&#x00A0;2&#x003E;=0,&#x00A0;-&#x00A0;2*b&#x00A0;+&#x00A0;k&#x003E;=0,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;-&#x00A0;2*c&#x00A0;+&#x00A0;k&#x003E;=0,&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;+&#x00A0;c&#x00A0;-&#x00A0;k&#x003E;=0,
+&#x00A0;<br />&#x00A0;&#x00A0;2*b&#x00A0;+&#x00A0;2*c&#x00A0;-&#x00A0;k&#x00A0;-&#x00A0;2&#x003E;=0,&#x00A0;a&#x00A0;+&#x00A0;b&#x00A0;+&#x00A0;c&#x00A0;-&#x00A0;k&#x003E;=0}$
+&#x00A0;<br />
+&#x00A0;<br />ineq_solve&#x00A0;(reg,{k,a,b,c});
+&#x00A0;<br />
+&#x00A0;<br />{c=(1&#x00A0;..&#x00A0;infinity),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;b=(1&#x00A0;..&#x00A0;infinity),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;a=(max(&#x00A0;-&#x00A0;b&#x00A0;+&#x00A0;c,b&#x00A0;-&#x00A0;c)&#x00A0;..&#x00A0;b&#x00A0;+&#x00A0;c&#x00A0;-&#x00A0;2),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;k=a&#x00A0;+&#x00A0;b&#x00A0;+&#x00A0;c}
+</div>
+<!--l. 66--><p class="nopar" >
+<!--l. 560--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 562--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse122.html" >Up</a></td><td class="clinks"><a 
+href="manualse123.html" >Next</a></td><td class="clinks"><a 
+href="manualse121.html" >Prev</a></td><td class="clinks"><a 
+href="manualse121.html#tailmanualse121.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse122.html" >Front</a></td></tr></table><a 
+ id="tailmanualse122.html"></a>  
+</body></html> 

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Even and Odd Operators</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse43.html" >Up</a></td><td class="clinks"><a 
+href="manualse44.html" >Next</a></td><td class="clinks"><a 
+href="manualse42.html" >Prev</a></td><td class="clinks"><a 
+href="manualse42.html#tailmanualse42.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse43.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.17    </span> <a 
+ id="x55-950007.17"></a>Even and Odd Operators</h3>
+<a 
+ id="dx55-95001"></a>
+<a 
+ id="dx55-95002"></a>
+<a 
+ id="dx55-95003"></a>
+<a 
+ id="dx55-95004"></a>
+<!--l. 4--><p class="noindent" ><a 
+ id="command:EVEN"></a> <a 
+ id="command:ODD"></a> <a 
+ id="command:NONZERO"></a> An operator can be declared to be <span 
+class="ptmri8t-x-x-109">even </span>or <span 
+class="ptmri8t-x-x-109">odd </span>in its first argument by the declarations
+<span 
+class="pcrr8t-x-x-109">EVEN</span><a 
+ id="dx55-95005"></a> and <span 
+class="pcrr8t-x-x-109">ODD</span><a 
+ id="dx55-95006"></a> respectively. Expressions involving an operator declared in this manner
+are transformed if the first argument contains a minus sign. Any other arguments are not
+affected. In addition, if say <span 
+class="pcrr8t-x-x-109">F </span>is declared odd, then <span 
+class="pcrr8t-x-x-109">f(0) </span>is replaced by zero unless
+<span 
+class="pcrr8t-x-x-109">F </span>is also declared <span 
+class="ptmri8t-x-x-109">non zero </span>by the declaration <span 
+class="pcrr8t-x-x-109">NONZERO</span><a 
+ id="dx55-95007"></a>. For example, the
+declarations
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-153">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;even&#x00A0;f1;&#x00A0;odd&#x00A0;f2;
+</div>
+<!--l. 17--><p class="nopar" > mean that
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-154">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f1(-a)&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F1(A)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f2(-a)&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;-F2(A)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f1(-a,-b)&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F1(A,-B)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;f2(0)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;&#x00A0;&#x00A0;0.
+</div>
+<!--l. 24--><p class="nopar" > To inhibit the last transformation, say <span 
+class="pcrr8t-x-x-109">nonzero f2;</span>.
+                                                                     
+
+                                                                     
+<!--l. 27--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse43.html" >Up</a></td><td class="clinks"><a 
+href="manualse44.html" >Next</a></td><td class="clinks"><a 
+href="manualse42.html" >Prev</a></td><td class="clinks"><a 
+href="manualse42.html#tailmanualse42.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse43.html" >Front</a></td></tr></table><a 
+ id="tailmanualse43.html"></a>  
+</body></html> 

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Quoted Expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse171.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse172.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse170.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse170.html#tailmanualse170.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse171.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">17.3    </span></span> <a 
+ id="x230-101300017.3"></a><span 
+class="ptmr8t-x-x-120">Quoted Expressions</span></h3>
+<a 
+ id="dx230-1013001"></a>
+<!--l. 114--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Because symbolic evaluation requires that each variable or expression has a</span>
+<span 
+class="ptmr8t-x-x-120">value, it is necessary to add to REDUCE the concept of a quoted expression by</span>
+<span 
+class="ptmr8t-x-x-120">analogy with the Lisp </span><span 
+class="pcrr8t-x-x-120">QUOTE </span><span 
+class="ptmr8t-x-x-120">function. This is provided by the single quote mark</span>
+<span 
+class="pcrr8t-x-x-120">&#8217;</span><span 
+class="ptmr8t-x-x-120">. For example,</span>
+     <div class="quote">
+     <div class="tabular"> <table id="TBL-173" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-173-1g"><col 
+id="TBL-173-1"><col 
+id="TBL-173-2"><col 
+id="TBL-173-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-173-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-173-1-1"  
+class="td10"><span 
+class="pcrr8t-x-x-120">&#8217;a      </span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-173-1-2"  
+class="td01"><span 
+class="ptmr8t-x-x-120">represents the Lisp S-expression</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-173-1-3"  
+class="td11"><span 
+class="pcrr8t-x-x-120">(quote a)      </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-173-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-173-2-1"  
+class="td10"><span 
+class="pcrr8t-x-x-120">&#8217;(a b c)</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;</span><span 
+class="ptmr8t-x-x-120">&#x00A0;            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-173-2-2"  
+class="td01"><span 
+class="ptmr8t-x-x-120">represents the Lisp S-expression</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-173-2-3"  
+class="td11"><span 
+class="pcrr8t-x-x-120">(quote (a b c))</span></td></tr></table>
+     </div></div>
+<!--l. 124--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Note, however, that strings are constants and therefore evaluate to themselves</span>
+<span 
+class="ptmr8t-x-x-120">in symbolic mode. Thus, to print the string </span><span 
+class="pcrr8t-x-x-120">~A String~</span><span 
+class="ptmr8t-x-x-120">, one would</span>
+<span 
+class="ptmr8t-x-x-120">write</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1358">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;prin2&#x00A0;~A&#x00A0;String~;
+</div>
+<!--l. 129--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">Within a quoted expression, identifier syntax rules are those of REDUCE. Thus</span>
+<span 
+class="pcrr8t-x-x-120">(A !. B) </span><span 
+class="ptmr8t-x-x-120">is the list consisting of the three elements </span><span 
+class="pcrr8t-x-x-120">A</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">.</span><span 
+class="ptmr8t-x-x-120">, and </span><span 
+class="pcrr8t-x-x-120">B</span><span 
+class="ptmr8t-x-x-120">, whereas </span><span 
+class="pcrr8t-x-x-120">(A</span>
+<span 
+class="pcrr8t-x-x-120">. B) </span><span 
+class="ptmr8t-x-x-120">is the dotted pair of </span><span 
+class="pcrr8t-x-x-120">A </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">B</span><span 
+class="ptmr8t-x-x-120">.</span>
+                                                                     
+
+                                                                     
+<!--l. 135--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch17.html#manualse171.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse172.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse170.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse170.html#tailmanualse170.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse171.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse171.html"></a>  
+</body></html> 

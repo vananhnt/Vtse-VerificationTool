@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Creating/Removing Variable Dependency</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse49.html" >Up</a></td><td class="clinks"><a 
+href="manualse48.html" >Prev</a></td><td class="clinks"><a 
+href="manualse48.html#tailmanualse48.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse49.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.23    </span> <a 
+ id="x61-1010007.23"></a>Creating/Removing Variable Dependency</h3>
+<!--l. 225--><p class="noindent" ><a 
+ id="command:DEPEND"></a> <a 
+ id="command:NODEPEND"></a>
+<!--l. 228--><p class="noindent" >There are several facilities in REDUCE, such as the differentiation <a 
+ id="dx61-101001"></a>operator and the
+linear operator<a 
+ id="dx61-101002"></a> facility, that can utilize knowledge of the dependency between various
+variables, or kernels. Such dependency may be expressed by the command <span 
+class="pcrr8t-x-x-109">DEPEND</span>.<a 
+ id="dx61-101003"></a>
+This takes an arbitrary number of arguments and sets up a dependency of the first
+argument on the remaining arguments. For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-163">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;depend&#x00A0;x,y,z;
+</div>
+<!--l. 238--><p class="nopar" > says that <span 
+class="pcrr8t-x-x-109">X </span>is dependent on both <span 
+class="pcrr8t-x-x-109">Y </span>and <span 
+class="pcrr8t-x-x-109">Z</span>.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-164">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;depend&#x00A0;z,cos(x),y;
+</div>
+<!--l. 242--><p class="nopar" > says that <span 
+class="pcrr8t-x-x-109">Z </span>is dependent on <span 
+class="pcrr8t-x-x-109">COS(X) </span>and <span 
+class="pcrr8t-x-x-109">Y</span>.
+<!--l. 245--><p class="noindent" >Dependencies introduced by <span 
+class="pcrr8t-x-x-109">DEPEND </span>can be removed by <span 
+class="pcrr8t-x-x-109">NODEPEND</span>. <a 
+ id="dx61-101004"></a> The
+arguments of this are the same as for <span 
+class="pcrr8t-x-x-109">DEPEND</span>. For example, given the above
+dependencies,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-165">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;nodepend&#x00A0;z,cos(x);
+</div>
+<!--l. 250--><p class="nopar" > says that <span 
+class="pcrr8t-x-x-109">Z </span>is no longer dependent on <span 
+class="pcrr8t-x-x-109">COS(X)</span>, although it remains dependent on
+<span 
+class="pcrr8t-x-x-109">Y</span>.
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse49.html" >Up</a></td><td class="clinks"><a 
+href="manualse48.html" >Prev</a></td><td class="clinks"><a 
+href="manualse48.html#tailmanualse48.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse49.html" >Front</a></td></tr></table><a 
+ id="tailmanualse49.html"></a>  
+</body></html> 

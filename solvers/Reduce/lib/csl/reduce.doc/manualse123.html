@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>INVBASE: A package for computing involutive bases</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse123.html" >Up</a></td><td class="clinks"><a 
+href="manualse124.html" >Next</a></td><td class="clinks"><a 
+href="manualse122.html" >Prev</a></td><td class="clinks"><a 
+href="manualse122.html#tailmanualse122.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse123.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.32    </span> <a 
+ id="x156-56300016.32"></a>INVBASE: A package for computing involutive
+bases</h3>
+<a 
+ id="dx156-563001"></a>
+<a 
+ id="dx156-563002"></a>
+<!--l. 565--><p class="noindent" >Involutive bases are a new tool for solving problems in connection with multivariate
+polynomials, such as solving systems of polynomial equations and analyzing polynomial
+ideals. An involutive basis of polynomial ideal is nothing but a special form of a
+redundant Gröbner basis. The construction of involutive bases reduces the problem of
+solving polynomial systems to simple linear algebra.
+<!--l. 572--><p class="noindent" >Authors: A.Yu. Zharkov and Yu.A. Blinkov.
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.32.1    </span> <a 
+ id="x156-56400016.32.1"></a>Introduction</h4>
+<!--l. 3--><p class="noindent" >Involutive bases are a new tool for solving problems in connection with multivariate
+polynomials, such as solving systems of polynomial equations and analyzing polynomial
+ideals, see <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. An involutive basis of polynomial ideal is nothing but a special form of a
+redundant Gröbner basis. The construction of involutive bases reduces the problem of
+solving polynomial systems to simple linear algebra.<br 
+class="newline" />The INVBASE package <span class="footnote-mark"><a 
+href="manual157.html#fn13x16"><sup class="textsuperscript">13</sup></a></span><a 
+ id="x156-564001f13"></a> 
+calculates involutive bases of polynomial ideals using an algorithm described in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>
+which may be considered as an alternative to the well-known Buchberger algorithm <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>.
+The package can be used over a variety of different coefficient domains, and for different
+variable and term orderings.<br 
+class="newline" />The algorithm implemented in the INVBASE package is proved to be valid for any
+zero-dimensional ideal (finite number of solutions) as well as for positive-dimensional
+ideals in generic form. However, the algorithm does not terminate for &#8220;sparse&#8221;
+positive-dimensional systems. In order to stop the process we use the maximum degree
+bound for the Gröbner bases of generic ideals in the total-degree term ordering
+established in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>. In this case, it is reasonable to call the GROEBNER package with the
+answer of INVBASE as input information in order to compute the reduced Gröbner basis
+                                                                     
+
+                                                                     
+under the same variable and term ordering.<br 
+class="newline" />Though the INVBASE package supports computing involutive bases in any
+admissible term ordering, it is reasonable to compute them only for the total-degree
+term orderings. The package includes a special algorithm for conversion of
+total-degree involutive bases into the triangular bases in the lexicographical term
+ordering that is desirable for finding solutions. Normally the sum of timings for
+these two computations is much less than the timing for direct computation
+of the lexicographical involutive bases. As a rule, the result of the conversion
+algorithm is a reduced Gröbner basis in the lexicographical term ordering. However,
+because of some gaps in the current version of the algorithm, there may be rare
+situations when the resulting triangular set does not possess the formal property
+of Gröbner bases. Anyway, we recommend using the GROEBNER package
+with the result of the conversion algorithm as input in order either to check the
+Gröbner bases property or to transform the result into a lexicographical Gröbner
+basis.
+<h4 class="subsectionHead"><span class="titlemark">16.32.2    </span> <a 
+ id="x156-56500016.32.2"></a>The Basic Operators</h4>
+<!--l. 49--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x156-56600016.32.2"></a>Term Ordering</h5>
+<!--l. 50--><p class="noindent" >The following term order modes are available:
+<center class="math-display" >
+<img 
+src="manual329x.png" alt="REV  GRADLEX,    GRADLEX,    LEX " class="math-display" ></center>
+These modes have the same meaning as for the GROEBNER package.<br 
+class="newline" />All orderings are based on an ordering among the variables. For each pair of variables an
+order relation <span 
+class="cmmi-10x-x-109">&#x003E; </span>must be defined, e.g. <span 
+class="cmmi-10x-x-109">x &#x003E; y</span>. The term ordering mode as well as the
+order of variables are set by the operator
+                                                                     
+
+                                                                     
+<center class="math-display" >
+<img 
+src="manual330x.png" alt="IN V T ORDER   &#x003C;  mode &#x003E;, {x1,...,xn } " class="math-display" ></center>
+where <span 
+class="cmmi-10x-x-109">&#x003C; mode &#x003E; </span>is one of the term order modes listed above. The notion of <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,...,x</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+as a list of variables at the same time means <span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmr-8">1</span></sub> <span 
+class="cmmi-10x-x-109">&#x003E; ... &#x003E; x</span><sub><span 
+class="cmmi-8">n</span></sub>.
+<!--l. 62--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Example 1.</span>
+<center class="math-display" >
+<img 
+src="manual331x.png" alt="IN V TORDER    REV  GRADLEX,     {x,y,z} " class="math-display" ></center> sets
+the reverse graduated term ordering based on the variable order <span 
+class="cmmi-10x-x-109">x &#x003E; y &#x003E; z</span>.<br 
+class="newline" />The operator <span 
+class="cmmi-10x-x-109">INV TORDER </span>may be omitted. The default term order mode is
+<span 
+class="cmmi-10x-x-109">REV GRADLEX </span>and the default decreasing variable order is alphabetical (or, more
+generally, the default REDUCE kernel order). Furthermore, the list of variables in
+the <span 
+class="cmmi-10x-x-109">INV TORDER </span>may be omitted. In this case the default variable order is
+used.
+<h5 class="subsubsectionHead"><a 
+ id="x156-56700016.32.2"></a>Computing Involutive Bases</h5>
+<!--l. 73--><p class="noindent" >To compute the involutive basis of ideal generated by the set of polynomials <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">p</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,...,p</span><sub><span 
+class="cmmi-8">m</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+one should type the command
+<center class="math-display" >
+<img 
+src="manual332x.png" alt="IN V BASE   {p1,...,pm } " class="math-display" ></center>
+where <span 
+class="cmmi-10x-x-109">p</span><sub><span 
+class="cmmi-8">i</span></sub> are polynomials in variables listed in the <span 
+class="cmmi-10x-x-109">INV TORDER </span>operator. If some
+kernels in <span 
+class="cmmi-10x-x-109">p</span><sub><span 
+class="cmmi-8">i</span></sub> were not listed previously in the <span 
+class="cmmi-10x-x-109">INV TORDER </span>operator they are
+considered as parameters, i.e. they are considered part of the coefficients of polynomials.
+If <span 
+class="cmmi-10x-x-109">INV TORDER </span>was omitted, all the kernels in <span 
+class="cmmi-10x-x-109">p</span><sub><span 
+class="cmmi-8">i</span></sub> are considered as variables with the
+default REDUCE kernel order.<br 
+class="newline" />The coefficients of polynomials <span 
+class="cmmi-10x-x-109">p</span><sub><span 
+class="cmmi-8">i</span></sub> may be integers as well as rational numbers (or,
+accordingly, polynomials and rational functions in the parametric case). The
+computations modulo prime numbers are also available. For this purpose one should type
+the REDUCE commands
+<center class="math-display" >
+<img 
+src="manual333x.png" alt="ON  M ODU   LAR;  SET M OD  p; " class="math-display" ></center>
+where <span 
+class="cmmi-10x-x-109">p </span>is a prime number.<br 
+class="newline" />The value of the <span 
+class="cmmi-10x-x-109">INV BASE </span>function is a list of integer polynomials <span 
+class="cmsy-10x-x-109">{</span><span 
+class="cmmi-10x-x-109">g</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,...,g</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-109">}</span>
+representing an involutive basis of a given ideal.<br 
+class="newline" /><span 
+class="ptmb8t-x-x-109">Example 2. </span><div class="eqnarray">
+<center class="math-display" >
+<img 
+src="manual334x.png" alt="IN VT ORDER    REV GRADLEX,     {x,y,z};
+g := IN V BASE {4 * x* *2+ x *y * *2- z + 1&#x2215;4, 2 *x + y **2 *z + 1&#x2215;2,
+
+x* *2* z - 1&#x2215;2 * x- y **2};
+" class="math-display" ></center>
+</div>The resulting involutive basis in the reverse graduate ordering is <div class="eqnarray">
+                                                                     
+
+                                                                     
+<center class="math-display" >
+<img 
+src="manual335x.png" alt="                   3             2       3
+g := {   8 *x *y *z  - 2* x* y *z +  4* y -
+         4 *y *z2 + 16* x* y + 17* y * z - 4 *y,
+         8 *y4 - 8* x* z2 - 256 *y2 + 2* x *z + 64* z2 - 96 *x + 20 *z - 9,
+             3
+         2 *y  *z + 4* x* y + y,
+         8 *x *z3 - 2* x* z2 + 4 *y2 - 4 *z2 + 16* x+ 17 *z - 4,
+         - 4* y * z3 - 8 *y3 + 6* x *y *z + y * z2 - 36 *x *y - 8 *y,
+                2        2      2
+         4 *x *y  + 32* y - 8 *z  + 12* x - 2* z + 1,
+         2 *y2 *z + 4* x+ 1,
+               3      2              2
+         - 4* z - 8 *y  + 6* x* z + z - 36 *x - 8,
+         8 *x2 - 16* y2 + 4 *z2 - 6* x - z }
+" class="math-display" ></center>
+</div>To convert it into a lexicographical Gröbner basis one should type
+<center class="math-display" >
+<img 
+src="manual336x.png" alt="h := IN V LEX   g; " class="math-display" ></center> The
+result is <div class="eqnarray">
+<center class="math-display" >
+<img 
+src="manual337x.png" alt="h := {    3976 *x + 37104 *z6 - 600* z5 + 2111 * z4 +
+         122062 *z3 + 232833 *z2 - 680336* z + 288814,
+                2           6          5         4
+         1988 *y  - 76752 *z +  1272* z - 4197 *z  -
+         251555 *z3 - 481837 *z2 + 1407741* z - 595666,
+              7       6   5        4       3         2
+         16 *z  - 8* z + z  + 52* z + 75 *z  - 342 *z +  266* z - 60 }
+" class="math-display" ></center>
+</div>In the case of &#8220;sparse&#8221; positive-dimensioned system when the involutive basis in the
+sense of <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span> does not exist, you get the error message
+<center class="math-display" >
+<img 
+src="manual338x.png" alt="** ** *M  AXIM  U M  DEGREE    BOU  N D EXCEEDED " class="math-display" ></center> The
+resulting list of polynomials which is not an involutive basis is stored in the share
+variable INVTEMPBASIS. In this case it is reasonable to call the GROEBNER package
+with the value of INVTEMPBASIS as input under the same variable and term
+ordering.
+<!--l. 131--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x156-568000"></a>Bibliography</h4>
+<!--l. 131--><p class="noindent" >
+     <div class="thebibliography">
+     <p class="bibitem" ><span class="biblabel">
+  [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XLille"></a>Zharkov A.Yu., Blinkov Yu.A. Involution Approach to Solving Systems
+     of Algebraic Equations. Proceedings of the IMACS &#8217;93, 1993, 11-16.
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XBuch"></a>Buchberger  B.  Gröbner  bases:  an  Algorithmic  Method  in  Polynomial
+     Ideal Theory. In: (Bose N.K., ed.) Recent Trends in Multidimensional System
+     Theory, Reidel, 1985.
+                                                                     
+
+                                                                     
+     </p>
+     <p class="bibitem" ><span class="biblabel">
+  [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XLaz"></a>Lazard  D.  Gröbner  Bases,  Gaussian  Elimination  and  Resolution  of
+     Systems  of  Algebraic  Equations.  Proceedings  of  EUROCAL  &#8217;83.  Lecture
+     Notes in Computer Science 162, Springer 1983, 146-157.
+</p>
+     </div>
+<!--l. 576--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 578--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse123.html" >Up</a></td><td class="clinks"><a 
+href="manualse124.html" >Next</a></td><td class="clinks"><a 
+href="manualse122.html" >Prev</a></td><td class="clinks"><a 
+href="manualse122.html#tailmanualse122.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse123.html" >Front</a></td></tr></table><a 
+ id="tailmanualse123.html"></a>   
+</body></html> 

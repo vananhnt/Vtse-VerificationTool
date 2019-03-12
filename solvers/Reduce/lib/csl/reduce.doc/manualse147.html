@@ -1,0 +1,1078 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>ROOTS: A REDUCE root finding package</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse147.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse148.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse146.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse146.html#tailmanualse146.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse147.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56    </span></span> <a 
+ id="x199-78800016.56"></a><span 
+class="ptmr8t-x-x-120">ROOTS: A REDUCE root finding package</span></h3>
+<a 
+ id="dx199-788001"></a>
+<a 
+ id="dx199-788002"></a>
+<!--l. 972--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This root finding package can be used to find some or all of the roots of a</span>
+<span 
+class="ptmr8t-x-x-120">univariate polynomial with real or complex coefficients, to the accuracy specified</span>
+<span 
+class="ptmr8t-x-x-120">by the user.</span>
+<!--l. 976--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">It is designed so that it can be used as an independent package, or it may</span>
+<span 
+class="ptmr8t-x-x-120">be called from </span><span 
+class="pcrr8t-x-x-120">SOLVE </span><span 
+class="ptmr8t-x-x-120">if </span><span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">is on. For example, the evaluation</span>
+<span 
+class="ptmr8t-x-x-120">of</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1155">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;rounded,complex;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve(x**3+x+5,x);
+</div>
+<!--l. 982--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">yields the result</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1156">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;{X=&#x00A0;-&#x00A0;1.51598,X=0.75799&#x00A0;+&#x00A0;1.65035*I,X=0.75799&#x00A0;-&#x00A0;1.65035*I}
+</div>
+<!--l. 986--><p class="nopar" >
+<!--l. 988--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package loads automatically.</span>
+<!--l. 990--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Stanley L. Kameny.</span>
+<a 
+ id="dx199-788003"></a>
+<a 
+ id="dx199-788004"></a>
+<!--l. 2--><p class="noindent" ><a 
+ id="package:ROOTS"></a>
+<!--l. 4--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.1    </span></span> <a 
+ id="x199-78900016.56.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<!--l. 6--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The root finding package is designed so that it can be used as an independent</span>
+<span 
+class="ptmr8t-x-x-120">package, or it can be integrated with and called by </span><span 
+class="pcrr8t-x-x-120">SOLVE</span><span 
+class="ptmr8t-x-x-120">.</span> <a 
+ id="dx199-789001"></a><span 
+class="ptmr8t-x-x-120">This document</span>
+<span 
+class="ptmr8t-x-x-120">describes the package in its independent use. It can be used to find some or all of</span>
+<span 
+class="ptmr8t-x-x-120">the roots of univariate polynomials with real or complex coefficients, to the</span>
+<span 
+class="ptmr8t-x-x-120">accuracy specified by the user.</span>
+<!--l. 13--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.2    </span></span> <a 
+ id="x199-79000016.56.2"></a><span 
+class="ptmr8t-x-x-120">Root Finding Strategies</span></h4>
+<!--l. 15--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">For all polynomials handled by the root finding package, strategies of</span>
+<span 
+class="ptmr8t-x-x-120">factoring are employed where possible to reduce the amount of required</span>
+<span 
+class="ptmr8t-x-x-120">work. These include square-free factoring and separation of complex</span>
+<span 
+class="ptmr8t-x-x-120">polynomials into a product of a polynomial with real coefficients and one</span>
+<span 
+class="ptmr8t-x-x-120">with complex coefficients. Whenever these succeed, the resulting smaller</span>
+<span 
+class="ptmr8t-x-x-120">polynomials are solved separately, except that the root accuracy takes into</span>
+<span 
+class="ptmr8t-x-x-120">account the possibility of close roots on different branches. One other</span>
+<span 
+class="ptmr8t-x-x-120">strategy used where applicable is the powergcd method of reducing the</span>
+<span 
+class="ptmr8t-x-x-120">powers of the initial polynomial by a common factor, and deriving the</span>
+<span 
+class="ptmr8t-x-x-120">roots in two stages, as roots of the reduced power polynomial. Again</span>
+<span 
+class="ptmr8t-x-x-120">here, the possibility of close roots on different branches is taken into</span>
+<span 
+class="ptmr8t-x-x-120">account.</span>
+                                                                     
+
+                                                                     
+<!--l. 28--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.3    </span></span> <a 
+ id="x199-79100016.56.3"></a><span 
+class="ptmr8t-x-x-120">Top Level Functions</span></h4>
+<!--l. 30--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The top level functions can be called either as symbolic operators from algebraic</span>
+<span 
+class="ptmr8t-x-x-120">mode, or they can be called directly from symbolic mode with symbolic mode</span>
+<span 
+class="ptmr8t-x-x-120">arguments. Outputs are expressed in forms that print out correctly in algebraic</span>
+<span 
+class="ptmr8t-x-x-120">mode.</span>
+<!--l. 36--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.3.1    </span></span> <a 
+ id="x199-79200016.56.3.1"></a><span 
+class="ptmr8t-x-x-120">Functions that refer to real roots only</span></h5>
+<!--l. 38--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Three top level functions refer only to real roots. Each of these functions can</span>
+<span 
+class="ptmr8t-x-x-120">receive 1, 2 or 3 arguments.</span>
+<!--l. 41--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The first argument is the polynomial p, that can be complex and can have</span>
+<span 
+class="ptmr8t-x-x-120">multiple or zero roots. If arg2 and arg3 are not present, all real roots are found. If</span>
+<span 
+class="ptmr8t-x-x-120">the additional arguments are present, they restrict the region of consideration.</span>
+<a 
+ id="dx199-792001"></a><a 
+ id="dx199-792002"></a><a 
+ id="dx199-792003"></a><a 
+ id="dx199-792004"></a>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">If   arguments   are   (p,arg2)   then   Arg2   must   be   </span><span 
+class="pcrr8t-x-x-120">POSITIVE </span><span 
+class="ptmr8t-x-x-120">or</span>
+     <span 
+class="pcrr8t-x-x-120">NEGATIVE</span><span 
+class="ptmr8t-x-x-120">.  If  arg2=</span><span 
+class="pcrr8t-x-x-120">NEGATIVE </span><span 
+class="ptmr8t-x-x-120">then  only  negative  roots  of  p  are</span>
+     <span 
+class="ptmr8t-x-x-120">included;  if  arg2=</span><span 
+class="pcrr8t-x-x-120">POSITIVE </span><span 
+class="ptmr8t-x-x-120">then  only  positive  roots  of  p  are</span>
+     <span 
+class="ptmr8t-x-x-120">included. Zero roots are excluded.</span>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">If arguments are (p,arg2,arg3) then</span> <a 
+ id="dx199-792005"></a> <a 
+ id="dx199-792006"></a> <a 
+ id="dx199-792007"></a> <a 
+ id="dx199-792008"></a> <span 
+class="ptmr8t-x-x-120">Arg2 and Arg3 must be r (a</span>
+     <span 
+class="ptmr8t-x-x-120">real  number)  or  </span><span 
+class="pcrr8t-x-x-120">EXCLUDE </span><span 
+class="ptmr8t-x-x-120">r,  or  a  member  of  the  list  </span><span 
+class="pcrr8t-x-x-120">POSITIVE</span><span 
+class="ptmr8t-x-x-120">,</span>
+     <span 
+class="pcrr8t-x-x-120">NEGATIVE</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">INFINITY</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">-INFINITY</span><span 
+class="ptmr8t-x-x-120">. </span><span 
+class="pcrr8t-x-x-120">EXCLUDE </span><span 
+class="ptmr8t-x-x-120">r causes the value</span>
+     <span 
+class="ptmr8t-x-x-120">r to be excluded from the region. The order of the sequence arg2, arg3</span>
+     <span 
+class="ptmr8t-x-x-120">is unimportant. Assuming that arg2 </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="ptmr8t-x-x-120">arg3 when both are numeric,</span>
+     <span 
+class="ptmr8t-x-x-120">then</span>
+     <div class="tabular"> <table id="TBL-124" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-124-1g"><col 
+id="TBL-124-1"><col 
+id="TBL-124-2"><col 
+id="TBL-124-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-124-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-124-1-1"  
+class="td11"><span 
+class="ptmr8t-x-x-120">{</span><span 
+class="pcrr8t-x-x-120">-INFINITY</span><span 
+class="ptmr8t-x-x-120">,</span><span 
+class="pcrr8t-x-x-120">INFINITY</span><span 
+class="ptmr8t-x-x-120">}</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-124-1-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">is equivalent to</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-124-1-3"  
+class="td11"><span 
+class="ptmr8t-x-x-120">{} represents all roots;</span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-124-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-124-2-1"  
+class="td11"><span 
+class="ptmr8t-x-x-120">{arg2,</span><span 
+class="pcrr8t-x-x-120">NEGATIVE</span><span 
+class="ptmr8t-x-x-120">}                </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-124-2-2"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">represents    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-124-2-3"  
+class="td11"><span 
+class="cmsy-10x-x-120">-&#x221E; </span><span 
+class="cmmi-12">&#x003C; r &#x003C; arg</span><span 
+class="cmr-12">2</span><span 
+class="ptmr8t-x-x-120">;        </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-124-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-124-3-1"  
+class="td11"><span 
+class="ptmr8t-x-x-120">{arg2,</span><span 
+class="pcrr8t-x-x-120">POSITIVE</span><span 
+class="ptmr8t-x-x-120">}                </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-124-3-2"  
+class="td11">  <span 
+class="ptmr8t-x-x-120">represents    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-124-3-3"  
+class="td11"><span 
+class="cmmi-12">arg</span><span 
+class="cmr-12">2 </span><span 
+class="cmmi-12">&#x003C; r &#x003C; </span><span 
+class="cmsy-10x-x-120">&#x221E;</span><span 
+class="ptmr8t-x-x-120">;           </span></td></tr></table>
+     </div>
+     <!--l. 66--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In each of the following, replacing an </span><span 
+class="ptmri8t-x-x-120">arg </span><span 
+class="ptmr8t-x-x-120">with </span><span 
+class="pcrr8t-x-x-120">EXCLUDE</span><span 
+class="ptmri8t-x-x-120">arg </span><span 
+class="ptmr8t-x-x-120">converts the</span>
+     <span 
+class="ptmr8t-x-x-120">corresponding inclusive </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="ptmr8t-x-x-120">to the exclusive </span><span 
+class="cmmi-12">&#x003C;</span>
+                                                                     
+
+                                                                     
+     <div class="tabular"> <table id="TBL-125" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-125-1g"><col 
+id="TBL-125-1"><col 
+id="TBL-125-2"><col 
+id="TBL-125-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-125-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-125-1-1"  
+class="td11"><span 
+class="ptmr8t-x-x-120">{arg2,</span><span 
+class="pcrr8t-x-x-120">-INFINITY</span><span 
+class="ptmr8t-x-x-120">}</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-125-1-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">represents</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-125-1-3"  
+class="td11"><span 
+class="cmsy-10x-x-120">-&#x221E; </span><span 
+class="cmmi-12">&#x003C; r </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">arg</span><span 
+class="cmr-12">2</span><span 
+class="ptmr8t-x-x-120">; </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-125-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-125-2-1"  
+class="td11"><span 
+class="ptmr8t-x-x-120">{arg2,</span><span 
+class="pcrr8t-x-x-120">INFINITY</span><span 
+class="ptmr8t-x-x-120">}   </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-125-2-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">represents</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-125-2-3"  
+class="td11"><span 
+class="cmmi-12">arg</span><span 
+class="cmr-12">2 </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">r &#x003C; </span><span 
+class="cmsy-10x-x-120">&#x221E;</span><span 
+class="ptmr8t-x-x-120">;    </span></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-125-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-125-3-1"  
+class="td11"><span 
+class="ptmr8t-x-x-120">{arg2,arg3}                </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-125-3-2"  
+class="td11"><span 
+class="ptmr8t-x-x-120">represents</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-125-3-3"  
+class="td11"><span 
+class="cmmi-12">arg</span><span 
+class="cmr-12">2 </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">r </span><span 
+class="cmsy-10x-x-120">&#x2264; </span><span 
+class="cmmi-12">arg</span><span 
+class="cmr-12">3</span><span 
+class="ptmr8t-x-x-120">;</span></td></tr></table>
+     </div>
+     </li>
+     <li class="itemize"><span 
+class="ptmr8t-x-x-120">If zero is in the interval the zero root is included.</span></li></ul>
+<a 
+ id="dx199-792009"></a>
+<a 
+ id="dx199-792010"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">REALROOTS</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This function finds the real roots of the polynomial p, using</span>
+     <span 
+class="ptmr8t-x-x-120">the </span><span 
+class="pcrr8t-x-x-120">REALROOT </span><span 
+class="ptmr8t-x-x-120">package to isolate real roots by the method of Sturm</span>
+     <span 
+class="ptmr8t-x-x-120">sequences, then polishing the root to the desired accuracy. Precision</span>
+     <span 
+class="ptmr8t-x-x-120">of computation is guaranteed to be sufficient to separate all real roots</span>
+     <span 
+class="ptmr8t-x-x-120">in  the  specified  region.  (cf.  </span><span 
+class="pcrr8t-x-x-120">MULTIROOT </span><span 
+class="ptmr8t-x-x-120">for  treatment  of  multiple</span>
+     <span 
+class="ptmr8t-x-x-120">roots.)</span>
+<a 
+ id="dx199-792011"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ISOLATER</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This  function  produces  a  list  of  rational  intervals,  each</span>
+     <span 
+class="ptmr8t-x-x-120">containing a single real root of the polynomial p, within the specified</span>
+     <span 
+class="ptmr8t-x-x-120">region, but does not find the roots.</span>
+<a 
+ id="dx199-792012"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">RLROOTNO</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This function computes the number of real roots of p in the</span>
+     <span 
+class="ptmr8t-x-x-120">specified region, but does not find the roots.</span></dd></dl>
+<!--l. 97--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.3.2    </span></span> <a 
+ id="x199-79300016.56.3.2"></a><span 
+class="ptmr8t-x-x-120">Functions that return both real and complex roots</span></h5>
+<a 
+ id="dx199-793001"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ROOTS p;</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This  is  the  main  top  level  function  of  the  roots  package.  It</span>
+     <span 
+class="ptmr8t-x-x-120">will  find  all  roots,  real  and  complex,  of  the  polynomial  p  to  an</span>
+     <span 
+class="ptmr8t-x-x-120">accuracy that is sufficient to separate them and which is a minimum</span>
+     <span 
+class="ptmr8t-x-x-120">of  6  decimal  places.  The  value  returned  by  </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">is  a  list  of</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">equations  for  all  roots.  In  addition,  </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">stores  separate  lists  of</span>
+     <span 
+class="ptmr8t-x-x-120">real roots and complex roots in the global variables </span><span 
+class="pcrr8t-x-x-120">ROOTSREAL </span><span 
+class="ptmr8t-x-x-120">and</span>
+     <span 
+class="pcrr8t-x-x-120">ROOTSCOMPLEX</span><span 
+class="ptmr8t-x-x-120">.</span> <a 
+ id="dx199-793002"></a> <a 
+ id="dx199-793003"></a>
+     <!--l. 109--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The order of root discovery by </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">is highly variable from system</span>
+     <span 
+class="ptmr8t-x-x-120">to system, depending upon very subtle arithmetic differences during</span>
+     <span 
+class="ptmr8t-x-x-120">the computation. In order to make it easier to compare results obtained</span>
+     <span 
+class="ptmr8t-x-x-120">on different computers, the output of </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">is sorted into a standard</span>
+     <span 
+class="ptmr8t-x-x-120">order: a root with smaller real part precedes a root with larger real</span>
+     <span 
+class="ptmr8t-x-x-120">part; roots with identical real parts are sorted so that larger imaginary</span>
+     <span 
+class="ptmr8t-x-x-120">part precedes smaller imaginary part. (This is done so that for complex</span>
+     <span 
+class="ptmr8t-x-x-120">pairs, the positive imaginary part is seen first.)</span>
+     <!--l. 118--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">However,  when  a  polynomial  has  been  factored  (by  square-free</span>
+     <span 
+class="ptmr8t-x-x-120">factoring  or  by  separation  into  real  and  complex  factors)  then  the</span>
+     <span 
+class="ptmr8t-x-x-120">root sorting is applied to each factor separately. This makes the final</span>
+     <span 
+class="ptmr8t-x-x-120">resulting order less obvious. However it is consistent from system to</span>
+     <span 
+class="ptmr8t-x-x-120">system.</span>
+<a 
+ id="dx199-793004"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ROOTS_AT_PREC p;</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Same  as  </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">except  that  roots  values  are</span>
+     <span 
+class="ptmr8t-x-x-120">returned to a minimum of the number of decimal places equal to the</span>
+     <span 
+class="ptmr8t-x-x-120">current system precision.</span>
+<a 
+ id="dx199-793005"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ROOT_VAL p;</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">Same   as   </span><span 
+class="pcrr8t-x-x-120">ROOTS_AT_PREC</span><span 
+class="ptmr8t-x-x-120">,   except   that   instead   of</span>
+     <span 
+class="ptmr8t-x-x-120">returning a list of equations for the roots, a list of the root value is</span>
+     <span 
+class="ptmr8t-x-x-120">returned. This is the function that SOLVE calls.</span>
+<a 
+ id="dx199-793006"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">NEARESTROOT(p,s);</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This top level function uses an iterative method to</span>
+     <span 
+class="ptmr8t-x-x-120">find the root to which the method converges given the initial starting</span>
+     <span 
+class="ptmr8t-x-x-120">origin s, which can be complex. If there are several roots in the vicinity</span>
+     <span 
+class="ptmr8t-x-x-120">of s and s is not significantly closer to one root than it is to all others,</span>
+     <span 
+class="ptmr8t-x-x-120">the convergence could arrive at a root that is not truly the nearest root.</span>
+     <span 
+class="ptmr8t-x-x-120">This function should therefore be used only when the user is certain</span>
+     <span 
+class="ptmr8t-x-x-120">that there is only one root in the immediate vicinity of the starting</span>
+     <span 
+class="ptmr8t-x-x-120">point s.</span>
+<a 
+ id="dx199-793007"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">FIRSTROOT p;</span> </dt><dd 
+class="description"><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">is called, but only the first root determined by</span>
+                                                                     
+
+                                                                     
+     <span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">is computed. Note that this is not in general the first root that</span>
+     <span 
+class="ptmr8t-x-x-120">would be listed in </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">output, since the </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">outputs are sorted</span>
+     <span 
+class="ptmr8t-x-x-120">into a canonical order. Also, in some difficult root finding cases, the</span>
+     <span 
+class="ptmr8t-x-x-120">first root computed might be incorrect.</span></dd></dl>
+<!--l. 152--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.3.3    </span></span> <a 
+ id="x199-79400016.56.3.3"></a><span 
+class="ptmr8t-x-x-120">Other top level functions</span></h5>
+<a 
+ id="dx199-794001"></a>
+<a 
+ id="dx199-794002"></a>
+<a 
+ id="dx199-794003"></a>
+<a 
+ id="dx199-794004"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">GETROOT(n,rr);</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">If   rr   has   the   form   of   the   output   of   ROOTS,</span>
+     <span 
+class="ptmr8t-x-x-120">REALROOTS,   or   NEARESTROOTS;   GETROOT   returns   the</span>
+     <span 
+class="ptmr8t-x-x-120">rational, real, or complex value of the root equation. An error occurs</span>
+     <span 
+class="ptmr8t-x-x-120">if </span><span 
+class="cmmi-12">n &#x003C; </span><span 
+class="cmr-12">1 </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="cmmi-12">n &#x003E; </span><span 
+class="ptmr8t-x-x-120">the number of roots in rr.</span>
+<a 
+ id="dx199-794005"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">MKPOLY rr;</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This  function  can  be  used  to  reconstruct  a  polynomial</span>
+     <span 
+class="ptmr8t-x-x-120">whose   root   equation   list   is   rr   and   whose   denominator   is   1.</span>
+     <span 
+class="ptmr8t-x-x-120">Thus  one  can  verify  that  if  </span><span 
+class="cmmi-12">rr  </span><span 
+class="cmr-12">:=   </span><span 
+class="cmmi-12">ROOTS</span><span 
+class="cmmi-12">&#x00A0;p</span><span 
+class="ptmr8t-x-x-120">,  and  </span><span 
+class="cmmi-12">rr</span><span 
+class="cmr-12">1   :=</span>
+     <span 
+class="cmmi-12">ROOTS</span><span 
+class="cmmi-12">&#x00A0;MKPOLY </span><span 
+class="cmmi-12">&#x00A0;rr</span><span 
+class="ptmr8t-x-x-120">,  then  </span><span 
+class="cmmi-12">rr</span><span 
+class="cmr-12">1  =  </span><span 
+class="cmmi-12">rr</span><span 
+class="ptmr8t-x-x-120">.  (This  will  be  true  if</span>
+     <span 
+class="pcrr8t-x-x-120">MULTIROOT </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">RATROOT </span><span 
+class="ptmr8t-x-x-120">are ON, and </span><span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">is off.) However,</span>
+     <span 
+class="cmmi-12">MKPOLY </span><span 
+class="cmmi-12">&#x00A0;rr</span><span 
+class="cmsy-10x-x-120">-</span><span 
+class="cmmi-12">NUM</span><span 
+class="cmmi-12">&#x00A0;p </span><span 
+class="cmr-12">= 0 </span><span 
+class="ptmr8t-x-x-120">will be true if and only if all roots of</span>
+     <span 
+class="ptmr8t-x-x-120">p have been computed exactly.</span>
+     </dd></dl>
+<!--l. 172--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.3.4    </span></span> <a 
+ id="x199-79500016.56.3.4"></a><span 
+class="ptmr8t-x-x-120">Functions available for diagnostic or instructional use only</span></h5>
+<a 
+ id="dx199-795001"></a>
+                                                                     
+
+                                                                     
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">GFNEWT(p,r,cpx);</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This  function  will  do  a  single  pass  through  the</span>
+     <span 
+class="ptmr8t-x-x-120">function </span><span 
+class="pcrr8t-x-x-120">GFNEWTON </span><span 
+class="ptmr8t-x-x-120">for polynomial p and root r. If cpx=T, then any</span>
+     <span 
+class="ptmr8t-x-x-120">complex part of the root will be kept, no matter how small.</span>
+<a 
+ id="dx199-795002"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">GFROOT(p,r,cpx);</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">This  function  will  do  a  single  pass  through  the</span>
+     <span 
+class="ptmr8t-x-x-120">function </span><span 
+class="pcrr8t-x-x-120">GFROOTFIND </span><span 
+class="ptmr8t-x-x-120">for polynomial p and root r. If cpx=T, then</span>
+     <span 
+class="ptmr8t-x-x-120">any complex part of the root will be kept, no matter how small.</span></dd></dl>
+<!--l. 186--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.4    </span></span> <a 
+ id="x199-79600016.56.4"></a><span 
+class="ptmr8t-x-x-120">Switches Used in Input</span></h4>
+<!--l. 188--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The input of polynomials in algebraic mode is sensitive to the switches</span>
+<span 
+class="pcrr8t-x-x-120">COMPLEX</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">ROUNDED</span><span 
+class="ptmr8t-x-x-120">, and </span><span 
+class="pcrr8t-x-x-120">ADJPREC</span><span 
+class="ptmr8t-x-x-120">. The correct choice of input method is</span>
+<span 
+class="ptmr8t-x-x-120">important since incorrect choices will result in undesirable truncation or rounding</span>
+<span 
+class="ptmr8t-x-x-120">of the input coefficients.</span>
+<!--l. 193--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Truncation or rounding may occur if </span><span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">is on and one of the following is</span>
+<span 
+class="ptmr8t-x-x-120">true:</span>
+<!--l. 196--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x199-796002x1"><span 
+class="ptmr8t-x-x-120">a coefficient is entered in floating point form or rational form.</span>
+     </li>
+     <li 
+  class="enumerate" id="x199-796004x2"><span 
+class="pcrr8t-x-x-120">COMPLEX </span><span 
+class="ptmr8t-x-x-120">is on and a coefficient is imaginary or complex.</span></li></ol>
+<!--l. 201--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Therefore, to avoid undesirable truncation or rounding, then:</span>
+<!--l. 203--><p class="noindent" >
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x199-796006x1"><span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">should  be  off  and  input  should  be  in  integer  or  rational</span>
+     <span 
+class="ptmr8t-x-x-120">form; or</span>
+     </li>
+     <li 
+  class="enumerate" id="x199-796008x2"><span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">can  be  on  if  it  is  acceptable  to  truncate  or  round  input</span>
+     <span 
+class="ptmr8t-x-x-120">to  the  current  value  of  system  precision;  or  both  </span><span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">and</span>
+     <span 
+class="pcrr8t-x-x-120">ADJPREC </span><span 
+class="ptmr8t-x-x-120">can be on, in which case system precision will be adjusted</span>
+     <span 
+class="ptmr8t-x-x-120">to accommodate the largest coefficient which is input; or</span>
+                                                                     
+
+                                                                     
+     </li>
+     <li 
+  class="enumerate" id="x199-796010x3"><span 
+class="ptmr8t-x-x-120">if   the   input   contains   complex   coefficients   with   very   different</span>
+     <span 
+class="ptmr8t-x-x-120">magnitude  for  the  real  and  imaginary  parts,  then  all  three  switches</span>
+     <span 
+class="pcrr8t-x-x-120">ROUNDED</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">ADJPREC </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">COMPLEX </span><span 
+class="ptmr8t-x-x-120">must be on.</span></li></ol>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">integer and complex modes</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">(</span><span 
+class="ptmb8t-x-x-120">off </span><span 
+class="pcrr8t-x-x-120">ROUNDED</span><span 
+class="ptmr8t-x-x-120">) any real polynomial can be</span>
+     <span 
+class="ptmr8t-x-x-120">input  using  integer  coefficients  of  any  size;  integer  or  rational</span>
+     <span 
+class="ptmr8t-x-x-120">coefficients  can  be  used  to  input  any  real  or  complex  polynomial,</span>
+     <span 
+class="ptmr8t-x-x-120">independent of the setting of the switch </span><span 
+class="pcrr8t-x-x-120">COMPLEX</span><span 
+class="ptmr8t-x-x-120">. These are the most</span>
+     <span 
+class="ptmr8t-x-x-120">versatile input modes, since any real or complex polynomial can be</span>
+     <span 
+class="ptmr8t-x-x-120">input exactly.</span>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">modes rounded and complex-rounded</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">(on  </span><span 
+class="pcrr8t-x-x-120">ROUNDED</span><span 
+class="ptmr8t-x-x-120">)  polynomials  can</span>
+     <span 
+class="ptmr8t-x-x-120">be   input   using   integer   coefficients   of   any   size.   Floating   point</span>
+     <span 
+class="ptmr8t-x-x-120">coefficients will be truncated or rounded, to a size dependent upon</span>
+     <span 
+class="ptmr8t-x-x-120">the  system.  If  complex  is  on,  real  coefficients  can  be  input  to  any</span>
+     <span 
+class="ptmr8t-x-x-120">precision  using  integer  form,  but  coefficients  of  imaginary  parts  of</span>
+     <span 
+class="ptmr8t-x-x-120">complex coefficients will be rounded or truncated.</span></dd></dl>
+<!--l. 233--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.5    </span></span> <a 
+ id="x199-79700016.56.5"></a><span 
+class="ptmr8t-x-x-120">Internal and Output Use of Switches</span></h4>
+<!--l. 235--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The REDUCE arithmetic mode switches </span><span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">COMPLEX </span><span 
+class="ptmr8t-x-x-120">control</span>
+<span 
+class="ptmr8t-x-x-120">the behavior of the root finding package. These switches are returned</span>
+<span 
+class="ptmr8t-x-x-120">in the same state in which they were set initially, (barring catastrophic</span>
+<span 
+class="ptmr8t-x-x-120">error).</span>
+<a 
+ id="dx199-797001"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">COMPLEX</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The  root  finding  package  controls  the  switch  </span><span 
+class="pcrr8t-x-x-120">COMPLEX</span>
+     <span 
+class="ptmr8t-x-x-120">internally,  turning  the  switch  on  if  it  is  processing  a  complex</span>
+     <span 
+class="ptmr8t-x-x-120">polynomial.  For  a  polynomial  with  real  coefficients,  the</span>  <a 
+ id="dx199-797002"></a>  <span 
+class="ptmr8t-x-x-120">starting</span>
+     <span 
+class="ptmr8t-x-x-120">point argument for </span><span 
+class="pcrr8t-x-x-120">NEARESTROOT </span><span 
+class="ptmr8t-x-x-120">can be given in algebraic mode</span>
+     <span 
+class="ptmr8t-x-x-120">in  complex  form  as  rl  +  im  *  I  and  will  be  handled  correctly,</span>
+     <span 
+class="ptmr8t-x-x-120">independent of the setting of the switch </span><span 
+class="pcrr8t-x-x-120">COMPLEX. </span><span 
+class="ptmr8t-x-x-120">Complex roots</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">will be computed and printed correctly regardless of the setting of the</span>
+     <span 
+class="ptmr8t-x-x-120">switch </span><span 
+class="pcrr8t-x-x-120">COMPLEX</span><span 
+class="ptmr8t-x-x-120">. However, if </span><span 
+class="pcrr8t-x-x-120">COMPLEX </span><span 
+class="ptmr8t-x-x-120">is off, the imaginary part</span>
+     <span 
+class="ptmr8t-x-x-120">will print out ahead of the real part, while the reverse order will be</span>
+     <span 
+class="ptmr8t-x-x-120">obtained if </span><span 
+class="pcrr8t-x-x-120">COMPLEX </span><span 
+class="ptmr8t-x-x-120">is on.</span>
+<a 
+ id="dx199-797003"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ROUNDED</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The  root  finding  package  performs  computations  using  the</span>
+     <span 
+class="ptmr8t-x-x-120">arithmetic mode that is required at the time, which may be integer,</span>
+     <span 
+class="ptmr8t-x-x-120">Gaussian integer, rounded, or complex rounded. The switch </span><span 
+class="pcrr8t-x-x-120">BFTAG</span>
+     <span 
+class="ptmr8t-x-x-120">is used internally to govern the mode of computation and precision</span>
+     <span 
+class="ptmr8t-x-x-120">is  adjusted  whenever  necessary.  The  initial  position  of  switches</span>
+     <span 
+class="pcrr8t-x-x-120">ROUNDED </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">COMPLEX </span><span 
+class="ptmr8t-x-x-120">are ignored. At output, these switches will</span>
+     <span 
+class="ptmr8t-x-x-120">emerge in their initial positions.</span></dd></dl>
+<!--l. 265--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.6    </span></span> <a 
+ id="x199-79800016.56.6"></a><span 
+class="ptmr8t-x-x-120">Root Package Switches</span></h4>
+<!--l. 267--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Note: switches </span><span 
+class="pcrr8t-x-x-120">AUTOMODE</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="pcrr8t-x-x-120">ISOROOT </span><span 
+class="ptmr8t-x-x-120">and </span><span 
+class="pcrr8t-x-x-120">ACCROOT</span><span 
+class="ptmr8t-x-x-120">, present in earlier</span>
+<span 
+class="ptmr8t-x-x-120">versions, have been eliminated.</span>
+<a 
+ id="dx199-798001"></a>
+<a 
+ id="dx199-798002"></a>
+<a 
+ id="dx199-798003"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">RATROOT</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">(Default OFF) If </span><span 
+class="pcrr8t-x-x-120">RATROOT </span><span 
+class="ptmr8t-x-x-120">is on all root equations are output</span>
+     <span 
+class="ptmr8t-x-x-120">in rational form. Assuming that the mode is </span><span 
+class="pcrr8t-x-x-120">COMPLEX </span><span 
+class="ptmr8t-x-x-120">(i.e. </span><span 
+class="pcrr8t-x-x-120">ROUNDED</span>
+     <span 
+class="ptmr8t-x-x-120">is off,) the root equations are guaranteed to be able to be input into</span>
+     <span 
+class="ptmr8t-x-x-120">REDUCE  without  truncation  or  rounding  errors.  (Cf.  the  function</span>
+     <span 
+class="pcrr8t-x-x-120">MKPOLY </span><span 
+class="ptmr8t-x-x-120">described above.)</span>
+<a 
+ id="dx199-798004"></a>
+<a 
+ id="dx199-798005"></a>
+<a 
+ id="dx199-798006"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">MULTIROOT</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">(Default  ON)  Whenever  the  polynomial  has  complex</span>
+     <span 
+class="ptmr8t-x-x-120">coefficients   or   has   real   coefficients   and   has   multiple   roots,   as</span>
+     <a 
+ id="dx199-798007"></a> <span 
+class="ptmr8t-x-x-120">determined  by  the  Sturm  function,  the  function  </span><span 
+class="pcrr8t-x-x-120">SQFRF </span><span 
+class="ptmr8t-x-x-120">is  called</span>
+     <span 
+class="ptmr8t-x-x-120">automatically  to  factor  the  polynomial  into  square-free  factors.  If</span>
+                                                                     
+
+                                                                     
+     <span 
+class="pcrr8t-x-x-120">MULTIROOT </span><span 
+class="ptmr8t-x-x-120">is on, the multiplicity of the roots will be indicated in</span>
+     <span 
+class="ptmr8t-x-x-120">the output of ROOTS or REALROOTS by printing the root output</span>
+     <span 
+class="ptmr8t-x-x-120">repeatedly, according to its multiplicity. If </span><span 
+class="pcrr8t-x-x-120">MULTIROOT </span><span 
+class="ptmr8t-x-x-120">is off, each</span>
+     <span 
+class="ptmr8t-x-x-120">root will be printed once, and all roots should be normally be distinct.</span>
+     <span 
+class="ptmr8t-x-x-120">(Two  identical  roots  should  not  appear.  If  the  initial  precision  of</span>
+     <span 
+class="ptmr8t-x-x-120">the  computation  or  the  accuracy  of  the  output  was  insufficient  to</span>
+     <span 
+class="ptmr8t-x-x-120">separate two closely-spaced roots, the program attempts to increase</span>
+     <span 
+class="ptmr8t-x-x-120">accuracy  and/or  precision  if  it  detects  equal  roots.  If,  however,  the</span>
+     <span 
+class="ptmr8t-x-x-120">initial  accuracy  specified  was  too  low,  and  it  was  not  possible  to</span>
+     <span 
+class="ptmr8t-x-x-120">separate the roots, the program will abort.)</span>
+<a 
+ id="dx199-798008"></a>
+<a 
+ id="dx199-798009"></a>
+<a 
+ id="dx199-798010"></a>
+<a 
+ id="dx199-798011"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">TRROOT</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">(Default  OFF)  If  switch  </span><span 
+class="pcrr8t-x-x-120">TRROOT </span><span 
+class="ptmr8t-x-x-120">is  on,  trace  messages  are</span>
+     <span 
+class="ptmr8t-x-x-120">printed  out  during  the  course  of  root  determination,  to  show  the</span>
+     <span 
+class="ptmr8t-x-x-120">progress of solution.</span>
+<a 
+ id="dx199-798012"></a>
+<a 
+ id="dx199-798013"></a>
+<a 
+ id="dx199-798014"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ROOTMSG</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">(Default OFF) If switch </span><span 
+class="pcrr8t-x-x-120">ROOTMSG </span><span 
+class="ptmr8t-x-x-120">is on in addition to switch</span>
+     <span 
+class="pcrr8t-x-x-120">TRROOT</span><span 
+class="ptmr8t-x-x-120">, additional messages are printed out to aid in following the</span>
+     <span 
+class="ptmr8t-x-x-120">progress of Laguerre and Newton complex iteration. These messages</span>
+     <span 
+class="ptmr8t-x-x-120">are intended for debugging use primarily.</span>
+     </dd></dl>
+<!--l. 311--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.7    </span></span> <a 
+ id="x199-79900016.56.7"></a><span 
+class="ptmr8t-x-x-120">Operational Parameters and Parameter Setting.</span></h4>
+<a 
+ id="dx199-799001"></a>
+<a 
+ id="dx199-799002"></a>
+     <dl class="description"><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ROOTACC#</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">(Default  6)  This  parameter  can  be  set  using  the  function</span>
+     <span 
+class="pcrr8t-x-x-120">ROOTACC </span><span 
+class="ptmr8t-x-x-120">n;  which  causes  </span><span 
+class="pcrr8t-x-x-120">ROOTACC!# </span><span 
+class="ptmr8t-x-x-120">to  be  set  to  MAX(n,6).</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">If  </span><span 
+class="pcrr8t-x-x-120">ACCROOT </span><span 
+class="ptmr8t-x-x-120">is  on,  roots  will  be  determined  to  a  minimum  of</span>
+     <span 
+class="pcrr8t-x-x-120">ROOTACC!# </span><span 
+class="ptmr8t-x-x-120">significant places. (If roots are closely spaced, a higher</span>
+     <span 
+class="ptmr8t-x-x-120">number of significant places is computed where needed.)</span>
+<a 
+ id="dx199-799003"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">system precision</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The roots package, during its operation, will change the</span>
+     <span 
+class="ptmr8t-x-x-120">value of system precision but will restore the original value of system</span>
+     <span 
+class="ptmr8t-x-x-120">precision at termination except that the value of system precision is</span>
+     <span 
+class="ptmr8t-x-x-120">increased if necessary to allow the full roots output to be printed.</span>
+<a 
+ id="dx199-799004"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">PRECISION n;</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">If  the  user  sets  system  precision,  using  the  command</span>
+     <span 
+class="ptmr8t-x-x-120">PRECISION n; then the effect is to increase the system precision to n,</span>
+     <span 
+class="ptmr8t-x-x-120">and to have the same effect on </span><span 
+class="pcrr8t-x-x-120">ROOTS </span><span 
+class="ptmr8t-x-x-120">as </span><span 
+class="pcrr8t-x-x-120">ROOTACC </span><span 
+class="ptmr8t-x-x-120">n; ie. roots will</span>
+     <span 
+class="ptmr8t-x-x-120">now  be  printed  with  minimum  accuracy  n.  The  original  conditions</span>
+     <span 
+class="ptmr8t-x-x-120">can then be restored by using the command PRECISION RESET; or</span>
+     <span 
+class="ptmr8t-x-x-120">PRECISION NIL;.</span>
+<a 
+ id="dx199-799005"></a>
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-120">ROOTPREC n;</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">The roots package normally sets the computation mode</span>
+     <span 
+class="ptmr8t-x-x-120">and precision automatically. However, if </span><span 
+class="pcrr8t-x-x-120">ROOTPREC </span><span 
+class="ptmr8t-x-x-120">n; is called and</span>
+     <span 
+class="cmmi-12">n </span><span 
+class="ptmr8t-x-x-120">is greater than the initial system precision then all root computation</span>
+     <span 
+class="ptmr8t-x-x-120">will be done initially using a minimum system precision n. Automatic</span>
+     <span 
+class="ptmr8t-x-x-120">operation can be restored by input of </span><span 
+class="pcrr8t-x-x-120">ROOTPREC </span><span 
+class="ptmr8t-x-x-120">0;.</span></dd></dl>
+<!--l. 345--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.56.8    </span></span> <a 
+ id="x199-80000016.56.8"></a><span 
+class="ptmr8t-x-x-120">Avoiding truncation of polynomials on input</span></h4>
+<!--l. 347--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The roots package will not internally truncate polynomials. However, it is</span>
+<span 
+class="ptmr8t-x-x-120">possible that a polynomial can be truncated by input reading functions of the</span>
+<span 
+class="ptmr8t-x-x-120">embedding lisp system, particularly when input is given in floating point</span>
+<span 
+class="ptmr8t-x-x-120">(rounded) format.</span>
+<!--l. 352--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">To avoid any difficulties, input can be done in integer or Gaussian integer format,</span>
+<span 
+class="ptmr8t-x-x-120">or mixed, with integers or rationals used to represent quantities of high</span>
+<span 
+class="ptmr8t-x-x-120">precision. There are many examples of this in the test package. It is usually</span>
+<span 
+class="ptmr8t-x-x-120">best to let the roots package determine the precision needed to compute</span>
+<span 
+class="ptmr8t-x-x-120">roots.</span>
+                                                                     
+
+                                                                     
+<!--l. 358--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The number of digits that can be safely represented in floating point in the lisp</span>
+<span 
+class="ptmr8t-x-x-120">system are contained in the global variable </span><span 
+class="pcrr8t-x-x-120">!!NFPD</span><span 
+class="ptmr8t-x-x-120">. Similarly, the maximum</span>
+<span 
+class="ptmr8t-x-x-120">number of significant figures in floating point output are contained in the global</span>
+<span 
+class="ptmr8t-x-x-120">variable </span><span 
+class="pcrr8t-x-x-120">!!FLIM</span><span 
+class="ptmr8t-x-x-120">. The roots package computes these values, which are needed to</span>
+<span 
+class="ptmr8t-x-x-120">control the logic of the program.</span> <a 
+ id="dx199-800001"></a> <a 
+ id="dx199-800002"></a>
+<!--l. 365--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The values of intermediate root iterations (that are printed when </span><span 
+class="pcrr8t-x-x-120">TRROOT </span><span 
+class="ptmr8t-x-x-120">is on)</span>
+<span 
+class="ptmr8t-x-x-120">are given in bigfloat format even when the actual values are computed in floating</span>
+<span 
+class="ptmr8t-x-x-120">point. This avoids intrusive rounding of root printout.</span>
+<!--l. 994--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 996--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse147.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse148.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse146.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse146.html#tailmanualse146.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse147.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse147.html"></a>   
+</body></html> 

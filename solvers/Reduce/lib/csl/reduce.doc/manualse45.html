@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Non-Commuting Operators</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse45.html" >Up</a></td><td class="clinks"><a 
+href="manualse46.html" >Next</a></td><td class="clinks"><a 
+href="manualse44.html" >Prev</a></td><td class="clinks"><a 
+href="manualse44.html#tailmanualse44.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse45.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.19    </span> <a 
+ id="x57-970007.19"></a>Non-Commuting Operators</h3>
+<a 
+ id="dx57-97001"></a>
+<a 
+ id="dx57-97002"></a>
+<!--l. 84--><p class="noindent" ><a 
+ id="command:NONCOM"></a> An operator can be declared to be non-commutative under multiplication by the
+declaration <span 
+class="pcrr8t-x-x-109">NONCOM</span>.<a 
+ id="dx57-97003"></a>
+<!--l. 88--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 90--><p class="noindent" >After the declaration
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-157">
+&#x00A0;&#x00A0;noncom&#x00A0;u,v;
+</div>
+<!--l. 93--><p class="nopar" > the expressions <span 
+class="pcrr8t-x-x-109">u(x)*u(y)-u(y)*u(x) </span>and <span 
+class="pcrr8t-x-x-109">u(x)*v(y)-v(y)*u(x)</span>
+will remain unchanged on simplification, and in particular will not simplify to
+zero.
+<!--l. 98--><p class="noindent" >Note that it is the operator (<span 
+class="pcrr8t-x-x-109">U </span>and <span 
+class="pcrr8t-x-x-109">V </span>in the above example) and not the variable that has
+the non-commutative property.
+<!--l. 101--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">LET</span><a 
+ id="dx57-97004"></a> statement may be used to introduce rules of evaluation for such operators. In
+particular, the boolean operator <span 
+class="pcrr8t-x-x-109">ORDP</span><a 
+ id="dx57-97005"></a> is useful for introducing an ordering on such
+expressions.
+<!--l. 106--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 108--><p class="noindent" >The rule
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-158">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;all&#x00A0;x,y&#x00A0;such&#x00A0;that&#x00A0;x&#x00A0;neq&#x00A0;y&#x00A0;and&#x00A0;ordp(x,y)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;let&#x00A0;u(x)*u(y)=&#x00A0;u(y)*u(x)+comm(x,y);
+</div>
+<!--l. 112--><p class="nopar" > would introduce the commutator of <span 
+class="pcrr8t-x-x-109">u(x) </span>and <span 
+class="pcrr8t-x-x-109">u(y) </span>for all <span 
+class="pcrr8t-x-x-109">X </span>and <span 
+class="pcrr8t-x-x-109">Y</span>. Note that since
+<span 
+class="pcrr8t-x-x-109">ordp(x,x) </span>is <span 
+class="ptmri8t-x-x-109">true</span>, the equality check is necessary in the degenerate case to avoid a
+circular loop in the rule.
+<!--l. 118--><p class="noindent" ><a 
+ id="reserved:SYMMETRIC">
+                                                                     
+
+                                                                     
+<table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse45.html" >Up</a></td><td class="clinks"><a 
+href="manualse46.html" >Next</a></td><td class="clinks"><a 
+href="manualse44.html" >Prev</a></td><td class="clinks"><a 
+href="manualse44.html#tailmanualse44.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse45.html" >Front</a></td></tr></table><a 
+ id="tailmanualse45.html"></a>  
+</body></html> 

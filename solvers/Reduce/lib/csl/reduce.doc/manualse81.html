@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Matrix Variables</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch14.html#manualse81.html" >Up</a></td><td class="clinks"><a 
+href="manualse82.html" >Next</a></td><td class="clinks"><a 
+href="manualse80.html" >Prev</a></td><td class="clinks"><a 
+href="manualse80.html#tailmanualse80.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse81.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">14.2    </span> <a 
+ id="x100-18400014.2"></a>Matrix Variables</h3>
+<!--l. 26--><p class="noindent" ><a 
+ id="command:MATRIX"></a>
+<!--l. 28--><p class="noindent" >An identifier may be declared a matrix variable by the declaration <span 
+class="pcrr8t-x-x-109">MATRIX</span>.<a 
+ id="dx100-184001"></a> The size of
+the matrix may be declared explicitly in the matrix declaration, or by default in assigning
+such a variable to a matrix expression. For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-348">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;matrix&#x00A0;x(2,1),y(3,4),z;
+</div>
+<!--l. 35--><p class="nopar" > declares <span 
+class="pcrr8t-x-x-109">X </span>to be a 2 x 1 (column) matrix, <span 
+class="pcrr8t-x-x-109">Y </span>to be a 3 x 4 matrix and <span 
+class="pcrr8t-x-x-109">Z </span>a matrix whose
+size is to be declared later.
+<!--l. 39--><p class="noindent" >Matrix declarations can appear anywhere in a program. Once a symbol is declared to
+name a matrix, it can not also be used to name an array, operator or a procedure, or used
+as an ordinary variable. It can however be redeclared to be a matrix, and its size may be
+changed at that time. Note however that matrices once declared are <span 
+class="ptmri8t-x-x-109">global </span>in scope, and
+so can then be referenced anywhere in the program. In other words, a declaration within
+a block (or a procedure) does not limit the scope of the matrix to that block,
+nor does the matrix go away on exiting the block (use <span 
+class="pcrr8t-x-x-109">CLEAR </span>instead for this
+purpose). An element of a matrix is referred to in the expected manner; thus
+<span 
+class="pcrr8t-x-x-109">x(1,1) </span>gives the first element of the matrix <span 
+class="pcrr8t-x-x-109">X </span>defined above. References to
+elements of a matrix whose size has not yet been declared leads to an error. All
+elements of a matrix whose size is declared are initialized to 0. As a result, a matrix
+element has an <span 
+class="ptmri8t-x-x-109">instant evaluation</span><a 
+ id="dx100-184002"></a> property and cannot stand for itself. If this
+is required, then an operator should be used to name the matrix elements as
+in:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-349">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;matrix&#x00A0;m;&#x00A0;operator&#x00A0;x;&#x00A0;&#x00A0;m&#x00A0;:=&#x00A0;mat((x(1,1),x(1,2));
+</div>
+<!--l. 57--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 59--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch14.html#manualse81.html" >Up</a></td><td class="clinks"><a 
+href="manualse82.html" >Next</a></td><td class="clinks"><a 
+href="manualse80.html" >Prev</a></td><td class="clinks"><a 
+href="manualse80.html#tailmanualse80.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse81.html" >Front</a></td></tr></table><a 
+ id="tailmanualse81.html"></a>  
+</body></html> 

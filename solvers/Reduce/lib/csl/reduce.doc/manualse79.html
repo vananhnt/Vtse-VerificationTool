@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Interactive File Control</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch13.html#manualse79.html" >Up</a></td><td class="clinks"><a 
+href="manualse78.html" >Prev</a></td><td class="clinks"><a 
+href="manualse78.html#tailmanualse78.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse79.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">13.3    </span> <a 
+ id="x97-18100013.3"></a>Interactive File Control</h3>
+<!--l. 124--><p class="noindent" ><a 
+ id="switch:INT"></a> If input is coming from an external file, the system treats it as a batch processed
+calculation. If the user desires interactive <a 
+ id="dx97-181001"></a>response in this case, he can include the
+command <span 
+class="pcrr8t-x-x-109">ON INT</span>;<a 
+ id="dx97-181002"></a> in the file. Likewise, he can issue the command <span 
+class="pcrr8t-x-x-109">off int</span>; in the
+main program if he does not desire continual questioning from the system. Regardless of
+the setting of <span 
+class="pcrr8t-x-x-109">INT</span>, input commands from a file are not kept in the system, and so cannot
+be edited using <span 
+class="pcrr8t-x-x-109">ED</span>. However, many implementations of REDUCE provide a
+link to an external system editor that can be used for such editing. The specific
+instructions for the particular implementation should be consulted for information on
+this.
+<!--l. 137--><p class="noindent" ><a 
+ id="CONT-and-PAUSE"></a> Two commands are available in REDUCE for interactive use of files. <span 
+class="pcrr8t-x-x-109">PAUSE</span>;<a 
+ id="dx97-181003"></a><a 
+ id="dx97-181004"></a> may be
+inserted at any point in an input file. When this command is encountered on
+input, the system prints the message <span 
+class="pcrr8t-x-x-109">CONT? </span>on the user&#8217;s terminal and halts.
+If the user responds <span 
+class="pcrr8t-x-x-109">Y </span>(for yes), the calculation continues from that point in
+the file. If the user responds <span 
+class="pcrr8t-x-x-109">N </span>(for no), control is returned to the terminal, and
+the user can input further statements and commands. Later on he can use the
+command <span 
+class="pcrr8t-x-x-109">cont;</span><a 
+ id="dx97-181005"></a><a 
+ id="dx97-181006"></a> to transfer control back to the point in the file following the
+last <span 
+class="pcrr8t-x-x-109">PAUSE </span>encountered. A top-level <span 
+class="pcrr8t-x-x-109">pause; </span>from the user&#8217;s terminal has no
+effect.
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch13.html#manualse79.html" >Up</a></td><td class="clinks"><a 
+href="manualse78.html" >Prev</a></td><td class="clinks"><a 
+href="manualse78.html#tailmanualse78.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse79.html" >Front</a></td></tr></table><a 
+ id="tailmanualse79.html"></a>  
+</body></html> 

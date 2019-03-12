@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Kernels</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch8.html#manualse50.html" >Up</a></td><td class="clinks"><a 
+href="manualse51.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse50.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">8.1    </span> <a 
+ id="x63-1030008.1"></a>Kernels</h3>
+<a 
+ id="dx63-103001"></a>
+<!--l. 10--><p class="noindent" >REDUCE is designed so that each operator in the system has an evaluation (or
+simplification)<a 
+ id="dx63-103002"></a> function associated with it that transforms the expression into an internal
+canonical form. <a 
+ id="dx63-103003"></a>This form, which bears little resemblance to the original expression, is
+described in detail in Hearn, A. C., &#8220;REDUCE 2: A System and Language for Algebraic
+Manipulation,&#8221; Proc. of the Second Symposium on Symbolic and Algebraic
+Manipulation, ACM, New York (1971) 128-133.
+<!--l. 19--><p class="noindent" >The evaluation function may transform its arguments in one of two alternative ways.
+First, it may convert the expression into other operators in the system, leaving no
+functions of the original operator for further manipulation. This is in a sense
+true of the evaluation functions associated with the operators <span 
+class="pcrr8t-x-x-109">+</span>, <span 
+class="pcrr8t-x-x-109">* </span>and <span 
+class="pcrr8t-x-x-109">/ </span>, for
+example, because the canonical form<a 
+ id="dx63-103004"></a> does not include these operators explicitly. It
+is also true of an operator such as the determinant operator <span 
+class="pcrr8t-x-x-109">DET</span><a 
+ id="dx63-103005"></a> because the
+relevant evaluation function calculates the appropriate determinant, and the
+operator <span 
+class="pcrr8t-x-x-109">DET </span>no longer appears. On the other hand, the evaluation process may
+leave some residual functions of the relevant operator. For example, with the
+operator <span 
+class="pcrr8t-x-x-109">COS</span>, a residual expression like <span 
+class="pcrr8t-x-x-109">COS(X) </span>may remain after evaluation
+                                                                     
+
+                                                                     
+unless a rule for the reduction of cosines into exponentials, for example, were
+introduced. These residual functions of an operator are termed <span 
+class="ptmri8t-x-x-109">kernels</span><a 
+ id="dx63-103006"></a> and are stored
+uniquely like variables. Subsequently, the kernel is carried through the calculation
+as a variable unless transformations are introduced for the operator at a later
+stage.
+<!--l. 38--><p class="noindent" ><a 
+ id="switch:INTSTR"></a> In those cases where the evaluation process leaves an operator expression with
+non-trivial arguments, the form of the argument can vary depending on the state of the
+system at the point of evaluation. Such arguments are normally produced in
+expanded form with no terms factored or grouped in any way. For example, the
+expression <span 
+class="pcrr8t-x-x-109">cos(2*x+2*y) </span>will normally be returned in the same form. If the
+argument <span 
+class="pcrr8t-x-x-109">2*x+2*y </span>were evaluated at the top level, however, it would be printed
+as <span 
+class="pcrr8t-x-x-109">2*(X+Y)</span>. If it is desirable to have the arguments themselves in a similar
+form, the switch <span 
+class="pcrr8t-x-x-109">INTSTR</span><a 
+ id="dx63-103007"></a><a 
+ id="dx63-103008"></a><a 
+ id="dx63-103009"></a> (for &#8220;internal structure&#8221;), if on, will cause this to
+happen.
+<!--l. 50--><p class="noindent" >In cases where the arguments of the kernel operators may be reordered, the system puts
+them in a canonical order, based on an internal intrinsic ordering of the variables.
+However, some commands allow arguments in the form of kernels, and the user has no
+way of telling what internal order the system will assign to these arguments. To resolve
+this difficulty, we introduce the notion of a <span 
+class="ptmri8t-x-x-109">kernel form</span><a 
+ id="dx63-103010"></a> as an expression that transforms
+to a kernel on evaluation.
+<!--l. 58--><p class="noindent" >Examples of kernel forms are:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-166">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;cos(x*y)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;log(sin(x))
+</div>
+<!--l. 63--><p class="nopar" > whereas
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-167">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a*b
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(a+b)^4
+</div>
+<!--l. 68--><p class="nopar" > are not.
+<!--l. 71--><p class="noindent" >We see that kernel forms can usually be used as generalized variables, and most algebraic
+properties associated with variables may also be associated with kernels.
+                                                                     
+
+                                                                     
+<!--l. 75--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch8.html#manualse50.html" >Up</a></td><td class="clinks"><a 
+href="manualse51.html" >Next</a></td><td class="clinks"><a 
+href="manualse50.html" >Front</a></td></tr></table><a 
+ id="tailmanualse50.html"></a>  
+</body></html> 

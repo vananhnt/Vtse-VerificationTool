@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>INT Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse35.html" >Up</a></td><td class="clinks"><a 
+href="manualse36.html" >Next</a></td><td class="clinks"><a 
+href="manualse34.html" >Prev</a></td><td class="clinks"><a 
+href="manualse34.html#tailmanualse34.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse35.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.9    </span> <a 
+ id="x46-800007.9"></a>INT Operator</h3>
+<!--l. 887--><p class="noindent" ><a 
+ id="operator:INT"></a> <span 
+class="pcrr8t-x-x-109">INT</span><a 
+ id="dx46-80001"></a> is an operator in REDUCE for indefinite integration<a 
+ id="dx46-80002"></a><a 
+ id="dx46-80003"></a> using a combination of the
+Risch-Norman algorithm and pattern matching. It is used with the syntax:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">INT(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VAR:kernel</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">)</span> <span 
+class="cmr-10x-x-109">: </span><span 
+class="cmmi-10x-x-109">algebraic.</span></div>
+<!--l. 895--><p class="noindent" >This will return correctly the indefinite integral for expressions comprising polynomials,
+log functions, exponential functions and tan and atan. The arbitrary constant is not
+represented. If the integral cannot be done in closed terms, it returns a formal integral for
+the answer in one of two ways:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x46-80005x1">It returns the input, <span 
+class="pcrr8t-x-x-109">INT(</span><span 
+class="pcrr8t-x-x-109">&#x2026;,</span><span 
+class="pcrr8t-x-x-109">&#x2026;) </span>unchanged.
+     </li>
+     <li 
+  class="enumerate" id="x46-80007x2">It returns an expression involving <span 
+class="pcrr8t-x-x-109">INT</span>s of some other functions (sometimes
+     more complicated than the original one, unfortunately).</li></ol>
+<!--l. 906--><p class="noindent" >Rational functions can be integrated when the denominator is factorizable by the
+program. In addition it will attempt to integrate expressions involving error functions,
+dilogarithms and other trigonometric expressions. In these cases it might not always
+succeed in finding the solution, even if one exists.
+<!--l. 912--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-121">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;int(log(x),x)&#x00A0;-&#x003E;&#x00A0;&#x00A0;X*(LOG(X)&#x00A0;-&#x00A0;1),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;int(e^x,x)&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;E**X.
+</div>
+<!--l. 916--><p class="nopar" > The program checks that the second argument is a variable and gives an error if it is
+not.
+<!--l. 920--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Note: </span>If the <span 
+class="pcrr8t-x-x-109">int </span>operator is called with 4 arguments, REDUCE will implicitly call the
+definite integration package (DEFINT) and this package will interpret the third and
+fourth arguments as the lower and upper limit of integration, respectively. For details,
+consult the documentation on the <span 
+class="ptmrc8t-x-x-109">D<span 
+class="small-caps">E</span><span 
+class="small-caps">fi</span><span 
+class="small-caps">N</span><span 
+class="small-caps">T</span></span><a 
+ id="dx46-80008"></a><a 
+ id="dx46-80009"></a> package.
+<!--l. 927--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.9.1    </span> <a 
+ id="x46-810007.9.1"></a>Options</h4>
+<!--l. 928--><p class="noindent" ><a 
+ id="switch:TRINT"></a> <a 
+ id="switch:TRINTSUBST"></a> <a 
+ id="switch:FAILHARD"></a> <a 
+ id="switch:NOLNR"></a> <a 
+ id="switch:NOINTSUBST"></a>
+<!--l. 934--><p class="noindent" >The switch <span 
+class="pcrr8t-x-x-109">TRINT</span><a 
+ id="dx46-81001"></a><a 
+ id="dx46-81002"></a><a 
+ id="dx46-81003"></a> when on will trace the operation of the algorithm. It produces a great
+deal of output in a somewhat illegible form, and is not of much interest to the general
+user. It is normally off.
+<!--l. 938--><p class="noindent" >The switch <span 
+class="pcrr8t-x-x-109">TRINTSUBST</span><a 
+ id="dx46-81004"></a><a 
+ id="dx46-81005"></a><a 
+ id="dx46-81006"></a> when on will trace the heuristic attempts to solve the integral
+by substitution. It is normally off.
+<!--l. 941--><p class="noindent" >If the switch <span 
+class="pcrr8t-x-x-109">FAILHARD</span><a 
+ id="dx46-81007"></a><a 
+ id="dx46-81008"></a><a 
+ id="dx46-81009"></a> is on the algorithm will terminate with an error if the integral
+cannot be done in closed terms, rather than return a formal integration form. <span 
+class="pcrr8t-x-x-109">FAILHARD</span>
+is normally off.
+<!--l. 945--><p class="noindent" >The switch <span 
+class="pcrr8t-x-x-109">NOLNR</span><a 
+ id="dx46-81010"></a><a 
+ id="dx46-81011"></a><a 
+ id="dx46-81012"></a> suppresses the use of the linear properties of integration in cases
+when the integral cannot be found in closed terms. It is normally off.
+<!--l. 949--><p class="noindent" >The switch <span 
+class="pcrr8t-x-x-109">NOINTSUBST</span><a 
+ id="dx46-81013"></a><a 
+ id="dx46-81014"></a><a 
+ id="dx46-81015"></a> disables the heuristic attempts to solve the integral by
+substitution. It is normally off.
+<!--l. 952--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.9.2    </span> <a 
+ id="x46-820007.9.2"></a>Advanced Use</h4>
+<!--l. 953--><p class="noindent" ><a 
+ id="operator:ERF"></a>
+<!--l. 955--><p class="noindent" >If a function appears in the integrand that is not one of the functions <span 
+class="pcrr8t-x-x-109">EXP, ERF, TAN,</span>
+                                                                     
+
+                                                                     
+<span 
+class="pcrr8t-x-x-109">ATAN, LOG, DILOG</span><a 
+ id="dx46-82001"></a><a 
+ id="dx46-82002"></a><a 
+ id="dx46-82003"></a><a 
+ id="dx46-82004"></a><a 
+ id="dx46-82005"></a><a 
+ id="dx46-82006"></a> then the algorithm will make an attempt to integrate the
+argument if it can, differentiate it and reach a known function. However the answer
+cannot be guaranteed in this case. If a function is known to be algebraically independent
+of this set it can be flagged transcendental by
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-122">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;flag(&#8217;(trilog),&#8217;transcendental);
+</div>
+<!--l. 965--><p class="nopar" > in which case this function will be added to the permitted field descriptors for a genuine
+decision procedure. If this is done the user is responsible for the mathematical
+correctness of his actions.
+<!--l. 970--><p class="noindent" >The standard version does not deal with algebraic extensions. Thus integration of
+expressions involving square roots and other like things can lead to trouble. A
+contributed package that supports integration of functions involving square roots is
+available, however (ALGINT<a 
+ id="dx46-82007"></a><a 
+ id="dx46-82008"></a>, chapter&#x00A0;<a 
+href="manualse92.html#x113-20400016.1">16.1<!--tex4ht:ref: ALGINT --></a>). In addition there is a definite integration
+package, DEFINT<a 
+ id="dx46-82009"></a><a 
+ id="dx46-82010"></a>( chapter&#x00A0;<a 
+href="manualse109.html#x141-38100016.18">16.18<!--tex4ht:ref: DEFINT --></a>).
+<!--l. 978--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.9.3    </span> <a 
+ id="x46-830007.9.3"></a>References</h4>
+<!--l. 980--><p class="noindent" >A. C. Norman &amp; P. M. A. Moore, &#8220;Implementing the New Risch Algorithm&#8221;, Proc. 4th
+International Symposium on Advanced Comp. Methods in Theor. Phys., CNRS,
+Marseilles, 1977.
+<!--l. 984--><p class="noindent" >S. J. Harrington, &#8220;A New Symbolic Integration System in Reduce&#8221;, Comp. Journ. 22
+(1979) 2.
+<!--l. 987--><p class="noindent" >A. C. Norman &amp; J. H. Davenport, &#8220;Symbolic Integration &#8212; The Dust Settles?&#8221;, Proc.
+EUROSAM 79, Lecture Notes in Computer Science 72, Springer-Verlag, Berlin
+Heidelberg New York (1979) 398-407.
+                                                                     
+
+                                                                     
+<!--l. 1005--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse35.html" >Up</a></td><td class="clinks"><a 
+href="manualse36.html" >Next</a></td><td class="clinks"><a 
+href="manualse34.html" >Prev</a></td><td class="clinks"><a 
+href="manualse34.html#tailmanualse34.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse35.html" >Front</a></td></tr></table><a 
+ id="tailmanualse35.html"></a>   
+</body></html> 

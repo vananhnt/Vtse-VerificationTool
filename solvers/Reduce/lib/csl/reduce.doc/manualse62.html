@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>RESULTANT Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse62.html" >Up</a></td><td class="clinks"><a 
+href="manualse63.html" >Next</a></td><td class="clinks"><a 
+href="manualse61.html" >Prev</a></td><td class="clinks"><a 
+href="manualse61.html#tailmanualse61.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse62.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">9.8    </span> <a 
+ id="x76-1390009.8"></a>RESULTANT Operator</h3>
+<a 
+ id="dx76-139001"></a>
+<!--l. 535--><p class="noindent" ><a 
+ id="operator:RESULTANT"></a> <a 
+ id="switch:BEZOUT"></a>
+<!--l. 538--><p class="noindent" >This is used with the syntax
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-249">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;RESULTANT(EXPRN1:polynomial,EXPRN2:polynomial,VAR:kernel):
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;polynomial.
+</div>
+<!--l. 542--><p class="nopar" > It computes the resultant of the two given polynomials with respect to the given variable,
+the coefficients of the polynomials can be taken from any domain. The result can be
+identified as the determinant of a Sylvester matrix, but can often also be thought of
+informally as the result obtained when the given variable is eliminated between the two
+input polynomials. If the two input polynomials have a non-trivial GCD their resultant
+vanishes.
+<!--l. 551--><p class="noindent" >The switch <span 
+class="pcrr8t-x-x-109">BEZOUT</span><a 
+ id="dx76-139002"></a><a 
+ id="dx76-139003"></a><a 
+ id="dx76-139004"></a> controls the computation of the resultants. It is off by default. In this
+case a subresultant algorithm is used. If the switch Bezout is turned on, the resultant is
+computed via the Bezout Matrix. However, in the latter case, only polynomial
+coefficients are permitted.
+<!--l. 558--><p class="noindent" >The sign conventions used by the resultant function follow those in R. Loos,
+&#8220;Computing in Algebraic Extensions&#8221; in &#8220;Computer Algebra &#8212; Symbolic and
+Algebraic Computation&#8221;, Second Ed., Edited by B. Buchberger, G.E. Collins
+and R. Loos, Springer-Verlag, 1983. Namely, with <span 
+class="pcrr8t-x-x-109">A </span>and <span 
+class="pcrr8t-x-x-109">B </span>not dependent on
+<span 
+class="pcrr8t-x-x-109">X</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-250">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;deg(p)*deg(q)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;resultant(p(x),q(x),x)=&#x00A0;(-1)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*resultant(q,p,x)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;deg(p)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;resultant(a,p(x),x)&#x00A0;&#x00A0;&#x00A0;=&#x00A0;a
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;resultant(a,b,x)&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;=&#x00A0;1
+</div>
+<!--l. 572--><p class="nopar" >
+<!--l. 575--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-251">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;resultant(x/r*u+y,u*y,u)&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;&#x00A0;-&#x00A0;y
+</div>
+<!--l. 581--><p class="nopar" >
+<!--l. 584--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">calculation in an algebraic extension:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-252">
+&#x00A0;&#x00A0;&#x00A0;load&#x00A0;arnum;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;defpoly&#x00A0;sqrt2**2&#x00A0;-&#x00A0;2;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;resultant(x&#x00A0;+&#x00A0;sqrt2,sqrt2&#x00A0;*&#x00A0;x&#x00A0;+1,x)&#x00A0;-&#x003E;&#x00A0;-1
+</div>
+<!--l. 592--><p class="nopar" >
+<!--l. 595--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">or in a modular domain:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-253">
+&#x00A0;&#x00A0;&#x00A0;setmod&#x00A0;17;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;on&#x00A0;modular;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;resultant(2x+1,3x+4,x)&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;5
+</div>
+<!--l. 603--><p class="nopar" >
+                                                                     
+
+                                                                     
+<table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse62.html" >Up</a></td><td class="clinks"><a 
+href="manualse63.html" >Next</a></td><td class="clinks"><a 
+href="manualse61.html" >Prev</a></td><td class="clinks"><a 
+href="manualse61.html#tailmanualse61.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse62.html" >Front</a></td></tr></table><a 
+ id="tailmanualse62.html"></a>  
+</body></html> 

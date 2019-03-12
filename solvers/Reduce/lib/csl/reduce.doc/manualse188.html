@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Fast Loading Code Generation Program</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch19.html#manualse188.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse189.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse187.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse187.html#tailmanualse187.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse188.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">19.2    </span></span> <a 
+ id="x249-104100019.2"></a><span 
+class="ptmr8t-x-x-120">Fast Loading Code Generation Program</span></h3>
+<a 
+ id="dx249-1041001"></a>
+<!--l. 42--><p class="noindent" ><a 
+ id="command:LOAD"></a> <a 
+ id="command:LOAD_PACKAGE"></a> <span 
+class="ptmr8t-x-x-120">In most versions of REDUCE, it is possible to take any set of Lisp, Rlisp or</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE commands and build a fast loading version of them. In Rlisp or</span>
+<span 
+class="ptmr8t-x-x-120">REDUCE, one does the following:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1394">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;faslout&#x00A0;&#x003C;filename&#x003E;;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;commands&#x00A0;or&#x00A0;IN&#x00A0;statements&#x003E;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;faslend;
+</div>
+<!--l. 51--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">To load such a file, one uses the command </span><span 
+class="pcrr8t-x-x-120">LOAD</span><span 
+class="ptmr8t-x-x-120">,</span><a 
+ id="dx249-1041002"></a> <span 
+class="ptmr8t-x-x-120">e.g. </span><span 
+class="pcrr8t-x-x-120">load foo; </span><span 
+class="ptmr8t-x-x-120">or </span><span 
+class="pcrr8t-x-x-120">load</span>
+<span 
+class="pcrr8t-x-x-120">foo,bah;</span>
+<!--l. 56--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This process produces a fast-loading version of the original file. In some</span>
+<span 
+class="ptmr8t-x-x-120">implementations, this means another file is created with the same name but a</span>
+<span 
+class="ptmr8t-x-x-120">different extension. For example, in PSL-based systems, the extension is </span><span 
+class="pcrr8t-x-x-120">b </span><span 
+class="ptmr8t-x-x-120">(for</span>
+<span 
+class="ptmr8t-x-x-120">binary). In CSL-based systems, however, this process adds the fast-loading code</span>
+<span 
+class="ptmr8t-x-x-120">to a single file in which all such code is stored. Particular functions are</span>
+<span 
+class="ptmr8t-x-x-120">provided by CSL for managing this file, and described in the CSL user</span>
+<span 
+class="ptmr8t-x-x-120">documentation.</span>
+<!--l. 64--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">In doing this build, as with the production of a Standard Lisp form of such</span>
+<span 
+class="ptmr8t-x-x-120">statements, it is important to remember that some of the commands must be</span>
+<span 
+class="ptmr8t-x-x-120">instantiated during the building process. For example, macros must be expanded,</span>
+<span 
+class="ptmr8t-x-x-120">and some property list operations must happen. The REDUCE sources should be</span>
+<span 
+class="ptmr8t-x-x-120">consulted for further details on this.</span>
+<!--l. 73--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">To avoid excessive printout, input statements should be followed by a </span><span 
+class="pcrr8t-x-x-120">$ </span><span 
+class="ptmr8t-x-x-120">instead</span>
+<span 
+class="ptmr8t-x-x-120">of the semicolon. With </span><span 
+class="pcrr8t-x-x-120">LOAD </span><span 
+class="ptmr8t-x-x-120">however, the input doesn&#8217;t print out regardless of</span>
+<span 
+class="ptmr8t-x-x-120">which terminator is used with the command.</span>
+<!--l. 77--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">If you subsequently change the source files used in producing a fast loading file,</span>
+<span 
+class="ptmr8t-x-x-120">don&#8217;t forget to repeat the above process in order to update the fast loading file</span>
+<span 
+class="ptmr8t-x-x-120">correspondingly. Remember also that the text which is read in during the creation</span>
+<span 
+class="ptmr8t-x-x-120">of the fast load file, in the compiling process described above, is </span><span 
+class="ptmri8t-x-x-120">not </span><span 
+class="ptmr8t-x-x-120">stored in</span>
+<span 
+class="ptmr8t-x-x-120">your REDUCE environment, but only translated and output. If you want to use</span>
+<span 
+class="ptmr8t-x-x-120">the file just created, you must then use </span><span 
+class="pcrr8t-x-x-120">LOAD </span><span 
+class="ptmr8t-x-x-120">to load the output of the</span>
+<span 
+class="ptmr8t-x-x-120">fast-loading file generation program.</span>
+<!--l. 86--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">When the file to be loaded contains a complete package for a given application,</span>
+<span 
+class="pcrr8t-x-x-120">LOAD_PACKAGE</span><a 
+ id="dx249-1041003"></a> <span 
+class="ptmr8t-x-x-120">rather than </span><span 
+class="pcrr8t-x-x-120">LOAD </span><span 
+class="ptmr8t-x-x-120">should be used. The syntax is the same.</span>
+<span 
+class="ptmr8t-x-x-120">However, </span><span 
+class="pcrr8t-x-x-120">LOAD_PACKAGE </span><span 
+class="ptmr8t-x-x-120">does some additional bookkeeping such as recording</span>
+<span 
+class="ptmr8t-x-x-120">that this package has now been loaded, that is required for the correct operation</span>
+<span 
+class="ptmr8t-x-x-120">of the system.</span>
+                                                                     
+
+                                                                     
+<!--l. 93--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch19.html#manualse188.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse189.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse187.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse187.html#tailmanualse187.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse188.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse188.html"></a>  
+</body></html> 

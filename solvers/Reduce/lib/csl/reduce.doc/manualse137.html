@@ -1,0 +1,861 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>PHYSOP: Operator calculus in quantum theory</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse137.html" >Up</a></td><td class="clinks"><a 
+href="manualse138.html" >Next</a></td><td class="clinks"><a 
+href="manualse136.html" >Prev</a></td><td class="clinks"><a 
+href="manualse136.html#tailmanualse136.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse137.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.46    </span> <a 
+ id="x181-72600016.46"></a>PHYSOP: Operator calculus in quantum theory</h3>
+<a 
+ id="dx181-726001"></a>
+<a 
+ id="dx181-726002"></a>
+<!--l. 822--><p class="noindent" >This package has been designed to meet the requirements of theoretical physicists
+looking for a computer algebra tool to perform complicated calculations in quantum
+theory with expressions containing operators. These operations consist mainly of the
+calculation of commutators between operator expressions and in the evaluations of
+operator matrix elements in some abstract space.
+<!--l. 829--><p class="noindent" >Author: Mathias Warns.
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.46.1    </span> <a 
+ id="x181-72700016.46.1"></a>Introduction</h4>
+<!--l. 3--><p class="noindent" >The package PHYSOP has been designed to meet the requirements of theoretical
+physicists looking for a computer algebra tool to perform complicated calculations in
+quantum theory with expressions containing operators. These operations consist mainly
+in the calculation of commutators between operator expressions and in the evaluations
+of operator matrix elements in some abstract space. Since the capabilities of
+the current REDUCE&#x00A0;release to deal with complex expressions containing
+noncommutative operators are rather restricted, the first step was to enhance
+these possibilities in order to achieve a better usability of REDUCE&#x00A0;for these
+kind of calculations. This has led to the development of a first package called
+NONCOM2 which is described in section 2. For more complicated expressions
+involving both scalar quantities and operators the need for an additional data type
+has emerged in order to make a clear separation between the various objects
+present in the calculation. The implementation of this new REDUCE&#x00A0;data type is
+realized by the PHYSOP (for PHYSical OPerator) package described in section
+3.
+<!--l. 23--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.46.2    </span> <a 
+ id="x181-72800016.46.2"></a>The NONCOM2 Package</h4>
+<!--l. 25--><p class="noindent" >The package NONCOM2 redefines some standard REDUCE&#x00A0;routines in order to
+                                                                     
+
+                                                                     
+modify the way noncommutative operators are handled by the system. In standard
+REDUCE&#x00A0;declaring an operator to be noncommutative using the <span 
+class="pcrr8t-x-x-109">NONCOM </span>statement
+puts a global flag on the operator. This flag is checked when the system has to
+decide whether or not two operators commute during the manipulation of an
+expression.
+<!--l. 33--><p class="noindent" >The NONCOM2 package redefines the <span 
+class="pcrr8t-x-x-109">NONCOM</span><a 
+ id="dx181-728001"></a> statement in a way more suitable for
+calculations in physics. Operators have now to be declared noncommutative pairwise, i.e.
+coding:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1097">
+NONCOM&#x00A0;A,B;
+</div>
+<!--l. 38--><p class="nopar" > declares the operators <span 
+class="pcrr8t-x-x-109">A </span>and <span 
+class="pcrr8t-x-x-109">B </span>to be noncommutative but allows them to commute
+with any other (noncommutative or not) operator present in the expression. In a
+similar way if one wants e.g.&#x00A0;<span 
+class="pcrr8t-x-x-109">A(X) </span>and <span 
+class="pcrr8t-x-x-109">A(Y) </span>not to commute, one has now to
+code:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1098">
+&#x00A0;NONCOM&#x00A0;A,A;
+</div>
+<!--l. 46--><p class="nopar" > Each operator gets a new property list containing the operators with which it does not
+commute. A final example should make the use of the redefined <span 
+class="pcrr8t-x-x-109">NONCOM </span>statement
+clear:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1099">
+NONCOM&#x00A0;A,B,C;
+</div>
+<!--l. 54--><p class="nopar" > declares <span 
+class="pcrr8t-x-x-109">A </span>to be noncommutative with <span 
+class="pcrr8t-x-x-109">B </span>and <span 
+class="pcrr8t-x-x-109">C</span>, <span 
+class="pcrr8t-x-x-109">B </span>to be noncommutative with <span 
+class="pcrr8t-x-x-109">A </span>and <span 
+class="pcrr8t-x-x-109">C</span>
+and <span 
+class="pcrr8t-x-x-109">C </span>to be noncommutative with <span 
+class="pcrr8t-x-x-109">A </span>and <span 
+class="pcrr8t-x-x-109">B</span>. Note that after these declaration e.g.&#x00A0;<span 
+class="pcrr8t-x-x-109">A(X)</span>
+and <span 
+class="pcrr8t-x-x-109">A(Y) </span>are still commuting kernels.
+<!--l. 63--><p class="noindent" >Finally to keep the compatibility with standard REDUCE   declaring a <span class="underline">single</span> identifier
+using the <span 
+class="pcrr8t-x-x-109">NONCOM </span>statement has the same effect as in standard REDUCE   i.e., the
+identifier is flagged with the <span 
+class="pcrr8t-x-x-109">NONCOM </span>tag.
+<!--l. 68--><p class="noindent" >From the user&#8217;s point of view there are no other new commands implemented by the
+package. Commutation relations have to be declared in the standard way as described in
+the manual i.e.&#x00A0;using <span 
+class="pcrr8t-x-x-109">LET </span>statements. The package itself consists of several redefined
+standard REDUCE&#x00A0;routines to handle the new definition of noncommutativity in
+multiplications and pattern matching processes.
+<!--l. 77--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">CAVEAT:  </span>Due to its nature, the package is highly version dependent. The current
+version has been designed for the 3.3 and 3.4 releases of REDUCE&#x00A0;and may not work
+with previous versions. Some different (but still correct) results may occur by using this
+package in conjunction with LET statements since part of the pattern matching routines
+have been redesigned. The package has been designed to bridge a deficiency
+of the current REDUCE&#x00A0;version concerning the notion of noncommutativity
+and it is the author&#8217;s hope that it will be made obsolete by a future release of
+REDUCE.
+<!--l. 89--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.46.3    </span> <a 
+ id="x181-72900016.46.3"></a>The PHYSOP package</h4>
+<!--l. 91--><p class="noindent" >The package PHYSOP implements a new REDUCE&#x00A0;data type to perform calculations
+with physical operators. The noncommutativity of operators is implemented
+using the NONCOM2 package so this file should be loaded prior to the use of
+PHYSOP<span class="footnote-mark"><a 
+href="manual182.html#fn24x16"><sup class="textsuperscript">24</sup></a></span><a 
+ id="x181-729001f24"></a> .
+In the following the new commands implemented by the package are described. Beside
+these additional commands, the full set of standard REDUCE&#x00A0;instructions remains
+                                                                     
+
+                                                                     
+available for performing any other calculation.
+<h5 class="subsubsectionHead"><span class="titlemark">16.46.3.1    </span> <a 
+ id="x181-73000016.46.3.1"></a>Type declaration commands</h5>
+<!--l. 106--><p class="noindent" >The new REDUCE&#x00A0;data type PHYSOP implemented by the package allows the
+definition of a new kind of operators (i.e. kernels carrying an arbitrary number of
+arguments). Throughout this manual, the name &#8220;operator&#8221; will refer, unless explicitly
+stated otherwise, to this new data type. This data type is in turn divided into 5 subtypes.
+For each of this subtype, a declaration command has been defined:
+     <dl class="description"><dt class="description">
+<span 
+class="pcrr8t-x-x-109">SCALOP A;</span>  </dt><dd 
+class="description"><a 
+ id="dx181-730001"></a> declares  <span 
+class="pcrr8t-x-x-109">A </span>to  be  a  scalar  operator.  This  operator  may  carry  an
+     arbitrary number of arguments i.e.&#x00A0;after the declaration:   <span 
+class="pcrr8t-x-x-109">SCALOP A; </span>all
+     kernels of the form e.g.&#x00A0;<span 
+class="pcrr8t-x-x-109">A(J), A(1,N), A(N,L,M) </span>are recognized by
+     the system as being scalar operators.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">VECOP V;</span>  </dt><dd 
+class="description"><a 
+ id="dx181-730002"></a> declares <span 
+class="pcrr8t-x-x-109">V </span>to be a vector operator. As for scalar operators, the vector
+     operators may carry an arbitrary number of arguments. For example <span 
+class="pcrr8t-x-x-109">V(3)</span>
+     can be used to represent the vector operator <img 
+src="manual473x.png" alt="&#x20D7;V"  class="vec" ><sub><span 
+class="cmr-8">3</span></sub>. Note that the dimension of
+     space in which this operator lives is <span class="underline">arbitrary</span>. One can however address a
+     specific component of the vector operator by using a special index declared
+     as  <span 
+class="pcrr8t-x-x-109">PHYSINDEX </span>(see  below).  This  index  must  then  be  the  first  in  the
+     argument list of the vector operator.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">TENSOP C(3);</span>  </dt><dd 
+class="description"><a 
+ id="dx181-730003"></a> declares <span 
+class="pcrr8t-x-x-109">C </span>to be a tensor operator of rank 3. Tensor operators of
+     any fixed integer rank larger than 1 can be declared. Again this operator may
+     carry an arbitrary number of arguments and the space dimension is not fixed.
+     The  tensor  components  can  be  addressed  by  using  special  <span 
+class="pcrr8t-x-x-109">PHYSINDEX</span>
+     indices (see below) which have to be placed in front of all other arguments
+     in the argument list.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">STATE U;</span>  </dt><dd 
+class="description"><a 
+ id="dx181-730004"></a> declares <span 
+class="pcrr8t-x-x-109">U </span>to be a state, i.e.&#x00A0;an object on which operators have a
+     certain action. The state U can also carry an arbitrary number of arguments.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">PHYSINDEX X;</span>  </dt><dd 
+class="description"><a 
+ id="dx181-730005"></a> declares <span 
+class="pcrr8t-x-x-109">X </span>to be a special index which will be used to address
+     components of vector and tensor operators.</dd></dl>
+<!--l. 155--><p class="noindent" >It is very important to understand precisely the way how the type declaration commands
+work in order to avoid type mismatch errors when using the PHYSOP package.
+The following examples should illustrate the way the program interprets type
+                                                                     
+
+                                                                     
+declarations. Assume that the declarations listed above have been typed in by the user,
+then:
+     <dl class="description"><dt class="description">
+<span 
+class="cmsy-10x-x-109">&#x2219;</span> </dt><dd 
+class="description"><span 
+class="pcrr8t-x-x-109">A,A(1,N),A(N,M,K) </span>are SCALAR operators.
+     </dd><dt class="description">
+<span 
+class="cmsy-10x-x-109">&#x2219;</span> </dt><dd 
+class="description"><span 
+class="pcrr8t-x-x-109">V,V(3),V(N,M) </span>are VECTOR operators.
+     </dd><dt class="description">
+<span 
+class="cmsy-10x-x-109">&#x2219;</span> </dt><dd 
+class="description"><span 
+class="pcrr8t-x-x-109">C, C(5),C(Y,Z) </span>are TENSOR operators of rank 3.
+     </dd><dt class="description">
+<span 
+class="cmsy-10x-x-109">&#x2219;</span> </dt><dd 
+class="description"><span 
+class="pcrr8t-x-x-109">U,U(P),U(N,L,M) </span>are STATES.
+     </dd><dt class="description">
+<span 
+class="ptmb8t-x-x-109">BUT:</span> </dt><dd 
+class="description"><span 
+class="pcrr8t-x-x-109">V(X),V(X,3),V(X,N,M) </span>are all <span class="underline">scalar</span> operators since the <span class="underline">special index</span>
+     <span 
+class="pcrr8t-x-x-109">X </span>addresses a specific component of the vector operator (which is a scalar
+     operator).  Accordingly,  <span 
+class="pcrr8t-x-x-109">C(X,X,X) </span>is  also  a  <span class="underline">scalar</span>  operator  because  the
+     diagonal component <span 
+class="cmmi-10x-x-109">C</span><sub><span 
+class="cmmi-8">xxx</span></sub> of the tensor operator <span 
+class="pcrr8t-x-x-109">C </span>is meant here (C has rank
+     3 so 3 special indices must be used for the components).</dd></dl>
+<!--l. 178--><p class="noindent" >In view of these examples, every time the following text refers to <span class="underline">scalar</span> operators, it
+should be understood that this means not only operators defined by the <span 
+class="pcrr8t-x-x-109">SCALOP</span>
+statement but also components of vector and tensor operators. Depending on the
+situation, in some case when dealing only with the components of vector or tensor
+operators it may be preferable to use an operator declared with <span 
+class="pcrr8t-x-x-109">SCALOP </span>rather than
+addressing the components using several special indices (throughout the manual,
+indices declared with the <span 
+class="pcrr8t-x-x-109">PHYSINDEX </span>command are referred to as special
+indices).
+<!--l. 191--><p class="noindent" >Another important feature of the system is that for each operator declared using the
+statements described above, the system generates 2 additional operators of the same
+type: the <span class="underline">adjoint</span> and the <span class="underline">inverse</span> operator. These operators are accessible to the
+user for subsequent calculations without any new declaration. The syntax is as
+following:
+<!--l. 198--><p class="noindent" >If <span 
+class="pcrr8t-x-x-109">A </span>has been declared to be an operator (scalar, vector or tensor) the <span class="underline">adjoint</span> operator is
+denoted <span 
+class="pcrr8t-x-x-109">A!+ </span>and the <span class="underline">inverse</span> operator is denoted <span 
+class="pcrr8t-x-x-109">A!-1 </span>(an inverse adjoint operator
+<span 
+class="pcrr8t-x-x-109">A!+!-1 </span>is also generated). The exclamation marks do not appear when these operators
+are printed out by REDUCE&#x00A0;(except when the switch <span 
+class="pcrr8t-x-x-109">NAT </span>is set to off) but have to be
+typed in when these operators are used in an input expression. An adjoint (but <span class="underline">no</span>
+inverse) state is also generated for every state defined by the user. One may
+consider these generated operators as &#8221;placeholders&#8221; which means that these
+operators are considered by default as being completely independent of the
+original operator. Especially if some value is assigned to the original operator,
+                                                                     
+
+                                                                     
+this value is <span class="underline">not</span> automatically assigned to the generated operators. The user
+must code additional assignement statements in order to get the corresponding
+values.
+<!--l. 218--><p class="noindent" >Exceptions from these rules are (i) that inverse operators are <span class="underline">always</span> ordered at the same
+place as the original operators and (ii) that the expressions <span 
+class="pcrr8t-x-x-109">A!-1*A </span>and <span 
+class="pcrr8t-x-x-109">A*A!-1 </span>are
+replaced<span class="footnote-mark"><a 
+href="manual183.html#fn25x16"><sup class="textsuperscript">25</sup></a></span><a 
+ id="x181-730006f25"></a> 
+by the unit operator <span 
+class="pcrr8t-x-x-109">UNIT</span><a 
+ id="dx181-730007"></a>. This operator is defined as a scalar operator during the
+initialization of the PHYSOP package. It should be used to indicate the type of an
+operator expression whenever no other PHYSOP occur in it. For example, the following
+sequence:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1100">
+SCALOP&#x00A0;A;
+&#x00A0;<br />A:=&#x00A0;5;
+</div>
+<!--l. 233--><p class="nopar" > leads to a type mismatch error and should be replaced by:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1101">
+SCALOP&#x00A0;A;
+&#x00A0;<br />A:=5*UNIT;
+</div>
+<!--l. 239--><p class="nopar" > The operator <span 
+class="pcrr8t-x-x-109">UNIT </span>is a reserved variable of the system and should not be used for other
+purposes.
+<!--l. 243--><p class="noindent" >All other kernels (including standard REDUCE&#x00A0;operators) occurring in expressions are
+treated as ordinary scalar variables without any PHYSOP type (referred to as <span class="underline">scalars</span> in
+the following). Assignement statements are checked to ensure correct operator type
+assignement on both sides leading to an error if a type mismatch occurs. However an
+assignement statement of the form <span 
+class="pcrr8t-x-x-109">A:= 0 </span>or <span 
+class="pcrr8t-x-x-109">LET A = 0 </span>is <span class="underline">always</span> valid regardless of
+the type of <span 
+class="pcrr8t-x-x-109">A</span>.
+<!--l. 253--><p class="noindent" >Finally a command <span 
+class="pcrr8t-x-x-109">CLEARPHYSOP</span><a 
+ id="dx181-730008"></a> has been defined to remove the PHYSOP type from
+an identifier in order to use it for subsequent calculations (e.g. as an ordinary
+REDUCE&#x00A0;operator). However it should be remembered that <span class="underline">no</span> substitution rule is
+cleared by this function. It is therefore left to the user&#8217;s responsibility to clear previously
+all substitution rules involving the identifier from which the PHYSOP type is
+removed.
+<!--l. 263--><p class="noindent" >Users should be very careful when defining procedures or statements of the type <span 
+class="pcrr8t-x-x-109">FOR</span>
+<span 
+class="pcrr8t-x-x-109">ALL ... LET ... </span>that the PHYSOP type of all identifiers occurring in such
+expressions is unambigously fixed. The type analysing procedure is rather restrictive and
+will print out a &#8221;PHYSOP type conflict&#8221; error message if such ambiguities
+occur.
+<h5 class="subsubsectionHead"><span class="titlemark">16.46.3.2    </span> <a 
+ id="x181-73100016.46.3.2"></a>Ordering of operators in an expression</h5>
+<!--l. 271--><p class="noindent" >The ordering of kernels in an expression is performed according to the following rules:
+<br 
+class="newline" />1. <span class="underline">Scalars</span> are always ordered ahead of PHYSOP <span class="underline">operators</span> in an expression. The
+REDUCE&#x00A0;statement <span 
+class="pcrr8t-x-x-109">KORDER</span><a 
+ id="dx181-731001"></a> can be used to control the ordering of scalars but has <span class="underline">no</span>
+effect on the ordering of operators.
+<!--l. 279--><p class="noindent" >2. The default ordering of <span class="underline">operators</span> follows the order in which they have been declared
+(and <span class="underline">not</span> the alphabetical one). This ordering scheme can be changed using the command
+<span 
+class="pcrr8t-x-x-109">OPORDER</span>. <a 
+ id="dx181-731002"></a> Its syntax is similar to the <span 
+class="pcrr8t-x-x-109">KORDER </span>statement, i.e.&#x00A0;coding: <span 
+class="pcrr8t-x-x-109">OPORDER</span>
+<span 
+class="pcrr8t-x-x-109">A,V,F; </span>means that all occurrences of the operator <span 
+class="pcrr8t-x-x-109">A </span>are ordered ahead of those of <span 
+class="pcrr8t-x-x-109">V </span>etc.
+It is also possible to include operators carrying indices (both normal and special ones) in
+the argument list of <span 
+class="pcrr8t-x-x-109">OPORDER</span>. However including objects <span class="underline">not</span> defined as operators (i.e.
+                                                                     
+
+                                                                     
+scalars or indices) in the argument list of the <span 
+class="pcrr8t-x-x-109">OPORDER </span>command leads to an
+error.
+<!--l. 294--><p class="noindent" >3. Adjoint operators are placed by the declaration commands just after the original
+operators on the <span 
+class="pcrr8t-x-x-109">OPORDER </span>list. Changing the place of an operator on this list means <span class="underline">not</span>
+that the adjoint operator is moved accordingly. This adjoint operator can be moved freely
+by including it in the argument list of the <span 
+class="pcrr8t-x-x-109">OPORDER </span>command.
+<!--l. 301--><p class="noindent" >
+<h5 class="subsubsectionHead"><span class="titlemark">16.46.3.3    </span> <a 
+ id="x181-73200016.46.3.3"></a>Arithmetic operations on operators</h5>
+<!--l. 303--><p class="noindent" >The following arithmetic operations are possible with operator expressions:
+<!--l. 306--><p class="noindent" >1. Multiplication or division of an operator by a scalar.
+<!--l. 308--><p class="noindent" >2. Addition and subtraction of operators of the <span class="underline">same</span> type.
+<!--l. 310--><p class="noindent" >3. Multiplication of operators is only defined between two <span class="underline">scalar</span> operators.
+<!--l. 313--><p class="noindent" >4. The scalar product of two VECTOR operators is implemented with a new function
+<span 
+class="pcrr8t-x-x-109">DOT</span><a 
+ id="dx181-732001"></a>. The system expands the product of two vector operators into an ordinary product
+of the components of these operators by inserting a special index generated by the
+program. To give an example, if one codes:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1102">
+VECOP&#x00A0;V,W;
+&#x00A0;<br />V&#x00A0;DOT&#x00A0;W;
+</div>
+<!--l. 322--><p class="nopar" > the system will transform the product into:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1103">
+V(IDX1)&#x00A0;*&#x00A0;W(IDX1)
+</div>
+<!--l. 327--><p class="nopar" > where <span 
+class="pcrr8t-x-x-109">IDX1 </span>is a <span 
+class="pcrr8t-x-x-109">PHYSINDEX </span>generated by the system (called a DUMMY INDEX in
+the following) to express the summation over the components. The identifiers <span 
+class="pcrr8t-x-x-109">IDXn </span>(<span 
+class="pcrr8t-x-x-109">n </span>is
+a nonzero integer) are reserved variables for this purpose and should not be used for other
+applications. The arithmetic operator <span 
+class="pcrr8t-x-x-109">DOT </span>can be used both in infix and prefix form with
+two arguments.
+<!--l. 336--><p class="noindent" >5. Operators (but not states) can only be raised to an <span class="underline">integer</span> power. The system
+expands this power expression into a product of the corresponding number of
+terms inserting dummy indices if necessary. The following examples explain the
+transformations occurring on power expressions (system output is indicated with an
+<span 
+class="pcrr8t-x-x-109">&#8211;&#x003E;</span>):
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1104">
+SCALOP&#x00A0;A;&#x00A0;A**2;
+&#x00A0;<br />-&#x00A0;--&#x003E;&#x00A0;A*A
+&#x00A0;<br />VECOP&#x00A0;V;&#x00A0;V**4;
+&#x00A0;<br />-&#x00A0;--&#x003E;&#x00A0;V(IDX1)*V(IDX1)*V(IDX2)*V(IDX2)
+&#x00A0;<br />TENSOP&#x00A0;C(2);&#x00A0;C**2;
+&#x00A0;<br />-&#x00A0;--&#x003E;&#x00A0;C(IDX3,IDX4)*C(IDX3,IDX4)
+</div>
+<!--l. 350--><p class="nopar" > Note in particular the way how the system interprets powers of tensor operators which is
+different from the notation used in matrix algebra.
+<!--l. 355--><p class="noindent" >6. Quotients of operators are only defined between <span class="underline">scalar</span> operator
+expressions. The system transforms the quotient of 2 scalar operators into
+the product of the first operator times the inverse of the second one.
+Example<span class="footnote-mark"><a 
+href="manual184.html#fn26x16"><sup class="textsuperscript">26</sup></a></span><a 
+ id="x181-732002f26"></a> :
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1105">
+SCALOP&#x00A0;A,B;&#x00A0;&#x00A0;&#x00A0;A&#x00A0;/&#x00A0;B;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;--&#x003E;&#x00A0;(B&#x00A0;&#x00A0;)*A
+</div>
+<!--l. 366--><p class="nopar" >
+<!--l. 368--><p class="noindent" >7. Combining the last 2 rules explains the way how the system handles negative powers
+of operators:
+<!--l. 371--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1106">
+SCALOP&#x00A0;B;
+&#x00A0;<br />B**(-3);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1&#x00A0;&#x00A0;&#x00A0;&#x00A0;-1
+&#x00A0;<br />&#x00A0;--&#x003E;&#x00A0;(B&#x00A0;&#x00A0;)*(B&#x00A0;&#x00A0;)*(B&#x00A0;&#x00A0;)
+</div>
+<!--l. 377--><p class="nopar" >
+<!--l. 380--><p class="noindent" >The method of inserting dummy indices and expanding powers of operators has been
+chosen to facilitate the handling of complicated operator expressions and particularly
+their application on states (see section 3.4.3). However it may be useful to get rid of these
+dummy indices in order to enhance the readability of the system&#8217;s final output. For this
+purpose the switch <span 
+class="pcrr8t-x-x-109">CONTRACT</span><a 
+ id="dx181-732003"></a> has to be turned on (<span 
+class="pcrr8t-x-x-109">CONTRACT </span>is normally set to
+<span 
+class="pcrr8t-x-x-109">OFF</span>). The system in this case contracts over dummy indices reinserting the <span 
+class="pcrr8t-x-x-109">DOT</span>
+operator and reassembling the expanded powers. However due to the predefined
+operator ordering the system may not remove all the dummy indices introduced
+previously.
+<h5 class="subsubsectionHead"><span class="titlemark">16.46.3.4    </span> <a 
+ id="x181-73300016.46.3.4"></a>Special functions</h5>
+<!--l. 396--><p class="noindent" >
+<!--l. 398--><p class="noindent" >If 2 PHYSOPs have been declared noncommutative using the (redefined) <span 
+class="pcrr8t-x-x-109">NONCOM</span>
+statement, it is possible to introduce in the environment <span class="underline">elementary</span> (anti-) commutation
+relations between them. For this purpose, 2 <span class="underline">scalar</span> operators <span 
+class="pcrr8t-x-x-109">COMM</span><a 
+ id="dx181-733001"></a> and <span 
+class="pcrr8t-x-x-109">ANTICOMM</span>
+<a 
+ id="dx181-733002"></a> are available. These operators are used in conjunction with <span 
+class="pcrr8t-x-x-109">LET </span>statements.
+Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1107">
+SCALOP&#x00A0;A,B,C,D;
+&#x00A0;<br />LET&#x00A0;COMM(A,B)=C;
+&#x00A0;<br />FOR&#x00A0;ALL&#x00A0;N,M&#x00A0;LET&#x00A0;ANTICOMM(A(N),B(M))=D;
+&#x00A0;<br />VECOP&#x00A0;U,V,W;&#x00A0;PHYSINDEX&#x00A0;X,Y,Z;
+&#x00A0;<br />FOR&#x00A0;ALL&#x00A0;X,Y&#x00A0;LET&#x00A0;COMM(V(X),W(Y))=U(Z);
+</div>
+<!--l. 413--><p class="nopar" >
+<!--l. 415--><p class="noindent" >Note that if special indices are used as dummy variables in <span 
+class="pcrr8t-x-x-109">FOR ALL ... LET</span>
+constructs then these indices should have been declared previously using the
+<span 
+class="pcrr8t-x-x-109">PHYSINDEX </span>command.
+<!--l. 419--><p class="noindent" >Every time the system encounters a product term involving 2 noncommutative operators
+which have to be reordered on account of the given operator ordering, the list of available
+(anti-) commutators is checked in the following way: First the system looks for a
+<span class="underline">commutation</span> relation which matches the product term. If it fails then the defined
+<span class="underline">anticommutation</span> relations are checked. If there is no successful match the product term
+<span 
+class="pcrr8t-x-x-109">A*B </span>is replaced by:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1108">
+A*B;
+&#x00A0;<br />&#x00A0;--&#x003E;&#x00A0;COMM(A,B)&#x00A0;+&#x00A0;B*A
+</div>
+<!--l. 432--><p class="nopar" > so that the user may introduce the commutation relation later on.
+<!--l. 435--><p class="noindent" >The user may want to force the system to look for <span class="underline">anticommutators</span> only; for this purpose
+a switch <span 
+class="pcrr8t-x-x-109">ANTICOM</span><a 
+ id="dx181-733003"></a><a 
+ id="dx181-733004"></a><a 
+ id="dx181-733005"></a> is defined which has to be turned on ( <span 
+class="pcrr8t-x-x-109">ANTICOM </span>is normally set to
+<span 
+class="pcrr8t-x-x-109">OFF</span>). In this case, the above example is replaced by:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1109">
+ON&#x00A0;ANTICOM;
+&#x00A0;<br />A*B;
+&#x00A0;<br />&#x00A0;--&#x003E;&#x00A0;&#x00A0;ANTICOMM(A,B)&#x00A0;-&#x00A0;B*A
+</div>
+<!--l. 445--><p class="nopar" >
+<!--l. 447--><p class="noindent" >Once the operator ordering has been fixed (in the example above <span 
+class="pcrr8t-x-x-109">B </span>has to be ordered
+ahead of <span 
+class="pcrr8t-x-x-109">A</span>), there is <span class="underline">no way</span> to prevent the system from introducing (anti-)commutators
+every time it encounters a product whose terms are not in the right order. On the other
+hand, simply by changing the <span 
+class="pcrr8t-x-x-109">OPORDER </span>statement and reevaluating the expression one
+can change the operator ordering <span class="underline">without</span> the need to introduce new commutation
+relations. Consider the following example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1110">
+SCALOP&#x00A0;A,B,C;&#x00A0;&#x00A0;&#x00A0;NONCOM&#x00A0;A,B;&#x00A0;&#x00A0;&#x00A0;OPORDER&#x00A0;B,A;
+&#x00A0;<br />LET&#x00A0;COMM(A,B)=C;
+&#x00A0;<br />A*B;
+&#x00A0;<br />-&#x00A0;--&#x003E;&#x00A0;&#x00A0;B*A&#x00A0;+&#x00A0;C;
+&#x00A0;<br />OPORDER&#x00A0;A,B;
+&#x00A0;<br />&#x00A0;B*A;
+&#x00A0;<br />-&#x00A0;--&#x003E;&#x00A0;A*B&#x00A0;-&#x00A0;C;
+</div>
+<!--l. 466--><p class="nopar" >
+<!--l. 468--><p class="noindent" >The functions <span 
+class="pcrr8t-x-x-109">COMM </span>and <span 
+class="pcrr8t-x-x-109">ANTICOMM </span>should only be used to define elementary (anti-)
+commutation relations between single operators. For the calculation of (anti-)
+commutators between complex operator expressions, the functions <span 
+class="pcrr8t-x-x-109">COMMUTE</span><a 
+ id="dx181-733006"></a> and
+<span 
+class="pcrr8t-x-x-109">ANTICOMMUTE</span><a 
+ id="dx181-733007"></a> have been defined. Example (is included as example 1 in the test
+file):
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1111">
+VECOP&#x00A0;P,A,K;
+&#x00A0;<br />PHYSINDEX&#x00A0;X,Y;
+&#x00A0;<br />FOR&#x00A0;ALL&#x00A0;X,Y&#x00A0;LET&#x00A0;COMM(P(X),A(Y))=K(X)*A(Y);
+&#x00A0;<br />COMMUTE(P**2,P&#x00A0;DOT&#x00A0;A);
+</div>
+<!--l. 482--><p class="nopar" >
+<!--l. 484--><p class="noindent" >
+<!--l. 486--><p class="noindent" >As has been already mentioned, for each operator and state defined using the
+declaration commands quoted in section 3.1, the system generates automatically the
+corresponding adjoint operator. For the calculation of the adjoint representation
+of a complicated operator expression, a function <span 
+class="pcrr8t-x-x-109">ADJ</span><a 
+ id="dx181-733008"></a> has been defined.
+Example<span class="footnote-mark"><a 
+href="manual185.html#fn27x16"><sup class="textsuperscript">27</sup></a></span><a 
+ id="x181-733009f27"></a> :
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1112">
+SCALOP&#x00A0;A,B;
+&#x00A0;<br />ADJ(A*B);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;&#x00A0;&#x00A0;&#x00A0;+
+&#x00A0;<br />&#x00A0;--&#x003E;&#x00A0;(B&#x00A0;)*(A&#x00A0;)
+</div>
+<!--l. 499--><p class="nopar" >
+<!--l. 503--><p class="noindent" >For this purpose, a function <span 
+class="pcrr8t-x-x-109">OPAPPLY</span><a 
+ id="dx181-733010"></a> has been defined. It has 2 arguments and is used
+in the following combinations:
+<!--l. 507--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">(i) </span><span 
+class="pcrr8t-x-x-109">LET OPAPPLY(</span><span 
+class="ptmri8t-x-x-109">operator, state</span><span 
+class="pcrr8t-x-x-109">) = </span><span 
+class="ptmri8t-x-x-109">state</span>; This is to define a elementary action of an
+operator on a state in analogy to the way elementary commutation relations are
+introduced to the system. Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1113">
+SCALOP&#x00A0;A;&#x00A0;STATE&#x00A0;U;
+&#x00A0;<br />FOR&#x00A0;ALL&#x00A0;N,P&#x00A0;LET&#x00A0;OPAPPLY((A(N),U(P))=&#x00A0;EXP(I*N*P)*U(P);
+</div>
+<!--l. 516--><p class="nopar" >
+<!--l. 518--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">(ii) </span><span 
+class="pcrr8t-x-x-109">LET OPAPPLY(</span><span 
+class="ptmri8t-x-x-109">state, state</span><span 
+class="pcrr8t-x-x-109">) = </span><span 
+class="ptmri8t-x-x-109">scalar exp.</span>; This form is to define scalar products
+between states and normalization conditions. Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1114">
+STATE&#x00A0;U;
+&#x00A0;<br />FOR&#x00A0;ALL&#x00A0;N,M&#x00A0;LET&#x00A0;OPAPPLY(U(N),U(M))&#x00A0;=&#x00A0;IF&#x00A0;N=M&#x00A0;THEN&#x00A0;1&#x00A0;ELSE&#x00A0;0;
+</div>
+<!--l. 526--><p class="nopar" >
+<!--l. 528--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">(iii) </span><span 
+class="ptmri8t-x-x-109">state </span><span 
+class="pcrr8t-x-x-109">:= OPAPPLY(</span><span 
+class="ptmri8t-x-x-109">operator expression, state</span>); In this way, the action of an
+operator expression on a given state is calculated using elementary relations defined as
+explained in <span 
+class="ptmb8t-x-x-109">(i)</span>. The result may be assigned to a different state vector.
+<!--l. 533--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">(iv) </span><span 
+class="pcrr8t-x-x-109">OPAPPLY(</span><span 
+class="ptmri8t-x-x-109">state</span><span 
+class="pcrr8t-x-x-109">, OPAPPLY(</span><span 
+class="ptmri8t-x-x-109">operator expression, state</span><span 
+class="pcrr8t-x-x-109">))</span>; This is the way how to
+calculate matrix elements of operator expressions. The system proceeds in the following
+way: first the rightmost operator is applied on the right state, which means that the
+system tries to find an elementary relation which match the application of the operator on
+the state. If it fails the system tries to apply the leftmost operator of the expression on the
+left state using the adjoint representations. If this fails also, the system prints out a
+warning message and stops the evaluation. Otherwise the next operator occuring in the
+expression is taken and so on until the complete expression is applied. Then the system
+looks for a relation expressing the scalar product of the two resulting states and
+prints out the final result. An example of such a calculation is given in the test
+file.
+<!--l. 551--><p class="noindent" >The infix version of the <span 
+class="pcrr8t-x-x-109">OPAPPLY </span>function is the vertical bar <span 
+class="cmsy-10x-x-109">&#x2223;</span> . It is <span class="underline">right</span> associative and
+placed in the precedence list just above the minus (<span 
+class="cmsy-10x-x-109">-</span>) operator. Some of the
+REDUCE&#x00A0;implementation may not work with this character, the prefix form should then be used
+instead<span class="footnote-mark"><a 
+href="manual186.html#fn28x16"><sup class="textsuperscript">28</sup></a></span><a 
+ id="x181-733011f28"></a> .
+<h4 class="subsectionHead"><span class="titlemark">16.46.4    </span> <a 
+ id="x181-73400016.46.4"></a>Known problems in the current release of PHYSOP</h4>
+<!--l. 561--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">(i) </span>Some spurious negative powers of operators may appear in the result of a calculation
+using the PHYSOP package. This is a purely &#8221;cosmetic&#8221; effect which is due to an
+additional factorization of the expression in the output printing routines of REDUCE.
+Setting off the REDUCE&#x00A0;switch <span 
+class="pcrr8t-x-x-109">ALLFAC </span>(<span 
+class="pcrr8t-x-x-109">ALLFAC </span>is normally on) should make
+these terms disappear and print out the correct result (see example 1 in the test
+file).
+<!--l. 572--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">(ii) </span>The current release of the PHYSOP package is not optimized w.r.t. computation
+                                                                     
+
+                                                                     
+speed. Users should be aware that the evaluation of complicated expressions involving a
+lot of commutation relations requires a significant amount of CPU time <span class="underline">and</span> memory.
+Therefore the use of PHYSOP on small machines is rather limited. A minimal hardware
+configuration should include at least 4 MB of memory and a reasonably fast CPU (type
+Intel 80386 or equiv.).
+<!--l. 580--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">(iii) </span>Slightly different ordering of operators (especially with multiple occurrences of the
+same operator with different indices) may appear in some calculations due to the internal
+ordering of atoms in the underlying LISP system (see last example in the test file). This
+cannot be entirely avoided by the package but does not affect the correctness of the
+results.
+<!--l. 588--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.46.5    </span> <a 
+ id="x181-73500016.46.5"></a>Final remarks</h4>
+<!--l. 589--><p class="noindent" >The package PHYSOP has been presented by the author at the IV inter. Conference on
+Computer Algebra in Physical Research, Dubna (USSR) 1990 (see M. Warns, <span 
+class="ptmri8t-x-x-109">Software</span>
+<span 
+class="ptmri8t-x-x-109">Extensions of REDUCE</span><span 
+class="ptmri8t-x-x-109">&#x00A0;for Operator Calculus in Quantum Theory</span>, Proc.&#x00A0;of the IV
+inter.&#x00A0;Conf.&#x00A0;on Computer Algebra in Physical Research, Dubna 1990, to appear). It has
+been developed with the aim in mind to perform calculations of the type exemplified in
+the test file included in the distribution of this package. However it should also be useful
+in some other domains like e.g.&#x00A0;the calculations of complicated Feynman diagrams in
+QCD which could not be performed using the HEPHYS package. The author is therefore
+grateful for any suggestion to improve or extend the usability of the package. Users
+should not hesitate to contact the author for additional help and explanations on how to
+use this package. Some bugs may also appear which have not been discovered
+during the tests performed prior to the release of this version. Please send in this
+case to the author a short input and output listing displaying the encountered
+problem.
+<!--l. 611--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x181-73600016.46.5"></a>Acknowledgements</h4>
+<!--l. 612--><p class="noindent" >The main ideas for the implementation of a new data type in the REDUCE&#x00A0;environnement
+have been taken from the VECTOR package developed by Dr.&#x00A0;David Harper (D. Harper,
+Comp.&#x00A0;Phys.&#x00A0;Comm.&#x00A0;<span 
+class="ptmb8t-x-x-109">54 </span>(1989) 295). Useful discussions with Dr.&#x00A0;Eberhard Schrüfer
+and Prof.&#x00A0;John Fitch are also gratefully acknowledged.
+                                                                     
+
+                                                                     
+<!--l. 621--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.46.6    </span> <a 
+ id="x181-73700016.46.6"></a>Appendix: List of error and warning messages</h4>
+<!--l. 622--><p class="noindent" >In the following the error (E) and warning (W) messages specific to the PHYSOP
+package are listed.
+     <dl class="description"><dt class="description">
+<span 
+class="pcrr8t-x-x-109">cannot declare </span><span 
+class="ptmri8t-x-x-109">x  </span><span 
+class="pcrr8t-x-x-109">as </span><span 
+class="ptmri8t-x-x-109">data type</span> </dt><dd 
+class="description">(W): An attempt has been made to declare
+     an object <span 
+class="ptmri8t-x-x-109">x </span>which cannot be used as a PHYSOP operator of the required type.
+     The declaration command is ignored.
+     </dd><dt class="description">
+<span 
+class="ptmri8t-x-x-109">x </span><span 
+class="pcrr8t-x-x-109">already defined as </span><span 
+class="ptmri8t-x-x-109">data type</span> </dt><dd 
+class="description">(W):   The   object   <span 
+class="ptmri8t-x-x-109">x   </span>has   already   been
+     declared using a REDUCE&#x00A0;type declaration command and can therefore not
+     be used as a PHYSOP operator. The declaration command is ignored.
+     </dd><dt class="description">
+<span 
+class="ptmri8t-x-x-109">x </span><span 
+class="pcrr8t-x-x-109">already declared as </span><span 
+class="ptmri8t-x-x-109">data type</span> </dt><dd 
+class="description">(W):  The  object  <span 
+class="pcrr8t-x-x-109">x </span>has  already  been
+     declared with a PHYSOP declaration command. The declaration command
+     is ignored.
+     </dd><dt class="description">
+<span 
+class="ptmri8t-x-x-109">x </span><span 
+class="pcrr8t-x-x-109">is not a PHYSOP</span> </dt><dd 
+class="description">(E):   An   invalid   argument   has   been   included   in   an
+     <span 
+class="pcrr8t-x-x-109">OPORDER </span>command. Check the arguments.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">invalid argument(s) to </span><span 
+class="ptmri8t-x-x-109">function</span> </dt><dd 
+class="description">(E):  A  function  implemented  by  the
+     PHYSOP package has been called with an invalid argument. Check type of
+     arguments.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">Type conflict in </span><span 
+class="ptmri8t-x-x-109">operation</span> </dt><dd 
+class="description">(E):  A  PHYSOP  type  conflict  has  occured
+     during an arithmetic operation. Check the arguments.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">invalid call of </span><span 
+class="ptmri8t-x-x-109">function </span><span 
+class="pcrr8t-x-x-109">with args: </span><span 
+class="ptmri8t-x-x-109">arguments</span> </dt><dd 
+class="description">(E): A function of the
+     PHYSOP package has been declared with invalid argument(s). Check the
+     argument list.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">type mismatch in </span><span 
+class="ptmri8t-x-x-109">expression</span> </dt><dd 
+class="description">(E): A type mismatch has been detected in an
+     expression. Check the corresponding expression.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">type mismatch in </span><span 
+class="ptmri8t-x-x-109">assignement</span> </dt><dd 
+class="description">(E): A type mismatch has been detected in
+     an assignment or in a <span 
+class="pcrr8t-x-x-109">LET </span>statement. Check the listed statement.
+                                                                     
+
+                                                                     
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">PHYSOP type conflict in </span><span 
+class="ptmri8t-x-x-109">expr</span> </dt><dd 
+class="description">(E):   A   ambiguity   has   been   detected
+     during the type analysis of the expression. Check the expression.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">operators in exponent cannot be handled</span> </dt><dd 
+class="description">(E):  An  operator  has
+     occurred in the exponent of an expression.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">cannot raise a state to a power</span> </dt><dd 
+class="description">(E): states cannot be exponentiated
+     by the system.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">invalid quotient</span> </dt><dd 
+class="description">(E): An invalid denominator has occurred in a quotient.
+     Check the expression.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">physops of different types cannot be commuted</span> </dt><dd 
+class="description">(E):
+     An invalid operator has occurred in a call of the <span 
+class="pcrr8t-x-x-109">COMMUTE</span>/<span 
+class="pcrr8t-x-x-109">ANTICOMMUTE</span>
+     function.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">commutators only implemented between scalar operators</span> </dt><dd 
+class="description">
+     (E):    An    invalid    operator    has    occurred    in    the    call    of    the
+     <span 
+class="pcrr8t-x-x-109">COMMUTE</span>/<span 
+class="pcrr8t-x-x-109">ANTICOMMUTE </span>function.
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-109">evaluation incomplete due to missing elementary relations</span> </dt><dd 
+class="description">
+     (W): <br 
+class="newline" />The  system  has  not  found  all  the  elementary  commutators  or  application
+     relations necessary to calculate or reorder the input expression. The result
+     may however be used for further calculations.</dd></dl>
+<!--l. 833--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 835--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse137.html" >Up</a></td><td class="clinks"><a 
+href="manualse138.html" >Next</a></td><td class="clinks"><a 
+href="manualse136.html" >Prev</a></td><td class="clinks"><a 
+href="manualse136.html#tailmanualse136.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse137.html" >Front</a></td></tr></table><a 
+ id="tailmanualse137.html"></a>   
+</body></html> 

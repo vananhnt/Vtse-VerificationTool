@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>SOLVE Operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse42.html" >Up</a></td><td class="clinks"><a 
+href="manualse43.html" >Next</a></td><td class="clinks"><a 
+href="manualse41.html" >Prev</a></td><td class="clinks"><a 
+href="manualse41.html#tailmanualse41.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse42.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.16    </span> <a 
+ id="x53-900007.16"></a>SOLVE Operator</h3>
+<a 
+ id="dx53-90001"></a>
+<!--l. 2--><p class="noindent" ><a 
+ id="operator:SOLVE"></a> SOLVE is an operator for solving one or more simultaneous algebraic equations. It is
+used with the syntax:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">SOLVE</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">EXPRN:algebraic</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmr-10x-x-109">[</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VAR:kernel</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">VARLIST:list of kernels</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmr-10x-x-109">]) : </span><span 
+class="cmmi-10x-x-109">list.</span></div>
+<!--l. 9--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">EXPRN </span>is of the form <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> or <span 
+class="pcrr8t-x-x-109">{</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression1</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>,<span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression2</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>, &#x2026;<span 
+class="pcrr8t-x-x-109">}</span>. Each
+expression is an algebraic equation, or is the difference of the two sides of the equation.
+The second argument is either a kernel or a list of kernels representing the unknowns in
+the system. This argument may be omitted if the number of distinct, non-constant,
+top-level kernels equals the number of unknowns, in which case these kernels are
+presumed to be the unknowns.
+<!--l. 18--><p class="noindent" >For one equation, <span 
+class="pcrr8t-x-x-109">SOLVE</span><a 
+ id="dx53-90002"></a> recursively uses factorization and decomposition,
+together with the known inverses of <span 
+class="pcrr8t-x-x-109">LOG</span>, <span 
+class="pcrr8t-x-x-109">SIN</span>, <span 
+class="pcrr8t-x-x-109">COS</span>, <span 
+class="pcrr8t-x-x-109">^</span>, <span 
+class="pcrr8t-x-x-109">ACOS</span>, <span 
+class="pcrr8t-x-x-109">ASIN</span>, and
+linear, quadratic, cubic, quartic, or binomial factors. Solutions of equations
+built with exponentials or logarithms are often expressed in terms of Lambert&#8217;s
+<span 
+class="pcrr8t-x-x-109">W </span>function.<a 
+ id="dx53-90003"></a> This function is (partially) implemented in the special functions
+package.
+<!--l. 27--><p class="noindent" ><a 
+ id="switch:CRAMER"></a> Linear equations are solved by the multi-step elimination method due to Bareiss, unless
+the switch <span 
+class="pcrr8t-x-x-109">CRAMER</span><a 
+ id="dx53-90004"></a><a 
+ id="dx53-90005"></a><a 
+ id="dx53-90006"></a> is on, in which case Cramer&#8217;s method is used. The Bareiss method is
+usually more efficient unless the system is large and dense.
+<!--l. 33--><p class="noindent" >Non-linear equations are solved using the Groebner basis package<a 
+ id="dx53-90007"></a><a 
+ id="dx53-90008"></a> (chapter&#x00A0;<a 
+href="manualse119.html#x151-50000016.28">16.28<!--tex4ht:ref: GROEBNER --></a>).
+Users should note that this can be quite a time consuming process.
+<!--l. 38--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-134">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve(log(sin(x+3))^5&#x00A0;=&#x00A0;8,x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve(a*log(sin(x+3))^5&#x00A0;-&#x00A0;b,&#x00A0;sin(x+3));
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve({a*x+y=3,y=-2},{x,y});
+</div>
+<!--l. 43--><p class="nopar" >
+<!--l. 45--><p class="noindent" ><a 
+ id="operator:ROOT_OF"></a> <span 
+class="pcrr8t-x-x-109">SOLVE </span>returns a list of solutions. If there is one unknown, each solution is an equation
+for the unknown. If a complete solution was found, the unknown will appear by itself on
+the left-hand side of the equation. On the other hand, if the solve package could not find a
+solution, the &#8220;solution&#8221; will be an equation for the unknown in terms of the operator
+<span 
+class="pcrr8t-x-x-109">ROOT_OF</span><a 
+ id="dx53-90009"></a>. If there are several unknowns, each solution will be a list of equations for the
+unknowns. For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-135">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve(x^2=1,x);&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;{X=-1,X=1}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve(x^7-x^6+x^2=1,x)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x003E;&#x00A0;{X=ROOT_OF(X_&#x00A0;&#x00A0;+&#x00A0;X_&#x00A0;+&#x00A0;1,X_,TAG_1),X=1}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve({x+3y=7,y-x=1},{x,y})&#x00A0;-&#x003E;&#x00A0;{{X=1,Y=2}}.
+</div>
+<!--l. 62--><p class="nopar" > <a 
+ id="reserved:ROOT_MULTIPLICITIES"></a><a 
+ id="dx53-90010"></a><a 
+ id="dx53-90011"></a> The TAG argument is used to uniquely identify those particular solutions. Solution
+multiplicities are stored in the global variable <span 
+class="pcrr8t-x-x-109">ROOT_MULTIPLICITIES </span>rather than
+the solution list. The value of this variable is a list of the multiplicities of the solutions for
+the last call of <span 
+class="pcrr8t-x-x-109">SOLVE</span>. <a 
+ id="dx53-90012"></a> For example,
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-136">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve(x^2=2x-1,x);&#x00A0;root_multiplicities;
+</div>
+<!--l. 73--><p class="nopar" > gives the results
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-137">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{X=1}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{2}
+</div>
+<!--l. 79--><p class="nopar" >
+<!--l. 81--><p class="noindent" ><a 
+ id="switch:MULTIPLICITIES"></a> If you want the multiplicities explicitly displayed, the switch <span 
+class="pcrr8t-x-x-109">MULTIPLICITIES</span><a 
+ id="dx53-90013"></a><a 
+ id="dx53-90014"></a><a 
+ id="dx53-90015"></a> can
+be turned on. For example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-138">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;multiplicities;&#x00A0;solve(x^2=2x-1,x);
+</div>
+<!--l. 86--><p class="nopar" > yields the result
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-139">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{X=1,X=1}
+</div>
+<!--l. 90--><p class="nopar" >
+<!--l. 92--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.16.1    </span> <a 
+ id="x53-910007.16.1"></a>Handling of Undetermined Solutions</h4>
+<!--l. 93--><p class="noindent" >When <span 
+class="pcrr8t-x-x-109">SOLVE </span>cannot find a solution to an equation, it normally returns an equation for
+the relevant indeterminates in terms of the operator <span 
+class="pcrr8t-x-x-109">ROOT_OF</span>.<a 
+ id="dx53-91001"></a> For example, the
+expression
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-140">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve(cos(x)&#x00A0;+&#x00A0;log(x),x);
+</div>
+<!--l. 98--><p class="nopar" > returns the result
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-141">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{X=ROOT_OF(COS(X_)&#x00A0;+&#x00A0;LOG(X_),X_,TAG_1)}&#x00A0;.
+</div>
+<!--l. 102--><p class="nopar" >
+<!--l. 104--><p class="noindent" ><a 
+ id="operator:ONE_OF"></a> <a 
+ id="operator:EXPAND_CASES"></a> An expression with a top-level <span 
+class="pcrr8t-x-x-109">ROOT_OF </span>operator is implicitly a list with an unknown
+number of elements (since we don&#8217;t always know how many solutions an equation has).
+If a substitution is made into such an expression, closed form solutions can emerge. If
+this occurs, the <span 
+class="pcrr8t-x-x-109">ROOT_OF </span>construct is replaced by an operator <span 
+class="pcrr8t-x-x-109">ONE_OF</span>.<a 
+ id="dx53-91002"></a> At this point it
+is of course possible to transform the result of the original <span 
+class="pcrr8t-x-x-109">SOLVE </span>operator expression
+into a standard <span 
+class="pcrr8t-x-x-109">SOLVE </span>solution. To effect this, the operator <span 
+class="pcrr8t-x-x-109">EXPAND_CASES</span><a 
+ id="dx53-91003"></a> can be
+used.
+<!--l. 116--><p class="noindent" >The following example shows the use of these facilities:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-142">
+solve(-a*x^3+a*x^2+x^4-x^3-4*x^2+4,x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />{X=ROOT_OF(A*X_&#x00A0;&#x00A0;-&#x00A0;X_&#x00A0;&#x00A0;+&#x00A0;4*X_&#x00A0;+&#x00A0;4,X_,TAG_2),X=1}
+&#x00A0;<br />
+&#x00A0;<br />sub(a=-1,ws);
+&#x00A0;<br />
+&#x00A0;<br />{X=ONE_OF({2,-1,-2},TAG_2),X=1}
+&#x00A0;<br />
+&#x00A0;<br />expand_cases&#x00A0;ws;
+&#x00A0;<br />
+&#x00A0;<br />{X=2,X=-1,X=-2,X=1}
+</div>
+<!--l. 129--><p class="nopar" >
+<!--l. 131--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.16.2    </span> <a 
+ id="x53-920007.16.2"></a>Solutions of Equations Involving Cubics and Quartics</h4>
+<!--l. 132--><p class="noindent" ><a 
+ id="switch:FULLROOTS"></a> <a 
+ id="switch:TRIGFORM"></a>
+<!--l. 135--><p class="noindent" >Since roots of cubics and quartics can often be very messy, a switch <span 
+class="pcrr8t-x-x-109">FULLROOTS</span><a 
+ id="dx53-92001"></a><a 
+ id="dx53-92002"></a><a 
+ id="dx53-92003"></a> is
+available, that, when off (the default), will prevent the production of a result in closed
+form. The <span 
+class="pcrr8t-x-x-109">ROOT_OF </span>construct will be used in this case instead.
+<!--l. 140--><p class="noindent" >In constructing the solutions of cubics and quartics, trigonometrical forms are used
+where appropriate. This option is under the control of a switch <span 
+class="pcrr8t-x-x-109">TRIGFORM</span>,<a 
+ id="dx53-92004"></a><a 
+ id="dx53-92005"></a><a 
+ id="dx53-92006"></a> which is
+normally on.
+<!--l. 144--><p class="noindent" >The following example illustrates the use of these facilities:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-143">
+let&#x00A0;xx&#x00A0;=&#x00A0;solve(x^3+x+1,x);
+&#x00A0;<br />
+&#x00A0;<br />xx;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />{X=ROOT_OF(X_&#x00A0;&#x00A0;+&#x00A0;X_&#x00A0;+&#x00A0;1,X_)}
+&#x00A0;<br />
+&#x00A0;<br />on&#x00A0;fullroots;
+&#x00A0;<br />
+&#x00A0;<br />xx;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;SQRT(31)*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ATAN(---------------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*SQRT(3)
+&#x00A0;<br />{X=(I*(SQRT(3)*SIN(-----------------------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+</div>
+<!--l. 161--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-144">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;SQRT(31)*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ATAN(---------------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*SQRT(3)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;COS(-----------------------)))/SQRT(3),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;SQRT(31)*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ATAN(---------------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*SQRT(3)
+&#x00A0;<br />&#x00A0;X=(&#x00A0;-&#x00A0;I*(SQRT(3)*SIN(-----------------------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;SQRT(31)*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ATAN(---------------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*SQRT(3)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;COS(-----------------------)))/SQRT(
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;SQRT(31)*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ATAN(---------------)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*SQRT(3)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;2*COS(-----------------------)*I
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;X=----------------------------------}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SQRT(3)
+&#x00A0;<br />
+&#x00A0;<br />off&#x00A0;trigform;
+&#x00A0;<br />
+&#x00A0;<br />xx;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3
+&#x00A0;<br />{X=(&#x00A0;-&#x00A0;(SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;*SQRT(3)*I
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;(SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;2&#x00A0;&#x00A0;&#x00A0;*SQRT(3)*I
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/3&#x00A0;&#x00A0;1/3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;)/(2*(SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;*6
+                                                                     
+
+                                                                     
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*3&#x00A0;&#x00A0;&#x00A0;),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3
+&#x00A0;<br />&#x00A0;X=((SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;*SQRT(3)*I
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;(SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;*SQRT(3)*I
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/3&#x00A0;&#x00A0;1/3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;2&#x00A0;&#x00A0;&#x00A0;)/(2*(SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;*6
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*3&#x00A0;&#x00A0;&#x00A0;),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3&#x00A0;&#x00A0;&#x00A0;&#x00A0;2/3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;2
+&#x00A0;<br />&#x00A0;X=-------------------------------------}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1/3&#x00A0;&#x00A0;1/3&#x00A0;&#x00A0;1/6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;(SQRT(31)&#x00A0;-&#x00A0;3*SQRT(3))&#x00A0;&#x00A0;&#x00A0;*6&#x00A0;&#x00A0;&#x00A0;*3
+</div>
+<!--l. 224--><p class="nopar" >
+<h4 class="subsectionHead"><span class="titlemark">7.16.3    </span> <a 
+ id="x53-930007.16.3"></a>Other Options</h4>
+<!--l. 227--><p class="noindent" ><a 
+ id="switch:SOLVESINGULAR"></a> <a 
+ id="switch:ALLBRANCH"></a> <a 
+ id="switch:ARBVARS"></a> <a 
+ id="operator:ARBCOMPLEX"></a> <a 
+ id="operator:ARBINT"></a> If <span 
+class="pcrr8t-x-x-109">SOLVESINGULAR</span><a 
+ id="dx53-93001"></a><a 
+ id="dx53-93002"></a><a 
+ id="dx53-93003"></a> is on (the default setting), degenerate systems such as <span 
+class="pcrr8t-x-x-109">x+y=0</span>,
+<span 
+class="pcrr8t-x-x-109">2x+2y=0 </span>will be solved by introducing appropriate arbitrary constants. The consistent
+singular equation 0=0 or equations involving functions with multiple inverses may
+introduce unique new indeterminant kernels <span 
+class="pcrr8t-x-x-109">ARBCOMPLEX(j)</span>, or <span 
+class="pcrr8t-x-x-109">ARBINT(j)</span>,
+(<span 
+class="cmmi-10x-x-109">j</span>=1,2,...), <a 
+ id="dx53-93004"></a><a 
+ id="dx53-93005"></a> representing arbitrary complex or integer numbers respectively. To
+automatically select the principal branches, do <span 
+class="pcrr8t-x-x-109">off allbranch; </span>. <span 
+class="pcrr8t-x-x-109">ALLBRANCH</span><a 
+ id="dx53-93006"></a><a 
+ id="dx53-93007"></a><a 
+ id="dx53-93008"></a> To
+avoid the introduction of new indeterminant kernels do <span 
+class="pcrr8t-x-x-109">OFF ARBVARS</span><a 
+ id="dx53-93009"></a><a 
+ id="dx53-93010"></a><a 
+ id="dx53-93011"></a> &#8211; then no
+equations are generated for the free variables and their original names are used to express
+the solution forms. To suppress solutions of consistent singular equations do <span 
+class="pcrr8t-x-x-109">OFF</span>
+<span 
+class="pcrr8t-x-x-109">SOLVESINGULAR</span>.
+<!--l. 248--><p class="noindent" >To incorporate additional inverse functions do, for example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-145">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;put(&#8217;sinh,&#8217;inverse,&#8217;asinh);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;put(&#8217;asinh,&#8217;inverse,&#8217;sinh);
+</div>
+<!--l. 252--><p class="nopar" > together with any desired simplification rules such as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-146">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;all&#x00A0;x&#x00A0;let&#x00A0;sinh(asinh(x))=x,&#x00A0;asinh(sinh(x))=x;
+</div>
+<!--l. 256--><p class="nopar" > For completeness, functions with non-unique inverses should be treated as <span 
+class="pcrr8t-x-x-109">^</span>, <span 
+class="pcrr8t-x-x-109">SIN</span>, and
+<span 
+class="pcrr8t-x-x-109">COS </span>are in the <span 
+class="pcrr8t-x-x-109">SOLVE </span>module source.
+<!--l. 261--><p class="noindent" >Arguments of <span 
+class="pcrr8t-x-x-109">ASIN </span>and <span 
+class="pcrr8t-x-x-109">ACOS </span>are not checked to ensure that the absolute value of the
+real part does not exceed 1; and arguments of <span 
+class="pcrr8t-x-x-109">LOG </span>are not checked to ensure that the
+absolute value of the imaginary part does not exceed <span 
+class="cmmi-10x-x-109">&#x03C0;</span>; but checks (perhaps involving
+user response for non-numerical arguments) could be introduced using <span 
+class="pcrr8t-x-x-109">LET</span><a 
+ id="dx53-93012"></a> statements
+for these operators.
+<!--l. 268--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">7.16.4    </span> <a 
+ id="x53-940007.16.4"></a>Parameters and Variable Dependency</h4>
+<!--l. 270--><p class="noindent" >The proper design of a variable sequence supplied as a second argument to
+<span 
+class="pcrr8t-x-x-109">SOLVE </span>is important for the structure of the solution of an equation system.
+Any unknown in the system not in this list is considered totally free. E.g.&#x00A0;the
+call
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-147">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve({x=2*z,z=2*y},{z});
+</div>
+<!--l. 277--><p class="nopar" > produces an empty list as a result because there is no function <span 
+class="cmmi-10x-x-109">z </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">z</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x,y</span><span 
+class="cmr-10x-x-109">) </span>which
+fulfills both equations for arbitrary <span 
+class="cmmi-10x-x-109">x </span>and <span 
+class="cmmi-10x-x-109">y </span>values. <a 
+ id="reserved:requirements"></a> In such a case the share
+variable <span 
+class="pcrr8t-x-x-109">REQUIREMENTS</span><a 
+ id="dx53-94001"></a><a 
+ id="dx53-94002"></a> displays a set of restrictions for the parameters of the
+system:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-148">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;requirements;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{x&#x00A0;-&#x00A0;4*y}
+</div>
+<!--l. 288--><p class="nopar" > The non-existence of a formal solution is caused by a contradiction which disappears
+only if the parameters of the initial system are set such that all members of the
+requirements list take the value zero. For a linear system the set is complete:
+a solution of the requirements list makes the initial system solvable. E.g.&#x00A0;in
+the above case a substitution <span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">= 4</span><span 
+class="cmmi-10x-x-109">y </span>makes the equation set consistent. For
+a non-linear system only one inconsistency is detected. If such a system has
+more than one inconsistency, you must reduce them one after the other.
+<span class="footnote-mark"><a 
+href="manual54.html#fn1x7"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x53-94003f1"></a> The
+set shows you also the dependency among the parameters: here one of <span 
+class="cmmi-10x-x-109">x </span>and <span 
+class="cmmi-10x-x-109">y </span>is free and
+a formal solution of the system can be computed by adding it to the variable
+list of <span 
+class="pcrr8t-x-x-109">solve</span>. The requirement set is not unique &#8211; there may be other such
+sets.
+<!--l. 314--><p class="noindent" >A system with parameters may have a formal solution, e.g.&#x00A0;
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-149">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;solve({x=a*z+1,0=b*z-y},{z,x});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a*y&#x00A0;+&#x00A0;b
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{{z=---,x=---------}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b
+</div>
+<!--l. 321--><p class="nopar" > which is not valid for all possible values of the parameters. <a 
+ id="reserved:assumptions"></a> The variable
+<span 
+class="pcrr8t-x-x-109">ASSUMPTIONS</span><a 
+ id="dx53-94004"></a><a 
+ id="dx53-94005"></a> contains then a list of restrictions: the solutions are valid only as long
+as none of these expressions vanishes. Any zero of one of them represents a
+special case that is not covered by the formal solution. In the above case the value
+is
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-150">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;assumptions;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;{b}
+</div>
+<!--l. 335--><p class="nopar" > which excludes formally the case <span 
+class="cmmi-10x-x-109">b </span><span 
+class="cmr-10x-x-109">= 0</span>; obviously this special parameter value makes
+the system singular. The set of assumptions is complete for both, linear and non&#8211;linear
+systems.
+<!--l. 340--><p class="noindent" ><a 
+ id="switch:VAROPT"></a> <span 
+class="pcrr8t-x-x-109">SOLVE </span>rearranges the variable sequence to reduce the (expected) computing time.
+This behavior is controlled by the switch <span 
+class="pcrr8t-x-x-109">VAROPT</span><a 
+ id="dx53-94006"></a><a 
+ id="dx53-94007"></a><a 
+ id="dx53-94008"></a>, which is on by default.
+If it is turned off, the supplied variable sequence is used or the system kernel
+ordering is taken if the variable list is omitted. The effect is demonstrated by an
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-151">
+&#x00A0;&#x00A0;&#x00A0;s:=&#x00A0;{y^3+3x=0,x^2+y^2=1};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;solve(s,{y,x});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{{y=root_of(y_&#x00A0;&#x00A0;+&#x00A0;9*y_&#x00A0;&#x00A0;-&#x00A0;9,y_),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;-&#x00A0;y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x=-------}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;off&#x00A0;varopt;&#x00A0;solve(s,{y,x});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{{x=root_of(x_&#x00A0;&#x00A0;-&#x00A0;3*x_&#x00A0;&#x00A0;+&#x00A0;12*x_&#x00A0;&#x00A0;-&#x00A0;1,x_),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x*(&#x00A0;-&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;2*x&#x00A0;&#x00A0;-&#x00A0;10)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y=-----------------------}}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />
+</div>
+<!--l. 370--><p class="nopar" > In the first case, <span 
+class="pcrr8t-x-x-109">solve </span>forms the solution as a set of pairs <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">y</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-10x-x-109">,x</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">y</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmr-10x-x-109">)) </span>because the
+degree of <span 
+class="cmmi-10x-x-109">x </span>is higher &#8211; such a rearrangement makes the internal computation of the
+Gröbner basis generally faster. For the second case the explicitly given variable
+sequence is used such that the solution has now the form <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmmi-10x-x-109">,y</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><sub><span 
+class="cmmi-8">i</span></sub><span 
+class="cmr-10x-x-109">))</span>. Controlling
+the variable sequence is especially important if the system has one or more
+free variables. As an alternative to turning off <span 
+class="pcrr8t-x-x-109">varopt</span>, a partial dependency
+among the variables can be declared using the <span 
+class="pcrr8t-x-x-109">depend</span><a 
+ id="dx53-94009"></a> statement: <span 
+class="pcrr8t-x-x-109">solve </span>then
+rearranges the variable sequence but keeps any variable ahead of those on which it
+depends.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-152">
+&#x00A0;&#x00A0;&#x00A0;on&#x00A0;varopt;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;s:={a^3+b,b^2+c}$
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;solve(s,{a,b,c});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{{a=arbcomplex(1),b=&#x00A0;-&#x00A0;a&#x00A0;,c=&#x00A0;-&#x00A0;a&#x00A0;}}
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;depend&#x00A0;a,c;&#x00A0;depend&#x00A0;b,c;&#x00A0;solve(s,{a,b,c});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;{{c=arbcomplex(2),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;6
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a=root_of(a_&#x00A0;&#x00A0;+&#x00A0;c,a_),
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;b=&#x00A0;-&#x00A0;a&#x00A0;}}
+</div>
+<!--l. 399--><p class="nopar" > Here <span 
+class="pcrr8t-x-x-109">solve </span>is forced to put <span 
+class="cmmi-10x-x-109">c </span>after <span 
+class="cmmi-10x-x-109">a </span>and after <span 
+class="cmmi-10x-x-109">b</span>, but there is no obstacle to
+interchanging <span 
+class="cmmi-10x-x-109">a </span>and <span 
+class="cmmi-10x-x-109">b</span>.
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse42.html" >Up</a></td><td class="clinks"><a 
+href="manualse43.html" >Next</a></td><td class="clinks"><a 
+href="manualse41.html" >Prev</a></td><td class="clinks"><a 
+href="manualse41.html#tailmanualse41.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse42.html" >Front</a></td></tr></table><a 
+ id="tailmanualse42.html"></a>   
+</body></html> 

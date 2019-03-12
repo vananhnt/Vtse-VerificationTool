@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Polynomial Pseudo-Division</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse61.html" >Up</a></td><td class="clinks"><a 
+href="manualse62.html" >Next</a></td><td class="clinks"><a 
+href="manualse60.html" >Prev</a></td><td class="clinks"><a 
+href="manualse60.html#tailmanualse60.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse61.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">9.7    </span> <a 
+ id="x75-1380009.7"></a>Polynomial Pseudo-Division</h3>
+<a 
+ id="dx75-138001"></a>
+<a 
+ id="dx75-138002"></a>
+<!--l. 408--><p class="noindent" >The polynomial division discussed above is normally most useful for a univariate
+polynomial over a field, otherwise the division is likely to fail giving trivially a zero
+quotient and a remainder equal to the dividend. (A ring of univariate polynomials is a
+Euclidean domain only if the coefficient ring is a field.) For example, over the
+integers:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-244">
+divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;2(x&#x00A0;-&#x00A0;y));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{0,x&#x00A0;&#x00A0;+&#x00A0;y&#x00A0;}
+</div>
+<!--l. 419--><p class="nopar" >
+<!--l. 421--><p class="noindent" ><a 
+ id="operator:pseudo_div"></a> <a 
+ id="operator:pseudo_divide"></a><a 
+ id="operator:pseudo_quotient"></a><a 
+ id="operator:pseudo_remainder"></a><a 
+ id="dx75-138003"></a><a 
+ id="dx75-138004"></a><a 
+ id="dx75-138005"></a><a 
+ id="dx75-138006"></a> The division of a polynomial <span 
+class="cmmi-10x-x-109">u</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">) </span>of degree <span 
+class="cmmi-10x-x-109">m </span>by a polynomial <span 
+class="cmmi-10x-x-109">v</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">)</span>
+of degree <span 
+class="cmmi-10x-x-109">n </span><span 
+class="cmsy-10x-x-109">&#x2264; </span><span 
+class="cmmi-10x-x-109">m </span>can be performed over any commutative ring with identity
+(such as the integers, or any polynomial ring) if the polynomial <span 
+class="cmmi-10x-x-109">u</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">) </span>is first
+multiplied by <span 
+class="cmr-10x-x-109">lc</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">v,x</span><span 
+class="cmr-10x-x-109">)</span><sup><span 
+class="cmmi-8">m</span><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">n</span><span 
+class="cmr-8">+1</span></sup> (where lc denotes the leading coefficient). This is called
+<span 
+class="ptmri8t-x-x-109">pseudo-division</span>. The polynomial pseudo-division operators <span 
+class="pcrr8t-x-x-109">pseudo_divide</span>,
+<span 
+class="pcrr8t-x-x-109">pseudo_quotient </span>(or <span 
+class="pcrr8t-x-x-109">pseudo_div</span>) and <span 
+class="pcrr8t-x-x-109">pseudo_remainder </span>are implemented
+as prefix operators (only). When multivariate polynomials are pseudo-divided it is
+important which variable is taken as the main variable, because the leading
+coefficient of the divisor is computed with respect to this variable. Therefore, if
+this is allowed to default and there is any ambiguity, i.e.&#x00A0;the polynomials are
+multivariate or contain more than one kernel, the pseudo-division operators output a
+warning message to indicate which kernel has been selected as the main variable
+&#8211; it is the first kernel found in the internal forms of the dividend and divisor.
+(As usual, the warning can be turned off by setting the switch <span 
+class="pcrr8t-x-x-109">msg </span>to off.) For
+example
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-245">
+pseudo_divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;x&#x00A0;-&#x00A0;y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;***&#x00A0;Main&#x00A0;division&#x00A0;variable&#x00A0;selected&#x00A0;is&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{x&#x00A0;+&#x00A0;y,2*y&#x00A0;}
+&#x00A0;<br />
+&#x00A0;<br />pseudo_divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;x&#x00A0;-&#x00A0;y,&#x00A0;x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{x&#x00A0;+&#x00A0;y,2*y&#x00A0;}
+&#x00A0;<br />
+&#x00A0;<br />pseudo_divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;x&#x00A0;-&#x00A0;y,&#x00A0;y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{&#x00A0;-&#x00A0;(x&#x00A0;+&#x00A0;y),2*x&#x00A0;}
+</div>
+<!--l. 465--><p class="nopar" >
+<!--l. 467--><p class="noindent" >If the leading coefficient of the divisor is a unit (invertible element) of the coefficient ring
+then division and pseudo-division should be identical, otherwise they are not,
+e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-246">
+divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;2(x&#x00A0;-&#x00A0;y));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{0,x&#x00A0;&#x00A0;+&#x00A0;y&#x00A0;}
+&#x00A0;<br />
+&#x00A0;<br />pseudo_divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;2(x&#x00A0;-&#x00A0;y));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;***&#x00A0;Main&#x00A0;division&#x00A0;variable&#x00A0;selected&#x00A0;is&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{2*(x&#x00A0;+&#x00A0;y),8*y&#x00A0;}
+</div>
+<!--l. 482--><p class="nopar" >
+<!--l. 484--><p class="noindent" >The pseudo-division gives essentially the same result as would division over the field of
+fractions of the coefficient ring (apart from the overall factors [contents] of the quotient
+and remainder), e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-247">
+on&#x00A0;rational;
+&#x00A0;<br />
+&#x00A0;<br />divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;2(x&#x00A0;-&#x00A0;y));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{---*(x&#x00A0;+&#x00A0;y),2*y&#x00A0;}
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />pseudo_divide(x^2&#x00A0;+&#x00A0;y^2,&#x00A0;2(x&#x00A0;-&#x00A0;y));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;***&#x00A0;Main&#x00A0;division&#x00A0;variable&#x00A0;selected&#x00A0;is&#x00A0;x
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{2*(x&#x00A0;+&#x00A0;y),8*y&#x00A0;}
+</div>
+<!--l. 503--><p class="nopar" >
+<!--l. 505--><p class="noindent" >Polynomial division and pseudo-division can only be applied to what REDUCE regards
+as polynomials, i.e.&#x00A0;rational expressions with denominator 1, e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-248">
+off&#x00A0;rational;
+&#x00A0;<br />
+&#x00A0;<br />pseudo_divide((x^2&#x00A0;+&#x00A0;y^2)/2,&#x00A0;x&#x00A0;-&#x00A0;y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;&#x00A0;+&#x00A0;y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;*****&#x00A0;---------&#x00A0;invalid&#x00A0;as&#x00A0;polynomial
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 517--><p class="nopar" >
+<!--l. 519--><p class="noindent" >Pseudo-division is implemented in the <span 
+class="pcrr8t-x-x-109">polydiv </span>package using an algorithm (D. E.
+Knuth 1981, <span 
+class="ptmri8t-x-x-109">Seminumerical Algorithms</span>, Algorithm R, page 407) that does not perform
+any actual division at all (which proves that it applies over a ring). It is more efficient
+than the naive algorithm, and it also has the advantage that it works over coefficient
+domains in which REDUCE may not be able to perform in practice divisions that are
+possible mathematically. An example of this is coefficient domains involving
+algebraic numbers, such as the integers extended by <img 
+src="manual23x.png" alt="&#x221A; --
+  2"  class="sqrt" >, as illustrated in the file
+<span 
+class="pcrr8t-x-x-109">polydiv.tst</span>.
+<!--l. 530--><p class="noindent" >The implementation attempts to be reasonably efficient, except that it always computes
+the quotient internally even when only the remainder is required (as does the standard
+remainder operator).
+                                                                     
+
+                                                                     
+<!--l. 534--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse61.html" >Up</a></td><td class="clinks"><a 
+href="manualse62.html" >Next</a></td><td class="clinks"><a 
+href="manualse60.html" >Prev</a></td><td class="clinks"><a 
+href="manualse60.html#tailmanualse60.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse61.html" >Front</a></td></tr></table><a 
+ id="tailmanualse61.html"></a>  
+</body></html> 

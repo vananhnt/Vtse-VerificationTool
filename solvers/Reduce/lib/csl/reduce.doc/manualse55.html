@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Controlling the Expansion of Expressions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse55.html" >Up</a></td><td class="clinks"><a 
+href="manualse56.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualse55.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">9.1    </span> <a 
+ id="x69-1310009.1"></a>Controlling the Expansion of Expressions</h3>
+<!--l. 42--><p class="noindent" ><a 
+ id="switch:EXP"></a> <a 
+ id="dx69-131001"></a><a 
+ id="dx69-131002"></a><a 
+ id="dx69-131003"></a>
+<!--l. 45--><p class="noindent" >The switch <span 
+class="pcrr8t-x-x-109">EXP</span><a 
+ id="dx69-131004"></a><a 
+ id="dx69-131005"></a><a 
+ id="dx69-131006"></a> controls the expansion of expressions. If it is off, no expansion of
+powers or products of expressions occurs. Users should note however that in this case
+results come out in a normal but not necessarily canonical form. This means that zero
+expressions simplify to zero, but that two equivalent expressions need not necessarily
+simplify to the same form.
+<!--l. 52--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example: </span>With <span 
+class="pcrr8t-x-x-109">EXP </span>on, the two expressions
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-221">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(a+b)*(a+2*b)
+</div>
+<!--l. 55--><p class="nopar" > and
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-222">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;a^2+3*a*b+2*b^2
+</div>
+<!--l. 59--><p class="nopar" > will both simplify to the latter form. With <span 
+class="pcrr8t-x-x-109">EXP </span>off, they would remain unchanged,
+unless the complete factoring (<span 
+class="pcrr8t-x-x-109">ALLFAC</span>) option were in force. <span 
+class="pcrr8t-x-x-109">EXP </span>is normally
+on.
+<!--l. 64--><p class="noindent" >Several operators that expect a polynomial as an argument behave differently when <span 
+class="pcrr8t-x-x-109">EXP</span>
+is off, since there is often only one term at the top level. For example, with <span 
+class="pcrr8t-x-x-109">EXP</span>
+off
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-223">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;length((a+b+c)^3/(c+d));
+</div>
+<!--l. 69--><p class="nopar" > returns the value 1.
+                                                                     
+
+                                                                     
+<!--l. 72--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse55.html" >Up</a></td><td class="clinks"><a 
+href="manualse56.html" >Next</a></td><td class="clinks"><a 
+href="manualse55.html" >Front</a></td></tr></table><a 
+ id="tailmanualse55.html"></a>  
+</body></html> 

@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>LISTVECOPS: Vector operations on lists</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse129.html" >Up</a></td><td class="clinks"><a 
+href="manualse130.html" >Next</a></td><td class="clinks"><a 
+href="manualse128.html" >Prev</a></td><td class="clinks"><a 
+href="manualse128.html#tailmanualse128.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse129.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.38    </span> <a 
+ id="x172-64700016.38"></a>LISTVECOPS: Vector operations on lists</h3>
+<a 
+ id="dx172-647001"></a>
+<a 
+ id="dx172-647002"></a>
+<!--l. 644--><p class="noindent" >Author: Eberhard Schrüfer
+<!--l. 2--><p class="noindent" >This package implements vector operations on lists.<a 
+ id="dx172-647003"></a>. Addition, multiplication, division,
+and exponentiation work elementwise. For example, after <a 
+ id="dx172-647004"></a> <a 
+ id="dx172-647005"></a> <a 
+ id="dx172-647006"></a> <a 
+ id="dx172-647007"></a> <a 
+ id="dx172-647008"></a> <a 
+ id="dx172-647009"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1018">
+&#x00A0;&#x00A0;A&#x00A0;:=&#x00A0;{a1,a2,a3,a4};
+&#x00A0;<br />&#x00A0;&#x00A0;B&#x00A0;:=&#x00A0;{b1,b2,b3,b4};
+</div>
+<!--l. 14--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">c*A </span>will simplify to <span 
+class="pcrr8t-x-x-109">{c*a1,..,c*a4}</span>, <span 
+class="pcrr8t-x-x-109">A + B </span>to <span 
+class="pcrr8t-x-x-109">{a1+b1,...,a4+b4}</span>, and
+<span 
+class="pcrr8t-x-x-109">A*B </span>to <span 
+class="pcrr8t-x-x-109">{a1*b1,...,a4*b4}</span>. Linear operations work as expected:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1019">
+c1*A&#x00A0;+&#x00A0;c2*B;
+&#x00A0;<br />
+&#x00A0;<br />{a1*c1&#x00A0;+&#x00A0;b1*c2,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;a2*c1&#x00A0;+&#x00A0;b2*c2,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;a3*c1&#x00A0;+&#x00A0;b3*c2,
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;a4*c1&#x00A0;+&#x00A0;b4*c2}
+</div>
+<!--l. 29--><p class="nopar" > A division and an exponentation example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1020">
+{a,b,c}/{3,g,5};
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;a&#x00A0;&#x00A0;&#x00A0;b&#x00A0;&#x00A0;&#x00A0;c
+&#x00A0;<br />{---,---,---}
+&#x00A0;<br />&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;g&#x00A0;&#x00A0;&#x00A0;5
+&#x00A0;<br />
+&#x00A0;<br />ws^3;
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;a&#x00A0;&#x00A0;&#x00A0;&#x00A0;b&#x00A0;&#x00A0;&#x00A0;&#x00A0;c
+&#x00A0;<br />{----,----,-----}
+&#x00A0;<br />&#x00A0;&#x00A0;27&#x00A0;&#x00A0;&#x00A0;&#x00A0;3&#x00A0;&#x00A0;&#x00A0;125
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;g
+</div>
+<!--l. 45--><p class="nopar" > The new operator <span 
+class="pcrr8t-x-x-109">*. </span>(<span 
+class="pcrr8t-x-x-109">ldot</span>)<a 
+ id="dx172-647010"></a> <a 
+ id="dx172-647011"></a> implements the dot product:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1021">
+{a,b,c,d}&#x00A0;*.&#x00A0;{5,7,9,11/d};
+&#x00A0;<br />
+&#x00A0;<br />5*a&#x00A0;+&#x00A0;7*b&#x00A0;+&#x00A0;9*c&#x00A0;+&#x00A0;11
+</div>
+<!--l. 53--><p class="nopar" > For accessing list elements, the new operator <span 
+class="pcrr8t-x-x-109">_ </span>(<span 
+class="pcrr8t-x-x-109">lnth</span>) <a 
+ id="dx172-647012"></a><a 
+ id="dx172-647013"></a> can be used instead of the <span 
+class="pcrr8t-x-x-109">PART</span>
+operator:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1022">
+l&#x00A0;:=&#x00A0;{1,{2,3},4}$
+&#x00A0;<br />
+&#x00A0;<br />lnth(l,3);
+&#x00A0;<br />
+&#x00A0;<br />4
+&#x00A0;<br />
+&#x00A0;<br />l&#x00A0;_2*3;
+&#x00A0;<br />
+&#x00A0;<br />{6,9}
+&#x00A0;<br />
+&#x00A0;<br />l&#x00A0;_2&#x00A0;_2;
+&#x00A0;<br />
+&#x00A0;<br />3
+</div>
+<!--l. 71--><p class="nopar" > It can also be used to modify a list (unlike <span 
+class="pcrr8t-x-x-109">PART</span>, which returns a modified
+list):
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1023">
+part(l,2,2):=three;
+&#x00A0;<br />
+&#x00A0;<br />{1,{2,three},4}
+&#x00A0;<br />
+&#x00A0;<br />l;
+&#x00A0;<br />
+&#x00A0;<br />{1,{2,3},4}
+&#x00A0;<br />
+&#x00A0;<br />l&#x00A0;_&#x00A0;2&#x00A0;_2&#x00A0;:=three;
+&#x00A0;<br />
+&#x00A0;<br />three
+&#x00A0;<br />
+&#x00A0;<br />l;
+&#x00A0;<br />
+&#x00A0;<br />{1,{2,three},4}
+</div>
+<!--l. 89--><p class="nopar" > Operators are distributed over lists:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1024">
+a&#x00A0;*.&#x00A0;log&#x00A0;b;
+&#x00A0;<br />
+&#x00A0;<br />log(b1)*a1&#x00A0;+&#x00A0;log(b2)*a2&#x00A0;+&#x00A0;log(b3)*a3&#x00A0;+&#x00A0;log(b4)*a4
+&#x00A0;<br />
+&#x00A0;<br />df({sin&#x00A0;x*y,x^3*cos&#x00A0;y},x,2,y);
+&#x00A0;<br />
+&#x00A0;<br />{&#x00A0;-&#x00A0;sin(x),&#x00A0;-&#x00A0;6*sin(y)*x}
+&#x00A0;<br />
+&#x00A0;<br />int({sin&#x00A0;x,cos&#x00A0;x},x);
+&#x00A0;<br />
+&#x00A0;<br />{&#x00A0;-&#x00A0;cos(x),sin(x)}
+</div>
+<!--l. 103--><p class="nopar" > By using the keyword <span 
+class="ptmb8t-x-x-109">listproc</span><a 
+ id="dx172-647014"></a>, an algebraic procedure can be declared to return a
+list:<a 
+ id="dx172-647015"></a>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1025">
+listproc&#x00A0;spat3(u,v,w);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;begin&#x00A0;scalar&#x00A0;x,y;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x&#x00A0;:=&#x00A0;u&#x00A0;*.&#x00A0;w;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y&#x00A0;:=&#x00A0;u&#x00A0;*.&#x00A0;v;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;v*x&#x00A0;-&#x00A0;w*y
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;end;
+</div>
+<!--l. 113--><p class="nopar" >
+<!--l. 648--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 650--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse129.html" >Up</a></td><td class="clinks"><a 
+href="manualse130.html" >Next</a></td><td class="clinks"><a 
+href="manualse128.html" >Prev</a></td><td class="clinks"><a 
+href="manualse128.html#tailmanualse128.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse129.html" >Front</a></td></tr></table><a 
+ id="tailmanualse129.html"></a>  
+</body></html> 

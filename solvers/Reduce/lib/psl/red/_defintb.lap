@@ -1,0 +1,211 @@
+(aeval (null (setq !*mode (quote algebraic))))
+(setk (quote defint_choose_data) (aeval (list (quote list) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote quotient) 1 (list (quote 
+expt) (list (quote !~) (quote a)) (list (quote times) (list (quote !~) (list (
+quote !~) (quote b))) (list (quote !~) (quote x))))) (list (quote !~) (quote var
+))) (list (quote when) (list (quote f1) 1 (list (quote times) (quote x) (list (
+quote log) (quote a)) (quote b))) (list (quote and) (list (quote freeof) (quote
+a) (quote var)) (list (quote freeof) (quote b) (quote var))))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote sin) (list (quote !~) (quote
+x))) (list (quote !~) (quote var))) (list (quote f1) 2 (quote x))) (list (quote
+replaceby) (list (quote defint_choose) (list (quote minus) (list (quote sin) (
+list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (quote f1) 25
+(quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote cos
+) (list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote f1) 3
+(quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+times) (list (quote acos) (list (quote !~) (quote x))) (list (quote heaviside) (
+list (quote difference) 1 (list (quote !~) (quote x))))) (list (quote !~) (quote
+var))) (list (quote f1) 7 (quote x))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote acos) (list (quote quotient) 1 (
+list (quote !~) (quote x)))) (list (quote heaviside) (list (quote difference) (
+list (quote !~) (quote x)) 1))) (list (quote !~) (quote var))) (list (quote f1)
+8 (quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+atan) (list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote 
+f1) 9 (quote x))) (list (quote replaceby) (list (quote defint_choose) (list (
+quote mysinh) (list (quote !~) (quote x))) (list (quote !~) (quote var))) (list
+(quote f1) 10 (quote x))) (list (quote replaceby) (list (quote defint_choose) (
+list (quote quotient) (list (quote difference) (list (quote expt) (quote e) (
+list (quote times) 2 (list (quote !~) (quote x)))) 1) (list (quote times) 2 (
+list (quote expt) (quote e) (list (quote !~) (quote x))))) (list (quote !~) (
+quote var))) (list (quote f1) 10 (quote x))) (list (quote replaceby) (list (
+quote defint_choose) (list (quote quotient) (list (quote difference) (list (
+quote expt) (quote e) (list (quote !~) (quote y))) 1) (list (quote times) 2 (
+list (quote expt) (quote e) (list (quote !~) (quote x))))) (list (quote !~) (
+quote var))) (list (quote when) (list (quote f1) 10 (quote x)) (list (quote 
+equal) (quote y) (list (quote times) 2 (quote x))))) (list (quote replaceby) (
+list (quote defint_choose) (list (quote mycosh) (list (quote !~) (quote x))) (
+list (quote !~) (quote var))) (list (quote f1) 11 (quote x))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote quotient) (list (quote plus)
+(list (quote expt) (quote e) (list (quote times) 2 (list (quote !~) (quote x))))
+1) (list (quote times) 2 (list (quote expt) (quote e) (list (quote !~) (quote x)
+)))) (list (quote !~) (quote var))) (list (quote f1) 11 (quote x))) (list (quote
+replaceby) (list (quote defint_choose) (list (quote quotient) (list (quote plus)
+(list (quote expt) (quote e) (list (quote !~) (quote y))) 1) (list (quote times)
+2 (list (quote expt) (quote e) (list (quote !~) (quote x))))) (list (quote !~) (
+quote var))) (list (quote when) (list (quote f1) 11 (quote x)) (list (quote 
+equal) (quote y) (list (quote times) 2 (quote x))))) (list (quote replaceby) (
+list (quote defint_choose) (list (quote heaviside) (list (quote difference) 1 (
+list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (quote f1) 30
+(quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+heaviside) (list (quote quotient) (list (quote difference) (list (quote !~) (
+quote p)) (list (quote !~) (quote x))) (list (quote !~) (quote p)))) (list (
+quote !~) (quote var))) (list (quote f1) 30 (list (quote quotient) (quote x) (
+quote p)))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+heaviside) (list (quote difference) (list (quote !~) (quote x)) 1)) (list (quote
+!~) (quote var))) (list (quote f1) 31 (quote x))) (list (quote replaceby) (list
+(quote defint_choose) (list (quote times) (list (quote log) (list (quote !~) (
+quote x))) (list (quote heaviside) (list (quote difference) 1 (list (quote !~) (
+quote x))))) (list (quote !~) (quote var))) (list (quote f1) 32 (quote x))) (
+list (quote replaceby) (list (quote defint_choose) (list (quote times) (list (
+quote log) (list (quote !~) (quote x))) (list (quote heaviside) (list (quote 
+difference) (list (quote !~) (quote x)) 1))) (list (quote !~) (quote var))) (
+list (quote f1) 33 (quote x))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote expt) (list (quote log) (list (
+quote !~) (quote x))) (list (quote !~) (quote n))) (list (quote heaviside) (list
+(quote difference) 1 (list (quote !~) (quote x))))) (list (quote !~) (quote var)
+)) (list (quote f31) (quote n) (quote x))) (list (quote replaceby) (list (quote
+defint_choose) (list (quote times) (list (quote expt) (list (quote log) (list (
+quote !~) (quote x))) (list (quote !~) (quote n))) (list (quote heaviside) (list
+(quote difference) (list (quote !~) (quote x)) 1))) (list (quote !~) (quote var)
+)) (list (quote f32) (quote n) (quote x))) (list (quote replaceby) (list (quote
+defint_choose) (list (quote log) (list (quote plus) 1 (list (quote !~) (quote x)
+))) (list (quote !~) (quote var))) (list (quote f1) 34 (quote x))) (list (quote
+replaceby) (list (quote defint_choose) (list (quote log) (list (quote quotient)
+(list (quote plus) (list (quote !~) (quote x)) 1) (list (quote !~) (quote x))))
+(list (quote !~) (quote var))) (list (quote f1) 35 (quote x))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote ei) (list (quote minus) (
+list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (quote f1) 36
+(quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote si)
+(list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote f1) 37
+(quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote ci)
+(list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote f1) 38
+(quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote shi
+) (list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote f1) 
+39 (quote x))) (list (quote replaceby) (list (quote defint_choose) (list (quote
+erf) (list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote f1
+) 41 (quote x))) (list (quote replaceby) (list (quote defint_choose) (list (
+quote plus) (list (quote minus) (list (quote erf) (list (quote !~) (quote x))))
+1) (list (quote !~) (quote var))) (list (quote f1) 42 (quote x))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote fresnel_s) (list (quote !~)
+(quote x))) (list (quote !~) (quote var))) (list (quote f1) 43 (quote x))) (list
+(quote replaceby) (list (quote defint_choose) (list (quote fresnel_c) (list (
+quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote f1) 44 (quote
+x))) (list (quote replaceby) (list (quote defint_choose) (list (quote gamma) (
+list (quote !~) (quote n)) (list (quote !~) (quote x))) (list (quote !~) (quote
+var))) (list (quote f1) 45 (quote x) (quote n))) (list (quote replaceby) (list (
+quote defint_choose) (list (quote besselj) (list (quote !~) (quote n)) (list (
+quote !~) (quote x))) (list (quote !~) (quote var))) (list (quote f1) 50 (quote
+x) (quote n))) (list (quote replaceby) (list (quote defint_choose) (list (quote
+bessely) (list (quote !~) (quote n)) (list (quote !~) (quote x))) (list (quote 
+!~) (quote var))) (list (quote f1) 51 (quote x) (quote n))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote besseli) (list (quote !~) (
+quote n)) (list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (
+quote f1) 52 (quote x) (quote n))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote besselk) (list (quote !~) (quote n)) (list (quote !~
+) (quote x))) (list (quote !~) (quote var))) (list (quote f1) 53 (quote x) (
+quote n))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+struveh) (list (quote !~) (quote n)) (list (quote !~) (quote x))) (list (quote 
+!~) (quote var))) (list (quote f1) 54 (quote x) (quote n))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote struvel) (list (quote !~) (
+quote n)) (list (quote !~) (quote x))) (list (quote !~) (quote var))) (list (
+quote f1) 55 (quote x) (quote n))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote m_legendrep) (list (quote !~) (
+quote n)) (list (quote !~) (quote x))) (list (quote heaviside) (list (quote 
+difference) 1 (list (quote !~) (quote x))))) (list (quote !~) (quote var))) (
+list (quote f1) 56 (quote x) (quote n))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote m_legendrep) (list (quote !~) (
+quote n)) (list (quote quotient) 1 (list (quote !~) (quote x)))) (list (quote 
+heaviside) (list (quote difference) (list (quote !~) (quote x)) 1))) (list (
+quote !~) (quote var))) (list (quote f1) 57 (quote x) (quote n))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote times) (list (quote expt) (
+list (quote difference) 1 (list (quote !~) (quote x))) (list (quote minus) (list
+(quote quotient) 1 2))) (list (quote m_chebyshevt) (list (quote !~) (quote n)) (
+list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (quote f1) 58
+(quote x) (quote n))) (list (quote replaceby) (list (quote defint_choose) (list
+(quote times) (list (quote expt) (list (quote difference) (list (quote !~) (
+quote x)) 1) (list (quote minus) (list (quote quotient) 1 2))) (list (quote 
+m_chebyshevt) (list (quote !~) (quote n)) (list (quote quotient) 1 (list (quote
+!~) (quote x))))) (list (quote !~) (quote var))) (list (quote f1) 59 (quote x) (
+quote n))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+times) (list (quote expt) (list (quote difference) 1 (list (quote !~) (quote x))
+) (list (quote quotient) 1 2)) (list (quote m_chebyshevu) (list (quote !~) (
+quote n)) (list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (
+quote f1) 60 (quote x) (quote n))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote expt) (list (quote difference) (
+list (quote !~) (quote x)) 1) (list (quote quotient) 1 2)) (list (quote 
+m_chebyshevu) (list (quote !~) (quote n)) (list (quote quotient) 1 (list (quote
+!~) (quote x))))) (list (quote !~) (quote var))) (list (quote f1) 61 (quote x) (
+quote n))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+m_hermitep) (list (quote !~) (quote n)) (list (quote !~) (quote x))) (list (
+quote !~) (quote var))) (list (quote f1) 62 (quote x) (quote n))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote m_laguerrep) (list (quote !~
+) (quote n)) (list (quote !~) (quote l)) (list (quote !~) (quote x))) (list (
+quote !~) (quote var))) (list (quote f1) 63 (quote x) (quote n) (quote l))) (
+list (quote replaceby) (list (quote defint_choose) (list (quote times) (list (
+quote sqrt) (list (quote difference) 1 (list (quote !~) (quote x)))) (list (
+quote m_gegenbauerp) (list (quote !~) (quote n)) (list (quote !~) (quote l)) (
+list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (quote f1) 64
+(quote x) (quote n) (quote l))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote sqrt) (list (quote difference) 1
+(list (quote !~) (quote x)))) (list (quote difference) 1 (list (quote !~) (quote
+x))) (list (quote m_gegenbauerp) (list (quote !~) (quote n)) (list (quote !~) (
+quote l)) (list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (
+quote f1) 64 (quote x) (quote n) (quote l))) (list (quote replaceby) (list (
+quote defint_choose) (list (quote times) (list (quote expt) (list (quote 
+difference) (list (quote !~) (quote x)) 1) (list (quote !~) (quote k))) (list (
+quote sqrt) (list (quote difference) (list (quote !~) (quote x)) 1)) (list (
+quote m_gegenbauerp) (list (quote !~) (quote n)) (list (quote !~) (quote l)) (
+list (quote !~) (quote x)))) (list (quote !~) (quote var))) (list (quote f1) 64
+(quote x) (quote n) (quote l))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote expt) (list (quote difference) (
+list (quote !~) (quote x)) 1) (list (quote !~) (quote k))) (list (quote sqrt) (
+list (quote difference) 1 (list (quote !~) (quote x)))) (list (quote 
+m_gegenbauerp) (list (quote !~) (quote n)) (list (quote !~) (quote l)) (list (
+quote !~) (quote x)))) (list (quote !~) (quote var))) (list (quote f1) 64 (quote
+x) (quote n) (quote l))) (list (quote replaceby) (list (quote defint_choose) (
+list (quote minus) (list (quote times) (list (quote expt) (list (quote 
+difference) (list (quote !~) (quote x)) 1) (list (quote !~) (quote k))) (list (
+quote sqrt) (list (quote difference) 1 (list (quote !~) (quote x)))) (list (
+quote m_gegenbauerp) (list (quote !~) (quote n)) (list (quote !~) (quote l)) (
+list (quote !~) (quote x))))) (list (quote !~) (quote var))) (list (quote f1) 64
+(quote x) (quote n) (quote l))) (list (quote replaceby) (list (quote 
+defint_choose) (list (quote times) (list (quote sqrt) (list (quote difference) (
+list (quote !~) (quote x)) 1)) (list (quote m_gegenbauerp) (list (quote !~) (
+quote n)) (list (quote !~) (quote l)) (list (quote quotient) 1 (list (quote !~)
+(quote x))))) (list (quote !~) (quote var))) (list (quote f1) 65 (quote x) (
+quote n) (quote l))) (list (quote replaceby) (list (quote defint_choose) (list (
+quote times) (list (quote sqrt) (list (quote difference) (list (quote !~) (quote
+x)) 1)) (list (quote difference) (list (quote !~) (quote x)) 1) (list (quote 
+m_gegenbauerp) (list (quote !~) (quote n)) (list (quote !~) (quote l)) (list (
+quote quotient) 1 (list (quote !~) (quote x))))) (list (quote !~) (quote var)))
+(list (quote f1) 65 (quote x) (quote n) (quote l))) (list (quote replaceby) (
+list (quote defint_choose) (list (quote times) (list (quote sqrt) (list (quote 
+difference) (list (quote !~) (quote x)) 1)) (list (quote expt) (list (quote 
+difference) (list (quote !~) (quote x)) 1) (list (quote !~) (quote k))) (list (
+quote m_gegenbauerp) (list (quote !~) (quote n)) (list (quote !~) (quote k)) (
+list (quote quotient) 1 (list (quote !~) (quote x))))) (list (quote !~) (quote 
+var))) (list (quote f1) 65 (quote x) (quote n) (quote l))) (list (quote 
+replaceby) (list (quote defint_choose) (list (quote minus) (list (quote times) (
+list (quote sqrt) (list (quote difference) (list (quote !~) (quote x)) 1)) (list
+(quote expt) (list (quote difference) (list (quote !~) (quote x)) 1) (list (
+quote !~) (quote k))) (list (quote m_gegenbauerp) (list (quote !~) (quote n)) (
+list (quote !~) (quote k)) (list (quote quotient) 1 (list (quote !~) (quote x)))
+))) (list (quote !~) (quote var))) (list (quote f1) 65 (quote x) (quote n) (
+quote l))) (list (quote replaceby) (list (quote defint_choose) (list (quote 
+times) (list (quote expt) (list (quote difference) 1 (list (quote !~) (quote x))
+) (list (quote !~) (quote r))) (list (quote m_jacobip) (list (quote !~) (quote n
+)) (list (quote !~) (quote r)) (list (quote !~) (quote s)) (list (quote !~) (
+quote x)))) (list (quote !~) (quote var))) (list (quote f1) 66 (quote x) (quote
+n) (quote r) (quote s))) (list (quote replaceby) (list (quote defint_choose) (
+list (quote times) (list (quote expt) (list (quote difference) (list (quote !~)
+(quote x)) 1) (list (quote !~) (quote r))) (list (quote m_jacobip) (list (quote
+!~) (quote n)) (list (quote !~) (quote r)) (list (quote !~) (quote s)) (list (
+quote quotient) 1 (list (quote !~) (quote x))))) (list (quote !~) (quote var)))
+(list (quote f1) 67 (quote x) (quote n) (quote r) (quote s))) (list (quote 
+replaceby) (list (quote defint_choose) 0 (list (quote !~) (quote var))) (list (
+quote f1) 0 0)) (list (quote replaceby) (list (quote defint_choose) (list (quote
+!~) (quote n)) (list (quote !~) (quote var))) (list (quote when) (list (quote f1
+) 0 (quote n)) (list (quote numberp) (quote n)))) (list (quote replaceby) (list
+(quote defint_choose) (list (quote !~) (quote f)) (list (quote !~) (quote var)))
+(quote unknown)))))
+(!~let (quote (defint_choose_data)))

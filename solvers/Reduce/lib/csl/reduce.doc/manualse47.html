@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Declaring New Prefix Operators</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse47.html" >Up</a></td><td class="clinks"><a 
+href="manualse48.html" >Next</a></td><td class="clinks"><a 
+href="manualse46.html" >Prev</a></td><td class="clinks"><a 
+href="manualse46.html#tailmanualse46.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse47.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">7.21    </span> <a 
+ id="x59-990007.21"></a>Declaring New Prefix Operators</h3>
+<!--l. 151--><p class="noindent" ><a 
+ id="command:OPERATOR"></a>
+<!--l. 153--><p class="noindent" >The user may add new prefix<a 
+ id="dx59-99001"></a> operators to the system by using the declaration
+<span 
+class="pcrr8t-x-x-109">OPERATOR</span><a 
+ id="dx59-99002"></a>. For example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-161">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;operator&#x00A0;h,g1,arctan;
+</div>
+<!--l. 157--><p class="nopar" > adds the prefix operators <span 
+class="pcrr8t-x-x-109">H</span>, <span 
+class="pcrr8t-x-x-109">G1 </span>and <span 
+class="pcrr8t-x-x-109">ARCTAN </span>to the system.
+<!--l. 160--><p class="noindent" >This allows symbols like <span 
+class="pcrr8t-x-x-109">h(w), h(x,y,z), g1(p+q), arctan(u/v) </span>to be
+used in expressions, but no meaning or properties of the operator are implied. The
+same operator symbol can be used equally well as a 0-, 1-, 2-, 3-, etc.-place
+operator.
+<!--l. 165--><p class="noindent" >To give a meaning to an operator symbol, or express some of its properties, <span 
+class="pcrr8t-x-x-109">LET</span><a 
+ id="dx59-99003"></a>
+statements can be used, or the operator can be given a definition as a procedure.
+<!--l. 169--><p class="noindent" >If the user forgets to declare an identifier as an operator, the system will prompt the user
+to do so in interactive mode, or do it automatically in non-interactive mode. A diagnostic
+message will also be printed if an identifier is declared <span 
+class="pcrr8t-x-x-109">OPERATOR </span>more than
+once.
+<!--l. 174--><p class="noindent" >Operators once declared are global in scope, and so can then be referenced anywhere in
+the program. In other words, a declaration within a block (or a procedure) does not limit
+the scope of the operator to that block, nor does the operator go away on exiting the
+block (use <span 
+class="pcrr8t-x-x-109">CLEAR </span>instead for this purpose).
+                                                                     
+
+                                                                     
+<!--l. 181--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch7.html#manualse47.html" >Up</a></td><td class="clinks"><a 
+href="manualse48.html" >Next</a></td><td class="clinks"><a 
+href="manualse46.html" >Prev</a></td><td class="clinks"><a 
+href="manualse46.html#tailmanualse46.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse47.html" >Front</a></td></tr></table><a 
+ id="tailmanualse47.html"></a>  
+</body></html> 

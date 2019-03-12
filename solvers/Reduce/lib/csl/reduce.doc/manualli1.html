@@ -1,0 +1,1487 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Contents</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualli1.html" >Up</a></td><td class="clinks"><a 
+href="manualli2.html" >Next</a></td><td class="clinks"><a 
+href="#tailmanualli1.html">Tail</a></td></tr></table><h2 class="likechapterHead"><a 
+ id="x2-1000"></a>Contents</h2>
+<div class="tableofcontents">
+<span class="chapterToc" > <a 
+href="manualli2.html#Q1-3-3">Abstract</a></span>
+<br /><span class="chapterToc" >1 <a 
+href="manualch1.html#x5-40001">Introductory Information</a></span>
+<br /><span class="chapterToc" >2 <a 
+href="manualch2.html#x6-50002">Structure of Programs</a></span>
+<br />&#x00A0;<span class="sectionToc" >2.1 <a 
+href="manualse1.html#x7-60002.1">The REDUCE Standard Character Set</a></span>
+<br />&#x00A0;<span class="sectionToc" >2.2 <a 
+href="manualse2.html#x8-70002.2">Numbers</a></span>
+<br />&#x00A0;<span class="sectionToc" >2.3 <a 
+href="manualse3.html#x9-80002.3">Identifiers</a></span>
+<br />&#x00A0;<span class="sectionToc" >2.4 <a 
+href="manualse4.html#x10-100002.4">Variables</a></span>
+<br />&#x00A0;<span class="sectionToc" >2.5 <a 
+href="manualse5.html#x11-120002.5">Strings</a></span>
+<br />&#x00A0;<span class="sectionToc" >2.6 <a 
+href="manualse6.html#x12-130002.6">Comments</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >2.7 <a 
+href="manualse7.html#x13-140002.7">Operators</a></span>
+<br /><span class="chapterToc" >3 <a 
+href="manualch3.html#x14-160003">Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.1 <a 
+href="manualse8.html#x15-170003.1">Scalar Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.2 <a 
+href="manualse9.html#x16-180003.2">Integer Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.3 <a 
+href="manualse10.html#x17-190003.3">Boolean Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.4 <a 
+href="manualse11.html#x18-200003.4">Equations</a></span>
+<br />&#x00A0;<span class="sectionToc" >3.5 <a 
+href="manualse12.html#x19-210003.5">Proper Statements as Expressions</a></span>
+<br /><span class="chapterToc" >4 <a 
+href="manualch4.html#x20-220004">Lists</a></span>
+<br />&#x00A0;<span class="sectionToc" >4.1 <a 
+href="manualse13.html#x21-230004.1">Operations on Lists</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.1 <a 
+href="manualse13.html#x21-240004.1.1" id="QQ2-21-25">LIST</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.2 <a 
+href="manualse13.html#x21-250004.1.2" id="QQ2-21-26">FIRST</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.3 <a 
+href="manualse13.html#x21-260004.1.3" id="QQ2-21-27">SECOND</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.4 <a 
+href="manualse13.html#x21-270004.1.4" id="QQ2-21-28">THIRD</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.5 <a 
+href="manualse13.html#x21-280004.1.5" id="QQ2-21-29">REST</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.6 <a 
+href="manualse13.html#x21-290004.1.6" id="QQ2-21-30"><span 
+class="ptmb8t-x-x-109">. </span>(Cons) Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.7 <a 
+href="manualse13.html#x21-300004.1.7" id="QQ2-21-31">APPEND</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.8 <a 
+href="manualse13.html#x21-310004.1.8" id="QQ2-21-32">REVERSE</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.9 <a 
+href="manualse13.html#x21-320004.1.9" id="QQ2-21-33">List Arguments of Other Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >4.1.10 <a 
+href="manualse13.html#x21-330004.1.10" id="QQ2-21-34">Caveats and Examples</a></span>
+<br /><span class="chapterToc" >5 <a 
+href="manualch5.html#x22-340005">Statements</a></span>
+<br />&#x00A0;<span class="sectionToc" >5.1 <a 
+href="manualse14.html#x23-350005.1">Assignment Statements</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >5.1.1 <a 
+href="manualse14.html#x23-360005.1.1" id="QQ2-23-37">Set and Unset Statements</a></span>
+<br />&#x00A0;<span class="sectionToc" >5.2 <a 
+href="manualse15.html#x24-370005.2">Group Statements</a></span>
+<br />&#x00A0;<span class="sectionToc" >5.3 <a 
+href="manualse16.html#x25-380005.3">Conditional Statements</a></span>
+<br />&#x00A0;<span class="sectionToc" >5.4 <a 
+href="manualse17.html#x26-390005.4">FOR Statements</a></span>
+<br />&#x00A0;<span class="sectionToc" >5.5 <a 
+href="manualse18.html#x27-400005.5">WHILE &#x2026;DO</a></span>
+<br />&#x00A0;<span class="sectionToc" >5.6 <a 
+href="manualse19.html#x28-410005.6">REPEAT &#x2026;UNTIL</a></span>
+<br />&#x00A0;<span class="sectionToc" >5.7 <a 
+href="manualse20.html#x29-420005.7">Compound Statements</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >5.7.1 <a 
+href="manualse20.html#x29-430005.7.1" id="QQ2-29-44">Compound Statements with GO TO</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >5.7.2 <a 
+href="manualse20.html#x29-440005.7.2" id="QQ2-29-45">Labels and GO TO Statements</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >5.7.3 <a 
+href="manualse20.html#x29-450005.7.3" id="QQ2-29-46">RETURN Statements</a></span>
+<br /><span class="chapterToc" >6 <a 
+href="manualch6.html#x30-460006">Commands and Declarations</a></span>
+<br />&#x00A0;<span class="sectionToc" >6.1 <a 
+href="manualse21.html#x31-470006.1">Array Declarations</a></span>
+<br />&#x00A0;<span class="sectionToc" >6.2 <a 
+href="manualse22.html#x32-480006.2">Mode Handling Declarations</a></span>
+<br />&#x00A0;<span class="sectionToc" >6.3 <a 
+href="manualse23.html#x33-490006.3">END</a></span>
+<br />&#x00A0;<span class="sectionToc" >6.4 <a 
+href="manualse24.html#x34-500006.4">BYE Command</a></span>
+<br />&#x00A0;<span class="sectionToc" >6.5 <a 
+href="manualse25.html#x35-510006.5">SHOWTIME Command</a></span>
+<br />&#x00A0;<span class="sectionToc" >6.6 <a 
+href="manualse26.html#x36-520006.6">DEFINE Command</a></span>
+<br /><span class="chapterToc" >7 <a 
+href="manualch7.html#x37-530007">Built-in Prefix Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.1 <a 
+href="manualse27.html#x38-540007.1">Numerical Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.1 <a 
+href="manualse27.html#x38-550007.1.1" id="QQ2-38-56">ABS</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.2 <a 
+href="manualse27.html#x38-560007.1.2" id="QQ2-38-57">CEILING</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.3 <a 
+href="manualse27.html#x38-570007.1.3" id="QQ2-38-58">CONJ</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.4 <a 
+href="manualse27.html#x38-580007.1.4" id="QQ2-38-59">FACTORIAL</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.5 <a 
+href="manualse27.html#x38-590007.1.5" id="QQ2-38-60">FIX</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.6 <a 
+href="manualse27.html#x38-600007.1.6" id="QQ2-38-61">FLOOR</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.7 <a 
+href="manualse27.html#x38-610007.1.7" id="QQ2-38-62">IMPART</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.8 <a 
+href="manualse27.html#x38-620007.1.8" id="QQ2-38-63">MAX/MIN</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.9 <a 
+href="manualse27.html#x38-630007.1.9" id="QQ2-38-64">NEXTPRIME</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.10 <a 
+href="manualse27.html#x38-640007.1.10" id="QQ2-38-65">RANDOM</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.11 <a 
+href="manualse27.html#x38-650007.1.11" id="QQ2-38-66">RANDOM_NEW_SEED</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.12 <a 
+href="manualse27.html#x38-660007.1.12" id="QQ2-38-67">REPART</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.13 <a 
+href="manualse27.html#x38-670007.1.13" id="QQ2-38-68">ROUND</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.1.14 <a 
+href="manualse27.html#x38-680007.1.14" id="QQ2-38-69">SIGN</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.2 <a 
+href="manualse28.html#x39-690007.2">Mathematical Functions</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.3 <a 
+href="manualse29.html#x40-700007.3">Bernoulli Numbers and Euler Numbers</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.4 <a 
+href="manualse30.html#x41-710007.4">Fibonacci Numbers and Fibonacci Polynomials</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.5 <a 
+href="manualse31.html#x42-720007.5">Motzkin numbers</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.6 <a 
+href="manualse32.html#x43-730007.6">CHANGEVAR operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.6.1 <a 
+href="manualse32.html#x43-740007.6.1" id="QQ2-43-75"><span 
+class="pcrr8t-x-x-109">CHANGEVAR </span>example: The 2-dim. Laplace Equation</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.6.2 <a 
+href="manualse32.html#x43-750007.6.2" id="QQ2-43-76">Another <span 
+class="pcrr8t-x-x-109">CHANGEVAR </span>example: An Euler Equation</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.7 <a 
+href="manualse33.html#x44-760007.7">CONTINUED_FRACTION Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.8 <a 
+href="manualse34.html#x45-770007.8">DF Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.8.1 <a 
+href="manualse34.html#x45-780007.8.1" id="QQ2-45-79">Switches influencing differentiation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.8.2 <a 
+href="manualse34.html#x45-790007.8.2" id="QQ2-45-80">Adding Differentiation Rules</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.9 <a 
+href="manualse35.html#x46-800007.9">INT Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.9.1 <a 
+href="manualse35.html#x46-810007.9.1" id="QQ2-46-82">Options</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.9.2 <a 
+href="manualse35.html#x46-820007.9.2" id="QQ2-46-83">Advanced Use</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.9.3 <a 
+href="manualse35.html#x46-830007.9.3" id="QQ2-46-84">References</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.10 <a 
+href="manualse36.html#x47-840007.10">LENGTH Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.11 <a 
+href="manualse37.html#x48-850007.11">MAP Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.12 <a 
+href="manualse38.html#x49-860007.12">MKID Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.13 <a 
+href="manualse39.html#x50-870007.13">The Pochhammer Notation</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.14 <a 
+href="manualse40.html#x51-880007.14">PF Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.15 <a 
+href="manualse41.html#x52-890007.15">SELECT Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.16 <a 
+href="manualse42.html#x53-900007.16">SOLVE Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.16.1 <a 
+href="manualse42.html#x53-910007.16.1" id="QQ2-53-92">Handling of Undetermined Solutions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.16.2 <a 
+href="manualse42.html#x53-920007.16.2" id="QQ2-53-93">Solutions of Equations Involving Cubics and Quartics</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.16.3 <a 
+href="manualse42.html#x53-930007.16.3" id="QQ2-53-94">Other Options</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >7.16.4 <a 
+href="manualse42.html#x53-940007.16.4" id="QQ2-53-95">Parameters and Variable Dependency</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.17 <a 
+href="manualse43.html#x55-950007.17">Even and Odd Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.18 <a 
+href="manualse44.html#x56-960007.18">Linear Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.19 <a 
+href="manualse45.html#x57-970007.19">Non-Commuting Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.20 <a 
+href="manualse46.html#x58-980007.20">Symmetric and Antisymmetric Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.21 <a 
+href="manualse47.html#x59-990007.21">Declaring New Prefix Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.22 <a 
+href="manualse48.html#x60-1000007.22">Declaring New Infix Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >7.23 <a 
+href="manualse49.html#x61-1010007.23">Creating/Removing Variable Dependency</a></span>
+<br /><span class="chapterToc" >8 <a 
+href="manualch8.html#x62-1020008">Display and Structuring of Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >8.1 <a 
+href="manualse50.html#x63-1030008.1">Kernels</a></span>
+<br />&#x00A0;<span class="sectionToc" >8.2 <a 
+href="manualse51.html#x64-1040008.2">The Expression Workspace</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >8.3 <a 
+href="manualse52.html#x65-1050008.3">Output of Expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.1 <a 
+href="manualse52.html#x65-1060008.3.1" id="QQ2-65-107">LINELENGTH Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.2 <a 
+href="manualse52.html#x65-1070008.3.2" id="QQ2-65-108">Output Declarations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.3 <a 
+href="manualse52.html#x65-1100008.3.3" id="QQ2-65-111">Output Control Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.4 <a 
+href="manualse52.html#x65-1180008.3.4" id="QQ2-65-119">WRITE Command</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.5 <a 
+href="manualse52.html#x65-1190008.3.5" id="QQ2-65-120">Suppression of Zeros</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.6 <a 
+href="manualse52.html#x65-1200008.3.6" id="QQ2-65-121">FORTRAN Style Output Of Expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.7 <a 
+href="manualse52.html#x65-1220008.3.7" id="QQ2-65-123">Saving Expressions for Later Use as Input</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.3.8 <a 
+href="manualse52.html#x65-1230008.3.8" id="QQ2-65-124">Displaying Expression Structure</a></span>
+<br />&#x00A0;<span class="sectionToc" >8.4 <a 
+href="manualse53.html#x66-1240008.4">Changing the Internal Order of Variables</a></span>
+<br />&#x00A0;<span class="sectionToc" >8.5 <a 
+href="manualse54.html#x67-1250008.5">Obtaining Parts of Algebraic Expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.5.1 <a 
+href="manualse54.html#x67-1260008.5.1" id="QQ2-67-127">COEFF Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.5.2 <a 
+href="manualse54.html#x67-1270008.5.2" id="QQ2-67-128">COEFFN Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.5.3 <a 
+href="manualse54.html#x67-1280008.5.3" id="QQ2-67-129">PART Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >8.5.4 <a 
+href="manualse54.html#x67-1290008.5.4" id="QQ2-67-130">Substituting for Parts of Expressions</a></span>
+<br /><span class="chapterToc" >9 <a 
+href="manualch9.html#x68-1300009">Polynomials and Rationals</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.1 <a 
+href="manualse55.html#x69-1310009.1">Controlling the Expansion of Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.2 <a 
+href="manualse56.html#x70-1320009.2">Factorization of Polynomials</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.3 <a 
+href="manualse57.html#x71-1330009.3">Cancellation of Common Factors</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.3.1 <a 
+href="manualse57.html#x71-1340009.3.1" id="QQ2-71-135">Determining the GCD of Two Polynomials</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.4 <a 
+href="manualse58.html#x72-1350009.4">Working with Least Common Multiples</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.5 <a 
+href="manualse59.html#x73-1360009.5">Controlling Use of Common Denominators</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.6 <a 
+href="manualse60.html#x74-1370009.6"><span 
+class="pcrr8t-x-x-109">divide </span>and <span 
+class="pcrr8t-x-x-109">mod </span>/ <span 
+class="pcrr8t-x-x-109">remainder </span>Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.7 <a 
+href="manualse61.html#x75-1380009.7">Polynomial Pseudo-Division</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.8 <a 
+href="manualse62.html#x76-1390009.8">RESULTANT Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.9 <a 
+href="manualse63.html#x77-1400009.9">DECOMPOSE Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.10 <a 
+href="manualse64.html#x78-1410009.10">INTERPOL operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.11 <a 
+href="manualse65.html#x79-1420009.11">Obtaining Parts of Polynomials and Rationals</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.1 <a 
+href="manualse65.html#x79-1430009.11.1" id="QQ2-79-144">DEG Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.2 <a 
+href="manualse65.html#x79-1440009.11.2" id="QQ2-79-145">DEN Operator</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.3 <a 
+href="manualse65.html#x79-1450009.11.3" id="QQ2-79-146">LCOF Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.4 <a 
+href="manualse65.html#x79-1460009.11.4" id="QQ2-79-147">LPOWER Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.5 <a 
+href="manualse65.html#x79-1470009.11.5" id="QQ2-79-148">LTERM Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.6 <a 
+href="manualse65.html#x79-1480009.11.6" id="QQ2-79-149">MAINVAR Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.7 <a 
+href="manualse65.html#x79-1490009.11.7" id="QQ2-79-150">NUM Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.8 <a 
+href="manualse65.html#x79-1500009.11.8" id="QQ2-79-151">REDUCT Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.11.9 <a 
+href="manualse65.html#x79-1510009.11.9" id="QQ2-79-152">TOTALDEG Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.12 <a 
+href="manualse66.html#x80-1520009.12">Polynomial Coefficient Arithmetic</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.12.1 <a 
+href="manualse66.html#x80-1530009.12.1" id="QQ2-80-154">Rational Coefficients in Polynomials</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.12.2 <a 
+href="manualse66.html#x80-1540009.12.2" id="QQ2-80-155">Real Coefficients in Polynomials</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.12.3 <a 
+href="manualse66.html#x80-1550009.12.3" id="QQ2-80-156">Modular Number Coefficients in Polynomials</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >9.12.4 <a 
+href="manualse66.html#x80-1560009.12.4" id="QQ2-80-157">Complex Number Coefficients in Polynomials</a></span>
+<br />&#x00A0;<span class="sectionToc" >9.13 <a 
+href="manualse67.html#x81-1570009.13">ROOT_VAL Operator</a></span>
+<br /><span class="chapterToc" >10 <a 
+href="manualch10.html#x82-15800010">Assigning and Testing Algebraic Properties</a></span>
+<br />&#x00A0;<span class="sectionToc" >10.1 <a 
+href="manualse68.html#x83-15900010.1">REALVALUED Declaration and Check</a></span>
+<br />&#x00A0;<span class="sectionToc" >10.2 <a 
+href="manualse69.html#x84-16000010.2">Declaring Expressions Positive or Negative</a></span>
+<br /><span class="chapterToc" >11 <a 
+href="manualch11.html#x85-16100011">Substitution Commands</a></span>
+<br />&#x00A0;<span class="sectionToc" >11.1 <a 
+href="manualse70.html#x86-16200011.1">SUB Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >11.2 <a 
+href="manualse71.html#x87-16300011.2">LET Rules</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.1 <a 
+href="manualse71.html#x87-16400011.2.1" id="QQ2-87-165">FOR ALL &#x2026; LET</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.2 <a 
+href="manualse71.html#x87-16500011.2.2" id="QQ2-87-166">FOR ALL &#x2026; SUCH THAT &#x2026; LET</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.3 <a 
+href="manualse71.html#x87-16600011.2.3" id="QQ2-87-167">Removing Assignments and Substitution Rules</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.4 <a 
+href="manualse71.html#x87-16700011.2.4" id="QQ2-87-168">Overlapping LET Rules</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >11.2.5 <a 
+href="manualse71.html#x87-16800011.2.5" id="QQ2-87-169">Substitutions for General Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >11.3 <a 
+href="manualse72.html#x88-16900011.3">Rule Lists</a></span>
+<br />&#x00A0;<span class="sectionToc" >11.4 <a 
+href="manualse73.html#x89-17300011.4">Asymptotic Commands</a></span>
+<br /><span class="chapterToc" >12 <a 
+href="manualch12.html#x90-17400012">File Handling Commands</a></span>
+<br />&#x00A0;<span class="sectionToc" >12.1 <a 
+href="manualse74.html#x91-17500012.1">IN Command</a></span>
+<br />&#x00A0;<span class="sectionToc" >12.2 <a 
+href="manualse75.html#x92-17600012.2">OUT Command</a></span>
+<br />&#x00A0;<span class="sectionToc" >12.3 <a 
+href="manualse76.html#x93-17700012.3">SHUT Command</a></span>
+                                                                     
+
+                                                                     
+<br /><span class="chapterToc" >13 <a 
+href="manualch13.html#x94-17800013">Commands for Interactive Use</a></span>
+<br />&#x00A0;<span class="sectionToc" >13.1 <a 
+href="manualse77.html#x95-17900013.1">Referencing Previous Results</a></span>
+<br />&#x00A0;<span class="sectionToc" >13.2 <a 
+href="manualse78.html#x96-18000013.2">Interactive Editing</a></span>
+<br />&#x00A0;<span class="sectionToc" >13.3 <a 
+href="manualse79.html#x97-18100013.3">Interactive File Control</a></span>
+<br /><span class="chapterToc" >14 <a 
+href="manualch14.html#x98-18200014">Matrix Calculations</a></span>
+<br />&#x00A0;<span class="sectionToc" >14.1 <a 
+href="manualse80.html#x99-18300014.1">MAT Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >14.2 <a 
+href="manualse81.html#x100-18400014.2">Matrix Variables</a></span>
+<br />&#x00A0;<span class="sectionToc" >14.3 <a 
+href="manualse82.html#x101-18500014.3">Matrix Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >14.4 <a 
+href="manualse83.html#x102-18600014.4">Operators with Matrix Arguments</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >14.4.1 <a 
+href="manualse83.html#x102-18700014.4.1" id="QQ2-102-188">DET Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >14.4.2 <a 
+href="manualse83.html#x102-18800014.4.2" id="QQ2-102-189">MATEIGEN Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >14.4.3 <a 
+href="manualse83.html#x102-18900014.4.3" id="QQ2-102-190">TP Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >14.4.4 <a 
+href="manualse83.html#x102-19000014.4.4" id="QQ2-102-191">Trace Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >14.4.5 <a 
+href="manualse83.html#x102-19100014.4.5" id="QQ2-102-192">Matrix Cofactors</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >14.4.6 <a 
+href="manualse83.html#x102-19200014.4.6" id="QQ2-102-193">NULLSPACE Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >14.4.7 <a 
+href="manualse83.html#x102-19300014.4.7" id="QQ2-102-194">RANK Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >14.5 <a 
+href="manualse84.html#x103-19400014.5">Matrix Assignments</a></span>
+<br />&#x00A0;<span class="sectionToc" >14.6 <a 
+href="manualse85.html#x104-19500014.6">Evaluating Matrix Elements</a></span>
+<br /><span class="chapterToc" >15 <a 
+href="manualch15.html#x105-19600015">Procedures</a></span>
+<br />&#x00A0;<span class="sectionToc" >15.1 <a 
+href="manualse86.html#x106-19700015.1">Procedure Heading</a></span>
+<br />&#x00A0;<span class="sectionToc" >15.2 <a 
+href="manualse87.html#x107-19800015.2">Procedure Body</a></span>
+<br />&#x00A0;<span class="sectionToc" >15.3 <a 
+href="manualse88.html#x108-19900015.3">Matrix-valued Procedures</a></span>
+<br />&#x00A0;<span class="sectionToc" >15.4 <a 
+href="manualse89.html#x109-20000015.4">Using LET Inside Procedures</a></span>
+<br />&#x00A0;<span class="sectionToc" >15.5 <a 
+href="manualse90.html#x110-20100015.5">LET Rules as Procedures</a></span>
+<br />&#x00A0;<span class="sectionToc" >15.6 <a 
+href="manualse91.html#x111-20200015.6">REMEMBER Statement</a></span>
+<br /><span class="chapterToc" >16 <a 
+href="manualch16.html#x112-20300016">User Contributed Packages</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.1 <a 
+href="manualse92.html#x113-20400016.1">ALGINT: Integration of square roots</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.2 <a 
+href="manualse93.html#x114-20500016.2">APPLYSYM: Infinitesimal symmetries of differential equations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.2.1 <a 
+href="manualse93.html#x114-20600016.2.1" id="QQ2-114-207">Introduction and overview of the symmetry method</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.2.2 <a 
+href="manualse93.html#x114-21000016.2.2" id="QQ2-114-211">Applying symmetries with <span 
+class="pcrr8t-x-x-109">APPLYSYM</span></a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.2.3 <a 
+href="manualse93.html#x114-21600016.2.3" id="QQ2-114-217">Solving quasilinear PDEs</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.2.4 <a 
+href="manualse93.html#x114-22100016.2.4" id="QQ2-114-222">Transformation of DEs</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.3 <a 
+href="manualse94.html#x115-22600016.3">ARNUM: An algebraic number package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.4 <a 
+href="manualse95.html#x116-22800016.4">ASSERT: Dynamic Verification of Assertions on Function Types</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.4.1 <a 
+href="manualse95.html#x116-22900016.4.1" id="QQ2-116-230">Loading and Using</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.4.2 <a 
+href="manualse95.html#x116-23000016.4.2" id="QQ2-116-231">Type Definitions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.4.3 <a 
+href="manualse95.html#x116-23100016.4.3" id="QQ2-116-232">Assertions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.4.4 <a 
+href="manualse95.html#x116-23200016.4.4" id="QQ2-116-235">Dynamic Checking of Assertions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.4.5 <a 
+href="manualse95.html#x116-23300016.4.5" id="QQ2-116-237">Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.4.6 <a 
+href="manualse95.html#x116-23400016.4.6" id="QQ2-116-238">Efficiency</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.4.7 <a 
+href="manualse95.html#x116-23500016.4.7" id="QQ2-116-239">Possible Extensions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.5 <a 
+href="manualse96.html#x118-23600016.5">ASSIST: Useful utilities for various applications</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.1 <a 
+href="manualse96.html#x118-23700016.5.1" id="QQ2-118-241">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.2 <a 
+href="manualse96.html#x118-23800016.5.2" id="QQ2-118-242"> Survey of the Available New Facilities</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.3 <a 
+href="manualse96.html#x118-23900016.5.3" id="QQ2-118-243">Control of Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.4 <a 
+href="manualse96.html#x118-24000016.5.4" id="QQ2-118-244">Manipulation of the List Structure</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.5 <a 
+href="manualse96.html#x118-24100016.5.5" id="QQ2-118-245"> The Bag Structure and its Associated Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.6 <a 
+href="manualse96.html#x118-24200016.5.6" id="QQ2-118-246">Sets and their Manipulation Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.7 <a 
+href="manualse96.html#x118-24300016.5.7" id="QQ2-118-247">General Purpose Utility Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.8 <a 
+href="manualse96.html#x118-24400016.5.8" id="QQ2-118-248">Properties and Flags</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.9 <a 
+href="manualse96.html#x118-24500016.5.9" id="QQ2-118-249">Control Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.10 <a 
+href="manualse96.html#x118-24600016.5.10" id="QQ2-118-250">Handling of Polynomials</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.11 <a 
+href="manualse96.html#x118-24700016.5.11" id="QQ2-118-251">Handling of Transcendental Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.12 <a 
+href="manualse96.html#x118-24800016.5.12" id="QQ2-118-252">Handling of n&#8211;dimensional Vectors</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.13 <a 
+href="manualse96.html#x118-24900016.5.13" id="QQ2-118-253">Handling of Grassmann Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.5.14 <a 
+href="manualse96.html#x118-25000016.5.14" id="QQ2-118-254">Handling of Matrices</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.6 <a 
+href="manualse97.html#x119-25100016.6">AVECTOR: A vector algebra and calculus package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.6.1 <a 
+href="manualse97.html#x119-25200016.6.1" id="QQ2-119-256">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.6.2 <a 
+href="manualse97.html#x119-25300016.6.2" id="QQ2-119-257">Vector declaration and initialisation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.6.3 <a 
+href="manualse97.html#x119-25400016.6.3" id="QQ2-119-258">Vector algebra</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.6.4 <a 
+href="manualse97.html#x119-25500016.6.4" id="QQ2-119-259"> Vector calculus</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.6.5 <a 
+href="manualse97.html#x119-25600016.6.5" id="QQ2-119-260">Volume and Line Integration</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.6.6 <a 
+href="manualse97.html#x119-25700016.6.6" id="QQ2-119-261">Defining new functions and procedures</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.6.7 <a 
+href="manualse97.html#x119-25800016.6.7" id="QQ2-119-262">Acknowledgements</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.7 <a 
+href="manualse98.html#x121-25900016.7">BIBASIS: A Package for Calculating Boolean Involutive Bases</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.7.1 <a 
+href="manualse98.html#x121-26000016.7.1" id="QQ2-121-264">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.7.2 <a 
+href="manualse98.html#x121-26100016.7.2" id="QQ2-121-265">Boolean Ring</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.7.3 <a 
+href="manualse98.html#x121-26200016.7.3" id="QQ2-121-266">Pommaret Involutive Algorithm</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.7.4 <a 
+href="manualse98.html#x121-26300016.7.4" id="QQ2-121-267">BIBASIS Package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.7.5 <a 
+href="manualse98.html#x121-26400016.7.5" id="QQ2-121-268">Examples</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.8 <a 
+href="manualse99.html#x122-26600016.8">BOOLEAN: A package for boolean algebra</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.8.1 <a 
+href="manualse99.html#x122-26700016.8.1" id="QQ2-122-271">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.8.2 <a 
+href="manualse99.html#x122-26800016.8.2" id="QQ2-122-272">Entering boolean expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.8.3 <a 
+href="manualse99.html#x122-26900016.8.3" id="QQ2-122-273">Normal forms</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.8.4 <a 
+href="manualse99.html#x122-27000016.8.4" id="QQ2-122-274">Evaluation of a boolean expression</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.9 <a 
+href="manualse100.html#x123-27100016.9">CALI: A package for computational commutative algebra</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.10 <a 
+href="manualse101.html#x124-27200016.10">CAMAL: Calculations in celestial mechanics</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.10.1 <a 
+href="manualse101.html#x124-27300016.10.1" id="QQ2-124-277">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.10.2 <a 
+href="manualse101.html#x124-27400016.10.2" id="QQ2-124-278">How CAMAL Worked</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.10.3 <a 
+href="manualse101.html#x124-28000016.10.3" id="QQ2-124-284">Towards a CAMAL Module</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.10.4 <a 
+href="manualse101.html#x124-28400016.10.4" id="QQ2-124-288">Integration with REDUCE</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.10.5 <a 
+href="manualse101.html#x124-28700016.10.5" id="QQ2-124-291">The Simple Experiments</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.10.6 <a 
+href="manualse101.html#x124-28800016.10.6" id="QQ2-124-292">A Medium-Sized Problem</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.10.7 <a 
+href="manualse101.html#x124-29100016.10.7" id="QQ2-124-295">Conclusion</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.11 <a 
+href="manualse102.html#x125-29400016.11">CANTENS: A Package for Manipulations and Simplifications of Indexed Objects</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.11.1 <a 
+href="manualse102.html#x125-29500016.11.1" id="QQ2-125-299">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.11.2 <a 
+href="manualse102.html#x125-29600016.11.2" id="QQ2-125-300">Handling of space(s)</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.11.3 <a 
+href="manualse102.html#x125-29700016.11.3" id="QQ2-125-301">Generic tensors and their manipulation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.11.4 <a 
+href="manualse102.html#x125-30100016.11.4" id="QQ2-125-305">Specific tensors</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.11.5 <a 
+href="manualse102.html#x125-30700016.11.5" id="QQ2-125-311">The simplification function <span 
+class="pcrr8t-x-x-109">CANONICAL</span></a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >16.12 <a 
+href="manualse103.html#x131-31500016.12">CDE: A package for integrability of PDEs</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.1 <a 
+href="manualse103.html#x131-31600016.12.1" id="QQ2-131-320">Introduction: why CDE?</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.2 <a 
+href="manualse103.html#x131-31700016.12.2" id="QQ2-131-321">Jet space of even and odd variables, and total derivatives</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.3 <a 
+href="manualse103.html#x131-31800016.12.3" id="QQ2-131-322">Differential equations in even and odd variables</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.4 <a 
+href="manualse103.html#x131-31900016.12.4" id="QQ2-131-323">Calculus of variations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.5 <a 
+href="manualse103.html#x131-32000016.12.5" id="QQ2-131-324">C-differential operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.6 <a 
+href="manualse103.html#x131-32200016.12.6" id="QQ2-131-326">C-differential operators as superfunctions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.7 <a 
+href="manualse103.html#x131-32300016.12.7" id="QQ2-131-327">The Schouten bracket</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.8 <a 
+href="manualse103.html#x131-32400016.12.8" id="QQ2-131-328">Computing linearization and its adjoint</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.9 <a 
+href="manualse103.html#x131-32500016.12.9" id="QQ2-131-329">Higher symmetries</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.10 <a 
+href="manualse103.html#x131-32600016.12.10" id="QQ2-131-330">Setting up the jet space and the differential equation.</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.11 <a 
+href="manualse103.html#x131-32700016.12.11" id="QQ2-131-331">Solving the problem via dimensional analysis.</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.12 <a 
+href="manualse103.html#x131-32800016.12.12" id="QQ2-131-332">Solving the problem using CRACK</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.13 <a 
+href="manualse103.html#x131-32900016.12.13" id="QQ2-131-333">Local conservation laws</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.14 <a 
+href="manualse103.html#x131-33000016.12.14" id="QQ2-131-334">Local Hamiltonian operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.15 <a 
+href="manualse103.html#x131-33100016.12.15" id="QQ2-131-335">Korteweg&#8211;de Vries equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.16 <a 
+href="manualse103.html#x131-33200016.12.16" id="QQ2-131-336">Boussinesq equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.17 <a 
+href="manualse103.html#x131-33300016.12.17" id="QQ2-131-337">Kadomtsev&#8211;Petviashvili equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.18 <a 
+href="manualse103.html#x131-33400016.12.18" id="QQ2-131-338">Examples of Schouten bracket of local Hamiltonian operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.19 <a 
+href="manualse103.html#x131-33500016.12.19" id="QQ2-131-339">Bi-Hamiltonian structure of the KdV equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.20 <a 
+href="manualse103.html#x131-33600016.12.20" id="QQ2-131-340">Bi-Hamiltonian structure of the WDVV equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.21 <a 
+href="manualse103.html#x131-33700016.12.21" id="QQ2-131-341">Schouten bracket of multidimensional operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.22 <a 
+href="manualse103.html#x131-33800016.12.22" id="QQ2-131-342">Non-local operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.23 <a 
+href="manualse103.html#x131-33900016.12.23" id="QQ2-131-343">Non-local Hamiltonian operators for the Korteweg&#8211;de Vries equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.24 <a 
+href="manualse103.html#x131-34000016.12.24" id="QQ2-131-344">Non-local recursion operator for the Korteweg&#8211;de Vries equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.25 <a 
+href="manualse103.html#x131-34100016.12.25" id="QQ2-131-345">Non-local Hamiltonian-recursion operators for Plebanski equation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.12.26 <a 
+href="manualse103.html#x131-34200016.12.26" id="QQ2-131-346">Appendix: old versions of CDE</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.13 <a 
+href="manualse104.html#x135-34500016.13">CDIFF: A package for computations in geometry of Differential Equations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.13.1 <a 
+href="manualse104.html#x135-34600016.13.1" id="QQ2-135-350">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.13.2 <a 
+href="manualse104.html#x135-34700016.13.2" id="QQ2-135-351">Computing with CDIFF</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >16.14 <a 
+href="manualse105.html#x137-35500016.14">CGB: Computing Comprehensive Gröbner Bases</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.1 <a 
+href="manualse105.html#x137-35600016.14.1" id="QQ2-137-360">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.2 <a 
+href="manualse105.html#x137-35700016.14.2" id="QQ2-137-361">Using the REDLOG Package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.3 <a 
+href="manualse105.html#x137-35800016.14.3" id="QQ2-137-362">Term Ordering Mode</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.4 <a 
+href="manualse105.html#x137-35900016.14.4" id="QQ2-137-363">CGB: Comprehensive Gröbner Basis</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.5 <a 
+href="manualse105.html#x137-36100016.14.5" id="QQ2-137-365">GSYS: Gröbner System</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.6 <a 
+href="manualse105.html#x137-36500016.14.6" id="QQ2-137-369">GSYS2CGB: Gröbner System to CGB</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.7 <a 
+href="manualse105.html#x137-36700016.14.7" id="QQ2-137-371">Switch CGBREAL: Computing over the Real Numbers</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.14.8 <a 
+href="manualse105.html#x137-36900016.14.8" id="QQ2-137-373">Switches</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.15 <a 
+href="manualse106.html#x138-37100016.15">COMPACT: Package for compacting expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.16 <a 
+href="manualse107.html#x139-37200016.16">CRACK: Solving overdetermined systems of PDEs or ODEs</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.17 <a 
+href="manualse108.html#x140-37300016.17">CVIT: Fast calculation of Dirac gamma matrix traces</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.18 <a 
+href="manualse109.html#x141-38100016.18">DEFINT: A definite integration interface</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.1 <a 
+href="manualse109.html#x141-38200016.18.1" id="QQ2-141-386">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.2 <a 
+href="manualse109.html#x141-38300016.18.2" id="QQ2-141-387">Integration between zero and infinity</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.3 <a 
+href="manualse109.html#x141-38400016.18.3" id="QQ2-141-388">Integration over other ranges</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.4 <a 
+href="manualse109.html#x141-38500016.18.4" id="QQ2-141-389">Using the definite integration package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.5 <a 
+href="manualse109.html#x141-38700016.18.5" id="QQ2-141-391">Integral Transforms</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.6 <a 
+href="manualse109.html#x141-39500016.18.6" id="QQ2-141-399">Additional Meijer G-function Definitions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.7 <a 
+href="manualse109.html#x141-39600016.18.7" id="QQ2-141-400">The print_conditions function</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.8 <a 
+href="manualse109.html#x141-39700016.18.8" id="QQ2-141-401">Tracing</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.18.9 <a 
+href="manualse109.html#x141-39800016.18.9" id="QQ2-141-402">Acknowledgements</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.19 <a 
+href="manualse110.html#x142-40000016.19">DESIR: Differential linear homogeneous equation solutions in the
+neighborhood of irregular and regular singular points</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.19.1 <a 
+href="manualse110.html#x142-40100016.19.1" id="QQ2-142-405">INTRODUCTION</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.19.2 <a 
+href="manualse110.html#x142-40200016.19.2" id="QQ2-142-406">FORMS OF SOLUTIONS</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.19.3 <a 
+href="manualse110.html#x142-40300016.19.3" id="QQ2-142-407">INTERACTIVE USE</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.19.4 <a 
+href="manualse110.html#x142-40400016.19.4" id="QQ2-142-408">DIRECT USE</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.19.5 <a 
+href="manualse110.html#x142-40500016.19.5" id="QQ2-142-409">USEFUL FUNCTIONS</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.19.6 <a 
+href="manualse110.html#x142-41200016.19.6" id="QQ2-142-416">LIMITATIONS</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.20 <a 
+href="manualse111.html#x143-41300016.20">DFPART: Derivatives of generic functions</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.20.1 <a 
+href="manualse111.html#x143-41400016.20.1" id="QQ2-143-418">Generic Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.20.2 <a 
+href="manualse111.html#x143-41500016.20.2" id="QQ2-143-419">Partial Derivatives</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.20.3 <a 
+href="manualse111.html#x143-41600016.20.3" id="QQ2-143-420">Substitutions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.21 <a 
+href="manualse112.html#x144-41700016.21">DUMMY: Canonical form of expressions with dummy variables</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.21.1 <a 
+href="manualse112.html#x144-41800016.21.1" id="QQ2-144-422">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.21.2 <a 
+href="manualse112.html#x144-41900016.21.2" id="QQ2-144-423">Dummy variables and dummy summations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.21.3 <a 
+href="manualse112.html#x144-42000016.21.3" id="QQ2-144-424">The Operators and their Properties</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.21.4 <a 
+href="manualse112.html#x144-42100016.21.4" id="QQ2-144-425">The Function <span 
+class="pcrr8t-x-x-109">CANONICAL</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.21.5 <a 
+href="manualse112.html#x144-42200016.21.5" id="QQ2-144-426">Bibliography</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.22 <a 
+href="manualse113.html#x145-42300016.22">EXCALC: A differential geometry package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.1 <a 
+href="manualse113.html#x145-42500016.22.1" id="QQ2-145-429">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.2 <a 
+href="manualse113.html#x145-42600016.22.2" id="QQ2-145-430">Declarations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.3 <a 
+href="manualse113.html#x145-42700016.22.3" id="QQ2-145-431">Exterior Multiplication</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.4 <a 
+href="manualse113.html#x145-42800016.22.4" id="QQ2-145-432">Partial Differentiation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.5 <a 
+href="manualse113.html#x145-42900016.22.5" id="QQ2-145-433">Exterior Differentiation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.6 <a 
+href="manualse113.html#x145-43000016.22.6" id="QQ2-145-434">Inner Product</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.7 <a 
+href="manualse113.html#x145-43100016.22.7" id="QQ2-145-435">Lie Derivative</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.8 <a 
+href="manualse113.html#x145-43200016.22.8" id="QQ2-145-436">Hodge-* Duality Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.9 <a 
+href="manualse113.html#x145-43300016.22.9" id="QQ2-145-437">Variational Derivative</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.10 <a 
+href="manualse113.html#x145-43400016.22.10" id="QQ2-145-438">Handling of Indices</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.11 <a 
+href="manualse113.html#x145-43500016.22.11" id="QQ2-145-439">Metric Structures</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.12 <a 
+href="manualse113.html#x145-43600016.22.12" id="QQ2-145-440">Riemannian Connections</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.13 <a 
+href="manualse113.html#x145-43700016.22.13" id="QQ2-145-441">Ordering and Structuring</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.14 <a 
+href="manualse113.html#x145-43800016.22.14" id="QQ2-145-442">Summary of Operators and Commands</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.22.15 <a 
+href="manualse113.html#x145-43900016.22.15" id="QQ2-145-444">Examples</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.23 <a 
+href="manualse114.html#x146-44000016.23">FIDE: Finite difference method for partial differential equations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.23.1 <a 
+href="manualse114.html#x146-44100016.23.1" id="QQ2-146-446">Abstract</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.23.2 <a 
+href="manualse114.html#x146-44200016.23.2" id="QQ2-146-447">EXPRES</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.23.3 <a 
+href="manualse114.html#x146-44900016.23.3" id="QQ2-146-454">IIMET</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.23.4 <a 
+href="manualse114.html#x146-45800016.23.4" id="QQ2-146-463">APPROX</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.23.5 <a 
+href="manualse114.html#x146-46300016.23.5" id="QQ2-146-468">CHARPOL</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.23.6 <a 
+href="manualse114.html#x146-46900016.23.6" id="QQ2-146-474">HURWP</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.23.7 <a 
+href="manualse114.html#x146-47200016.23.7" id="QQ2-146-477">LINBAND</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.24 <a 
+href="manualse115.html#x147-47600016.24">FPS: Automatic calculation of formal power series</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.24.1 <a 
+href="manualse115.html#x147-47700016.24.1" id="QQ2-147-482">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.24.2 <a 
+href="manualse115.html#x147-47800016.24.2" id="QQ2-147-483">REDUCE operator <span 
+class="pcrr8t-x-x-109">FPS</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.24.3 <a 
+href="manualse115.html#x147-47900016.24.3" id="QQ2-147-484">REDUCE operator <span 
+class="pcrr8t-x-x-109">SimpleDE</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.24.4 <a 
+href="manualse115.html#x147-48000016.24.4" id="QQ2-147-485">Problems in the current version</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.25 <a 
+href="manualse116.html#x148-48200016.25">GCREF: A Graph Cross Referencer</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.25.1 <a 
+href="manualse116.html#x148-48300016.25.1" id="QQ2-148-488">Basic Usage</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.25.2 <a 
+href="manualse116.html#x148-48400016.25.2" id="QQ2-148-489">Shell Script "gcref"</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.25.3 <a 
+href="manualse116.html#x148-48500016.25.3" id="QQ2-148-490">Redering with yED</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.26 <a 
+href="manualse117.html#x149-48600016.26">GENTRAN: A code generation package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.27 <a 
+href="manualse118.html#x150-48700016.27">GNUPLOT: Display of functions and surfaces</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.1 <a 
+href="manualse118.html#x150-48800016.27.1" id="QQ2-150-493">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.2 <a 
+href="manualse118.html#x150-48900016.27.2" id="QQ2-150-494">Command <span 
+class="pcrr8t-x-x-109">plot</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.3 <a 
+href="manualse118.html#x150-49300016.27.3" id="QQ2-150-498">Paper output</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.4 <a 
+href="manualse118.html#x150-49400016.27.4" id="QQ2-150-499">Mesh generation for implicit curves</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.5 <a 
+href="manualse118.html#x150-49500016.27.5" id="QQ2-150-500">Mesh generation for surfaces</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.6 <a 
+href="manualse118.html#x150-49600016.27.6" id="QQ2-150-501"><span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>operation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.7 <a 
+href="manualse118.html#x150-49700016.27.7" id="QQ2-150-502">Saving <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>command sequences</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.8 <a 
+href="manualse118.html#x150-49800016.27.8" id="QQ2-150-503">Direct Call of <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span></span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.27.9 <a 
+href="manualse118.html#x150-49900016.27.9" id="QQ2-150-504">Examples</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.28 <a 
+href="manualse119.html#x151-50000016.28">GROEBNER: A Gröbner basis package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.28.1 <a 
+href="manualse119.html#x151-50100016.28.1" id="QQ2-151-506">Background</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.28.2 <a 
+href="manualse119.html#x151-50500016.28.2" id="QQ2-151-510">Loading of the Package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.28.3 <a 
+href="manualse119.html#x151-50600016.28.3" id="QQ2-151-511">The Basic Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.28.4 <a 
+href="manualse119.html#x151-51900016.28.4" id="QQ2-151-524">Ideal Decomposition &amp; Equation System Solving</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.28.5 <a 
+href="manualse119.html#x151-52300016.28.5" id="QQ2-151-528">Calculations &#8220;by Hand&#8221;</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.29 <a 
+href="manualse120.html#x152-52800016.29">GUARDIAN: Guarded Expressions in Practice</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.29.1 <a 
+href="manualse120.html#x152-52900016.29.1" id="QQ2-152-534">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.29.2 <a 
+href="manualse120.html#x152-53000016.29.2" id="QQ2-152-535">An outline of our method</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.29.3 <a 
+href="manualse120.html#x152-54700016.29.3" id="QQ2-152-552">Examples</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.29.4 <a 
+href="manualse120.html#x152-54800016.29.4" id="QQ2-152-553">Outlook</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.29.5 <a 
+href="manualse120.html#x152-55300016.29.5" id="QQ2-152-558">Conclusions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.30 <a 
+href="manualse121.html#x153-55500016.30">IDEALS: Arithmetic for polynomial ideals</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.30.1 <a 
+href="manualse121.html#x153-55600016.30.1" id="QQ2-153-561">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.30.2 <a 
+href="manualse121.html#x153-55700016.30.2" id="QQ2-153-562">Initialization</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.30.3 <a 
+href="manualse121.html#x153-55800016.30.3" id="QQ2-153-563">Bases</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.30.4 <a 
+href="manualse121.html#x153-56000016.30.4" id="QQ2-153-565">Algorithms</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.30.5 <a 
+href="manualse121.html#x153-56100016.30.5" id="QQ2-153-566">Examples</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.31 <a 
+href="manualse122.html#x154-56200016.31">INEQ: Support for solving inequalities</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.32 <a 
+href="manualse123.html#x156-56300016.32">INVBASE: A package for computing involutive bases</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.32.1 <a 
+href="manualse123.html#x156-56400016.32.1" id="QQ2-156-569">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.32.2 <a 
+href="manualse123.html#x156-56500016.32.2" id="QQ2-156-570">The Basic Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.33 <a 
+href="manualse124.html#x158-56900016.33">LALR: A parser generator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.33.1 <a 
+href="manualse124.html#x158-57000016.33.1" id="QQ2-158-575">Limitations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.33.2 <a 
+href="manualse124.html#x158-57100016.33.2" id="QQ2-158-576">An example</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.34 <a 
+href="manualse125.html#x159-57200016.34">LAPLACE: Laplace transforms</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.35 <a 
+href="manualse126.html#x160-57300016.35">LIE: Functions for the classification of real n-dimensional Lie algebras</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.36 <a 
+href="manualse127.html#x161-57500016.36">LIMITS: A package for finding limits</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.36.1 <a 
+href="manualse127.html#x161-57600016.36.1" id="QQ2-161-581">Normal entry points</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.36.2 <a 
+href="manualse127.html#x161-57700016.36.2" id="QQ2-161-582">Direction-dependent limits</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.37 <a 
+href="manualse128.html#x162-57800016.37">LINALG: Linear algebra package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.37.1 <a 
+href="manualse128.html#x162-57900016.37.1" id="QQ2-162-584">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.37.2 <a 
+href="manualse128.html#x162-58600016.37.2" id="QQ2-162-591">Getting started</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.37.3 <a 
+href="manualse128.html#x162-59000016.37.3" id="QQ2-162-595">What&#8217;s available</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.37.4 <a 
+href="manualse128.html#x162-64400016.37.4" id="QQ2-162-649">Fast Linear Algebra</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.37.5 <a 
+href="manualse128.html#x162-64500016.37.5" id="QQ2-162-650">Acknowledgments</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.38 <a 
+href="manualse129.html#x172-64700016.38">LISTVECOPS: Vector operations on lists</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >16.39 <a 
+href="manualse130.html#x173-64800016.39">LPDO: Linear Partial Differential Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.39.1 <a 
+href="manualse130.html#x173-64900016.39.1" id="QQ2-173-654">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.39.2 <a 
+href="manualse130.html#x173-65000016.39.2" id="QQ2-173-655">Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.39.3 <a 
+href="manualse130.html#x173-65400016.39.3" id="QQ2-173-659">Shapes of F-elements</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.39.4 <a 
+href="manualse130.html#x173-65700016.39.4" id="QQ2-173-662">Commands</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.40 <a 
+href="manualse131.html#x174-66200016.40">MODSR: Modular solve and roots</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.41 <a 
+href="manualse132.html#x175-66300016.41">NCPOLY: Non&#8211;commutative polynomial ideals</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.1 <a 
+href="manualse132.html#x175-66400016.41.1" id="QQ2-175-669">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.2 <a 
+href="manualse132.html#x175-66500016.41.2" id="QQ2-175-670">Setup, Cleanup</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.3 <a 
+href="manualse132.html#x175-66600016.41.3" id="QQ2-175-671">Left and right ideals</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.4 <a 
+href="manualse132.html#x175-66700016.41.4" id="QQ2-175-672">Gröbner bases</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.5 <a 
+href="manualse132.html#x175-66800016.41.5" id="QQ2-175-673">Left or right polynomial division</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.6 <a 
+href="manualse132.html#x175-66900016.41.6" id="QQ2-175-674">Left or right polynomial reduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.7 <a 
+href="manualse132.html#x175-67000016.41.7" id="QQ2-175-675">Factorization</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.41.8 <a 
+href="manualse132.html#x175-67500016.41.8" id="QQ2-175-680">Output of expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.42 <a 
+href="manualse133.html#x177-67600016.42">NORMFORM: Computation of matrix normal forms</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.1 <a 
+href="manualse133.html#x177-67700016.42.1" id="QQ2-177-682">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.2 <a 
+href="manualse133.html#x177-67800016.42.2" id="QQ2-177-683">Smith normal form</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.3 <a 
+href="manualse133.html#x177-67900016.42.3" id="QQ2-177-684">smithex_int</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.4 <a 
+href="manualse133.html#x177-68000016.42.4" id="QQ2-177-685">frobenius</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.5 <a 
+href="manualse133.html#x177-68100016.42.5" id="QQ2-177-686">ratjordan</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.6 <a 
+href="manualse133.html#x177-68200016.42.6" id="QQ2-177-687">jordansymbolic</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.7 <a 
+href="manualse133.html#x177-68300016.42.7" id="QQ2-177-688">jordan</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.8 <a 
+href="manualse133.html#x177-68400016.42.8" id="QQ2-177-689">Algebraic extensions: Using the <span 
+class="ptmrc8t-x-x-109"><span 
+class="small-caps">A</span><span 
+class="small-caps">R</span><span 
+class="small-caps">N</span><span 
+class="small-caps">U</span><span 
+class="small-caps">M</span> </span>package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.42.9 <a 
+href="manualse133.html#x177-68600016.42.9" id="QQ2-177-691">Modular arithmetic</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.43 <a 
+href="manualse134.html#x178-68900016.43">NUMERIC: Solving numerical problems</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.1 <a 
+href="manualse134.html#x178-69000016.43.1" id="QQ2-178-695">Syntax</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.2 <a 
+href="manualse134.html#x178-69400016.43.2" id="QQ2-178-699">Minima</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.3 <a 
+href="manualse134.html#x178-69500016.43.3" id="QQ2-178-700">Roots of Functions/ Solutions of Equations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.4 <a 
+href="manualse134.html#x178-69600016.43.4" id="QQ2-178-701">Integrals</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.5 <a 
+href="manualse134.html#x178-69700016.43.5" id="QQ2-178-702">Ordinary Differential Equations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.6 <a 
+href="manualse134.html#x178-69800016.43.6" id="QQ2-178-703">Bounds of a Function</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.7 <a 
+href="manualse134.html#x178-69900016.43.7" id="QQ2-178-704">Chebyshev Curve Fitting</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.8 <a 
+href="manualse134.html#x178-70000016.43.8" id="QQ2-178-705">General Curve Fitting</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.43.9 <a 
+href="manualse134.html#x178-70100016.43.9" id="QQ2-178-706">Function Bases</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.44 <a 
+href="manualse135.html#x179-70200016.44">ODESOLVE: Ordinary differential equations solver</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.1 <a 
+href="manualse135.html#x179-70300016.44.1" id="QQ2-179-708">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.2 <a 
+href="manualse135.html#x179-70400016.44.2" id="QQ2-179-709">Installation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.3 <a 
+href="manualse135.html#x179-70500016.44.3" id="QQ2-179-710">User interface</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.4 <a 
+href="manualse135.html#x179-70900016.44.4" id="QQ2-179-714">Output syntax</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.5 <a 
+href="manualse135.html#x179-71000016.44.5" id="QQ2-179-715">Solution techniques</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.6 <a 
+href="manualse135.html#x179-71300016.44.6" id="QQ2-179-718">Extension interface</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.7 <a 
+href="manualse135.html#x179-71400016.44.7" id="QQ2-179-719">Change log</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.44.8 <a 
+href="manualse135.html#x179-71500016.44.8" id="QQ2-179-720">Planned developments</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.45 <a 
+href="manualse136.html#x180-71700016.45">ORTHOVEC: Manipulation of scalars and vectors</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.45.1 <a 
+href="manualse136.html#x180-71800016.45.1" id="QQ2-180-723">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.45.2 <a 
+href="manualse136.html#x180-71900016.45.2" id="QQ2-180-724">Initialisation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.45.3 <a 
+href="manualse136.html#x180-72000016.45.3" id="QQ2-180-725">Input-Output</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.45.4 <a 
+href="manualse136.html#x180-72100016.45.4" id="QQ2-180-726">Algebraic Operations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.45.5 <a 
+href="manualse136.html#x180-72200016.45.5" id="QQ2-180-727">Differential Operations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.45.6 <a 
+href="manualse136.html#x180-72300016.45.6" id="QQ2-180-730">Integral Operations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.45.7 <a 
+href="manualse136.html#x180-72400016.45.7" id="QQ2-180-733">Test Cases</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.46 <a 
+href="manualse137.html#x181-72600016.46">PHYSOP: Operator calculus in quantum theory</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.46.1 <a 
+href="manualse137.html#x181-72700016.46.1" id="QQ2-181-736">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.46.2 <a 
+href="manualse137.html#x181-72800016.46.2" id="QQ2-181-737">The NONCOM2 Package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.46.3 <a 
+href="manualse137.html#x181-72900016.46.3" id="QQ2-181-738">The PHYSOP package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.46.4 <a 
+href="manualse137.html#x181-73400016.46.4" id="QQ2-181-743">Known problems in the current release of PHYSOP</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.46.5 <a 
+href="manualse137.html#x181-73500016.46.5" id="QQ2-181-744">Final remarks</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.46.6 <a 
+href="manualse137.html#x181-73700016.46.6" id="QQ2-181-746">Appendix: List of error and warning messages</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.47 <a 
+href="manualse138.html#x187-73800016.47">PM: A REDUCE pattern matcher</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.47.1 <a 
+href="manualse138.html#x187-73900016.47.1" id="QQ2-187-748"><span 
+class="pcrr8t-x-x-109">M(exp,temp)</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.47.2 <a 
+href="manualse138.html#x187-74100016.47.2" id="QQ2-187-750">temp _= logical_exp</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.47.3 <a 
+href="manualse138.html#x187-74300016.47.3" id="QQ2-187-752">S(exp,{temp1 -&#x003E; sub1, temp2 -&#x003E; sub2, &#x2026;}, rept, depth)</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.47.4 <a 
+href="manualse138.html#x187-74500016.47.4" id="QQ2-187-754">temp :- exp and temp ::- exp</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.47.5 <a 
+href="manualse138.html#x187-74700016.47.5" id="QQ2-187-756">Arep({rep1,rep2,&#x2026;})</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.47.6 <a 
+href="manualse138.html#x187-74800016.47.6" id="QQ2-187-757">Drep({rep1,rep2,..})</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.47.7 <a 
+href="manualse138.html#x187-75000016.47.7" id="QQ2-187-759">Switches</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.48 <a 
+href="manualse139.html#x188-75100016.48">QSUM: Indefinite and Definite Summation of <span 
+class="ptmro8t-x-x-109">q</span>-hypergeometric Terms</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.1 <a 
+href="manualse139.html#x188-75200016.48.1" id="QQ2-188-761">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.2 <a 
+href="manualse139.html#x188-75300016.48.2" id="QQ2-188-762">Elementary <span 
+class="ptmro8t-x-x-109">q</span>-Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.3 <a 
+href="manualse139.html#x188-75400016.48.3" id="QQ2-188-763"><span 
+class="ptmro8t-x-x-109">q</span>-Gosper Algorithm</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.4 <a 
+href="manualse139.html#x188-75500016.48.4" id="QQ2-188-764"><span 
+class="ptmro8t-x-x-109">q</span>-Zeilberger Algorithm</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.5 <a 
+href="manualse139.html#x188-75600016.48.5" id="QQ2-188-765">REDUCE operator <span 
+class="pcrr8t-x-x-109">QGOSPER</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.6 <a 
+href="manualse139.html#x188-75700016.48.6" id="QQ2-188-766">REDUCE operator <span 
+class="pcrr8t-x-x-109">QSUMRECURSION</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.7 <a 
+href="manualse139.html#x188-75800016.48.7" id="QQ2-188-767">Simplification Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.8 <a 
+href="manualse139.html#x188-75900016.48.8" id="QQ2-188-768">Global Variables and Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.48.9 <a 
+href="manualse139.html#x188-76000016.48.9" id="QQ2-188-769">Messages</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.49 <a 
+href="manualse140.html#x190-76200016.49">RANDPOLY: A random polynomial generator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.49.1 <a 
+href="manualse140.html#x190-76300016.49.1" id="QQ2-190-772">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.49.2 <a 
+href="manualse140.html#x190-76400016.49.2" id="QQ2-190-773">Basic use of <span 
+class="pcrr8t-x-x-109">randpoly</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.49.3 <a 
+href="manualse140.html#x190-76600016.49.3" id="QQ2-190-775">Advanced use of <span 
+class="pcrr8t-x-x-109">randpoly</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.49.4 <a 
+href="manualse140.html#x190-76700016.49.4" id="QQ2-190-776">Subsidiary functions: rand, proc, random</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.49.5 <a 
+href="manualse140.html#x190-77200016.49.5" id="QQ2-190-781">Examples</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.49.6 <a 
+href="manualse140.html#x190-77300016.49.6" id="QQ2-190-782">Appendix: Algorithmic background</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.50 <a 
+href="manualse141.html#x193-77600016.50">RATAPRX: Rational Approximations Package for REDUCE</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.50.1 <a 
+href="manualse141.html#x193-77700016.50.1" id="QQ2-193-786">Periodic Decimal Representation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.50.2 <a 
+href="manualse141.html#x193-77800016.50.2" id="QQ2-193-787">Continued Fractions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.50.3 <a 
+href="manualse141.html#x193-77900016.50.3" id="QQ2-193-788">Padé Approximation</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.51 <a 
+href="manualse142.html#x194-78100016.51">REACTEQN: Support for chemical reaction equation systems</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.52 <a 
+href="manualse143.html#x195-78200016.52">REDLOG: Extend REDUCE to a computer logic system</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >16.53 <a 
+href="manualse144.html#x196-78300016.53">RESET: Code to reset REDUCE to its initial state</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.54 <a 
+href="manualse145.html#x197-78400016.54">RESIDUE: A residue package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.55 <a 
+href="manualse146.html#x198-78500016.55">RLFI: REDUCE <span class="LATEX">L<span class="A">A</span><span class="TEX">T<span 
+class="E">E</span>X</span></span> formula interface</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.55.1 <a 
+href="manualse146.html#x198-78600016.55.1" id="QQ2-198-795">APPENDIX: Summary and syntax</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.56 <a 
+href="manualse147.html#x199-78800016.56">ROOTS: A REDUCE root finding package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.1 <a 
+href="manualse147.html#x199-78900016.56.1" id="QQ2-199-798">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.2 <a 
+href="manualse147.html#x199-79000016.56.2" id="QQ2-199-799">Root Finding Strategies</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.3 <a 
+href="manualse147.html#x199-79100016.56.3" id="QQ2-199-800">Top Level Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.4 <a 
+href="manualse147.html#x199-79600016.56.4" id="QQ2-199-805">Switches Used in Input</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.5 <a 
+href="manualse147.html#x199-79700016.56.5" id="QQ2-199-806">Internal and Output Use of Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.6 <a 
+href="manualse147.html#x199-79800016.56.6" id="QQ2-199-807">Root Package Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.7 <a 
+href="manualse147.html#x199-79900016.56.7" id="QQ2-199-808">Operational Parameters and Parameter Setting.</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.56.8 <a 
+href="manualse147.html#x199-80000016.56.8" id="QQ2-199-809">Avoiding truncation of polynomials on input</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.57 <a 
+href="manualse148.html#x200-80100016.57">RSOLVE: Rational/integer polynomial solvers</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.57.1 <a 
+href="manualse148.html#x200-80200016.57.1" id="QQ2-200-811">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.57.2 <a 
+href="manualse148.html#x200-80300016.57.2" id="QQ2-200-812">The user interface</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.57.3 <a 
+href="manualse148.html#x200-80400016.57.3" id="QQ2-200-813">Examples</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.57.4 <a 
+href="manualse148.html#x200-80500016.57.4" id="QQ2-200-814">Tracing</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.58 <a 
+href="manualse149.html#x201-80600016.58">RTRACE: Tracing in REDUCE</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.58.1 <a 
+href="manualse149.html#x201-80700016.58.1" id="QQ2-201-816">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.58.2 <a 
+href="manualse149.html#x201-80800016.58.2" id="QQ2-201-817">RTrace versus RDebug</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.58.3 <a 
+href="manualse149.html#x201-80900016.58.3" id="QQ2-201-818">Procedure tracing: RTR, UNRTR</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.58.4 <a 
+href="manualse149.html#x201-81000016.58.4" id="QQ2-201-819">Assignment tracing: RTRST, UNRTRST</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.58.5 <a 
+href="manualse149.html#x201-81100016.58.5" id="QQ2-201-820">Tracing active rules: TRRL, UNTRRL</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.58.6 <a 
+href="manualse149.html#x201-81200016.58.6" id="QQ2-201-821">Tracing inactive rules: TRRLID, UNTRRLID</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.58.7 <a 
+href="manualse149.html#x201-81300016.58.7" id="QQ2-201-822">Output control: RTROUT</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.59 <a 
+href="manualse150.html#x202-81400016.59">SCOPE: REDUCE source code optimization package</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.60 <a 
+href="manualse151.html#x203-81500016.60">SETS: A basic set theory package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.1 <a 
+href="manualse151.html#x203-81600016.60.1" id="QQ2-203-825">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.2 <a 
+href="manualse151.html#x203-81700016.60.2" id="QQ2-203-826">Infix operator precedence</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.3 <a 
+href="manualse151.html#x203-81800016.60.3" id="QQ2-203-827">Explicit set representation and <span 
+class="pcrr8t-x-x-109">mkset</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.4 <a 
+href="manualse151.html#x203-81900016.60.4" id="QQ2-203-828">Union and intersection</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.5 <a 
+href="manualse151.html#x203-82000016.60.5" id="QQ2-203-829">Symbolic set expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.6 <a 
+href="manualse151.html#x203-82100016.60.6" id="QQ2-203-830">Set difference</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.7 <a 
+href="manualse151.html#x203-82200016.60.7" id="QQ2-203-831">Predicates on sets</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.60.8 <a 
+href="manualse151.html#x203-82600016.60.8" id="QQ2-203-835">Possible future developments</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.61 <a 
+href="manualse152.html#x204-82700016.61">SPARSE: Sparse Matrix Calculations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.1 <a 
+href="manualse152.html#x204-82800016.61.1" id="QQ2-204-837">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.2 <a 
+href="manualse152.html#x204-83000016.61.2" id="QQ2-204-839">Sparse Matrix Calculations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.3 <a 
+href="manualse152.html#x204-83400016.61.3" id="QQ2-204-843">Sparse Matrix Expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.4 <a 
+href="manualse152.html#x204-83500016.61.4" id="QQ2-204-844">Operators with Sparse Matrix Arguments</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.5 <a 
+href="manualse152.html#x204-83700016.61.5" id="QQ2-204-846">The Linear Algebra Package for Sparse Matrices</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.6 <a 
+href="manualse152.html#x204-84400016.61.6" id="QQ2-204-853">Available Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.7 <a 
+href="manualse152.html#x204-89200016.61.7" id="QQ2-204-901">Fast Linear Algebra</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.61.8 <a 
+href="manualse152.html#x204-89300016.61.8" id="QQ2-204-902">Acknowledgments</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.62 <a 
+href="manualse153.html#x209-89500016.62">SPDE: Finding symmetry groups of PDE&#8217;s</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.62.1 <a 
+href="manualse153.html#x209-89600016.62.1" id="QQ2-209-905">Description of the System Functions and Variables</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.62.2 <a 
+href="manualse153.html#x209-89700016.62.2" id="QQ2-209-910">How to Use the Package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.62.3 <a 
+href="manualse153.html#x209-89800016.62.3" id="QQ2-209-911">Test File</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.63 <a 
+href="manualse154.html#x210-89900016.63">SPECFN: Package for special functions</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.64 <a 
+href="manualse155.html#x211-90000016.64">SPECFN2: Package for special special functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.64.1 <a 
+href="manualse155.html#x211-90100016.64.1" id="QQ2-211-914">REDUCE operator HYPERGEOMETRIC</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.64.2 <a 
+href="manualse155.html#x211-90200016.64.2" id="QQ2-211-915">Extending the HYPERGEOMETRIC operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.64.3 <a 
+href="manualse155.html#x211-90300016.64.3" id="QQ2-211-916">REDUCE operator <span 
+class="pcrr8t-x-x-109">meijerg</span></a></span>
+<br />&#x00A0;<span class="sectionToc" >16.65 <a 
+href="manualse156.html#x212-90500016.65">SSTOOLS: Computations with supersymmetric algebraic and differential
+expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.65.1 <a 
+href="manualse156.html#x212-90600016.65.1" id="QQ2-212-919">Overview</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.66 <a 
+href="manualse157.html#x213-90800016.66">SUM: A package for series summation</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.67 <a 
+href="manualse158.html#x214-90900016.67">SYMMETRY: Operations on symmetric matrices</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.67.1 <a 
+href="manualse158.html#x214-91000016.67.1" id="QQ2-214-923">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.67.2 <a 
+href="manualse158.html#x214-91100016.67.2" id="QQ2-214-924">Operators for linear representations</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.67.3 <a 
+href="manualse158.html#x214-91200016.67.3" id="QQ2-214-925">Display Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.67.4 <a 
+href="manualse158.html#x214-91300016.67.4" id="QQ2-214-926">Storing a new group</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.68 <a 
+href="manualse159.html#x215-91500016.68">TAYLOR: Manipulation of Taylor series</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.68.1 <a 
+href="manualse159.html#x215-91600016.68.1" id="QQ2-215-929">Basic Use</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.68.2 <a 
+href="manualse159.html#x215-91700016.68.2" id="QQ2-215-930">Caveats</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.68.3 <a 
+href="manualse159.html#x215-91800016.68.3" id="QQ2-215-931">Warning messages</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.68.4 <a 
+href="manualse159.html#x215-91900016.68.4" id="QQ2-215-932">Error messages</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.68.5 <a 
+href="manualse159.html#x215-92000016.68.5" id="QQ2-215-933">Comparison to other packages</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.69 <a 
+href="manualse160.html#x216-92100016.69">TPS: A truncated power series package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.1 <a 
+href="manualse160.html#x216-92200016.69.1" id="QQ2-216-935">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.2 <a 
+href="manualse160.html#x216-92300016.69.2" id="QQ2-216-936">PS Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.3 <a 
+href="manualse160.html#x216-92400016.69.3" id="QQ2-216-937">PSEXPLIM Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.4 <a 
+href="manualse160.html#x216-92500016.69.4" id="QQ2-216-938">PSPRINTORDER Switch</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.5 <a 
+href="manualse160.html#x216-92600016.69.5" id="QQ2-216-939">PSORDLIM Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.6 <a 
+href="manualse160.html#x216-92700016.69.6" id="QQ2-216-940">PSTERM Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.7 <a 
+href="manualse160.html#x216-92800016.69.7" id="QQ2-216-941">PSORDER Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.8 <a 
+href="manualse160.html#x216-92900016.69.8" id="QQ2-216-942">PSSETORDER Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.9 <a 
+href="manualse160.html#x216-93000016.69.9" id="QQ2-216-943">PSDEPVAR Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.10 <a 
+href="manualse160.html#x216-93100016.69.10" id="QQ2-216-944">PSEXPANSIONPT operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.11 <a 
+href="manualse160.html#x216-93200016.69.11" id="QQ2-216-945">PSFUNCTION Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.12 <a 
+href="manualse160.html#x216-93300016.69.12" id="QQ2-216-946">PSCHANGEVAR Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.13 <a 
+href="manualse160.html#x216-93400016.69.13" id="QQ2-216-947">PSREVERSE Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.14 <a 
+href="manualse160.html#x216-93500016.69.14" id="QQ2-216-948">PSCOMPOSE Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.15 <a 
+href="manualse160.html#x216-93600016.69.15" id="QQ2-216-949">PSSUM Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.16 <a 
+href="manualse160.html#x216-93700016.69.16" id="QQ2-216-950">PSTAYLOR Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.17 <a 
+href="manualse160.html#x216-93800016.69.17" id="QQ2-216-951">PSCOPY Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.18 <a 
+href="manualse160.html#x216-93900016.69.18" id="QQ2-216-952">PSTRUNCATE Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.19 <a 
+href="manualse160.html#x216-94000016.69.19" id="QQ2-216-953">Arithmetic Operations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.20 <a 
+href="manualse160.html#x216-94100016.69.20" id="QQ2-216-954">Differentiation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.69.21 <a 
+href="manualse160.html#x216-94200016.69.21" id="QQ2-216-955">Restrictions and Known Bugs</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >16.70 <a 
+href="manualse161.html#x217-94300016.70">TRI: TeX REDUCE interface</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.71 <a 
+href="manualse162.html#x218-94400016.71">TRIGSIMP: Simplification and factorization of trigonometric and
+hyperbolic functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.71.1 <a 
+href="manualse162.html#x218-94500016.71.1" id="QQ2-218-958">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.71.2 <a 
+href="manualse162.html#x218-94600016.71.2" id="QQ2-218-959">Simplifying trigonometric expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.71.3 <a 
+href="manualse162.html#x218-94700016.71.3" id="QQ2-218-960">Factorizing trigonometric expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.71.4 <a 
+href="manualse162.html#x218-94800016.71.4" id="QQ2-218-961">GCDs of trigonometric expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.71.5 <a 
+href="manualse162.html#x218-94900016.71.5" id="QQ2-218-962">Further Examples</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.72 <a 
+href="manualse163.html#x219-95100016.72">TURTLE: Turtle Graphics Interface for REDUCE</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.72.1 <a 
+href="manualse163.html#x219-95200016.72.1" id="QQ2-219-965">Turtle Graphics</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.72.2 <a 
+href="manualse163.html#x219-95300016.72.2" id="QQ2-219-966">Implementation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.72.3 <a 
+href="manualse163.html#x219-95400016.72.3" id="QQ2-219-967">Turtle Functions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.72.4 <a 
+href="manualse163.html#x219-96000016.72.4" id="QQ2-219-973">Examples</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.72.5 <a 
+href="manualse163.html#x219-96100016.72.5" id="QQ2-219-974">References</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.73 <a 
+href="manualse164.html#x220-96200016.73">WU: Wu algorithm for polynomial systems</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.74 <a 
+href="manualse165.html#x221-96300016.74">XCOLOR: Color factor in some field theories</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.75 <a 
+href="manualse166.html#x222-96800016.75">XIDEAL: Gröbner Bases for exterior algebra</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.75.1 <a 
+href="manualse166.html#x222-96900016.75.1" id="QQ2-222-982">Description</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.75.2 <a 
+href="manualse166.html#x222-97000016.75.2" id="QQ2-222-983">Declarations</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.75.3 <a 
+href="manualse166.html#x222-97300016.75.3" id="QQ2-222-986">Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.75.4 <a 
+href="manualse166.html#x222-98000016.75.4" id="QQ2-222-993">Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.75.5 <a 
+href="manualse166.html#x222-98400016.75.5" id="QQ2-222-997">Examples</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.76 <a 
+href="manualse167.html#x223-98600016.76">ZEILBERG: Indefinite and definite summation</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.1 <a 
+href="manualse167.html#x223-98700016.76.1" id="QQ2-223-1000">Introduction</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.2 <a 
+href="manualse167.html#x223-98800016.76.2" id="QQ2-223-1001">Gosper Algorithm</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.3 <a 
+href="manualse167.html#x223-98900016.76.3" id="QQ2-223-1002">Zeilberger Algorithm</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.4 <a 
+href="manualse167.html#x223-99000016.76.4" id="QQ2-223-1003">REDUCE operator <span 
+class="pcrr8t-x-x-109">GOSPER</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.5 <a 
+href="manualse167.html#x223-99100016.76.5" id="QQ2-223-1004">REDUCE operator <span 
+class="pcrr8t-x-x-109">EXTENDED_GOSPER</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.6 <a 
+href="manualse167.html#x223-99200016.76.6" id="QQ2-223-1005">REDUCE operator <span 
+class="pcrr8t-x-x-109">SUMRECURSION</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.7 <a 
+href="manualse167.html#x223-99300016.76.7" id="QQ2-223-1006">REDUCE operator <span 
+class="pcrr8t-x-x-109">EXTENDED_SUMRECURSION</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.8 <a 
+href="manualse167.html#x223-99400016.76.8" id="QQ2-223-1007">REDUCE operator <span 
+class="pcrr8t-x-x-109">HYPERRECURSION</span></a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.9 <a 
+href="manualse167.html#x223-99500016.76.9" id="QQ2-223-1008">REDUCE operator <span 
+class="pcrr8t-x-x-109">HYPERSUM</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.10 <a 
+href="manualse167.html#x223-99600016.76.10" id="QQ2-223-1009">REDUCE operator <span 
+class="pcrr8t-x-x-109">SUMTOHYPER</span></a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.11 <a 
+href="manualse167.html#x223-99700016.76.11" id="QQ2-223-1010">Simplification Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.12 <a 
+href="manualse167.html#x223-99800016.76.12" id="QQ2-223-1011">Tracing</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.13 <a 
+href="manualse167.html#x223-99900016.76.13" id="QQ2-223-1012">Global Variables and Switches</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.76.14 <a 
+href="manualse167.html#x223-100000016.76.14" id="QQ2-223-1013">Messages</a></span>
+<br />&#x00A0;<span class="sectionToc" >16.77 <a 
+href="manualse168.html#x226-100200016.77">ZTRANS: <span 
+class="cmmi-10x-x-109">Z</span>-transform package</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.77.1 <a 
+href="manualse168.html#x226-100300016.77.1" id="QQ2-226-1016">Z-Transform</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.77.2 <a 
+href="manualse168.html#x226-100400016.77.2" id="QQ2-226-1017">Inverse Z-Transform</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.77.3 <a 
+href="manualse168.html#x226-100500016.77.3" id="QQ2-226-1018">Input for the Z-Transform</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.77.4 <a 
+href="manualse168.html#x226-100600016.77.4" id="QQ2-226-1019">Input for the Inverse Z-Transform</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.77.5 <a 
+href="manualse168.html#x226-100700016.77.5" id="QQ2-226-1020">Application of the Z-Transform</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >16.77.6 <a 
+href="manualse168.html#x226-100800016.77.6" id="QQ2-226-1021">EXAMPLES</a></span>
+<br /><span class="chapterToc" >17 <a 
+href="manualch17.html#x227-101000017">Symbolic Mode</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.1 <a 
+href="manualse169.html#x228-101100017.1">Symbolic Infix Operators</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.2 <a 
+href="manualse170.html#x229-101200017.2">Symbolic Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.3 <a 
+href="manualse171.html#x230-101300017.3">Quoted Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.4 <a 
+href="manualse172.html#x231-101400017.4">Lambda Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.5 <a 
+href="manualse173.html#x232-101500017.5">Symbolic Assignment Statements</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.6 <a 
+href="manualse174.html#x233-101600017.6">FOR EACH Statement</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.7 <a 
+href="manualse175.html#x234-101700017.7">Symbolic Procedures</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.8 <a 
+href="manualse176.html#x235-101800017.8">Standard Lisp Equivalent of Reduce Input</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.9 <a 
+href="manualse177.html#x236-101900017.9">Communicating with Algebraic Mode</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >17.9.1 <a 
+href="manualse177.html#x236-102000017.9.1" id="QQ2-236-1033">Passing Algebraic Mode Values to Symbolic Mode</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >17.9.2 <a 
+href="manualse177.html#x236-102100017.9.2" id="QQ2-236-1034">Passing Symbolic Mode Values to Algebraic Mode</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >17.9.3 <a 
+href="manualse177.html#x236-102200017.9.3" id="QQ2-236-1035">Complete Example</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >17.9.4 <a 
+href="manualse177.html#x236-102300017.9.4" id="QQ2-236-1036">Defining Procedures for Intermode Communication</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.10 <a 
+href="manualse178.html#x237-102400017.10">Rlisp &#8217;88</a></span>
+<br />&#x00A0;<span class="sectionToc" >17.11 <a 
+href="manualse179.html#x238-102500017.11">References</a></span>
+<br /><span class="chapterToc" >18 <a 
+href="manualch18.html#x239-102600018">Calculations in High Energy Physics</a></span>
+                                                                     
+
+                                                                     
+<br />&#x00A0;<span class="sectionToc" >18.1 <a 
+href="manualse180.html#x240-102700018.1">High Energy Physics Operators</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >18.1.1 <a 
+href="manualse180.html#x240-102800018.1.1" id="QQ2-240-1041">. (Cons) Operator</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >18.1.2 <a 
+href="manualse180.html#x240-102900018.1.2" id="QQ2-240-1042">G Operator for Gamma Matrices</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >18.1.3 <a 
+href="manualse180.html#x240-103000018.1.3" id="QQ2-240-1043">EPS Operator</a></span>
+<br />&#x00A0;<span class="sectionToc" >18.2 <a 
+href="manualse181.html#x241-103100018.2">Vector Variables</a></span>
+<br />&#x00A0;<span class="sectionToc" >18.3 <a 
+href="manualse182.html#x242-103200018.3">Additional Expression Types</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >18.3.1 <a 
+href="manualse182.html#x242-103300018.3.1" id="QQ2-242-1046">Vector Expressions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >18.3.2 <a 
+href="manualse182.html#x242-103400018.3.2" id="QQ2-242-1047">Dirac Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >18.4 <a 
+href="manualse183.html#x243-103500018.4">Trace Calculations</a></span>
+<br />&#x00A0;<span class="sectionToc" >18.5 <a 
+href="manualse184.html#x244-103600018.5">Mass Declarations</a></span>
+<br />&#x00A0;<span class="sectionToc" >18.6 <a 
+href="manualse185.html#x245-103700018.6">Example</a></span>
+<br />&#x00A0;<span class="sectionToc" >18.7 <a 
+href="manualse186.html#x246-103800018.7">Extensions to More Than Four Dimensions</a></span>
+<br /><span class="chapterToc" >19 <a 
+href="manualch19.html#x247-103900019">REDUCE and Rlisp Utilities</a></span>
+<br />&#x00A0;<span class="sectionToc" >19.1 <a 
+href="manualse187.html#x248-104000019.1">The Standard Lisp Compiler</a></span>
+<br />&#x00A0;<span class="sectionToc" >19.2 <a 
+href="manualse188.html#x249-104100019.2">Fast Loading Code Generation Program</a></span>
+<br />&#x00A0;<span class="sectionToc" >19.3 <a 
+href="manualse189.html#x250-104200019.3">The Standard Lisp Cross Reference Program</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >19.3.1 <a 
+href="manualse189.html#x250-104300019.3.1" id="QQ2-250-1056">Restrictions</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >19.3.2 <a 
+href="manualse189.html#x250-104400019.3.2" id="QQ2-250-1057">Usage</a></span>
+<br />&#x00A0;&#x00A0;<span class="subsectionToc" >19.3.3 <a 
+href="manualse189.html#x250-104500019.3.3" id="QQ2-250-1058">Options</a></span>
+<br />&#x00A0;<span class="sectionToc" >19.4 <a 
+href="manualse190.html#x251-104600019.4">Prettyprinting Reduce Expressions</a></span>
+<br />&#x00A0;<span class="sectionToc" >19.5 <a 
+href="manualse191.html#x252-104700019.5">Prettyprinting Standard Lisp S-Expressions</a></span>
+<br /><span class="chapterToc" >20 <a 
+href="manualch20.html#x253-104800020">Maintaining REDUCE</a></span>
+<br /><span class="appendixToc" >A <a 
+href="manualap1.html#x254-1049000A">Reserved Identifiers</a></span>
+<br /><span class="appendixToc" >B <a 
+href="manualap2.html#x255-1050000B">Bibliography</a></span>
+<br /><span class="appendixToc" >C <a 
+href="manualap3.html#x256-1051000C">Changes since Version 3.8</a></span>
+</div>
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manual.html#manualli1.html" >Up</a></td><td class="clinks"><a 
+href="manualli2.html" >Next</a></td><td class="clinks"><a 
+href="manualli1.html" >Front</a></td></tr></table><a 
+ id="tailmanualli1.html"></a>  
+</body></html> 

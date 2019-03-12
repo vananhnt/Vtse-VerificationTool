@@ -1,0 +1,735 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DEFINT: A definite integration interface</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse109.html" >Up</a></td><td class="clinks"><a 
+href="manualse110.html" >Next</a></td><td class="clinks"><a 
+href="manualse108.html" >Prev</a></td><td class="clinks"><a 
+href="manualse108.html#tailmanualse108.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse109.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.18    </span> <a 
+ id="x141-38100016.18"></a>DEFINT: A definite integration interface</h3>
+<a 
+ id="dx141-381001"></a>
+<a 
+ id="dx141-381002"></a>
+<!--l. 337--><p class="noindent" >This package finds the definite integral of an expression in a stated interval. It uses
+several techniques, including an innovative approach based on the Meijer G-function,
+and contour integration.
+<!--l. 341--><p class="noindent" >Authors: Kerry Gaskell, Stanley M. Kameny, Winfried Neun.
+<!--l. 2--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.18.1    </span> <a 
+ id="x141-38200016.18.1"></a>Introduction</h4>
+<!--l. 3--><p class="noindent" >This documentation describes part of REDUCE&#8217;s definite integration package that is able
+to calculate the definite integrals of many functions, including several special functions.
+There are other parts of this package, such as Stan Kameny&#8217;s code for contour
+integration, that are not included here. The integration process described here is
+not the more normal approach of initially calculating the indefinite integral,
+but is instead the rather unusual idea of representing each function as a Meijer
+G-function (a formal definition of the Meijer G-function can be found in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>),
+and then calculating the integral by using the following Meijer G integration
+formula.
+<table 
+class="equation"><tr><td><a 
+ id="x141-382001r72"></a>
+<center class="math-display" >
+<img 
+src="manual177x.png" alt="             (   |     )     (      |    )           (  |     )
+&#x222B; &#x221E;   &#x03B1;-1 st     || (cu)    mn     l&#x2215;k|| (ap)          ij   || (gk)
+    x    Guv  &#x03C3;x || (d )  Gpq   &#x03C9;x   || (b )  dx = kG kl  &#x03BE;|| (h)
+ 0                   v                 q                    l
+" class="math-display" ></center></td><td class="equation-label">(16.72)</td></tr></table>
+                                                                     
+
+                                                                     
+<!--l. 20--><p class="nopar" >
+<!--l. 22--><p class="noindent" >The resulting Meijer G-function is then retransformed, either directly or via a
+hypergeometric function simplification, to give the answer. A more detailed account of
+this theory can be found in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>.
+<!--l. 27--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.18.2    </span> <a 
+ id="x141-38300016.18.2"></a>Integration between zero and infinity</h4>
+<!--l. 29--><p class="noindent" >As an example, if one wishes to calculate the following integral
+<center class="par-math-display" >
+<img 
+src="manual178x.png" alt="&#x222B;
+  &#x221E;  -1 -x
+ 0  x  e  sin(x)dx
+" class="par-math-display" ></center>
+<!--l. 33--><p class="nopar" >
+<!--l. 35--><p class="noindent" >then initially the correct Meijer G-functions are found, via a pattern matching process,
+and are substituted into eq.&#x00A0;<a 
+href="#x141-382001r72">16.72<!--tex4ht:ref: defint:eq1 --></a> to give
+<center class="par-math-display" >
+<img 
+src="manual179x.png" alt="&#x221A; --&#x222B; &#x221E;        (  ||  )     (  2||   )
+  &#x03C0;     x-1G1001  x|| .  G1002   x-|| .1.  dx
+     0            | 0        4 | 20
+" class="par-math-display" ></center>
+<!--l. 44--><p class="nopar" >
+<!--l. 46--><p class="noindent" >The cases for validity of the integral are then checked. If these are found to be
+satisfactory then the formula is calculated and we obtain the following Meijer
+G-function
+<center class="par-math-display" >
+<img 
+src="manual180x.png" alt="   (   ||11 )
+G1222  1 ||21
+       |20
+" class="par-math-display" ></center>
+<!--l. 52--><p class="nopar" >
+                                                                     
+
+                                                                     
+<!--l. 54--><p class="noindent" >This is reduced to the following hypergeometric function
+<!--l. 56--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span>                                 <sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">F</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmr-10x-x-109">(</span><img 
+src="manual181x.png" alt="1
+2"  class="frac" align="middle"><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmr-10x-x-109">1;</span><img 
+src="manual182x.png" alt="3
+2"  class="frac" align="middle"><span 
+class="cmr-10x-x-109">;</span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">1)</span>
+<!--l. 60--><p class="noindent" >which is then calculated to give the correct answer of
+<center class="par-math-display" >
+<img 
+src="manual183x.png" alt="&#x03C0;-
+ 4
+" class="par-math-display" ></center>
+<!--l. 64--><p class="nopar" >
+<!--l. 66--><p class="noindent" >The above formula (1) is also true for the integration of a single Meijer G-function by
+replacing the second Meijer G-function with a trivial Meijer G-function.
+<!--l. 70--><p class="noindent" >A list of numerous particular Meijer G-functions is available in <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>.
+<!--l. 73--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.18.3    </span> <a 
+ id="x141-38400016.18.3"></a>Integration over other ranges</h4>
+<!--l. 75--><p class="noindent" >Although the description so far has been limited to the computation of definite integrals
+between 0 and infinity, it can also be extended to calculate integrals between 0 and some
+specific upper bound, and by further extension, integrals between any two bounds. One
+approach is to use the Heaviside function, i.e.
+<center class="par-math-display" >
+<img 
+src="manual184x.png" alt="&#x222B;                      &#x222B;
+  &#x221E;  2 - x               1  2- x
+ 0  x e   H (1 - x)dx =  0 x e   dx
+" class="par-math-display" ></center>
+<!--l. 83--><p class="nopar" >
+<!--l. 85--><p class="noindent" >Another approach, again not involving the normal indefinite integration process, again
+uses Meijer G-functions, this time by means of the following formula
+<table 
+class="equation"><tr><td><a 
+ id="x141-384001r73"></a>
+                                                                     
+
+                                                                     
+<center class="math-display" >
+<img 
+src="manual185x.png" alt="            (    |    )                (    |                      )
+&#x222B; y              ||(au)                      ||(a1..an,1 - &#x03B1;,an+1..ap)
+   x&#x03B1;- 1Gmpnq   &#x03C3;x |      dx = y&#x03B1;Gmnp++11q+1  &#x03C3;y |
+ 0               |(bv)                      | (b1..bm,- &#x03B1;,bm+1..bq)
+" class="math-display" ></center></td><td class="equation-label">(16.73)</td></tr></table>
+<!--l. 94--><p class="nopar" >
+<!--l. 96--><p class="noindent" >For a more detailed look at the theory behind this see <span class="cite">[<span 
+class="ptmb8t-x-x-109">?</span>]</span>.
+<!--l. 99--><p class="noindent" >For example, if one wishes to calculate the following integral
+<center class="par-math-display" >
+<img 
+src="manual186x.png" alt="&#x222B; y     &#x221A; --
+   sin(2  x)dx
+ 0
+" class="par-math-display" ></center>
+<!--l. 103--><p class="nopar" >
+<!--l. 105--><p class="noindent" >then initially the correct Meijer G-function is found, by a pattern matching process, and
+is substituted into eq.&#x00A0;<a 
+href="#x141-384001r73">16.73<!--tex4ht:ref: defint:eq2 --></a> to give
+<center class="par-math-display" >
+<img 
+src="manual187x.png" alt="&#x222B;      (  |   )
+  y  10   || ..
+   G 02 x || 10  dx
+ 0          2
+" class="par-math-display" ></center>
+<!--l. 112--><p class="nopar" >
+<!--l. 114--><p class="noindent" >which then in turn gives
+<center class="par-math-display" >
+<img 
+src="manual188x.png" alt="     (  ||       )
+yG11   y||   0     dx
+   13   | 12 - 10
+" class="par-math-display" ></center>
+<!--l. 118--><p class="nopar" >
+<!--l. 120--><p class="noindent" >and returns the result
+                                                                     
+
+                                                                     
+<center class="par-math-display" >
+<img 
+src="manual189x.png" alt="&#x221A; &#x03C0;J   (2&#x221A;y-)y
+-----3&#x2215;2-------
+     y1&#x2215;4
+" class="par-math-display" ></center>
+<!--l. 124--><p class="nopar" >
+<!--l. 126--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.18.4    </span> <a 
+ id="x141-38500016.18.4"></a>Using the definite integration package</h4>
+<!--l. 127--><p class="noindent" >To use this package, you must first load it by the command
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-822">
+load_package&#x00A0;defint;
+</div>
+<!--l. 130--><p class="nopar" > Definite integration is then possible using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">int</span></span></span> command with the syntax:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-823">
+&#x00A0;&#x00A0;&#x00A0;INT(EXPRN:algebraic,VAR:kernel,LOW:algebraic,UP:algebraic)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;:algebraic.
+</div>
+<!--l. 136--><p class="nopar" > where LOW and UP are the lower and upper bounds respectively for the definite
+integration of EXPRN with respect to VAR.
+<!--l. 140--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-38600016.18.4"></a>Examples</h5>
+<center class="par-math-display" >
+<img 
+src="manual190x.png" alt="&#x222B; &#x221E;
+    e- xdx
+ 0
+" class="par-math-display" ></center>
+<!--l. 144--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-824">
+&#x00A0;int(e^(-x),x,0,infinity);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;1
+</div>
+<!--l. 151--><p class="nopar" >
+<center class="par-math-display" >
+<img 
+src="manual191x.png" alt="&#x222B; &#x221E;
+    xsin (1&#x2215;x )dx
+ 0
+" class="par-math-display" ></center>
+<!--l. 155--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-825">
+&#x00A0;int(x*sin(1/x),x,0,infinity);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;1
+&#x00A0;<br />INT(X*SIN(---),X,0,INFINITY)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+</div>
+<!--l. 163--><p class="nopar" >
+<center class="par-math-display" >
+<img 
+src="manual192x.png" alt="&#x222B; &#x221E;
+    x2cos(x)e-2xdx
+ 0
+" class="par-math-display" ></center>
+<!--l. 167--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-826">
+&#x00A0;int(x^2*cos(x)*e^(-2*x),x,0,infinity);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />&#x00A0;-----
+&#x00A0;<br />&#x00A0;&#x00A0;125
+</div>
+<!--l. 175--><p class="nopar" >
+<center class="par-math-display" >
+<img 
+src="manual193x.png" alt="&#x222B;                       &#x222B;
+  &#x221E; xe-1&#x2215;2xH (1 - x)dx =   1xe -1&#x2215;2xdx
+ 0                       0
+" class="par-math-display" ></center>
+<!--l. 179--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-827">
+&#x00A0;int(x*e^(-1/2x)*Heaviside(1-x),x,0,infinity);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;2*(2*SQRT(E)&#x00A0;-&#x00A0;3)
+&#x00A0;<br />&#x00A0;-------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;SQRT(E)
+</div>
+<!--l. 187--><p class="nopar" >
+<center class="par-math-display" >
+<img 
+src="manual194x.png" alt="&#x222B;
+  1xlog(1 + x)dx
+ 0
+" class="par-math-display" ></center>
+<!--l. 191--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-828">
+&#x00A0;int(x*log(1+x),x,0,1);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;1
+&#x00A0;<br />&#x00A0;---
+&#x00A0;<br />&#x00A0;&#x00A0;4
+</div>
+<!--l. 199--><p class="nopar" >
+<center class="par-math-display" >
+<img 
+src="manual195x.png" alt="&#x222B; y
+   cos(2x)dx
+ 0
+" class="par-math-display" ></center>
+<!--l. 203--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-829">
+&#x00A0;int(cos(2x),x,y,2y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;SIN(4*Y)&#x00A0;-&#x00A0;SIN(2*Y)
+&#x00A0;<br />---------------------
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+</div>
+<!--l. 211--><p class="nopar" >
+<!--l. 214--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.18.5    </span> <a 
+ id="x141-38700016.18.5"></a>Integral Transforms</h4>
+<!--l. 216--><p class="noindent" >A useful application of the definite integration package is in the calculation of various
+integral transforms. The transforms available are as follows:
+     <ul class="itemize1">
+     <li class="itemize">Laplace transform
+     </li>
+     <li class="itemize">Hankel transform
+     </li>
+     <li class="itemize">Y-transform
+     </li>
+     <li class="itemize">K-transform
+     </li>
+     <li class="itemize">StruveH transform
+     </li>
+     <li class="itemize">Fourier sine transform
+     </li>
+     <li class="itemize">Fourier cosine transform</li></ul>
+                                                                     
+
+                                                                     
+<!--l. 230--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-38800016.18.5"></a>Laplace transform</h5>
+<!--l. 232--><p class="noindent" >The Laplace transform
+<!--l. 234--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;             f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">s</span><span 
+class="cmr-10x-x-109">) = </span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-4c.png" alt="L" class="10-109x-x-4c" /> </span>{F(t)} = <span 
+class="cmex-10x-x-109">&#x222B;</span>
+ <sub><span 
+class="cmr-8">0</span></sub><sup><span 
+class="cmsy-8">&#x221E;</span></sup><span 
+class="cmmi-10x-x-109">e</span><sup><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">st</span></sup><span 
+class="cmmi-10x-x-109">F</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">t</span><span 
+class="cmr-10x-x-109">)</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmmi-10x-x-109">dt</span>
+<!--l. 237--><p class="noindent" >can be calculated by using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">laplace_transform</span></span></span> command.
+<!--l. 239--><p class="noindent" >This requires as parameters
+     <ul class="itemize1">
+     <li class="itemize">the function to be integrated
+     </li>
+     <li class="itemize">the integration variable.</li></ul>
+<!--l. 246--><p class="noindent" >For example
+<!--l. 248--><p class="noindent" ><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;</span><span 
+class="cmmi-10x-x-109">&#x00A0;                                     </span><span 
+class="cmsy-10x-x-109"><img 
+src="cmsy10-4c.png" alt="L" class="10-109x-x-4c" />{</span><span 
+class="cmmi-10x-x-109">e</span><sup><span 
+class="cmsy-8">-</span><span 
+class="cmmi-8">at</span></sup><span 
+class="cmsy-10x-x-109">}</span> is entered as
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-830">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;laplace_transform(e^(-a*x),x);
+</div>
+<!--l. 253--><p class="nopar" >
+<!--l. 255--><p class="noindent" >and returns the result
+<center class="par-math-display" >
+<img 
+src="manual196x.png" alt="--1--
+s+ a
+" class="par-math-display" ></center>
+<!--l. 259--><p class="nopar" >
+<!--l. 261--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-38900016.18.5"></a>Hankel transform</h5>
+<!--l. 263--><p class="noindent" >The Hankel transform
+<center class="par-math-display" >
+<img 
+src="manual197x.png" alt="       &#x222B;
+         &#x221E;         &#x221A; ---
+f(&#x03C9; ) = 0  F (t)J &#x03BD;(2  &#x03C9;t)dt
+" class="par-math-display" ></center>
+<!--l. 267--><p class="nopar" >
+<!--l. 269--><p class="noindent" >can be calculated by using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">hankel_transform</span></span></span> command e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-831">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;hankel_transform(f(x),x);
+</div>
+<!--l. 273--><p class="nopar" >
+<!--l. 275--><p class="noindent" >This is used in the same way as the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">laplace_transform</span></span></span> command.
+<!--l. 277--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-39000016.18.5"></a>Y-transform</h5>
+<!--l. 279--><p class="noindent" >The Y-transform
+<center class="par-math-display" >
+<img 
+src="manual198x.png" alt="       &#x222B; &#x221E;
+f(&#x03C9; ) =    F (t)Y &#x03BD;(2&#x221A; &#x03C9;t)dt
+        0
+" class="par-math-display" ></center>
+<!--l. 283--><p class="nopar" >
+<!--l. 285--><p class="noindent" >can be calculated by using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">Y_transform</span></span></span> command e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-832">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y_transform(f(x),x);
+</div>
+<!--l. 289--><p class="nopar" >
+<!--l. 291--><p class="noindent" >This is used in the same way as the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">laplace_transform</span></span></span> command.
+<!--l. 293--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-39100016.18.5"></a>K-transform</h5>
+<!--l. 295--><p class="noindent" >The K-transform
+<center class="par-math-display" >
+<img 
+src="manual199x.png" alt="       &#x222B; &#x221E;
+f(&#x03C9;) =     F (t)K &#x03BD;(2&#x221A;&#x03C9;t-)dt
+        0
+" class="par-math-display" ></center>
+<!--l. 299--><p class="nopar" >
+<!--l. 301--><p class="noindent" >can be calculated by using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">K_transform</span></span></span> command e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-833">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;K_transform(f(x),x);
+</div>
+<!--l. 305--><p class="nopar" >
+<!--l. 307--><p class="noindent" >This is used in the same way as the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">laplace_transform</span></span></span> command.
+<!--l. 309--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-39200016.18.5"></a>StruveH transform</h5>
+<!--l. 311--><p class="noindent" >The StruveH transform
+<center class="par-math-display" >
+<img 
+src="manual200x.png" alt="       &#x222B; &#x221E;
+f(&#x03C9; ) =    F (t)StruveH  (&#x03BD;,2&#x221A; &#x03C9;t)dt
+        0
+" class="par-math-display" ></center>
+<!--l. 315--><p class="nopar" >
+<!--l. 317--><p class="noindent" >can be calculated by using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">struveh_transform</span></span></span> command e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-834">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;struveh_transform(f(x),x);
+</div>
+<!--l. 321--><p class="nopar" >
+<!--l. 323--><p class="noindent" >This is used in the same way as the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">laplace_transform</span></span></span> command.
+<!--l. 325--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-39300016.18.5"></a>Fourier sine transform</h5>
+<!--l. 327--><p class="noindent" >The Fourier sine transform
+<center class="par-math-display" >
+<img 
+src="manual201x.png" alt="      &#x222B; &#x221E;
+f(s) =    F (t)sin(st)dt
+       0
+" class="par-math-display" ></center>
+<!--l. 331--><p class="nopar" >
+<!--l. 333--><p class="noindent" >can be calculated by using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">fourier_sin</span></span></span> command e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-835">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fourier_sin(f(x),x);
+</div>
+<!--l. 336--><p class="nopar" >
+<!--l. 338--><p class="noindent" >This is used in the same way as the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">laplace_transform</span></span></span> command.
+<!--l. 340--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x141-39400016.18.5"></a>Fourier cosine transform</h5>
+<!--l. 342--><p class="noindent" >The Fourier cosine transform
+<center class="par-math-display" >
+<img 
+src="manual202x.png" alt="      &#x222B; &#x221E;
+f(s) =    F (t)cos(st)dt
+       0
+" class="par-math-display" ></center>
+<!--l. 346--><p class="nopar" >
+<!--l. 348--><p class="noindent" >can be calculated by using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">fourier_cos</span></span></span> command e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-836">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fourier_cos(f(x),x);
+</div>
+<!--l. 351--><p class="nopar" >
+<!--l. 353--><p class="noindent" >This is used in the same way as the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">laplace_transform</span></span></span> command.
+<!--l. 355--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.18.6    </span> <a 
+ id="x141-39500016.18.6"></a>Additional Meijer G-function Definitions</h4>
+<!--l. 357--><p class="noindent" >The relevant Meijer G representation for any function is found by a pattern-matching
+process which is carried out on a list of Meijer G-function definitions. This list,
+although extensive, can never hope to be complete and therefore the user may
+wish to add more definitions. Definitions can be added by adding the following
+lines:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-837">
+&#x00A0;&#x00A0;defint_choose(f(~x),~var&#x00A0;=&#x003E;&#x00A0;f1(n,x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;symbolic&#x00A0;putv(mellin!-transforms!*,n,&#8217;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(()&#x00A0;(m&#x00A0;n&#x00A0;p&#x00A0;q)&#x00A0;(ai)&#x00A0;(bj)&#x00A0;(C)&#x00A0;(var)));
+&#x00A0;<br />
+</div>
+<!--l. 369--><p class="nopar" > where f(x) is the new function, i = 1..p, j=1..q, C = a constant, var = variable, n = an
+indexing number.
+<!--l. 374--><p class="noindent" >For example when considering <span 
+class="cmmi-10x-x-109">cos</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">) </span>we have
+<!--l. 376--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Meijer G representation -</span>
+<center class="math-display" >
+<img 
+src="manual203x.png" alt="            |
+&#x221A; --   ( x2 | .. )
+  &#x03C0;G1002  ---|| 1   dx
+         4  |02
+" class="math-display" ></center>
+<!--l. 380--><p class="nopar" >
+<!--l. 382--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Internal definite integration package representation -</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-838">
+&#x00A0;&#x00A0;defint_choose(cos(~x),~var)&#x00A0;&#x00A0;&#x00A0;=&#x003E;&#x00A0;f1(3,x);
+</div>
+<!--l. 385--><p class="nopar" >
+<!--l. 387--><p class="noindent" >where 3 is the indexing number corresponding to the 3 in the following formula
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-839">
+&#x00A0;&#x00A0;symbolic&#x00A0;putv(mellin!-transforms!*,3,&#8217;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(()&#x00A0;(1&#x00A0;0&#x00A0;0&#x00A0;2)&#x00A0;()&#x00A0;(nil&#x00A0;(quotient&#x00A0;1&#x00A0;2))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(sqrt&#x00A0;pi)&#x00A0;(quotient&#x00A0;(expt&#x00A0;x&#x00A0;2)&#x00A0;4)));
+</div>
+<!--l. 394--><p class="nopar" >
+<!--l. 396--><p class="noindent" >or the more interesting example of <span 
+class="cmmi-10x-x-109">J</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">)</span>:
+<!--l. 398--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Meijer G representation -</span>
+<center class="math-display" >
+<img 
+src="manual204x.png" alt="    (   |     )
+ 10  x2-||  ..
+G02   4 || n--n  dx
+          2 2
+" class="math-display" ></center>
+<!--l. 402--><p class="nopar" >
+<!--l. 404--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Internal definite integration package representation -</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-840">
+&#x00A0;&#x00A0;defint_choose(besselj(~n,~x),~var)&#x00A0;=&#x003E;&#x00A0;f1(50,x,n);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;symbolic&#x00A0;putv(mellin!-transforms!*,50,&#8217;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;((n)&#x00A0;(1&#x00A0;0&#x00A0;0&#x00A0;2)&#x00A0;()&#x00A0;((quotient&#x00A0;n&#x00A0;2)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(minus&#x00A0;quotient&#x00A0;n&#x00A0;2))&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;(quotient&#x00A0;(expt&#x00A0;x&#x00A0;2)&#x00A0;4)));
+</div>
+<!--l. 413--><p class="nopar" >
+<!--l. 415--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmri8t-x-x-109">16.18.7    </span></span> <a 
+ id="x141-39600016.18.7"></a><span 
+class="ptmri8t-x-x-109">The print_conditions function</span></h4>
+<!--l. 417--><p class="noindent" >The required conditions for the validity of the transform integrals can be viewed using
+the following command:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-841">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;print_conditions().
+</div>
+<!--l. 422--><p class="nopar" >
+<!--l. 424--><p class="noindent" >For example after calculating the following laplace transform
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-842">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;laplace_transform(x^k,x);
+</div>
+<!--l. 428--><p class="nopar" >
+<!--l. 430--><p class="noindent" >using the <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">print_conditions</span></span></span> command would produce
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-843">
+&#x00A0;<br />repart(sum(ai)&#x00A0;-&#x00A0;sum(bj))&#x00A0;+&#x00A0;1/2&#x00A0;(q&#x00A0;+&#x00A0;1&#x00A0;-&#x00A0;p)&#x003E;(q&#x00A0;-&#x00A0;p)&#x00A0;repart(s)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;and&#x00A0;(&#x00A0;-&#x00A0;min(repart(bj))&#x003C;repart(s))&#x003C;1&#x00A0;-&#x00A0;max(repart(ai))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;or&#x00A0;mod(arg(eta))=pi*delta
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;or&#x00A0;(&#x00A0;-&#x00A0;min(repart(bj))&#x003C;repart(s))&#x003C;1&#x00A0;-&#x00A0;max(repart(ai))
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;or&#x00A0;mod(arg(eta))&#x003C;pi*delta
+&#x00A0;<br />
+</div>
+<!--l. 444--><p class="nopar" >
+<!--l. 446--><p class="noindent" >where
+<center class="math-display" >
+<img 
+src="manual205x.png" alt="delta = s + t- u--v
+eta = 1- &#x03B1;(v - 2u)- &#x03BC; - &#x03C1;
+    &#x2211;q        &#x2211;p        p--q
+&#x03BC; = &#x2211;vj=1bj - &#x2211;ui=1 ai + u-2v + 1
+&#x03C1; =   j=1dj -   i=1 ci +-2--+ 1
+s,t,u,v,p,q,&#x03B1;asin(1)
+" class="math-display" ></center>
+<!--l. 455--><p class="nopar" >
+<!--l. 458--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.18.8    </span> <a 
+ id="x141-39700016.18.8"></a>Tracing</h4>
+<!--l. 459--><p class="noindent" ><a 
+ id="switch:TRDEFINT"></a>
+<!--l. 461--><p class="noindent" >A new switch <span 
+class="pcrr8t-x-x-109">TRDEFINT </span>can be set to ON to print information about intermediate steps
+of the calculation.
+<!--l. 464--><p class="noindent" >
+                                                                     
+
+                                                                     
+<h4 class="subsectionHead"><span class="titlemark">16.18.9    </span> <a 
+ id="x141-39800016.18.9"></a>Acknowledgements</h4>
+<!--l. 465--><p class="noindent" >I would like to thank Victor Adamchik whose implementation of the definite integration
+package for REDUCE is vital to this interface.
+<!--l. 470--><p class="noindent" >
+<h4 class="likesubsectionHead"><a 
+ id="x141-399000"></a>Bibliography</h4>
+<!--l. 470--><p class="noindent" >
+  <div class="thebibliography">
+  <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XPrudnikov"></a>A.P. Prudnikov, Yu.A. Brychkov and O.I. Marichev, <span 
+class="ptmri8t-x-x-109">Integrals and Series,</span>
+  <span 
+class="ptmri8t-x-x-109">Volume  3:  More  Special  Functions  </span>Gordon  and  Breach  Science  Publishers
+  (1990)
+  </p>
+  <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XAdamchik:90"></a>V.S. Adamchik and O.I. Marichev, <span 
+class="ptmri8t-x-x-109">The Algorithm for Calculating Integrals</span>
+  <span 
+class="ptmri8t-x-x-109">of Hypergeometric Type Functions and its Realization in Reduce System </span>from
+  <span 
+class="ptmri8t-x-x-109">ISSAC  90:Symbolic  and  Algebraic  Computation  </span>Addison-Wesley  Publishing
+  Company (1990)
+  </p>
+  <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XLuke"></a>Yudell L. Luke, <span 
+class="ptmri8t-x-x-109">The Special Functions and their Approximations, Volume</span>
+  <span 
+class="ptmri8t-x-x-109">1 </span>Academic Press (1969).
+</p>
+  </div>
+<!--l. 345--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 347--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse109.html" >Up</a></td><td class="clinks"><a 
+href="manualse110.html" >Next</a></td><td class="clinks"><a 
+href="manualse108.html" >Prev</a></td><td class="clinks"><a 
+href="manualse108.html#tailmanualse108.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse109.html" >Front</a></td></tr></table><a 
+ id="tailmanualse109.html"></a>   
+</body></html> 

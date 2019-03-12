@@ -1,0 +1,890 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>GNUPLOT: Display of functions and surfaces</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse118.html" >Up</a></td><td class="clinks"><a 
+href="manualse119.html" >Next</a></td><td class="clinks"><a 
+href="manualse117.html" >Prev</a></td><td class="clinks"><a 
+href="manualse117.html#tailmanualse117.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse118.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.27    </span> <a 
+ id="x150-48700016.27"></a>GNUPLOT: Display of functions and surfaces</h3>
+<a 
+ id="dx150-487001"></a>
+<a 
+ id="dx150-487002"></a>
+<a 
+ id="dx150-487003"></a>
+<a 
+ id="dx150-487004"></a>
+<!--l. 475--><p class="noindent" >This package is an interface to the popular GNUPLOT package. It allows you to display
+functions in 2D and surfaces in 3D on a variety of output devices including X terminals,
+PC monitors, and postscript and Latex printer files.
+<!--l. 480--><p class="noindent" >NOTE: The GNUPLOT package may not be included in all versions of REDUCE.
+<!--l. 482--><p class="noindent" >Author: Herbert Melenk.
+<a 
+ id="dx150-487005"></a>
+<!--l. 30--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.1    </span> <a 
+ id="x150-48800016.27.1"></a>Introduction</h4>
+<!--l. 32--><p class="noindent" >The <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>system provides easy to use graphics output for curves or surfaces which
+are defined by formulas and/or data sets. <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>supports a variety of output devices
+such as <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">VGA</span><span 
+class="pcrr8t-x-x-109">&#x00A0;screen</span></span></span>, <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">postscript</span></span></span>, <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">pic</span></span></span><span class="TEX">T<span 
+class="E">E</span>X</span>, <span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-109">MS</span><span 
+class="pcrr8t-x-x-109">&#x00A0;Windows</span></span></span>. The REDUCE
+<span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>package lets one use the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>graphical output directly from inside
+REDUCE, either for the interactive display of curves/surfaces or for the production of
+pictures on paper.
+<!--l. 53--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.2    </span> <a 
+ id="x150-48900016.27.2"></a>Command <span 
+class="pcrr8t-x-x-109">plot</span></h4>
+<a 
+ id="dx150-489001"></a>
+<!--l. 56--><p class="noindent" >Under REDUCE <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>is used as graphical output server, invoked by the command
+<span 
+class="pcrr8t-x-x-109">plot(...)</span>. This command can have a variable number of parameters:
+     <ul class="itemize1">
+     <li class="itemize">A function to plot; a function can be
+          <ul class="itemize2">
+                                                                     
+
+                                                                     
+          <li class="itemize">an expression with one unknown, e.g. <span 
+class="pcrr8t-x-x-109">u*sin(u)</span><span 
+class="pcrr8t-x-x-109">^2</span>.
+          </li>
+          <li class="itemize">a  list  of  expressions  with  one  (identical)  unknown,  e.g.  <span 
+class="pcrr8t-x-x-109">{sin(u),</span>
+          <span 
+class="pcrr8t-x-x-109">cos(u)}</span>.
+          </li>
+          <li class="itemize">an expression with two unknowns, e.g. <span 
+class="pcrr8t-x-x-109">u*sin(u)</span><span 
+class="pcrr8t-x-x-109">^2+sqrt(v)</span>.
+          </li>
+          <li class="itemize">a    list    of    expressions    with    two    (identical)    unknowns,    e.g.
+          <span 
+class="pcrr8t-x-x-109">{x^2+y^2,x^2-y^2}</span>.
+          </li>
+          <li class="itemize">a    parametic    expression    of    the    form    <span 
+class="pcrr8t-x-x-109">point(&#x003C;u&#x003E;,&#x003C;v&#x003E;) </span>or
+          <span 
+class="pcrr8t-x-x-109">point(&#x003C;u&#x003E;,&#x003C;v&#x003E;,&#x003C;w&#x003E;) </span>where   <span 
+class="pcrr8t-x-x-109">u,v,w </span>are   expressions   which
+          depend of one or two parameters; if there is one parameter, the object
+          describes a curve in the plane (only <span 
+class="pcrr8t-x-x-109">u </span>and <span 
+class="pcrr8t-x-x-109">v</span>) or in 3D space; if there are
+          two parameters, the object describes a surface in 3D. The parameters
+          are treated as independent variables. Example: <span 
+class="pcrr8t-x-x-109">point(sin t,cos</span>
+          <span 
+class="pcrr8t-x-x-109">t,t/10)</span>.
+          </li>
+          <li class="itemize">an  equation  with  a  symbol  on  the  left-hand  side  and  an  expression
+          with  one  or  two  unknowns  on  the  right-hand  side,  e.g.  <span 
+class="pcrr8t-x-x-109">dome=</span>
+          <span 
+class="pcrr8t-x-x-109">1/(x</span><span 
+class="pcrr8t-x-x-109">^2+y</span><span 
+class="pcrr8t-x-x-109">^2)</span>.
+          </li>
+          <li class="itemize">an  equation  with  an  expression  on  the  left-hand  side  and  a  zero  on
+          right-hand side describing implicitly a one dimensional variety in the
+          plane  (implicitly  given  curve),  e.g.  <span 
+class="pcrr8t-x-x-109">x</span><span 
+class="pcrr8t-x-x-109">^3 + x*y</span><span 
+class="pcrr8t-x-x-109">^2-9x = 0</span>,  or  a
+          two-dimensional surface in 3-dimensional Euclidean space,
+          </li>
+          <li class="itemize">an  equation  with  an  expression  in  two  variables  on  the  left-hand
+          side  and  a  list  of  numbers  on  the  right-hand  side;  the  contour  lines
+          corresponding to the given values are drawn, e.g. <br 
+class="newline" /><span 
+class="pcrr8t-x-x-109">x</span><span 
+class="pcrr8t-x-x-109">^3 - y</span><span 
+class="pcrr8t-x-x-109">^2 + x*y = {-2,-1,0,1,2}</span>.
+          </li>
+          <li class="itemize">a list of points in 2 or 3 dimensions, e.g. <span 
+class="pcrr8t-x-x-109">{{0,0},{0,1},{1,1}}</span>
+          representing a curve,
+          </li>
+          <li class="itemize">a                                                   list                                                   of
+          lists of points in 2 or 3 dimensions e.g. <span 
+class="pcrr8t-x-x-109">{{{0,0},{0,1},{1,1}},</span>
+          <span 
+class="pcrr8t-x-x-109">{{0,0},{0,1},{1,1}}} </span>representing a family of curves.</li></ul>
+     <!--l. 96--><p class="noindent" ><a 
+ id="reserved:intervalop">
+     </li>
+                                                                     
+
+                                                                     
+     <li class="itemize"></a>A range for a variable; this has the form <span 
+class="pcrr8t-x-x-109">variable=(lower_bound,..,</span>
+     <span 
+class="pcrr8t-x-x-109">upper_bound) </span>where <span 
+class="pcrr8t-x-x-109">lower_bound </span>and <span 
+class="pcrr8t-x-x-109">upper_bound </span>must
+     be expressions which evaluate to numbers. If no range is specified the
+     default ranges for independent variables are <span 
+class="cmr-10x-x-109">(</span><span 
+class="cmsy-10x-x-109">-</span><span 
+class="cmr-10x-x-109">10</span><span style="margin-left:0.3em" class="thinspace"></span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmmi-10x-x-109">..</span><span style="margin-left:0.3em" class="thinspace"></span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmr-10x-x-109">10) </span>and the range
+     for the dependent variable is set to maximum number of the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span></span>
+     executable (using double floats on most IEEE machines). Additionally the
+     number of interval subdivisions can be assigned as a formal quotient
+     <span 
+class="pcrr8t-x-x-109">variable=(lower_bound..upper_bound)/&#x003C;it&#x003E; </span>where <span 
+class="pcrr8t-x-x-109">it </span>is a
+     positive integer. E.g. <span 
+class="pcrr8t-x-x-109">(1 .. 5)/30 </span>means the interval from <span 
+class="cmr-10x-x-109">1 </span>to <span 
+class="cmr-10x-x-109">5 </span>subdivided
+     into <span 
+class="cmr-10x-x-109">30 </span>pieces of equal size. A subdivision parameter overrides the value of the
+     variable <span 
+class="pcrr8t-x-x-109">points </span>for this variable.
+     </li>
+     <li class="itemize">A plot option, either as fixed keyword, e.g. <span 
+class="pcrr8t-x-x-109">hidden3d </span>or as equation e.g.
+     <span 
+class="pcrr8t-x-x-109">term=pictex</span>; free texts such as titles and labels should be enclosed in string
+     quotes.</li></ul>
+<!--l. 113--><p class="noindent" >Please note that a blank has to be inserted between a number and a dot, otherwise the
+REDUCE translator will be misled.
+<!--l. 116--><p class="noindent" >If a function is given as an equation the left-hand side is mainly used as a label for the
+axis of the dependent variable.
+<!--l. 119--><p class="noindent" >In two dimensions, <span 
+class="pcrr8t-x-x-109">plot </span>can be called with more than one explicit function; all curves
+are drawn in one picture. However, all these must use the same independent variable
+name. One of the functions can be a point set or a point set list. Normally all functions
+and point sets are plotted by lines. A point set is drawn by points only if functions and
+the point set are drawn in one picture.
+<!--l. 126--><p class="noindent" >The same applies to three dimensions with explicit functions. However, an implicitly
+given curve must be the sole object for one picture.
+<!--l. 129--><p class="noindent" >The functional expressions are evaluated in <span 
+class="pcrr8t-x-x-109">rounded </span>mode. This is done automatically,
+it is not necessary to turn on rounded mode explicitly.
+<!--l. 132--><p class="noindent" ><span 
+class="ptmb8t-x-x-109">Examples:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-959">
+plot(cos&#x00A0;x);
+&#x00A0;<br />plot(s=sin&#x00A0;phi,&#x00A0;phi=(-3&#x00A0;..&#x00A0;3));
+&#x00A0;<br />plot(sin&#x00A0;phi,&#x00A0;cos&#x00A0;phi,&#x00A0;phi=(-3&#x00A0;..&#x00A0;3));
+&#x00A0;<br />plot&#x00A0;(cos&#x00A0;sqrt(x^2&#x00A0;+&#x00A0;y^2),&#x00A0;x=(-3&#x00A0;..&#x00A0;3),&#x00A0;y=(-3&#x00A0;..&#x00A0;3),&#x00A0;hidden3d);
+&#x00A0;<br />plot&#x00A0;{{0,0},{0,1},{1,1},{0,0},{1,0},{0,1},{0.5,1.5},{1,1},{1,0}};
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;parametric:&#x00A0;screw
+&#x00A0;<br />
+&#x00A0;<br />on&#x00A0;rounded;
+&#x00A0;<br />w&#x00A0;:=&#x00A0;for&#x00A0;j&#x00A0;:=&#x00A0;1:200&#x00A0;collect&#x00A0;{1/j*sin&#x00A0;j,&#x00A0;1/j*cos&#x00A0;j,&#x00A0;j/200}$
+&#x00A0;<br />plot&#x00A0;w;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;parametric:&#x00A0;globe
+&#x00A0;<br />dd&#x00A0;:=&#x00A0;pi/15$
+&#x00A0;<br />w&#x00A0;:=&#x00A0;for&#x00A0;u&#x00A0;:=&#x00A0;dd&#x00A0;step&#x00A0;dd&#x00A0;until&#x00A0;pi-dd&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;v&#x00A0;:=&#x00A0;0&#x00A0;step&#x00A0;dd&#x00A0;until&#x00A0;2pi&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{sin(u)*cos(v),&#x00A0;sin(u)*sin(v),&#x00A0;cos(u)}$
+&#x00A0;<br />plot&#x00A0;w;
+&#x00A0;<br />
+&#x00A0;<br />%&#x00A0;implicit:&#x00A0;superposition&#x00A0;of&#x00A0;polynomials
+&#x00A0;<br />plot((x^2+y^2-9)*x*y&#x00A0;=&#x00A0;0);
+</div>
+<!--l. 155--><p class="nopar" >
+<!--l. 158--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x150-49000016.27.2"></a>Piecewise-defined functions</h5>
+<!--l. 159--><p class="noindent" >A composed graph can be defined by a rule-based operator. In that case each rule
+must contain a clause which restricts the rule application to numeric arguments,
+e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-960">
+&#x00A0;&#x00A0;&#x00A0;operator&#x00A0;my_step1;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;let&#x00A0;{my_step1(~x)&#x00A0;=&#x003E;&#x00A0;-1&#x00A0;when&#x00A0;numberp&#x00A0;x&#x00A0;and&#x00A0;x&#x003C;-pi/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;my_step1(~x)&#x00A0;=&#x003E;&#x00A0;&#x00A0;1&#x00A0;when&#x00A0;numberp&#x00A0;x&#x00A0;and&#x00A0;x&#x003E;pi/2,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;my_step1(~x)&#x00A0;=&#x003E;&#x00A0;sin&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;when&#x00A0;numberp&#x00A0;x&#x00A0;and&#x00A0;-pi/2&#x003C;=x&#x00A0;and&#x00A0;x&#x003C;=pi/2};
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;plot(my_step2(x));
+</div>
+<!--l. 169--><p class="nopar" > Of course, such a rule may call a procedure:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-961">
+&#x00A0;&#x00A0;&#x00A0;procedure&#x00A0;my_step3(x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;x&#x003C;-1&#x00A0;then&#x00A0;-1&#x00A0;else&#x00A0;if&#x00A0;x&#x003E;1&#x00A0;then&#x00A0;1&#x00A0;else&#x00A0;x;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;operator&#x00A0;my_step2;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;let&#x00A0;my_step2(~x)&#x00A0;=&#x003E;&#x00A0;my_step3(x)&#x00A0;when&#x00A0;numberp&#x00A0;x;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;plot(my_step2(x));
+</div>
+<!--l. 177--><p class="nopar" > The direct use of a produre with a numeric <span 
+class="pcrr8t-x-x-109">if </span>clause is impossible.
+<!--l. 180--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x150-49100016.27.2"></a>Plot options</h5>
+<!--l. 181--><p class="noindent" >The following plot options are supported in the <span 
+class="pcrr8t-x-x-109">plot </span>command:
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">points=&#x003C;integer&#x003E;</span>:  the  number  of  unconditionally  computed  data
+     points; for a grid <span 
+class="pcrr8t-x-x-109">points</span><span 
+class="pcrr8t-x-x-109">^2 </span>grid points are used. The default value is 20.
+     The  value  of  <span 
+class="pcrr8t-x-x-109">points </span>is  used  only  for  variables  for  which  no  individual
+     interval subdivision has been specified in the range specification.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">refine=&#x003C;integer&#x003E;</span>:                              the                              maximum
+     depth of adaptive interval intersections. The default is 8. A value 0 switches
+     any refinement off. Note that a high value may increase the computing time
+     significantly.</li></ul>
+<!--l. 194--><p class="noindent" >
+<h5 class="subsubsectionHead"><a 
+ id="x150-49200016.27.2"></a>Additional options</h5>
+<!--l. 196--><p class="noindent" >The following additional <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>options are supported in the <span 
+class="pcrr8t-x-x-109">plot </span>command:
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">title=name</span>: the title (string) is put at the top of the picture.
+     </li>
+     <li class="itemize">axes labels: <span 
+class="pcrr8t-x-x-109">xlabel=~text1~, ylabel=~text2~</span>, and for surfaces
+     <span 
+class="pcrr8t-x-x-109">zlabel=~text3~</span>. If omitted the axes are labeled by the independent and
+                                                                     
+
+                                                                     
+     dependent variable names from the expression. Note that <span 
+class="pcrr8t-x-x-109">xlabel</span>, <span 
+class="pcrr8t-x-x-109">ylabel</span>, and
+     <span 
+class="pcrr8t-x-x-109">zlabel </span>here are used in the usual sense, <span 
+class="cmmi-10x-x-109">x </span>for the horizontal and <span 
+class="cmmi-10x-x-109">y </span>for the vertical
+     axis in 2-d and <span 
+class="cmmi-10x-x-109">z </span>for the perpendicular axis under 3-d &#8211; these names do not refer to
+     the variable names used in the expressions.
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-962">
+     &#x00A0;plot(1,x,(4*x^2-1)/2,(x*(12*x^2-5))/3,&#x00A0;x=(-1&#x00A0;..&#x00A0;1),
+     &#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ylabel=~L(x,n)~,&#x00A0;title=~Legendre&#x00A0;Polynomials~);
+     &#x00A0;<br />&#x00A0;
+</div>
+     <!--l. 209--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">terminal=name</span>: prepare output for device type <span 
+class="pcrr8t-x-x-109">name</span>. Every installation uses a
+     default terminal as output device; some installations support additional devices
+     such as printers; consult the original <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>documentation or the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span></span>
+     Help for details.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">output=~filename~</span>: redirect the output to a file.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">size=~s_x,s_y~</span>: rescale the graph (not the window) where <span 
+class="cmmi-10x-x-109">s</span><sub><span 
+class="cmmi-8">x</span></sub> and <span 
+class="cmmi-10x-x-109">s</span><sub><span 
+class="cmmi-8">y</span></sub> are
+     scaling factors for the <span 
+class="cmmi-10x-x-109">x</span>- and <span 
+class="cmmi-10x-x-109">y</span>-sizes. Defaults are <span 
+class="cmmi-10x-x-109">s</span><sub><span 
+class="cmmi-8">x</span></sub> <span 
+class="cmr-10x-x-109">= 1</span><span 
+class="cmmi-10x-x-109">,x</span><sub><span 
+class="cmmi-8">z</span></sub> <span 
+class="cmr-10x-x-109">= 1</span>. Note that
+     scaling factors greater than 1 will often cause the picture to be too big for the
+     window.
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-963">
+     plot(1/(x^2+y^2),&#x00A0;x=(0.1&#x00A0;..&#x00A0;5),&#x00A0;y=(0.1&#x00A0;..&#x00A0;5),&#x00A0;size=~0.7,1~);
+</div>
+     <!--l. 221--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">view=~r_x,r_z~</span>: set the viewpoint in 3 dimensions by turning the object
+     around the <span 
+class="cmmi-10x-x-109">x </span>or <span 
+class="cmmi-10x-x-109">z </span>axis; the values are degrees (integers). Defaults are
+     <span 
+class="cmmi-10x-x-109">r</span><sub><span 
+class="cmmi-8">x</span></sub> <span 
+class="cmr-10x-x-109">= 60</span><span 
+class="cmmi-10x-x-109">,r</span><sub><span 
+class="cmmi-8">z</span></sub> <span 
+class="cmr-10x-x-109">= 30</span>.
+                                                                     
+
+                                                                     
+     <div class="verbatim" id="verbatim-964">
+     plot(1/(x^2+y^2),&#x00A0;x=(0.1&#x00A0;..&#x00A0;5),&#x00A0;y=(0.1&#x00A0;..&#x00A0;5),&#x00A0;view=~30,130~);
+</div>
+     <!--l. 227--><p class="nopar" >
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">contour </span>resp. <span 
+class="pcrr8t-x-x-109">nocontour</span>: in 3 dimensions an additional contour map is drawn
+     (default: <span 
+class="pcrr8t-x-x-109">nocontour</span>). Note that <span 
+class="pcrr8t-x-x-109">contour </span>is an option which is executed by
+     <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>by interpolating the precomputed function values. If you want to draw
+     contour lines of a delicate formula, you had better use the contour form of the
+     REDUCE <span 
+class="pcrr8t-x-x-109">plot </span>command.
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">surface </span>resp. <span 
+class="pcrr8t-x-x-109">nosurface</span>: in 3 dimensions the surface is drawn, resp.
+     suppressed (default: <span 
+class="pcrr8t-x-x-109">surface</span>).
+     </li>
+     <li class="itemize"><span 
+class="pcrr8t-x-x-109">hidden3d</span>: hidden line removal in 3 dimensions.</li></ul>
+<!--l. 240--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.3    </span> <a 
+ id="x150-49300016.27.3"></a>Paper output</h4>
+<!--l. 242--><p class="noindent" >The following example works for a PostScript printer. If your printer uses a different
+communication, please find the correct setting for the <span 
+class="pcrr8t-x-x-109">terminal </span>variable in the
+<span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>documentation.
+<!--l. 246--><p class="noindent" >For a PostScript printer, add the options <span 
+class="pcrr8t-x-x-109">terminal=postscript </span>and
+<span 
+class="pcrr8t-x-x-109">output=~filename~ </span>to your plot command, e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-965">
+plot(sin&#x00A0;x,&#x00A0;x=(0&#x00A0;..&#x00A0;10),&#x00A0;terminal=postscript,&#x00A0;output=~sin.ps~);
+</div>
+<!--l. 250--><p class="nopar" >
+<!--l. 253--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.4    </span> <a 
+ id="x150-49400016.27.4"></a>Mesh generation for implicit curves</h4>
+<!--l. 255--><p class="noindent" >The basic mesh for finding an implicitly-given curve, the <span 
+class="cmmi-10x-x-109">x,y </span>plane is subdivided into an
+initial set of triangles. Those triangles which have an explicit zero point or which have
+two points with different signs are refined by subdivision. A further refinement is
+performed for triangles which do not have exactly two zero neighbours because such
+places may represent crossings, bifurcations, turning points or other difficulties. The
+initial subdivision and the refinements are controlled by the option <span 
+class="pcrr8t-x-x-109">points </span>which is
+initially set to 20: the initial grid is refined unconditionally until approximately
+<span 
+class="pcrr8t-x-x-109">points * points </span>equally-distributed points in the <span 
+class="cmmi-10x-x-109">x,y </span>plane have been
+generated.
+<!--l. 266--><p class="noindent" >The final mesh can be visualized in the picture by setting
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-966">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;on&#x00A0;show_grid;
+</div>
+<!--l. 269--><p class="nopar" >
+<!--l. 272--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.5    </span> <a 
+ id="x150-49500016.27.5"></a>Mesh generation for surfaces</h4>
+<!--l. 274--><p class="noindent" >By default the functions are computed at predefined mesh points: the ranges are divided
+by the number associated with the option <span 
+class="pcrr8t-x-x-109">points </span>in both directions.
+<!--l. 278--><p class="noindent" >For two dimensions the given mesh is adaptively smoothed when the curves are too
+coarse, especially if singularities are present. On the other hand refinement can be rather
+time-consuming if used with complicated expressions. You can control it with the option
+<span 
+class="pcrr8t-x-x-109">refine</span>. At singularities the graph is interrupted.
+<!--l. 284--><p class="noindent" >In three dimensions no refinement is possible as <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>supports surfaces only with a
+fixed regular grid. In the case of a singularity the near neighborhood is tested; if a point
+there allows a function evaluation, its clipped value is used instead, otherwise a zero is
+inserted.
+<!--l. 289--><p class="noindent" >When plotting surfaces in three dimensions you have the option of hidden line removal.
+Because of an error in Gnuplot 3.2 the axes cannot be labeled correctly when hidden3d is
+used ; therefore they aren&#8217;t labelled at all. Hidden line removal is not available with point
+lists.
+<!--l. 295--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.6    </span> <a 
+ id="x150-49600016.27.6"></a><span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>operation</h4>
+<a 
+ id="dx150-496001"></a>
+<!--l. 298--><p class="noindent" >The command <span 
+class="pcrr8t-x-x-109">plotreset; </span>deletes the current <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>output window. The next
+call to <span 
+class="pcrr8t-x-x-109">plot </span>will then open a new one.
+<!--l. 301--><p class="noindent" >If <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>is invoked directly by an output pipe (UNIX and Windows), an eventual
+error in the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>data transmission might cause <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>to quit. As REDUCE is
+unable to detect the broken pipe, you have to reset the plot system by calling the
+command <span 
+class="pcrr8t-x-x-109">plotreset; </span>explicitly. Afterwards new graphics output can be
+produced.
+                                                                     
+
+                                                                     
+<!--l. 307--><p class="noindent" >Under Windows 3.1 and Windows NT, <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>has a text and a graph window. If you
+don&#8217;t want to see the text window, iconify it and activate the option <span 
+class="pcrr8t-x-x-109">update</span>
+<span 
+class="pcrr8t-x-x-109">wgnuplot.ini </span>from the graph window system menu - then the present screen layout
+(including the graph window size) will be saved and the text windows will come up
+iconified in future. You can also select some more features there and so tailor the graphic
+output. Before you terminate REDUCE you should terminate the graphic window by
+calling <span 
+class="pcrr8t-x-x-109">plotreset;</span>. If you terminate REDUCE without deleting the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span></span>
+windows, use the command button from the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>text window - it offers an exit
+function.
+<!--l. 318--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.7    </span> <a 
+ id="x150-49700016.27.7"></a>Saving <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>command sequences</h4>
+<a 
+ id="dx150-497001"></a>
+<a 
+ id="dx150-497002"></a>
+<a 
+ id="dx150-497003"></a>
+<a 
+ id="dx150-497004"></a>
+<a 
+ id="dx150-497005"></a>
+<a 
+ id="dx150-497006"></a>
+<!--l. 319--><p class="noindent" >GNUPLOT <a 
+ id="dx150-497007"></a>If you want to use the internal <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>command sequence more than
+once (e.g. for producing a picture for a publication), you may set
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-967">
+on&#x00A0;trplot,&#x00A0;plotkeep;
+</div>
+<!--l. 325--><p class="nopar" > <span 
+class="pcrr8t-x-x-109">trplot </span>causes all <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>commands to be written additionally to the actual
+REDUCE output. Normally the data files are erased after calling <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span></span>, however
+with <span 
+class="pcrr8t-x-x-109">plotkeep </span>on the files are not erased.
+<!--l. 331--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.8    </span> <a 
+ id="x150-49800016.27.8"></a>Direct Call of <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span></span></h4>
+<a 
+ id="dx150-498001"></a>
+<!--l. 334--><p class="noindent" ><span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>has a lot of facilities which are not accessed by the operators and parameters
+described above. Therefore genuine <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>commands can be sent by REDUCE.
+Please consult the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>manual for the available commands and parameters. The
+general syntax for a <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>call inside REDUCE is
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-968">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;gnuplot(&#x003C;cmd&#x003E;,&#x003C;p_1&#x003E;,&#x003C;p_2&#x003E;&#x00A0;...)
+</div>
+<!--l. 340--><p class="nopar" > where <span 
+class="pcrr8t-x-x-109">cmd </span>is a command name and <span 
+class="cmmi-10x-x-109">p</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,p</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmmi-10x-x-109">&#x2026;</span> are the parameters, inside REDUCE
+separated by commas. The parameters are evaluated by REDUCE and then
+transmitted to <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>in <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>syntax. Usually a drawing is built by a
+sequence of commands which are buffered by REDUCE or the operating system.
+For terminating and activating them use the REDUCE command <span 
+class="pcrr8t-x-x-109">plotshow</span>.
+Example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-969">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gnuplot(set,polar);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gnuplot(set,noparametric);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gnuplot(plot,&#x00A0;x*sin&#x00A0;x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;plotshow;
+</div>
+<!--l. 352--><p class="nopar" > In this example the function expression is transferred literally to <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span></span>, while
+REDUCE is responsible for computing the function values when <span 
+class="pcrr8t-x-x-109">plot </span>is called. Note
+that <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>restrictions with respect to variable and function names have to be taken
+into account when using this type of operation. <span 
+class="ptmb8t-x-x-109">Important</span>: String quotes are
+not transferred to the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>executable; if the <span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>syntax needs
+string quotes, you must add doubled stringquotes <span 
+class="ptmri8t-x-x-109">inside </span>the argument string,
+e.g.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-970">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;gnuplot(plot,&#x00A0;~~~mydata~~~,&#x00A0;~using&#x00A0;2:1~);
+</div>
+<!--l. 362--><p class="nopar" >
+<!--l. 365--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.27.9    </span> <a 
+ id="x150-49900016.27.9"></a>Examples</h4>
+<!--l. 367--><p class="noindent" >The following are taken from a collection of sample plots (<span 
+class="pcrr8t-x-x-109">gnuplot.tst</span>) and a
+set of tests for plotting special functions. The pictures are made using the <span 
+class="pcrr8t-x-x-109">qt</span>
+<span 
+class="ptmrc8t-x-x-109">G<span 
+class="small-caps">N</span><span 
+class="small-caps">U</span>P<span 
+class="small-caps">L</span><span 
+class="small-caps">O</span><span 
+class="small-caps">T</span> </span>device and using the menu of the graphics window to export to PDF or
+PNG.
+<!--l. 373--><p class="noindent" >A simple plot for <span 
+class="cmr-10x-x-109">sin</span><span 
+class="cmr-10x-x-109">(1</span><span 
+class="cmmi-10x-x-109">&#x2215;x</span><span 
+class="cmr-10x-x-109">)</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-971">
+plot(sin(1/x),&#x00A0;x=(-1&#x00A0;..&#x00A0;1),&#x00A0;y=(-3&#x00A0;..&#x00A0;3));
+</div>
+<!--l. 376--><p class="nopar" >
+<!--l. 379--><p class="center" ><img 
+src="manual233x.png" alt="PICT" >
+<!--l. 384--><p class="noindent" >Some implicitly-defined curves:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-972">
+plot(x^3&#x00A0;+&#x00A0;y^3&#x00A0;-&#x00A0;3*x*y&#x00A0;=&#x00A0;{0,1,2,3},&#x00A0;x=(-2.5&#x00A0;..&#x00A0;2),&#x00A0;y=(-5&#x00A0;..&#x00A0;5));
+</div>
+<!--l. 387--><p class="nopar" > <img 
+src="manual234x.png" alt="PICT" >
+<!--l. 394--><p class="noindent" >
+                                                                     
+
+                                                                     
+<!--l. 395--><p class="noindent" >A test for hidden surfaces:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-973">
+plot(cos&#x00A0;sqrt(x^2&#x00A0;+&#x00A0;y^2),&#x00A0;x=(-3&#x00A0;..&#x00A0;3),&#x00A0;y=(-3&#x00A0;..&#x00A0;3),&#x00A0;hidden3d);
+</div>
+<!--l. 398--><p class="nopar" >
+<!--l. 400--><p class="center" ><img 
+src="manual235x.png" alt="PICT" >
+<!--l. 405--><p class="noindent" >This may be slow on some machines because of a delicate evaluation context:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-974">
+plot(sinh(x*y)/sinh(2*x*y),&#x00A0;hidden3d);
+</div>
+<!--l. 408--><p class="nopar" >
+<!--l. 410--><p class="center" ><img 
+src="manual236x.png" alt="PICT" >
+<!--l. 415--><p class="noindent" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-975">
+on&#x00A0;rounded;
+&#x00A0;<br />w:=&#x00A0;{for&#x00A0;j:=1&#x00A0;step&#x00A0;0.1&#x00A0;until&#x00A0;20&#x00A0;collect&#x00A0;{1/j*sin&#x00A0;j,&#x00A0;1/j*cos&#x00A0;j,&#x00A0;j},
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;for&#x00A0;j:=1&#x00A0;step&#x00A0;0.1&#x00A0;until&#x00A0;20&#x00A0;collect
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;{(0.1+1/j)*sin&#x00A0;j,&#x00A0;(0.1+1/j)*cos&#x00A0;j,&#x00A0;j}&#x00A0;}$
+&#x00A0;<br />plot&#x00A0;w;
+</div>
+<!--l. 423--><p class="nopar" > <img 
+src="manual237x.png" alt="PICT" >
+<!--l. 429--><p class="noindent" >An example taken from: Cox, Little, O&#8217;Shea, <span 
+class="ptmri8t-x-x-109">Ideals, Varieties and Algorithms</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-976">
+plot(point(3u+3u*v^2-u^3,&#x00A0;3v+3u^2*v-v^3,&#x00A0;3u^2-3v^2),&#x00A0;hidden3d,
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;title=~Enneper&#x00A0;Surface~);
+</div>
+<!--l. 433--><p class="nopar" >
+<!--l. 435--><p class="center" ><img 
+src="manual238x.png" alt="PICT" >
+<!--l. 440--><p class="noindent" >
+                                                                     
+
+                                                                     
+<!--l. 442--><p class="noindent" >The following examples use the <span 
+class="pcrr8t-x-x-109">specfn </span>package to draw a collection of Chebyshev T
+polynomials and Bessel Y functions. The special function package has to be loaded
+explicitely to make the operator ChebyshevT and BesselY available.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-977">
+load_package&#x00A0;specfn;
+&#x00A0;<br />plot(chebyshevt(1,x),&#x00A0;chebyshevt(2,x),&#x00A0;chebyshevt(3,x),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;chebyshevt(4,x),&#x00A0;chebyshevt(5,x),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;x=(-1&#x00A0;..&#x00A0;1),&#x00A0;title=~Chebyshev&#x00A0;t&#x00A0;Polynomials~);
+</div>
+<!--l. 453--><p class="nopar" >
+<!--l. 455--><p class="center" ><img 
+src="manual239x.png" alt="PICT" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-978">
+plot(bessely(0,x),&#x00A0;bessely(1,x),&#x00A0;bessely(2,x),&#x00A0;x=(0.1&#x00A0;..&#x00A0;10),
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;y=(-1&#x00A0;..&#x00A0;1),&#x00A0;title=~Bessel&#x00A0;functions&#x00A0;of&#x00A0;2nd&#x00A0;kind~);
+</div>
+<!--l. 463--><p class="nopar" >
+<!--l. 465--><p class="center" ><img 
+src="manual240x.png" alt="PICT" >
+<!--l. 486--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 488--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse118.html" >Up</a></td><td class="clinks"><a 
+href="manualse119.html" >Next</a></td><td class="clinks"><a 
+href="manualse117.html" >Prev</a></td><td class="clinks"><a 
+href="manualse117.html#tailmanualse117.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse118.html" >Front</a></td></tr></table><a 
+ id="tailmanualse118.html"></a>   
+</body></html> 

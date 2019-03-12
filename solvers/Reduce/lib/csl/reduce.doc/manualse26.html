@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DEFINE Command</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch6.html#manualse26.html" >Up</a></td><td class="clinks"><a 
+href="manualse25.html" >Prev</a></td><td class="clinks"><a 
+href="manualse25.html#tailmanualse25.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse26.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">6.6    </span> <a 
+ id="x36-520006.6"></a>DEFINE Command</h3>
+<!--l. 159--><p class="noindent" ><a 
+ id="command:DEFINE"></a>
+<a 
+ id="dx36-52001"></a>
+<a 
+ id="dx36-52002"></a>
+<!--l. 162--><p class="noindent" >The command <span 
+class="pcrr8t-x-x-109">DEFINE </span>allows a user to supply a new name for any identifier or replace
+it by any well-formed expression. Its argument is a list of expressions of the
+form
+  <div class="syntax">
+  <div class="array"> <table id="TBL-11" class="array" 
+cellpadding="0" cellspacing="0"  
+><colgroup id="TBL-11-1g"><col 
+id="TBL-11-1"><col 
+id="TBL-11-2"><col 
+id="TBL-11-3"></colgroup><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">identifier</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"><span 
+class="pcrr8t-x-x-109">=</span></div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">number</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">identifier</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">operator</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span></div></td>
+</tr><tr  
+ style="vertical-align:baseline;"><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11">        </div></td><td  style="white-space:nowrap; text-align:center;" 
+><div class="td11"> </div></td><td  style="white-space:nowrap; text-align:left;" 
+><div class="td11"><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">reserved word</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x2223;</span><span style="margin-left:0.3em" class="thinspace"></span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>  </div></td></tr></table>              </div></div>
+<!--l. 170--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-77">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;define&#x00A0;be==,x=y+z;
+</div>
+<!--l. 173--><p class="nopar" > means that <span 
+class="pcrr8t-x-x-109">BE </span>will be interpreted as an equal sign, and <span 
+class="pcrr8t-x-x-109">X </span>as the expression <span 
+class="pcrr8t-x-x-109">y+z </span>from
+then on. This renaming is done at parse time, and therefore takes precedence over any
+other replacement declared for the same identifier. It stays in effect until the end of the
+REDUCE run.
+<!--l. 180--><p class="noindent" >The identifiers <span 
+class="pcrr8t-x-x-109">ALGEBRAIC </span>and <span 
+class="pcrr8t-x-x-109">SYMBOLIC </span>have properties which prevent <span 
+class="pcrr8t-x-x-109">DEFINE</span>
+from being used on them. To define <span 
+class="pcrr8t-x-x-109">ALG </span>to be a synonym for <span 
+class="pcrr8t-x-x-109">ALGEBRAIC</span>, use the more
+complicated construction
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-78">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;put(&#8217;alg,&#8217;newnam,&#8217;algebraic);
+</div>
+<!--l. 186--><p class="nopar" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch6.html#manualse26.html" >Up</a></td><td class="clinks"><a 
+href="manualse25.html" >Prev</a></td><td class="clinks"><a 
+href="manualse25.html#tailmanualse25.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse26.html" >Front</a></td></tr></table><a 
+ id="tailmanualse26.html"></a>  
+</body></html> 

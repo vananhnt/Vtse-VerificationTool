@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The Standard Lisp Compiler</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch19.html#manualse187.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse188.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="#tailmanualse187.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">19.1    </span></span> <a 
+ id="x248-104000019.1"></a><span 
+class="ptmr8t-x-x-120">The Standard Lisp Compiler</span></h3>
+<a 
+ id="dx248-1040001"></a>
+<!--l. 9--><p class="noindent" ><a 
+ id="switch:COMP"></a>
+<!--l. 11--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Many versions of REDUCE include a Standard Lisp compiler that is</span>
+<span 
+class="ptmr8t-x-x-120">automatically loaded on demand. You should check your system specific user</span>
+<span 
+class="ptmr8t-x-x-120">guide to make sure you have such a compiler. To make the compiler active, the</span>
+<span 
+class="ptmr8t-x-x-120">switch </span><span 
+class="pcrr8t-x-x-120">COMP</span><a 
+ id="dx248-1040002"></a><a 
+ id="dx248-1040003"></a><a 
+ id="dx248-1040004"></a> <span 
+class="ptmr8t-x-x-120">should be turned on. Any further definitions input after this will be</span>
+<span 
+class="ptmr8t-x-x-120">compiled automatically. If the compiler used is a derivative version of the</span>
+<span 
+class="ptmr8t-x-x-120">original Griss-Hearn compiler, (M. L. Griss and A. C. Hearn, &#8220;A Portable LISP</span>
+<span 
+class="ptmr8t-x-x-120">Compiler", SOFTWARE &#8212; Practice and Experience 11 (1981) 541-605),</span>
+<span 
+class="ptmr8t-x-x-120">there are other switches that might also be used in this regard. However,</span>
+<span 
+class="ptmr8t-x-x-120">these additional switches are not supported in all compilers. They are as</span>
+<span 
+class="ptmr8t-x-x-120">follows:</span>
+     <dl class="description"><dt class="description">
+<span 
+class="pcrr8t-x-x-120">PLAP</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">If ON, causes the printing of the portable macros produced by the</span>
+     <span 
+class="ptmr8t-x-x-120">compiler;</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">PGWD</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">If   ON,   causes   the   printing   of   the   actual   assembly   language</span>
+                                                                     
+
+                                                                     
+     <span 
+class="ptmr8t-x-x-120">instructions generated from the macros;</span>
+     </dd><dt class="description">
+<span 
+class="pcrr8t-x-x-120">PWRDS</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">If ON, causes a statistic message of the form </span><br 
+class="newline" /><span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="pcrro8t-x-x-120">function</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="pcrr8t-x-x-120">COMPILED,</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="pcrro8t-x-x-120">words</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="pcrr8t-x-x-120">WORDS,</span> <span 
+class="cmsy-10x-x-120">&#x27E8;</span><span 
+class="pcrro8t-x-x-120">words</span><span 
+class="cmsy-10x-x-120">&#x27E9;</span> <span 
+class="pcrr8t-x-x-120">LEFT</span>
+     <br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">to  be  printed.  The  first  number  is  the  number  of  words  of  binary</span>
+     <span 
+class="ptmr8t-x-x-120">program space the compiled function took, and the second number the</span>
+     <span 
+class="ptmr8t-x-x-120">number of words left unused in binary program space.</span></dd></dl>
+                                                                     
+
+                                                                     
+<!--l. 40--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch19.html#manualse187.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse188.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse187.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse187.html"></a>  
+</body></html> 

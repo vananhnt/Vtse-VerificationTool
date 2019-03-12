@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>RSOLVE:
+Rational/integer polynomial solvers</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse148.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse149.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse147.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse147.html#tailmanualse147.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="#tailmanualse148.html"><span 
+class="ptmr8t-x-x-120">Tail</span></a></td></tr></table><h3 class="sectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.57    </span></span> <a 
+ id="x200-80100016.57"></a><span 
+class="ptmr8t-x-x-120">RSOLVE: </span><br 
+class="newline" /><span 
+class="ptmr8t-x-x-120">Rational/integer polynomial solvers</span></h3>
+<a 
+ id="dx200-801001"></a>
+<a 
+ id="dx200-801002"></a>
+<!--l. 1001--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package provides operators that compute the exact rational zeros of a single</span>
+<span 
+class="ptmr8t-x-x-120">univariate polynomial using fast modular methods. The algorithm used is that</span>
+<span 
+class="ptmr8t-x-x-120">described by R. Loos (1983): Computing rational zeros of integral polynomials</span>
+<span 
+class="ptmr8t-x-x-120">by </span><span 
+class="cmmi-12">p</span><span 
+class="ptmr8t-x-x-120">-adic expansion, </span><span 
+class="ptmri8t-x-x-120">SIAM J. Computing</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="ptmb8t-x-x-120">12</span><span 
+class="ptmr8t-x-x-120">, 286&#8211;293.</span>
+<!--l. 1007--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Author: Francis J. Wright.</span>
+<!--l. 3--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package provides the operators </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">r/i_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">that compute respectively the</span>
+<span 
+class="ptmr8t-x-x-120">exact rational or integer zeros of a single univariate polynomial using fast</span>
+<span 
+class="ptmr8t-x-x-120">modular methods.</span>
+<!--l. 9--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.57.1    </span></span> <a 
+ id="x200-80200016.57.1"></a><span 
+class="ptmr8t-x-x-120">Introduction</span></h4>
+<a 
+ id="dx200-802001"></a>
+<a 
+ id="dx200-802002"></a>
+<!--l. 12--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">This package provides operators that compute the exact rational zeros of a single</span>
+<span 
+class="ptmr8t-x-x-120">univariate polynomial using fast modular methods. The algorithm used is</span>
+<span 
+class="ptmr8t-x-x-120">that described by R. Loos (1983): Computing rational zeros of integral</span>
+<span 
+class="ptmr8t-x-x-120">polynomials by </span><span 
+class="cmmi-12">p</span><span 
+class="ptmr8t-x-x-120">-adic expansion, </span><span 
+class="ptmri8t-x-x-120">SIAM J. Computing</span><span 
+class="ptmr8t-x-x-120">, </span><span 
+class="ptmb8t-x-x-120">12</span><span 
+class="ptmr8t-x-x-120">, 286&#8211;293. The</span>
+<span 
+class="ptmr8t-x-x-120">operator </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">r_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">computes all rational zeros whereas the operator</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">i_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">computes only integer zeros in a way that is slightly more</span>
+<span 
+class="ptmr8t-x-x-120">efficient than extracting them from the rational zeros. The </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">r_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">and</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">i_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">interfaces are almost identical, and are intended to be completely</span>
+<span 
+class="ptmr8t-x-x-120">compatible with that of the general </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">solve</span></span></span> <span 
+class="ptmr8t-x-x-120">operator, although </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">r_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">and</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">i_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">give more convenient output when only rational or integer zeros</span>
+<span 
+class="ptmr8t-x-x-120">respectively are required. The current implementation appears to be faster than</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">solve</span></span></span> <span 
+class="ptmr8t-x-x-120">by a factor that depends on the example, but is typically up to about</span>
+<span 
+class="ptmr8t-x-x-120">2.</span>
+<!--l. 27--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">I plan to extend this package to compute Gaussian integer and rational zeros and</span>
+                                                                     
+
+                                                                     
+<span 
+class="ptmr8t-x-x-120">zeros of polynomial systems.</span>
+<!--l. 31--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.57.2    </span></span> <a 
+ id="x200-80300016.57.2"></a><span 
+class="ptmr8t-x-x-120">The user interface</span></h4>
+<!--l. 33--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The first argument is required and must simplify to either a univariate polynomial</span>
+<span 
+class="ptmr8t-x-x-120">expression or equation with integer, rational or rounded coefficients. Symbolic</span>
+<span 
+class="ptmr8t-x-x-120">coefficients are not allowed (and currently complex coefficients are not allowed</span>
+<span 
+class="ptmr8t-x-x-120">either.) The argument is simplified to a quotient of integer polynomials and the</span>
+<span 
+class="ptmr8t-x-x-120">denominator is silently ignored.</span>
+<!--l. 40--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Subsequent arguments are optional. If the polynomial variable is to be specified</span>
+<span 
+class="ptmr8t-x-x-120">then it must be the first optional argument, and if the first optional argument is</span>
+<span 
+class="ptmr8t-x-x-120">not a valid option (see below) then it is (mis-)interpreted as the polynomial</span>
+<span 
+class="ptmr8t-x-x-120">variable. However, since the variable in a non-constant univariate polynomial can</span>
+<span 
+class="ptmr8t-x-x-120">be deduced from the polynomial it is unnecessary to specify it separately, except</span>
+<span 
+class="ptmr8t-x-x-120">in the degenerate case that the first argument simplifies to either 0 or </span><span 
+class="cmr-12">0 = 0</span><span 
+class="ptmr8t-x-x-120">. In</span>
+<span 
+class="ptmr8t-x-x-120">this case the result is returned by </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">i_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">in terms of the operator</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">arbint</span></span></span> <span 
+class="ptmr8t-x-x-120">and by </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">r_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">in terms of the (new) analogous operator</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">arbrat</span></span></span><span 
+class="ptmr8t-x-x-120">. The operator </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">i_solve</span></span></span> <span 
+class="ptmr8t-x-x-120">will generally run slightly faster than</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">r_solve</span></span></span><span 
+class="ptmr8t-x-x-120">.</span>
+<!--l. 52--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The (rational or integer) zeros of the first argument are returned as a list</span>
+<span 
+class="ptmr8t-x-x-120">and the default output format is the same as that used by </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">solve</span></span></span><span 
+class="ptmr8t-x-x-120">. Each</span>
+<span 
+class="ptmr8t-x-x-120">distinct zero is returned in the form of an equation with the variable on</span>
+<span 
+class="ptmr8t-x-x-120">the left and the multiplicities of the zeros are assigned to the variable</span>
+<span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">root_multiplicities</span></span></span> <span 
+class="ptmr8t-x-x-120">as a list. However, if the switch </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">multiplicities</span></span></span> <span 
+class="ptmr8t-x-x-120">is</span>
+<span 
+class="ptmr8t-x-x-120">turned on then each zero is explicitly included in the solution list the</span>
+<span 
+class="ptmr8t-x-x-120">appropriate number of times (and </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">root_multiplicities</span></span></span> <span 
+class="ptmr8t-x-x-120">has no</span>
+<span 
+class="ptmr8t-x-x-120">value).</span>
+<!--l. 62--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">Optional keyword arguments acting as local switches allow other output formats.</span>
+<span 
+class="ptmr8t-x-x-120">They have the following meanings:</span>
+     <dl class="description"><dt class="description">
+<span 
+class="pcrb8t-x-x-120">separate</span><span 
+class="ptmb8t-x-x-120">:</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">assign    the    multiplicity    list    to    the    global    variable</span>
+     <span 
+class="pcrr8t-x-x-120">root_multiplicities </span><span 
+class="ptmr8t-x-x-120">(the default);</span>
+     </dd><dt class="description">
+<span 
+class="pcrb8t-x-x-120">expand </span><span 
+class="ptmb8t-x-x-120">or </span><span 
+class="pcrb8t-x-x-120">multiplicities</span><span 
+class="ptmb8t-x-x-120">:</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">expand   the   solution   list   to   include</span>
+     <span 
+class="ptmr8t-x-x-120">multiple zeros multiple times (the default if the </span><span 
+class="pcrr8t-x-x-120">|</span><span 
+class="ptmr8t-x-x-120">multiplicities| switch</span>
+     <span 
+class="ptmr8t-x-x-120">is on);</span>
+                                                                     
+
+                                                                     
+     </dd><dt class="description">
+<span 
+class="pcrb8t-x-x-120">together</span><span 
+class="ptmb8t-x-x-120">:</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">return  each  solution  as  a  list  whose  second  element  is  the</span>
+     <span 
+class="ptmr8t-x-x-120">multiplicity;</span>
+     </dd><dt class="description">
+<span 
+class="pcrb8t-x-x-120">nomul</span><span 
+class="ptmb8t-x-x-120">:</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">do not compute multiplicities (thereby saving some time);</span>
+     </dd><dt class="description">
+<span 
+class="pcrb8t-x-x-120">noeqs</span><span 
+class="ptmb8t-x-x-120">:</span> </dt><dd 
+class="description"><span 
+class="ptmr8t-x-x-120">do not return univariate zeros as equations but just as values.</span></dd></dl>
+<!--l. 80--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.57.3    </span></span> <a 
+ id="x200-80400016.57.3"></a><span 
+class="ptmr8t-x-x-120">Examples</span></h4>
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1157">
+r_solve((9x^2&#x00A0;-&#x00A0;16)*(x^2&#x00A0;-&#x00A0;9),&#x00A0;x);
+</div>
+<!--l. 84--><p class="nopar" >
+<center class="math-display" >
+<img 
+src="manual521x.png" alt="{                              }
+  x = --4,x = 3, x = - 3,x = 4-
+       3                     3
+" class="math-display" ></center>
+<!--l. 87--><p class="nopar" >
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-1158">
+i_solve((9x^2&#x00A0;-&#x00A0;16)*(x^2&#x00A0;-&#x00A0;9),&#x00A0;x);
+</div>
+<!--l. 90--><p class="nopar" >
+<center class="math-display" >
+<img 
+src="manual522x.png" alt="{x =  3,x = - 3}
+" class="math-display" ></center>
+<!--l. 93--><p class="nopar" > <span 
+class="ptmr8t-x-x-120">See the test/demonstration file </span><span class="obeylines-h"><span class="verb"><span 
+class="pcrr8t-x-x-120">rsolve.tst</span></span></span> <span 
+class="ptmr8t-x-x-120">for more examples.</span>
+<!--l. 97--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark"><span 
+class="ptmr8t-x-x-120">16.57.4    </span></span> <a 
+ id="x200-80500016.57.4"></a><span 
+class="ptmr8t-x-x-120">Tracing</span></h4>
+<!--l. 99--><p class="noindent" ><span 
+class="ptmr8t-x-x-120">The switch </span><span 
+class="pcrr8t-x-x-120">trsolve</span><a 
+ id="dx200-805001"></a><a 
+ id="dx200-805002"></a><a 
+ id="dx200-805003"></a> <span 
+class="ptmr8t-x-x-120">turns on tracing of the algorithm. It is off by default.</span>
+<!--l. 1011--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 1013--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse148.html" ><span 
+class="ptmr8t-x-x-120">Up</span></a></td><td class="clinks"><a 
+href="manualse149.html" ><span 
+class="ptmr8t-x-x-120">Next</span></a></td><td class="clinks"><a 
+href="manualse147.html" ><span 
+class="ptmr8t-x-x-120">Prev</span></a></td><td class="clinks"><a 
+href="manualse147.html#tailmanualse147.html" ><span 
+class="ptmr8t-x-x-120">PrevTail</span></a></td><td class="clinks"><a 
+href="manualse148.html" ><span 
+class="ptmr8t-x-x-120">Front</span></a></td></tr></table><a 
+ id="tailmanualse148.html"></a>   
+</body></html> 

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>INTERPOL operator</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse64.html" >Up</a></td><td class="clinks"><a 
+href="manualse65.html" >Next</a></td><td class="clinks"><a 
+href="manualse63.html" >Prev</a></td><td class="clinks"><a 
+href="manualse63.html#tailmanualse63.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse64.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">9.10    </span> <a 
+ id="x78-1410009.10"></a>INTERPOL operator</h3>
+<a 
+ id="dx78-141001"></a>
+<!--l. 627--><p class="noindent" ><a 
+ id="operator:INTERPOL"></a>
+<!--l. 629--><p class="noindent" >Syntax:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">INTERPOL(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">values</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">variable</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">,</span><span 
+class="cmmi-10x-x-109">meta</span><span 
+class="cmmi-10x-x-109">points</span><span 
+class="pcrr8t-x-x-109">);</span></div>
+<!--l. 634--><p class="noindent" >where <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">values</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> and <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">points</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> are lists of equal length and <span 
+class="pcrr8t-x-x-109">&#x003C;variable&#x003E; </span>is an algebraic
+expression (preferably a kernel).
+<!--l. 637--><p class="noindent" ><span 
+class="pcrr8t-x-x-109">INTERPOL </span>generates an interpolation polynomial <span 
+class="ptmri8t-x-x-109">f  </span>in the given variable of degree
+<span 
+class="pcrr8t-x-x-109">length</span>(<span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">values</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span>)-1. The unique polynomial <span 
+class="ptmri8t-x-x-109">f  </span>is defined by the property that for
+corresponding elements <span 
+class="ptmri8t-x-x-109">v </span>of <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">values</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> and <span 
+class="ptmri8t-x-x-109">p </span>of <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">points</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> the relation <span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">p</span><span 
+class="cmr-10x-x-109">) = </span><span 
+class="cmmi-10x-x-109">v</span>
+holds.
+<!--l. 643--><p class="noindent" >The Aitken-Neville interpolation algorithm is used which guarantees a stable result even
+with rounded numbers and an ill-conditioned problem.
+                                                                     
+
+                                                                     
+<!--l. 646--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch9.html#manualse64.html" >Up</a></td><td class="clinks"><a 
+href="manualse65.html" >Next</a></td><td class="clinks"><a 
+href="manualse63.html" >Prev</a></td><td class="clinks"><a 
+href="manualse63.html#tailmanualse63.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse64.html" >Front</a></td></tr></table><a 
+ id="tailmanualse64.html"></a>  
+</body></html> 

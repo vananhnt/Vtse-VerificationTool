@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DFPART: Derivatives of generic functions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse111.html" >Up</a></td><td class="clinks"><a 
+href="manualse112.html" >Next</a></td><td class="clinks"><a 
+href="manualse110.html" >Prev</a></td><td class="clinks"><a 
+href="manualse110.html#tailmanualse110.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse111.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">16.20    </span> <a 
+ id="x143-41300016.20"></a>DFPART: Derivatives of generic functions</h3>
+<a 
+ id="dx143-413001"></a>
+<a 
+ id="dx143-413002"></a>
+<!--l. 365--><p class="noindent" >This package supports computations with total and partial derivatives of formal function
+objects. Such computations can be useful in the context of differential equations or power
+series expansions.
+<!--l. 369--><p class="noindent" >Author: Herbert Melenk.
+<a 
+ id="dx143-413003"></a>
+<a 
+ id="dx143-413004"></a>
+<a 
+ id="dx143-413005"></a>
+<!--l. 5--><p class="noindent" >The package <span 
+class="pcrr8t-x-x-109">DFPART </span>supports computations with total and partial derivatives of formal
+function objects. Such computations can be useful in the context of differential equations
+or power series expansions.
+<!--l. 10--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.20.1    </span> <a 
+ id="x143-41400016.20.1"></a>Generic Functions</h4>
+<a 
+ id="dx143-414001"></a>
+<!--l. 13--><p class="noindent" >A generic function is a symbol which represents a mathematical function. The
+minimal information about a generic function function is the number of its
+arguments. In order to facilitate the programming and for a better readable output this
+package assumes that the arguments of a generic function have default names such
+as <span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x,y</span><span 
+class="cmr-10x-x-109">)</span>,<span 
+class="cmmi-10x-x-109">q</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">rho,phi</span><span 
+class="cmr-10x-x-109">)</span>. A generic function is declared by prototype form in a
+statement
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">GENERIC_FUNCTION</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">fname</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">arg</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">arg</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">&#x27E9;</span><img 
+src="manual207x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">arg</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">);</span></div>
+<!--l. 24--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">fname </span>is the (new) name of a function and <span 
+class="cmmi-10x-x-109">arg</span><sub><span 
+class="cmmi-8">i</span></sub> are symbols for its
+formal arguments. In the following <span 
+class="cmmi-10x-x-109">fname </span>is referred to as &#8220;generic function",
+<span 
+class="cmmi-10x-x-109">arg</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,arg</span><sub><span 
+class="cmr-8">2</span></sub><img 
+src="manual208x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmmi-10x-x-109">arg</span><sub><span 
+class="cmmi-8">n</span></sub> as &#8220;generic arguments" and <span 
+class="cmmi-10x-x-109">fname</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">arg</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmmi-10x-x-109">,arg</span><sub><span 
+class="cmr-8">2</span></sub><img 
+src="manual209x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmmi-10x-x-109">arg</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">) </span>as &#8220;generic
+form". Examples:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-844">
+&#x00A0;&#x00A0;&#x00A0;generic_function&#x00A0;f(x,y);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;generic_function&#x00A0;g(z);
+</div>
+<!--l. 35--><p class="nopar" >
+<!--l. 38--><p class="noindent" >After this declaration REDUCE knows that
+     <ul class="itemize1">
+     <li class="itemize">there are formal partial derivatives <img 
+src="manual210x.png" alt="&#x2202;f
+&#x2202;x"  class="frac" align="middle">, <img 
+src="manual211x.png" alt="&#x2202;f
+-&#x2202;y"  class="frac" align="middle"> <img 
+src="manual212x.png" alt="&#x2202;g
+&#x2202;z"  class="frac" align="middle"> and higher ones, while partial
+     derivatives of <span 
+class="cmmi-10x-x-109">f </span>and <span 
+class="cmmi-10x-x-109">g </span>with respect to other variables are assumed as zero,
+     </li>
+     <li class="itemize">expressions of the type <span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">()</span>, <span 
+class="cmmi-10x-x-109">g</span><span 
+class="cmr-10x-x-109">() </span>are abbreviations for <span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x,y</span><span 
+class="cmr-10x-x-109">)</span>, <span 
+class="cmmi-10x-x-109">g</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">z</span><span 
+class="cmr-10x-x-109">)</span>,
+     </li>
+     <li class="itemize">expressions of the type <span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">u,v</span><span 
+class="cmr-10x-x-109">) </span>are abbreviations for<br 
+class="newline" /><span 
+class="cmmi-10x-x-109">sub</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">u,y </span><span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">v,f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x,y</span><span 
+class="cmr-10x-x-109">))</span>
+     </li>
+     <li class="itemize">a total derivative <img 
+src="manual213x.png" alt="df(udw,v)"  class="frac" align="middle"> has to be computed as <img 
+src="manual214x.png" alt="&#x2202;&#x2202;fx"  class="frac" align="middle"><img 
+src="manual215x.png" alt=" dduw"  class="frac" align="middle"> <span 
+class="cmr-10x-x-109">+</span> <img 
+src="manual216x.png" alt="&#x2202;&#x2202;fy"  class="frac" align="middle"><img 
+src="manual217x.png" alt="ddvw-"  class="frac" align="middle"></li></ul>
+<!--l. 53--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.20.2    </span> <a 
+ id="x143-41500016.20.2"></a>Partial Derivatives</h4>
+<a 
+ id="dx143-415001"></a>
+<!--l. 56--><p class="noindent" >The operator <span 
+class="pcrr8t-x-x-109">DFP </span>represents a partial derivative:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">DFP(</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">expr</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">dfarg</span><sub><span 
+class="cmr-8">1</span></sub><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="cmmi-10x-x-109">,</span><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">dfarg</span><sub><span 
+class="cmr-8">2</span></sub><span 
+class="cmsy-10x-x-109">&#x27E9;</span><img 
+src="manual218x.png" alt="&#x22C5;&#x22C5;&#x22C5;"  class="@cdots" ><span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">dfarg</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmsy-10x-x-109">&#x27E9;</span><span 
+class="pcrr8t-x-x-109">);</span></div>
+<!--l. 60--><p class="noindent" >where <span 
+class="cmmi-10x-x-109">expr </span>is a function expression and <span 
+class="cmmi-10x-x-109">dfarg</span><sub><span 
+class="cmmi-8">i</span></sub> are the differentiation variables.
+Examples:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-845">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;dfp(f(),{x,y});
+</div>
+<!--l. 66--><p class="nopar" > means <img 
+src="manual219x.png" alt="&#x2202;2f-
+&#x2202;x&#x2202;y"  class="frac" align="middle"> and
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-846">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;dfp(f(u,v),{x,y});
+</div>
+<!--l. 70--><p class="nopar" > stands for <img 
+src="manual220x.png" alt="&#x2202;2f-
+&#x2202;x&#x2202;y"  class="frac" align="middle"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">u,v</span><span 
+class="cmr-10x-x-109">)</span>. For compatibility with the <span 
+class="cmmi-10x-x-109">DF </span>operator the differentiation
+variables need not be entered in list form; instead the syntax of <span 
+class="pcrr8t-x-x-109">DF </span>can be used, where
+the function expression is followed by the differentiation variables, eventually with
+repetition numbers. Such forms are interenally converted to the above form with a list as
+second parameter.
+<!--l. 79--><p class="noindent" >The expression <span 
+class="cmmi-10x-x-109">expr </span>can be a generic function with or without arguments, or an
+arithmetic expression built from generic functions and other algebraic parts. In the
+second case the standard differentiation rules are applied in order to reduce each
+derivative expressions to a minimal form.
+<!--l. 86--><p class="noindent" >When the switch <span 
+class="pcrr8t-x-x-109">NAT </span>is on partial derivatives of generic functions are printed
+in standard index notation, that is <span 
+class="cmmi-10x-x-109">f</span><sub><span 
+class="cmmi-8">xy</span></sub> for <img 
+src="manual221x.png" alt=" 2
+&#x2202;&#x2202;xf&#x2202;y-"  class="frac" align="middle"> and <span 
+class="cmmi-10x-x-109">f</span><sub><span 
+class="cmmi-8">xy</span></sub><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">u,v</span><span 
+class="cmr-10x-x-109">) </span>for <img 
+src="manual222x.png" alt="  2
+&#x2202;&#x2202;x&#x2202;fy"  class="frac" align="middle"><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">u,v</span><span 
+class="cmr-10x-x-109">)</span>.
+Therefore single characters should be used for the arguments whenever possible.
+Examples:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-847">
+&#x00A0;<br />&#x00A0;&#x00A0;generic_function&#x00A0;f(x,y);
+&#x00A0;<br />&#x00A0;&#x00A0;generic_function&#x00A0;g(y);
+&#x00A0;<br />&#x00A0;&#x00A0;dfp(f(),x,2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;dfp(f()*g(),x,2);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F&#x00A0;&#x00A0;*G()
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;dfp(f()*g(),x,y);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F&#x00A0;&#x00A0;*G()&#x00A0;+&#x00A0;F&#x00A0;*G
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XY&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;Y
+&#x00A0;<br />
+</div>
+<!--l. 112--><p class="nopar" >
+<!--l. 114--><p class="noindent" >The difference between partial and total derivatives is illustrated by the following
+example:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-848">
+&#x00A0;&#x00A0;generic_function&#x00A0;h(x);
+&#x00A0;<br />&#x00A0;&#x00A0;dfp(f(x,h(x))*g(h(x)),x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F&#x00A0;(X,H(X))*G(H(X))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;X
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;df(f(x,h(x))*g(h(x)),x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F&#x00A0;(X,H(X))*G(H(X))&#x00A0;+&#x00A0;F&#x00A0;(X,H(X))*H&#x00A0;(X)*G(H(X))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;+&#x00A0;G&#x00A0;(H(X))*H&#x00A0;(X)*F(X,H(X))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X
+</div>
+<!--l. 131--><p class="nopar" >
+<!--l. 133--><p class="noindent" >Cooperation of partial derivatives and Taylor series under a differential side relation
+<img 
+src="manual223x.png" alt="ddqx"  class="frac" align="middle"> <span 
+class="cmr-10x-x-109">= </span><span 
+class="cmmi-10x-x-109">f</span><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x,q</span><span 
+class="cmr-10x-x-109">)</span>:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-849">
+&#x00A0;&#x00A0;load_package&#x00A0;taylor;
+&#x00A0;<br />&#x00A0;&#x00A0;operator&#x00A0;q;
+&#x00A0;<br />&#x00A0;&#x00A0;let&#x00A0;df(q(~x),x)&#x00A0;=&#x003E;&#x00A0;f(x,q(x));
+&#x00A0;<br />&#x00A0;&#x00A0;taylor(q(x0+h),h,0,3);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;F&#x00A0;(X0,Q(X0))&#x00A0;+&#x00A0;F&#x00A0;(X0,Q(X0))*F(X0,Q(X0))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />Q(X0)&#x00A0;+&#x00A0;F(X0,Q(X0))*H&#x00A0;+&#x00A0;-----------------------------------------*H
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />
+&#x00A0;<br />+&#x00A0;(F&#x00A0;&#x00A0;(X0,Q(X0))&#x00A0;+&#x00A0;F&#x00A0;&#x00A0;(X0,Q(X0))*F(X0,Q(X0))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;XX&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;XY
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;F&#x00A0;(X0,Q(X0))*F&#x00A0;(X0,Q(X0))&#x00A0;+&#x00A0;F&#x00A0;&#x00A0;(X0,Q(X0))*F(X0,Q(X0))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;X&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;YX
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;+&#x00A0;F&#x00A0;&#x00A0;(X0,Q(X0))*F(X0,Q(X0))&#x00A0;&#x00A0;+&#x00A0;F&#x00A0;(X0,Q(X0))&#x00A0;*F(X0,Q(X0)))/6*H
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;YY&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Y
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;4
+&#x00A0;<br />&#x00A0;+&#x00A0;O(H&#x00A0;)
+&#x00A0;<br />
+</div>
+<!--l. 160--><p class="nopar" >
+<!--l. 162--><p class="noindent" >Normally partial differentials are assumed as non-commutative
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-850">
+&#x00A0;&#x00A0;dfp(f(),x,y)-dfp(f(),y,x);
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F&#x00A0;&#x00A0;&#x00A0;-&#x00A0;F
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XY&#x00A0;&#x00A0;&#x00A0;&#x00A0;YX
+</div>
+<!--l. 169--><p class="nopar" >
+<!--l. 171--><p class="noindent" >However, a generic function can be declared to have globally interchangeable partial
+derivatives using the declaration <span 
+class="pcrr8t-x-x-109">DFP_COMMUTE </span>which takes the name of a
+generic function or a generic function form as argument. For such a function
+differentiation variables are rearranged corresponding to the sequence of the generic
+variables.
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-851">
+&#x00A0;&#x00A0;generic_function&#x00A0;q(x,y);
+&#x00A0;<br />&#x00A0;&#x00A0;dfp_commute&#x00A0;q(x,y);
+&#x00A0;<br />&#x00A0;&#x00A0;dfp(q(),{x,y,y})&#x00A0;+&#x00A0;dfp(q(),{y,x,y})&#x00A0;+&#x00A0;dfp(q(),{y,y,x});
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;3*Q
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;XYY
+</div>
+<!--l. 185--><p class="nopar" >
+<!--l. 187--><p class="noindent" >If only a part of the derivatives commute, this has to be declared using the standard
+REDUCE rule mechanism. Please note that then the derivative variables must be written
+as list.
+<!--l. 192--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">16.20.3    </span> <a 
+ id="x143-41600016.20.3"></a>Substitutions</h4>
+<!--l. 194--><p class="noindent" >When a generic form or a <span 
+class="pcrr8t-x-x-109">DFP </span>expression takes part in a substitution the following steps
+are performed:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x143-416002x1">The substitutions are performed for the arguments. If the argument list is
+     empty the substitution is applied to the generic arguments of the function;
+     if these change, the resulting forms are used as new actual arguments. If the
+     generic function itself is not affected by the substitution, the process stops
+     here.
+     </li>
+     <li 
+  class="enumerate" id="x143-416004x2">If the function name or the generic function form occurs as a left hand side
+     in the substitution list, it is replaced by the corresponding right hand side.
+     </li>
+     <li 
+  class="enumerate" id="x143-416006x3">The  new  form  is  partially  differentiated  according  to  the  list  of  partial
+     derivative variables.
+     </li>
+     <li 
+  class="enumerate" id="x143-416008x4">The (eventually modified) actual parameters are substituted into the form for
+     their corresponding generic variables. This substitution is done by name.</li></ol>
+<!--l. 213--><p class="noindent" >Examples:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-852">
+&#x00A0;&#x00A0;generic_function&#x00A0;f(x,y);
+&#x00A0;<br />&#x00A0;&#x00A0;sub(y=10,f());
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F(X,10)
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;sub(y=10,dfp(f(),x,2));
+&#x00A0;<br />
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F&#x00A0;&#x00A0;(X,10)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;sub(y=10,dfp(f(y,y),x,2));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;F&#x00A0;&#x00A0;(10,10)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;XX
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;sub(f=x**3*y**3,dfp(f(),x,2));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3
+&#x00A0;<br />&#x00A0;&#x00A0;6*X*Y
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;generic_function&#x00A0;ff(y,z);
+&#x00A0;<br />&#x00A0;&#x00A0;sub(f=ff,f(a,b));
+&#x00A0;<br />
+&#x00A0;<br />&#x00A0;&#x00A0;FF(B,Z)
+</div>
+<!--l. 240--><p class="nopar" >
+<!--l. 242--><p class="noindent" >The dataset <span 
+class="pcrr8t-x-x-109">dfpart.tst </span>contains more examples, including a complete application for
+computing the coefficient equations for Runge-Kutta ODE solvers.
+<!--l. 373--><p class="noindent" >
+                                                                     
+
+                                                                     
+                                                                     
+
+                                                                     
+<!--l. 375--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch16.html#manualse111.html" >Up</a></td><td class="clinks"><a 
+href="manualse112.html" >Next</a></td><td class="clinks"><a 
+href="manualse110.html" >Prev</a></td><td class="clinks"><a 
+href="manualse110.html#tailmanualse110.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse111.html" >Front</a></td></tr></table><a 
+ id="tailmanualse111.html"></a>   
+</body></html> 

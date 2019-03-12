@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Procedure Body</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch15.html#manualse87.html" >Up</a></td><td class="clinks"><a 
+href="manualse88.html" >Next</a></td><td class="clinks"><a 
+href="manualse86.html" >Prev</a></td><td class="clinks"><a 
+href="manualse86.html#tailmanualse86.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse87.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">15.2    </span> <a 
+ id="x107-19800015.2"></a>Procedure Body</h3>
+<a 
+ id="dx107-198001"></a>
+<!--l. 92--><p class="noindent" >Following the delimiter that ends the procedure heading must be a <span 
+class="ptmri8t-x-x-109">single </span>statement
+defining the action to be performed or the value to be delivered. A terminator must follow
+the statement. If it is a semicolon, the name of the procedure just defined is printed. It is
+not printed if a dollar sign is used.
+<!--l. 98--><p class="noindent" >If the result wanted is given by a formula of some kind, the body is just that formula,
+using the variables in the procedure heading.
+<!--l. 101--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Simple Example:</span>
+<!--l. 103--><p class="noindent" >If <span 
+class="pcrr8t-x-x-109">f(x) </span>is to mean <span 
+class="pcrr8t-x-x-109">(x+5)*(x+6)/(x+7)</span>, the entire procedure definition could
+read
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-373">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;procedure&#x00A0;f&#x00A0;x;&#x00A0;(x+5)*(x+6)/(x+7);
+</div>
+<!--l. 107--><p class="nopar" > Then <span 
+class="pcrr8t-x-x-109">f(10) </span>would evaluate to 240/17, <span 
+class="pcrr8t-x-x-109">f(a-6) </span>to <span 
+class="pcrr8t-x-x-109">A*(A-1)/(A+1)</span>, and so
+on.
+<!--l. 111--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">More Complicated Example:</span>
+<!--l. 113--><p class="noindent" >Suppose we need a function <span 
+class="pcrr8t-x-x-109">p(n,x) </span>that, for any positive integer <span 
+class="pcrr8t-x-x-109">N</span>, is the Legendre
+polynomial<a 
+ id="dx107-198002"></a> of order <span 
+class="cmmi-10x-x-109">n</span>. We can define this operator using the textbook formula defining
+these functions:
+<center class="math-display" >
+<img 
+src="manual28x.png" alt="                              |
+         1  dn        1       ||
+pn(x) = n! dyn- -2-----------1||
+                (y  - 2xy + 1)2 y=0
+" class="math-display" ></center>
+<!--l. 120--><p class="nopar" >
+Put into words, the Legendre polynomial <span 
+class="cmmi-10x-x-109">p</span><sub><span 
+class="cmmi-8">n</span></sub><span 
+class="cmr-10x-x-109">(</span><span 
+class="cmmi-10x-x-109">x</span><span 
+class="cmr-10x-x-109">) </span>is the result of substituting <span 
+class="cmmi-10x-x-109">y </span><span 
+class="cmr-10x-x-109">= 0 </span>in the
+<span 
+class="cmmi-10x-x-109">n</span><sup><span 
+class="cmmi-8">th</span></sup> partial derivative with respect to <span 
+class="cmmi-10x-x-109">y </span>of a certain fraction involving <span 
+class="cmmi-10x-x-109">x </span>and <span 
+class="cmmi-10x-x-109">y</span>, then
+dividing that by <span 
+class="cmmi-10x-x-109">n</span><span 
+class="cmr-10x-x-109">!</span>.
+<!--l. 125--><p class="noindent" >This verbal formula can easily be written in REDUCE:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-374">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;procedure&#x00A0;p(n,x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;sub(y=0,df(1/(y^2-2*x*y+1)^(1/2),y,n))
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;/(for&#x00A0;i:=1:n&#x00A0;product&#x00A0;i);
+</div>
+<!--l. 130--><p class="nopar" > Having input this definition, the expression evaluation
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-375">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2p(2,w);
+</div>
+<!--l. 134--><p class="nopar" > would result in the output
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-376">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;2
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;3*W&#x00A0;&#x00A0;-&#x00A0;1&#x00A0;.
+</div>
+<!--l. 139--><p class="nopar" > If the desired process is best described as a series of steps, then a group or compound
+statement can be used.
+<!--l. 144--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 146--><p class="noindent" >The above Legendre polynomial example can be rewritten as a series of steps instead of a
+single formula as follows:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-377">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;procedure&#x00A0;p(n,x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;begin&#x00A0;scalar&#x00A0;seed,deriv,top,fact;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;seed:=1/(y^2&#x00A0;-&#x00A0;2*x*y&#x00A0;+1)^(1/2);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;deriv:=df(seed,y,n);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;top:=sub(y=0,deriv);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;fact:=for&#x00A0;i:=1:n&#x00A0;product&#x00A0;i;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;return&#x00A0;top/fact
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;end;
+</div>
+<!--l. 157--><p class="nopar" > Procedures may also be defined recursively. In other words, the procedure body<a 
+ id="dx107-198003"></a> can
+include references to the procedure name itself, or to other procedures that themselves
+reference the given procedure. As an example, we can define the Legendre polynomial
+through its standard recurrence relation:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-378">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;procedure&#x00A0;p(n,x);
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;if&#x00A0;n&#x003C;0&#x00A0;then&#x00A0;rederr&#x00A0;~Invalid&#x00A0;argument&#x00A0;to&#x00A0;P(N,X)~
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;else&#x00A0;if&#x00A0;n=0&#x00A0;then&#x00A0;1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;else&#x00A0;if&#x00A0;n=1&#x00A0;then&#x00A0;x
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;else&#x00A0;((2*n-1)*x*p(n-1,x)-(n-1)*p(n-2,x))/n;
+</div>
+<!--l. 169--><p class="nopar" >
+<!--l. 171--><p class="noindent" ><a 
+ id="operator:REDERR"></a> The operator <span 
+class="pcrr8t-x-x-109">REDERR</span><a 
+ id="dx107-198004"></a> in the above example provides for a simple error exit from an
+algebraic procedure (and also a block). It can take a string as argument.
+<!--l. 176--><p class="noindent" >It should be noted however that all the above definitions of <span 
+class="pcrr8t-x-x-109">p(n,x) </span>are quite inefficient
+if extensive use is to be made of such polynomials, since each call effectively recomputes
+all lower order polynomials. It would be better to store these expressions in an array, and
+then use say the recurrence relation to compute only those polynomials that have not
+already been derived. We leave it as an exercise for the reader to write such a
+definition.
+                                                                     
+
+                                                                     
+<!--l. 184--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch15.html#manualse87.html" >Up</a></td><td class="clinks"><a 
+href="manualse88.html" >Next</a></td><td class="clinks"><a 
+href="manualse86.html" >Prev</a></td><td class="clinks"><a 
+href="manualse86.html#tailmanualse86.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse87.html" >Front</a></td></tr></table><a 
+ id="tailmanualse87.html"></a>  
+</body></html> 

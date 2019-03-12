@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>WHILE . . . DO</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"> 
+<!-- 3,html --> 
+<meta name="src" content="manual.tex"> 
+<link rel="stylesheet" type="text/css" href="manual.css"> 
+</head><body 
+>
+<p align="centre"><img src="redlogo.png" width=621 height=60 border=0 alt="REDUCE"></p><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse18.html" >Up</a></td><td class="clinks"><a 
+href="manualse19.html" >Next</a></td><td class="clinks"><a 
+href="manualse17.html" >Prev</a></td><td class="clinks"><a 
+href="manualse17.html#tailmanualse17.html" >PrevTail</a></td><td class="clinks"><a 
+href="#tailmanualse18.html">Tail</a></td></tr></table><h3 class="sectionHead"><span class="titlemark">5.5    </span> <a 
+ id="x27-400005.5"></a>WHILE &#x2026;DO</h3>
+<!--l. 332--><p class="noindent" ><a 
+ id="command:WHILE"></a>
+<!--l. 334--><p class="noindent" >The<a 
+ id="dx27-40001"></a> <span 
+class="pcrr8t-x-x-109">FOR</span>&#x2026; <span 
+class="pcrr8t-x-x-109">DO</span><a 
+ id="dx27-40002"></a> feature <a 
+ id="dx27-40003"></a><a 
+ id="dx27-40004"></a> allows easy coding of a repeated operation in which the number
+of repetitions is known in advance. If the criterion for repetition is more complicated,
+<span 
+class="pcrr8t-x-x-109">WHILE</span>&#x2026; <span 
+class="pcrr8t-x-x-109">DO </span>can often be used. Its syntax is:
+  <div class="syntax">
+  <span 
+class="pcrr8t-x-x-109">WHILE</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">boolean expression</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span> <span 
+class="pcrr8t-x-x-109">DO</span> <span 
+class="cmsy-10x-x-109">&#x27E8;</span><span 
+class="ptmri8t-x-x-109">statement</span><span 
+class="cmsy-10x-x-109">&#x27E9;</span></div>
+<!--l. 342--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">WHILE</span>&#x2026; <span 
+class="pcrr8t-x-x-109">DO </span>controls the single statement following <span 
+class="pcrr8t-x-x-109">DO</span>. If several statements are to
+be repeated, as is almost always the case, they must be grouped using the <span 
+class="pcrr8t-x-x-109">&#x003C;&#x003C;</span>&#x2026; <span 
+class="pcrr8t-x-x-109">&#x003E;&#x003E; </span>or
+<span 
+class="pcrr8t-x-x-109">BEGIN</span>&#x2026; <span 
+class="pcrr8t-x-x-109">END </span>as in the example below.
+<!--l. 349--><p class="noindent" >The <span 
+class="pcrr8t-x-x-109">WHILE </span>condition is tested each time <span 
+class="ptmri8t-x-x-109">before </span>the action following the <span 
+class="pcrr8t-x-x-109">DO </span>is attempted.
+If the condition is false to begin with, the action is not performed at all. Make sure that
+what is to be tested has an appropriate value initially.
+<!--l. 354--><p class="noindent" ><span 
+class="ptmri8t-x-x-109">Example:</span>
+<!--l. 356--><p class="noindent" >Suppose we want to add up a series of terms, generated one by one, until we reach a term
+which is less than 1/1000 in value. For our simple example, let us suppose the first term
+equals 1 and each term is obtained from the one before by taking one third of it and
+adding one third its square. We would write:
+                                                                     
+
+                                                                     
+<div class="verbatim" id="verbatim-62">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;ex:=0;&#x00A0;term:=1;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;while&#x00A0;num(term&#x00A0;-&#x00A0;1/1000)&#x00A0;&#x003E;=&#x00A0;0&#x00A0;&#x00A0;do
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;&#x003C;ex&#x00A0;:=&#x00A0;ex+term;&#x00A0;term:=(term&#x00A0;+&#x00A0;term^2)/3&#x003E;&#x003E;;
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ex;
+</div>
+<!--l. 366--><p class="nopar" > As long as <span 
+class="pcrr8t-x-x-109">TERM </span>is greater than or equal to (<span 
+class="pcrr8t-x-x-109">&#x003E;=</span>) 1/1000 it will be added to <span 
+class="pcrr8t-x-x-109">EX </span>and the
+next <span 
+class="pcrr8t-x-x-109">TERM </span>calculated. As soon as <span 
+class="pcrr8t-x-x-109">TERM </span>becomes less than 1/1000 the <span 
+class="pcrr8t-x-x-109">WHILE </span>test fails
+and the <span 
+class="pcrr8t-x-x-109">TERM </span>will not be added.
+                                                                     
+
+                                                                     
+<!--l. 373--><p class="noindent" ><table cellspacing="5"><tr><td class="clinks"><a 
+href="manualch5.html#manualse18.html" >Up</a></td><td class="clinks"><a 
+href="manualse19.html" >Next</a></td><td class="clinks"><a 
+href="manualse17.html" >Prev</a></td><td class="clinks"><a 
+href="manualse17.html#tailmanualse17.html" >PrevTail</a></td><td class="clinks"><a 
+href="manualse18.html" >Front</a></td></tr></table><a 
+ id="tailmanualse18.html"></a>  
+</body></html> 
