@@ -1,7 +1,13 @@
 <AssertionFile>
-	<AssertionMethod>
-		<Method>square_4_true_unreach_call</Method>
-		<PreCondition>(IN >= 0.0)^(IN < 1.0)</PreCondition>
-		<PostCondition>(return >= 0)^(return < 1.39844)</PostCondition>
-	</AssertionMethod>
+    <AssertionMethod>
+        <Method>square_4_true_unreach_call</Method>
+        <PreCondition>(IN >= 0.0)^(IN
+            <
+            1.0)
+        </PreCondition>
+        <PostCondition>(return >= 0)^(return
+            <
+            1.39844)
+        </PostCondition>
+    </AssertionMethod>
 </AssertionFile>

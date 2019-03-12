@@ -1,25 +1,24 @@
 package test;
 
-import java.io.IOException;
-
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-
 import app.verification.FunctionVerification;
 import app.verification.report.VerificationReport;
 import cfg.build.ASTFactory;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+
+import java.io.IOException;
 
 public class TestFunction {
-	public static void main(String[] args) {
-		ASTFactory ast = new ASTFactory("./TestInput.c");
-		IASTFunctionDefinition function = ast.getFunction(0);
-		
-		FunctionVerification functionVerification = new FunctionVerification();
-		try {
-			VerificationReport report = functionVerification.verify(ast, function, "", "", 3);
-			System.out.println(report.getCounterEx());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    public static void main(String[] args) {
+        ASTFactory ast = new ASTFactory("./TestInput.c");
+        IASTFunctionDefinition function = ast.getFunction(0);
+
+        FunctionVerification functionVerification = new FunctionVerification();
+        try {
+            VerificationReport report = functionVerification.verify(ast, function, "", "", 3);
+            System.out.println(report.getCounterEx());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
  /*		
 		VtseCFG cfg = new VtseCFG(function);
 		
@@ -41,9 +40,9 @@ public class TestFunction {
 			System.out.println(var);
 		}
 */
-		
+
 //		File smtImputFile = new File("./z3/bin/test/input.smt.txt");
-		
+
 //		try {
 //			FileOutputStream is = new FileOutputStream(smtImputFile);
 //			smtInput.printInputToOutputStream(is);
@@ -51,25 +50,22 @@ public class TestFunction {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-		
-		//cfg.printMeta();
-		//cfg.getExit().printNode();
-		//cfg.printGraph();
-		//cfg.printFormular(System.out);
-		//cfg.getVm().printList();
-		//PrintStream out = new PrintStream("smt.txt");
-		
-		//PrintStream out = System.out;
-		//cfg.printSMTFormula(out);
-		
-		//cfg.printMeta();
-		//cfg.printFormular(System.out);
-		
 
-		
-		
-		
+        //cfg.printMeta();
+        //cfg.getExit().printNode();
+        //cfg.printGraph();
+        //cfg.printFormular(System.out);
+        //cfg.getVm().printList();
+        //PrintStream out = new PrintStream("smt.txt");
+
+        //PrintStream out = System.out;
+        //cfg.printSMTFormula(out);
+
+        //cfg.printMeta();
+        //cfg.printFormular(System.out);
+
+
 //		System.out.println( cfg.getNameFunction());
 //		System.out.println( cfg.getTypeFunction());
-	}
+    }
 }

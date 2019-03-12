@@ -1,8 +1,9 @@
 <AssertionFile>
-	<AssertionMethod>
-		<Method>sum</Method>
-		<LoopCount>7</LoopCount>
-		<PreCondition>(n >= 0)^(n <= 10)</PreCondition>
-		<PostCondition>(return = (n*(n + 1))/2)</PostCondition>
-	</AssertionMethod>
+    <AssertionMethod>
+        <Method>sum</Method>
+        <LoopCount>7</LoopCount>
+        <PreCondition>(n >= 0)^(n<= 10)
+        </PreCondition>
+        <PostCondition>(return = (n*(n + 1))/2)</PostCondition>
+    </AssertionMethod>
 </AssertionFile>

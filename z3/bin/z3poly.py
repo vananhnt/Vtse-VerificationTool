@@ -7,6 +7,7 @@
 ############################################
 from z3 import *
 
+
 def subresultants(p, q, x):
     """
     Return the non-constant subresultants of 'p' and 'q' with respect to the "variable" 'x'.
@@ -28,10 +29,9 @@ def subresultants(p, q, x):
     """
     return AstVector(Z3_polynomial_subresultants(p.ctx_ref(), p.as_ast(), q.as_ast(), x.as_ast()), p.ctx)
 
+
 if __name__ == "__main__":
     import doctest
+
     if doctest.testmod().failed:
         exit(1)
-
-
-    
