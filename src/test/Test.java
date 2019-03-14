@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 /**
@@ -20,15 +21,22 @@ public class Test {
 		return benchmarkProps.getProperty("invgen");
 	}
 
+	private static void printTree(IASTNode node, int index) {
+		IASTNode[] children = node.getChildren();
+
+		for (int i = 0; i < index; i++) {
+			System.out.print(" ");
+		}
+
+		System.out.println("-" + node.getClass().getSimpleName() + " -> " + node.getRawSignature());
+		for (IASTNode iastNode : children)
+			printTree(iastNode, index + 2);
+	}
 	public static void  main(String[] args) throws FileNotFoundException, IOException {
-		String benchmark = getBenchmark("invgen") + "inv01.c";
+		String benchmark = "benchmark/invgen/template1/inv_04.c";
 		ASTFactory ast = new ASTFactory(benchmark);
-		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-//		cfg.unfold();
-//		cfg.index();
-		cfg.invariant();
-		//ast.print();
-		cfg.printGraph();
+		//VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
+
 
 	}
 }
