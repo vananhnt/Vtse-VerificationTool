@@ -66,6 +66,7 @@ public class LoopTemplate {
     public static LoopTemplate getLoopElement(IASTTranslationUnit iastTranslationUnit) {
         return getLoopElement(getFunctionBodyElement(iastTranslationUnit));
     }
+
     //template 1
     private static LoopTemplate getLoopElement(IASTNode[] bodyElement) {
         LoopTemplate loopTemplate = new LoopTemplate();
@@ -84,7 +85,6 @@ public class LoopTemplate {
                     }
                 }
                 loopTemplate.setConsecution(statements);
-
             } else if (node instanceof IASTExpressionStatement) {
                 init.add((IASTExpressionStatement) node);
             } else if (node instanceof IASTDeclarationStatement) {
@@ -164,13 +164,16 @@ public class LoopTemplate {
         System.out.println("-> Consecution: ");
         for (IASTExpressionStatement cons : consecution) {
             System.out.println("\t" + cons.getRawSignature());
+            ConsecutionFormat.formatFarkas(cons);
         }
     }
+
     public static void main(String[] args) throws IOException {
         String benchmark = "benchmark/invgen/template1/inv_04.c";
         ASTFactory ast = new ASTFactory(benchmark);
         LoopTemplate loopTemplate = LoopTemplate.getLoopElement(ast.getTranslationUnit());
-        loopTemplate.print();
+        //loopTemplate.print();
+        InvagenXMLInput.printInputToXMLFarkas(loopTemplate,System.out);
     }
 
 }
