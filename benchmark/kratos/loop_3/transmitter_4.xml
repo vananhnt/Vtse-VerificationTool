@@ -1,7 +1,7 @@
 <AssertionFile>
-	<AssertionMethod>
-		<Method>transmitter_4</Method>
-		<PreCondition></PreCondition>
-		<PostCondition>return = 0</PostCondition>
-	</AssertionMethod>
+    <AssertionMethod>
+        <Method>transmitter_4</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return = 0</PostCondition>
+    </AssertionMethod>
 </AssertionFile>

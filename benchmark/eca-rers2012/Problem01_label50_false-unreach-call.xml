@@ -1,0 +1,13 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>main</Method>
+        <PreCondition>1
+            <
+            0
+        </PreCondition>
+        <PostCondition>0
+            <
+            1
+        </PostCondition>
+    </AssertionMethod>
+</AssertionFile>

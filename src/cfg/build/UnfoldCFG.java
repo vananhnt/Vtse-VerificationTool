@@ -25,7 +25,7 @@ import cfg.utils.Cloner;
  */
 
 public class UnfoldCFG {
-	private int nLoops = 6;
+	private int nLoops = 5;
 	
 	private CFGNode start;
 	private CFGNode exit;
@@ -81,7 +81,7 @@ public class UnfoldCFG {
 		return iter;
 	}
 	
-	private CFGNode findEnd(CFGNode start) {
+	protected CFGNode findEnd(CFGNode start) {
 		CFGNode iter = start;
 		while (iter.getNext() != null) {
 			iter = iter.getNext();
@@ -238,7 +238,7 @@ public class UnfoldCFG {
 		return iter;
 	}
 	/* Chua xoa Goto va Label Node */
-	private ControlFlowGraph unfoldGoto(GotoNode node) {
+	protected ControlFlowGraph unfoldGoto(GotoNode node) {
 		// TODO Auto-generated method stub
 		EmptyNode emp = new EmptyNode();
 		CFGNode endNode = findEndFunctionNode((LabelNode) ((GotoNode) node).getLabelNode());

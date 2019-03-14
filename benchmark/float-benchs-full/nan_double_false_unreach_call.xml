@@ -1,7 +1,11 @@
 <AssertionFile>
-	<AssertionMethod>
-		<Method>nan_double_false_unreach_call</Method>
-		<PreCondition>(0 < 1)</PreCondition>
-		<PostCondition>return<0.1</PostCondition>
-	</AssertionMethod>
+    <AssertionMethod>
+        <Method>nan_double_false_unreach_call</Method>
+        <PreCondition>(0
+            <
+            1)
+        </PreCondition>
+        <PostCondition>return<0.1
+        </PostCondition>
+    </AssertionMethod>
 </AssertionFile>

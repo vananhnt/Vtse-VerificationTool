@@ -1,7 +1,9 @@
 <AssertionFile>
-	<AssertionMethod>
-		<Method>cos_polynomial_true_unreach_call</Method>
-		<PreCondition>(IN + 0.5 >= 0)^(IN <= 0.75)</PreCondition>
-		<PostCondition>(return >= 0)^(return <= 1.1)</PostCondition>
-	</AssertionMethod>
+    <AssertionMethod>
+        <Method>cos_polynomial_true_unreach_call</Method>
+        <PreCondition>(IN + 0.5 >= 0)^(IN<= 0.75)
+        </PreCondition>
+        <PostCondition>(return >= 0)^(return<= 1.1)
+        </PostCondition>
+    </AssertionMethod>
 </AssertionFile>
