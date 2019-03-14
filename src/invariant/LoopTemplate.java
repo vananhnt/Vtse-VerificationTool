@@ -63,6 +63,7 @@ public class LoopTemplate {
         benchmarkProps.load(is);
         return benchmarkProps.getProperty("invgen");
     }
+
     public static LoopTemplate getLoopElement(IASTTranslationUnit iastTranslationUnit) {
         return getLoopElement(getFunctionBodyElement(iastTranslationUnit));
     }
@@ -173,7 +174,10 @@ public class LoopTemplate {
         ASTFactory ast = new ASTFactory(benchmark);
         LoopTemplate loopTemplate = LoopTemplate.getLoopElement(ast.getTranslationUnit());
         //loopTemplate.print();
-        InvagenXMLInput.printInputToXMLFarkas(loopTemplate,System.out);
+        //InvagenXMLInput.printInputToXMLFarkas(loopTemplate, System.out);
+        InvagenRunner.run(benchmark).forEach(s -> {
+            System.out.println(s);
+        });
     }
 
 }

@@ -23,7 +23,6 @@ public class ConsecutionFormat {
         IASTExpression newRightHand = factory.newBinaryExpression(IASTBinaryExpression.op_minus,
                 rightHand, leftHand);
         //split x + y and constant, just handle const is + in the last position
-
         IASTLiteralExpression zero = factory.newLiteralExpression(IASTLiteralExpression.lk_integer_constant, "0");
         IASTBinaryExpression resExp = factory.newBinaryExpression(IASTBinaryExpression.op_equals,newRightHand.copy(), zero);
         res = ExpressionHelper.toString(resExp).replaceAll("\\(", "")
