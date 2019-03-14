@@ -164,20 +164,19 @@ public class LoopTemplate {
         System.out.println("-> Condition: " + condition.getRawSignature());
         System.out.println("-> Consecution: ");
         for (IASTExpressionStatement cons : consecution) {
-            System.out.println("\t" + cons.getRawSignature());
-            ConsecutionFormat.formatFarkas(cons);
+            System.out.println("\t" + ConsecutionFormat.formatFarkas(cons));
+
         }
     }
 
     public static void main(String[] args) throws IOException {
-        String benchmark = "benchmark/invgen/template1/inv_04.c";
+        String benchmark = "benchmark/invgen/template1/count_by_1.c";
         ASTFactory ast = new ASTFactory(benchmark);
         LoopTemplate loopTemplate = LoopTemplate.getLoopElement(ast.getTranslationUnit());
-        //loopTemplate.print();
-        //InvagenXMLInput.printInputToXMLFarkas(loopTemplate, System.out);
         InvagenRunner.run(benchmark).forEach(s -> {
             System.out.println(s);
         });
+
     }
 
 }

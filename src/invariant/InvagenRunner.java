@@ -2,7 +2,6 @@ package invariant;
 
 import cfg.build.ASTFactory;
 import main.farkas.entity.TransitionSystem;
-import main.solver.SolverRunner;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,9 +16,7 @@ public class InvagenRunner {
         ASTFactory ast = new ASTFactory(cfilepath);
         LoopTemplate loopTemplate = LoopTemplate.getLoopElement(ast.getTranslationUnit());
         String filename = new File(cfilepath).getName();
-
-        String path = (SMTINPUT_DIR  + filename).replaceAll(".c", "_fak_inv.xml");
-        System.out.println(path);
+        String path = (SMTINPUT_DIR  + filename).replace(".c", "_fak_inv.xml");
         List<String> result = new ArrayList<String>();
         FileOutputStream fo;
         try {
