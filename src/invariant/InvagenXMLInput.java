@@ -9,7 +9,7 @@ import java.io.*;
 
 public class InvagenXMLInput {
 
-    public static void printInputToXMLFarkas(LoopTemplate loop, OutputStream os) throws IOException {
+    public static void printInputToXMLFarkas(LoopMonoWhileTemplate loop, OutputStream os) throws IOException {
         Writer out = new BufferedWriter(new OutputStreamWriter(os));
         out.append("<TransitionSystem>\n" +
                 "    <Variables>\n");
