@@ -3,7 +3,7 @@ package cfg.build;
 import cfg.node.*;
 
 public class InvariantCFG extends UnfoldCFG {
-
+    int numberOfInvariant = 0;
     public InvariantCFG() {
     }
 
@@ -26,7 +26,7 @@ public class InvariantCFG extends UnfoldCFG {
         if (node == null) {
             return null;
         } else if (node instanceof BeginWhileNode || node instanceof BeginForNode) {
-            //get Invariant Node
+            //add Invariant Node
             if (node.getNext() instanceof DecisionNode) {
                 if (((DecisionNode) node.getNext()).getThenNode() instanceof InvariantNode) {
                     InvariantNode invariantNode = (InvariantNode) ((DecisionNode) node.getNext()).getThenNode();
@@ -35,6 +35,11 @@ public class InvariantCFG extends UnfoldCFG {
                     CFGNode endNode = ((BeginNode) node).getEndNode();
                     invariantGraph.getExit().setNext(iterateInvariantNode(endNode));
                 }
+//                InvariantNode invariantNode = new InvariantNode();
+//                ControlFlowGraph invariantGraph = new ControlFlowGraph(invariantNode, invariantNode);
+//                node.setNext(invariantGraph.getStart());
+//                CFGNode endNode = ((BeginNode) node).getEndNode();
+//                invariantGraph.getExit().setNext(iterateInvariantNode(endNode));
             }
         } else if (node instanceof PlainNode) {
             node.setNext(iterateInvariantNode(node.getNext()));

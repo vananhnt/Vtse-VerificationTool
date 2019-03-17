@@ -83,7 +83,7 @@ public class LoopMonoWhileTemplate extends LoopTemplate {
         System.out.println("-> Condition: " + super.getLoopCondition().getRawSignature());
         System.out.println("-> Consecution: ");
         for (IASTExpressionStatement cons : consecution) {
-            System.out.println("\t" + ConsecutionFormat.formatFarkas(cons));
+            System.out.println("\t" + TransitionFormat.formatFarkas(cons));
         }
     }
 

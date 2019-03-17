@@ -1,7 +1,6 @@
 package invariant;
 
 import cfg.build.ASTFactory;
-import main.farkas.entity.TransitionSystem;
 import main.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
@@ -121,7 +120,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         System.out.println("-> Consecutions: ");
         for (List<IASTNode> cons : consecutions) {
             for (IASTNode con : cons) {
-                System.out.println("\t" + ConsecutionFormat.formatFarkas(con));
+                System.out.println("\t" + TransitionFormat.formatFarkas(con));
             }
         }
     }
@@ -139,6 +138,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         }
         System.out.println(concat);
         System.out.println(RedlogRunner.rlsimpl(concat));
+        TextFileModification.modifyFile(benchmark, "invariant:;", "invariant: " + RedlogRunner.rlsimpl(concat) + ";");
         //invariants.forEach(v -> System.out.println(v));
 
     }

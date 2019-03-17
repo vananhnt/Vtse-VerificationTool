@@ -1,10 +1,15 @@
 package test;
 
 import java.io.*;
+import java.util.List;
 import java.util.Properties;
 
+import app.verification.ExportExcel;
+import app.verification.FileVerification;
+import app.verification.report.VerificationReport;
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
+import jxl.write.WriteException;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
@@ -32,11 +37,17 @@ public class Test {
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);
 	}
-	public static void  main(String[] args) throws FileNotFoundException, IOException {
-		String benchmark = "benchmark/invgen/template1/inv_04.c";
+	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
+		String benchmark = "benchmark/invgen/template2/loops_crafted/Mono5_1.c";
 		ASTFactory ast = new ASTFactory(benchmark);
-		//VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 
+		ExportExcel exportExcel = new ExportExcel();
+
+		File file = new File(benchmark);
+		FileVerification fv = new FileVerification();
+		List<VerificationReport> reportList = fv.verifyDirectory(file);
+		exportExcel.writeExcel(reportList);
 
 	}
 }

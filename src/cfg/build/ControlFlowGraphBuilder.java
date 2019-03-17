@@ -3,6 +3,7 @@ package cfg.build;
 import cfg.node.*;
 import cfg.utils.FunctionHelper;
 import cfg.utils.astnode.ASTNodeFactory;
+import invariant.InvagenRunner;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 

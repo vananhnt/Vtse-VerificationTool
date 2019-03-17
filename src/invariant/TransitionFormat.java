@@ -4,7 +4,7 @@ import cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-public class ConsecutionFormat {
+public class TransitionFormat {
 
     public static String formatFarkas(IASTNode conStm) {
         String res = null;
@@ -62,5 +62,6 @@ public class ConsecutionFormat {
         }
         return res;
     }
+
 
 }

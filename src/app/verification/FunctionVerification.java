@@ -104,9 +104,10 @@ public class FunctionVerification {
 		long begin = System.currentTimeMillis();
 		
 		VtseCFG cfg = new VtseCFG(function, ast);
-		cfg.unfold(nLoops);
+		//cfg.unfold(nLoops);
+		cfg.invariant();
 		cfg.index();
-//	 cfg.printGraph();
+		//	 cfg.printGraph();
 		// cfg.printMeta();
 		// cfg.printFormular(System.out);
 		
@@ -160,7 +161,7 @@ public class FunctionVerification {
 //	    	System.out.println("\t" + verReport.getCounterEx());
 //	    }
 	    verReport.print();
-	    //result.forEach(System.out::println);
+	    result.forEach(System.out::println);
 	    
 	    verReport.setFunctionName(cfg.getNameFunction());
 	    verReport.setGenerateConstraintTime((int)(end-begin));

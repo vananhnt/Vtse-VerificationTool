@@ -99,8 +99,14 @@ public class Index {
     private static IASTNode indexIASTBinaryExpression(IASTBinaryExpression node, VariableManager vm) {
         boolean isAssignment = (node.getOperator() == IASTBinaryExpression.op_assign);
         if (isAssignment) { //neu la phep gan
-            IASTExpression right = (IASTExpression) index(node.getOperand2().copy(), vm);
-            IASTExpression left = (IASTExpression) indexVariable((IASTIdExpression) node.getOperand1().copy(), vm);
+           // System.out.println(ExpressionHelper.toString(node));
+            IASTExpression right = (IASTExpression) index (node.getOperand2().copy(), vm);
+            IASTExpression left = null;
+            if (node.getOperand1() instanceof IASTIdExpression) { // neu la 1 bien gan
+                left = (IASTExpression) indexVariable((IASTIdExpression) node.getOperand1().copy(), vm);
+            } else if (node.getOperand1() instanceof IASTBinaryExpression) { //neu la binary expression gan
+                left = (IASTExpression) index (node.getOperand1().copy(), vm);
+            }
             IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), left, right);
             return newNode;
         } else { //neu la phep so sanh
