@@ -3,7 +3,10 @@ package invariant;
 import cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTName;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
+
 import java.io.*;
+import java.util.List;
 
 public class InvagenXMLInput {
 
@@ -61,16 +64,18 @@ public class InvagenXMLInput {
                     +"</Constraint>\n");
         }
         out.append("    </Initiation>\n" +
-                "    <Transitions>\n" +
-                "        <Transition>\n");
-//        for (List<IASTNode> con : loop.getConsecutions()) {
-//            out.append("            <Constraint>" + ConsecutionFormat.formatFarkas(con)
-//                    .replaceAll("\\(", "")
-//                    .replaceAll("\\)", "")
-//                    +"</Constraint>\n");
-//        }
-        out.append("        </Transition>\n" +
-                "    </Transitions>\n");
+                "    <Transitions>\n");
+        for (List<IASTNode> cons : loop.getConsecutions()) {
+            out.append("        <Transition>\n");
+            for (IASTNode constraint : cons) {
+                out.append("            <Constraint>" + ConsecutionFormat.formatFarkas(constraint)
+                    .replaceAll("\\(", "")
+                    .replaceAll("\\)", "")
+                    +"</Constraint>\n");
+            }
+            out.append("        </Transition>\n");
+        }
+        out.append("    </Transitions>\n");
         out.append("</TransitionSystem>\n");
         out.flush();
         out.close();

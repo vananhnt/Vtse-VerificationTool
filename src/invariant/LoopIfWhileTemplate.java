@@ -1,13 +1,11 @@
 package invariant;
 
 import cfg.build.ASTFactory;
-import cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class LoopIfWhileTemplate extends LoopTemplate {
@@ -123,7 +121,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         String benchmark = "benchmark/invgen/template2/loops_crafted/Mono4_1.c";
         ASTFactory ast = new ASTFactory(benchmark);
         LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        loopTemplate.print();
+        InvagenRunner.run(benchmark).forEach(v-> System.out.println(v));
 
     }
 
