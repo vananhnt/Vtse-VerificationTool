@@ -43,6 +43,7 @@ public class LoopTemplate {
     public void setLoopCondition(IASTExpression loopCondition) {
         this.loopCondition = loopCondition;
     }
+
     public static LoopTemplate getLoopElement(IASTTranslationUnit iastTranslationUnit) {
         return null;
     }

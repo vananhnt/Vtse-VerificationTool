@@ -1,6 +1,8 @@
 package invariant;
 
 import cfg.build.ASTFactory;
+import main.farkas.entity.TransitionSystem;
+import main.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
@@ -118,10 +120,19 @@ public class LoopIfWhileTemplate extends LoopTemplate {
     }
 
     public static void main(String[] args) throws IOException {
-        String benchmark = "benchmark/invgen/template2/loops_crafted/Mono4_1.c";
+        String benchmark = "benchmark/invgen/template2/loops_crafted/Mono5_1.c";
         ASTFactory ast = new ASTFactory(benchmark);
         LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        InvagenRunner.run(benchmark).forEach(v-> System.out.println(v));
+
+        //print invariant
+        List<String> invariants = InvagenRunner.run(benchmark);
+        String concat = invariants.get(0);
+        for (int i = 1; i < invariants.size(); i++) {
+            concat += " and " + invariants.get(i);
+        }
+        System.out.println(concat);
+        System.out.println(RedlogRunner.rlsimpl(concat));
+        //invariants.forEach(v -> System.out.println(v));
 
     }
 
