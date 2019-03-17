@@ -13,7 +13,7 @@ public class InvagenRunner {
     private static String SMTINPUT_DIR = "smt/";
     public static List<String> run(String cfilepath) {
         ASTFactory ast = new ASTFactory(cfilepath);
-        LoopMonoWhileTemplate loopTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        LoopTemplate loopTemplate = LoopTemplate.getLoopElement(ast.getTranslationUnit());
         String filename = new File(cfilepath).getName();
         String path = (SMTINPUT_DIR  + filename).replace(".c", "_fak_inv.xml");
         List<String> result = new ArrayList<String>();

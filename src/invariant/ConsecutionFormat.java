@@ -5,6 +5,7 @@ import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 public class ConsecutionFormat {
+
     public static String formatFarkas(IASTNode conStm) {
         String res = null;
         if (conStm instanceof IASTExpressionStatement) {
@@ -23,10 +24,12 @@ public class ConsecutionFormat {
         }
         return "";
     }
+
     private static String formatFarkas(IASTBinaryExpression expression) {
         String res = null;
         CPPNodeFactory factory = new CPPNodeFactory();
         int operator = expression.getOperator(); // default operator is =
+        //if the binary expression is assignment
         if (operator == IASTBinaryExpression.op_assign) {
             IASTExpression leftHandExp = expression.getOperand1().copy(); //x, y
             IASTExpression leftHand;
@@ -43,9 +46,9 @@ public class ConsecutionFormat {
             //split x + y and constant, just handle const is + in the last position
             IASTLiteralExpression zero = factory.newLiteralExpression(IASTLiteralExpression.lk_integer_constant, "0");
             IASTBinaryExpression resExp = factory.newBinaryExpression(IASTBinaryExpression.op_equals,newRightHand.copy(), zero);
-            res = ExpressionHelper.toString(resExp).replaceAll("\\(", "")
-                    .replaceAll("\\)", "");
-            //System.out.println(res);
+            res = ExpressionHelper.toString(resExp).replaceAll("\\(", "").replaceAll("\\)", "");
+
+        //if binary expression is condition
         } else if (operator == IASTBinaryExpression.op_lessEqual
                 || operator == IASTBinaryExpression.op_lessThan) {
             IASTExpression leftHand = expression.getOperand1().copy();
@@ -56,7 +59,6 @@ public class ConsecutionFormat {
             IASTBinaryExpression resExp = factory.newBinaryExpression(operator, newLeftHand.copy(), zero);
             res = ExpressionHelper.toString(resExp).replaceAll("\\(", "")
                     .replaceAll("\\)", "");
-            //return expression.getRawSignature();
         }
         return res;
     }

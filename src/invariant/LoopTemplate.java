@@ -3,6 +3,7 @@ package invariant;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTName;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import java.util.List;
 
@@ -42,4 +43,8 @@ public class LoopTemplate {
     public void setLoopCondition(IASTExpression loopCondition) {
         this.loopCondition = loopCondition;
     }
+    public static LoopTemplate getLoopElement(IASTTranslationUnit iastTranslationUnit) {
+        return null;
+    }
+
 }
