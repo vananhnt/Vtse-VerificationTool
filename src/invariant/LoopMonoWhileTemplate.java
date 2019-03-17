@@ -45,6 +45,11 @@ public class LoopMonoWhileTemplate extends LoopTemplate {
                 for (IASTNode child : children) {
                     if (child instanceof IASTExpressionStatement) {
                         statements.add((IASTExpressionStatement)child);
+                    } else if (child instanceof IASTLabelStatement) {
+                        IASTLabelStatement labelStatement = (IASTLabelStatement) child;
+                        if (labelStatement.getName().toString().equals("invariant")) {
+                            //Stub - do nothing
+                        }
                     }
                 }
                 loopTemplate.setConsecution(statements);

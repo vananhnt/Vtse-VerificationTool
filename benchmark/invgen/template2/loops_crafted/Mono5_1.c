@@ -4,7 +4,8 @@ int Mono5_1() {
 	x = 0;
 	y - 10000000 = 0;
 	z - 5000000 = 0;
-	while (x<y) {	
+	while (x<y) {
+	invariant:;
 		if (x < 5000000) {
 			x = x + 1;
 		} else {

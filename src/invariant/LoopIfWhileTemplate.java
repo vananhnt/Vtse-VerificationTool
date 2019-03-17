@@ -41,6 +41,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
                 IASTNode[] children = whileStatement.getBody().getChildren();
                 //for each element of if-else in while loop
                 for (IASTNode child : children) {
+                    //if - else statement
                     if (child instanceof IASTIfStatement) {
                         IASTIfStatement ifStatement = (IASTIfStatement) child;
                         List<IASTNode> cons = new ArrayList<>();
@@ -63,10 +64,16 @@ public class LoopIfWhileTemplate extends LoopTemplate {
                             }
                         }
                         consecutions.add(cons);
+                    //invariant statement
+                    } else if (child instanceof IASTLabelStatement) {
+                        IASTLabelStatement labelStatement = (IASTLabelStatement) child;
+                        if (labelStatement.getName().toString().equals("invariant")) {
+                            //Stub - do nothing
+                        }
                     }
                 }
                 loopTemplate.setConsecutions(consecutions);
-            //get initiation
+                //get initiation
             } else if (node instanceof IASTExpressionStatement) {
                 init.add((IASTExpressionStatement) node);
             //get variable declaration
