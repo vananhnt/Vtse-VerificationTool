@@ -19,155 +19,84 @@ import cfg.build.VtseCFG;
 import cfg.index.Variable;
 
 public class FunctionVerification {
-	
-	FunctionDeclaration function;
-	String precondition;
-	String postcondition;
-	int nLoops = 1;
-	
-	static String SMTINPUT_DIR = "smt/";
+    static String SMTINPUT_DIR = "smt/";
+    public static int UNFOLD_MODE = 0;
+    public static int INVARIANT_MODE = 1;
 
-	public FunctionVerification() {
-	}
-	
-	public void setNumberOfLoops(int nLoops) {
-		this.nLoops = nLoops;
-	}
+    public FunctionVerification() {
+    }
 
-	/**
-	 * verify a function with pre-condition and post-condition
-	 * @param function: function to verify
-	 * @param preCondition
-	 * @param postCondition
-	 * @return	verification report
-	 * @throws IOException 
-	 */
-	public VerificationReport verify(IASTFunctionDefinition function, String preCondition, String postCondition) 
-			throws IOException {
-		
-		long begin = System.currentTimeMillis();
-		
-		VtseCFG cfg = new VtseCFG(function);
-		cfg.unfold();
-		cfg.index();
-//		cfg.printGraph();
-		//cfg.printMeta();
-		//cfg.printFormular(System.out);
-		
-		SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
-		
-		String constraintTemp;
+    /**
+     * verify a function with pre-condition and post-condition
+     * @param function: function to verify
+     * @param preCondition
+     * @param postCondition
+     * @return	verification report
+     * @throws IOException
+     */
 
-		List<String> constraints = new ArrayList<>();
-		UserInput userInput = new UserInput();
-		ArrayList<Variable> params = cfg.getInitVariables();
-		params.add(cfg.getReturn());
-		userInput.setParameter(params);
-		
-		// add pre-condition
-		if (preCondition != null && !preCondition.equals("")) {
-			constraintTemp = userInput.createUserAssertion(preCondition);
-			constraints.add(constraintTemp);
-		}
-		
-		// add user's assertion
-		constraintTemp = userInput.createUserAssertion(postCondition);
-		constraintTemp = "(not " + constraintTemp + ")";
-		constraints.add(constraintTemp);
-		
-		smtInput.setConstrainst(constraints);
-		
-		long end = System.currentTimeMillis();
-		
-		String functionName = cfg.getNameFunction();
-		String path = SMTINPUT_DIR + functionName + ".smt";
-		FileOutputStream fo = new FileOutputStream(new File(path));
-	    smtInput.printInputToOutputStream(fo);
-	    
-	    List<String> result = Z3Runner.runZ3(path);
-	    
-	    
-	    //result.forEach(System.out::println);
-	    Report report = new Report();
-	    report.setListParameter(cfg.getInitVariables());
-	    VerificationReport verReport = report.generateReport(result);
-	    verReport.setFunctionName(cfg.getNameFunction());
-	    verReport.setGenerateConstraintTime((int)(end-begin));
-	    verReport.setPreCondition(preCondition);
-	    verReport.setPostCondition(postCondition);
-		
-		return verReport;
-	}
-	public VerificationReport verify(ASTFactory ast, IASTFunctionDefinition function, String preCondition, String postCondition, int nLoops) 
-			throws IOException {
-		
-		long begin = System.currentTimeMillis();
-		
-		VtseCFG cfg = new VtseCFG(function, ast);
-		//cfg.unfold(nLoops);
-		cfg.invariant();
-		cfg.index();
-		//	 cfg.printGraph();
-		// cfg.printMeta();
-		// cfg.printFormular(System.out);
-		
-		SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
-		
-		String constraintTemp;
+    public static VerificationReport verify(ASTFactory ast, IASTFunctionDefinition function, String preCondition, String postCondition, int nLoops, int mode)
+            throws IOException {
 
-		List<String> constraints = new ArrayList<>();
-		UserInput userInput = new UserInput();
-		ArrayList<Variable> params = cfg.getInitVariables();
-		params.add(new Variable(cfg.getTypeFunction(), "return"));
-		userInput.setParameter(params);
-		
-		// add pre-condition
-		if (preCondition != null && !preCondition.equals("")) {
-			constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
-			constraints.add(constraintTemp);
-			//System.err.println(constraintTemp);
-		}
-		
-		
-		// add user's assertion
-		constraintTemp = userInput.createUserAssertion(postCondition,cfg.getNameFunction());
-		//System.err.println(constraintTemp);
-		constraintTemp = "(not " + constraintTemp + ")";
-		constraints.add(constraintTemp);
-		
-		smtInput.setConstrainst(constraints);
-		
-		long end = System.currentTimeMillis();
-		
-		String functionName = cfg.getNameFunction();		
-		String path = SMTINPUT_DIR + functionName + ".smt";
-		
-		//System.err.println("    0.o   " + path);
-		
-		
-		FileOutputStream fo = new FileOutputStream(new File(path));
-	    smtInput.printInputToOutputStream(fo);
-	    
-	    List<String> result = Z3Runner.runZ3(path);
-	    
-	    Report report = new Report();
-	    report.setListParameter(cfg.getInitVariables());
-	    report.setFunctionName(cfg.getNameFunction());
-	    VerificationReport verReport = report.generateReport(result);
-//	    
-//	    System.out.println(verReport.getStatus());
-//	    if (verReport.getStatus().equals(VerificationReport.NOT_ALWAYS_TRUE)) {
-//	    	System.out.println("Counter Example:");  
-//	    	System.out.println("\t" + verReport.getCounterEx());
-//	    }
-	    verReport.print();
-	    result.forEach(System.out::println);
-	    
-	    verReport.setFunctionName(cfg.getNameFunction());
-	    verReport.setGenerateConstraintTime((int)(end-begin));
-	    verReport.setPreCondition(preCondition);
-	    verReport.setPostCondition(postCondition);
-		
-		return verReport;
-	}
+        long begin = System.currentTimeMillis();
+
+        VtseCFG cfg = new VtseCFG(function, ast);
+        if (mode == UNFOLD_MODE) {
+            cfg.unfold(nLoops);
+        } else {
+            cfg.invariant();
+        }
+        cfg.index();
+        // cfg.printGraph();
+        // cfg.printMeta();
+        // cfg.printFormular(System.out);
+
+        SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
+
+        String constraintTemp;
+
+        List<String> constraints = new ArrayList<>();
+        UserInput userInput = new UserInput();
+        ArrayList<Variable> params = cfg.getInitVariables();
+        params.add(new Variable(cfg.getTypeFunction(), "return"));
+        userInput.setParameter(params);
+
+        // add pre-condition
+        if (preCondition != null && !preCondition.equals("")) {
+            constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
+            constraints.add(constraintTemp);
+        }
+
+        // add user's assertion
+        constraintTemp = userInput.createUserAssertion(postCondition,cfg.getNameFunction());
+        constraintTemp = "(not " + constraintTemp + ")";
+        constraints.add(constraintTemp);
+
+        smtInput.setConstrainst(constraints);
+
+        long end = System.currentTimeMillis();
+
+        String functionName = cfg.getNameFunction();
+        String path = SMTINPUT_DIR + functionName + ".smt";
+
+        FileOutputStream fo = new FileOutputStream(new File(path));
+        smtInput.printInputToOutputStream(fo);
+
+        List<String> result = Z3Runner.runZ3(path);
+
+        Report report = new Report();
+        report.setListParameter(cfg.getInitVariables());
+        report.setFunctionName(cfg.getNameFunction());
+        VerificationReport verReport = report.generateReport(result);
+
+        verReport.print();
+        result.forEach(System.out::println);
+
+        verReport.setFunctionName(cfg.getNameFunction());
+        verReport.setGenerateConstraintTime((int)(end-begin));
+        verReport.setPreCondition(preCondition);
+        verReport.setPostCondition(postCondition);
+
+        return verReport;
+    }
 }

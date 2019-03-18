@@ -3,7 +3,6 @@ package cfg.build;
 import cfg.node.*;
 
 public class InvariantCFG extends UnfoldCFG {
-    int numberOfInvariant = 0;
     public InvariantCFG() {
     }
 

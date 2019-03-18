@@ -6,12 +6,13 @@ import java.util.Properties;
 
 import app.verification.ExportExcel;
 import app.verification.FileVerification;
+import app.verification.FunctionVerification;
 import app.verification.report.VerificationReport;
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
+import invariant.LoopTemplate;
 import jxl.write.WriteException;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 /**
  * @author va
@@ -37,16 +38,20 @@ public class Test {
 		for (IASTNode iastNode : children)
 			printTree(iastNode, index + 2);
 	}
+
 	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
 		String benchmark = "benchmark/invgen/template2/loops_crafted/Mono5_1.c";
 		ASTFactory ast = new ASTFactory(benchmark);
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-
-		ExportExcel exportExcel = new ExportExcel();
-
 		File file = new File(benchmark);
+		ExportExcel exportExcel = new ExportExcel();
+		int mode = FunctionVerification.INVARIANT_MODE;
+		if (mode == FunctionVerification.INVARIANT_MODE) {
+			LoopTemplate.generateInvariantDirectory(file,LoopTemplate.IFELSE_WHILE_TEMPLATE);
+		}
+
 		FileVerification fv = new FileVerification();
-		List<VerificationReport> reportList = fv.verifyDirectory(file);
+		List<VerificationReport> reportList = fv.verifyDirectory(file, mode);
 		exportExcel.writeExcel(reportList);
 
 	}

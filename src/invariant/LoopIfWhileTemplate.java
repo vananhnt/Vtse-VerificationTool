@@ -136,6 +136,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         for (int i = 1; i < invariants.size(); i++) {
             concat += " and " + invariants.get(i);
         }
+
         System.out.println(concat);
         System.out.println(RedlogRunner.rlsimpl(concat));
         TextFileModification.modifyFile(benchmark, "invariant:;", "invariant: " + RedlogRunner.rlsimpl(concat) + ";");

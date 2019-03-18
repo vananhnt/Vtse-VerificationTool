@@ -1,4 +1,4 @@
-package testbenchmark;
+package runbenchmark;
 
 import app.verification.ExportExcel;
 import app.verification.FileVerification;

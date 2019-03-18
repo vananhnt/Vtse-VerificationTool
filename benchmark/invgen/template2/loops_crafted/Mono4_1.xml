@@ -1,7 +1,7 @@
 <AssertionFile>
     <AssertionMethod>
-        <Method>Mono5_1</Method>
+        <Method>Mono4_1</Method>
         <PreCondition></PreCondition>
-        <PostCondition>(return = 0)</PostCondition>
+        <PostCondition>(return > 0) or (return < 0)</PostCondition>
     </AssertionMethod>
 </AssertionFile>

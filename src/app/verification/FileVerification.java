@@ -3,6 +3,7 @@ package app.verification;
 import app.verification.report.VerificationReport;
 import app.verification.userassertion.AssertionMethod;
 import cfg.build.ASTFactory;
+import invariant.LoopTemplate;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
@@ -21,8 +22,10 @@ public class FileVerification {
     public FileVerification() throws RowsExceededException, WriteException, IOException {
 
     }
-
     public List<VerificationReport> verifyDirectory(File directory) throws WriteException, IOException {
+            return verifyDirectory(directory, FunctionVerification.UNFOLD_MODE);
+    }
+    public List<VerificationReport> verifyDirectory(File directory, int mode) throws WriteException, IOException {
         List<VerificationReport> reportList = new ArrayList<>();
         List<VerificationReport> reports;
 
@@ -32,11 +35,11 @@ public class FileVerification {
             File[] files = directory.listFiles();
 
             for (File f : files) {
-                reports = verifyDirectory(f);
+                reports = verifyDirectory(f, mode);
                 reportList.addAll(reports);
             }
         } else {
-            reports = verify(directory);
+            reports = verify(directory, mode);
             reportList.addAll(reports);
         }
 
@@ -44,8 +47,7 @@ public class FileVerification {
     }
 
     @SuppressWarnings("unused")
-    public List<VerificationReport> verify(File file) {
-
+    public List<VerificationReport> verify(File file, int mode) {
         List<VerificationReport> reportList = new ArrayList<>();
 
         if (file == null) {
@@ -54,9 +56,6 @@ public class FileVerification {
         }
 
         String filePath = file.getAbsolutePath();
-
-        //System.out.println(filePath);
-
         String CPPFilename = getCFilename(file);
         String PPPathFile;
 
@@ -66,17 +65,9 @@ public class FileVerification {
         } else {
             PPPathFile = CPPFilename + PP_FILE_TAG;
         }
-
         ASTFactory ast = new ASTFactory(filePath);
-
-
-        @SuppressWarnings("static-access")
         ArrayList<IASTFunctionDefinition> listFunction = ast.getListFunction();
-
         FunctionVerification mv = new FunctionVerification();
-
-        //System.err.println("file: " + file.getPath());
-
 
         File PPFile = new File(PPPathFile);
         if (!PPFile.exists()) {
@@ -99,12 +90,12 @@ public class FileVerification {
             }
             for (IASTFunctionDefinition function : listFunction) {
                 String functionName = getFunctionName(function);
-//				System.err.println("function name: " + functionName);
+
                 if (functionName.equals(am.getMethodName())) {
                     try {
                         long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 //						System.err.println("function: " + functionName);
-                        report = mv.verify(ast, function, am.getPreCondition(), am.getPostCondition(), nLoops);
+                        report = mv.verify(ast, function, am.getPreCondition(), am.getPostCondition(), nLoops, mode);
                         if (report != null) {
                             reportList.add(report);
                         }

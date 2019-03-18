@@ -1,4 +1,4 @@
-package testbenchmark;
+package runbenchmark;
 
 import java.io.File;
 import java.io.IOException;
