@@ -22,6 +22,7 @@ public class LoopTemplate {
     private static final String CPP_TAG = ".cpp";
     private static final String PP_FILE_TAG = ".xml";
 
+    public static int UNKNOWN_TEMPLATE = -1;
     public static int MONO_WHILE_TEMPLATE = 0;
     public static int IFELSE_WHILE_TEMPLATE = 1;
 
@@ -67,7 +68,42 @@ public class LoopTemplate {
             TextFileModification.modifyFile(cfilepath, "invariant:;", "invariant: " + RedlogRunner.rlsimpl(concat) + ";");
         }
     }
+    public static void generateInvariant(File file) {
+        String cfilepath = file.getPath();
+        if (file == null) {
+            System.out.println("file is null");
+        }
+        String CPPFilename = getCFilename(file);
 
+        if (CPPFilename == null) {
+            System.out.println("not cpp file");
+            return;
+        }
+        ASTFactory ast = new ASTFactory(cfilepath);
+        System.out.println("- Invariant generated for: \n" + cfilepath);
+
+        int template = TemplateDetector.detect(ast.getTranslationUnit());
+
+        if (template == MONO_WHILE_TEMPLATE) {
+            LoopMonoWhileTemplate loopMonoWhileTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        } else {
+            LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        }
+        //concat invariants
+        List<String> invariants = InvagenRunner.run(cfilepath);
+        String concat = "";
+        if (invariants.size() > 1) {
+            concat = invariants.get(0);
+            for (int i = 1; i < invariants.size(); i++) {
+                concat += " and " + invariants.get(i);
+            }
+        }
+//        System.out.println(concat);
+//        System.out.println(RedlogRunner.rlsimpl(concat));
+        if (concat != "") {
+            TextFileModification.modifyFile(cfilepath, "invariant:;", "invariant: " + RedlogRunner.rlsimpl(concat) + ";");
+        }
+    }
     public static void generateInvariantDirectory(File directory, int template) {
         if (directory == null) {
         } else if (directory.isDirectory()) {
@@ -78,6 +114,18 @@ public class LoopTemplate {
             }
         } else {
             generateInvariant(directory, template);
+        }
+    }
+    public static void generateInvariantDirectory(File directory) {
+        if (directory == null) {
+        } else if (directory.isDirectory()) {
+            File[] files = directory.listFiles();
+
+            for (File f : files) {
+                generateInvariantDirectory(f);
+            }
+        } else {
+            generateInvariant(directory);
         }
     }
     private static String getCFilename(File file) {

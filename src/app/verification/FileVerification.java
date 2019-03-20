@@ -46,7 +46,6 @@ public class FileVerification {
         return reportList;
     }
 
-    @SuppressWarnings("unused")
     public List<VerificationReport> verify(File file, int mode) {
         List<VerificationReport> reportList = new ArrayList<>();
 

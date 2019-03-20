@@ -18,6 +18,10 @@ public class InvagenRunner {
         String filename = new File(cfilepath).getName();
         String path = (SMTINPUT_DIR  + filename).replace(".c", "_fak_inv.xml");
         List<String> result = new ArrayList<String>();
+        if (loopTemplate == null) {
+            System.err.println("Cannot generate invariant for: " + filename);
+            return result;
+        }
         FileOutputStream fo;
         try {
             fo = new FileOutputStream(new File(path));
