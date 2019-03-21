@@ -119,7 +119,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         }
         System.out.println("-> Initiation: ");
         for (IASTExpressionStatement iastExpressionStatement : super.getInitiation()) {
-            System.out.println("\t" + iastExpressionStatement.getRawSignature());
+            System.out.println("\t" + TransitionFormat.formatInitiation(iastExpressionStatement));
         }
         System.out.println("-> Condition: " + super.getLoopCondition().getRawSignature());
         System.out.println("-> Consecutions: ");
@@ -131,7 +131,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
     }
 
     public static void main(String[] args) throws IOException {
-        String benchmark = "benchmark/invgen/template2/loops_crafted/Mono5_1.c";
+        String benchmark = "benchmark/invgen/template2/loop_lit/cggmp2005_variant.c";
         ASTFactory ast = new ASTFactory(benchmark);
         LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
 
@@ -143,10 +143,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         }
 
         System.out.println(concat);
-        System.out.println(RedlogRunner.rlsimpl(concat));
-        TextFileModification.modifyFile(benchmark, "invariant:;", "invariant: " + RedlogRunner.rlsimpl(concat) + ";");
-        //invariants.forEach(v -> System.out.println(v));
-
+        loopTemplate.print();
     }
 
 }

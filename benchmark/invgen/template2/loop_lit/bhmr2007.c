@@ -1,7 +1,7 @@
 // Source: Dirk Beyer, Thomas A. Henzinger, Rupak Majumdar, Andrey
 // Rybalchenko: "Path Invariants", PLDI 2007.
 
-
+//true
 int bhmr2007() {
     int i;
     int n;

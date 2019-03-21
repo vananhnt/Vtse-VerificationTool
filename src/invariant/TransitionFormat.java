@@ -6,6 +6,29 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 public class TransitionFormat {
 
+    public static String formatInitiation(IASTNode initStm) {
+        String res = "";
+        if (initStm instanceof IASTExpressionStatement) {
+            return formatInitiation((IASTExpressionStatement) initStm);
+        } else if (initStm instanceof IASTBinaryExpression) {
+            return formatInitiation((IASTBinaryExpression) initStm);
+        }
+        return res;
+    }
+    private static String formatInitiation(IASTExpressionStatement initStm) {
+        return formatInitiation(initStm.getExpression());
+    }
+    private static String formatInitiation(IASTBinaryExpression initStm) {
+            IASTBinaryExpression binaryExpression = (IASTBinaryExpression) initStm;
+            IASTExpression left = binaryExpression.getOperand1().copy();
+            IASTExpression right = binaryExpression.getOperand2().copy();
+            int operator = binaryExpression.getOperator();
+            if (ExpressionHelper.toString(right).equals("0")) {
+                return ExpressionHelper.toString(initStm);
+            } else {
+                return ExpressionHelper.toString(left) + " - " + ExpressionHelper.toString(right) + " = 0";
+            }
+    }
     public static String formatFarkas(IASTNode conStm) {
         String res = "";
         if (conStm instanceof IASTExpressionStatement) {

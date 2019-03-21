@@ -10,9 +10,10 @@ int cggmp2005() {
     i = 1;
     j = 10;
     while (j >= i) {
+    invariant: j <= 0 and i <= 0;
         i = i + 2;
         j = -1 + j;
     }
   //  __VERIFIER_assert(j == 6);
-    return 0;
+    return j;
 }

@@ -14,12 +14,12 @@ import java.util.List;
 
 public class RunInvariant {
     public static void  main(String[] args) throws IOException, WriteException {
-        String benchmark = "benchmark/invgen/template2/loop_lit/bhmr2007.c";
+        String benchmark = "benchmark/invgen/template2/loops_crafted";
         ExportExcel exportExcel = new ExportExcel();
         File file = new File(benchmark);
         FileVerification fv = new FileVerification();
         LoopTemplate.generateInvariantDirectory(file);
-        List<VerificationReport> reportList = fv.verifyDirectory(file, FunctionVerification.INVARIANT_MODE);
+        List<VerificationReport> reportList = fv.verifyDirectory(file, FunctionVerification.UNFOLD_MODE);
         exportExcel.writeExcel(reportList);
     }
 }

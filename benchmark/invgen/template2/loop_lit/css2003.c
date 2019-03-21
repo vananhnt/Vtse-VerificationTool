@@ -1,9 +1,10 @@
 // Source: Michael Colon, Sriram Sankaranarayanan, Henny Sipma: "Linear
 // Invariant Generation using Non-Linear Constraint Solving", CAV 2003.
 
-#include "assert.h"
 int main() {
-    int i,j,k;
+    int i;
+    int j;
+    int k;
     i = 1;
     j = 1;
     k = __VERIFIER_nondet_int();
