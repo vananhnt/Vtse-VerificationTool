@@ -46,7 +46,8 @@ public class LoopIfWhileTemplate extends LoopTemplate {
                         List<IASTNode> cons = new ArrayList<>();
                         //get consecution of Then Clause
                         IASTExpression trueConditionalExpression = ifStatement.getConditionExpression();
-                        cons.add(trueConditionalExpression); //-> true condition
+                        if (trueConditionalExpression instanceof IASTBinaryExpression)
+                            cons.add(trueConditionalExpression); //-> true condition
                         for (IASTNode thenNode : ifStatement.getThenClause().getChildren()) {
                             if (thenNode instanceof IASTExpressionStatement) {
                                 cons.add((IASTExpressionStatement) thenNode);
@@ -55,13 +56,17 @@ public class LoopIfWhileTemplate extends LoopTemplate {
                         consecutions.add(cons);
                         //get consecution of Else Clause
                         cons = new ArrayList<>();
-                        IASTExpression falseConditionalExpression = getNegative(ifStatement.getConditionExpression());
-                        cons.add(falseConditionalExpression);
+                        if (trueConditionalExpression instanceof IASTBinaryExpression) {
+                            IASTExpression falseConditionalExpression = getNegative(ifStatement.getConditionExpression());
+                            cons.add(falseConditionalExpression);
+                        }
                         for (IASTNode elseNode : ifStatement.getElseClause().getChildren()) {
                             if (elseNode instanceof IASTExpressionStatement) {
                                 cons.add((IASTExpressionStatement) elseNode);
                             }
                         }
+                        if (trueConditionalExpression instanceof IASTBinaryExpression)
+                            cons.add(trueConditionalExpression); //-> true condition
                         consecutions.add(cons);
                     //invariant statement
                     } else if (child instanceof IASTLabelStatement) {

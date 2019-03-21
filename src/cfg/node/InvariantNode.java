@@ -8,7 +8,6 @@ public class InvariantNode extends PlainNode {
 
     public InvariantNode() {
     }
-
     public InvariantNode(IASTStatement stm) {
         super(stm);
     }

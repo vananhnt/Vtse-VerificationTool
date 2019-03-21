@@ -2,7 +2,6 @@
 // "Verification of Programs by Combining Iterated Specialization with
 // Interpolation", HCVS 2014
 
-
 int afnp2014() {
     int x;
     int y;

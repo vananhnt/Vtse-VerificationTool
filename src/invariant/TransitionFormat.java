@@ -7,7 +7,7 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 public class TransitionFormat {
 
     public static String formatFarkas(IASTNode conStm) {
-        String res = null;
+        String res = "";
         if (conStm instanceof IASTExpressionStatement) {
             return formatFarkas((IASTExpressionStatement) conStm);
         } else if (conStm instanceof IASTBinaryExpression) {

@@ -2,6 +2,7 @@ package invariant;
 
 import app.verification.report.VerificationReport;
 import cfg.build.ASTFactory;
+import cfg.utils.ExpressionHelper;
 import jxl.write.WriteException;
 import main.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
@@ -83,11 +84,11 @@ public class LoopTemplate {
         System.out.println("- Invariant generated for: \n" + cfilepath);
 
         int template = TemplateDetector.detect(ast.getTranslationUnit());
-
+        LoopTemplate loopTemplate;
         if (template == MONO_WHILE_TEMPLATE) {
-            LoopMonoWhileTemplate loopMonoWhileTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
+            loopTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
         } else {
-            LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
+            loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
         }
         //concat invariants
         List<String> invariants = InvagenRunner.run(cfilepath);
@@ -98,6 +99,8 @@ public class LoopTemplate {
                 concat += " and " + invariants.get(i);
             }
         }
+        //add not (condition)
+        //concat += "and (not " + ExpressionHelper.toString(loopTemplate.getLoopCondition()) + ")";
 //        System.out.println(concat);
 //        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {

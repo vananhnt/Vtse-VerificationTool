@@ -40,19 +40,11 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
-		String benchmark = "benchmark/invgen/template2/loops_crafted/Mono5_1.c";
+		String benchmark = "benchmark/invgen/template2/loop_lit/bhmr2007.c";
 		ASTFactory ast = new ASTFactory(benchmark);
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-		File file = new File(benchmark);
-		ExportExcel exportExcel = new ExportExcel();
-		int mode = FunctionVerification.INVARIANT_MODE;
-		if (mode == FunctionVerification.INVARIANT_MODE) {
-			LoopTemplate.generateInvariantDirectory(file,LoopTemplate.IFELSE_WHILE_TEMPLATE);
-		}
-
-		FileVerification fv = new FileVerification();
-		List<VerificationReport> reportList = fv.verifyDirectory(file, mode);
-		exportExcel.writeExcel(reportList);
+		cfg.invariant();
+		cfg.printGraph();
 
 	}
 }

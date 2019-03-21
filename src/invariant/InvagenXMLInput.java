@@ -68,6 +68,7 @@ public class InvagenXMLInput {
         for (List<IASTNode> cons : loop.getConsecutions()) {
             out.append("        <Transition>\n");
             for (IASTNode constraint : cons) {
+                if (TransitionFormat.formatFarkas(constraint) != null)
                 out.append("            <Constraint>" + TransitionFormat.formatFarkas(constraint)
                     .replaceAll("\\(", "")
                     .replaceAll("\\)", "")
