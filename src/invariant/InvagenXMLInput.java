@@ -27,7 +27,7 @@ public class InvagenXMLInput {
         out.append("    </Variables>\n" +
                 "    <Initiation>\n");
         for (IASTExpressionStatement init : loop.getInitiation()) {
-            out.append("            <Constraint>" + ExpressionHelper.toString(init)
+            out.append("            <Constraint>" + TransitionFormat.formatInitiation(init)
                                                 .replaceAll("\\(", "")
                                                 .replaceAll("\\)", "")
                                 +"</Constraint>\n");
@@ -58,7 +58,7 @@ public class InvagenXMLInput {
         out.append("    </Variables>\n" +
                 "    <Initiation>\n");
         for (IASTExpressionStatement init : loop.getInitiation()) {
-            out.append("            <Constraint>" + ExpressionHelper.toString(init)
+            out.append("            <Constraint>" + TransitionFormat.formatInitiation(init)
                     .replaceAll("\\(", "")
                     .replaceAll("\\)", "")
                     +"</Constraint>\n");

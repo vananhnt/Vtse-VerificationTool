@@ -10,7 +10,7 @@ int bhmr2007() {
     i = 0; a = 0; b = 0; n = 100;
  
     while (i < n) {
-    invariant: b >= 0 and b - i >= 0 and a - 3*b + i <= 0 and a - b - i <= 0 and a + b - 3*i <= 0 and 2*a - b >= 0 and 3*a - b - i >= 0;
+     invariant: b >= 0 ; b - i >= 0 ; a - 3*b + i <= 0 ; a - b - i <= 0 ; a + b - 3*i <= 0 ; 2*a - b >= 0 ; 3*a - b - i >= 0;
         if (VERIFIER_NON_DET) {
             a = a + 1;
             b = b + 2;

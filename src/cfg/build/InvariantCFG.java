@@ -1,14 +1,12 @@
 package cfg.build;
 
 import cfg.node.*;
-import cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 public class InvariantCFG extends UnfoldCFG {
     public InvariantCFG() {
     }
-
     public InvariantCFG(ControlFlowGraph g) {
         generate(g);
     }
@@ -44,7 +42,13 @@ public class InvariantCFG extends UnfoldCFG {
         }
         return new PlainNode();
     }
-
+    private  CFGNode getBeginNode(CFGNode node) throws Exception {
+        while (!(node instanceof BeginWhileNode || node instanceof BeginForNode)) {
+            node = node.getNext();
+        }
+        return node;
+    }
+    //iterate in while loop
     private CFGNode iterateInvariantNode(CFGNode node) throws Exception {
         //if (node != null) node.printNode();
         if (node == null) {

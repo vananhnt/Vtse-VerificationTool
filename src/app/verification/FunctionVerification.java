@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.internal.core.model.FunctionDeclaration;
 
 import app.solver.SMTInput;
 import app.solver.Z3Runner;
@@ -41,17 +40,20 @@ public class FunctionVerification {
         long begin = System.currentTimeMillis();
 
         VtseCFG cfg = new VtseCFG(function, ast);
+        SMTInput smtInput;
         if (mode == UNFOLD_MODE) {
             cfg.unfold(nLoops);
+            cfg.index();
+            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormula());
         } else {
             cfg.invariant();
+            cfg.index();
+            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createInvariantFormula());
         }
-        cfg.index();
+
         // cfg.printGraph();
         // cfg.printMeta();
         // cfg.printFormular(System.out);
-
-        SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormular());
 
         String constraintTemp;
 

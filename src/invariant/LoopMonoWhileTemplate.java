@@ -87,14 +87,5 @@ public class LoopMonoWhileTemplate extends LoopTemplate {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        String benchmark = "benchmark/invgen/template1/count_by_1.c";
-        ASTFactory ast = new ASTFactory(benchmark);
-        LoopMonoWhileTemplate loopTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        InvagenRunner.run(benchmark).forEach(s -> {
-            System.out.println(s);
-        });
-
-    }
 
 }

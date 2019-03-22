@@ -4,8 +4,8 @@ int Mono6_1() {
     int y;
     int z;
 	x = 0;
-	y - 10000000 = 0;
-	z - 5000000 = 0;
+	y = 10000000;
+	z = 5000000;
 	while (x<y) {
 	invariant:;
 		if (x < 5000000) {

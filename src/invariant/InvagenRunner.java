@@ -12,9 +12,14 @@ import java.util.List;
 public class InvagenRunner {
     private static String SMTINPUT_DIR = "smt/";
 
-    public static List<String> run(String cfilepath) {
+    public static List<String> run(String cfilepath, int template) {
         ASTFactory ast = new ASTFactory(cfilepath);
-        LoopTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        LoopTemplate loopTemplate;
+        if (template == LoopTemplate.MONO_WHILE_TEMPLATE) {
+            loopTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        } else {
+            loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        }
         String filename = new File(cfilepath).getName();
         String path = (SMTINPUT_DIR  + filename).replace(".c", "_fak_inv.xml");
         List<String> result = new ArrayList<String>();

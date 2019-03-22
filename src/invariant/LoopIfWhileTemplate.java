@@ -30,7 +30,6 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         List<List<IASTNode>> consecutions = new ArrayList<>();
         List<IASTName> var = new ArrayList<>();
         CPPNodeFactory factory = new CPPNodeFactory();
-
         for (IASTNode node : bodyElement) {
             //get While statement
             if (node instanceof IASTWhileStatement) {
@@ -58,15 +57,13 @@ public class LoopIfWhileTemplate extends LoopTemplate {
                         cons = new ArrayList<>();
                         if (trueConditionalExpression instanceof IASTBinaryExpression) {
                             IASTExpression falseConditionalExpression = getNegative(ifStatement.getConditionExpression());
-                            cons.add(falseConditionalExpression);
+                            cons.add(falseConditionalExpression);//-> false condition
                         }
                         for (IASTNode elseNode : ifStatement.getElseClause().getChildren()) {
                             if (elseNode instanceof IASTExpressionStatement) {
                                 cons.add((IASTExpressionStatement) elseNode);
                             }
                         }
-                        if (trueConditionalExpression instanceof IASTBinaryExpression)
-                            cons.add(trueConditionalExpression); //-> true condition
                         consecutions.add(cons);
                     //invariant statement
                     } else if (child instanceof IASTLabelStatement) {
@@ -128,22 +125,6 @@ public class LoopIfWhileTemplate extends LoopTemplate {
                 System.out.println("\t" + TransitionFormat.formatFarkas(con));
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        String benchmark = "benchmark/invgen/template2/loop_lit/cggmp2005_variant.c";
-        ASTFactory ast = new ASTFactory(benchmark);
-        LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
-
-        //print invariant
-        List<String> invariants = InvagenRunner.run(benchmark);
-        String concat = invariants.get(0);
-        for (int i = 1; i < invariants.size(); i++) {
-            concat += " and " + invariants.get(i);
-        }
-
-        System.out.println(concat);
-        loopTemplate.print();
     }
 
 }

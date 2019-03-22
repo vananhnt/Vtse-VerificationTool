@@ -85,11 +85,10 @@ public class FileVerification {
             if (am.getLoopCount() != null) {
                 nLoops = Integer.parseInt(am.getLoopCount());
             } else {
-                nLoops = 1;
+                nLoops = 100;
             }
             for (IASTFunctionDefinition function : listFunction) {
                 String functionName = getFunctionName(function);
-
                 if (functionName.equals(am.getMethodName())) {
                     try {
                         long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();

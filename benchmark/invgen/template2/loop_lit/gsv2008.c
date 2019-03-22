@@ -1,16 +1,17 @@
 // Source: Sumit Gulwani, Saurabh Srivastava, Ramarathnam Venkatesan: "Program
 // Analysis as Constraint Solving", PLDI 2008.
 
-#include "assert.h"
-int main() {
-    int x,y;
+int gsv2008() {
+    int x;
+    int y;
     x = -50;
-    y = __VERIFIER_nondet_int();
+    y = 50;
     //if (!(-1000 < y && y < LARGE_INT)) return 0;
     while (x < 0) {
+     invariant: x - y = 0 and x + y = 0;
         x = x + y;
-        y++;
+        y = y + 1;
     }
    // __VERIFIER_assert(y > 0);
-    return 0;
+    return y;
 }

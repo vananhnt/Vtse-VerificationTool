@@ -10,7 +10,7 @@ public class TemplateDetector {
 
     public static int detect(IASTTranslationUnit iastTranslationUnit) {
         IASTNode[] nodes = LoopTemplateUtils.getFunctionBodyElement(iastTranslationUnit);
-        boolean mono = true;
+        if (nodes == null) return -1;
         for (IASTNode node : nodes) {
             if (node instanceof IASTWhileStatement) {
                 IASTWhileStatement whileStatement = (IASTWhileStatement) node;

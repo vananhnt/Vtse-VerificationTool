@@ -106,16 +106,18 @@ public class VtseCFG extends ControlFlowGraph {
         DFSHelper(super.start);
     }
 
-    public String createFormular() {
+    public String createFormula() {
         return FormulaCreater.create(start, exit);
     }
-
+    public String createInvariantFormula () {
+        return FormulaCreater.createInvariantFormula(start, exit);
+    }
     public String createInfixFormula() {
         return FormulaCreater.createInfix(start, exit);
     }
 
     public void printFormular(PrintStream ps) {
-        ps.print(createFormular());
+        ps.print(createFormula());
     }
 
     public String getNameFunction() {

@@ -2,9 +2,9 @@
 int Mono1_1() {
   int x;
   x = 0;
-  while (x < 100000000) {
-  invariant: x >= 0 and x - 10000002 <= 0;
-    if (x < 10000000) {
+  while (x < 100) {
+     invariant: x >= 0 and x - 102 <= 0;
+    if (x < 100) {
       x = x + 1;
     } else {
       x = x + 2;

@@ -1,9 +1,6 @@
 package invariant;
 
-import app.verification.report.VerificationReport;
 import cfg.build.ASTFactory;
-import cfg.utils.ExpressionHelper;
-import jxl.write.WriteException;
 import main.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
@@ -11,8 +8,6 @@ import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoopTemplate {
@@ -55,7 +50,7 @@ public class LoopTemplate {
             LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
         }
         //concat invariants
-        List<String> invariants = InvagenRunner.run(cfilepath);
+        List<String> invariants = InvagenRunner.run(cfilepath, template);
         String concat = "";
         if (invariants.size() > 1) {
             concat = invariants.get(0);
@@ -66,7 +61,7 @@ public class LoopTemplate {
 //        System.out.println(concat);
 //        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {
-            TextFileModification.modifyFile(cfilepath, "invariant:;", "invariant: " + RedlogRunner.rlsimpl(concat) + ";");
+            TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat).replaceAll("and", ";"));
         }
     }
     public static void generateInvariant(File file) {
@@ -84,14 +79,9 @@ public class LoopTemplate {
         System.out.println("- Invariant generated for: \n" + cfilepath);
 
         int template = TemplateDetector.detect(ast.getTranslationUnit());
-        LoopTemplate loopTemplate;
-        if (template == MONO_WHILE_TEMPLATE) {
-            loopTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        } else {
-            loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        }
+
         //concat invariants
-        List<String> invariants = InvagenRunner.run(cfilepath);
+        List<String> invariants = InvagenRunner.run(cfilepath, template);
         String concat = "";
         if (invariants.size() > 1) {
             concat = invariants.get(0);
@@ -104,7 +94,7 @@ public class LoopTemplate {
 //        System.out.println(concat);
 //        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {
-            TextFileModification.modifyFile(cfilepath, "invariant:;", "invariant: " + RedlogRunner.rlsimpl(concat) + ";");
+            TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat).replaceAll("and", ";"));
         }
     }
     public static void generateInvariantDirectory(File directory, int template) {
@@ -147,7 +137,9 @@ public class LoopTemplate {
 
         return filename;
     }
+    public void print() {
 
+    }
     public List<IASTName> getVariables() {
         return variables;
     }

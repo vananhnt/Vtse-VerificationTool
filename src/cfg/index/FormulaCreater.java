@@ -2,6 +2,8 @@ package cfg.index;
 
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
+import cfg.node.BeginForNode;
+import cfg.node.BeginWhileNode;
 import cfg.node.CFGNode;
 import cfg.node.DecisionNode;
 import cfg.utils.ExpressionHelper;
@@ -33,6 +35,35 @@ public class FormulaCreater {
                     constraint = temp;
                 } else {
 //					constraint = wrapInfix(LOGIC_AND, temp, constraint);
+                    constraint = wrapPrefix(LOGIC_AND, constraint, temp);
+                }
+            }
+            if (node == exit) break;
+            if (node instanceof DecisionNode) {
+                node = ((DecisionNode) node).getEndNode();
+            } else {
+                node = node.getNext();
+            }
+
+        }
+
+        return constraint;
+    }
+
+    public static String createInvariantFormula(CFGNode start, CFGNode exit) {
+        CFGNode node = start;
+        while (!(node instanceof BeginForNode || node instanceof BeginWhileNode)) {
+            node = node.getNext();
+        }
+        String constraint = node.getFormula();
+        String temp;
+
+        while (node != null) {
+            temp = node.getFormula();
+            if (temp != null) {
+                if (constraint == null) {
+                    constraint = temp;
+                } else {
                     constraint = wrapPrefix(LOGIC_AND, constraint, temp);
                 }
             }

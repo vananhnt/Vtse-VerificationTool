@@ -1,20 +1,21 @@
 // Source: Denis Gopan, Thomas Reps: "Lookahead Widening", CAV 2006.
-
-#include "assert.h"
-
-int main() {
-    int x,y;
+//true
+int gr2006() {
+    int x;
+    int y;
     x = 0;
     y = 0;
-    while (1) {
+    while (y >= 0) {
+     invariant: x - y >= 0 and x + y >= 0;
         if (x < 50) {
             y = y + 1;
+            x = x + 1;
         } else {
             y = y - 1;
+            x = x + 1;
         }
-        if (y < 0) break;
-        x++;
+
     }
-    __VERIFIER_assert(x == 100);
-    return 0;
+   // __VERIFIER_assert(x == 100);
+    return x;
 }

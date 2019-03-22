@@ -57,7 +57,7 @@ public class AssertionMethod {
             String method = null;
             String preCondition = null;
             String postCondition = null;
-            String loopCount = "1";
+            String loopCount = null;
             Node node;
             for (int i = 0; i < nodeList.getLength(); i++) {
                 node = nodeList.item(i);
