@@ -9,7 +9,7 @@ int css2003() {
     j = 1;
     k = 100;
     while (i < 100) {
-     invariant: k - 100 <= 0 ; k - 100 >= 0 ; j - 1 = 0 ; i - 1 <= 0 ; i + k - 101 <= 0 ; 100*i - 3*k + 200 <= 0 ; 101*i - k - 1 >= 0 ; 102*i - k - 2 >= 0;
+     invariant: (-j-k <= 0) and (-j-k+1 <= 0) and (-j+k-99 <= 0) and (-100i-j+k+1 <= 0) and (j-k <= 0) and (j-k+1 <= 0) and (j+k-101 <= 0) and (-102i+j+k+1 <= 0) and (101i-j-k <= 0) and (100i-j-k+1 <= 0) and (i-j+k-100 <= 0) and (i-102j+k+1 <= 0) and (i+j-k <= 0) and (i+j-k+1 <= 0) and (i+j+k-102 <= 0);
         i = i + 1;
         j = j + k;
         k = k - 1;

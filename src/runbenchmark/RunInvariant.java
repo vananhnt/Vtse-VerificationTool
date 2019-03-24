@@ -8,13 +8,12 @@ import invariant.LoopTemplate;
 import jxl.write.WriteException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
 public class RunInvariant {
     public static void  main(String[] args) throws IOException, WriteException {
-        String benchmark = "benchmark/invgen/template2/loop_lit/cggmp2005.c";
+        String benchmark = "benchmark/invgen/template2/loop_lit/gj2007.c";
         ExportExcel exportExcel = new ExportExcel();
         File file = new File(benchmark);
         FileVerification fv = new FileVerification();

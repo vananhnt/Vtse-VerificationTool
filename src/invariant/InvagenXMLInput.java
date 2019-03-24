@@ -36,6 +36,7 @@ public class InvagenXMLInput {
                 "    <Transitions>\n" +
                 "        <Transition>\n");
         for (IASTExpressionStatement con : loop.getConsecution()) {
+            if ( TransitionFormat.formatFarkas(con) != null)
             out.append("            <Constraint>" + TransitionFormat.formatFarkas(con)
                                                 .replaceAll("\\(", "")
                                                 .replaceAll("\\)", "")

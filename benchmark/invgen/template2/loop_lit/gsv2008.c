@@ -8,7 +8,7 @@ int gsv2008() {
     y = 50;
     //if (!(-1000 < y && y < LARGE_INT)) return 0;
     while (x < 0) {
-     invariant: x - y = 0 and x + y = 0;
+     invariant: (x - y = 0) and (x + y = 0);
         x = x + y;
         y = y + 1;
     }

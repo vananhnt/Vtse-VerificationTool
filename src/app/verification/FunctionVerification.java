@@ -41,17 +41,17 @@ public class FunctionVerification {
 
         VtseCFG cfg = new VtseCFG(function, ast);
         SMTInput smtInput;
-        if (mode == UNFOLD_MODE) {
-            cfg.unfold(nLoops);
+        if (mode == INVARIANT_MODE) {
+            cfg.invariant();
             cfg.index();
             smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormula());
         } else {
-            cfg.invariant();
+            cfg.unfold(nLoops);
             cfg.index();
             smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createInvariantFormula());
         }
 
-        // cfg.printGraph();
+         cfg.printGraph();
         // cfg.printMeta();
         // cfg.printFormular(System.out);
 

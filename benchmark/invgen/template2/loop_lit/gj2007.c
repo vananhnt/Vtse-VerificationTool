@@ -6,7 +6,7 @@ int gj2007() {
     x = 0;
     y = 50;
     while(x < 100) {
-     invariant: y - 1 >= 0 ; x - y + 1 <= 0 ; x - y + 50 >= 0;
+     invariant: (-y <= 0) and (-y+1 <= 0) and (-x+y-50 <= 0) and (x-y <= 0) and (x-y+1 <= 0);
         if (x < 50) {
             x = x + 1;
         } else {

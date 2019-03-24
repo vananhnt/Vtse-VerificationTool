@@ -4,13 +4,13 @@
 //true
 int bhmr2007() {
     int i;
-    int n;
     int a;
     int b;
+    int n;
     i = 0; a = 0; b = 0; n = 100;
  
     while (i < n) {
-     invariant: b >= 0 ; b - i >= 0 ; a - 3*b + i <= 0 ; a - b - i <= 0 ; a + b - 3*i <= 0 ; 2*a - b >= 0 ; 3*a - b - i >= 0;
+     invariant: (-b-n <= 0) and (-b-n+1 <= 0) and (-b+n-100 <= 0) and (b-n <= 0) and (b-n+1 <= 0) and (b+n-100 <= 0) and (a-b-n <= 0) and (a-b-n+1 <= 0) and (a-b+n-100 <= 0) and (a+b-n <= 0) and (a+b-n+1 <= 0) and (a+b+n-100 <= 0) and (i-b-n <= 0) and (i-b-n+1 <= 0) and (i-b+n-100 <= 0) and (i+b-n <= 0) and (i+b-n+1 <= 0) and (i+b+n-100 <= 0) and (i+a-b-n <= 0) and (i+a-b-n+1 <= 0) and (i+a-b+n-100 <= 0) and (i+a+b-n <= 0) and (i+a+b-n+1 <= 0) and (i+a+b+n-100 <= 0);
         if (VERIFIER_NON_DET) {
             a = a + 1;
             b = b + 2;

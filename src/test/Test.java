@@ -40,9 +40,10 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
-		String benchmark = "benchmark/invgen/template2/loops_crafted/Mono1_1.c";
+		String benchmark = "benchmark/invgen/template2/loop_lit/gsv2008.c";
 		ASTFactory ast = new ASTFactory(benchmark);
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
+		ast.print();
 		cfg.invariant();
 		cfg.index();
 		cfg.printGraph();
