@@ -29,7 +29,7 @@ public class LoopIfWhileTemplate extends LoopTemplate {
         List<IASTExpressionStatement> init = new ArrayList<>();
         List<List<IASTNode>> consecutions = new ArrayList<>();
         List<IASTName> var = new ArrayList<>();
-        CPPNodeFactory factory = new CPPNodeFactory();
+        if (bodyElement == null) return loopTemplate;
         for (IASTNode node : bodyElement) {
             //get While statement
             if (node instanceof IASTWhileStatement) {

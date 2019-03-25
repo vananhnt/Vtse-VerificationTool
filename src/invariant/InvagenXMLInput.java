@@ -18,6 +18,7 @@ public class InvagenXMLInput {
         }
     }
     public static void printInputToXMLFarkas(LoopMonoWhileTemplate loop, OutputStream os) throws IOException {
+        if (loop == null) return; // if loop null dont write to xml file
         Writer out = new BufferedWriter(new OutputStreamWriter(os));
         out.append("<TransitionSystem>\n" +
                 "    <Variables>\n");
@@ -50,6 +51,7 @@ public class InvagenXMLInput {
     }
 
     public static void printInputToXMLFarkas(LoopIfWhileTemplate loop, OutputStream os) throws IOException {
+        if (loop.getVariables() == null) return;
         Writer out = new BufferedWriter(new OutputStreamWriter(os));
         out.append("<TransitionSystem>\n" +
                 "    <Variables>\n");
@@ -59,7 +61,7 @@ public class InvagenXMLInput {
         out.append("    </Variables>\n" +
                 "    <Initiation>\n");
         for (IASTExpressionStatement init : loop.getInitiation()) {
-            out.append("            <Constraint>" + TransitionFormat.formatInitiation(init)
+            out.append("            <Constraint>"    + TransitionFormat.formatInitiation(init)
                     .replaceAll("\\(", "")
                     .replaceAll("\\)", "")
                     +"</Constraint>\n");
