@@ -1,7 +1,7 @@
 package invariant;
 
 import cfg.build.ASTFactory;
-import main.farkas.entity.TransitionSystem;
+import main.algo.farkas.entity.TransitionSystem;
 
 import java.io.File;
 import java.io.FileOutputStream;

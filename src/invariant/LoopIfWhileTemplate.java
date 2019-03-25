@@ -1,11 +1,8 @@
 package invariant;
 
-import cfg.build.ASTFactory;
-import main.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

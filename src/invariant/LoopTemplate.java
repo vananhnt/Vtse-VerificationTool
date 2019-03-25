@@ -1,7 +1,7 @@
 package invariant;
 
 import cfg.build.ASTFactory;
-import main.solver.RedlogRunner;
+import main.app.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTName;
@@ -53,15 +53,19 @@ public class LoopTemplate {
         List<String> invariants = InvagenRunner.run(cfilepath, template);
         String concat = "";
         if (invariants.size() > 1) {
-            concat = invariants.get(0);
+            concat = "(" + invariants.get(0) + ")";
             for (int i = 1; i < invariants.size(); i++) {
-                concat += " and " + invariants.get(i);
+                concat += " and " + "(" + invariants.get(i) + ")";
             }
         }
 //        System.out.println(concat);
 //        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {
-            TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
+            //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
+            System.err.println(concat);
+            TextFileModification.modifyCFile(cfilepath, concat);
+        } else {
+            System.err.println("Cannot generate Invariants");
         }
     }
     public static void generateInvariant(File file) {
@@ -76,8 +80,8 @@ public class LoopTemplate {
             return;
         }
         ASTFactory ast = new ASTFactory(cfilepath);
+        System.out.println("-------------------------------------------");
         System.out.println("- Invariant generated for: \n" + cfilepath);
-
         int template = TemplateDetector.detect(ast.getTranslationUnit());
 
         //concat invariants
@@ -95,7 +99,10 @@ public class LoopTemplate {
 //        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {
             //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
+            System.err.println(concat);
             TextFileModification.modifyCFile(cfilepath, concat);
+        } else {
+            System.err.println("Cannot generate Invariants");
         }
     }
     public static void generateInvariantDirectory(File directory, int template) {

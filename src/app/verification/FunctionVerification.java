@@ -51,7 +51,7 @@ public class FunctionVerification {
             smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createInvariantFormula());
         }
 
-         cfg.printGraph();
+        // cfg.printGraph();
         // cfg.printMeta();
         // cfg.printFormular(System.out);
 
