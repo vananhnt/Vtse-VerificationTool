@@ -1,6 +1,6 @@
 // Source: Denis Gopan, Thomas Reps: "Lookahead Widening", CAV 2006.
 //true
-int gr2006() {
+int gr2006_true() {
     int x;
     int y;
     x = 0;

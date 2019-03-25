@@ -1,6 +1,6 @@
 <AssertionFile>
     <AssertionMethod>
-        <Method>afnp2014</Method>
+        <Method>afnp2014_true</Method>
         <PreCondition></PreCondition>
         <PostCondition>return >= 0</PostCondition>
     </AssertionMethod>

@@ -1,7 +1,7 @@
 <AssertionFile>
     <AssertionMethod>
-        <Method>bhmr2007</Method>
+        <Method>gr2006_true</Method>
         <PreCondition></PreCondition>
-        <PostCondition>return = 0</PostCondition>
+        <PostCondition>return = 100</PostCondition>
     </AssertionMethod>
 </AssertionFile>

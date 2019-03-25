@@ -2,7 +2,7 @@
 // Rybalchenko: "Path Invariants", PLDI 2007.
 
 //true
-int bhmr2007() {
+int bhmr2007_true() {
     int i;
     int a;
     int b;

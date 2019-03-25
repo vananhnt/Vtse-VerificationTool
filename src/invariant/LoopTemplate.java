@@ -1,7 +1,6 @@
 package invariant;
 
 import cfg.build.ASTFactory;
-import main.app.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTName;
@@ -93,16 +92,10 @@ public class LoopTemplate {
                 concat += " and " + "(" + invariants.get(i) + ")";
             }
         }
-        //add not (condition)
-        //concat += "and (not " + ExpressionHelper.toString(loopTemplate.getLoopCondition()) + ")";
-//        System.out.println(concat);
-//        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {
             //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
             System.err.println(concat);
             TextFileModification.modifyCFile(cfilepath, concat);
-        } else {
-            System.err.println("Cannot generate Invariants");
         }
     }
     public static void generateInvariantDirectory(File directory, int template) {

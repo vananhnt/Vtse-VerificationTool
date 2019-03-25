@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RunInvariant {
     public static void  main(String[] args) throws IOException, WriteException {
-        String benchmark = "benchmark/invgen/template2/loop_lit/cggmp2005_variant.c";
+        String benchmark = "benchmark/invgen/template2/loop_lit";
         ExportExcel exportExcel = new ExportExcel();
         File file = new File(benchmark);
         FileVerification fv = new FileVerification();

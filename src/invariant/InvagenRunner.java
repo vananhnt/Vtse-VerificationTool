@@ -1,7 +1,9 @@
 package invariant;
 
+import app.verification.ExportExcel;
+import app.verification.FileVerification;
 import cfg.build.ASTFactory;
-import main.algo.farkas.entity.TransitionSystem;
+import main.farkas.entity.TransitionSystem;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,6 +40,13 @@ public class InvagenRunner {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        String benchmark = "benchmark/invgen/template2/loop_lit/cggmp2005_variant.c";
+        ASTFactory ast = new ASTFactory(benchmark);
+        LoopMonoWhileTemplate monoWhileTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        monoWhileTemplate.print();
     }
 
 }

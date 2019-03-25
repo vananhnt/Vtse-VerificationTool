@@ -1,6 +1,6 @@
 // Source: Sumit Gulwani, Nebosja Jojic: "Program Verification as
 // Probabilistic Inference", POPL 2007.
-int gj2007() {
+int gj2007_true() {
     int x;
     int y;
     x = 0;
