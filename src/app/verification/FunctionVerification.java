@@ -44,11 +44,11 @@ public class FunctionVerification {
         if (mode == INVARIANT_MODE) {
             cfg.invariant();
             cfg.index();
-            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormula());
+            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createInvariantFormula());
         } else {
             cfg.unfold(nLoops);
             cfg.index();
-            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createInvariantFormula());
+            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormula() );
         }
 
         // cfg.printGraph();

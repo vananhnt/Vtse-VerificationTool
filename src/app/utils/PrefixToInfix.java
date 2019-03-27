@@ -76,8 +76,7 @@ public class PrefixToInfix {
     }
 
     public static void main(String[] args) {
-        String prefix = "- / 437498374983748378473874837483784738478374837847384444444444444444444 15.0";
-
+        String prefix = "(<= x_Mono1_1_false_0 0)";
         String infix = PrefixToInfix.prefixToInfix(prefix);
 
         System.out.println("infix: " + infix);

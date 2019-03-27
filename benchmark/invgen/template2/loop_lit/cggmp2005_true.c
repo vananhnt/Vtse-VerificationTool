@@ -9,7 +9,6 @@ int cggmp2005_true() {
     i = 1;
     j = 10;
     while (j >= i) {
-     invariant: (-i-2j <= 0) and (-i-2j+1 <= 0) and (j-10 <= 0) and (-11i+j+1 <= 0) and (i+2j-21 <= 0);
         i = i + 2;
         j = -1 + j;
     }

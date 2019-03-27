@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>Mono3_1</Method>
-        <PreCondition></PreCondition>
-        <PostCondition>(return > 0) or (return < 0)</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

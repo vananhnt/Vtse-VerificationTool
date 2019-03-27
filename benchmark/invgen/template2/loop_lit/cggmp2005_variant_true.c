@@ -12,7 +12,6 @@ int cggmp2005_variant_true() {
     mid = 100;
     hi = 2*mid;
     while (mid > 0) {
-     invariant: (-lo-hi <= 0) and (-lo-hi+1 <= 0) and (hi-200 <= 0) and (-2lo-3mid+hi+100 <= 0) and (mid-hi <= 0) and (mid-hi+1 <= 0) and (mid+hi-300 <= 0) and (lo+hi-200 <= 0) and (lo+2mid-hi <= 0) and (lo+3mid-2hi+100 <= 0) and (lo+mid+hi-300 <= 0);
         lo = lo + 1;
         hi = hi - 1;
         mid = mid - 1;

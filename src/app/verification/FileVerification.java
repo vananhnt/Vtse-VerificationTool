@@ -80,7 +80,7 @@ public class FileVerification {
 
         for (AssertionMethod am : listAssertion) {
             //System.err.println("***Verification report:");
-            System.out.println("-Method name: " + am.getMethodName());
+            System.out.println("- Method name: " + am.getMethodName());
             int nLoops;
             if (am.getLoopCount() != null) {
                 nLoops = Integer.parseInt(am.getLoopCount());

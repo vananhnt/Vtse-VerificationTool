@@ -10,7 +10,7 @@ int bhmr2007_true() {
     i = 0; a = 0; b = 0; n = 100;
  
     while (i < n) {
-     invariant: (-b-n <= 0) and (-b-n+1 <= 0) and (-b+n-100 <= 0) and (b-n <= 0) and (b-n+1 <= 0) and (b+n-100 <= 0) and (a-b-n <= 0) and (a-b-n+1 <= 0) and (a-b+n-100 <= 0) and (a+b-n <= 0) and (a+b-n+1 <= 0) and (a+b+n-100 <= 0) and (i-b-n <= 0) and (i-b-n+1 <= 0) and (i-b+n-100 <= 0) and (i+b-n <= 0) and (i+b-n+1 <= 0) and (i+b+n-100 <= 0) and (i+a-b-n <= 0) and (i+a-b-n+1 <= 0) and (i+a-b+n-100 <= 0) and (i+a+b-n <= 0) and (i+a+b-n+1 <= 0) and (i+a+b+n-100 <= 0);
+     invariant: (b + n >= 0) and (b + n - 1 >= 0) and (b - n + 100 >= 0) and (b - n <= 0) and (b - n + 1 <= 0) and (b + n - 100 <= 0) and (a - b - n <= 0) and (a - b - n + 1 <= 0) and (a - b + n - 100 <= 0) and (a + b - n <= 0) and (a + b - n + 1 <= 0) and (a + b + n - 100 <= 0) and (b - i + n >= 0) and (b - i + n - 1 >= 0) and (b - i - n + 100 >= 0) and (b + i - n <= 0) and (b + i - n + 1 <= 0) and (b + i + n - 100 <= 0) and (a - b + i - n <= 0) and (a - b + i - n + 1 <= 0) and (a - b + i + n - 100 <= 0) and (a + b + i - n <= 0) and (a + b + i - n + 1 <= 0) and (a + b + i + n - 100 <= 0);
         if (VERIFIER_NON_DET) {
             a = a + 1;
             b = b + 2;

@@ -1,6 +1,7 @@
 package invariant;
 
 import cfg.build.ASTFactory;
+import main.solver.RedlogRunner;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTName;
@@ -52,9 +53,9 @@ public class LoopTemplate {
         List<String> invariants = InvagenRunner.run(cfilepath, template);
         String concat = "";
         if (invariants.size() > 1) {
-            concat = "(" + invariants.get(0) + ")";
+            concat = "(" + RedlogRunner.rlsimpl(invariants.get(0)) + ")";
             for (int i = 1; i < invariants.size(); i++) {
-                concat += " and " + "(" + invariants.get(i) + ")";
+                concat += " and " + "(" + RedlogRunner.rlsimpl(invariants.get(i)) + ")";
             }
         }
 //        System.out.println(concat);
@@ -87,9 +88,9 @@ public class LoopTemplate {
         List<String> invariants = InvagenRunner.run(cfilepath, template);
         String concat = "";
         if (invariants.size() > 1) {
-            concat = "(" + invariants.get(0) + ")";
+            concat = "(" + RedlogRunner.rlsimpl(invariants.get(0)) + ")";
             for (int i = 1; i < invariants.size(); i++) {
-                concat += " and " + "(" + invariants.get(i) + ")";
+                concat += " and " + "(" + RedlogRunner.rlsimpl(invariants.get(i)) + ")";
             }
         }
         if (concat != "") {

@@ -1,4 +1,4 @@
-// Source: Denis Gopan, Thomas Reps: "Lookahead Widening", CAV 2006.
+//Source: Denis Gopan, Thomas Reps: "Lookahead Widening", CAV 2006.
 //true
 int gr2006_true() {
     int x;
@@ -6,7 +6,7 @@ int gr2006_true() {
     x = 0;
     y = 0;
     while (y >= 0) {
-     invariant: (-x-y <= 0) and (-x+y <= 0);
+     invariant: (x + y >= 0) and (x - y >= 0);
         if (x < 50) {
             y = y + 1;
             x = x + 1;

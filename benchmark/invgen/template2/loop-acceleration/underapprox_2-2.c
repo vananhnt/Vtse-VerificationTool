@@ -1,20 +1,12 @@
-extern void __VERIFIER_error() __attribute__ ((__noreturn__));
 
-void __VERIFIER_assert(int cond) {
-  if (!(cond)) {
-    ERROR: __VERIFIER_error();
-  }
-  return;
-}
-
-int main(void) {
-  unsigned int x = 0;
-  unsigned int y = 1;
+int underapprox_2_2_true() {
+  int x = 0;
+  int y = 1;
 
   while (x < 6) {
-    x++;
-    y *= 2;
+    x = x + 1;
+    y = 2*y;
   }
-
-  __VERIFIER_assert(x == 6);
+  return x;
+ // __VERIFIER_assert(x == 6);
 }

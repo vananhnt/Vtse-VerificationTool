@@ -8,7 +8,7 @@ int afnp2014_true() {
     x = 1;
     y = 0;
     while (y < 1000) {
-     invariant: (-x-y <= 0) and (-x-y+1 <= 0) and (-x+y <= 0) and (-x+y+1 <= 0) and (x-y-1 <= 0) and (x+y-1 <= 0);
+     invariant: (x + y >= 0) and (x + y - 1 >= 0) and (x - y >= 0) and (x - y - 1 >= 0) and (x - y - 1 <= 0) and (x + y - 1 <= 0);
         x = x + y;
         y = y + 1;
     }
