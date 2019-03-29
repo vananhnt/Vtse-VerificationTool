@@ -1,13 +1,13 @@
 package invariant;
 
-import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.*;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 public class LoopTemplateUtils {
@@ -26,8 +26,8 @@ public class LoopTemplateUtils {
     private static IASTNode[] getFunctionBodyElementUtils(IASTNode ast) {
         IASTNode[] children = ast.getChildren();
         for (IASTNode iastNode : children) {
+            //get element in the body
             if (iastNode instanceof IASTFunctionDefinition) {
-                //function[0] -> compound -> body
                 IASTNode[] child_Function = iastNode.getChildren();
                 IASTCompoundStatement compoundStatement = null;
                 for (IASTNode iChildFunc : child_Function) {
@@ -35,8 +35,15 @@ public class LoopTemplateUtils {
                         compoundStatement = (IASTCompoundStatement) iChildFunc;
                     }
                 }
-                IASTNode[] child_Compound = compoundStatement.getChildren();
-                return child_Compound;
+                List<IASTNode> child_Compound = new ArrayList<>(Arrays.asList(compoundStatement.getChildren()));
+                IASTNode[] params = ((IASTFunctionDefinition) iastNode).getDeclarator().getChildren();
+                for (IASTNode param : params) {
+                    if (param instanceof IASTParameterDeclaration) {
+                        child_Compound.add(param);
+                    }
+                }
+                IASTNode[] result = new IASTNode[child_Compound.size()];
+                return child_Compound.toArray(result);
             } else {
                 return getFunctionBodyElementUtils(iastNode);
             }

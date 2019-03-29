@@ -83,6 +83,10 @@ public class LoopIfWhileTemplate extends LoopTemplate {
                         var.add(((IASTDeclarator) childDe).getName());
                     }
                 }
+            } else if (node instanceof IASTParameterDeclaration) {
+                IASTParameterDeclaration param = (IASTParameterDeclaration) node;
+                IASTDeclarator declarator = param.getDeclarator();
+                var.add(declarator.getName());
             }
         }
         loopTemplate.setInitiation(init);

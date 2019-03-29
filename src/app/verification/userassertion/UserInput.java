@@ -193,7 +193,8 @@ public class UserInput {
                 .replaceAll("<=", "~")
                 .replaceAll("&&", "&")
                 .replaceAll("\\^", "&")
-                .replaceAll("!=", "?");
+                .replaceAll("!=", "?")
+                .replaceAll("%", "%");
 
     }
 
@@ -206,6 +207,7 @@ public class UserInput {
                 .replaceAll("~", "<=")
                 .replaceAll("&", "and")
                 .replaceAll("!", "not")
+                .replaceAll("%", "mod")
                 .replaceAll("\\?", "distinct");
     }
 

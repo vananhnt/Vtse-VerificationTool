@@ -1,6 +1,7 @@
 
 int multivar_1_2_false(int x) {
-  int y = x + 1;
+  int y;
+  y = x + 1;
 
   while (x < 1024) {
     x = x + 1;

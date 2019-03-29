@@ -64,6 +64,11 @@ public class LoopMonoWhileTemplate extends LoopTemplate {
                         var.add(((IASTDeclarator) childDe).getName());
                     }
                 }
+            } else if (node instanceof IASTParameterDeclaration) {
+                IASTParameterDeclaration param = (IASTParameterDeclaration) node;
+                IASTDeclarator declarator = param.getDeclarator();
+                var.add(declarator.getName());
+                //System.out.println(node.toString());
             }
         }
         loopTemplate.setInitiation(init);

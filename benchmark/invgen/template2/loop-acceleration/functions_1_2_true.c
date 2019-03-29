@@ -1,6 +1,7 @@
 
 int functions_1_2_true() {
-  int x = 0;
+  int x;
+  x = 0;
 
   while (x < 10000) {
     x = x + 2;

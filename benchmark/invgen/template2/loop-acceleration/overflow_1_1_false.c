@@ -1,6 +1,5 @@
 
-int overflow_1_1_false() {
-  int x = 10;
+int overflow_1_1_false(int x) {
 
   while (x >= 10) {
     x = x + 2;

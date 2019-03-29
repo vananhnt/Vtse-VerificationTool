@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>const_1_1_true</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return = 0</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

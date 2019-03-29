@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class InfixToPrefix {
 
-    public static char operator[] = {'(', ')', '>', '<', '=', '+', '-', '*', '/', '@', '?', '&', '~'};
+    public static char operator[] = {'(', ')', '>', '<', '=', '+', '-', '*', '/', '@', '?', '&', '~', '%'};
     static Stack<Character> stack = new Stack<>();
 
     static {

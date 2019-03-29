@@ -11,6 +11,7 @@ import app.verification.report.VerificationReport;
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
 import invariant.LoopTemplate;
+import invariant.LoopTemplateUtils;
 import jxl.write.WriteException;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 
@@ -40,14 +41,13 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
-		String benchmark = "benchmark/invgen/template2/loop_lit/gsv2008.c";
+		String benchmark = "benchmark/invgen/template2/loop-acceleration/multivar_1_1_true.c";
 		ASTFactory ast = new ASTFactory(benchmark);
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-		ast.print();
-		cfg.invariant();
-		cfg.index();
-		cfg.printGraph();
-		cfg.printSMTFormula(System.out);
+		//ast.print();
+		for (IASTNode node : LoopTemplateUtils.getFunctionBodyElement(ast.getTranslationUnit())) {
+			System.out.println(node.getRawSignature());
+		}
 
 	}
 }

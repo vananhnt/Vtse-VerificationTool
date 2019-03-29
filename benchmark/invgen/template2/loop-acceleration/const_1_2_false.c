@@ -1,7 +1,7 @@
 
 int const_1_false() {
-  int x = 1;
-  int y = 0;
+  int x; int y;
+  x = 1; y = 0;
 
   while (y < 1024) {
     x = 0;

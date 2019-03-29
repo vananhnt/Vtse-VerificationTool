@@ -81,7 +81,7 @@ public class LoopTemplate {
         }
         ASTFactory ast = new ASTFactory(cfilepath);
         System.out.println("-------------------------------------------");
-        System.out.println("- Invariant generated for: \n" + cfilepath);
+        System.out.println("- Invariant generating for: \n" + cfilepath);
         int template = TemplateDetector.detect(ast.getTranslationUnit());
 
         //concat invariants
@@ -97,6 +97,8 @@ public class LoopTemplate {
             //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
             System.err.println(concat);
             TextFileModification.modifyCFile(cfilepath, concat);
+        } else {
+            System.err.println("Cannot generate invariants");
         }
     }
     public static void generateInvariantDirectory(File directory, int template) {
