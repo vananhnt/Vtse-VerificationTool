@@ -1,10 +1,11 @@
 
-int const_1_false() {
+int const_1_2_false() {
   int x; int y;
-  x = 1; y = 0;
+  x = 0; y = 0;
 
-  while (y < 1024) {
-    x = 0;
+  while (y < 10) {
+     invariant: (x + y >= 0) and (x - y >= 0) and (x - y <= 0) and (x + y <= 0);
+    x = 0*x;
     y = y + 1;
   }
   return x;

@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>simple_3_2_true</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return >= 10000</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

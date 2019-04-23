@@ -1,6 +1,7 @@
 <AssertionFile>
     <AssertionMethod>
         <Method>Mono6_1_false</Method>
+        <LoopCount>10000000</LoopCount>
         <PreCondition></PreCondition>
         <PostCondition>(return > 0) or (return < 0)</PostCondition>
     </AssertionMethod>

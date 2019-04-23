@@ -19,7 +19,7 @@ public class TestBenchmark {
 	
 	public static void main(String[] args) throws RowsExceededException, WriteException, IOException {	
 		ExportExcel exportExcel = new ExportExcel();
-		File file = new File(EXAMPLE + "/example_5.c");
+		File file = new File(FLOAT_CDFPL);
 		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

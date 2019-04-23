@@ -2,6 +2,6 @@
     <AssertionMethod>
         <Method>phases_1_2_false</Method>
         <PreCondition></PreCondition>
-        <PostCondition>(return % 2) = 1</PostCondition>
+        <PostCondition>(return % 2) = 0</PostCondition>
     </AssertionMethod>
 </AssertionFile>

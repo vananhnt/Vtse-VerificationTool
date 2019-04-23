@@ -43,7 +43,7 @@ public class Z3Runner {
             }
         } else if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
             try {
-                Process p = Runtime.getRuntime().exec("z3 -smt2 -st -T:1 " + filename);
+                Process p = Runtime.getRuntime().exec("z3 -smt2 -st -T:500 " + filename);
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((s = br.readLine()) != null) {

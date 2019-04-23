@@ -8,6 +8,7 @@ int gsv2008_true() {
     y = 50;
     //if (!(-1000 < y && y < LARGE_INT)) return 0;
     while (x < 0) {
+     invariant: c[0]*y+c[1]*_x+0) <= 0;
         x = x + y;
         y = y + 1;
     }

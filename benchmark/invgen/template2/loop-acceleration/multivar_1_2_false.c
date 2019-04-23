@@ -1,9 +1,10 @@
 
-int multivar_1_2_false(int x) {
-  int y;
-  y = x + 1;
+int multivar_1_2_false() {
+  int x; int y;
+  x = 10; y = x + 1;
 
-  while (x < 1024) {
+  while (x < 100) {
+     invariant: (y >= 0) and (y - 1 >= 0) and (x - y >= 0) and (x - y - 1 >= 0) and (x - y - 1 <= 0) and (9*x - 11*y + 9 <= 0);
     x = x + 1;
     y = y + 1;
   }

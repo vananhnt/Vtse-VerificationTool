@@ -61,7 +61,6 @@ public class InvariantCFG extends UnfoldCFG {
                     PlainNode notCondition = getNotCondition(((DecisionNode) node.getNext()).getCondition());
                     invariantNode.setNext(notCondition);
                     ControlFlowGraph invariantGraph = new ControlFlowGraph(invariantNode, notCondition);
-                    node.setNext(invariantGraph.getStart());
                     CFGNode endNode = ((BeginNode) node).getEndNode();
                     invariantGraph.getExit().setNext(iterateInvariantNode(endNode));
                 }

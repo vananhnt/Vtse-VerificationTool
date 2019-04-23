@@ -9,8 +9,8 @@ public class VerificationReport {
 //	public static final int TIMEOUT = 2;
 //	public static final int UNKNOWN = 3;
 
-    public static final String NOT_ALWAYS_TRUE = "unsafe";
-    public static final String ALWAYS_TRUE = "safe";
+    public static final String NOT_ALWAYS_TRUE = "false";
+    public static final String ALWAYS_TRUE = "true";
     public static final String TIMEOUT = "timeout";
     public static final String UNKNOWN = "unknown";
 

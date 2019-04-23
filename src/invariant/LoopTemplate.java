@@ -57,6 +57,8 @@ public class LoopTemplate {
             for (int i = 1; i < invariants.size(); i++) {
                 concat += " and " + "(" + RedlogRunner.rlsimpl(invariants.get(i)) + ")";
             }
+        } else if (invariants.size() == 1) {
+            concat = RedlogRunner.rlsimpl(invariants.get(0));
         }
 //        System.out.println(concat);
 //        System.out.println(RedlogRunner.rlsimpl(concat));
@@ -86,13 +88,7 @@ public class LoopTemplate {
 
         //concat invariants
         List<String> invariants = InvagenRunner.run(cfilepath, template);
-        String concat = "";
-        if (invariants.size() > 1) {
-            concat = "(" + RedlogRunner.rlsimpl(invariants.get(0)) + ")";
-            for (int i = 1; i < invariants.size(); i++) {
-                concat += " and " + "(" + RedlogRunner.rlsimpl(invariants.get(i)) + ")";
-            }
-        }
+        String concat = formatInvariant(invariants);
         if (concat != "") {
             //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
             System.err.println(concat);
@@ -100,6 +96,26 @@ public class LoopTemplate {
         } else {
             System.err.println("Cannot generate invariants");
         }
+    }
+    private static String formatInvariant(List<String> invariants) {
+        String concat = "";
+        if (invariants.size() > 1) {
+            concat = "(" + RedlogRunner.rlsimpl(invariants.get(0)) + ")";
+            for (int i = 1; i < invariants.size(); i++) {
+                concat += " and " + "(" + RedlogRunner.rlsimpl(invariants.get(i)) + ")";
+            }
+//            concat = RedlogRunner.rlsimpl(concat);
+//        String[] new_invariants = concat.split("and");
+//        if (new_invariants.length <= 1) return concat;
+//        String res = "(" + new_invariants[0]+ ")";
+//        for (int i = 1; i < new_invariants.length; i++) {
+//            res += " and " + "(" + new_invariants[i] + ")";
+//        }
+//            return res;
+        } else if (invariants.size() == 1) {
+            concat = invariants.get(0);
+        }
+        return concat;
     }
     public static void generateInvariantDirectory(File directory, int template) {
         if (directory == null) {

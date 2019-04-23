@@ -2,6 +2,6 @@
     <AssertionMethod>
         <Method>const_1_2_false</Method>
         <PreCondition></PreCondition>
-        <PostCondition>return = 0</PostCondition>
+        <PostCondition>return = 1</PostCondition>
     </AssertionMethod>
 </AssertionFile>

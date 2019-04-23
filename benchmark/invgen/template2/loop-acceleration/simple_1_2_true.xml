@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>simple_1_2_true</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return % 2 == 1</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

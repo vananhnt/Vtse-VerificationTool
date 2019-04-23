@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>underapprox_2_1_false</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return ? 6</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

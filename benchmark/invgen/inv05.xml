@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>inv05</Method>
-        <LoopCount>4</LoopCount>
-        <PreCondition></PreCondition>
-        <PostCondition>return >= 0</PostCondition>
-    </AssertionMethod>
-</AssertionFile>
