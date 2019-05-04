@@ -52,27 +52,27 @@ public class FormulaCreater {
 
     public static String createInvariantFormula(CFGNode start, CFGNode exit) {
         CFGNode node = start;
-        while (!(node instanceof BeginForNode || node instanceof BeginWhileNode)) {
-            node = node.getNext();
-        }
         String constraint = node.getFormula();
         String temp;
 
         while (node != null) {
-            temp = node.getFormula();
-            if (temp != null) {
-                if (constraint == null) {
-                    constraint = temp;
-                } else {
-                    constraint = wrapPrefix(LOGIC_AND, constraint, temp);
+            if (!(node instanceof DecisionNode)) {
+                temp = node.getFormula();
+                if (temp != null) {
+                    if (constraint == null) {
+                        constraint = temp;
+                    } else {
+                        constraint = wrapPrefix(LOGIC_AND, constraint, temp);
+                    }
                 }
             }
             if (node == exit) break;
             if (node instanceof DecisionNode) {
-                node = ((DecisionNode) node).getEndNode();
+                node = ((DecisionNode) node).getThenNode();
             } else {
                 node = node.getNext();
             }
+
 
         }
 

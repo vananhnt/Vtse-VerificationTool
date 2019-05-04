@@ -72,14 +72,12 @@ public class InvariantCFG extends UnfoldCFG {
             }
         } else if (node instanceof PlainNode) {
             node.setNext(iterateInvariantNode(node.getNext()));
-
         } else if (node instanceof BeginIfNode) {
             DecisionNode condition = (DecisionNode) node.getNext();
             node.setNext(condition);
             condition.setThenNode(iterateInvariantNode(condition.getThenNode()));
             condition.setElseNode(iterateInvariantNode(condition.getElseNode()));
             ((BeginIfNode) node).getEndNode().setNext(iterateInvariantNode(((BeginIfNode) node).getEndNode().getNext()));
-
         } else if (node instanceof EmptyNode || node instanceof LabelNode
                 || node instanceof UndefinedNode) {
             node.setNext(iterateInvariantNode(node.getNext()));

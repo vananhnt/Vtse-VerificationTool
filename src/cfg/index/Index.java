@@ -57,6 +57,9 @@ public class Index {
         String name = ExpressionHelper.toString(node);
         Variable var = vm.getVariable(name);
         if (var == null) return node;
+        if (var.getIndexInvariant() > var.getIndex()) {
+            var.setIndex(var.getIndexInvariant());
+        }
         IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
         IASTIdExpression newExp = factory.newIdExpression(nameId);
         return newExp;

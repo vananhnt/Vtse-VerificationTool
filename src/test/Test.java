@@ -44,7 +44,7 @@ public class Test {
 		String benchmark = "benchmark/invgen/ase17/ase17_37.c";
 		ASTFactory ast = new ASTFactory(benchmark);
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-		//ast.print();
+		cfg.invariant();
 		cfg.index();
 		cfg.printMeta();
 
