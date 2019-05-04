@@ -5,6 +5,7 @@ public class Variable {
     private String type;
     private String name;
     private int index = -1; //mac dinh -1
+    private int indexInvariant = -1; //the index use in invariant
     private boolean isDuplicated;
 
     public Variable() {
@@ -64,6 +65,15 @@ public class Variable {
 
     public void increase() {
         index++;
+    }
+    public void decrease() {
+        index--;
+    }
+    public void setIndexInvariant(int i) {
+        indexInvariant = i;
+    }
+    public int getIndexInvariant() {
+        return indexInvariant;
     }
 
     // -3 danh dau bien nhan gia tri tra ve cua ham

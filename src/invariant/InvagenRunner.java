@@ -43,7 +43,7 @@ public class InvagenRunner {
     }
 
     public static void main(String[] args) {
-        String benchmark = "benchmark/invgen/template2/loop_lit/cggmp2005_variant.c";
+        String benchmark = "benchmark/invgen/example/ase17_07.c";
         ASTFactory ast = new ASTFactory(benchmark);
         LoopMonoWhileTemplate monoWhileTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
         monoWhileTemplate.print();

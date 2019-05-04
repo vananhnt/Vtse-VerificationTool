@@ -1,0 +1,8 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>sum</Method>
+        <LoopCount>10</LoopCount>
+        <PreCondition></PreCondition>
+        <PostCondition>return = 6</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

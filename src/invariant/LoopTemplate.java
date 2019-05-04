@@ -63,9 +63,9 @@ public class LoopTemplate {
 //        System.out.println(concat);
 //        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {
-            //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
-            System.err.println(concat);
-            TextFileModification.modifyCFile(cfilepath, concat);
+            TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
+            System.err.println(RedlogRunner.rlsimpl(concat));
+            //TextFileModification.modifyCFile(cfilepath, concat);
         } else {
             System.err.println("Cannot generate Invariants");
         }

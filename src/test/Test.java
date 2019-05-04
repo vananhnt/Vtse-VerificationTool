@@ -41,13 +41,12 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
-		String benchmark = "benchmark/invgen/template2/loop-acceleration/multivar_1_1_true.c";
+		String benchmark = "benchmark/invgen/ase17/ase17_37.c";
 		ASTFactory ast = new ASTFactory(benchmark);
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 		//ast.print();
-		for (IASTNode node : LoopTemplateUtils.getFunctionBodyElement(ast.getTranslationUnit())) {
-			System.out.println(node.getRawSignature());
-		}
+		cfg.index();
+		cfg.printMeta();
 
 	}
 }

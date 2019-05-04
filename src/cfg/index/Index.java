@@ -33,10 +33,36 @@ public class Index {
         return node;
     }
 
+    public static IASTNode indexInvariant(IASTNode node, VariableManager vm) {
+    //TODO
+        if (node instanceof IASTExpressionStatement) { //cau lenh gan va so sanh
+            node = indexExpressionStatementInvariant((IASTExpressionStatement) node, vm);
+
+        } else if (node instanceof IASTBinaryExpression) { //phep gan va so sanh
+            node = indexIASTBinaryExpressionInvariant((IASTBinaryExpression) node, vm);
+
+        } else if (node instanceof IASTUnaryExpression) { // i++
+            node = indexUranyExpressionInvariant((IASTUnaryExpression) node, vm);
+
+        } else if (node instanceof IASTIdExpression) { //bien (khong tinh trong phep khoi tao)
+            node = indexIdExpressionInvariant((IASTIdExpression) node, vm);
+        }
+        return node;
+    }
+
     /**
      * Gan index cho cac bien ve phai (khong tang index)
      */
     private static IASTNode indexIdExpression(IASTIdExpression node, VariableManager vm) {
+        String name = ExpressionHelper.toString(node);
+        Variable var = vm.getVariable(name);
+        if (var == null) return node;
+        IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
+        IASTIdExpression newExp = factory.newIdExpression(nameId);
+        return newExp;
+    }
+
+    private static IASTNode indexIdExpressionInvariant(IASTIdExpression node, VariableManager vm) {
         String name = ExpressionHelper.toString(node);
         Variable var = vm.getVariable(name);
         if (var == null) return node;
@@ -52,8 +78,26 @@ public class Index {
         String name = ExpressionHelper.toString(node);
         Variable var = vm.getVariable(name);
         if (var == null) return node;
-        var.increase();
+        if (var.getIndexInvariant() == -1) {
+            var.increase();
+        } else {
+            var.setIndex(var.getIndexInvariant() + 1);
+        }
         IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
+        IASTIdExpression newNode = factory.newIdExpression(nameId);
+        return newNode;
+    }
+    /*
+        Gan index cho invariant, index trong vm khong thay doi???
+     */
+    private static IASTNode indexVariableInvariant(IASTIdExpression node, VariableManager vm) {
+        String name = ExpressionHelper.toString(node);
+        Variable var = vm.getVariable(name);
+        if (var == null) return node;
+        var.increase();
+        var.setIndexInvariant(var.getIndex());
+        IASTName nameId = factory.newName(var.getVariableWithIndex().toCharArray());
+        var.decrease();
         IASTIdExpression newNode = factory.newIdExpression(nameId);
         return newNode;
     }
@@ -90,7 +134,9 @@ public class Index {
     private static IASTNode indexUranyExpression(IASTUnaryExpression node, VariableManager vm) {
         return index(changeUnarytoBinary(node), vm);
     }
-
+    private static IASTNode indexUranyExpressionInvariant(IASTUnaryExpression node, VariableManager vm) {
+        return indexInvariant(changeUnarytoBinary(node),vm);
+    }
     /**
      * @param node
      * @param vm
@@ -117,12 +163,49 @@ public class Index {
         }
     }
 
+    private static IASTNode indexIASTBinaryExpressionInvariant(IASTBinaryExpression node, VariableManager vm) {
+        boolean isAssignment = (node.getOperator() == IASTBinaryExpression.op_assign);
+        if (isAssignment) { //neu la phep gan thi van index nhu binh thuong
+            // System.out.println(ExpressionHelper.toString(node));
+            IASTExpression right = (IASTExpression) index (node.getOperand2().copy(), vm);
+            IASTExpression left = null;
+            if (node.getOperand1() instanceof IASTIdExpression) { // neu la 1 bien gan
+                left = (IASTExpression) indexVariableInvariant((IASTIdExpression) node.getOperand1().copy(), vm);
+            } else if (node.getOperand1() instanceof IASTBinaryExpression) { //neu la binary expression gan
+                left = (IASTExpression) index (node.getOperand1().copy(), vm);
+            }
+            IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), left, right);
+            return newNode;
+
+        } else { //neu la phep so sanh thi index ca 2 ve
+            IASTExpression right = null;
+            if (node.getOperand2() instanceof IASTIdExpression) {
+                right = (IASTExpression) indexVariableInvariant(((IASTIdExpression) node.getOperand2()).copy(), vm);
+            } else  {
+                right = (IASTExpression) indexInvariant(node.getOperand2().copy(), vm);
+            }
+
+            IASTExpression left = null;
+            if (node.getOperand1() instanceof IASTIdExpression) { // neu la 1 bien gan
+                left = (IASTExpression) indexVariableInvariant((IASTIdExpression) node.getOperand1().copy(), vm);
+            } else  { //neu la binary expression gan
+                left = (IASTExpression) indexInvariant (node.getOperand1().copy(), vm);
+            }
+            IASTBinaryExpression newNode = factory.newBinaryExpression(node.getOperator(), left, right);
+            return newNode;
+        }
+    }
+
     private static IASTNode indexExpressionStatement(IASTExpressionStatement node, VariableManager vm) {
         IASTExpression expression = node.getExpression().copy();
         IASTExpressionStatement newNode = factory.newExpressionStatement((IASTExpression) index(expression, vm));
         return newNode;
     }
-
+    private static IASTNode indexExpressionStatementInvariant(IASTExpressionStatement node, VariableManager vm) {
+        IASTExpression expression = node.getExpression().copy();
+        IASTExpressionStatement newNode = factory.newExpressionStatement((IASTExpression) indexInvariant(expression, vm));
+        return newNode;
+    }
     /**
      * danh chi so danh rieng cho khoi tao trong for
      *

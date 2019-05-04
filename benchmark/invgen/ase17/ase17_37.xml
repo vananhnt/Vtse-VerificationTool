@@ -1,0 +1,8 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>ase17_37</Method>
+        <LoopCount>10</LoopCount>
+        <PreCondition></PreCondition>
+        <PostCondition>(return >= 0)^(return < 100)</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

@@ -1,5 +1,6 @@
 package cfg.node;
 
+import cfg.index.Variable;
 import cfg.index.VariableManager;
 
 import java.io.PrintStream;

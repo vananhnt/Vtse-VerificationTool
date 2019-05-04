@@ -1,5 +1,7 @@
 package cfg.node;
 
+import cfg.index.Index;
+import cfg.index.VariableManager;
 import cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
@@ -14,6 +16,10 @@ public class InvariantNode extends PlainNode {
 
     public InvariantNode(IASTStatement stm, IASTFunctionDefinition func) {
         super(stm, func);
+    }
+
+    public void index(VariableManager vm) {
+        super.setStatement((IASTStatement) Index.indexInvariant(super.getStatement(), vm));
     }
 
     public void printNode() {

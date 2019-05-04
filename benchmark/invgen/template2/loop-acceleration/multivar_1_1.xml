@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>multivar_1_1</Method>
+        <PreCondition>x = 0</PreCondition>
+        <PostCondition>return != 1024</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

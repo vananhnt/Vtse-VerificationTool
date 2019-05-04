@@ -170,6 +170,9 @@ public class VtseCFG extends ControlFlowGraph {
             iteration(((BeginNode) iter).getEndNode().getNext());
         } else if (iter instanceof EndConditionNode) {
             iter.index(vm);
+        } else if (iter instanceof InvariantNode) {
+            iter.index(vm);
+            iteration(iter.getNext());
         } else {
             iter.index(vm);
             iteration(iter.getNext());
