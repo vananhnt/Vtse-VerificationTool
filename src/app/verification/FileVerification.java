@@ -82,7 +82,7 @@ public class FileVerification {
             //System.err.println("***Verification report:");
             System.out.println("- Method name: " + am.getMethodName());
             int nLoops;
-            if (am.getLoopCount() != null) {
+            if (am.getLoopCount() != null && am.getLoopCount().matches("^\\d+$")) {
                 nLoops = Integer.parseInt(am.getLoopCount());
             } else {
                 nLoops = 100;

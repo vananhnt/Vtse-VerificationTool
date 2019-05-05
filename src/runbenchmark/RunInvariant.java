@@ -14,7 +14,7 @@ import java.util.List;
 public class RunInvariant {
     public static void  main(String[] args) throws IOException, WriteException {
         //String benchmark = "benchmark/invgen/template2/loop_lit/afnp2014_true.c";
-        String benchmark = "benchmark/invgen/ase17/ase17_37.c";
+        String benchmark = "benchmark/invgen/final";
         ExportExcel exportExcel = new ExportExcel();
         File file = new File(benchmark);
         FileVerification fv = new FileVerification();

@@ -155,7 +155,9 @@ public class VtseCFG extends ControlFlowGraph {
     public void index() {
         iteration(start);
     }
-
+/*
+    Note: Index invariant + 1, tuy nhien k index notConditionNode
+ */
     private void iteration(CFGNode start) {
         CFGNode iter = start;
         if (iter == null) {
@@ -171,6 +173,9 @@ public class VtseCFG extends ControlFlowGraph {
         } else if (iter instanceof EndConditionNode) {
             iter.index(vm);
         } else if (iter instanceof InvariantNode) {
+            iter.index(vm);
+            iteration(iter.getNext());
+        } else if (iter instanceof PlainNode) {
             iter.index(vm);
             iteration(iter.getNext());
         } else {

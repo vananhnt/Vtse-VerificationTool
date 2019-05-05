@@ -2,6 +2,6 @@
     <AssertionMethod>
         <Method>Mono6_1_false</Method>
         <PreCondition></PreCondition>
-        <PostCondition>(return > 0) or (return < 0)</PostCondition>
+        <PostCondition>(return < 0)</PostCondition>
     </AssertionMethod>
 </AssertionFile>

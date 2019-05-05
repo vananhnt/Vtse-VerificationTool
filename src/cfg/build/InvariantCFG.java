@@ -20,11 +20,12 @@ public class InvariantCFG extends UnfoldCFG {
         }
         setExit(super.findEnd(super.getStart()));
     }
+    //TODO sua tam la assign == equal
     private int getNegetive(int operator) { // x < 100 -> x = 100
-        if (operator == IASTBinaryExpression.op_lessThan) return IASTBinaryExpression.op_equals;
+        if (operator == IASTBinaryExpression.op_lessThan) return IASTBinaryExpression.op_assign;
         else if (operator == IASTBinaryExpression.op_lessEqual) return IASTBinaryExpression.op_greaterThan;
         else if (operator == IASTBinaryExpression.op_greaterEqual) return IASTBinaryExpression.op_lessThan;
-        else if (operator == IASTBinaryExpression.op_greaterThan) return IASTBinaryExpression.op_equals;
+        else if (operator == IASTBinaryExpression.op_greaterThan) return IASTBinaryExpression.op_assign;
         else if (operator == IASTBinaryExpression.op_equals) return IASTBinaryExpression.op_notequals;
         return operator;
     }

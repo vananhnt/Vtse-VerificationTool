@@ -35,6 +35,9 @@ public class InvagenRunner {
             InvagenXMLInput.printInputToXMLFarkas(loopTemplate, fo);
             TransitionSystem ts = new TransitionSystem(path);
             result  = ts.getInvariants();
+            if (result.isEmpty()) {
+                result.add(loopTemplate.getLoopCondition().getRawSignature());
+            }
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

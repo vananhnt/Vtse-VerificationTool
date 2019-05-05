@@ -6,8 +6,10 @@ int Mono6_1_false() {
 	x = 0;
 	y = 10000000;
 	z = 5000000;
-	while (x<y) {
+	while (x < y) {
+     invariant: (z >= 0) and (z - 1 >= 0) and (x - z + 5000000 >= 0);
 		if (x < 5000000) {
+		    z = z;
 			x = x + 1;
 		} else {
 			z = z + 1;
@@ -15,6 +17,5 @@ int Mono6_1_false() {
 		}
 	}
   //__VERIFIER_assert(z!=x);
-  int res = z - x;
-  return res;
+  return z;
 }

@@ -43,6 +43,7 @@ public class SMTInput {
         this.constraints = constrainst;
     }
 
+    //Unused
     public void printInput() {
         System.err.println("print");
         for (Variable v : variableList) {
@@ -53,7 +54,8 @@ public class SMTInput {
             if (v.getIndex() < 0)
                 System.out.println("(declare-fun " + v.getVariableWithIndex() + " () " + smtType + ")");
             else {
-                for (int i = 0; i <= v.getIndex(); i++)
+                int imax = (v.getIndexInvariant() > v.getIndex()) ? v.getIndexInvariant() : v.getIndex();
+                for (int i = 0; i <= imax; i++)
                     System.out.println(declare(v.getName(), i, smtType));
             }
         }
@@ -85,7 +87,8 @@ public class SMTInput {
                 if (v.getIndex() < 0)
                     out.append("(declare-fun " + v.getVariableWithIndex() + " () " + smtType + ")\n");
                 else {
-                    for (int i = -1; i <= v.getIndex(); i++)
+                    int imax = (v.getIndexInvariant() > v.getIndex()) ? v.getIndexInvariant() : v.getIndex();
+                    for (int i = -1; i <= imax; i++)
                         out.append(declare(v.getName(), i, smtType) + "\n");
                 }
             } else if (v.getName().equals("return")) {
