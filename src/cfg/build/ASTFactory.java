@@ -9,6 +9,7 @@ import org.eclipse.core.runtime.CoreException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Get IASTFunctionDefinition
@@ -82,6 +83,17 @@ public class ASTFactory {
         filelocation = fileName;
     }
 
+    public List<String> getFunctionSignatures() {
+        if (translationUnit == null) return null;
+        List<String> funcList = new ArrayList<>();
+        for (IASTNode run : translationUnit.getDeclarations()) {
+            if (run instanceof IASTFunctionDefinition) {
+                String name = ((IASTFunctionDefinition) run).getDeclarator().getName().toString();
+                funcList.add(name);
+            }
+        }
+        return funcList;
+    }
     public ArrayList<IASTFunctionDefinition> getListFunction() {
         if (translationUnit == null) return null;
         ArrayList<IASTFunctionDefinition> funcList = new ArrayList<>();

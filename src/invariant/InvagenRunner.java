@@ -36,7 +36,7 @@ public class InvagenRunner {
             fo = new FileOutputStream(new File(path));
             InvagenXMLInput.printInputToXMLFarkas(loopTemplate, fo);
             TransitionSystem ts = new TransitionSystem(path);
-            result  = ts.getInvariants();
+            result = ts.getInvariants();
             if (result.isEmpty()) {
                 result.add(loopTemplate.getLoopCondition().getRawSignature());
             }
