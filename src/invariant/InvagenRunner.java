@@ -16,6 +16,7 @@ public class InvagenRunner {
 
     public static List<String> run(String cfilepath, int template) {
         ASTFactory ast = new ASTFactory(cfilepath);
+        //set template -> could change into a factory
         LoopTemplate loopTemplate;
         if (template == LoopTemplate.MONO_WHILE_TEMPLATE) {
             loopTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
@@ -24,6 +25,7 @@ public class InvagenRunner {
         } else {
             loopTemplate = LoopForTemplate.getLoopElement(ast.getTranslationUnit());
         }
+
         String filename = new File(cfilepath).getName();
         String path = (SMTINPUT_DIR  + filename).replace(".c", "_fak_inv.xml");
         List<String> result = new ArrayList<String>();
@@ -36,6 +38,8 @@ public class InvagenRunner {
             fo = new FileOutputStream(new File(path));
             InvagenXMLInput.printInputToXMLFarkas(loopTemplate, fo);
             TransitionSystem ts = new TransitionSystem(path);
+//            System.err.println("Redlog formula: ");
+//            ts.printRedlogFormulas();
             result = ts.getInvariants();
             if (result.isEmpty()) {
                 result.add(loopTemplate.getLoopCondition().getRawSignature());

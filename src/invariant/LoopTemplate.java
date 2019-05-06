@@ -49,7 +49,7 @@ public class LoopTemplate {
             LoopMonoWhileTemplate loopMonoWhileTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
         } else if (template == IFELSE_WHILE_TEMPLATE) {
             LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        } else {
+        } else if (template == FOR_TEMPLATE) {
             LoopForTemplate loopTemplate = LoopForTemplate.getLoopElement(ast.getTranslationUnit());
         }
 
@@ -68,7 +68,7 @@ public class LoopTemplate {
 //        System.out.println(RedlogRunner.rlsimpl(concat));
         if (concat != "") {
             //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
-            System.err.println(RedlogRunner.rlsimpl(concat));
+            System.err.println("Invariant: " + RedlogRunner.rlsimpl(concat));
             TextFileModification.modifyCFile(cfilepath, concat);
         } else {
             System.err.println("Cannot generate Invariants");
@@ -89,16 +89,19 @@ public class LoopTemplate {
         System.out.println("-------------------------------------------");
         System.out.println("- Invariant generating for: \n" + cfilepath);
         int template = TemplateDetector.detect(ast.getTranslationUnit());
-
+        if (template == -1) {
+            System.err.println("Cannot detect loop in program.");
+            return;
+        }
         //concat invariants
         List<String> invariants = InvagenRunner.run(cfilepath, template);
         String concat = formatInvariant(invariants);
         if (concat != "") {
             //TextFileModification.modifyCFile(cfilepath, RedlogRunner.rlsimpl(concat));
-            System.err.println(RedlogRunner.rlsimpl(concat));
+            System.err.println("Invariant: " + RedlogRunner.rlsimpl(concat));
             TextFileModification.modifyCFile(cfilepath, concat);
         } else {
-            System.err.println("Cannot generate invariants");
+            System.err.println("Cannot generate invariants.");
         }
     }
     private static String formatInvariant(List<String> invariants) {
@@ -108,14 +111,7 @@ public class LoopTemplate {
             for (int i = 1; i < invariants.size(); i++) {
                 concat += " and " + "(" + RedlogRunner.rlsimpl(invariants.get(i)) + ")";
             }
-//            concat = RedlogRunner.rlsimpl(concat);
-//        String[] new_invariants = concat.split("and");
-//        if (new_invariants.length <= 1) return concat;
-//        String res = "(" + new_invariants[0]+ ")";
-//        for (int i = 1; i < new_invariants.length; i++) {
-//            res += " and " + "(" + new_invariants[i] + ")";
-//        }
-//            return res;
+//
         } else if (invariants.size() == 1) {
             concat = invariants.get(0);
         }

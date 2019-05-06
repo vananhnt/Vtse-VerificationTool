@@ -18,6 +18,15 @@ public class FileVerification {
     public static final String C_TAG = ".c";
     public static final String CPP_TAG = ".cpp";
     public static final String PP_FILE_TAG = ".xml";
+    private int loopCount = -1;
+
+    public int getLoopCount() {
+        return loopCount;
+    }
+
+    public void setLoopCount(int loopCount) {
+        loopCount = loopCount;
+    }
 
     public FileVerification() throws RowsExceededException, WriteException, IOException {
 
@@ -82,11 +91,16 @@ public class FileVerification {
             //System.err.println("***Verification report:");
             System.out.println("- Method name: " + am.getMethodName());
             int nLoops;
-            if (am.getLoopCount() != null && am.getLoopCount().matches("^\\d+$")) {
-                nLoops = Integer.parseInt(am.getLoopCount());
+            if (loopCount == -1) {
+                if (am.getLoopCount() != null && am.getLoopCount().matches("^\\d+$")) {
+                    nLoops = Integer.parseInt(am.getLoopCount());
+                } else {
+                    nLoops = 100;
+                }
             } else {
-                nLoops = 100;
+                nLoops = loopCount;
             }
+
             for (IASTFunctionDefinition function : listFunction) {
                 String functionName = getFunctionName(function);
                 if (functionName.equals(am.getMethodName())) {

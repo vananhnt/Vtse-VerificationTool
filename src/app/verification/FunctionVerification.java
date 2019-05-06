@@ -92,6 +92,7 @@ public class FunctionVerification {
         VerificationReport verReport = report.generateReport(result);
 
         verReport.print();
+        System.out.println("Z3 result:");
         result.forEach(System.out::println);
 
         verReport.setFunctionName(cfg.getNameFunction());

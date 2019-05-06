@@ -12,6 +12,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="libs" level="project" />
+    <orderEntry type="library" exported="" name="libs" level="project" />
+    <orderEntry type="module" module-name="invagen" exported="" />
+    <orderEntry type="library" exported="" name="com.microsoft.z3" level="project" />
+    <orderEntry type="library" exported="" name="Maven: org.antlr:antlr4-runtime:4.7" level="project" />
+    <orderEntry type="library" exported="" name="repositories.xml" level="project" />
   </component>
 </module>
