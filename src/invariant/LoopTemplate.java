@@ -21,6 +21,7 @@ public class LoopTemplate {
     public static int UNKNOWN_TEMPLATE = -1;
     public static int MONO_WHILE_TEMPLATE = 0;
     public static int IFELSE_WHILE_TEMPLATE = 1;
+    public static int FOR_TEMPLATE = 2;
 
     public LoopTemplate(){}
 
@@ -46,9 +47,12 @@ public class LoopTemplate {
         System.out.println("- Invariant generated for: \n" + cfilepath);
         if (template == MONO_WHILE_TEMPLATE) {
             LoopMonoWhileTemplate loopMonoWhileTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        } else {
+        } else if (template == IFELSE_WHILE_TEMPLATE) {
             LoopIfWhileTemplate loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        } else {
+            LoopForTemplate loopTemplate = LoopForTemplate.getLoopElement(ast.getTranslationUnit());
         }
+
         //concat invariants
         List<String> invariants = InvagenRunner.run(cfilepath, template);
         String concat = "";
@@ -158,7 +162,15 @@ public class LoopTemplate {
         return filename;
     }
     public void print() {
-
+        System.out.println("-> Variable: ");
+        for (IASTName node : getVariables()) {
+            System.out.println("\t" + node.getRawSignature());
+        }
+        System.out.println("-> Initiation: ");
+        for (IASTExpressionStatement iastExpressionStatement : getInitiation()) {
+            System.out.println("\t" + iastExpressionStatement.getRawSignature());
+        }
+        System.out.println("-> Condition: " + getLoopCondition().getRawSignature());
     }
     public List<IASTName> getVariables() {
         return variables;

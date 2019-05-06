@@ -1,9 +1,7 @@
 package cfg.utils;
 
-import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
-import org.eclipse.cdt.core.dom.ast.IASTExpression;
-import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
-import org.eclipse.cdt.core.dom.ast.INodeFactory;
+import org.eclipse.cdt.core.dom.ast.*;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 public class UnaryToBinaryExpression {
     public static int unaryToBinaryOperator(int unaryOperator) {
@@ -17,7 +15,16 @@ public class UnaryToBinaryExpression {
             return -1;
         }
     }
-
+    public static IASTBinaryExpression unaryToBinary(IASTUnaryExpression unaryExpression) {
+        CPPNodeFactory nodeFactory = new CPPNodeFactory();
+        int unaryOperator = unaryExpression.getOperator();
+        int binaryOperator = unaryToBinaryOperator(unaryOperator);
+        IASTExpression operand = unaryExpression.getOperand().copy();
+        IASTLiteralExpression newLiteral = nodeFactory.newLiteralExpression(IASTLiteralExpression.lk_integer_constant, "1");
+        IASTBinaryExpression right = nodeFactory.newBinaryExpression(binaryOperator, operand, newLiteral);
+        IASTBinaryExpression binaryExpression = nodeFactory.newBinaryExpression(IASTBinaryExpression.op_assign, operand, right);
+        return binaryExpression;
+    }
     @SuppressWarnings("unused")
     private void properStatement(IASTUnaryExpression unaryExpression) {
         INodeFactory nodeFactory = unaryExpression.getTranslationUnit().getASTNodeFactory();

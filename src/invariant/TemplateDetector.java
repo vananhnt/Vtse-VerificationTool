@@ -1,10 +1,7 @@
 package invariant;
 
 import cfg.build.ASTFactory;
-import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
-import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
-import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
+import org.eclipse.cdt.core.dom.ast.*;
 
 public class TemplateDetector {
 
@@ -23,6 +20,8 @@ public class TemplateDetector {
                     }
                 }
                 return LoopTemplate.MONO_WHILE_TEMPLATE;
+            } else if (node instanceof IASTForStatement) {
+                return LoopTemplate.FOR_TEMPLATE;
             }
         }
         return -1;

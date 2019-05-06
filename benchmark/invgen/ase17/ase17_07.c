@@ -4,6 +4,7 @@ int ase17_07() {
   int i; int a; int b; int n;
   i = 0; a = 0; b = 0; n = 10;
   while( i < n ) {
+     invariant: (b + n >= 0) and (b + n - 1 >= 0) and (b - n + 10 >= 0) and (b - n <= 0) and (b - n + 1 <= 0) and (b + n - 10 <= 0) and (a - b - n <= 0) and (a - b - n + 1 <= 0) and (a - b + n - 10 <= 0) and (a + b - n <= 0) and (a + b - n + 1 <= 0) and (a + b + n - 10 <= 0) and (b - i + n >= 0) and (b - i + n - 1 >= 0) and (b - i - n + 10 >= 0) and (b + i - n <= 0) and (b + i - n + 1 <= 0) and (b + i + n - 10 <= 0) and (a - b + i - n <= 0) and (a - b + i - n + 1 <= 0) and (a - b + i + n - 10 <= 0) and (a + b + i - n <= 0) and (a + b + i - n + 1 <= 0) and (a + b + i + n - 10 <= 0);
     if(__BLAST_NONDET) {
       a = a+1;
       b = b+2;

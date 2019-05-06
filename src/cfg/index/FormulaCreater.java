@@ -72,8 +72,6 @@ public class FormulaCreater {
             } else {
                 node = node.getNext();
             }
-
-
         }
 
         return constraint;

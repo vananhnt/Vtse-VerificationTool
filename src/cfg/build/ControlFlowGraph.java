@@ -180,7 +180,6 @@ public class ControlFlowGraph {
         if (this != null)
             print(start, 0);
     }
-
     public void printBoundary() {
         System.out.print("StartNode: ");
         start.printNode();

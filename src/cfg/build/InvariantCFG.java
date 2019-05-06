@@ -22,10 +22,10 @@ public class InvariantCFG extends UnfoldCFG {
     }
     //TODO sua tam la assign == equal
     private int getNegetive(int operator) { // x < 100 -> x = 100
-        if (operator == IASTBinaryExpression.op_lessThan) return IASTBinaryExpression.op_assign;
+        if (operator == IASTBinaryExpression.op_lessThan) return IASTBinaryExpression.op_equals;
         else if (operator == IASTBinaryExpression.op_lessEqual) return IASTBinaryExpression.op_greaterThan;
         else if (operator == IASTBinaryExpression.op_greaterEqual) return IASTBinaryExpression.op_lessThan;
-        else if (operator == IASTBinaryExpression.op_greaterThan) return IASTBinaryExpression.op_assign;
+        else if (operator == IASTBinaryExpression.op_greaterThan) return IASTBinaryExpression.op_equals;
         else if (operator == IASTBinaryExpression.op_equals) return IASTBinaryExpression.op_notequals;
         return operator;
     }
@@ -54,7 +54,7 @@ public class InvariantCFG extends UnfoldCFG {
         //if (node != null) node.printNode();
         if (node == null) {
             return null;
-        } else if (node instanceof BeginWhileNode || node instanceof BeginForNode) {
+        } else if (node instanceof BeginWhileNode) {
             //add Invariant Node
             if (node.getNext() instanceof DecisionNode) {
                 if (((DecisionNode) node.getNext()).getThenNode() instanceof InvariantNode) {
@@ -71,7 +71,25 @@ public class InvariantCFG extends UnfoldCFG {
 //                CFGNode endNode = ((BeginNode) node).getEndNode();
 //                invariantGraph.getExit().setNext(iterateInvariantNode(endNode));
             }
-        } else if (node instanceof PlainNode) {
+        } else if (node instanceof BeginForNode) {
+            if (node.getNext().getNext() instanceof DecisionNode) {
+                if (((DecisionNode) node.getNext().getNext()).getThenNode() instanceof InvariantNode) {
+                    DecisionNode decisionNode = (DecisionNode) node.getNext().getNext();
+                    PlainNode initNode = null;
+                    if (decisionNode.getThenNode() instanceof PlainNode) {
+                        initNode = (PlainNode) decisionNode.getThenNode();
+                    }
+                    InvariantNode invariantNode = (InvariantNode) decisionNode.getThenNode();
+                    initNode.setNext(invariantNode);
+                    PlainNode notCondition = getNotCondition(decisionNode.getCondition());
+                    invariantNode.setNext(notCondition);
+                    ControlFlowGraph invariantGraph = new ControlFlowGraph(initNode, notCondition);
+                    CFGNode endNode = ((BeginNode) node).getEndNode();
+                    invariantGraph.getExit().setNext(iterateInvariantNode(endNode));
+                }
+            }
+        }
+        else if (node instanceof PlainNode) {
             node.setNext(iterateInvariantNode(node.getNext()));
         } else if (node instanceof BeginIfNode) {
             DecisionNode condition = (DecisionNode) node.getNext();

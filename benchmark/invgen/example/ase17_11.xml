@@ -1,8 +1,8 @@
 <AssertionFile>
     <AssertionMethod>
-        <Method>sum</Method>
+        <Method>ase17_11</Method>
         <LoopCount>10</LoopCount>
         <PreCondition></PreCondition>
-        <PostCondition>return = 6</PostCondition>
+        <PostCondition>return = 200</PostCondition>
     </AssertionMethod>
 </AssertionFile>

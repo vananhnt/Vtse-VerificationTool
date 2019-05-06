@@ -10,6 +10,7 @@ import app.verification.FunctionVerification;
 import app.verification.report.VerificationReport;
 import cfg.build.ASTFactory;
 import cfg.build.VtseCFG;
+import invariant.LoopForTemplate;
 import invariant.LoopTemplate;
 import invariant.LoopTemplateUtils;
 import jxl.write.WriteException;
@@ -41,12 +42,15 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
-		String benchmark = "benchmark/invgen/final/multivar_1_1_true.c";
+		String benchmark = "benchmark/invgen/example/ase17_11.c";
 		ASTFactory ast = new ASTFactory(benchmark);
+		//ast.print();
+		LoopForTemplate looptemplate = LoopForTemplate.getLoopElement(ast.getTranslationUnit());
+		//looptemplate.print();
 		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 		cfg.invariant();
 		cfg.index();
 		//cfg.printMeta();
-		//cfg.printGraph();
+		cfg.printGraph();
 	}
 }

@@ -19,8 +19,10 @@ public class InvagenRunner {
         LoopTemplate loopTemplate;
         if (template == LoopTemplate.MONO_WHILE_TEMPLATE) {
             loopTemplate = LoopMonoWhileTemplate.getLoopElement(ast.getTranslationUnit());
-        } else {
+        } else if (template == LoopTemplate.IFELSE_WHILE_TEMPLATE) {
             loopTemplate = LoopIfWhileTemplate.getLoopElement(ast.getTranslationUnit());
+        } else {
+            loopTemplate = LoopForTemplate.getLoopElement(ast.getTranslationUnit());
         }
         String filename = new File(cfilepath).getName();
         String path = (SMTINPUT_DIR  + filename).replace(".c", "_fak_inv.xml");
