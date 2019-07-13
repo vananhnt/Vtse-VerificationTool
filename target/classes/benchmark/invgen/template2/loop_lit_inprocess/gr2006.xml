@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>gr2006</Method>
-        <PreCondition></PreCondition>
-        <PostCondition>return = 100</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

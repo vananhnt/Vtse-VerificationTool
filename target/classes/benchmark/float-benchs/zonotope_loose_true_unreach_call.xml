@@ -1,9 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>zonotope_loose_true_unreach_call</Method>
-        <PreCondition>(IN >= 0)^(IN<= 10)
-        </PreCondition>
-        <PostCondition>(return >= 0)^(return<= 105)
-        </PostCondition>
-    </AssertionMethod>
-</AssertionFile>

@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>underapprox_2_1_false</Method>
-        <LoopCount>6</LoopCount>
-        <PreCondition></PreCondition>
-        <PostCondition>return ? 6</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

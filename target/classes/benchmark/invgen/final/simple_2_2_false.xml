@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>simple_2_2_false</Method>
-        <LoopCount>10000</LoopCount>
-        <PreCondition></PreCondition>
-        <PostCondition>return > 10000</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

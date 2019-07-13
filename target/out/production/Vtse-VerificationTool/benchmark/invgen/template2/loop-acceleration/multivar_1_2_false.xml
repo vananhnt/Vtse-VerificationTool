@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>multivar_1_2_false</Method>
-        <LoopCount>100</LoopCount>
-        <PreCondition></PreCondition>
-        <PostCondition>return = 0</PostCondition>
-    </AssertionMethod>
-</AssertionFile>
