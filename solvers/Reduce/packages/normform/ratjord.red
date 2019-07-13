@@ -988,7 +988,7 @@ symbolic procedure make_ratj_block(p,e,x);
 
 symbolic procedure priminv_to_ratjordan(prim_inv,x);
   %
-  % For a primary invariant prim_inv, priminv_to_ratjordan(prim_inv,x)
+  % For a primary java.invariant prim_inv, priminv_to_ratjordan(prim_inv,x)
   % returns the matrix R in rational Jordan normal form corresponding to
   % prim_inv.
   %

@@ -196,7 +196,7 @@ flag ('(jordansymbolic),'opfn);  %  So it can be used from
 
 symbolic procedure jordansymbolicform(a,full_coeff_list);
   begin
-    scalar l,r,tt,tinv,s,sinv,tmp,p,pinv,invariant;
+    scalar l,r,tt,tinv,s,sinv,tmp,p,pinv,java.invariant;
 
     tmp := ratjordanform(a,full_coeff_list);
     r := car tmp;
@@ -211,9 +211,9 @@ symbolic procedure jordansymbolicform(a,full_coeff_list);
     p := off_mod_reval {'times,tt,s};
     pinv := off_mod_reval {'times,sinv,tinv};
 
-    invariant := invariant_to_jordan(nth(l,1));
+    java.invariant := invariant_to_jordan(nth(l,1));
 
-    return {invariant,nth(l,2),p,pinv};
+    return {java.invariant,nth(l,2),p,pinv};
   end;
 
 
@@ -295,22 +295,22 @@ flag ('(identitymatrix),'boolean);
 
 
 
-symbolic procedure invariant_to_jordan(invariant);
+symbolic procedure invariant_to_jordan(java.invariant);
   begin
     scalar block_list;
     integer n,m;
 
-    n := length invariant;
+    n := length java.invariant;
     block_list := {};
 
     for i:=1:n do
     <<
-      m := length nth(nth(invariant,i),2);
+      m := length nth(nth(java.invariant,i),2);
       for j:=1:m do
       <<
         block_list := append(block_list,
-                      {jordanblock(nth(nth(invariant,i),1),
-                      nth(nth(nth(invariant,i),2),j))});
+                      {jordanblock(nth(nth(java.invariant,i),1),
+                      nth(nth(nth(java.invariant,i),2),j))});
       >>;
     >>;
     return (reval {'diagi,block_list});
@@ -353,7 +353,7 @@ flag ('(jordanblock),'opfn); %  So it can be used independently
 switch mod_was_on;
 symbolic procedure ratjordan_to_jordan(r);
   begin
-    scalar prim_inv,tt,tinv,tinvlist,tlist,exp_list,invariant,p,partt,
+    scalar prim_inv,tt,tinv,tinvlist,tlist,exp_list,java.invariant,p,partt,
            parttinv,s1,t1,v,w,sum1,tmp,s,sinv,x;
     integer nn,n,d;
     %
@@ -367,7 +367,7 @@ symbolic procedure ratjordan_to_jordan(r);
 
     prim_inv := ratjordan_to_priminv(r,x);
 
-    invariant := {};
+    java.invariant := {};
     tlist := {};
     tinvlist := {};
 
@@ -379,14 +379,14 @@ symbolic procedure ratjordan_to_jordan(r);
       d := off_mod_reval(deg(p,x));
       if d=1 then
       <<
-        invariant := append(invariant,{{reval {'minus,coeffn(p,x,0)},
+        java.invariant := append(java.invariant,{{reval {'minus,coeffn(p,x,0)},
                             exp_list}});
       >>
       else
       <<
         for j:=1:d do
         <<
-          invariant := append(invariant,{{mkid(x,off_mod_reval{'plus,
+          java.invariant := append(java.invariant,{{mkid(x,off_mod_reval{'plus,
                               {'times,10,i},j}),exp_list}});
         >>;
       >>;
@@ -501,7 +501,7 @@ symbolic procedure ratjordan_to_jordan(r);
     sinv := reval{'diagi,tinvlist};
     tmp := {for i:=1:nn collect nth(nth(prim_inv ,i),1)};
     tmp := append(tmp,{x});
-    tmp := append({invariant},{tmp});
+    tmp := append({java.invariant},{tmp});
 
     return {tmp,s,sinv};
   end;
@@ -511,7 +511,7 @@ symbolic procedure ratjordan_to_jordan(r);
 
 symbolic procedure ratjordan_to_priminv(r,x);
   %
-  % ratjordan_to_priminv(R,x) computes the primary invariant of a matrix
+  % ratjordan_to_priminv(R,x) computes the primary java.invariant of a matrix
   % R which is in rational Jordan normal form.
   %
   begin

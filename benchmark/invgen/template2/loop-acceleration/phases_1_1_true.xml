@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>phases_1_1_true</Method>
-        <PreCondition>x = 10</PreCondition>
-        <PostCondition>return = 0</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

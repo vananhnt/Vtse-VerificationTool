@@ -47,7 +47,7 @@ Classification strategy:
        differentiation                        - done
        equidimensional                        - done
        exact                                  - done
-       scale invariant                        - done
+       scale java.invariant                        - done
        contact                                - ???
        Lie symmetry                           - ???
 

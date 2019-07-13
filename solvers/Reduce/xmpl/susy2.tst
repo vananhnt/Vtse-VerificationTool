@@ -298,7 +298,7 @@ for k:=0:2 do for l:=0:3 do write sd_part(xxx,l,k);
 
 clear xxx;
 
-% 17.) Projection onto invariant subspace;
+% 17.) Projection onto java.invariant subspace;
 
 xxx:=
 w_comb({{f,1,b}},2,a,b)*d(1)+
@@ -480,7 +480,7 @@ adam:=groesolve(sub(der(1)=1,der(2)=1,d(1)=1,lyst1(ewa)));
 vira:=sub(adam,vira);
 
 % we make additional assumption that our Poisson tensor vira should be O(2)
-% invariant under the change of susy derivatives;
+% java.invariant under the change of susy derivatives;
 
 dad:=odwa(vira)-vira;
 factor der;
@@ -488,7 +488,7 @@ wyr1:=sub(der(1)=1,der(2)=1,lyst1(dad));
 remfac der;
 dad:=groesolve(wyr1);
 vira:=sub(dad,vira);
-% we check wheather it is really O(2) invariant;
+% we check wheather it is really O(2) java.invariant;
 vira-odwa(vira);
 % O.K
 %so

@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>functions_1_1_false</Method>
-        <PreCondition></PreCondition>
-        <PostCondition>return % 2 = 1</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

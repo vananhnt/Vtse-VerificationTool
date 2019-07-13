@@ -207,7 +207,7 @@ begin
   pde:=first vari;
   vari:=rest vari;
 
-  % is oldsol an invariant?
+  % is oldsol an java.invariant?
   oldsol_ex:=equ_to_expr(oldsol)$      % oldsol as vanishing expression
   prev_depend:=storedepend(vari)$  
   h2:=sub(u_=oldsol_ex,pde);
@@ -221,7 +221,7 @@ begin
   >>;
   restoredepend(prev_depend)$  
   if 0=h2 then return lisp
-  <<write"The special solution to be generalized is an invariant ",
+  <<write"The special solution to be generalized is an java.invariant ",
 	 "with respect to";terpri()$
     write"this symmetry, therefore no generalization is possible.";
     terpri()$

@@ -174,10 +174,10 @@ odesolve(x*y(x)*df(y(x),x,2) + x*df(y(x),x)^2 + y(x)*df(y(x),x) = 0,
 odesolve(df(y(x),x,2)^2 - 2df(y(x),x)*df(y(x),x,2) + 2y(x)*df(y(x),x) -
    y(x)^2 = 0, y(x), x);
 
-% (40) Scale invariant (fails with algint option)
+% (40) Scale java.invariant (fails with algint option)
 odesolve(x^2*df(y(x),x,2) + 3x*df(y(x),x) = 1/(y(x)^3*x^4), y(x), x);
 
-% Revised scale-invariant example (hangs with algint option):
+% Revised scale-java.invariant example (hangs with algint option):
 ode := x^2*df(y(x),x,2) + 3x*df(y(x),x) + 2*y(x) = 1/(y(x)^3*x^4);
 % Choose full (explicit and expanded) solution:
 odesolve(ode, y(x), x, full);           % or "explicit, expand"
