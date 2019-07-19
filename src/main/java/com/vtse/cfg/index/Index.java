@@ -64,6 +64,12 @@ public class Index {
         return newExp;
     }
 
+    /**
+     * index invariant, không thay đổi giá trị index
+     * @param node
+     * @param vm
+     * @return
+     */
     private static IASTNode indexIdExpressionInvariant(IASTIdExpression node, VariableManager vm) {
         String name = ExpressionHelper.toString(node);
         Variable var = vm.getVariable(name);
@@ -86,7 +92,7 @@ public class Index {
             } else {
                 var.increase();
             }
-        } else { //dont have in java.invariant
+        } else { //dont have in invariant
             var.increase();
         }
 
@@ -95,7 +101,7 @@ public class Index {
         return newNode;
     }
     /*
-        Gan index cho java.invariant, index trong vm khong thay doi???
+        Gan index cho invariant, index trong vm khong thay doi???
      */
     private static IASTNode indexVariableInvariant(IASTIdExpression node, VariableManager vm) {
         String name = ExpressionHelper.toString(node);
@@ -211,6 +217,12 @@ public class Index {
         return newNode;
     }
     private static IASTNode indexExpressionStatementInvariant(IASTExpressionStatement node, VariableManager vm) {
+        // After done index a invariant node, increase var that exist in invariant
+        for (Variable variable : vm.getVariableList()) {
+            if (variable.getIndexInvariant() != -1) {
+                //variable.increase();
+            }
+        }
         IASTExpression expression = node.getExpression().copy();
         IASTExpressionStatement newNode = factory.newExpressionStatement((IASTExpression) indexInvariant(expression, vm));
         return newNode;

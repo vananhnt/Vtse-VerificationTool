@@ -1,5 +1,6 @@
 package com.vtse.cfg.utils;
 
+import com.vtse.cfg.node.InvariantNode;
 import com.vtse.cfg.node.PlainNode;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
@@ -186,7 +187,7 @@ public class ExpressionHelper {
      * @param condition the condition statement
      * @return a plainNode, only return not condition when the loop may terminate
      */
-    public static PlainNode getNotCondition(IASTExpression condition) {
+    public static InvariantNode getNotCondition(IASTExpression condition) {
         CPPNodeFactory factory = new CPPNodeFactory();
         if (condition instanceof IASTBinaryExpression) {
             IASTBinaryExpression con = (IASTBinaryExpression) condition;
@@ -195,9 +196,9 @@ public class ExpressionHelper {
             IASTExpression right = con.getOperand2().copy();
             IASTBinaryExpression newExp = factory.newBinaryExpression(getNegetive(operator), left, right);
             IASTStatement statement = factory.newExpressionStatement(newExp);
-            return new PlainNode(statement);
+            return new InvariantNode(statement);
         }
-        return new PlainNode();
+        return new InvariantNode();
     }
 
     private static boolean isForwardCondition(IASTBinaryExpression condition) {

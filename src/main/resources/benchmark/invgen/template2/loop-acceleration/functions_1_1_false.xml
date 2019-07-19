@@ -1,7 +1,7 @@
 <AssertionFile>
     <AssertionMethod>
         <Method>functions_1_1_false</Method>
-        <LoopCount>10000</LoopCount>
+        <LoopCount>3</LoopCount>
         <PreCondition></PreCondition>
         <PostCondition>return % 2 = 1</PostCondition>
     </AssertionMethod>

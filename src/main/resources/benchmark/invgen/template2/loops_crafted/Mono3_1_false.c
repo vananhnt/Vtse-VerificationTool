@@ -5,7 +5,7 @@ int Mono3_1_false() {
   x = 0;
   y = 0;
   while (x < 1000000) {
-     invariant: (x + y >= 0) and (x - y >= 0);
+     invariant: (x - y >= 0) and (x + y >= 0);
     if (x < 500000) {
 	    y = y + 1;
       x = x + 1;

@@ -127,7 +127,7 @@ public class FileVerification {
                         long start = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
                         System.err.println("function: " + functionName);
                         if (mode == FunctionVerification.UNFOLD_MODE) {
-                            int incr = (nLoops < 1000) ? nLoops : 1000;
+                            int incr = (nLoops < 100) ? nLoops : 100;
                             report = mv.verify(ast, function, am.getPreCondition(), am.getPostCondition(), incr, mode);
                         }
                         else { //Invariant_Mode

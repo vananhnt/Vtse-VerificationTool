@@ -184,7 +184,8 @@ public class UnfoldCFG {
 		} else if (node instanceof BeginWhileNode) {
 			/* only add not condition node when loop may terminate*/
 			IASTExpression condition = ((BeginWhileNode) node).getDecisionNode().getCondition();
-			boolean isTerminate = ExpressionHelper.checkTermination(((BeginWhileNode) node).getWhileStatement());
+			//boolean isTerminate = ExpressionHelper.checkTermination(((BeginWhileNode) node).getWhileStatement());
+			boolean isTerminate = false;
 			ControlFlowGraph whileGraph = unfoldWhile(node, ((BeginWhileNode) node).getEndNode());
 			if (isTerminate) { //add not condition
 				PlainNode notCondition = ExpressionHelper.getNotCondition(condition);

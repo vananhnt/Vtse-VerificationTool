@@ -89,6 +89,7 @@ public class FunctionVerification {
         Report report = new Report();
         report.setListParameter(cfg.getInitVariables());
         report.setFunctionName(cfg.getNameFunction());
+        if (nLoops < 100) mode = FunctionVerification.INVARIANT_MODE; //change from true* to true
         report.setMode(mode);
         VerificationReport verReport = report.generateReport(result);
 

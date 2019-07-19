@@ -33,19 +33,17 @@ public class    InvariantCFG extends UnfoldCFG {
             if (node.getNext() instanceof DecisionNode) {
 
                 if (((DecisionNode) node.getNext()).getThenNode() instanceof InvariantNode) {
+                    //replace then graph by invariant
                     InvariantNode invariantNode = (InvariantNode)((DecisionNode) node.getNext()).getThenNode();
-                    PlainNode notCondition = ExpressionHelper.getNotCondition(((DecisionNode) node.getNext()).getCondition());
-                    ((DecisionNode) node.getNext()).getEndOfThen().setNext(notCondition);
-                    //invariantNode.setNext(notCondition);
-                    ControlFlowGraph invariantGraph = new ControlFlowGraph(invariantNode, notCondition);
-                    CFGNode endNode = ((BeginNode) node).getEndNode();
-                    invariantGraph.getExit().setNext(iterateInvariantNode(endNode));
+                    CFGNode endNode = ((BeginWhileNode) node).getEndNode();
+                    invariantNode.setNext(endNode);
+                    ((DecisionNode) node.getNext()).setEndOfThen(invariantNode);
+                    //add not condition at the end of loop
+                    CFGNode contNode = iterateInvariantNode(((BeginWhileNode) node).getEndNode().getNext());
+                    InvariantNode notCondition = ExpressionHelper.getNotCondition(((DecisionNode) node.getNext()).getCondition());
+                    endNode.setNext(notCondition);
+                    notCondition.setNext(contNode);
                 }
-//                InvariantNode invariantNode = new InvariantNode();
-//                ControlFlowGraph invariantGraph = new ControlFlowGraph(invariantNode, invariantNode);
-//                node.setNext(invariantGraph.getStart());
-//                CFGNode endNode = ((BeginNode) node).getEndNode();
-//                invariantGraph.getExit().setNext(iterateInvariantNode(endNode));
             }
         } else if (node instanceof BeginForNode) {
             if (node.getNext().getNext() instanceof DecisionNode) {

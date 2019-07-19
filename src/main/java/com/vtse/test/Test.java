@@ -36,13 +36,13 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws IOException {
-		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/invgen/template2/loop-acceleration/overflow_1_1_false.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("overflow_1_1_false"), ast);
+		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/invgen/template2/loops_crafted/Mono1_2_true.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("Mono1_2_true"), ast);
 
 		//ast.print();
-		//cfg.invariant();
-		cfg.unfold(1);
-		//cfg.index();
+		cfg.invariant();
+		//cfg.unfold(1);
+		cfg.index();
 		//java.cfg.printMeta();
 		cfg.printGraph();
 	}
