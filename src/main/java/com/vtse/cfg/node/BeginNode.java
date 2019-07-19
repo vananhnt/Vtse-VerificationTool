@@ -24,5 +24,12 @@ public class BeginNode extends CFGNode {
         return adj;
     }
 
+    public DecisionNode getDecisionNode() {
+        if (this.next.next instanceof DecisionNode) {
+            return (DecisionNode) this.next.next;
+        } else if (this.next instanceof DecisionNode) {
+            return (DecisionNode) this.next;
+        } else return null;
+    }
 
 }

@@ -9,17 +9,17 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
 public class BeginWhileNode extends BeginNode {
-    private IASTNode whileStatement;
+    private IASTWhileStatement whileStatement;
     private CFGNode divert;//chuyen huong sang Invariant
 
     public BeginWhileNode() {
     }
 
-    public BeginWhileNode(IASTNode stm) {
+    public BeginWhileNode(IASTWhileStatement stm) {
         whileStatement = stm;
     }
 
-    public IASTNode getWhileStatement() {
+    public IASTWhileStatement getWhileStatement() {
         return whileStatement;
     }
 

@@ -1,7 +1,8 @@
 package com.vtse.cfg.build;
 
+import com.vtse.cfg.utils.ExpressionHelper;
 import com.vtse.cfg.utils.FunctionHelper;
-import com.vtse.cfg.utils.astnode.ASTNodeFactory;
+import com.vtse.cfg.utils.ASTNodeFactory;
 
 import com.vtse.cfg.node.*;
 import org.eclipse.cdt.core.dom.ast.*;
@@ -131,8 +132,9 @@ public class ControlFlowGraphBuilder {
 
     private ControlFlowGraph createGotoGraph(IASTLabelStatement statement, IASTFunctionDefinition def) {
         ControlFlowGraph cfg = null;
+        String label = ExpressionHelper.toString(statement);
         //check if label statement is java.invariant
-        if (statement.getRawSignature().contains("java/invariant")) {
+        if (label.matches("invariant(.*)")) {
             IASTStatement nested = statement.getNestedStatement();
             InvariantNode inv = new InvariantNode(nested, def);
             cfg = new ControlFlowGraph(inv, inv);

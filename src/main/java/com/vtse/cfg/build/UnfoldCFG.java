@@ -1,22 +1,10 @@
 package com.vtse.cfg.build;
 
+import com.vtse.cfg.node.*;
+import com.vtse.cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 
-import com.vtse.cfg.node.BeginForNode;
-import com.vtse.cfg.node.BeginIfNode;
-import com.vtse.cfg.node.BeginWhileNode;
-import com.vtse.cfg.node.CFGNode;
-import com.vtse.cfg.node.DecisionNode;
-import com.vtse.cfg.node.EmptyNode;
-import com.vtse.cfg.node.EndConditionNode;
-import com.vtse.cfg.node.EndFunctionNode;
-import com.vtse.cfg.node.GotoNode;
-import com.vtse.cfg.node.IterationNode;
-import com.vtse.cfg.node.LabelNode;
-import com.vtse.cfg.node.PlainNode;
-import com.vtse.cfg.node.UndefinedNode;
 import com.vtse.cfg.utils.Cloner;
-
 
 /**
  * @author va
@@ -130,7 +118,10 @@ public class UnfoldCFG {
 		}
 		CFGNode beginNode = new BeginWhileNode();
 		beginNode.setNext(lastNode);
-		
+
+//		PlainNode notCondition = ExpressionHelper.getNotCondition(conditionExpression);
+//		endNode.setNext(notCondition);
+
 		return new ControlFlowGraph(beginNode.getNext(), endNode);
 	}
 	
@@ -151,7 +142,7 @@ public class UnfoldCFG {
 		ControlFlowGraph thenClause = new ControlFlowGraph(currentCondition.getThenNode(), 
 					findExit(currentCondition.getThenNode())); 
 		ControlFlowGraph copyThen;
-		
+
 		thenClause.setStart(iterateNode(thenClause.getStart()));
 		//thenClause.printGraph();
 		
@@ -160,8 +151,7 @@ public class UnfoldCFG {
 			condition.setCondition(conditionExpression);
 			condition.setElseNode(new EmptyNode());
 			condition.getElseNode().setNext(endNode);
-			
-			copyThen = new ControlFlowGraph();
+
 			copyThen = Cloner.clone(thenClause);
 			
 			condition.setThenNode(copyThen.getStart());
@@ -173,10 +163,11 @@ public class UnfoldCFG {
 			
 			lastNode = condition;
 		}
+
 		CFGNode beginNode = new BeginForNode();
 		initNode.setNext(lastNode);
 		beginNode.setNext(initNode);
-	 	//new ControlFlowGraph(beginNode.getNext(), endNode).printGraph();
+		//new ControlFlowGraph(beginNode.getNext(), notCondition).printGraph();
 		return new ControlFlowGraph(beginNode.getNext(), endNode);
 	} 
 	
@@ -191,13 +182,27 @@ public class UnfoldCFG {
 		if (node == null) {
 			return null;
 		} else if (node instanceof BeginWhileNode) {
+			/* only add not condition node when loop may terminate*/
+			IASTExpression condition = ((BeginWhileNode) node).getDecisionNode().getCondition();
+			boolean isTerminate = ExpressionHelper.checkTermination(((BeginWhileNode) node).getWhileStatement());
 			ControlFlowGraph whileGraph = unfoldWhile(node, ((BeginWhileNode) node).getEndNode());
-			node.setNext(whileGraph.getStart());
-			whileGraph.getExit().setNext(iterateNode(((BeginWhileNode) node).getEndNode().getNext()));
-			
+			if (isTerminate) { //add not condition
+				PlainNode notCondition = ExpressionHelper.getNotCondition(condition);
+				node.setNext(whileGraph.getStart());
+				CFGNode contNode = iterateNode(((BeginWhileNode) node).getEndNode().getNext());
+				whileGraph.getExit().setNext(notCondition);
+				notCondition.setNext(contNode);
+			} else {
+				node.setNext(whileGraph.getStart());
+				whileGraph.getExit().setNext(iterateNode(((BeginWhileNode) node).getEndNode().getNext()));
+			}
 		} else if (node instanceof PlainNode) {
-			node.setNext(iterateNode(node.getNext()));	
-	
+			//remove invariant node when unfold
+			if (node instanceof InvariantNode) {
+				node = iterateNode(node.getNext());
+			} else {
+				node.setNext(iterateNode(node.getNext()));
+			}
 		} else if (node instanceof BeginIfNode) {
 			DecisionNode condition = (DecisionNode) node.getNext();
 			node.setNext(condition);
@@ -206,23 +211,28 @@ public class UnfoldCFG {
 			((BeginIfNode) node).getEndNode().setNext(iterateNode(((BeginIfNode) node).getEndNode().getNext()));
 		
 		} else if (node instanceof BeginForNode) {
+			IASTExpression condition = ((BeginForNode) node).getDecisionNode().getCondition();
+			PlainNode notCondition = ExpressionHelper.getNotCondition(condition);
+
 			ControlFlowGraph forGraph = unfoldFor(node, ((BeginForNode) node).getEndNode());
 			node.setNext(forGraph.getStart());
-			forGraph.getExit().setNext(iterateNode(((BeginForNode) node).getEndNode().getNext()));
+
+			CFGNode contNode = iterateNode(((BeginForNode) node).getEndNode().getNext());
+			forGraph.getExit().setNext(notCondition);
+			notCondition.setNext(contNode);
 		
 		} else if (node instanceof EmptyNode || node instanceof LabelNode
 					|| node instanceof UndefinedNode ) {
 			node.setNext(iterateNode(node.getNext()));				
 		} else if (node instanceof EndConditionNode) {
-			//node.setNext(iterateNode(node.getNext()));		
-		} 
+		}
 		else if (node instanceof GotoNode) {
 			ControlFlowGraph gotoGraph = unfoldGoto((GotoNode)node);
 			CFGNode endNode = node.getNext();
 			node.setNext(gotoGraph.getStart());
 			gotoGraph.getExit().setNext(iterateNode(endNode));
-			
 		}
+
 		return node;
 }
 	private CFGNode findEndFunctionNode(LabelNode label) {

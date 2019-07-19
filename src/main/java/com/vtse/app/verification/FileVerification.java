@@ -215,7 +215,7 @@ public class FileVerification {
                                 reportList.add(report);
                             } else {
                                 if (nLoops > 1000) {
-                                    nLoops = 10;
+                                    nLoops = 100;
                                 }
                                 report = mv.verify(ast, function, am.getPreCondition(), am.getPostCondition(), nLoops, FunctionVerification.UNFOLD_MODE);
                                 System.err.println("UNFOLD STRATEGY");

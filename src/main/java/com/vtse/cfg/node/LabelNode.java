@@ -20,6 +20,10 @@ public class LabelNode extends CFGNode {
         function = func;
     }
 
+    public IASTLabelStatement getLabel() {
+        return statement;
+    }
+
     public IASTFunctionDefinition getFunction() {
         return function;
     }

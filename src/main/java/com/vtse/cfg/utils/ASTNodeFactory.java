@@ -1,4 +1,4 @@
-package com.vtse.cfg.utils.astnode;
+package com.vtse.cfg.utils;
 
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;

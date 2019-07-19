@@ -13,17 +13,17 @@ public class TextFileModification {
             //Reading all the lines of input text file into oldContent
             String line = reader.readLine();
             while (line != null) {
-                if (!line.contains("java.invariant:")) {
+                if (!line.contains("invariant:")) {
                     oldContent = oldContent + line + System.lineSeparator();
                 }
                 //Add java.invariant after loop
                 if (line.contains("while") || line.contains("for")) {
-                    oldContent = oldContent + "     java.invariant:;" + System.lineSeparator();
+                    oldContent = oldContent + "     invariant:;" + System.lineSeparator();
                 }
                 line = reader.readLine();
             }
             //Replacing oldString with newString in the oldContent
-            String newContent = oldContent.replaceAll("invariant:;", "java.invariant: " + invariant + ";");
+            String newContent = oldContent.replaceAll("invariant:;", "invariant: " + invariant + ";");
             //Rewriting the input text file with newContent
             writer = new FileWriter(fileToBeModified);
             writer.write(newContent);

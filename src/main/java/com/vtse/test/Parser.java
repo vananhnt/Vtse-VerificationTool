@@ -15,7 +15,8 @@ public class Parser {
         VtseCFG cfg = new VtseCFG(func);
         cfg.unfold();
         cfg.index();
-        cfg.printMeta();
+
+        //cfg.printMeta();
 
         //printTree(func, 1);
     }

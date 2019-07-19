@@ -16,11 +16,11 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
  */
 public class Test {
 	private static String getBenchmark(String props) throws IOException {
-		String path = System.getProperty("user.dir") + "/src/test/benchmark.properties";
+		String path = System.getProperty("user.dir") + "/src/main/java/com/vtse/test/benchmark.properties";
 		FileInputStream is = new FileInputStream(new File(path));
 		Properties benchmarkProps = new Properties();
 		benchmarkProps.load(is);
-		return benchmarkProps.getProperty("invgen");
+		return benchmarkProps.getProperty(props);
 	}
 
 	private static void printTree(IASTNode node, int index) {
@@ -35,15 +35,14 @@ public class Test {
 			printTree(iastNode, index + 2);
 	}
 
-	public static void  main(String[] args) throws FileNotFoundException, IOException, WriteException {
-		String benchmark = "benchmark/invgen/template2/loop-acceleration/simple_3_2_true.c";
-		ASTFactory ast = new ASTFactory(benchmark);
+	public static void  main(String[] args) throws IOException {
+		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/invgen/template2/loop-acceleration/overflow_1_1_false.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("overflow_1_1_false"), ast);
+
 		//ast.print();
-		LoopForTemplate looptemplate = LoopForTemplate.getLoopElement(ast.getTranslationUnit());
-		//looptemplate.print();
-		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-		cfg.invariant();
-		cfg.index();
+		//cfg.invariant();
+		cfg.unfold(1);
+		//cfg.index();
 		//java.cfg.printMeta();
 		cfg.printGraph();
 	}

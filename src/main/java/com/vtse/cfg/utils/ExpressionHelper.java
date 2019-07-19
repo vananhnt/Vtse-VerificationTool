@@ -1,6 +1,8 @@
 package com.vtse.cfg.utils;
 
+import com.vtse.cfg.node.PlainNode;
 import org.eclipse.cdt.core.dom.ast.*;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPNodeFactory;
 
 public class ExpressionHelper {
 
@@ -24,6 +26,8 @@ public class ExpressionHelper {
             return "return " + toString(node.getChildren()[0]);
         } else if (node instanceof IASTFunctionCallExpression) {
             return toStringFunctionCallExpression((IASTFunctionCallExpression) node);
+        } else if (node instanceof IASTLabelStatement) {
+            return node.getRawSignature();
         } else if (node == null) {
             return "";
         }
@@ -167,5 +171,100 @@ public class ExpressionHelper {
         return "@";
     }
 
+    //TODO sua tam la assign == equal
+    public static int getNegetive(int operator) { // x < 100 -> x = 100
+        if (operator == IASTBinaryExpression.op_lessThan) return IASTBinaryExpression.op_greaterEqual;
+        else if (operator == IASTBinaryExpression.op_lessEqual) return IASTBinaryExpression.op_greaterThan;
+        else if (operator == IASTBinaryExpression.op_greaterEqual) return IASTBinaryExpression.op_lessThan;
+        else if (operator == IASTBinaryExpression.op_greaterThan) return IASTBinaryExpression.op_lessEqual;
+        else if (operator == IASTBinaryExpression.op_equals) return IASTBinaryExpression.op_notequals;
+        return operator;
+    }
+
+    /**
+     * Get not condition plain node, regarding loop steps
+     * @param condition the condition statement
+     * @return a plainNode, only return not condition when the loop may terminate
+     */
+    public static PlainNode getNotCondition(IASTExpression condition) {
+        CPPNodeFactory factory = new CPPNodeFactory();
+        if (condition instanceof IASTBinaryExpression) {
+            IASTBinaryExpression con = (IASTBinaryExpression) condition;
+            IASTExpression left = con.getOperand1().copy();
+            int operator = con.getOperator();
+            IASTExpression right = con.getOperand2().copy();
+            IASTBinaryExpression newExp = factory.newBinaryExpression(getNegetive(operator), left, right);
+            IASTStatement statement = factory.newExpressionStatement(newExp);
+            return new PlainNode(statement);
+        }
+        return new PlainNode();
+    }
+
+    private static boolean isForwardCondition(IASTBinaryExpression condition) {
+        int operator = condition.getOperator();
+        if (operator == IASTBinaryExpression.op_lessEqual || operator == IASTBinaryExpression.op_lessThan) {
+            return true;
+        } else {
+           return false;
+        }
+    }
+    /**
+     * Check termination, using simple heuristic regarding unwinding steps
+     * if condition is not binary expression, auto return false
+     * @param whileStatement loop statement
+     * @return if the loop will terminate
+     */
+    public static boolean checkTermination(IASTWhileStatement whileStatement) {
+        IASTExpression condition = whileStatement.getCondition();
+        String var = null;
+        boolean isConditionForward = false;
+        if (!(condition instanceof IASTBinaryExpression)) {
+            return false;
+        }
+        isConditionForward = isForwardCondition((IASTBinaryExpression) condition);
+        // Get variable in condition
+        for (IASTNode child : condition.getChildren()) {
+            if (child instanceof IASTIdExpression) {
+                var = child.getRawSignature();
+            }
+        }
+        IASTNode[] body = whileStatement.getBody().getChildren();
+        for (IASTNode node : body) {
+            // Consider assign statements
+            if (node instanceof IASTExpressionStatement) {
+                IASTExpression expression = ((IASTExpressionStatement) node).getExpression();
+                if (expression instanceof IASTBinaryExpression) {
+
+                    //check is assignment or not
+                    boolean isAssign = (((IASTBinaryExpression) expression).getOperator() == IASTBinaryExpression.op_assign);
+                    if (isAssign) {
+
+                        //check is it the assignment that update loop step
+                        IASTExpression left = ((IASTBinaryExpression) expression).getOperand1();
+                        IASTExpression right = ((IASTBinaryExpression) expression).getOperand2();
+                        if (left.getRawSignature().equals(var)) {
+
+                            //check if step is forward or backward
+                            //only consider easy cases like: x = x + a or x = x - a; other cases may produce wrong results
+                            if (right instanceof IASTBinaryExpression &&
+                                ((IASTBinaryExpression) right).getOperator() == IASTBinaryExpression.op_plus) {
+                                //forward step
+                                if (isConditionForward) {
+                                    return true;
+                                }
+                            } else if (right instanceof IASTBinaryExpression &&
+                                ((IASTBinaryExpression) right).getOperator() == IASTBinaryExpression.op_minus) {
+                                //backward
+                                if (!isConditionForward) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
 }
