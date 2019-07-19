@@ -82,7 +82,7 @@ int is_transmit11_triggered() ;
 int is_transmit12_triggered() ;
 void immediate_notify() ;
 int token  ;
-int __NONDET  ;
+int __NONDET  = 0;
 int local  ;
 
 void master() 
@@ -1347,12 +1347,13 @@ int exists_runnable_thread()
 }
 }
 void eval() 
-{ int __NONDET___0 ;
+{ int __NONDET___0 = 0 ;
   int tmp ;
 
   {
   {
-  while (1 < 2) {
+  while (1 < 2)
+  {
     while_13_continue: /* CIL Label */ ;
     {
     tmp = exists_runnable_thread();

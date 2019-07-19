@@ -340,7 +340,7 @@ void eval()
   int tmp___0 ;
   int tmp___1 ;
   int tmp___2 ;
-  int __NONDET = 5;
+  int __NONDET = 0;
 
   {
   {

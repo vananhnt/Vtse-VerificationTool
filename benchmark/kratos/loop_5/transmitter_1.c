@@ -28,7 +28,9 @@ void master()
   }
   M_ENTRY: ;
   {
-  while (1 < 2) {
+  while (1 < 2)
+  {
+  }
     while_0_continue: /* CIL Label */ ;
     {
     E_1 = 1;
@@ -312,7 +314,8 @@ void master()
     E_1 = 2;
     }
     {
-    while (1 < 2) {
+    while (1 < 2)
+    {
       while_1_continue: /* CIL Label */ ;
       m_pc = 1;
       m_st = 2;
@@ -328,7 +331,8 @@ void master()
     E_1 = 2;
     }
     {
-    while (1 < 2) {
+    while (1 < 2)
+    {
       while_1_continue: /* CIL Label */ ;
       m_pc = 1;
       m_st = 2;
@@ -336,7 +340,7 @@ void master()
       goto return_label;
       M_WAIT: ;
     }
-{
+    {
       while_1_continue: /* CIL Label */ ;
       m_pc = 1;
       m_st = 2;
@@ -396,7 +400,8 @@ void transmit1()
   }
   T1_ENTRY: ;
   {
-  while (1 < 2) {
+  while (1 < 2)
+  {
     while_2_continue: /* CIL Label */ ;
     t1_pc = 1;
     t1_st = 2;
@@ -548,7 +553,8 @@ void eval()
 
   {
   {
-  while (1 < 2) {
+  while (1 < 2)
+  {
     while_3_continue: /* CIL Label */ ;
     {
     tmp = exists_runnable_thread();
@@ -887,7 +893,8 @@ void start_simulation()
   reset_delta_events();
   }
   {
-  while (1 < 2) {
+  while (1 < 2)
+  {
     while_4_continue: /* CIL Label */ ;
     {
     kernel_st = 1;

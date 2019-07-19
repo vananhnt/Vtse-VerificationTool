@@ -17,7 +17,7 @@ public class RunKratos {
     static String ECA_RERS = "./benchmark/eca-rers2012";
 
     public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
-        ExportExcel exportExcel = new ExportExcel("Kratos Benchmark loop 1.xls");
+        ExportExcel exportExcel = new ExportExcel("Kratos Benchmark loop 1_ edit NONDET&token for token_ring.xls");
 
         File file = new File(KRATOS);
         FileVerification fv = new FileVerification();

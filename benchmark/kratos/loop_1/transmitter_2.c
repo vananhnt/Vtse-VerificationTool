@@ -484,8 +484,8 @@ int stop_simulation()
   return (__retres2);
 }
 }
-void start_simulation() 
-{ int kernel_st ;
+void start_simulation()
+int kernel_st ;
   int tmp ;
   int tmp___0 ;
 

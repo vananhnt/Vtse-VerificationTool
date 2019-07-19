@@ -33,17 +33,17 @@ public class Test {
 			printTree(iastNode, index + 2);
 	}
 	public static void  main(String[] args) throws FileNotFoundException, IOException {
-		String benchmark = "benchmark/kratos/loop_1";
+		String KRATOS = "./benchmark/kratos/loop_1";
 //		ASTFactory ast = new ASTFactory(benchmark);
 		//VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-		ASTFactory ast = new ASTFactory(benchmark + "/token_ring_13.c");
+		ASTFactory ast = new ASTFactory(KRATOS + "/transmitter_1.c");
 
-//		VtseCFG cfg = new VtseCFG(ast.getFunction("token_ring_13"), ast);
-		VtseCFG cfg = new VtseCFG(ast.getFunction("is_master_triggered"), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction("eval"), ast);
+//		VtseCFG cfg = new VtseCFG(ast.getFunction("start_simulation"), ast);
 
 //		ast.print();
-//		cfg.index();
-		cfg.unfold();
+		cfg.index();
+//		cfg.unfold();
 		cfg.printGraph();
 
 	}

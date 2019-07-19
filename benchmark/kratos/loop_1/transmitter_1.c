@@ -126,14 +126,14 @@ int is_transmit1_triggered()
   return (__retres1);
 }
 }
-void update_channels() 
-{ 
-
-  {
-
-  
-}
-}
+//void update_channels()
+//{
+//
+//  {
+//
+//
+//}
+//}
 void init_threads() 
 { 
 
@@ -194,24 +194,28 @@ void eval()
         m_st = 1;
         master();
         }
-      } else {
-
       }
-    } else {
-
+//      else {
+//
+//      }
     }
+//    else {
+//
+//    }
     if (t1_st == 0) {
       if (__NONDET) {
         {
         t1_st = 1;
         transmit1();
         }
-      } else {
-
       }
-    } else {
-
+//       else {
+//
+//      }
     }
+//    else {
+//
+//    }
   }
   while_3_break: /* CIL Label */ ;
   }
@@ -258,16 +262,15 @@ void reset_delta_events()
   }
   if (E_1 == 1) {
     E_1 = 2;
-  } else {
-
   }
-
-  
+//  else {
+//
+//  }
 }
 }
 void activate_threads() 
-{ int tmp ;
-  int tmp___0 ;
+{ int tmp = 0 ;
+  int tmp___0  = 0;
 
   {
   {
@@ -275,31 +278,28 @@ void activate_threads()
   }
   if (tmp) {
     m_st = 0;
-  } else {
-
   }
+//  else {
+//
+//  }
   {
   tmp___0 = is_transmit1_triggered();
   }
   if (tmp___0) {
     t1_st = 0;
-  } else {
-
   }
+//  else {
+//
+//  }
 
   
 }
 }
 void immediate_notify() 
-{ 
-
-  {
+{
   {
   activate_threads();
   }
-
-  
-}
 }
 void fire_time_events() 
 { 
@@ -321,14 +321,16 @@ void reset_time_events()
   }
   if (T1_E == 1) {
     T1_E = 2;
-  } else {
-
   }
+//  else {
+//
+//  }
   if (E_1 == 1) {
     E_1 = 2;
-  } else {
-
   }
+//  else {
+//
+//  }
 
   
 }
@@ -370,7 +372,7 @@ void start_simulation()
   {
   {
   kernel_st = 0;
-  update_channels();
+// update_channels();
   init_threads();
   fire_delta_events();
   activate_threads();
@@ -385,7 +387,7 @@ void start_simulation()
     }
     {
     kernel_st = 2;
-    update_channels();
+//    update_channels();
     }
     {
     kernel_st = 3;

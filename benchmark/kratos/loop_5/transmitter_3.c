@@ -699,7 +699,7 @@ int exists_runnable_thread()
 }
 }
 void eval() 
-{ int __NONDET ;
+{ int __NONDET;
   int tmp ;
 
   {

@@ -30,20 +30,20 @@ int c_read_req_ev  ;
 int c_write_req_ev  ;
 int c_read_rsp_ev  ;
 int c_write_rsp_ev  ;
-static int d_t  ;
-static int a_t  ;
-static int req_t_type  ;
-static int req_t_a  ;
-static int req_t_d  ;
-static int rsp_t_type  ;
-static int rsp_t_status  ;
-static int rsp_t_d  ;
-static int req_tt_type  ;
-static int req_tt_a  ;
-static int req_tt_d  ;
-static int rsp_tt_type  ;
-static int rsp_tt_status  ;
-static int rsp_tt_d  ;
+int d_t  ;
+int a_t  ;
+int req_t_type  ;
+int req_t_a  ;
+int req_t_d  ;
+int rsp_t_type  ;
+int rsp_t_status  ;
+int rsp_t_d  ;
+int req_tt_type  ;
+int req_tt_a  ;
+int req_tt_d  ;
+int rsp_tt_type  ;
+int rsp_tt_status  ;
+int rsp_tt_d  ;
 
 int s_memory_read(int i)
 {
@@ -117,7 +117,8 @@ void m_run()
   L_MASTER_RUN_ENTRY:
   a = 0;
   {
-  while (1 < 2) {
+  while (1 < 2)
+  {
     while_0_continue: ;/* CIL Label */ ;
     if (a < 1) {
 
@@ -621,7 +622,8 @@ void m_run()
     }
     c_write_req_ev = 2;
     {
-    while (1 < 2) {
+    while (1 < 2)
+    {
       while_7_continue: ;/* CIL Label */ ;
       if (c_empty_rsp == 1) {
 
@@ -828,12 +830,12 @@ void m_run()
   
 }
 }
-static int req_t_type___0  ;
-static int req_t_a___0  ;
-static int req_t_d___0  ;
-static int rsp_t_type___0  ;
-static int rsp_t_status___0  ;
-static int rsp_t_d___0  ;
+int req_t_type___0  ;
+int req_t_a___0  ;
+int req_t_d___0  ;
+int rsp_t_type___0  ;
+int rsp_t_status___0  ;
+int rsp_t_d___0  ;
 void s_run()
 { int req_type ;
   int req_a ;
@@ -1096,7 +1098,7 @@ void s_run()
 void eval()
 { int tmp ;
   int tmp___0 ;
-  int __NONDET;
+  int __NONDET = 0;
 
   {
   {
