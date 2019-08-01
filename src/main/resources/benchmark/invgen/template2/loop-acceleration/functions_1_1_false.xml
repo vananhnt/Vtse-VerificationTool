@@ -3,6 +3,6 @@
         <Method>functions_1_1_false</Method>
         <LoopCount>3</LoopCount>
         <PreCondition></PreCondition>
-        <PostCondition>return % 2 = 1</PostCondition>
+        <PostCondition>return % 2 = 0</PostCondition>
     </AssertionMethod>
 </AssertionFile>

@@ -13,12 +13,12 @@ import java.util.List;
 
 public class RunInvariant {
     public static void  main(String[] args) throws IOException, WriteException {
-        String benchmark = "/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/invgen/template2/loops_crafted/Mono6_1_false.c";
+        String benchmark = "/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/invgen/template2/loop-acceleration/simple_3_2_true.c";
         ExportExcel exportExcel = new ExportExcel();
         File file = new File(benchmark);
         FileVerification fv = new FileVerification();
         LoopTemplate.generateInvariantDirectory(file);
-        List<VerificationReport> reportList = fv.verifyDirectory(file);
+        List<VerificationReport> reportList = fv.verifyDirectory(file, FunctionVerification.UNFOLD_MODE);
         exportExcel.writeExcel(reportList);
     }
 }

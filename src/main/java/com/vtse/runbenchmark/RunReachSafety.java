@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class RunReachSafety {
-    static String FLOAT_CDFPL = "./benchmark/float-cdfpl-func";
+    static String FLOAT_CDFPL = "/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/float-cdfpl-func";
     static String FLOAT_BENCHS = "./benchmark/float-benchs";
     static String KRATOS = "./benchmark/kratos";
     static String ECA_RERS = "./benchmark/eca-rers2012";

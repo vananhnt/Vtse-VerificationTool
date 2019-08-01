@@ -1,8 +1,8 @@
 <AssertionFile>
     <AssertionMethod>
         <Method>simple_3_2_true</Method>
-        <PreCondition>n = 100</PreCondition>
-        <LoopCount>100</LoopCount>
+        <PreCondition></PreCondition>
+        <LoopCount>10000</LoopCount>
         <PostCondition>return % 2 = 0</PostCondition>
     </AssertionMethod>
 </AssertionFile>

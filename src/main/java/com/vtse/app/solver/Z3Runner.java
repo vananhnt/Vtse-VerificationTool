@@ -21,7 +21,7 @@ public class Z3Runner {
         //System.err.println(filename);
         if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
             try {
-                Process p = Runtime.getRuntime().exec("/usr/local/bin/z3 -smt2 -st -T:300 " + filename);
+                Process p = Runtime.getRuntime().exec("/usr/local/bin/z3 -smt2 -st -T:60 " + filename);
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((s = br.readLine()) != null) {

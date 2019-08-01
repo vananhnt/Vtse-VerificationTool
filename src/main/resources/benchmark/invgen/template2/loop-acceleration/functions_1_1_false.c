@@ -4,7 +4,7 @@ int functions_1_1_false() {
   x = 0;
 
   while (x < 10000) {
-     invariant: x >= 0;
+   //  invariant: x >= 0;
     x = x + 2;
   }
   return x;

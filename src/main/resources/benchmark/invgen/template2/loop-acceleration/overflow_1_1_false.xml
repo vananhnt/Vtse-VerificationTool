@@ -3,6 +3,6 @@
         <Method>overflow_1_1_false</Method>
         <LoopCount>10</LoopCount>
         <PreCondition>x = 10</PreCondition>
-        <PostCondition>return % 2 = 1</PostCondition>
+        <PostCondition>return % 2 = 0</PostCondition>
     </AssertionMethod>
 </AssertionFile>
