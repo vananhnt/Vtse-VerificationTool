@@ -33,10 +33,18 @@ public class Test {
 			printTree(iastNode, index + 2);
 	}
 	public static void  main(String[] args) throws FileNotFoundException, IOException {
-		String benchmark = "benchmark/invgen/template1/inv_04.c";
-		ASTFactory ast = new ASTFactory(benchmark);
+		String benchmark = "benchmark/kratos/loop_1";
+//		ASTFactory ast = new ASTFactory(benchmark);
 		//VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
+		ASTFactory ast = new ASTFactory(benchmark + "/token_ring_13.c");
 
+//		VtseCFG cfg = new VtseCFG(ast.getFunction("token_ring_13"), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction("is_master_triggered"), ast);
+
+//		ast.print();
+//		cfg.index();
+		cfg.unfold();
+		cfg.printGraph();
 
 	}
 }
