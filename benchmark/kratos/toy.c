@@ -12,29 +12,29 @@
 }*/
 
 int assert_1 = 0;
-int c = 0 ;
-int c_t = 0 ;
+int c  ;
+int c_t  ;
 int c_req_up  ;
-int p_in  = 0;
-int p_out = 0 ;
-int wl_st = 0 ;
-int c1_st = 0 ;
-int c2_st = 0 ;
-int wb_st = 0;
-int r_st = 0 ;
-int wl_i  = 0;
-int c1_i = 0 ;
-int c2_i  = 0;
-int wb_i  = 0;
-int r_i = 0 ;
-int wl_pc = 0 ;
-int c1_pc = 0 ;
-int c2_pc = 0 ;
-int wb_pc = 0 ;
-int e_e = 0 ;
-int e_f = 0 ;
-int e_g = 0 ;
-int e_c = 0 ;
+int p_in  ;
+int p_out  ;
+int wl_st  ;
+int c1_st  ;
+int c2_st  ;
+int wb_st  ;
+int r_st  ;
+int wl_i  ;
+int c1_i  ;
+int c2_i  ;
+int wb_i  ;
+int r_i  ;
+int wl_pc  ;
+int c1_pc  ;
+int c2_pc  ;
+int wb_pc  ;
+int e_e  ;
+int e_f  ;
+int e_g  ;
+int e_c  ;
 int e_p_in  ;
 int e_wl  ;
 void write_loop() ;
@@ -42,21 +42,21 @@ void compute1() ;
 void compute2() ;
 void write_back() ;
 void read() ;
-int d = 0 ;
-int data = 0  ;
-int processed = 0 ;
-int t_b = 0 ;
+int d  ;
+int data  ;
+int processed  ;
+static int t_b  ;
 void write_loop() 
 { int t ;
 
   {
-  if ( wl_pc == 0) {
+  if (wl_pc == 0) {
     goto WL_ENTRY_LOC;
   } else {
-    if ( wl_pc == 2) {
+    if (wl_pc == 2) {
       goto WL_WAIT_2_LOC;
     } else {
-      if ( wl_pc == 1) {
+      if (wl_pc == 1) {
         goto WL_WAIT_1_LOC;
       } else {
 
@@ -71,8 +71,7 @@ void write_loop()
   goto return_label;
   WL_WAIT_1_LOC: 
   {
-  while (1 < 2)
-  {
+  while (1 < 2) {
     while_0_continue: /* CIL Label */ ;
     t = d;
     data = d;
@@ -116,101 +115,13 @@ void write_loop()
       }
     }
   }
-  {
-    while_0_continue: /* CIL Label */ ;
-    t = d;
-    data = d;
-    processed = 0;
-    e_f = 1;
-    if (c1_pc == 1) {
-      if (e_f == 1) {
-        c1_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c2_pc == 1) {
-      if (e_f == 1) {
-        c2_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    e_f = 2;
-    wl_st = 2;
-    wl_pc = 2;
-    t_b = t;
-
-    goto return_label;
-    WL_WAIT_2_LOC:
-    t = t_b;
-    if (d == t + 1) {
-
-    } else {
-      if (d == t + 2) {
-
-      } else {
-        {
-	  assert_1 = 1;
-        }
-      }
-    }
-  }
-  {
-    while_0_continue: /* CIL Label */ ;
-    t = d;
-    data = d;
-    processed = 0;
-    e_f = 1;
-    if (c1_pc == 1) {
-      if (e_f == 1) {
-        c1_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c2_pc == 1) {
-      if (e_f == 1) {
-        c2_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    e_f = 2;
-    wl_st = 2;
-    wl_pc = 2;
-    t_b = t;
-
-    goto return_label;
-    WL_WAIT_2_LOC:
-    t = t_b;
-    if (d == t + 1) {
-
-    } else {
-      if (d == t + 2) {
-
-      } else {
-        {
-	  assert_1 = 1;
-        }
-      }
-    }
-  }
-
   while_0_break: /* CIL Label */ ;
   }
-  return_label:; /* CIL Label */
+  return_label:; /* CIL Label */ 
+  
 }
 }
-void compute1()
+void compute1() 
 { 
 
   {
@@ -225,8 +136,7 @@ void compute1()
   }
   C1_ENTRY_LOC: 
   {
-  while (1 < 2)
-  {
+  while (1 < 2) {
     while_1_continue: /* CIL Label */ ;
     c1_st = 2;
     c1_pc = 1;
@@ -250,55 +160,6 @@ void compute1()
 
     }
   }
-  {
-    while_1_continue: /* CIL Label */ ;
-    c1_st = 2;
-    c1_pc = 1;
-
-    goto return_label;
-    C1_WAIT_LOC:
-    if (! processed) {
-      data += 1;
-      e_g = 1;
-      if (wb_pc == 1) {
-        if (e_g == 1) {
-          wb_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
-      e_g = 2;
-    } else {
-
-    }
-  }
-  {
-    while_1_continue: /* CIL Label */ ;
-    c1_st = 2;
-    c1_pc = 1;
-
-    goto return_label;
-    C1_WAIT_LOC:
-    if (! processed) {
-      data += 1;
-      e_g = 1;
-      if (wb_pc == 1) {
-        if (e_g == 1) {
-          wb_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
-      e_g = 2;
-    } else {
-
-    }
-  }
-
   while_1_break: /* CIL Label */ ;
   }
   return_label:; /* CIL Label */ 
@@ -320,8 +181,7 @@ void compute2()
   }
   C2_ENTRY_LOC: 
   {
-  while (1 < 2)
-  {
+  while (1 < 2) {
     while_2_continue: /* CIL Label */ ;
     c2_st = 2;
     c2_pc = 1;
@@ -345,55 +205,6 @@ void compute2()
 
     }
   }
-  {
-    while_2_continue: /* CIL Label */ ;
-    c2_st = 2;
-    c2_pc = 1;
-
-    goto return_label;
-    C2_WAIT_LOC:
-    if (! processed) {
-      data += 1;
-      e_g = 1;
-      if (wb_pc == 1) {
-        if (e_g == 1) {
-          wb_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
-      e_g = 2;
-    } else {
-
-    }
-  }
-  {
-    while_2_continue: /* CIL Label */ ;
-    c2_st = 2;
-    c2_pc = 1;
-
-    goto return_label;
-    C2_WAIT_LOC:
-    if (! processed) {
-      data += 1;
-      e_g = 1;
-      if (wb_pc == 1) {
-        if (e_g == 1) {
-          wb_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
-      e_g = 2;
-    } else {
-
-    }
-  }
-
   while_2_break: /* CIL Label */ ;
   }
   return_label:; /* CIL Label */ 
@@ -415,8 +226,7 @@ void write_back()
   }
   WB_ENTRY_LOC: 
   {
-  while (1 < 2)
-  {
+  while (1 < 2) {
     while_3_continue: /* CIL Label */ ;
     wb_st = 2;
     wb_pc = 1;
@@ -427,29 +237,6 @@ void write_back()
     c_req_up = 1;
     processed = 1;
   }
-  {
-    while_3_continue: /* CIL Label */ ;
-    wb_st = 2;
-    wb_pc = 1;
-
-    goto return_label;
-    WB_WAIT_LOC:
-    c_t = data;
-    c_req_up = 1;
-    processed = 1;
-  }
-  {
-    while_3_continue: /* CIL Label */ ;
-    wb_st = 2;
-    wb_pc = 1;
-
-    goto return_label;
-    WB_WAIT_LOC:
-    c_t = data;
-    c_req_up = 1;
-    processed = 1;
-  }
-
   while_3_break: /* CIL Label */ ;
   }
   return_label:; /* CIL Label */ 
@@ -487,17 +274,16 @@ void read()
 }
 }
 void eval() 
-{ int tmp = 0 ;
-  int tmp___0 = 0;
-  int tmp___1 = 0;
-  int tmp___2 = 0;
-  int tmp___3 = 0;
-  int __NONDET = 0;
+{ int tmp ;
+  int tmp___0 ;
+  int tmp___1 ;
+  int tmp___2 ;
+  int tmp___3 ;
+  int __NONDET;
 
   {
   {
-  while (1 < 2)
-  {
+  while (1 < 2) {
     while_4_continue: /* CIL Label */ ;
     if (wl_st == 0) {
 
@@ -596,205 +382,6 @@ void eval()
 
     }
   }
-  {
-    while_4_continue: /* CIL Label */ ;
-    if (wl_st == 0) {
-
-    } else {
-      if (c1_st == 0) {
-
-      } else {
-        if (c2_st == 0) {
-
-        } else {
-          if (wb_st == 0) {
-
-          } else {
-            if (r_st == 0) {
-
-            } else {
-              goto while_4_break;
-            }
-          }
-        }
-      }
-    }
-    if (wl_st == 0) {
-      {
-      tmp = __NONDET;
-      }
-      if (tmp) {
-        {
-        wl_st = 1;
-        write_loop();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c1_st == 0) {
-      {
-      tmp___0 = __NONDET;
-      }
-      if (tmp___0) {
-        {
-        c1_st = 1;
-        compute1();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c2_st == 0) {
-      {
-      tmp___1 = __NONDET;
-      }
-      if (tmp___1) {
-        {
-        c2_st = 1;
-        compute2();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (wb_st == 0) {
-      {
-      tmp___2 = __NONDET;
-      }
-      if (tmp___2) {
-        {
-        wb_st = 1;
-        write_back();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (r_st == 0) {
-      {
-      tmp___3 = __NONDET;
-      }
-      if (tmp___3) {
-        {
-        r_st = 1;
-        read();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-  }
-  {
-    while_4_continue: /* CIL Label */ ;
-    if (wl_st == 0) {
-
-    } else {
-      if (c1_st == 0) {
-
-      } else {
-        if (c2_st == 0) {
-
-        } else {
-          if (wb_st == 0) {
-
-          } else {
-            if (r_st == 0) {
-
-            } else {
-              goto while_4_break;
-            }
-          }
-        }
-      }
-    }
-    if (wl_st == 0) {
-      {
-      tmp = __NONDET;
-      }
-      if (tmp) {
-        {
-        wl_st = 1;
-        write_loop();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c1_st == 0) {
-      {
-      tmp___0 = __NONDET;
-      }
-      if (tmp___0) {
-        {
-        c1_st = 1;
-        compute1();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c2_st == 0) {
-      {
-      tmp___1 = __NONDET;
-      }
-      if (tmp___1) {
-        {
-        c2_st = 1;
-        compute2();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (wb_st == 0) {
-      {
-      tmp___2 = __NONDET;
-      }
-      if (tmp___2) {
-        {
-        wb_st = 1;
-        write_back();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-    if (r_st == 0) {
-      {
-      tmp___3 = __NONDET;
-      }
-      if (tmp___3) {
-        {
-        r_st = 1;
-        read();
-        }
-      } else {
-
-      }
-    } else {
-
-    }
-  }
-
   while_4_break: /* CIL Label */ ;
   }
 
@@ -802,7 +389,7 @@ void eval()
 }
 }
 void start_simulation() 
-{ int kernel_st = 0;
+{ int kernel_st ;
 
   {
   kernel_st = 0;
@@ -943,8 +530,7 @@ void start_simulation()
 
   }
   {
-  while (1 < 2)
-  {
+  while (1 < 2) {
     while_5_continue: /* CIL Label */ ;
     {
     kernel_st = 1;
@@ -1085,289 +671,6 @@ void start_simulation()
       }
     }
   }
-  {
-    while_5_continue: /* CIL Label */ ;
-    {
-    kernel_st = 1;
-    eval();
-    }
-    kernel_st = 2;
-    if (c_req_up == 1) {
-      if (c != c_t) {
-        c = c_t;
-        e_c = 0;
-      } else {
-
-      }
-      c_req_up = 0;
-    } else {
-
-    }
-    kernel_st = 3;
-    if (e_f == 0) {
-      e_f = 1;
-    } else {
-
-    }
-    if (e_g == 0) {
-      e_g = 1;
-    } else {
-
-    }
-    if (e_e == 0) {
-      e_e = 1;
-    } else {
-
-    }
-    if (e_c == 0) {
-      e_c = 1;
-    } else {
-
-    }
-    if (e_wl == 0) {
-      e_wl = 1;
-    } else {
-
-    }
-    if (wl_pc == 1) {
-      if (e_wl == 1) {
-        wl_st = 0;
-      } else {
-        goto _L___0;
-      }
-    } else {
-      _L___0: /* CIL Label */
-      if (wl_pc == 2) {
-        if (e_e == 1) {
-          wl_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
-    }
-    if (c1_pc == 1) {
-      if (e_f == 1) {
-        c1_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c2_pc == 1) {
-      if (e_f == 1) {
-        c2_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (wb_pc == 1) {
-      if (e_g == 1) {
-        wb_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (e_c == 1) {
-      r_st = 0;
-    } else {
-
-    }
-    if (e_e == 1) {
-      e_e = 2;
-    } else {
-
-    }
-    if (e_f == 1) {
-      e_f = 2;
-    } else {
-
-    }
-    if (e_g == 1) {
-      e_g = 2;
-    } else {
-
-    }
-    if (e_c == 1) {
-      e_c = 2;
-    } else {
-
-    }
-    if (e_wl == 1) {
-      e_wl = 2;
-    } else {
-
-    }
-    if (wl_st == 0) {
-
-    } else {
-      if (c1_st == 0) {
-
-      } else {
-        if (c2_st == 0) {
-
-        } else {
-          if (wb_st == 0) {
-
-          } else {
-            if (r_st == 0) {
-
-            } else {
-              goto while_5_break;
-            }
-          }
-        }
-      }
-    }
-  }
-  {
-    while_5_continue: /* CIL Label */ ;
-    {
-    kernel_st = 1;
-    eval();
-    }
-    kernel_st = 2;
-    if (c_req_up == 1) {
-      if (c != c_t) {
-        c = c_t;
-        e_c = 0;
-      } else {
-
-      }
-      c_req_up = 0;
-    } else {
-
-    }
-    kernel_st = 3;
-    if (e_f == 0) {
-      e_f = 1;
-    } else {
-
-    }
-    if (e_g == 0) {
-      e_g = 1;
-    } else {
-
-    }
-    if (e_e == 0) {
-      e_e = 1;
-    } else {
-
-    }
-    if (e_c == 0) {
-      e_c = 1;
-    } else {
-
-    }
-    if (e_wl == 0) {
-      e_wl = 1;
-    } else {
-
-    }
-    if (wl_pc == 1) {
-      if (e_wl == 1) {
-        wl_st = 0;
-      } else {
-        goto _L___0;
-      }
-    } else {
-      _L___0: /* CIL Label */
-      if (wl_pc == 2) {
-        if (e_e == 1) {
-          wl_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
-    }
-    if (c1_pc == 1) {
-      if (e_f == 1) {
-        c1_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (c2_pc == 1) {
-      if (e_f == 1) {
-        c2_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (wb_pc == 1) {
-      if (e_g == 1) {
-        wb_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
-    if (e_c == 1) {
-      r_st = 0;
-    } else {
-
-    }
-    if (e_e == 1) {
-      e_e = 2;
-    } else {
-
-    }
-    if (e_f == 1) {
-      e_f = 2;
-    } else {
-
-    }
-    if (e_g == 1) {
-      e_g = 2;
-    } else {
-
-    }
-    if (e_c == 1) {
-      e_c = 2;
-    } else {
-
-    }
-    if (e_wl == 1) {
-      e_wl = 2;
-    } else {
-
-    }
-    if (wl_st == 0) {
-
-    } else {
-      if (c1_st == 0) {
-
-      } else {
-        if (c2_st == 0) {
-
-        } else {
-          if (wb_st == 0) {
-
-          } else {
-            if (r_st == 0) {
-
-            } else {
-              goto while_5_break;
-            }
-          }
-        }
-      }
-    }
-  }
-
   while_5_break: /* CIL Label */ ;
   }
 
@@ -1375,7 +678,7 @@ void start_simulation()
 }
 }
 int toy() 
-{ int __retres1 = 0 ;
+{ int __retres1 ;
 
   {
   {

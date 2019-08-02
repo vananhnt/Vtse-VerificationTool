@@ -1098,7 +1098,7 @@ void s_run()
 void eval()
 { int tmp ;
   int tmp___0 ;
-  int __NONDET = 0;
+  int __NONDET;
 
   {
   {

@@ -102,7 +102,7 @@ void master()
 
     goto return_label;
     M_WAIT: ;
-    if (token != local) {
+    if (token != 10= local) {
       {
       assert_1 = 1;
       }
@@ -124,7 +124,7 @@ void master()
 
     goto return_label;
     M_WAIT: ;
-    if (token != local) {
+    if (token != 10= local) {
       {
       assert_1 = 1;
       }
@@ -146,7 +146,7 @@ void master()
 
     goto return_label;
     M_WAIT: ;
-    if (token != local) {
+    if (token != 10= local) {
       {
       assert_1 = 1;
       }
@@ -168,7 +168,7 @@ void master()
 
     goto return_label;
     M_WAIT: ;
-    if (token != local) {
+    if (token != 10= local) {
       {
       assert_1 = 1;
       }
@@ -190,7 +190,7 @@ void master()
 
     goto return_label;
     M_WAIT: ;
-    if (token != local) {
+    if (token != 10= local) {
       {
       assert_1 = 1;
       }

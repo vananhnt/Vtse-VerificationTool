@@ -17,11 +17,11 @@ int num ;
 int i  ;
 int e  ;
 int timer ;
-char data_0  ;
-char data_1  ;
-char read_data(int i___0 )
-{ char c ;
-  char __retres3 ;
+int data_0  ;
+int data_1  ;
+int read_data(int i___0 )
+{ int c ;
+  int __retres3 ;
 
   {
   if (i___0 == 0) {
@@ -42,7 +42,7 @@ char read_data(int i___0 )
   return (__retres3);
 }
 }
-void write_data(int i___0 , char c )
+void write_data(int i___0 , int c )
 {
 
   {
@@ -83,7 +83,7 @@ void P_1()
   while (i < max_loop) {
     while_0_continue: /* CIL Label */ ;
     {
-    write_data(num, 'A');
+    write_data(num, (int)'A');
     num += 1;
     P_1_pc = 1;
     P_1_st = 2;
@@ -141,7 +141,7 @@ void P_2()
   while (i < max_loop) {
     while_1_continue: /* CIL Label */ ;
     {
-    write_data(num, 'B');
+    write_data(num, (int)'B');
     num += 1;
     }
     if (timer) {
@@ -193,7 +193,7 @@ int C_1_i  ;
 int C_1_ev  ;
 int C_1_pr  ;
 void C_1()
-{ char c ;
+{ int c ;
 
   {
   if (C_1_pc == 0) {
@@ -470,7 +470,7 @@ void reset_time_events()
 }
 }
 void activate_threads()
-{ int tmp = 9;
+{ int tmp;
   int tmp___0 ;
   int tmp___1 ;
 
