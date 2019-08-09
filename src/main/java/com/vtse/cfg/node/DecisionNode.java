@@ -5,7 +5,7 @@ import com.vtse.cfg.index.FormulaCreater;
 import com.vtse.cfg.index.Index;
 import com.vtse.cfg.index.Variable;
 import com.vtse.cfg.index.VariableManager;
-import com.vtse.cfg.utils.Cloner;
+import com.vtse.cfg.utils.MyCloner;
 import com.vtse.cfg.utils.ExpressionHelper;
 import com.vtse.cfg.utils.ExpressionModifier;
 import org.eclipse.cdt.core.dom.ast.*;
@@ -191,7 +191,7 @@ public class DecisionNode extends CFGNode {
         condition = (IASTExpression) Index.index(condition, vm);
 
         // then clause
-        thenVM = Cloner.clone(vm);
+        thenVM = MyCloner.clone(vm);
         CFGNode run = this.getThenNode();
         while ((run != null) && (run != this.endNode)) {
             run.index(thenVM);
@@ -203,7 +203,7 @@ public class DecisionNode extends CFGNode {
         }
 
         // else clause
-        elseVM = Cloner.clone(vm);
+        elseVM = MyCloner.clone(vm);
         run = this.getElseNode();
         while ((run != null) && (run != this.endNode)) {
             run.index(elseVM);

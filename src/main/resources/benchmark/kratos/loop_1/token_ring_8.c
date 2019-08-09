@@ -58,7 +58,7 @@ int is_transmit7_triggered() ;
 int is_transmit8_triggered() ;
 void immediate_notify() ;
 int token  ;
-int __NONDET = 0 ;
+int __NONDET ;
 int local  ;
 
 void master()

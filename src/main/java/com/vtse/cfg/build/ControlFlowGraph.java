@@ -180,6 +180,10 @@ public class ControlFlowGraph {
         if (this != null)
             print(start, 0);
     }
+
+    public void printFuncGraph() {
+        printFunc(start, 0);
+    }
     public void printBoundary() {
         System.out.print("StartNode: ");
         start.printNode();
@@ -187,6 +191,45 @@ public class ControlFlowGraph {
         if (exit != null) {
             exit.printNode();
         } else System.out.println(exit);
+    }
+
+    private void printFunc(CFGNode start, int level) {
+        CFGNode iter = start;
+        printSpace(level);
+        if (iter == null) {
+            //System.out.println(iter);
+            return;
+        } else if (iter instanceof DecisionNode) {
+            //System.out.println(iter.getFormula());
+            printSpace(level);
+            if (((DecisionNode) iter).getThenNode() != null) {
+                printFunc(((DecisionNode) iter).getThenNode(), level);
+            }
+            //printSpace(level);
+            if (((DecisionNode) iter).getElseNode() != null)
+                printFunc(((DecisionNode) iter).getElseNode(), level);
+        } else if (iter instanceof GotoNode) {
+            printFunc(((GotoNode) iter).getNext(), level);
+        } else if (iter instanceof IterationNode) {
+            if (iter.getNext() != null) printFunc(iter.getNext(), level);
+            else return;
+        } else if (iter instanceof EmptyNode) {
+            printFunc(iter.getNext(), level);
+        } else if (iter instanceof EndConditionNode) {
+            //level -= 1;
+        } else if (iter instanceof BeginNode) {
+            printFunc(iter.getNext(), level);
+            printFunc(((BeginNode) iter).getEndNode().getNext(), level);
+        } else if (iter instanceof BeginFunctionNode) {
+            iter.printNode();
+            //level += 1;
+            printFunc(iter.getNext(), level);
+        } else if (iter instanceof EndFunctionNode) {
+            iter.printNode();
+            printFunc(iter.getNext(), level);
+        }  else {
+            printFunc(iter.getNext(), level);
+        }
     }
 
     public void printDebug() {

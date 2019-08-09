@@ -1,7 +1,7 @@
 <AssertionFile>
     <AssertionMethod>
-        <Method>token_ring_12</Method>
-        <PreCondition></PreCondition>
+        <Method>token_ring_7_new</Method>
+        <PreCondition>nondet = 100</PreCondition>
         <PostCondition>return = 0</PostCondition>
     </AssertionMethod>
 </AssertionFile>

@@ -36,14 +36,15 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws IOException {
-		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/invgen/template2/loops_crafted/Mono1_2_true.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("Mono1_2_true"), ast);
+		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/kratos/token_ring_1_new.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("token_ring_1_new"), ast);
 
 		//ast.print();
-		cfg.invariant();
-		//cfg.unfold(1);
-		cfg.index();
+		//cfg.invariant();
+		cfg.unfold(4);
+		//cfg.index();
 		//java.cfg.printMeta();
 		cfg.printGraph();
+		//cfg.printFuncGraph();
 	}
 }

@@ -22,6 +22,6 @@ public class EndFunctionNode extends CFGNode {
     }
 
     public void printNode() {
-        System.out.println("EndFunctionNode: " + FunctionHelper.getFunctionName(func));
+        System.out.println("}  <--" + FunctionHelper.getFunctionName(func));
     }
 }

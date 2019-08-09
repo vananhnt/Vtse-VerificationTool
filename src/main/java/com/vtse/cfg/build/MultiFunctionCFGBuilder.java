@@ -128,12 +128,20 @@ public class MultiFunctionCFGBuilder {
             System.err.println("Not found function " + funcName);
             System.exit(1);
         }
+
+        //add begin function node at the beginning
+        BeginFunctionNode beginNode = new BeginFunctionNode(func);
+        cfg.concat(new ControlFlowGraph(beginNode, beginNode));
+
         CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
         //Cho tham so = params
-        cfg.concat(createArguments(callExpression, currentFunc));
+        ControlFlowGraph argGraph = createArguments(callExpression, currentFunc);
+        if (argGraph != null) cfg.concat(argGraph);
 
         //Noi voi than cua ham duoc goi
-        cfg.concat(new ControlFlowGraph(func));
+        ControlFlowGraph funcGraph = new ControlFlowGraph(func);
+        //TODO Try to unfold funcGraph
+        cfg.concat(funcGraph);
 
         //Tao ra node: ham duoc goi = return neu khong phai void
         if (!isVoid(callExpression)) {
@@ -150,6 +158,7 @@ public class MultiFunctionCFGBuilder {
         EndFunctionNode endFunction = new EndFunctionNode(func);
         cfg.concat(new ControlFlowGraph(endFunction, endFunction));
         //System.out.println("concated function");
+
         return cfg;
     }
 
@@ -177,6 +186,7 @@ public class MultiFunctionCFGBuilder {
 //		IASTDeclarator declarator;
 //		IASTSimpleDeclaration declaration;
 
+        if (arguments.length == 0) return null;
         CPPNodeFactory factory = (CPPNodeFactory) func.getTranslationUnit().getASTNodeFactory();
 
         for (int i = 0; i < arguments.length; i++) {
@@ -206,6 +216,7 @@ public class MultiFunctionCFGBuilder {
             plainNode = new PlainNode(statement);
             cfg.concat(new ControlFlowGraph(plainNode, plainNode));
         }
+
         return cfg;
     }
 

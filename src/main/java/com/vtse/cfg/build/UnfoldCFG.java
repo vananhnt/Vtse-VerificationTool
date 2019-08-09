@@ -4,7 +4,7 @@ import com.vtse.cfg.node.*;
 import com.vtse.cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
 
-import com.vtse.cfg.utils.Cloner;
+import com.vtse.cfg.utils.MyCloner;
 
 /**
  * @author va
@@ -104,7 +104,7 @@ public class UnfoldCFG {
 			condition.getElseNode().setNext(endNode);
 			
 			copyThen = new ControlFlowGraph();
-			copyThen = Cloner.clone(thenClause);
+			copyThen = MyCloner.clone(thenClause);
 			
 			condition.setThenNode(copyThen.getStart());
 			copyThen.getExit().setNext(lastNode);
@@ -152,7 +152,7 @@ public class UnfoldCFG {
 			condition.setElseNode(new EmptyNode());
 			condition.getElseNode().setNext(endNode);
 
-			copyThen = Cloner.clone(thenClause);
+			copyThen = MyCloner.clone(thenClause);
 			
 			condition.setThenNode(copyThen.getStart());
 			copyThen.getExit().setNext(lastNode);
@@ -223,7 +223,7 @@ public class UnfoldCFG {
 			notCondition.setNext(contNode);
 		
 		} else if (node instanceof EmptyNode || node instanceof LabelNode
-					|| node instanceof UndefinedNode ) {
+					|| node instanceof UndefinedNode || node instanceof BeginFunctionNode) {
 			node.setNext(iterateNode(node.getNext()));				
 		} else if (node instanceof EndConditionNode) {
 		}
@@ -255,7 +255,7 @@ public class UnfoldCFG {
 		CFGNode endNode = findEndFunctionNode((LabelNode) ((GotoNode) node).getLabelNode());
 		ControlFlowGraph tmpGraph = new ControlFlowGraph(node.getLabelNode().getNext(), endNode);
 		
-		ControlFlowGraph testGraph = Cloner.clone(tmpGraph);
+		ControlFlowGraph testGraph = MyCloner.clone(tmpGraph);
 		testGraph.getExit().setNext(new EmptyNode());
 		//testGraph.printGraph();
 		return testGraph;
