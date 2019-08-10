@@ -1,4 +1,4 @@
-package app.solver;
+package com.vtse.app.solver;
 
 import java.io.BufferedReader;
 import java.io.IOException;
