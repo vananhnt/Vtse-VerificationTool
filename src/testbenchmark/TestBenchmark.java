@@ -22,7 +22,7 @@ public class TestBenchmark {
 		
 //		File file = new File(EXAMPLE + "/example_3.c");
 //		File file = new File(EXAMPLE + "/example_4.c");
-		File file = new File(KRATOS + "/toy.c");
+		File file = new File(KRATOS +"/token_ring_1.c");
 		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);

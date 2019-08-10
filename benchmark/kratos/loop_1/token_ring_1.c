@@ -15,7 +15,7 @@ int is_master_triggered() ;
 int is_transmit1_triggered() ;
 void immediate_notify() ;
 int token  ;
-int __NONDET  ;
+int __NONDET = 5 ;
 int local  ;
 
 void master() 
@@ -47,7 +47,7 @@ void master()
 
     goto return_label;
     M_WAIT: ;
-    if (token != local) {
+    if (token != local + 1 ) {
       {
       assert_1 = 1;
       }
@@ -184,7 +184,7 @@ int exists_runnable_thread()
 }
 }
 void eval() 
-{ int __NONDET___0 ;
+{ int __NONDET___0 = 10 ;
   int tmp ;
 
   {
