@@ -30,6 +30,7 @@ void start_simulations() {
         }
         goto return_label;
         M_WAIT: ;
+
           assert_1 = 1;
         } else {
         }
