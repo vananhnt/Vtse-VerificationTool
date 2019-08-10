@@ -253,8 +253,9 @@ public class UnfoldCFG {
 		// TODO Auto-generated method stub
 		EmptyNode emp = new EmptyNode();
 		CFGNode endNode = findEndFunctionNode((LabelNode) ((GotoNode) node).getLabelNode());
+		if (endNode == null) return new ControlFlowGraph(emp, emp);
+		//copy unfold từ label to endNode
 		ControlFlowGraph tmpGraph = new ControlFlowGraph(node.getLabelNode().getNext(), endNode);
-		
 		ControlFlowGraph testGraph = MyCloner.clone(tmpGraph);
 		testGraph.getExit().setNext(new EmptyNode());
 		//testGraph.printGraph();

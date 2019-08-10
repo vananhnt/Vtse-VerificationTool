@@ -36,12 +36,12 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws IOException {
-		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/kratos/token_ring_1_new.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("token_ring_1_new"), ast);
+		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/kratos/example.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("example"), ast);
 
 		//ast.print();
 		//cfg.invariant();
-		cfg.unfold(4);
+		cfg.unfold(2);
 		//cfg.index();
 		//java.cfg.printMeta();
 		cfg.printGraph();
