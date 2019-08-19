@@ -15,7 +15,7 @@ int is_master_triggered() ;
 int is_transmit1_triggered() ;
 void immediate_notify() ;
 int token  ;
-int __NONDET = 5 ;
+int __NONDET ;
 int local  ;
 
 void master() 
@@ -27,14 +27,12 @@ void master()
   } else {
     if (m_pc == 1) {
       goto M_WAIT;
-    } else {
-
     }
   }
   M_ENTRY: ;
   {
   while (1 < 2) {
-    while_0_continue: /* CIL Label */ ;
+
     {
     token = __NONDET;
     local = token;
@@ -52,11 +50,8 @@ void master()
       assert_1 = 1;
       }
     }
-     else {
 
-    }
   }
-  while_0_break: /* CIL Label */ ;
   }
 
   return_label: ;/* CIL Label */ 
@@ -79,7 +74,7 @@ void transmit1()
   T1_ENTRY: ;
   {
   while (1 < 2) {
-    while_1_continue: /* CIL Label */ ;
+
     t1_pc = 1;
     t1_st = 2;
 
@@ -92,7 +87,6 @@ void transmit1()
     E_M = 2;
     }
   }
-  while_1_break: /* CIL Label */ ;
   }
 
   return_label: ;/* CIL Label */ 
@@ -148,7 +142,7 @@ void update_channels()
 void init_threads() 
 { 
 
-  {
+
   if (m_i == 1) {
     m_st = 0;
   } else {
@@ -160,8 +154,7 @@ void init_threads()
     t1_st = 2;
   }
 
-  
-}
+
 }
 int exists_runnable_thread() 
 { int __retres1 ;
@@ -174,8 +167,6 @@ int exists_runnable_thread()
     if (t1_st == 0) {
       __retres1 = 1;
       goto return_label;
-    } else {
-
     }
   }
   __retres1 = 0;
@@ -184,7 +175,7 @@ int exists_runnable_thread()
 }
 }
 void eval() 
-{ int __NONDET___0 = 10 ;
+{ int __NONDET___0 ;
   int tmp ;
 
   {
@@ -447,7 +438,7 @@ void start_simulation()
   
 }
 }
-int token_ring_1() 
+int token_ring_1_new()
 { int __retres1 ;
 
   {

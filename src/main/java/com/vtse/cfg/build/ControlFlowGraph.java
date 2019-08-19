@@ -165,6 +165,10 @@ public class ControlFlowGraph {
         unfoldCfg.generate(this);
     }
 
+    public void ungoto() {
+        GotoCFG gotoCFG = new GotoCFG();
+        gotoCFG.generate(this);
+    }
     /*
     create java.invariant graph
      */

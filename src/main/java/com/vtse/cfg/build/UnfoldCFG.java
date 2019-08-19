@@ -63,7 +63,7 @@ public class UnfoldCFG {
 	 */
 	private CFGNode findExit(CFGNode start) {
 		CFGNode iter = start;
-		while (!(iter instanceof IterationNode)) {
+		while (!(iter instanceof IterationNode) && iter != null) {
 			iter = iter.getNext();
 		}
 		return iter;
@@ -91,7 +91,7 @@ public class UnfoldCFG {
 		EndConditionNode endNode = (EndConditionNode) ((BeginWhileNode) start).getEndNode();
 		CFGNode lastNode = endNode;
 		//tao ra ban sao Then moi
-		ControlFlowGraph thenClause = new ControlFlowGraph(currentCondition.getThenNode(), 
+		ControlFlowGraph thenClause = new ControlFlowGraph(currentCondition.getThenNode(),
 					findExit(currentCondition.getThenNode())); 
 		ControlFlowGraph copyThen;
 		
@@ -107,6 +107,7 @@ public class UnfoldCFG {
 			copyThen = MyCloner.clone(thenClause);
 			
 			condition.setThenNode(copyThen.getStart());
+			if (copyThen.getExit() != null)
 			copyThen.getExit().setNext(lastNode);
 			
 			//TODO change
@@ -197,7 +198,9 @@ public class UnfoldCFG {
 				node.setNext(whileGraph.getStart());
 				whileGraph.getExit().setNext(iterateNode(((BeginWhileNode) node).getEndNode().getNext()));
 			}
-		} else if (node instanceof PlainNode) {
+		} else if (node instanceof LabelNode) {
+
+		}  else if (node instanceof PlainNode) {
 			//remove invariant node when unfold
 			if (node instanceof InvariantNode) {
 				node = iterateNode(node.getNext());
@@ -222,45 +225,22 @@ public class UnfoldCFG {
 			forGraph.getExit().setNext(notCondition);
 			notCondition.setNext(contNode);
 		
-		} else if (node instanceof EmptyNode || node instanceof LabelNode
-					|| node instanceof UndefinedNode || node instanceof BeginFunctionNode) {
+		} else if (node instanceof EmptyNode
+						|| node instanceof UndefinedNode || node instanceof BeginFunctionNode) {
 			node.setNext(iterateNode(node.getNext()));				
 		} else if (node instanceof EndConditionNode) {
 		}
-		else if (node instanceof GotoNode) {
-			ControlFlowGraph gotoGraph = unfoldGoto((GotoNode)node);
-			CFGNode endNode = node.getNext();
-			node.setNext(gotoGraph.getStart());
-			gotoGraph.getExit().setNext(iterateNode(endNode));
-		}
+//		else if (node instanceof GotoNode) {
+//			ControlFlowGraph gotoGraph = unfoldGoto((GotoNode)node);
+//			//CFGNode endNode = node.getNext();
+//			CFGNode endNode = gotoGraph.getExit().getNext();
+//			node.setNext(gotoGraph.getStart());
+//			node.setNext(new EmptyNode());
+//		}
 
 		return node;
 }
-	private CFGNode findEndFunctionNode(LabelNode label) {
-		CFGNode iter = label;
-		while (iter != null) {
-			if (iter instanceof EndFunctionNode) {
-				if (((EndFunctionNode) iter).getFunction().equals(label.getFunction())) {
-					return iter;
-				}
-			}
-			iter = iter.getNext();
-		}
-		return iter;
-	}
-	/* Chua xoa Goto va Label Node */
-	protected ControlFlowGraph unfoldGoto(GotoNode node) {
-		// TODO Auto-generated method stub
-		EmptyNode emp = new EmptyNode();
-		CFGNode endNode = findEndFunctionNode((LabelNode) ((GotoNode) node).getLabelNode());
-		if (endNode == null) return new ControlFlowGraph(emp, emp);
-		//copy unfold từ label to endNode
-		ControlFlowGraph tmpGraph = new ControlFlowGraph(node.getLabelNode().getNext(), endNode);
-		ControlFlowGraph testGraph = MyCloner.clone(tmpGraph);
-		testGraph.getExit().setNext(new EmptyNode());
-//		testGraph.printGraph();
-		return testGraph;
-	}
+
 
 	public void printGraph() {
 		ControlFlowGraph.printGraph(start);

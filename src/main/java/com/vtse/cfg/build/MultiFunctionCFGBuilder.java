@@ -103,7 +103,7 @@ public class MultiFunctionCFGBuilder {
                 node = iterateNode(functionGraph.getStart(), end, func);
                 functionGraph.getExit().setNext(iterateNode(pause, end, func));
             }
-        } else if (node instanceof EndNode) {
+        } else if (node instanceof EndNode || node instanceof EndFunctionNode ) {
 
         } else {
             node.setNext(iterateNode(node.getNext(), end, func));
@@ -140,6 +140,8 @@ public class MultiFunctionCFGBuilder {
 
         //Noi voi than cua ham duoc goi
         ControlFlowGraph funcGraph = new ControlFlowGraph(func);
+        funcGraph.ungoto();
+        funcGraph.unfold(1);
         //TODO Try to unfold funcGraph
         cfg.concat(funcGraph);
 

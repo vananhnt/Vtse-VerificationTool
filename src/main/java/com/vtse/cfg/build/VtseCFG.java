@@ -1,11 +1,12 @@
 package com.vtse.cfg.build;
 
 import com.vtse.app.solver.SMTTypeConvertion;
+import com.vtse.cfg.build.ASTFactory;
+import com.vtse.cfg.build.ControlFlowGraph;
 import com.vtse.cfg.index.FormulaCreater;
 import com.vtse.cfg.index.Variable;
 import com.vtse.cfg.index.VariableManager;
 import com.vtse.cfg.utils.FunctionHelper;
-import com.vtse.cfg.node.*;
 import com.vtse.cfg.node.*;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
@@ -45,8 +46,6 @@ public class VtseCFG extends ControlFlowGraph {
         } else if (node instanceof PlainNode) {
             if (node.toString() != null) {
                 printStream.println(nSpaces + node.toString());
-                //System.err.println("node: " + node);
-                //System.err.println("constraint: " + node.toString());
             }
             printMeta(printStream, node.getNext(), end, nSpaces);    // 4 spaces
         } else if (node instanceof SyncNode) {

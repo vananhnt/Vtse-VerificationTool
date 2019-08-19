@@ -5,9 +5,7 @@ import java.util.Properties;
 
 import com.vtse.cfg.build.ASTFactory;
 import com.vtse.cfg.build.VtseCFG;
-import com.vtse.invariant.LoopForTemplate;
 
-import jxl.write.WriteException;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 
 /**
@@ -41,10 +39,11 @@ public class Test {
 
 		//ast.print();
 		//cfg.invariant();
-		cfg.unfold(2);
+		//cfg.ungoto();
+		//cfg.unfold(2);
 		//cfg.index();
 		//java.cfg.printMeta();
-		cfg.printGraph();
+		//cfg.printGraph();
 		//cfg.printFuncGraph();
 	}
 }

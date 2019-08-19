@@ -1,9 +1,11 @@
 package com.vtse.cfg.build;
 
+import com.vtse.cfg.build.ControlFlowGraph;
+import com.vtse.cfg.build.UnfoldCFG;
 import com.vtse.cfg.node.*;
 import com.vtse.cfg.utils.ExpressionHelper;
 
-public class    InvariantCFG extends UnfoldCFG {
+public class InvariantCFG extends UnfoldCFG {
     public InvariantCFG() {
     }
 
@@ -72,16 +74,17 @@ public class    InvariantCFG extends UnfoldCFG {
             condition.setElseNode(iterateInvariantNode(condition.getElseNode()));
             ((BeginIfNode) node).getEndNode().setNext(iterateInvariantNode(((BeginIfNode) node).getEndNode().getNext()));
         } else if (node instanceof EmptyNode || node instanceof LabelNode
-                || node instanceof UndefinedNode) {
+                || node instanceof UndefinedNode || node instanceof GotoNode) {
             node.setNext(iterateInvariantNode(node.getNext()));
         } else if (node instanceof EndConditionNode) {
             //node.setNext(iterateNode(node.getNext()));
-        } else if (node instanceof GotoNode) {
-            ControlFlowGraph gotoGraph = unfoldGoto((GotoNode) node);
-            CFGNode endNode = node.getNext();
-            node.setNext(gotoGraph.getStart());
-            gotoGraph.getExit().setNext(iterateInvariantNode(endNode));
         }
+//        else if (node instanceof GotoNode) {
+//            ControlFlowGraph gotoGraph = unfoldGoto((GotoNode) node);
+//            CFGNode endNode = node.getNext();
+//            node.setNext(gotoGraph.getStart());
+//            gotoGraph.getExit().setNext(iterateInvariantNode(endNode));
+//        }
         return node;
     }
 

@@ -46,7 +46,8 @@ public class FunctionVerification {
             cfg.index();
             smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createInvariantFormula());
         } else {
-            cfg.unfold(nLoops);
+//            cfg.ungoto();
+//            cfg.unfold(nLoops);
             cfg.index();
             smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormula() );
         }
