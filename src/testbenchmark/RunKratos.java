@@ -13,11 +13,11 @@ import java.util.List;
 public class RunKratos {
     static String FLOAT_CDFPL = "./benchmark/float-cdfpl-func";
     static String FLOAT_BENCHS = "./benchmark/float-benchs";
-    static String KRATOS = "./benchmark/kratos/loop_1";
+    static String KRATOS = "./benchmark/kratos/loop_5";
     static String ECA_RERS = "./benchmark/eca-rers2012";
 
     public static void main(String[] args) throws RowsExceededException, WriteException, IOException {
-        ExportExcel exportExcel = new ExportExcel("Kratos Benchmark loop 1_ edit NONDET&token for token_ring.xls");
+        ExportExcel exportExcel = new ExportExcel("Kratos Benchmark loop 5_ edit NONDET&token for token_ring.xls");
 
         File file = new File(KRATOS);
         FileVerification fv = new FileVerification();
