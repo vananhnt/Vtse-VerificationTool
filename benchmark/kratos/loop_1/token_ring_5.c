@@ -40,7 +40,7 @@ int is_transmit4_triggered() ;
 int is_transmit5_triggered() ;
 void immediate_notify() ;
 int token  ;
-int __NONDET = 0 ;
+int __NONDET ;
 int local  ;
 
 void master() 
@@ -468,7 +468,7 @@ int exists_runnable_thread()
 }
 }
 void eval() 
-{ int __NONDET___0 = 0 ;
+{ int __NONDET___0;
   int tmp ;
 
   {

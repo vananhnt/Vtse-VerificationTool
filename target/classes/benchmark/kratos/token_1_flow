@@ -1,0 +1,101 @@
+token_ring_1_new {
+    init_model {
+    }  <--init_model
+    
+    start_simulation {
+        update_channels {
+        }  <--update_channels
+        
+        init_threads {
+        }  <--init_threads
+        
+        fire_delta_events {
+        }  <--fire_delta_events
+        
+        activate_threads {
+            
+            is_master_triggered {
+            }  <--is_master_triggered
+            
+            is_transmit1_triggered {
+            }  <--is_transmit1_triggered
+            
+        }  <--activate_threads
+        
+        reset_delta_events {
+        }  <--reset_delta_events
+        
+        eval {
+            exists_runnable_thread {
+            }  <--exists_runnable_thread
+            
+            master {
+                immediate_notify {
+                    activate_threads {
+                        
+                        is_master_triggered {
+                        }  <--is_master_triggered
+                        
+                        is_transmit1_triggered {
+                        }  <--is_transmit1_triggered
+                    
+                    }  <--activate_threads
+                }  <--immediate_notify
+            }  <--master
+
+            transmit1 {
+                immediate_notify {
+                    activate_threads {
+                        
+                        is_master_triggered {
+                        }  <--is_master_triggered
+                        
+                        is_transmit1_triggered {
+                        }  <--is_transmit1_triggered
+                    
+                    }  <--activate_threads
+                }  <--immediate_notify
+            }  <--transmit1
+        
+        }  <--eval
+        
+        update_channels {
+        }  <--update_channels
+        
+        fire_delta_events {
+        }  <--fire_delta_events
+        
+        activate_threads {
+            is_master_triggered {
+            }  <--is_master_triggered
+            
+            is_transmit1_triggered {
+            }  <--is_transmit1_triggered
+        }  <--activate_threads
+
+        reset_delta_events {
+        }  <--reset_delta_events
+        
+        exists_runnable_thread {
+        }  <--exists_runnable_thread
+        
+        fire_time_events {
+        }  <--fire_time_events
+        
+        activate_threads {
+            is_master_triggered {
+            }  <--is_master_triggered
+            is_transmit1_triggered {
+            }  <--is_transmit1_triggered
+        }  <--activate_threads
+        
+        reset_time_events {
+        }  <--reset_time_events
+        
+        stop_simulation {
+            exists_runnable_thread {
+            }  <--exists_runnable_thread
+        }  <--stop_simulation
+    
+    }  <--start_simulation
+}  <--token_ring_1_new

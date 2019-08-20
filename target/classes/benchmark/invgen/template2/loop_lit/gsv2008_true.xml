@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>gsv2008_true</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return > 0</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

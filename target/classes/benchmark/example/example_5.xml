@@ -1,0 +1,15 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>foo</Method>
+        <PreCondition>(a
+            <
+            0)^(b
+            <
+            1)
+        </PreCondition>
+        <PostCondition>(return * return
+            <
+            (a + b) / 2 )
+        </PostCondition>
+    </AssertionMethod>
+</AssertionFile>

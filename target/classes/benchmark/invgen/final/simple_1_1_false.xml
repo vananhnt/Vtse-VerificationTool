@@ -1,0 +1,8 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>simple_1_1_false</Method>
+        <LoopCount>10001</LoopCount>
+        <PreCondition></PreCondition>
+        <PostCondition>return = 500</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

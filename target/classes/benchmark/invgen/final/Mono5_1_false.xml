@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>Mono5_1_false</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>(return > 0) ^ (return < 0)</PostCondition>
+    </AssertionMethod>
+</AssertionFile>
