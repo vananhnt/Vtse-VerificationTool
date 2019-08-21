@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>toy</Method>
-        <PreCondition></PreCondition>
-        <PostCondition>return = 0</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

@@ -1,0 +1,8 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>underapprox_1_2_true</Method>
+        <LoopCount>6</LoopCount>
+        <PreCondition></PreCondition>
+        <PostCondition>return % 3 = 1</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

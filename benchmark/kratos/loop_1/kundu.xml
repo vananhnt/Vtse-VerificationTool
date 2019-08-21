@@ -3,5 +3,6 @@
         <Method>kundu</Method>
         <PreCondition></PreCondition>
         <PostCondition>return = 0</PostCondition>
+        <LoopCount>1</LoopCount>
     </AssertionMethod>
 </AssertionFile>
