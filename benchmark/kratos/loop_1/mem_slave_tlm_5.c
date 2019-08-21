@@ -843,7 +843,7 @@ void mem_slave_tlm_5_run
   while_4_break: /* CIL Label */ ;
   }
 
-  return_label: /* CIL Label */ 
+  return_label:; /* CIL Label */ 
   
 }
 }
@@ -1108,7 +1108,7 @@ void s_run
   }
   while_8_break: /* CIL Label */ ;
   }
-  return_label: /* CIL Label */ 
+  return_label:; /* CIL Label */ 
   
 }
 }
