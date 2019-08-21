@@ -1,0 +1,8 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>token_ring_10</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return = 0</PostCondition>
+        <LoopCount>1</LoopCount>
+    </AssertionMethod>
+</AssertionFile>

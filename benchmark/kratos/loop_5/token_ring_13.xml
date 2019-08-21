@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>token_ring_13</Method>
-        <PreCondition></PreCondition>
-        <PostCondition>return = 0</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

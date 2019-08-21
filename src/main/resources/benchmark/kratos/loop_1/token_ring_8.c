@@ -58,7 +58,7 @@ int is_transmit7_triggered() ;
 int is_transmit8_triggered() ;
 void immediate_notify() ;
 int token  ;
-int __NONDET ;
+int __NONDET;
 int local  ;
 
 void master()
@@ -681,7 +681,7 @@ int exists_runnable_thread()
 }
 }
 void eval()
-{ int __NONDET___0 = 0;
+{ int __NONDET___0;
   int tmp ;
 
   {
