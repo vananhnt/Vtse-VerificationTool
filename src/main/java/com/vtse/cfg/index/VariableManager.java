@@ -64,7 +64,7 @@ public class VariableManager {
     }
 
     public void addVariable(String type, String name, String funcName, int index) {
-        Variable var = new Variable(type, name + "_" + funcName, index);
+        Variable var = new Variable(type, name + "_" + FunctionHelper.getShortenName(funcName), index);
         variableList.add(var);
     }
 
@@ -113,8 +113,6 @@ public class VariableManager {
 
     /**
      * tao variableList voi dau vao
-     *
-     * @param a function
      */
 
     public void build(IASTFunctionDefinition func) {
@@ -122,7 +120,7 @@ public class VariableManager {
         ArrayList<Variable> localVars = new ArrayList<>();
         ArrayList<Variable> globalVars = getGlobalVars(func);
 
-        String funcName = func.getDeclarator().getName().toString();
+        String funcName = FunctionHelper.getShortenName(func);
 
         localVars = getLocalVar(func, funcName, localVars);
         for (Variable var : globalVars) {
@@ -167,15 +165,14 @@ public class VariableManager {
 
     private Variable getReturn(IASTFunctionDefinition func) {
         IASTNode typeFunction = func.getDeclSpecifier();
-        Variable var = new Variable(typeFunction.getRawSignature(), "return" + "_" + func.getDeclarator().getName().toString());
+        Variable var = new Variable(typeFunction.getRawSignature(), "return" + "_" + FunctionHelper.getShortenName(func));
 
         return var;
     }
 
     /**
      * tra ve danh sach tham so truyen vao ham (neu co)
-     *
-     * @param function
+
      * @return List Variable
      */
     private ArrayList<Variable> getParameters(IASTFunctionDefinition func) {
@@ -196,7 +193,7 @@ public class VariableManager {
                             && paramDecls[i + 1] instanceof IASTDeclarator) {
                         Variable var = new Variable(paramDecls[i].getRawSignature(),
                                 paramDecls[i + 1].getRawSignature() + "_" +
-                                        func.getDeclarator().getName().toString(), 0);
+                                        FunctionHelper.getShortenName(func), 0);
                         params.add(var);
                     }
                 }
@@ -227,7 +224,7 @@ public class VariableManager {
             declarations = ((IASTSimpleDeclaration) node).getDeclarators();
             name = declarations[0].getName().getRawSignature();
 
-            var = new Variable(type, name + "_" + funcName, init);
+            var = new Variable(type, name + "_" + FunctionHelper.getShortenName(funcName), init);
             list.add(var);
         }
         /*

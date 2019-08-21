@@ -148,7 +148,7 @@ public class MultiFunctionCFGBuilder {
         //Tao ra node: ham duoc goi = return neu khong phai void
         if (!isVoid(callExpression)) {
             IASTIdExpression left = (IASTIdExpression) ExpressionModifier.changeFunctionCallExpression(callExpression, func);
-            IASTName nameRight = factory.newName(("return_" + funcName).toCharArray());
+            IASTName nameRight = factory.newName(("return_" + FunctionHelper.getShortenName(funcName)).toCharArray());
             IASTIdExpression right = factory.newIdExpression(nameRight);
             IASTBinaryExpression binaryExp = factory.newBinaryExpression(IASTBinaryExpression.op_assign, left, right);
             IASTExpressionStatement statement = factory.newExpressionStatement(binaryExp);

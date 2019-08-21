@@ -2,6 +2,7 @@ package com.vtse.app.verification.report;
 
 import com.vtse.app.utils.PrefixToInfix;
 import com.vtse.cfg.index.Variable;
+import com.vtse.cfg.utils.FunctionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,7 +178,7 @@ public class Report {
                     }
 
                     String value = getValue(valueStr);
-                    paramtersDefineFun.add(new DefineFun(removePostFix(v.getName(), functionName), v.getType(), value));
+                    paramtersDefineFun.add(new DefineFun(removePostFix(v.getName(), FunctionHelper.getShortenName(functionName)), v.getType(), value));
                     break;
                 }
 
@@ -188,7 +189,7 @@ public class Report {
 
         i = begin;
         while (i <= end) {
-            if (result.get(i).indexOf("return_" + functionName + "_0") >= 0) {
+            if (result.get(i).indexOf("return_" + FunctionHelper.getShortenName(functionName) + "_0") >= 0) {
                 String valueStr = "";
                 i++;
                 while (i <= end && !result.get(i).contains("define-fun")) {

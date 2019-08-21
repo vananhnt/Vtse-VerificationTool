@@ -43,7 +43,7 @@ public class Test {
 		//cfg.unfold(2);
 		//cfg.index();
 		//java.cfg.printMeta();
-		//cfg.printGraph();
+		cfg.printGraph();
 		//cfg.printFuncGraph();
 	}
 }

@@ -19,7 +19,19 @@ public class FunctionHelper {
         }
         return null;
     }
-
+    public static String getShortenName(String longName) {
+        int len = longName.length();
+//        if (len < 5) {
+//            return longName;
+//        } else {
+//            return longName.replaceAll("_", "").replaceAll("[aeiouAEIOU]", "");
+//        }
+        return longName;
+    }
+    public static String getShortenName(IASTFunctionDefinition func) {
+        String longName = getFunctionName(func);
+        return getShortenName(longName);
+    }
     public static String getFunctionType(IASTFunctionDefinition func) {
         return func.getDeclSpecifier().toString();
 

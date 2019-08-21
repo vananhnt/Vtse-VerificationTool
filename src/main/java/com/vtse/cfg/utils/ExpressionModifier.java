@@ -114,7 +114,7 @@ public class ExpressionModifier {
                 }
                 newNameVar = ((IASTDeclarator) run).getName().toString();
                 if (!globarVar.contains(newNameVar)) {
-                    newNameVar += "_" + getFunctionName(func);
+                    newNameVar += "_" + FunctionHelper.getShortenName(func);
 
                 }
                 //newNameVar += "_" + getFunctionName(func);
@@ -174,13 +174,6 @@ public class ExpressionModifier {
         return newNode;
 
 }*/
-    private static String getFunctionName(IASTFunctionDefinition func) {
-        String res = func.getDeclarator().getName().toString();
-//		for (IASTVariable node: FunctionHelper.getParameters(func)) {
-//			res += "_" + node.getName().toString();
-//		}
-        return res;
-    }
 
     /**
      * @param node, func
@@ -195,7 +188,7 @@ public class ExpressionModifier {
         String newName = null;
         if (globarVar.contains(currentName)) newName = currentName;
         else {
-            newName = currentName + "_" + getFunctionName(func);
+            newName = currentName + "_" + FunctionHelper.getShortenName(func);
 
         }
         //newName = currentName + "_" + getFunctionName(func);

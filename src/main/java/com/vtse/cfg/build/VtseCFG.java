@@ -136,7 +136,7 @@ public class VtseCFG extends ControlFlowGraph {
             if (iter instanceof IASTParameterDeclaration) {
                 String type = ((IASTParameterDeclaration) iter).getDeclSpecifier().toString();
                 String name = ((IASTParameterDeclaration) iter).getDeclarator().getName().toString();
-                Variable var = new Variable(type, name + "_" + this.getNameFunction());
+                Variable var = new Variable(type, name + "_" + FunctionHelper.getShortenName(this.getNameFunction()));
                 varList.add(var);
             }
         }
@@ -144,7 +144,7 @@ public class VtseCFG extends ControlFlowGraph {
     }
 
     public Variable getReturn() {
-        return this.getVm().getVariable("return_" + getNameFunction());
+        return this.getVm().getVariable("return_" + FunctionHelper.getShortenName(getNameFunction()));
     }
 
     public String getTypeFunction() {
