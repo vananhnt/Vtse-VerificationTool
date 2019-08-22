@@ -22,11 +22,7 @@ public class TestBenchmark {
 		
 //		File file = new File(EXAMPLE + "/example_3.c");
 //		File file = new File(EXAMPLE + "/example_4.c");
-<<<<<<< HEAD
 		File file = new File(KRATOS + "/token_ring_2.c");
-=======
-		File file = new File(KRATOS +"/token_ring_1.c");
->>>>>>> 049ddd764abc58c8384b3e764052668718aca5dd
 		FileVerification fv = new FileVerification();	
 		List<VerificationReport> reportList = fv.verifyDirectory(file);
 		exportExcel.writeExcel(reportList);
