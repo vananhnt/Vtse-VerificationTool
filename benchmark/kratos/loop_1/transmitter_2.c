@@ -28,14 +28,12 @@ void master()
   } else {
     if (m_pc == 1) {
       goto M_WAIT;
-    } else {
-
-    }
+    } 
   }
   M_ENTRY: ;
   {
   while (1 < 2) {
-    while_0_continue: /* CIL Label */ ;
+    
     {
     E_1 = 1;
     immediate_notify();
@@ -43,7 +41,7 @@ void master()
     }
     {
     while (1 < 2) {
-      while_1_continue: /* CIL Label */ ;
+      
       m_pc = 1;
       m_st = 2;
 
@@ -69,14 +67,12 @@ void transmit1()
   } else {
     if (t1_pc == 1) {
       goto T1_WAIT;
-    } else {
-
-    }
+    } 
   }
   T1_ENTRY: ;
   {
   while (1 < 2) {
-    while_2_continue: /* CIL Label */ ;
+    
     t1_pc = 1;
     t1_st = 2;
 
@@ -105,14 +101,12 @@ void transmit2()
   } else {
     if (t2_pc == 1) {
       goto T2_WAIT;
-    } else {
-
-    }
+    } 
   }
   T2_ENTRY: ;
   {
   while (1 < 2) {
-    while_3_continue: /* CIL Label */ ;
+    
     t2_pc = 1;
     t2_st = 2;
 
@@ -137,12 +131,8 @@ int is_master_triggered()
     if (M_E == 1) {
       __retres1 = 1;
       goto return_label;
-    } else {
-
-    }
-  } else {
-
-  }
+    } 
+  } 
   __retres1 = 0;
   return_label: ;/* CIL Label */ 
   return (__retres1);
@@ -156,12 +146,8 @@ int is_transmit1_triggered()
     if (E_1 == 1) {
       __retres1 = 1;
       goto return_label;
-    } else {
-
-    }
-  } else {
-
-  }
+    } 
+  } 
   __retres1 = 0;
   return_label: ;/* CIL Label */ 
   return (__retres1);
@@ -175,12 +161,8 @@ int is_transmit2_triggered()
     if (E_2 == 1) {
       __retres1 = 1;
       goto return_label;
-    } else {
-
-    }
-  } else {
-
-  }
+    } 
+  } 
   __retres1 = 0;
   return_label: ;/* CIL Label */ 
   return (__retres1);
@@ -232,9 +214,7 @@ int exists_runnable_thread()
       if (t2_st == 0) {
         __retres1 = 1;
         goto return_label;
-      } else {
-
-      }
+      } 
     }
   }
   __retres1 = 0;
@@ -249,7 +229,7 @@ void eval()
   {
   {
   while (1 < 2) {
-    while_4_continue: /* CIL Label */ ;
+    
     {
     tmp = exists_runnable_thread();
     }
@@ -264,36 +244,24 @@ void eval()
         m_st = 1;
         master();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
     if (t1_st == 0) {
       if (__NONDET) {
         {
         t1_st = 1;
         transmit1();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
     if (t2_st == 0) {
       if (__NONDET) {
         {
         t2_st = 1;
         transmit2();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
   }
   while_4_break: /* CIL Label */ ;
   }
@@ -307,29 +275,19 @@ void fire_delta_events()
   {
   if (M_E == 0) {
     M_E = 1;
-  } else {
-
-  }
+  } 
   if (T1_E == 0) {
     T1_E = 1;
-  } else {
-
-  }
+  } 
   if (T2_E == 0) {
     T2_E = 1;
-  } else {
-
-  }
+  } 
   if (E_1 == 0) {
     E_1 = 1;
-  } else {
-
-  }
+  } 
   if (E_2 == 0) {
     E_2 = 1;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -340,29 +298,19 @@ void reset_delta_events()
   {
   if (M_E == 1) {
     M_E = 2;
-  } else {
-
-  }
+  } 
   if (T1_E == 1) {
     T1_E = 2;
-  } else {
-
-  }
+  } 
   if (T2_E == 1) {
     T2_E = 2;
-  } else {
-
-  }
+  } 
   if (E_1 == 1) {
     E_1 = 2;
-  } else {
-
-  }
+  } 
   if (E_2 == 1) {
     E_2 = 2;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -378,25 +326,19 @@ void activate_threads()
   }
   if (tmp) {
     m_st = 0;
-  } else {
-
-  }
+  } 
   {
   tmp___0 = is_transmit1_triggered();
   }
   if (tmp___0) {
     t1_st = 0;
-  } else {
-
-  }
+  } 
   {
   tmp___1 = is_transmit2_triggered();
   }
   if (tmp___1) {
     t2_st = 0;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -427,29 +369,19 @@ void reset_time_events()
   {
   if (M_E == 1) {
     M_E = 2;
-  } else {
-
-  }
+  } 
   if (T1_E == 1) {
     T1_E = 2;
-  } else {
-
-  }
+  } 
   if (T2_E == 1) {
     T2_E = 2;
-  } else {
-
-  }
+  } 
   if (E_1 == 1) {
     E_1 = 2;
-  } else {
-
-  }
+  } 
   if (E_2 == 1) {
     E_2 = 2;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -476,9 +408,7 @@ int stop_simulation()
   if (tmp) {
     __retres2 = 0;
     goto return_label;
-  } else {
-
-  }
+  } 
   __retres2 = 1;
   return_label: ;/* CIL Label */ 
   return (__retres2);
@@ -500,7 +430,7 @@ int kernel_st ;
   }
   {
   while (1 < 2) {
-    while_5_continue: /* CIL Label */ ;
+    
     {
     kernel_st = 1;
     eval();
@@ -525,17 +455,13 @@ int kernel_st ;
       activate_threads();
       reset_time_events();
       }
-    } else {
-
-    }
+    } 
     {
     tmp___0 = stop_simulation();
     }
     if (tmp___0) {
       goto while_5_break;
-    } else {
-
-    }
+    } 
   }
   while_5_break: /* CIL Label */ ;
   }

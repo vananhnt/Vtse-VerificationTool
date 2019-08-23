@@ -7,7 +7,6 @@
   
 }
 }*/
-
 int assert_1 = 0;
 int m_run_st  ;
 int m_run_i  ;
@@ -30,20 +29,20 @@ int c_read_req_ev  ;
 int c_write_req_ev  ;
 int c_read_rsp_ev  ;
 int c_write_rsp_ev  ;
-int d_t  ;
-int a_t  ;
-int req_t_type  ;
-int req_t_a  ;
-int req_t_d  ;
-int rsp_t_type  ;
-int rsp_t_status  ;
-int rsp_t_d  ;
-int req_tt_type  ;
-int req_tt_a  ;
-int req_tt_d  ;
-int rsp_tt_type  ;
-int rsp_tt_status  ;
-int rsp_tt_d  ;
+static int d_t  ;
+static int a_t  ;
+static int req_t_type  ;
+static int req_t_a  ;
+static int req_t_d  ;
+static int rsp_t_type  ;
+static int rsp_t_status  ;
+static int rsp_t_d  ;
+static int req_tt_type  ;
+static int req_tt_a  ;
+static int req_tt_d  ;
+static int rsp_tt_type  ;
+static int rsp_tt_status  ;
+static int rsp_tt_d  ;
 
 int s_memory_read(int i)
 {
@@ -105,9 +104,7 @@ void m_run()
             } else {
               if (m_run_pc == 6) {
                 goto L_MASTER_RUN_GET2;
-              } else {
-
-              }
+              } 
             }
           }
         }
@@ -117,9 +114,8 @@ void m_run()
   L_MASTER_RUN_ENTRY:
   a = 0;
   {
-  while (1 < 2)
-  {
-    while_0_continue: ;/* CIL Label */ ;
+  while (1 < 2) {
+    
     if (a < 1) {
 
     } else {
@@ -130,7 +126,7 @@ void m_run()
     req_d = a + 50;
     {
     while (1 < 2) {
-      while_1_continue: ;/* CIL Label */ ;
+      
       if (c_m_lock == 1) {
 
       } else {
@@ -158,12 +154,12 @@ void m_run()
       d = d_t;
       a = a_t;
     }
-    while_1_break: ;/* CIL Label */ ;
+    while_1_break: /* CIL Label */ ;
     }
     c_m_lock = 1;
     {
     while (1 < 2) {
-      while_2_continue: ;/* CIL Label */ ;
+      
       if (c_empty_req == 0) {
 
       } else {
@@ -191,7 +187,7 @@ void m_run()
       a = a_t;
       d = d_t;
     }
-    while_2_break: ;/* CIL Label */ ;
+    while_2_break: /* CIL Label */ ;
     }
     c_req_type = req_type;
     c_req_a = req_a;
@@ -205,7 +201,7 @@ void m_run()
         goto _L___3;
       }
     } else {
-      _L___3: ;/* CIL Label */
+      _L___3: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -213,7 +209,7 @@ void m_run()
           goto _L___2;
         }
       } else {
-        _L___2: ;/* CIL Label */
+        _L___2: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -221,7 +217,7 @@ void m_run()
             goto _L___1;
           }
         } else {
-          _L___1: ;/* CIL Label */
+          _L___1: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -229,7 +225,7 @@ void m_run()
               goto _L___0;
             }
           } else {
-            _L___0: ;/* CIL Label */
+            _L___0: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -237,16 +233,12 @@ void m_run()
                 goto _L;
               }
             } else {
-              _L: ;/* CIL Label */
+              _L: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -259,21 +251,17 @@ void m_run()
         goto _L___4;
       }
     } else {
-      _L___4: ;/* CIL Label */
+      _L___4: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_write_req_ev = 2;
     {
     while (1 < 2) {
-      while_3_continue: ;/* CIL Label */ ;
+      
       if (c_empty_rsp == 1) {
 
       } else {
@@ -301,7 +289,7 @@ void m_run()
       d = d_t;
       a = a_t;
     }
-    while_3_break: ;/* CIL Label */ ;
+    while_3_break: /* CIL Label */ ;
     }
     rsp_type = c_rsp_type;
     rsp_status = c_rsp_status;
@@ -315,7 +303,7 @@ void m_run()
         goto _L___9;
       }
     } else {
-      _L___9: ;/* CIL Label */
+      _L___9: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -323,7 +311,7 @@ void m_run()
           goto _L___8;
         }
       } else {
-        _L___8: ;/* CIL Label */
+        _L___8: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -331,7 +319,7 @@ void m_run()
             goto _L___7;
           }
         } else {
-          _L___7: ;/* CIL Label */
+          _L___7: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -339,7 +327,7 @@ void m_run()
               goto _L___6;
             }
           } else {
-            _L___6: ;/* CIL Label */
+            _L___6: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -347,16 +335,12 @@ void m_run()
                 goto _L___5;
               }
             } else {
-              _L___5: ;/* CIL Label */
+              _L___5: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -369,25 +353,19 @@ void m_run()
         goto _L___10;
       }
     } else {
-      _L___10: ;/* CIL Label */
+      _L___10: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_read_rsp_ev = 2;
     if (c_m_lock == 0) {
       {
       assert_1 = 1;
       }
-    } else {
-
-    }
+    } 
     c_m_lock = 0;
     c_m_ev = 1;
     if (m_run_pc == 1) {
@@ -397,7 +375,7 @@ void m_run()
         goto _L___15;
       }
     } else {
-      _L___15: ;/* CIL Label */
+      _L___15: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -405,7 +383,7 @@ void m_run()
           goto _L___14;
         }
       } else {
-        _L___14: ;/* CIL Label */
+        _L___14: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -413,7 +391,7 @@ void m_run()
             goto _L___13;
           }
         } else {
-          _L___13: ;/* CIL Label */
+          _L___13: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -421,7 +399,7 @@ void m_run()
               goto _L___12;
             }
           } else {
-            _L___12: ;/* CIL Label */
+            _L___12: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -429,16 +407,12 @@ void m_run()
                 goto _L___11;
               }
             } else {
-              _L___11: ;/* CIL Label */
+              _L___11: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -451,26 +425,22 @@ void m_run()
         goto _L___16;
       }
     } else {
-      _L___16: ;/* CIL Label */
+      _L___16: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_m_ev = 2;
     a += 1;
   }
-  while_0_break: ;/* CIL Label */ ;
+  while_0_break: /* CIL Label */ ;
   }
   a = 0;
   {
   while (1 < 2) {
-    while_4_continue: ;/* CIL Label */ ;
+    
     if (a < 1) {
 
     } else {
@@ -480,7 +450,7 @@ void m_run()
     req_a___0 = a;
     {
     while (1 < 2) {
-      while_5_continue: ;/* CIL Label */ ;
+      
       if (c_m_lock == 1) {
 
       } else {
@@ -508,12 +478,12 @@ void m_run()
       d = d_t;
       a = a_t;
     }
-    while_5_break: ;/* CIL Label */ ;
+    while_5_break: /* CIL Label */ ;
     }
     c_m_lock = 1;
     {
     while (1 < 2) {
-      while_6_continue: ;/* CIL Label */ ;
+      
       if (c_empty_req == 0) {
 
       } else {
@@ -541,7 +511,7 @@ void m_run()
       d = d_t;
       a = a_t;
     }
-    while_6_break: ;/* CIL Label */ ;
+    while_6_break: /* CIL Label */ ;
     }
     c_req_type = req_type___0;
     c_req_a = req_a___0;
@@ -555,7 +525,7 @@ void m_run()
         goto _L___21;
       }
     } else {
-      _L___21: ;/* CIL Label */
+      _L___21: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -563,7 +533,7 @@ void m_run()
           goto _L___20;
         }
       } else {
-        _L___20: ;/* CIL Label */
+        _L___20: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -571,7 +541,7 @@ void m_run()
             goto _L___19;
           }
         } else {
-          _L___19: ;/* CIL Label */
+          _L___19: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -579,7 +549,7 @@ void m_run()
               goto _L___18;
             }
           } else {
-            _L___18: ;/* CIL Label */
+            _L___18: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -587,16 +557,12 @@ void m_run()
                 goto _L___17;
               }
             } else {
-              _L___17: ;/* CIL Label */
+              _L___17: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -609,22 +575,17 @@ void m_run()
         goto _L___22;
       }
     } else {
-      _L___22: ;/* CIL Label */
+      _L___22: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_write_req_ev = 2;
     {
-    while (1 < 2)
-    {
-      while_7_continue: ;/* CIL Label */ ;
+    while (1 < 2) {
+      
       if (c_empty_rsp == 1) {
 
       } else {
@@ -652,7 +613,7 @@ void m_run()
       d = d_t;
       a = a_t;
     }
-    while_7_break: ;/* CIL Label */ ;
+    while_7_break: /* CIL Label */ ;
     }
     rsp_type___0 = c_rsp_type;
     rsp_status___0 = c_rsp_status;
@@ -666,7 +627,7 @@ void m_run()
         goto _L___27;
       }
     } else {
-      _L___27: ;/* CIL Label */
+      _L___27: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -674,7 +635,7 @@ void m_run()
           goto _L___26;
         }
       } else {
-        _L___26: ;/* CIL Label */
+        _L___26: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -682,7 +643,7 @@ void m_run()
             goto _L___25;
           }
         } else {
-          _L___25: ;/* CIL Label */
+          _L___25: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -690,7 +651,7 @@ void m_run()
               goto _L___24;
             }
           } else {
-            _L___24: ;/* CIL Label */
+            _L___24: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -698,16 +659,12 @@ void m_run()
                 goto _L___23;
               }
             } else {
-              _L___23: ;/* CIL Label */
+              _L___23: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -720,25 +677,19 @@ void m_run()
         goto _L___28;
       }
     } else {
-      _L___28:; /* CIL Label */
+      _L___28: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_read_rsp_ev = 2;
     if (c_m_lock == 0) {
       {
       assert_1 = 1;
       }
-    } else {
-
-    }
+    } 
     c_m_lock = 0;
     c_m_ev = 1;
     if (m_run_pc == 1) {
@@ -748,7 +699,7 @@ void m_run()
         goto _L___33;
       }
     } else {
-      _L___33: ;/* CIL Label */
+      _L___33: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -756,7 +707,7 @@ void m_run()
           goto _L___32;
         }
       } else {
-        _L___32: ;/* CIL Label */
+        _L___32: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -764,7 +715,7 @@ void m_run()
             goto _L___31;
           }
         } else {
-          _L___31: ;/* CIL Label */
+          _L___31: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -772,7 +723,7 @@ void m_run()
               goto _L___30;
             }
           } else {
-            _L___30: ;/* CIL Label */
+            _L___30: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -780,16 +731,12 @@ void m_run()
                 goto _L___29;
               }
             } else {
-              _L___29: ;/* CIL Label */
+              _L___29: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -802,40 +749,34 @@ void m_run()
         goto _L___34;
       }
     } else {
-      _L___34: ;/* CIL Label */
+      _L___34: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_m_ev = 2;
     if (! (req_a___0 + 50 == rsp_d___0)) {
       {
       assert_1 = 1;
       }
-    } else {
-
-    }
+    } 
     a += 1;
   }
-  while_4_break: ;/* CIL Label */ ;
+  while_4_break: /* CIL Label */ ;
   }
 
   return_label:; /* CIL Label */
   
 }
 }
-int req_t_type___0  ;
-int req_t_a___0  ;
-int req_t_d___0  ;
-int rsp_t_type___0  ;
-int rsp_t_status___0  ;
-int rsp_t_d___0  ;
+static int req_t_type___0  ;
+static int req_t_a___0  ;
+static int req_t_d___0  ;
+static int rsp_t_type___0  ;
+static int rsp_t_status___0  ;
+static int rsp_t_d___0  ;
 void s_run()
 { int req_type ;
   int req_a ;
@@ -854,18 +795,16 @@ void s_run()
     } else {
       if (s_run_pc == 2) {
         goto L_SLAVE_RUN_GET;
-      } else {
-
-      }
+      } 
     }
   }
   L_SLAVE_RUN_ENTRY:
   {
   while (1 < 2) {
-    while_8_continue: ;/* CIL Label */ ;
+    
     {
     while (1 < 2) {
-      while_9_continue: ;/* CIL Label */ ;
+      
       if (c_empty_req == 1) {
 
       } else {
@@ -889,7 +828,7 @@ void s_run()
       rsp_status = rsp_t_status___0;
       rsp_d = rsp_t_d___0;
     }
-    while_9_break: ;/* CIL Label */ ;
+    while_9_break: /* CIL Label */ ;
     }
     req_type = c_req_type;
     req_a = c_req_a;
@@ -903,7 +842,7 @@ void s_run()
         goto _L___3;
       }
     } else {
-      _L___3: ;/* CIL Label */
+      _L___3: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -911,7 +850,7 @@ void s_run()
           goto _L___2;
         }
       } else {
-        _L___2: ;/* CIL Label */
+        _L___2: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -919,7 +858,7 @@ void s_run()
             goto _L___1;
           }
         } else {
-          _L___1: ;/* CIL Label */
+          _L___1: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -927,7 +866,7 @@ void s_run()
               goto _L___0;
             }
           } else {
-            _L___0: ;/* CIL Label */
+            _L___0: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -935,16 +874,12 @@ void s_run()
                 goto _L;
               }
             } else {
-              _L: ;/* CIL Label */
+              _L: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -957,16 +892,12 @@ void s_run()
         goto _L___4;
       }
     } else {
-      _L___4: ;/* CIL Label */
+      _L___4: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_read_req_ev = 2;
     rsp_type = req_type;
@@ -984,7 +915,7 @@ void s_run()
     }
     {
     while (1 < 2) {
-      while_10_continue: ;/* CIL Label */ ;
+      while_10_continue: /* CIL Label */ ;
       if (c_empty_rsp == 0) {
 
       } else {
@@ -1008,7 +939,7 @@ void s_run()
       rsp_status = rsp_t_status___0;
       rsp_d = rsp_t_d___0;
     }
-    while_10_break: ;/* CIL Label */ ;
+    while_10_break: /* CIL Label */ ;
     }
     c_rsp_type = rsp_type;
     c_rsp_status = rsp_status;
@@ -1022,7 +953,7 @@ void s_run()
         goto _L___9;
       }
     } else {
-      _L___9: ;/* CIL Label */
+      _L___9: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -1030,7 +961,7 @@ void s_run()
           goto _L___8;
         }
       } else {
-        _L___8: ;/* CIL Label */
+        _L___8: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -1038,7 +969,7 @@ void s_run()
             goto _L___7;
           }
         } else {
-          _L___7: ;/* CIL Label */
+          _L___7: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -1046,7 +977,7 @@ void s_run()
               goto _L___6;
             }
           } else {
-            _L___6: ;/* CIL Label */
+            _L___6: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -1054,16 +985,12 @@ void s_run()
                 goto _L___5;
               }
             } else {
-              _L___5: ;/* CIL Label */
+              _L___5: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -1076,20 +1003,16 @@ void s_run()
         goto _L___10;
       }
     } else {
-      _L___10: ;/* CIL Label */
+      _L___10: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_write_rsp_ev = 2;
   }
-  while_8_break: ;/* CIL Label */ ;
+  while_8_break: /* CIL Label */ ;
   }
   return_label:; /* CIL Label */
   
@@ -1098,12 +1021,12 @@ void s_run()
 void eval()
 { int tmp ;
   int tmp___0 ;
-  int __NONDET = 0;
+  int __NONDET;
 
   {
   {
   while (1 < 2) {
-    while_11_continue: ;/* CIL Label */ ;
+    while_11_continue: /* CIL Label */ ;
     if (m_run_st == 0) {
 
     } else {
@@ -1122,12 +1045,8 @@ void eval()
         m_run_st = 1;
         m_run();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
     if (s_run_st == 0) {
       {
       tmp___0 = __NONDET;
@@ -1137,14 +1056,10 @@ void eval()
         s_run_st = 1;
         s_run();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
   }
-  while_11_break: ;/* CIL Label */ ;
+  while_11_break: /* CIL Label */ ;
   }
 
   
@@ -1172,7 +1087,7 @@ void start_simulation()
       goto _L___3;
     }
   } else {
-    _L___3: ;/* CIL Label */
+    _L___3: /* CIL Label */
     if (m_run_pc == 2) {
       if (c_read_req_ev == 1) {
         m_run_st = 0;
@@ -1180,7 +1095,7 @@ void start_simulation()
         goto _L___2;
       }
     } else {
-      _L___2: ;/* CIL Label */
+      _L___2: /* CIL Label */
       if (m_run_pc == 3) {
         if (c_write_rsp_ev == 1) {
           m_run_st = 0;
@@ -1188,7 +1103,7 @@ void start_simulation()
           goto _L___1;
         }
       } else {
-        _L___1: ;/* CIL Label */
+        _L___1: /* CIL Label */
         if (m_run_pc == 4) {
           if (c_m_ev == 1) {
             m_run_st = 0;
@@ -1196,7 +1111,7 @@ void start_simulation()
             goto _L___0;
           }
         } else {
-          _L___0: ;/* CIL Label */
+          _L___0: /* CIL Label */
           if (m_run_pc == 5) {
             if (c_read_req_ev == 1) {
               m_run_st = 0;
@@ -1204,16 +1119,12 @@ void start_simulation()
               goto _L;
             }
           } else {
-            _L: ;/* CIL Label */
+            _L: /* CIL Label */
             if (m_run_pc == 6) {
               if (c_write_rsp_ev == 1) {
                 m_run_st = 0;
-              } else {
-
-              }
-            } else {
-
-            }
+              } 
+            } 
           }
         }
       }
@@ -1226,20 +1137,16 @@ void start_simulation()
       goto _L___4;
     }
   } else {
-    _L___4: ;/* CIL Label */
+    _L___4: /* CIL Label */
     if (s_run_pc == 1) {
       if (c_read_rsp_ev == 1) {
         s_run_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
   }
   {
   while (1 < 2) {
-    while_12_continue: ;/* CIL Label */ ;
+    while_12_continue: /* CIL Label */ ;
     {
     kernel_st = 1;
     eval();
@@ -1253,7 +1160,7 @@ void start_simulation()
         goto _L___9;
       }
     } else {
-      _L___9: ;/* CIL Label */
+      _L___9: /* CIL Label */
       if (m_run_pc == 2) {
         if (c_read_req_ev == 1) {
           m_run_st = 0;
@@ -1261,7 +1168,7 @@ void start_simulation()
           goto _L___8;
         }
       } else {
-        _L___8: ;/* CIL Label */
+        _L___8: /* CIL Label */
         if (m_run_pc == 3) {
           if (c_write_rsp_ev == 1) {
             m_run_st = 0;
@@ -1269,7 +1176,7 @@ void start_simulation()
             goto _L___7;
           }
         } else {
-          _L___7: ;/* CIL Label */
+          _L___7: /* CIL Label */
           if (m_run_pc == 4) {
             if (c_m_ev == 1) {
               m_run_st = 0;
@@ -1277,7 +1184,7 @@ void start_simulation()
               goto _L___6;
             }
           } else {
-            _L___6: ;/* CIL Label */
+            _L___6: /* CIL Label */
             if (m_run_pc == 5) {
               if (c_read_req_ev == 1) {
                 m_run_st = 0;
@@ -1285,16 +1192,12 @@ void start_simulation()
                 goto _L___5;
               }
             } else {
-              _L___5: ;/* CIL Label */
+              _L___5: /* CIL Label */
               if (m_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   m_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -1307,16 +1210,12 @@ void start_simulation()
         goto _L___10;
       }
     } else {
-      _L___10: ;/* CIL Label */
+      _L___10: /* CIL Label */
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     if (m_run_st == 0) {
 
@@ -1328,7 +1227,7 @@ void start_simulation()
       }
     }
   }
-  while_12_break: ;/* CIL Label */ ;
+  while_12_break: /* CIL Label */ ;
   }
 
   

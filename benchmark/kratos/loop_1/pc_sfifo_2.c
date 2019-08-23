@@ -22,14 +22,10 @@ void update_fifo_q()
   {
   if (q_free == 0) {
     q_write_ev = 0;
-  } else {
-
-  }
+  } 
   if (q_free == 1) {
     q_read_ev = 0;
-  } else {
-
-  }
+  } 
   q_ev = 0;
   q_req_up = 0;
 
@@ -54,12 +50,8 @@ int is_do_write_p_triggered()
     if (q_read_ev == 1) {
       __retres1 = 1;
       goto return_label;
-    } else {
-
-    }
-  } else {
-
-  }
+    } 
+  } 
   __retres1 = 0;
   return_label: ;/* CIL Label */ 
   return (__retres1);
@@ -73,12 +65,8 @@ int is_do_read_c_triggered()
     if (q_write_ev == 1) {
       __retres1 = 1;
       goto return_label;
-    } else {
-
-    }
-  } else {
-
-  }
+    } 
+  } 
   __retres1 = 0;
   return_label: ;/* CIL Label */ 
   return (__retres1);
@@ -94,17 +82,13 @@ void immediate_notify_threads()
   }
   if (tmp) {
     p_dw_st = 0;
-  } else {
-
-  }
+  } 
   {
   tmp___0 = is_do_read_c_triggered();
   }
   if (tmp___0) {
     c_dr_st = 0;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -119,23 +103,19 @@ void do_write_p()
   } else {
     if (p_dw_pc == 1) {
       goto DW_WAIT_READ;
-    } else {
-
-    }
+    } 
   }
   DW_ENTRY: 
   {
   while (1 < 2) {
-    while_0_continue: /* CIL Label */ ;
+    
     if (q_free == 0) {
       p_dw_st = 2;
       p_dw_pc = 1;
 
       goto return_label;
       DW_WAIT_READ: ;
-    } else {
-
-    }
+    } 
     {
       q_buf_0 = __NONDET;
     p_last_write = q_buf_0;
@@ -160,14 +140,12 @@ void do_read_c()
   } else {
     if (c_dr_pc == 1) {
       goto DR_WAIT_WRITE;
-    } else {
-
-    }
+    } 
   }
   DR_ENTRY: 
   {
   while (1 < 2) {
-    while_1_continue: /* CIL Label */ ;
+    
     if (q_free == 1) {
       c_dr_st = 2;
       c_dr_pc = 1;
@@ -176,9 +154,7 @@ void do_read_c()
       goto return_label;
       DR_WAIT_WRITE: 
       a = a_t;
-    } else {
-
-    }
+    } 
     a = q_buf_0;
     c_last_read = a;
     c_num_read += 1;
@@ -212,9 +188,7 @@ void update_channels()
     {
     update_fifo_q();
     }
-  } else {
-
-  }
+  } 
 
   
 }
@@ -248,9 +222,7 @@ int exists_runnable_thread()
     if (c_dr_st == 0) {
       __retres1 = 1;
       goto return_label;
-    } else {
-
-    }
+    } 
   }
   __retres1 = 0;
   return_label: ;/* CIL Label */ 
@@ -263,14 +235,10 @@ void fire_delta_events()
   {
   if (q_read_ev == 0) {
     q_read_ev = 1;
-  } else {
-
-  }
+  } 
   if (q_write_ev == 0) {
     q_write_ev = 1;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -281,14 +249,10 @@ void reset_delta_events()
   {
   if (q_read_ev == 1) {
     q_read_ev = 2;
-  } else {
-
-  }
+  } 
   if (q_write_ev == 1) {
     q_write_ev = 2;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -303,17 +267,13 @@ void activate_threads()
   }
   if (tmp) {
     p_dw_st = 0;
-  } else {
-
-  }
+  } 
   {
   tmp___0 = is_do_read_c_triggered();
   }
   if (tmp___0) {
     c_dr_st = 0;
-  } else {
-
-  }
+  } 
 
   
 }
@@ -327,7 +287,7 @@ void eval()
   {
   {
   while (1 < 2) {
-    while_2_continue: /* CIL Label */ ;
+    
     {
     tmp___1 = exists_runnable_thread();
     }
@@ -345,12 +305,8 @@ void eval()
         p_dw_st = 1;
         do_write_p();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
     if (c_dr_st == 0) {
       {
       tmp___0 = __NONDET;
@@ -360,12 +316,8 @@ void eval()
         c_dr_st = 1;
         do_read_c();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
   }
   while_2_break: /* CIL Label */ ;
   }
@@ -384,9 +336,7 @@ int stop_simulation()
   if (tmp) {
     __retres2 = 0;
     goto return_label;
-  } else {
-
-  }
+  } 
   __retres2 = 1;
   return_label: ;/* CIL Label */ 
   return (__retres2);
@@ -407,7 +357,7 @@ void start_simulation()
   }
   {
   while (1 < 2) {
-    while_3_continue: /* CIL Label */ ;
+    
     {
     kernel_st = 1;
     eval();
@@ -425,9 +375,7 @@ void start_simulation()
     }
     if (tmp) {
       goto while_3_break;
-    } else {
-
-    }
+    } 
   }
   while_3_break: /* CIL Label */ ;
   }

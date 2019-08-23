@@ -124,9 +124,7 @@ void mem_slave_tlm_5_run
             } else {
               if (mem_slave_tlm_5_run_pc == 6) {
                 goto L_mem_slave_tlm_5ASTER_RUN_GET2;
-              } else {
-
-              }
+              } 
             }
           }
         }
@@ -137,7 +135,7 @@ void mem_slave_tlm_5_run
   a = 0;
   {
   while (1 < 2) {
-    while_0_continue: /* CIL Label */ ;
+    
     if (a < 5) {
 
     } else {
@@ -148,7 +146,7 @@ void mem_slave_tlm_5_run
     req_d = a + 50;
     {
     while (1 < 2) {
-      while_1_continue: /* CIL Label */ ;
+      
       if (c_mem_slave_tlm_5_lock == 1) {
 
       } else {
@@ -181,7 +179,7 @@ void mem_slave_tlm_5_run
     c_mem_slave_tlm_5_lock = 1;
     {
     while (1 < 2) {
-      while_2_continue: /* CIL Label */ ;
+      
       if (c_emem_slave_tlm_5pty_req == 0) {
 
       } else {
@@ -259,12 +257,8 @@ void mem_slave_tlm_5_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -281,17 +275,13 @@ void mem_slave_tlm_5_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_write_req_ev = 2;
     {
     while (1 < 2) {
-      while_3_continue: /* CIL Label */ ;
+      
       if (c_emem_slave_tlm_5pty_rsp == 1) {
 
       } else {
@@ -369,12 +359,8 @@ void mem_slave_tlm_5_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -391,21 +377,15 @@ void mem_slave_tlm_5_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_read_rsp_ev = 2;
     if (c_mem_slave_tlm_5_lock == 0) {
       {
       assert_1 = 1;
       }
-    } else {
-
-    }
+    } 
     c_mem_slave_tlm_5_lock = 0;
     c_mem_slave_tlm_5_ev = 1;
     if (mem_slave_tlm_5_run_pc == 1) {
@@ -451,12 +431,8 @@ void mem_slave_tlm_5_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -473,12 +449,8 @@ void mem_slave_tlm_5_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_mem_slave_tlm_5_ev = 2;
     a += 1;
@@ -488,7 +460,7 @@ void mem_slave_tlm_5_run
   a = 0;
   {
   while (1 < 2) {
-    while_4_continue: /* CIL Label */ ;
+    
     if (a < 5) {
 
     } else {
@@ -498,7 +470,7 @@ void mem_slave_tlm_5_run
     req_a___0 = a;
     {
     while (1 < 2) {
-      while_5_continue: /* CIL Label */ ;
+      
       if (c_mem_slave_tlm_5_lock == 1) {
 
       } else {
@@ -531,7 +503,7 @@ void mem_slave_tlm_5_run
     c_mem_slave_tlm_5_lock = 1;
     {
     while (1 < 2) {
-      while_6_continue: /* CIL Label */ ;
+      
       if (c_emem_slave_tlm_5pty_req == 0) {
 
       } else {
@@ -609,12 +581,8 @@ void mem_slave_tlm_5_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -631,17 +599,13 @@ void mem_slave_tlm_5_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_write_req_ev = 2;
     {
     while (1 < 2) {
-      while_7_continue: /* CIL Label */ ;
+      
       if (c_emem_slave_tlm_5pty_rsp == 1) {
 
       } else {
@@ -719,12 +683,8 @@ void mem_slave_tlm_5_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -741,21 +701,15 @@ void mem_slave_tlm_5_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_read_rsp_ev = 2;
     if (c_mem_slave_tlm_5_lock == 0) {
       {
       assert_1 = 1;
       }
-    } else {
-
-    }
+    } 
     c_mem_slave_tlm_5_lock = 0;
     c_mem_slave_tlm_5_ev = 1;
     if (mem_slave_tlm_5_run_pc == 1) {
@@ -801,12 +755,8 @@ void mem_slave_tlm_5_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -823,21 +773,15 @@ void mem_slave_tlm_5_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_mem_slave_tlm_5_ev = 2;
     if (! (req_a___0 + 50 == rsp_d___0)) {
       {
       assert_1 = 1;
       }
-    } else {
-
-    }
+    } 
     a += 1;
   }
   while_4_break: /* CIL Label */ ;
@@ -871,18 +815,16 @@ void s_run
     } else {
       if (s_run_pc == 2) {
         goto L_SLAVE_RUN_GET;
-      } else {
-
-      }
+      } 
     }
   }
   L_SLAVE_RUN_ENTRY: 
   {
   while (1 < 2) {
-    while_8_continue: /* CIL Label */ ;
+    
     {
     while (1 < 2) {
-      while_9_continue: /* CIL Label */ ;
+      
       if (c_emem_slave_tlm_5pty_req == 1) {
 
       } else {
@@ -956,12 +898,8 @@ void s_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -978,12 +916,8 @@ void s_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_read_req_ev = 2;
     rsp_type = req_type;
@@ -1075,12 +1009,8 @@ void s_run
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -1097,12 +1027,8 @@ void s_run
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     c_write_rsp_ev = 2;
   }
@@ -1139,12 +1065,8 @@ void eval
         mem_slave_tlm_5_run_st = 1;
         mem_slave_tlm_5_run();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
     if (s_run_st == 0) {
       {
       tmem_slave_tlm_5p___0 = __NONDET;
@@ -1154,12 +1076,8 @@ void eval
         s_run_st = 1;
         s_run();
         }
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
   }
   while_11_break: /* CIL Label */ ;
   }
@@ -1225,12 +1143,8 @@ void start_simem_slave_tlm_5ulation
             if (mem_slave_tlm_5_run_pc == 6) {
               if (c_write_rsp_ev == 1) {
                 mem_slave_tlm_5_run_st = 0;
-              } else {
-
-              }
-            } else {
-
-            }
+              } 
+            } 
           }
         }
       }
@@ -1247,12 +1161,8 @@ void start_simem_slave_tlm_5ulation
     if (s_run_pc == 1) {
       if (c_read_rsp_ev == 1) {
         s_run_st = 0;
-      } else {
-
-      }
-    } else {
-
-    }
+      } 
+    } 
   }
   {
   while (1 < 2) {
@@ -1306,12 +1216,8 @@ void start_simem_slave_tlm_5ulation
               if (mem_slave_tlm_5_run_pc == 6) {
                 if (c_write_rsp_ev == 1) {
                   mem_slave_tlm_5_run_st = 0;
-                } else {
-
-                }
-              } else {
-
-              }
+                } 
+              } 
             }
           }
         }
@@ -1328,12 +1234,8 @@ void start_simem_slave_tlm_5ulation
       if (s_run_pc == 1) {
         if (c_read_rsp_ev == 1) {
           s_run_st = 0;
-        } else {
-
-        }
-      } else {
-
-      }
+        } 
+      } 
     }
     if (mem_slave_tlm_5_run_st == 0) {
 
