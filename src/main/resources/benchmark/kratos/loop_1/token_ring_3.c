@@ -61,7 +61,7 @@ void master()
     M_WAIT: ;
     if (token != local + 3) {
       {
-      assert = 1;
+      assert_1 = 1;
       }
     } else {
 
