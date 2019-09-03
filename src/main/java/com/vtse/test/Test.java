@@ -34,14 +34,14 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws IOException {
-		ASTFactory ast = new ASTFactory("/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/kratos/example.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("example"), ast);
+		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/kratos/transmitter/transmitter_4.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("transmitter_4"), ast);
 
 		//ast.print();
 		//cfg.invariant();
 		//cfg.ungoto();
-		//cfg.unfold(2);
-		//cfg.index();
+		//cfg.unfold(1);
+		cfg.index();
 		//java.cfg.printMeta();
 		cfg.printGraph();
 		//cfg.printFuncGraph();
