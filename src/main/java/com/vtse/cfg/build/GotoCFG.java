@@ -69,9 +69,9 @@ public class GotoCFG {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ControlFlowGraph testGraph = MyCloner.clone(tmpGraph);
-        testGraph.getExit().setNext(new EmptyNode());
-        return testGraph;
+        if (tmpGraph != null)
+        tmpGraph.getExit().setNext(new EmptyNode());
+        return tmpGraph;
     }
 
     /**
@@ -116,6 +116,7 @@ public class GotoCFG {
 			ControlFlowGraph gotoGraph = unfoldGoto((GotoNode)node);
 			//CFGNode endNode = node.getNext();
 			CFGNode endNode = gotoGraph.getExit().getNext();
+			if (gotoGraph != null)
 			node.setNext(gotoGraph.getStart());
 			//node.setNext(new EmptyNode());
 		}

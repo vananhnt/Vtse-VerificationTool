@@ -8,6 +8,7 @@ import com.vtse.cfg.utils.ExpressionHelper;
 import org.eclipse.cdt.core.dom.ast.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author va
@@ -34,6 +35,35 @@ public class FormulaCreater {
                 } else {
 //					constraint = wrapInfix(LOGIC_AND, temp, constraint);
                     constraint = wrapPrefix(LOGIC_AND, constraint, temp);
+                }
+            }
+            if (node == exit) break;
+            if (node instanceof DecisionNode) {
+                node = ((DecisionNode) node).getEndNode();
+            } else {
+                node = node.getNext();
+            }
+
+        }
+
+        return constraint;
+    }
+
+    public static List<String> createAssert(CFGNode start, CFGNode exit) {
+        List<String> constraint = new ArrayList<>();
+        constraint.add(start.getFormula());
+
+        String temp;
+        CFGNode node = start.getNext();
+        while (node != null) {
+            temp = node.getFormula();
+            if (temp != null) {
+                if (constraint == null) {
+                    constraint.add(temp);
+                } else {
+//					constraint = wrapInfix(LOGIC_AND, temp, constraint);
+                    //constraint = wrapPrefix(LOGIC_AND, constraint, temp);
+                    constraint.add(temp);
                 }
             }
             if (node == exit) break;

@@ -13,7 +13,9 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 
 import java.io.PrintStream;
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.List;
 
 public class VtseCFG extends ControlFlowGraph {
     private VariableManager vm;
@@ -108,6 +110,10 @@ public class VtseCFG extends ControlFlowGraph {
 
     public String createFormula() {
         return FormulaCreater.create(start, exit);
+    }
+
+    public List<String> createFormulas() {
+        return FormulaCreater.createAssert(start, exit);
     }
     public String createInvariantFormula () {
         return FormulaCreater.createInvariantFormula(start, exit);

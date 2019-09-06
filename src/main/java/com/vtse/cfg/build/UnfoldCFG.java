@@ -63,7 +63,7 @@ public class UnfoldCFG {
 	 */
 	private CFGNode findExit(CFGNode start) {
 		CFGNode iter = start;
-		while (!(iter instanceof IterationNode) && iter != null) {
+		while (!(iter instanceof IterationNode) && iter != null && iter.getNext() != null && !(iter.getNext() instanceof EndConditionNode)) {
 			iter = iter.getNext();
 		}
 		return iter;
@@ -94,7 +94,7 @@ public class UnfoldCFG {
 		ControlFlowGraph thenClause = new ControlFlowGraph(currentCondition.getThenNode(),
 					findExit(currentCondition.getThenNode())); 
 		ControlFlowGraph copyThen;
-		
+
 		thenClause.setStart(iterateNode(thenClause.getStart()));
 		//tao ra nhieu vong lap moi tu duoi len tren
 		for (int i = 0; i < nLoops; i++) {
@@ -104,8 +104,9 @@ public class UnfoldCFG {
 			condition.getElseNode().setNext(endNode);
 			
 			copyThen = new ControlFlowGraph();
+			//if (MyCloner.getSize(thenClause) > Integer.MAX_VALUE) System.exit(1) ;
 			copyThen = MyCloner.clone(thenClause);
-			
+
 			condition.setThenNode(copyThen.getStart());
 			if (copyThen.getExit() != null)
 			copyThen.getExit().setNext(lastNode);
@@ -188,6 +189,7 @@ public class UnfoldCFG {
 			//boolean isTerminate = ExpressionHelper.checkTermination(((BeginWhileNode) node).getWhileStatement());
 			boolean isTerminate = false;
 			ControlFlowGraph whileGraph = unfoldWhile(node, ((BeginWhileNode) node).getEndNode());
+
 			if (isTerminate) { //add not condition
 				PlainNode notCondition = ExpressionHelper.getNotCondition(condition);
 				node.setNext(whileGraph.getStart());
@@ -199,7 +201,7 @@ public class UnfoldCFG {
 				whileGraph.getExit().setNext(iterateNode(((BeginWhileNode) node).getEndNode().getNext()));
 			}
 		} else if (node instanceof LabelNode) {
-
+			node.setNext(iterateNode(node.getNext()));
 		}  else if (node instanceof PlainNode) {
 			//remove invariant node when unfold
 			if (node instanceof InvariantNode) {
@@ -229,7 +231,9 @@ public class UnfoldCFG {
 						|| node instanceof UndefinedNode || node instanceof BeginFunctionNode) {
 			node.setNext(iterateNode(node.getNext()));				
 		} else if (node instanceof EndConditionNode) {
-		}
+		} else if (node instanceof GotoNode) {
+		    node.setNext(iterateNode(node.getNext()));
+        }
 //		else if (node instanceof GotoNode) {
 //			ControlFlowGraph gotoGraph = unfoldGoto((GotoNode)node);
 //			//CFGNode endNode = node.getNext();

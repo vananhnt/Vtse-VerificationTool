@@ -8,6 +8,7 @@ import java.util.List;
 public class SMTInput {
     private List<Variable> variableList;
     private String formula;
+    private List<String> formulas;
     private List<String> constraints;
 
     public SMTInput() {
@@ -17,6 +18,10 @@ public class SMTInput {
     public SMTInput(List<Variable> varList, String formula) {
         this.variableList = varList;
         this.formula = formula;
+    }
+    public SMTInput(List<Variable> varList, List<String> formulas) {
+        this.variableList = varList;
+        this.formulas = formulas;
     }
 
     public List<Variable> getVariableList() {
@@ -72,6 +77,47 @@ public class SMTInput {
 
         System.out.println("(assert " + formula + ")");
     }
+
+    public void printInputToOutputStreamAssert(OutputStream os)
+            throws IOException {
+        Writer out = new BufferedWriter(new OutputStreamWriter(os));
+        String smtType;
+        for (Variable v : variableList) {
+            smtType = getSMTType(v.getType());
+            // TODO changed
+
+            if (v.hasInitialized()) {
+
+                //System.out.println("v: " + v);
+                if (v.getIndex() < 0)
+                    out.append("(declare-fun " + v.getVariableWithIndex() + " () " + smtType + ")\n");
+                else {
+                    int imax = (v.getIndexInvariant() > v.getIndex()) ? v.getIndexInvariant() : v.getIndex();
+                    for (int i = -1; i <= imax; i++)
+                        out.append(declare(v.getName(), i, smtType) + "\n");
+                }
+            } else if (v.getName().equals("return")) {
+                out.append("(declare-fun return () " + smtType + ")\n");
+            }
+        }
+
+        for (String s : formulas) {
+            if (s != null) out.append("(assert " + s + ")\n");
+        }
+
+        if (constraints != null) {
+            for (String s : constraints) {
+                out.append("(assert " + s + ")\n");
+            }
+        }
+
+        out.append("(check-sat)\n");
+        out.append("(get-model)");
+
+        out.flush();
+        out.close();
+    }
+
 
     public void printInputToOutputStream(OutputStream os)
             throws IOException {

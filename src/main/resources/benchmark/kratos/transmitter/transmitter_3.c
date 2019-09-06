@@ -40,7 +40,7 @@ void master()
   M_ENTRY: ;
   {
   while (1 < 2) {
-    while_0_continue: /* CIL Label */ ;
+   // while_0_continue: /* CIL Label */ ;
     {
     E_1 = 1;
     immediate_notify();
@@ -48,7 +48,7 @@ void master()
     }
     {
     while (1 < 2) {
-      while_1_continue: /* CIL Label */ ;
+    //  while_1_continue: /* CIL Label */ ;
       m_pc = 1;
       m_st = 2;
 
@@ -79,7 +79,7 @@ void transmit1()
   T1_ENTRY: ;
   {
   while (1 < 2) {
-    while_2_continue: /* CIL Label */ ;
+   // while_2_continue: /* CIL Label */ ;
     t1_pc = 1;
     t1_st = 2;
 
@@ -112,7 +112,7 @@ void transmit2()
   T2_ENTRY: ;
   {
   while (1 < 2) {
-    while_3_continue: /* CIL Label */ ;
+    //while_3_continue: /* CIL Label */ ;
     t2_pc = 1;
     t2_st = 2;
 
@@ -146,7 +146,7 @@ void transmit3()
   T3_ENTRY: ;
   {
   while (1 < 2) {
-    while_4_continue: /* CIL Label */ ;
+   // while_4_continue: /* CIL Label */ ;
     t3_pc = 1;
     t3_st = 2;
 
@@ -294,7 +294,7 @@ void eval()
   {
   {
   while (1 < 2) {
-    while_5_continue: /* CIL Label */ ;
+   // while_5_continue: /* CIL Label */ ;
     {
     tmp = exists_runnable_thread();
     }
@@ -526,7 +526,7 @@ void start_simulation()
   }
   {
   while (1 < 2) {
-    while_6_continue: /* CIL Label */ ;
+   // while_6_continue: /* CIL Label */ ;
     {
     kernel_st = 1;
     eval();

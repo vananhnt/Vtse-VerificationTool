@@ -1,6 +1,5 @@
 package com.vtse.cfg.build;
 
-import com.vtse.cfg.utils.ErrorPrompt;
 import com.vtse.cfg.utils.FunctionHelper;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
@@ -167,7 +166,9 @@ public class ASTFactory {
         for (String str : funcNameList) {
             System.out.println("   ." + str);
         }
-        ErrorPrompt.FunctionNotFound("<" + name + ">");
+
+        System.err.println("Cannot find function: " + name);
+        System.exit(1);
         return null;
     }
 

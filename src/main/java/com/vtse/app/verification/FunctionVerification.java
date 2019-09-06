@@ -50,7 +50,7 @@ public class FunctionVerification {
 //            cfg.unfold(nLoops);
 //            cfg.unfold(10);
             cfg.index();
-            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormula() );
+            smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormulas() );
         }
 
         // java.cfg.printGraph();
@@ -84,7 +84,7 @@ public class FunctionVerification {
         String path = SMTINPUT_DIR + functionName + ".smt";
 
         FileOutputStream fo = new FileOutputStream(new File(path));
-        smtInput.printInputToOutputStream(fo);
+        smtInput.printInputToOutputStreamAssert(fo);
 
         List<String> result = Z3Runner.runZ3(path);
 

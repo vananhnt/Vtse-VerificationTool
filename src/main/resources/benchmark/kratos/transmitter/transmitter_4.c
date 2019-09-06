@@ -61,10 +61,10 @@ void master()
       goto return_label;
       M_WAIT: ;
     }
-   // while_1_break: /* CIL Label */ ;
+    while_1_break: /* CIL Label */ ;
     }
   }
- // while_0_break: /* CIL Label */ ;
+  while_0_break: /* CIL Label */ ;
   }
 
   return_label:; /* CIL Label */ 
@@ -97,7 +97,7 @@ void transmit1()
     E_2 = 2;
     }
   }
- // while_2_break: /* CIL Label */ ;
+  while_2_break: /* CIL Label */ ;
   }
 
   return_label:; /* CIL Label */ 
@@ -130,7 +130,7 @@ void transmit2()
     E_3 = 2;
     }
   }
- // while_3_break: /* CIL Label */ ;
+  while_3_break: /* CIL Label */ ;
   }
 
   return_label:; /* CIL Label */ 
@@ -163,7 +163,7 @@ void transmit3()
     E_4 = 2;
     }
   }
- // while_4_break: /* CIL Label */ ;
+  while_4_break: /* CIL Label */ ;
   }
 
   return_label:; /* CIL Label */ 
@@ -195,7 +195,7 @@ void transmit4()
     assert_1 = 1 ;
     
   }
-//  while_5_break: /* CIL Label */ ;
+  while_5_break: /* CIL Label */ ;
   }
 
   return_label:; /* CIL Label */ 
@@ -363,29 +363,29 @@ void eval()
     } else {
       goto while_6_break;
     }
-    if (m_st == 0) {
+if (m_st == 0) {
       if (__NONDET) {
         {
         m_st = 1;
         master();
         }
-      } 
-    } 
+      }
+    }
     if (t1_st == 0) {
       if (__NONDET) {
         {
         t1_st = 1;
         transmit1();
         }
-      } 
-    } 
+      }
+    }
     if (t2_st == 0) {
       if (__NONDET) {
         {
         t2_st = 1;
         transmit2();
         }
-      } 
+      }
     }
     if (t3_st == 0) {
       if (__NONDET) {
@@ -393,16 +393,16 @@ void eval()
         t3_st = 1;
         transmit3();
         }
-      } 
-    } 
+      }
+    }
     if (t4_st == 0) {
       if (__NONDET) {
         {
         t4_st = 1;
         transmit4();
         }
-      } 
-    } 
+      }
+    }
   }
   while_6_break: /* CIL Label */ ;
   }
