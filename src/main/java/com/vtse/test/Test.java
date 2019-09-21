@@ -35,14 +35,13 @@ public class Test {
 
 	public static void  main(String[] args) throws IOException {
 		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/kratos/transmitter_1.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
-
-		//ast.print();
+		VtseCFG cfg = new VtseCFG(ast.getFunction("transmit5"), ast);
+		ast.print();
 		//cfg.invariant();
 		//cfg.ugoto();
 		//cfg.unfold(1);
-		cfg.index();
+		//cfg.index();
 		//java.cfg.printMeta();
-		cfg.printGraph();
+		//cfg.printGraph();
 	}
 }

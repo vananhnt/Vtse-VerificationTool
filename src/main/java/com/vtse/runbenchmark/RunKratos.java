@@ -15,7 +15,7 @@ public class RunKratos {
     public static void main(String[] args) throws WriteException, IOException {
         ExportExcel exportExcel = new ExportExcel("VTSE Report.xls");
 
-        File file = new File("./src/main/resources/benchmark/kratos/token_ring");
+        File file = new File("./src/main/resources/benchmark/kratos/loop_1/mem_slave_tlm_1.c");
         FileVerification fv = new FileVerification();
         List<VerificationReport> reportList = fv.verifyDirectory(file, FunctionVerification.UNFOLD_MODE);
         exportExcel.writeExcel(reportList);

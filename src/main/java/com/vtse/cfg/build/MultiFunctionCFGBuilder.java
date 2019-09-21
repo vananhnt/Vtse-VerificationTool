@@ -140,8 +140,8 @@ public class MultiFunctionCFGBuilder {
 
         //Noi voi than cua ham duoc goi
         ControlFlowGraph funcGraph = new ControlFlowGraph(func);
-        funcGraph.ungoto();
-        funcGraph.unfold(1);
+        //funcGraph.ungoto();
+        //funcGraph.unfold(1);
         //TODO Try to unfold funcGraph
         cfg.concat(funcGraph);
 

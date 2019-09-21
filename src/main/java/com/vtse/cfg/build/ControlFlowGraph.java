@@ -68,8 +68,8 @@ public class ControlFlowGraph {
         } else if (iter instanceof GotoNode) {
             iter.printNode();
             //printSpace(level);
-            //((GotoNode) iter).getNext().printNode();
-            print(((GotoNode) iter).getNext(), level);
+            ((GotoNode) iter).getNext().printNode();
+            //print(((GotoNode) iter).getNext(), level);
         } else if (iter instanceof IterationNode) {
             iter.printNode();
             if (iter.getNext() != null) print(iter.getNext(), level);

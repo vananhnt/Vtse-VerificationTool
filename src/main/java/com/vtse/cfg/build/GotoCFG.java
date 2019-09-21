@@ -55,6 +55,19 @@ public class GotoCFG {
         return iter;
     }
 
+    private void createGotoGraph(CFGNode inNode, CFGNode newNode) {
+        CFGNode node = inNode;
+        while (node != null) {
+
+            if (node == exit) break;
+            if (node instanceof DecisionNode) {
+                node = ((DecisionNode) node).getEndNode();
+            } else {
+                node = node.getNext();
+            }
+
+        }
+    }
     /* Chua xoa Goto va Label Node */
     protected ControlFlowGraph unfoldGoto(GotoNode node) {
         // TODO Auto-generated method stub
