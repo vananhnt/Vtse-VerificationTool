@@ -23,7 +23,10 @@ public class InvagenRunner {
         } else {
             loopTemplate = LoopForTemplate.getLoopElement(ast.getTranslationUnit());
         }
-
+        File dir = new File(SMTINPUT_DIR);
+        if (!(dir.exists() && dir.isDirectory())) {
+            dir.mkdir();
+        }
         String filename = new File(cfilepath).getName();
         String path = (SMTINPUT_DIR  + filename).replace(".c", "_fak_inv.xml");
         List<String> result = new ArrayList<String>();

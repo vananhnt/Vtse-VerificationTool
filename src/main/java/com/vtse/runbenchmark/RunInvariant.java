@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RunInvariant {
     public static void  main(String[] args) throws IOException, WriteException {
-        String benchmark = "/home/va/data/Vtse-VerificationTool/src/main/resources/benchmark/invgen/template2/loop-acceleration/simple_3_2_true.c";
+        String benchmark = "./src/main/resources/benchmark/invgen/template2/loop-acceleration/simple_3_2_true.c";
         ExportExcel exportExcel = new ExportExcel();
         File file = new File(benchmark);
         FileVerification fv = new FileVerification();
