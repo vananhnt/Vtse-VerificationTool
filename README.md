@@ -44,6 +44,63 @@ However, the tasks that we use have been reformatted and put in "./src/main/reso
 ```
 Output is in the format of an excel report. 
 
+### How to verify a function step-by-step (using unfolding)
+Create AST of the whole program
+```
+ASTFactory ast = new ASTFactory(filePath);
+```
+Get user's assertions from xml file
+```
+List<AssertionMethod> listAssertion = AssertionMethod.getUserAssertions(PPFile);
+\\one XML file can contain multiple user's assertion of multiple functions
+```
+Get pre-condtion and post-condition from AssertionMethod
+```
+AssertionMethod am; \\choose using am.getMethodName()
+String pre = am.getPreCondition(); String post = am.getPostCondition();
+```
+Build CFG for a function
+```
+FunctionVerification function = ast.getListFunction().getFunction(functionName);
+VtseCFG cfg = new VtseCFG(function, ast);
+cfg.unfold(nLoops);
+cfg.index();
+```
+Create SMTInput
+```
+SMTInput smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createFormulas() );
+```
+Add pre and post condition into SMTInput (will reformat later)
+```
+String constraintTemp;
+List<String> constraints = new ArrayList<>();
+UserInput userInput = new UserInput();
+ArrayList<Variable> params = cfg.getInitVariables();
+params.add(new Variable(cfg.getTypeFunction(), "return"));
+userInput.setParameter(params);
+// add pre-condition
+if (preCondition != null && !preCondition.equals("")) {
+    constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
+    constraints.add(constraintTemp);
+ }
+// add user's assertion
+constraintTemp = userInput.createUserAssertion(postCondition,cfg.getNameFunction());
+constraintTemp = "(not " + constraintTemp + ")";
+constraints.add(constraintTemp);
+smtInput.setConstrainst(constraints);
+```
+Print SMTInput into File
+```
+smtInput.printInputToOutputStreamAssert(fo);
+```
+Input SMTInput into Z3 and generate Report
+```
+Report report = new Report();
+...
+VerificationReport verReport = report.generateReport(result);
+```
+* For more details, check .\src\main\java\com\vtse\app\verification\FunctionVerification.java
+
 ### Some running examples
 
 - See in package /src/main/java/com/vtse/runbenchmark/ for more details
