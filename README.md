@@ -11,8 +11,8 @@ git checkout "invariant-new"
 
 ### Prerequisites
 
-In Windows, tools are put in "solvers" folder
-In Linux, install mathsat, Z3 and Redlog using terminal
+- In Windows, tools are already put in "solvers" folder, no installation required
+- In Linux, install mathsat, Z3 and Redlog using terminal
 
 ### Installing
 
