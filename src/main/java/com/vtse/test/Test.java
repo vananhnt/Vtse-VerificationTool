@@ -4,8 +4,14 @@ import java.io.*;
 import java.util.Properties;
 
 import com.vtse.cfg.build.ASTFactory;
+import com.vtse.cfg.build.UnfoldCFG;
 import com.vtse.cfg.build.VtseCFG;
 
+import com.vtse.graph.GraphGenerator;
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
+import guru.nidi.graphviz.model.MutableGraph;
+import guru.nidi.graphviz.parse.Parser;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 
 /**
@@ -34,14 +40,26 @@ public class Test {
 	}
 
 	public static void  main(String[] args) throws IOException {
-		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/kratos/transmitter_1.c");
-		VtseCFG cfg = new VtseCFG(ast.getFunction("transmit5"), ast);
-		ast.print();
+		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/example/graph.c");
+		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+		UnfoldCFG unfoldCFG = new UnfoldCFG(cfg);
+//		cfg = cfg.pr
+	    //ast.print();
 		//cfg.invariant();
-		//cfg.ugoto();
+		//cfg.ungoto();
 		//cfg.unfold(1);
 		//cfg.index();
 		//java.cfg.printMeta();
-		//cfg.printGraph();
+		unfoldCFG.printGraph();
+        GraphGenerator graphGenerator = new GraphGenerator(unfoldCFG);
+        graphGenerator.printGraph();
+		try {
+			File file = new File("./graph.dot");
+			InputStream dot = new FileInputStream(file);
+			MutableGraph g = new Parser().read(dot);
+			Graphviz.fromGraph(g).width(700).render(Format.PNG).toFile(new File("./a.png"));
+		} catch(Exception e){
+            System.out.println(e.toString());
+		}
 	}
 }

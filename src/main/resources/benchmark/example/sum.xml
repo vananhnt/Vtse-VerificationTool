@@ -2,7 +2,7 @@
     <AssertionMethod>
         <Method>sum</Method>
         <LoopCount>5</LoopCount>
-        <PreCondition>(n = 6)</PreCondition>
+        <PreCondition>(n = 1)</PreCondition>
         <PostCondition>(return = (n*(n + 1))/2)</PostCondition>
     </AssertionMethod>
 </AssertionFile>

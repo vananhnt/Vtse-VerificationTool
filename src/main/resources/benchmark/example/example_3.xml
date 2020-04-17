@@ -2,9 +2,7 @@
     <AssertionMethod>
         <Method>foo</Method>
         <PreCondition></PreCondition>
-        <PostCondition>(return > 0)^(return
-            <
-            1)
+        <PostCondition>(return > 0)^(return<1)
         </PostCondition>
     </AssertionMethod>
 </AssertionFile>
