@@ -42,13 +42,13 @@ public class Test {
 	public static void  main(String[] args) throws IOException {
 		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/example/graph.c");
 		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+//		cfg.index();
 		UnfoldCFG unfoldCFG = new UnfoldCFG(cfg);
 //		cfg = cfg.pr
 	    //ast.print();
 		//cfg.invariant();
 		//cfg.ungoto();
 		//cfg.unfold(1);
-		//cfg.index();
 		//java.cfg.printMeta();
 		unfoldCFG.printGraph();
         GraphGenerator graphGenerator = new GraphGenerator(unfoldCFG);

@@ -1,8 +1,14 @@
 int main(){
-    int a = 4;
-    if(a>5){
-        c = 10;
-    } else {
-        c = 15;
-    }
-}
+     int a;
+     int i;
+     if(i<3){
+        i++;
+     } else {
+        a--;
+     }
+     if(i<3){
+        i++;
+     } else {
+        a--;
+     }
+ }
