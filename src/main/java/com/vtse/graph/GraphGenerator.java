@@ -11,15 +11,11 @@ public class GraphGenerator {
     UnfoldCFG unfoldCFG;
     FileWriter fileWriter;
     Boolean debug;
-    int countIf;
-    int countFor;
     public GraphGenerator(UnfoldCFG unfoldCFG) throws IOException {
         this.unfoldCFG =unfoldCFG;
         FileWriter fileWriter = new FileWriter("graph.dot");
         this.fileWriter = fileWriter;
         this.debug = false;
-        this.countIf = 0;
-        this.countFor = 0;
     }
     public void writeBegin() throws IOException {
         this.fileWriter.write("digraph");
@@ -39,6 +35,16 @@ public class GraphGenerator {
             label = "EndConditionNode";
         } else if (node instanceof BeginIfNode){
             label = "BeginIfNode";
+        } else if (node instanceof BeginForNode){
+            label = "BeginForNode";
+        } else if (node instanceof BeginWhileNode){
+            label = "BeginWhileNode";
+        } else if(node instanceof IterationNode){
+            if(node.toString().equals("")){
+                label = "IterationNode";
+            } else {
+                label = node.toString();
+            }
         } else {
             label = node.toString();
         }
@@ -49,9 +55,15 @@ public class GraphGenerator {
         this.write("\"" + a + "\"" + " -> " + "\"" + b + "\"" );
         this.write(";\n");
     }
-    public void writeTwoNode(CFGNode a, CFGNode b) throws IOException{
+    public CFGNode writeTwoNode(CFGNode a, CFGNode b) throws IOException{
         if(a instanceof EmptyNode){
-            return;
+            return null;
+        }
+        if(a == null){
+            return null;
+        }
+        if(b == null){
+            return null;
         }
         while(b instanceof EmptyNode){
             b = b.getNext();
@@ -59,6 +71,7 @@ public class GraphGenerator {
         this.writeDirected(a.toString() + a.hashCode(), b.toString() + b.hashCode());
         this.writeLabel(a);
         this.writeLabel(b);
+        return b;
     }
     public void printGraph() throws IOException {
         CFGNode start = this.unfoldCFG.getStart();
@@ -67,7 +80,7 @@ public class GraphGenerator {
         this.writeEnd();
     }
     public CFGNode printPlainNode(CFGNode start, CFGNode nextNode) throws IOException {
-        this.writeTwoNode(start, nextNode);
+        nextNode = this.writeTwoNode(start, nextNode);
         if(this.debug){
             System.out.println("\"" + start.toString() + "\"" + " -> " + "\"" + nextNode.toString() + "\"");
         }
@@ -76,12 +89,12 @@ public class GraphGenerator {
 
 
     public CFGNode printIfNode(CFGNode beginIfNode) throws IOException {
-        CFGNode decisionNode = ((BeginIfNode)beginIfNode).getDecisionNode();
+        DecisionNode decisionNode = ((BeginIfNode)beginIfNode).getDecisionNode();
         this.writeTwoNode(beginIfNode, decisionNode);
 
-        CFGNode thenNode = ((DecisionNode)decisionNode).getThenNode();
-        CFGNode elseNode = ((DecisionNode)decisionNode).getElseNode();
-        CFGNode endConditionNode = ((DecisionNode)decisionNode).getEndNode();
+        CFGNode thenNode = decisionNode.getThenNode();
+        CFGNode elseNode = decisionNode.getElseNode();
+        CFGNode endConditionNode = decisionNode.getEndNode();
 
         if(thenNode != null){
             this.writeTwoNode(decisionNode, thenNode);
@@ -98,60 +111,81 @@ public class GraphGenerator {
 
         this.print(thenNode, endConditionNode);
         this.print(elseNode, endConditionNode);
-        CFGNode thenNodeEnd = ((DecisionNode)decisionNode).getEndOfThen();
-        CFGNode elseNodeEnd = ((DecisionNode)decisionNode).getEndOfElse();
+        CFGNode thenNodeEnd = decisionNode.getEndOfThen();
+        CFGNode elseNodeEnd = decisionNode.getEndOfElse();
         this.writeTwoNode(thenNodeEnd, endConditionNode);
         this.writeTwoNode(elseNodeEnd, endConditionNode);
         return endConditionNode;
     }
 
     public CFGNode printForNode(CFGNode start) throws IOException{
-        CFGNode decisionNode = ((BeginForNode)start).getDecisionNode();
-        this.countFor++;
-        CFGNode endNode = ((BeginForNode) start).getEndNode();
-        ((EndConditionNode)endNode).setStatement("EndCondition_For_1");
-        System.out.println(((DecisionNode)decisionNode).getElseNode().getClass());
-        System.out.println(((DecisionNode)decisionNode).getElseNode().toString());
+        DecisionNode decisionNode = ((BeginForNode)start).getDecisionNode();
+        this.writeTwoNode(start, decisionNode);
+        CFGNode endConditionNode = ((BeginForNode) start).getEndNode();
         CFGNode d = decisionNode;
-//        for(int i=0;i<4;i++){
-//            d = ((DecisionNode) d).getEndOfThen();
-//            d = d.getNext();
-//        }
+        this.writeTwoNode(d, endConditionNode);
 
         // TODO decisionNode has no thenNode
         while(true){
-            System.out.println("iiiiiiiiiiiiiiiiiii");
             CFGNode thenNode = ((DecisionNode)d).getThenNode();
             CFGNode iterationNode = ((DecisionNode)d).getEndOfThen();
-            this.print(thenNode, iterationNode);
+            CFGNode endOfThen = this.print(thenNode, iterationNode);
+            System.out.println("----------------");
+            System.out.println(thenNode.getClass());
+            System.out.println(thenNode.toString());
+            System.out.println(iterationNode.getClass());
+            System.out.println(iterationNode.toString());
+            System.out.println(endOfThen.getClass());
+            System.out.println(endConditionNode.toString());
+            System.out.println("----------------");
+            this.printPlainNode(d, thenNode);
+            this.printPlainNode(endOfThen, iterationNode);
             d = iterationNode.getNext();
-            this.printPlainNode(d, endNode);
-            if(!(d instanceof DecisionNode)){
-                this.printPlainNode(iterationNode, endNode);
+            if(d instanceof DecisionNode){
+                this.printPlainNode(iterationNode, d);
+                this.printPlainNode(d, endConditionNode);
+            } else {
+                this.printPlainNode(iterationNode, endConditionNode);
                 break;
             }
         }
-        return start;
+        return endConditionNode;
     }
-    public void printEndConditionNode(CFGNode start, CFGNode thenNodeEnd, CFGNode elseNodeEnd, EndConditionNode endConditionNode, Boolean elseNodeEmpty) throws IOException{
-        if(thenNodeEnd != null){
-            this.writeTwoNode(thenNodeEnd, endConditionNode);
-        }
-        if(elseNodeEmpty){
-            this.writeTwoNode(start, endConditionNode);
-        } else if(elseNodeEnd != null){
-            this.writeTwoNode(elseNodeEnd, endConditionNode);
-        }
-    }
-    public CFGNode fixNode(CFGNode node){
+
+    //print cho vong while
+    public CFGNode printWhileNode(CFGNode start) throws IOException{
+        DecisionNode decisionNode = ((BeginWhileNode)start).getDecisionNode();
+        this.writeTwoNode(start, decisionNode);
+        CFGNode endConditionNode = ((BeginWhileNode) start).getEndNode();
+        CFGNode d = decisionNode;
+        this.writeTwoNode(d, endConditionNode);
+
+        // TODO decisionNode has no thenNode
         while(true){
-            if(node instanceof BeginIfNode){
-                node = node.getNext();
-            }  else {
+            CFGNode thenNode = ((DecisionNode)d).getThenNode();
+            CFGNode iterationNode = ((DecisionNode)d).getEndOfThen();
+            CFGNode endOfThen = this.print(thenNode, iterationNode);
+            System.out.println("----------------");
+            System.out.println(thenNode.getClass());
+            System.out.println(thenNode.toString());
+            System.out.println(iterationNode.getClass());
+            System.out.println(iterationNode.toString());
+            System.out.println(endOfThen.getClass());
+            System.out.println(endConditionNode.toString());
+            System.out.println("----------------");
+            this.printPlainNode(d, thenNode);
+            this.printPlainNode(endOfThen, iterationNode);
+            d = iterationNode.getNext();
+            if(d instanceof DecisionNode){
+                this.printPlainNode(iterationNode, d);
+                this.printPlainNode(d, endConditionNode);
+            } else {
+                this.printPlainNode(iterationNode, endConditionNode);
                 break;
             }
         }
-        return node;
+        return endConditionNode;
+
     }
     public CFGNode print(CFGNode start, CFGNode end) throws IOException {
         if(start == null){
@@ -167,10 +201,19 @@ public class GraphGenerator {
         } else if(start instanceof BeginForNode){
             nextNode = this.printForNode(start);
             return this.print(nextNode, end);
+        }  else if(start instanceof BeginWhileNode){
+            nextNode = this.printWhileNode(start);
+            return this.print(nextNode, end);
         }  else if(start instanceof PlainNode){
             nextNode = this.printPlainNode(start, nextNode);
             return this.print(nextNode, end);
         } else {
+//            System.out.println("----------------");
+//            System.out.println(start.getClass());
+//            System.out.println(start.toString());
+//            System.out.println(nextNode.getClass());
+//            System.out.println(nextNode.toString());
+//            System.out.println("-----------------");
             nextNode = this.printPlainNode(start, nextNode);
             return this.print(nextNode, end);
         }
