@@ -13,7 +13,7 @@ import com.vtse.cfg.utils.MyCloner;
  */
 
 public class UnfoldCFG {
-	private int nLoops = 5;
+	private int nLoops = 2;
 	
 	private CFGNode start;
 	private CFGNode exit;
@@ -63,7 +63,8 @@ public class UnfoldCFG {
 	 */
 	private CFGNode findExit(CFGNode start) {
 		CFGNode iter = start;
-		while (!(iter instanceof IterationNode) && iter != null && iter.getNext() != null && !(iter.getNext() instanceof EndConditionNode)) {
+//		while(!(iter instanceof IterationNode) && iter != null && iter.getNext() != null && !(iter instanceof DecisionNode)){
+		while(!(iter instanceof IterationNode) && iter != null && iter.getNext() != null){
 			iter = iter.getNext();
 		}
 		return iter;

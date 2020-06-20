@@ -29,7 +29,9 @@ public class FileVerification {
         this.loopCount = loopCount;
     }
 
-    public FileVerification() throws RowsExceededException, WriteException, IOException {
+    public FileVerification()
+           throws RowsExceededException, WriteException, IOException
+            {
 
     }
     public List<VerificationReport> verifyDirectory(File directory) throws WriteException, IOException {

@@ -310,4 +310,19 @@ public class DecisionNode extends CFGNode {
         this.endOfThen = endOfThen;
     }
 
+    public VariableManager getThenVM() {
+        return thenVM;
+    }
+
+    public void setThenVM(VariableManager thenVM) {
+        this.thenVM = thenVM;
+    }
+
+    public VariableManager getElseVM() {
+        return elseVM;
+    }
+
+    public void setElseVM(VariableManager elseVM) {
+        this.elseVM = elseVM;
+    }
 }

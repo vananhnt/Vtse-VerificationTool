@@ -1,16 +1,10 @@
 int main(){
-     int a;
-     int i;
-     if(i<3){
-     } else {
-        if(i>3){
-            if(i>4){
-                a = 5;
-            } else {
-                a = 7;
-            }
-        } else {
-            a--;
-        }
-     }
- }
+    int a = 5;
+    int c;
+    if(a == 5){
+        c = 10;
+    } else {
+        c = 20;
+    }
+    return c;
+}

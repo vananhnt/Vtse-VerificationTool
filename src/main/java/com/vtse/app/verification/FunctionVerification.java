@@ -2,6 +2,7 @@ package com.vtse.app.verification;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class FunctionVerification {
             cfg.index();
             smtInput = new SMTInput(cfg.getVm().getVariableList(), cfg.createInvariantFormula());
         } else {
-            cfg.ungoto();
+//            cfg.ungoto();
             cfg.unfold(nLoops);
 //            cfg.unfold(10);
             cfg.index();
@@ -81,13 +82,13 @@ public class FunctionVerification {
         long end = System.currentTimeMillis();
 
         String functionName = cfg.getNameFunction();
-        String path = SMTINPUT_DIR + functionName + ".smt";
+        String path = SMTINPUT_DIR + functionName + ".txt";
 
         FileOutputStream fo = new FileOutputStream(new File(path));
         smtInput.printInputToOutputStreamAssert(fo);
 
         List<String> result = Z3Runner.runZ3(path);
-
+        
         Report report = new Report();
         report.setListParameter(cfg.getInitVariables());
         report.setFunctionName(cfg.getNameFunction());

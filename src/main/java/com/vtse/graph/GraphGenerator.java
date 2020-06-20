@@ -1,6 +1,7 @@
 package com.vtse.graph;
 
 import com.vtse.cfg.build.UnfoldCFG;
+import com.vtse.cfg.index.VariableManager;
 import com.vtse.cfg.node.*;
 
 import java.io.File;
@@ -88,13 +89,24 @@ public class GraphGenerator {
     }
 
 
-    public CFGNode printIfNode(CFGNode beginIfNode) throws IOException {
-        DecisionNode decisionNode = ((BeginIfNode)beginIfNode).getDecisionNode();
-        this.writeTwoNode(beginIfNode, decisionNode);
+    public CFGNode printIfNode(CFGNode startNode) throws IOException {
+        DecisionNode decisionNode;
+        if (startNode instanceof BeginIfNode){
+            decisionNode = ((BeginIfNode)startNode).getDecisionNode();
+            this.writeTwoNode(startNode, decisionNode);
+        } else {
+            decisionNode = (DecisionNode)startNode;
+        }
+
+        String formula = decisionNode.getFormula();
+        System.out.println(formula);
+
 
         CFGNode thenNode = decisionNode.getThenNode();
         CFGNode elseNode = decisionNode.getElseNode();
         CFGNode endConditionNode = decisionNode.getEndNode();
+        CFGNode endOfThen = decisionNode.getEndOfThen();
+        CFGNode endOfElse = decisionNode.getEndOfElse();
 
         if(thenNode != null){
             this.writeTwoNode(decisionNode, thenNode);
@@ -108,13 +120,14 @@ public class GraphGenerator {
                 System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + elseNode.toString() + "\"");
             }
         }
-
-        this.print(thenNode, endConditionNode);
-        this.print(elseNode, endConditionNode);
-        CFGNode thenNodeEnd = decisionNode.getEndOfThen();
-        CFGNode elseNodeEnd = decisionNode.getEndOfElse();
-        this.writeTwoNode(thenNodeEnd, endConditionNode);
-        this.writeTwoNode(elseNodeEnd, endConditionNode);
+        this.print(thenNode, endOfThen);
+        this.print(elseNode, endOfElse);
+        this.writeTwoNode(endOfThen, endConditionNode);
+        if(endOfElse != null){
+            this.writeTwoNode(endOfElse, endConditionNode);
+        } else {
+            this.writeTwoNode(decisionNode, endConditionNode);
+        }
         return endConditionNode;
     }
 
@@ -123,32 +136,12 @@ public class GraphGenerator {
         this.writeTwoNode(start, decisionNode);
         CFGNode endConditionNode = ((BeginForNode) start).getEndNode();
         CFGNode d = decisionNode;
+        CFGNode thenNode = ((DecisionNode)d).getThenNode();
+        CFGNode iterationNode = ((DecisionNode)d).getEndOfThen();
+        this.writeTwoNode(d, thenNode);
         this.writeTwoNode(d, endConditionNode);
-
-        // TODO decisionNode has no thenNode
-        while(true){
-            CFGNode thenNode = ((DecisionNode)d).getThenNode();
-            CFGNode iterationNode = ((DecisionNode)d).getEndOfThen();
-            CFGNode endOfThen = this.print(thenNode, iterationNode);
-            System.out.println("----------------");
-            System.out.println(thenNode.getClass());
-            System.out.println(thenNode.toString());
-            System.out.println(iterationNode.getClass());
-            System.out.println(iterationNode.toString());
-            System.out.println(endOfThen.getClass());
-            System.out.println(endConditionNode.toString());
-            System.out.println("----------------");
-            this.printPlainNode(d, thenNode);
-            this.printPlainNode(endOfThen, iterationNode);
-            d = iterationNode.getNext();
-            if(d instanceof DecisionNode){
-                this.printPlainNode(iterationNode, d);
-                this.printPlainNode(d, endConditionNode);
-            } else {
-                this.printPlainNode(iterationNode, endConditionNode);
-                break;
-            }
-        }
+        this.print(thenNode, iterationNode);
+        this.print(iterationNode, endConditionNode);
         return endConditionNode;
     }
 
@@ -158,42 +151,26 @@ public class GraphGenerator {
         this.writeTwoNode(start, decisionNode);
         CFGNode endConditionNode = ((BeginWhileNode) start).getEndNode();
         CFGNode d = decisionNode;
+        CFGNode thenNode = ((DecisionNode)d).getThenNode();
+        CFGNode iterationNode = ((DecisionNode)d).getEndOfThen();
+
+        this.writeTwoNode(d, thenNode);
         this.writeTwoNode(d, endConditionNode);
-
-        // TODO decisionNode has no thenNode
-        while(true){
-            CFGNode thenNode = ((DecisionNode)d).getThenNode();
-            CFGNode iterationNode = ((DecisionNode)d).getEndOfThen();
-            CFGNode endOfThen = this.print(thenNode, iterationNode);
-            System.out.println("----------------");
-            System.out.println(thenNode.getClass());
-            System.out.println(thenNode.toString());
-            System.out.println(iterationNode.getClass());
-            System.out.println(iterationNode.toString());
-            System.out.println(endOfThen.getClass());
-            System.out.println(endConditionNode.toString());
-            System.out.println("----------------");
-            this.printPlainNode(d, thenNode);
-            this.printPlainNode(endOfThen, iterationNode);
-            d = iterationNode.getNext();
-            if(d instanceof DecisionNode){
-                this.printPlainNode(iterationNode, d);
-                this.printPlainNode(d, endConditionNode);
-            } else {
-                this.printPlainNode(iterationNode, endConditionNode);
-                break;
-            }
-        }
+        this.print(thenNode, iterationNode);
+        this.print(iterationNode, endConditionNode);
         return endConditionNode;
-
     }
     public CFGNode print(CFGNode start, CFGNode end) throws IOException {
         if(start == null){
             return null;
         }
+        if(start == end){
+            return start;
+        }
         CFGNode nextNode = start.getNext();
         if(nextNode == end){
-            return start;
+            this.writeTwoNode(start, end);
+            return end;
         }
         if(start instanceof BeginIfNode){
             nextNode= this.printIfNode(start);
@@ -204,7 +181,11 @@ public class GraphGenerator {
         }  else if(start instanceof BeginWhileNode){
             nextNode = this.printWhileNode(start);
             return this.print(nextNode, end);
-        }  else if(start instanceof PlainNode){
+        } else if (start instanceof DecisionNode){
+            nextNode = this.printIfNode(start);
+            return this.print(nextNode, end);
+        }
+        else if(start instanceof PlainNode){
             nextNode = this.printPlainNode(start, nextNode);
             return this.print(nextNode, end);
         } else {
