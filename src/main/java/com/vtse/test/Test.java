@@ -2,6 +2,7 @@ package com.vtse.test;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.vtse.app.verification.FileVerification;
@@ -11,7 +12,9 @@ import com.vtse.cfg.build.ASTFactory;
 import com.vtse.cfg.build.UnfoldCFG;
 import com.vtse.cfg.build.VtseCFG;
 
+import com.vtse.cfg.node.CFGNode;
 import com.vtse.graph.GraphGenerator;
+import com.vtse.visualize.PathExecutionVisualize;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
@@ -51,30 +54,28 @@ public class Test {
 		IASTFunctionDefinition main_func = ast.getFunction("main");
 		System.out.println(main_func.toString());
 		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+		cfg.unfold(2);
+		cfg.index();
 //		String pre_condition = "a = 5";
 		String pre_condition = "";
-		String post_condition = "return  = 10";
+		String post_condition = "return > 20";
 		int nLoops = 2;
 		int mode = FunctionVerification.UNFOLD_MODE;
 		VerificationReport vr = FunctionVerification.verify(ast, main_func, pre_condition, post_condition, nLoops, mode);
-//		cfg.index();
-		UnfoldCFG unfoldCFG = new UnfoldCFG(cfg);
-//		cfg = cfg.pr
-	    //ast.print();
-		//cfg.invariant();
-		//cfg.ungoto();
-		//cfg.unfold(1);
-		//java.cfg.printMeta();
-		unfoldCFG.printGraph();
-//        GraphGenerator graphGenerator = new GraphGenerator(unfoldCFG);
-//        graphGenerator.printGraph();
-//		try {
-//			File file = new File("./graph.dot");
-//			InputStream dot = new FileInputStream(file);
-//			MutableGraph g = new Parser().read(dot);
-//			Graphviz.fromGraph(g).width(700).render(Format.PNG).toFile(new File("./a1.png"));
-//		} catch(Exception e){
-//            System.out.println(e.toString());
-//		}
+		PathExecutionVisualize pathExecutionVisualize = new PathExecutionVisualize(cfg, vr);
+		List<CFGNode> nodes = pathExecutionVisualize.findPathToFail();
+//		System.out.println(formulas.size());
+//		PathExecutionVisualize.print(formulas);
+        GraphGenerator graphGenerator = new GraphGenerator(cfg);
+        graphGenerator.printGraph(false);
+        graphGenerator.fillColor(nodes, true);
+		try {
+			File file = new File("./graph.dot");
+			InputStream dot = new FileInputStream(file);
+			MutableGraph g = new Parser().read(dot);
+			Graphviz.fromGraph(g).width(700).render(Format.PNG).toFile(new File("./a1.png"));
+		} catch(Exception e){
+            System.out.println(e.toString());
+		}
 	}
 }

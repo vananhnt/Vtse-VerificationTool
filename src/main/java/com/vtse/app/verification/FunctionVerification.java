@@ -58,8 +58,6 @@ public class FunctionVerification {
         // java.cfg.printMeta();
         // java.cfg.printFormular(System.out);
 
-        String constraintTemp;
-
         List<String> constraints = new ArrayList<>();
         UserInput userInput = new UserInput();
         ArrayList<Variable> params = cfg.getInitVariables();
@@ -67,6 +65,7 @@ public class FunctionVerification {
         userInput.setParameter(params);
 
         // add pre-condition
+        String constraintTemp;
         if (preCondition != null && !preCondition.equals("")) {
             constraintTemp = userInput.createUserAssertion(preCondition, cfg.getNameFunction());
             constraints.add(constraintTemp);
@@ -104,6 +103,7 @@ public class FunctionVerification {
         verReport.setGenerateConstraintTime((int)(end-begin));
         verReport.setPreCondition(preCondition);
         verReport.setPostCondition(postCondition);
+        verReport.setSmtInput(smtInput);
 
         return verReport;
     }

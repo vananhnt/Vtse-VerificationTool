@@ -1,5 +1,6 @@
 package com.vtse.app.verification.report;
 
+import com.vtse.app.solver.SMTInput;
 import com.vtse.app.verification.FunctionVerification;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class VerificationReport {
     private List<String> errors;
     private int solverTime;
     private int generateConstraintTime;
+    private SMTInput smtInput;
 
 
     /**
@@ -210,5 +212,21 @@ public class VerificationReport {
         //System.out.println("constraint time: " + generateConstraintTime + " (ms)");
         float total_time = generateConstraintTime + solverTime;
         System.out.println("Total time: " + total_time + " (ms)");
+    }
+
+    public DefineFun getRet() {
+        return ret;
+    }
+
+    public void setRet(DefineFun ret) {
+        this.ret = ret;
+    }
+
+    public SMTInput getSmtInput() {
+        return smtInput;
+    }
+
+    public void setSmtInput(SMTInput smtInput) {
+        this.smtInput = smtInput;
     }
 }

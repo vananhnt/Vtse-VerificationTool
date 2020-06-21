@@ -1,10 +1,8 @@
-int main(){
-    int a = 5;
-    int c;
-    if(a == 5){
-        c = 10;
-    } else {
-        c = 20;
+int main(int a, int c){
+    for(int i=0;i<a;i++){
+        if(c < 10){
+            c = c + i;
+        }
     }
     return c;
 }
