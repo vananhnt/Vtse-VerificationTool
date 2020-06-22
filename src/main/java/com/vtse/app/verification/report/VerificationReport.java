@@ -28,6 +28,7 @@ public class VerificationReport {
     private int solverTime;
     private int generateConstraintTime;
     private SMTInput smtInput;
+    private List<String> result;
 
 
     /**
@@ -228,5 +229,13 @@ public class VerificationReport {
 
     public void setSmtInput(SMTInput smtInput) {
         this.smtInput = smtInput;
+    }
+
+    public List<String> getResult() {
+        return result;
+    }
+
+    public void setResult(List<String> result) {
+        this.result = result;
     }
 }

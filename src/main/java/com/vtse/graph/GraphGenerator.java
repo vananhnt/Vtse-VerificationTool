@@ -5,26 +5,56 @@ import com.vtse.cfg.build.VtseCFG;
 import com.vtse.cfg.index.VariableManager;
 import com.vtse.cfg.node.*;
 import com.vtse.visualize.PathExecutionVisualize;
+import org.antlr.v4.runtime.misc.Pair;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GraphGenerator {
     VtseCFG unfoldCFG;
     FileWriter fileWriter;
+    Map<String, String> listParameters;
     Boolean debug;
-    public GraphGenerator(VtseCFG unfoldCFG) throws IOException {
+    Boolean detail;
+    public GraphGenerator(VtseCFG unfoldCFG, Map<String, String> listParameters) throws IOException {
         this.unfoldCFG =unfoldCFG;
         FileWriter fileWriter = new FileWriter("graph.dot");
         this.fileWriter = fileWriter;
+        this.listParameters =listParameters;
+        this.detail = true;
         this.debug = false;
+    }
+    public String getDetail(String label){
+        String valueLabel = label;
+
+        Pattern parameterPattern = Pattern.compile("[\\w|\\d|-]+");
+        Matcher matcher = parameterPattern.matcher(label);
+        Boolean isShorter = false;
+        while(matcher.find()){
+            String parameter = matcher.group(0);
+            String value = this.listParameters.get(parameter);
+            if(value != null){
+                valueLabel = valueLabel.replaceAll(parameter, value);
+                isShorter = true;
+            }
+        }
+        if(isShorter) {
+            return label + "\n" + valueLabel;
+        } else {
+            return label;
+        }
     }
     public void writeBegin() throws IOException {
         this.fileWriter.write("strict digraph");
         this.fileWriter.write(" {");
+        this.fileWriter.write("\n");
+        this.fileWriter.write("splines=ortho;");
         this.fileWriter.write("\n");
     }
     public void writeEnd() throws IOException{
@@ -54,6 +84,9 @@ public class GraphGenerator {
             label = "EmptyNode";
         } else {
             label = node.toString();
+        }
+        if(this.detail){
+            label = this.getDetail(label);
         }
         this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label=\"" + label + "\" shape=rectangle]");
         this.write(";\n");
@@ -138,7 +171,7 @@ public class GraphGenerator {
         }
 
         String formula = decisionNode.getFormula();
-        System.out.println(formula);
+//        System.out.println(formula);
 
 
         CFGNode thenNode = decisionNode.getThenNode();

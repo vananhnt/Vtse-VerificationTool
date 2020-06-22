@@ -108,6 +108,7 @@ public class Report {
 
         this.result = result;
         report = new VerificationReport();
+        report.setResult(result);
 
         List<String> listError = new ArrayList<>();
 
@@ -169,7 +170,7 @@ public class Report {
             String varName = v.getName() + "_0";
             i = begin;
             while (i <= end) {
-                if (result.get(i).indexOf(" " + varName + " ") >= 0) {
+                if (result.get(i).contains(" " + varName + " ")) {
                     String valueStr = "";
                     i++;
                     while (i <= end && !result.get(i).contains("define-fun")) {
@@ -189,7 +190,7 @@ public class Report {
 
         i = begin;
         while (i <= end) {
-            if (result.get(i).indexOf("return_" + FunctionHelper.getShortenName(functionName) + "_0") >= 0) {
+            if (result.get(i).contains("return_" + FunctionHelper.getShortenName(functionName) + "_0")) {
                 String valueStr = "";
                 i++;
                 while (i <= end && !result.get(i).contains("define-fun")) {
