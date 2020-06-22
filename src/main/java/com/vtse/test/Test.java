@@ -49,26 +49,26 @@ public class Test {
 
 	public static void  main(String[] args) throws IOException {
 //		FileVerification fileVerification = new FileVerification();
-//		fileVerification.verify(new File("./src/main/resources/benchmark/example/example_7.c"), FunctionVerification.UNFOLD_MODE);
-		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/example/graph.c");
-		IASTFunctionDefinition main_func = ast.getFunction("main");
-		System.out.println(main_func.toString());
-		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
-		cfg.unfold(2);
-		cfg.index();
-//		String pre_condition = "a = 5";
-		String pre_condition = "";
-		String post_condition = "return > 20";
-		int nLoops = 2;
-		int mode = FunctionVerification.UNFOLD_MODE;
-		VerificationReport vr = FunctionVerification.verify(ast, main_func, pre_condition, post_condition, nLoops, mode);
-		PathExecutionVisualize pathExecutionVisualize = new PathExecutionVisualize(cfg, vr);
-		List<CFGNode> nodes = pathExecutionVisualize.findPathToFail();
-//		System.out.println(formulas.size());
-//		PathExecutionVisualize.print(formulas);
-        GraphGenerator graphGenerator = new GraphGenerator(cfg);
-        graphGenerator.printGraph(false);
-        graphGenerator.fillColor(nodes, true);
+////		fileVerification.verify(new File("./src/main/resources/benchmark/example/example_7.c"), FunctionVerification.UNFOLD_MODE);
+//		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/example/graph.c");
+//		IASTFunctionDefinition main_func = ast.getFunction("main");
+//		System.out.println(main_func.toString());
+//		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+//		cfg.unfold(2);
+//		cfg.index();
+////		String pre_condition = "a = 5";
+//		String pre_condition = "";
+//		String post_condition = "return > 20";
+//		int nLoops = 2;
+//		int mode = FunctionVerification.UNFOLD_MODE;
+//		VerificationReport vr = FunctionVerification.verify(ast, main_func, pre_condition, post_condition, nLoops, mode);
+//		PathExecutionVisualize pathExecutionVisualize = new PathExecutionVisualize(cfg, vr);
+//		List<CFGNode> nodes = pathExecutionVisualize.findPathToFail();
+////		System.out.println(formulas.size());
+////		PathExecutionVisualize.print(formulas);
+//        GraphGenerator graphGenerator = new GraphGenerator(cfg);
+//        graphGenerator.printGraph(false);
+//        graphGenerator.fillColor(nodes, true);
 		try {
 			File file = new File("./graph.dot");
 			InputStream dot = new FileInputStream(file);

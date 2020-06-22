@@ -55,30 +55,36 @@ public class GraphGenerator {
         } else {
             label = node.toString();
         }
-        this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label=\"" + label + "\"]");
+        this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label=\"" + label + "\" shape=rectangle]");
         this.write(";\n");
+        if(node instanceof DecisionNode){
+            this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ shape=diamond ]");
+            this.write(";\n");
+        } else if (node instanceof EndFunctionNode){
+            this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label= \"End\" shape=circle]");
+            this.write(";\n");
+        }
     }
     public void writeDirected(String a, String b) throws IOException {
         this.write("\"" + a + "\"" + " -> " + "\"" + b + "\"" );
         this.write(";\n");
     }
     public CFGNode writeTwoNode(CFGNode a, CFGNode b) throws IOException{
-//        if(a instanceof EmptyNode){
-//            return null;
-//        }
         if(a == null){
             return null;
         }
         if(b == null){
             return null;
         }
-//        while(b instanceof EmptyNode){
-//            b = b.getNext();
-//        }
         this.writeDirected(a.toString() + a.hashCode(), b.toString() + b.hashCode());
         this.writeLabel(a);
         this.writeLabel(b);
         return b;
+    }
+    public void writeDecisionNode(CFGNode decisionNode, CFGNode nextNode, String path) throws IOException {
+        this.write("\"" + decisionNode.toString() + decisionNode.hashCode() + "\"" + " -> " + "\"" + nextNode.toString() + nextNode.hashCode() + "\"" );
+        this.write("[ label=\"" + path + "\" ]");
+        this.write(";\n");
     }
     public void fillColor(List<CFGNode> nodes, Boolean isClose) throws IOException {
         if(!nodes.isEmpty()){
@@ -101,13 +107,6 @@ public class GraphGenerator {
                 this.write(";\n");
             }
         }
-
-//        for(int i=0;i<nodes.size()-1;i++){
-//            CFGNode a = nodes.get(i);
-//            CFGNode b = nodes.get(i+1);
-//            this.write("\"" + a.toString() + a.hashCode() + "\"" + " -> " + "\"" + b.toString() + b.hashCode() + "\"" + " [ color=\"red\"]" );
-//            this.write(";\n");
-//        }
         if(isClose){
             this.writeEnd();
         }
@@ -149,14 +148,14 @@ public class GraphGenerator {
         CFGNode endOfElse = decisionNode.getEndOfElse();
 
         if(thenNode != null){
-            this.writeTwoNode(decisionNode, thenNode);
+            this.writeDecisionNode(decisionNode, thenNode, "then");
             if(this.debug){
                 System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + thenNode.toString() + "\"");
             }
         }
 //        if( elseNode != null){
         if( elseNode != null && !(elseNode instanceof EmptyNode)){
-            this.writeTwoNode(decisionNode, elseNode);
+            this.writeDecisionNode(decisionNode, elseNode, "else");
             if(this.debug){
                 System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + elseNode.toString() + "\"");
             }
@@ -166,7 +165,7 @@ public class GraphGenerator {
         this.print(thenNode, endOfThen);
         this.print(endOfThen, endConditionNode);
         if(elseNode instanceof EmptyNode){
-            this.writeTwoNode(decisionNode, endConditionNode);
+            this.writeDecisionNode(decisionNode, endConditionNode, "else");
         } else {
             this.print(elseNode, endOfElse);
             this.print(endOfElse, endConditionNode);
