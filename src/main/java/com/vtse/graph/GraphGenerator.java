@@ -22,6 +22,7 @@ public class GraphGenerator {
     Map<String, String> listParameters;
     Boolean debug;
     Boolean detail;
+    Boolean isShowSyncNode;
     public GraphGenerator(VtseCFG unfoldCFG, Map<String, String> listParameters) throws IOException {
         this.unfoldCFG =unfoldCFG;
         FileWriter fileWriter = new FileWriter("graph.dot");
@@ -29,6 +30,7 @@ public class GraphGenerator {
         this.listParameters =listParameters;
         this.detail = true;
         this.debug = false;
+        this.isShowSyncNode = true;
     }
     public String getDetail(String label){
         String valueLabel = label;
@@ -186,23 +188,33 @@ public class GraphGenerator {
                 System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + thenNode.toString() + "\"");
             }
         }
-//        if( elseNode != null){
-        if( elseNode != null && !(elseNode instanceof EmptyNode)){
-            this.writeDecisionNode(decisionNode, elseNode, "else");
-            if(this.debug){
-                System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + elseNode.toString() + "\"");
+        if(this.isShowSyncNode){
+            if( elseNode != null){
+//        if( elseNode != null && !(elseNode instanceof EmptyNode)){
+                this.writeDecisionNode(decisionNode, elseNode, "else");
+                if(this.debug){
+                    System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + elseNode.toString() + "\"");
+                }
             }
-        }
-//        this.print(decisionNode, thenNode);
-//        this.print(decisionNode, elseNode);
-        this.print(thenNode, endOfThen);
-        this.print(endOfThen, endConditionNode);
-        if(elseNode instanceof EmptyNode){
-            this.writeDecisionNode(decisionNode, endConditionNode, "else");
-        } else {
             this.print(elseNode, endOfElse);
             this.print(endOfElse, endConditionNode);
+        } else {
+            if( elseNode != null && !(elseNode instanceof EmptyNode)) {
+                this.writeDecisionNode(decisionNode, elseNode, "else");
+                if (this.debug) {
+                    System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + elseNode.toString() + "\"");
+                }
+            }
+            if(elseNode instanceof EmptyNode){
+                this.writeDecisionNode(decisionNode, endConditionNode, "else");
+            } else {
+                this.print(elseNode, endOfElse);
+                this.print(endOfElse, endConditionNode);
+            }
         }
+
+        this.print(thenNode, endOfThen);
+        this.print(endOfThen, endConditionNode);
         return endConditionNode;
     }
 
@@ -270,5 +282,29 @@ public class GraphGenerator {
             nextNode = this.printPlainNode(start, nextNode);
             return this.print(nextNode, end);
         }
+    }
+
+    public Boolean getDebug() {
+        return debug;
+    }
+
+    public void setDebug(Boolean debug) {
+        this.debug = debug;
+    }
+
+    public Boolean getDetail() {
+        return detail;
+    }
+
+    public void setDetail(Boolean detail) {
+        this.detail = detail;
+    }
+
+    public Boolean getShowSyncNode() {
+        return isShowSyncNode;
+    }
+
+    public void setShowSyncNode(Boolean showSyncNode) {
+        isShowSyncNode = showSyncNode;
     }
 }

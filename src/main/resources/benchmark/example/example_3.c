@@ -7,4 +7,3 @@ float foo (float a, float b) {
     }
     return result;
 }
-

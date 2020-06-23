@@ -31,6 +31,9 @@ public class PathExecutionVisualize {
         this.verificationReport = verificationReport;
     }
     public List<CFGNode> findPathToFail() throws IOException {
+        if(this.verificationReport.getParameters() == null){
+            return new ArrayList<CFGNode>();
+        }
         VtseCFG cfg = this.vtseCFG;
         UserInput userInput = new UserInput();
         ArrayList<Variable> params = cfg.getInitVariables();
@@ -44,7 +47,7 @@ public class PathExecutionVisualize {
         SMTInput smtInput = this.verificationReport.getSmtInput();
         List<String> formulas = new ArrayList<>();
         for(DefineFun param: this.verificationReport.getParameters()){
-            String temp = userInput.createUserAssertion(param.getExpression(), cfg.getNameFunction());
+            String temp = userInput.createZ3Assertion(param.getExpression(), cfg.getNameFunction());
             formulas.add(temp);
         }
         while(iter.getNext() != null){

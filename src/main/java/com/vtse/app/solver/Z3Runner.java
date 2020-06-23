@@ -66,6 +66,7 @@ public class Z3Runner {
         } else {
 //    		List<String> result = new ArrayList<String>();
             String pathToZ3 = "solvers\\z3\\bin\\z3.exe";
+            // System.out.println("z3 file name: " + filename);
             ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", pathToZ3 + " -smt2 -st -T:1500 " + filename);
             builder.redirectErrorStream(true);
             Process p = builder.start();

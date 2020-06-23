@@ -35,6 +35,9 @@ public class DefineFun {
         this.name = name;
     }
 
+    public String trimValue(String value){
+        return value.replaceAll(" ", "").trim();
+    }
     /**
      * @return the value
      */
@@ -46,6 +49,7 @@ public class DefineFun {
      * @param value the value to set
      */
     public void setValue(String value) {
+        value = trimValue(value);
         this.value = value;
     }
 
@@ -64,11 +68,11 @@ public class DefineFun {
     }
 
     public String getExpression() {
-        return name + " = " + value;
+        return name + " = " + trimValue(value);
     }
 
     @Override
     public String toString() {
-        return name + " " + type + " (" + value + ")";
+        return name + " " + type + " (" + trimValue(value) + ")";
     }
 }

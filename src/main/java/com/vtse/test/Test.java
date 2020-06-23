@@ -55,23 +55,23 @@ public class Test {
 //		FileVerification fileVerification = new FileVerification();
 //		fileVerification.verify(new File("./src/main/resources/benchmark/example/example_7.c"), FunctionVerification.UNFOLD_MODE);
 		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/example/graph.c");
-		IASTFunctionDefinition main_func = ast.getFunction("main");
+		IASTFunctionDefinition main_func = ast.getFunction(0);
 		System.out.println(main_func.toString());
-		VtseCFG cfg = new VtseCFG(ast.getFunction("main"), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
 		cfg.unfold(2);
 		cfg.index();
 //		String pre_condition = "a = 5";
 		String pre_condition = "";
-		String post_condition = "return > 20";
+		String post_condition = "return = 1";
 		int nLoops = 2;
 		int mode = FunctionVerification.UNFOLD_MODE;
-		VerificationReport vr = FunctionVerification.verify(ast, main_func, pre_condition, post_condition, nLoops, mode);
+		File smtFile = File.createTempFile("temp", ".txt");
+		System.out.println(smtFile.getAbsolutePath());
+		VerificationReport vr = FunctionVerification.verify(ast, main_func, pre_condition, post_condition, nLoops, mode, smtFile);
 		PathExecutionVisualize pathExecutionVisualize = new PathExecutionVisualize(cfg, vr);
 		List<CFGNode> nodes = pathExecutionVisualize.findPathToFail();
 		AddMoreInformation addMoreInformation = new AddMoreInformation(cfg, vr);
 		Map<String, String> listParameters = addMoreInformation.parseParameters();
-//		System.out.println(formulas.size());
-//		PathExecutionVisualize.print(formulas);
         GraphGenerator graphGenerator = new GraphGenerator(cfg, listParameters);
         graphGenerator.printGraph(false);
         graphGenerator.fillColor(nodes, true);
@@ -79,7 +79,7 @@ public class Test {
 			File file = new File("./graph.dot");
 			InputStream dot = new FileInputStream(file);
 			MutableGraph g = new Parser().read(dot);
-			Graphviz.fromGraph(g).width(700).render(Format.PNG).toFile(new File("./a1.png"));
+			Graphviz.fromGraph(g).width(500).render(Format.PNG).toFile(new File("./a1.png"));
 		} catch(Exception e){
             System.out.println(e.toString());
 		}

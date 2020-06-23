@@ -114,6 +114,26 @@ public class UserInput {
 
         return assertion;
     }
+    public String createZ3Assertion(String input, String funcName) {
+
+        this.input = input;
+
+        preProcess();
+        mathElements = input.split(" ");
+        String temp = mathElements[0];
+        mathElements[0] = mathElements[1];
+        mathElements[1] = temp;
+
+        addIndexForParameter(funcName);
+
+        addParenthesis();
+
+        replaceParameters(funcName);
+
+        postReplace();
+
+        return assertion;
+    }
 
     public UserInput setParameter(List<Variable> parameters) {
         this.parameters = parameters;
@@ -214,38 +234,38 @@ public class UserInput {
     private void addParenthesis() {
         boolean isInteger = true;
         String type;
-        for (int i = mathElements.length - 2; i >= 0; i--) {
-            if (InfixToPrefix.isOperator(mathElements[i].charAt(0))) {
+            for (int i = mathElements.length - 2; i >= 0; i--) {
+                if (InfixToPrefix.isOperator(mathElements[i].charAt(0))) {
 
-                if (isInteger) {
-                    type = getType(mathElements[i + 1]);
-                    //System.out.println("type 1: " + type);
-                    if (type.equals("double") || type.equals("float")) {
-                        //System.out.println("hellow");
-                        isInteger = false;
-                        //System.out.println("is integer 1 : " + isInteger);
+                    if (isInteger) {
+                        type = getType(mathElements[i + 1]);
+                        //System.out.println("type 1: " + type);
+                        if (type.equals("double") || type.equals("float")) {
+                            //System.out.println("hellow");
+                            isInteger = false;
+                            //System.out.println("is integer 1 : " + isInteger);
+                        }
+                        type = getType(mathElements[i + 2]);
+                        //System.out.println("type 2: " + type);
+                        if (type.equals("double") || type.equals("float")) {
+                            isInteger = false;
+                            //System.out.println("is integer 2: " + isInteger);
+                        }
                     }
-                    type = getType(mathElements[i + 2]);
-                    //System.out.println("type 2: " + type);
-                    if (type.equals("double") || type.equals("float")) {
-                        isInteger = false;
-                        //System.out.println("is integer 2: " + isInteger);
+
+                    if (mathElements[i].equals("/") && isInteger) {
+                        //System.err.println("is integer: " + isInteger);
+                        mathElements[i] = "/";
                     }
-                }
 
-                if (mathElements[i].equals("/") && isInteger) {
-                    //System.err.println("is integer: " + isInteger);
-                    mathElements[i] = "/";
-                }
+                    String temp = "(" + mathElements[i] + " " + mathElements[i + 1] + " " + mathElements[i + 2] + ")";
 
-                String temp = "(" + mathElements[i] + " " + mathElements[i + 1] + " " + mathElements[i + 2] + ")";
-
-                mathElements[i] = temp;
-                for (int j = i + 1; j < mathElements.length - 2; j++) {
-                    mathElements[j] = mathElements[j + 2];
+                    mathElements[i] = temp;
+                    for (int j = i + 1; j < mathElements.length - 2; j++) {
+                        mathElements[j] = mathElements[j + 2];
+                    }
                 }
             }
-        }
 
         assertion = mathElements[0];
 //		System.out.println("assertion: " + assertion);

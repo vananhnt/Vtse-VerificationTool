@@ -1,8 +1,9 @@
-int main(int a, int c){
-    for(int i=0;i<a;i++){
-        if(c < 10){
-            c = c + i;
-        }
+int foo (int a, int b) {
+    float result = 0;
+    if (a > b) {
+        result = a - b;
+    } else {
+        result = a + b;
     }
-    return c;
+    return result;
 }

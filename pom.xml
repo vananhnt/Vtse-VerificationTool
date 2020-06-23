@@ -38,10 +38,11 @@
             <artifactId>cloning</artifactId>
             <version>1.9.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/guru.nidi/graphviz-java -->
         <dependency>
             <groupId>guru.nidi</groupId>
             <artifactId>graphviz-java</artifactId>
-            <version>0.15.1</version>
+            <version>0.16.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
