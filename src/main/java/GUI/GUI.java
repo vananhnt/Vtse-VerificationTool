@@ -43,6 +43,8 @@ public class GUI extends JFrame{
     private JLabel labelPrecondition;
     private JLabel labelPostCondition;
     private JList listCounterExample;
+    private JTextField textLoopCount;
+    private JLabel labelLoopCount;
     private List<String> counterExample;
     private DefaultListModel<String> modelCounterExample;
 
@@ -98,22 +100,26 @@ public class GUI extends JFrame{
         out.close();
         Boolean isShowSyncNode = checkBoxSync.isSelected();
         Boolean isShowDetail = checkBoxDetail.isSelected();
-        generate(tempfile, isShowSyncNode, isShowDetail);
+        String nLoopsStr = textLoopCount.getText();
+        if(nLoopsStr.length() == 0){
+            nLoopsStr = "2";
+        }
+        int nLoops = Integer.parseInt(nLoopsStr);
+        generate(tempfile, isShowSyncNode, isShowDetail, nLoops);
         File imgFile = new File("./a1.png");
         BufferedImage img = ImageIO.read(imgFile);
         img = ImageResizer.resize(img, 500);
         imageLabel.setIcon(new ImageIcon(img));
     }
-    public void generate(File tempfile, Boolean isShowSyncNode, Boolean isShowDetail) throws IOException {
+    public void generate(File tempfile, Boolean isShowSyncNode, Boolean isShowDetail, int nLoops) throws IOException {
         ASTFactory ast = new ASTFactory(tempfile.getAbsolutePath());
         IASTFunctionDefinition main_func = ast.getFunction(0);
         System.out.println(main_func.toString());
         VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
-        cfg.unfold(2);
+        cfg.unfold(nLoops);
         cfg.index();
         String pre_condition = textPreCondition.getText();
         String post_condition = textPostCondition.getText();
-        int nLoops = 2;
         int mode = FunctionVerification.UNFOLD_MODE;
         File smtFile = File.createTempFile("temp", ".txt");
         System.out.println(smtFile.getAbsolutePath());
