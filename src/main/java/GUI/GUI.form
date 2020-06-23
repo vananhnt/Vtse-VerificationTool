@@ -53,7 +53,9 @@
                 <preferred-size width="150" height="50"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <font size="16"/>
+            </properties>
           </component>
           <component id="4be7c" class="javax.swing.JTextField" binding="textPostCondition">
             <constraints>
@@ -160,11 +162,13 @@
                 </constraints>
                 <properties/>
               </component>
-              <scrollpane id="bf637">
+              <scrollpane id="bf637" binding="imagePanel">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-12631741"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <component id="799d" class="javax.swing.JLabel" binding="imageLabel">

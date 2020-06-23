@@ -50,7 +50,7 @@ public class PathExecutionVisualize {
             String temp = userInput.createZ3Assertion(param.getExpression(), cfg.getNameFunction());
             formulas.add(temp);
         }
-        while(iter.getNext() != null){
+        while(iter != null){
             nodes.add(iter);
             if (iter instanceof DecisionNode){
                 IASTExpression condition = ((DecisionNode) iter).getCondition();

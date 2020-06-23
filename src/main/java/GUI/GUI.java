@@ -45,6 +45,7 @@ public class GUI extends JFrame{
     private JList listCounterExample;
     private JTextField textLoopCount;
     private JLabel labelLoopCount;
+    private JScrollPane imagePanel;
     private List<String> counterExample;
     private DefaultListModel<String> modelCounterExample;
 
@@ -54,6 +55,7 @@ public class GUI extends JFrame{
         this.setContentPane(this.panelEDT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
+        this.imagePanel.setBorder(null);
         this.counterExample = new ArrayList<>();
         this.modelCounterExample = new DefaultListModel<>();
         this.listCounterExample.setModel(modelCounterExample);
@@ -108,7 +110,7 @@ public class GUI extends JFrame{
         generate(tempfile, isShowSyncNode, isShowDetail, nLoops);
         File imgFile = new File("./a1.png");
         BufferedImage img = ImageIO.read(imgFile);
-        img = ImageResizer.resize(img, 500);
+        img = ImageResizer.resize(img, 300);
         imageLabel.setIcon(new ImageIcon(img));
     }
     public void generate(File tempfile, Boolean isShowSyncNode, Boolean isShowDetail, int nLoops) throws IOException {
@@ -132,7 +134,11 @@ public class GUI extends JFrame{
         graphGenerator.setShowSyncNode(isShowSyncNode);
         graphGenerator.setDetail(isShowDetail);
         graphGenerator.printGraph(false);
-        graphGenerator.fillColor(nodes, true);
+        if(vr.getStatus() == VerificationReport.ALWAYS_TRUE){
+            graphGenerator.fillColor(nodes, false, true);
+        } else {
+            graphGenerator.fillColor(nodes, true, true);
+        }
         try {
             File file = new File("./graph.dot");
             InputStream dot = new FileInputStream(file);
@@ -151,16 +157,22 @@ public class GUI extends JFrame{
             modelCounterExample.addElement("Chuong trinh khong thoa man bieu thuc dieu kien cua nguoi dung!");
             modelCounterExample.addElement("Counter example: ");
         }
-        for(DefineFun param: vr.getParameters()){
-            String paramString = param.getName() + " = " + param.getValue();
-            modelCounterExample.addElement(paramString);
-        }
-        if (vr.getRet() != null) {
-            modelCounterExample.addElement(vr.getRet().getExpression());
+        if(vr.getParameters() != null) {
+            for (DefineFun param : vr.getParameters()) {
+                String paramString = param.getName() + " = " + param.getValue();
+                modelCounterExample.addElement(paramString);
+            }
+            if (vr.getRet() != null) {
+                modelCounterExample.addElement(vr.getRet().getExpression());
+            }
         }
     }
     public static void main(String[] args) {
         GUI gui = new GUI();
         gui.setVisible(true);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

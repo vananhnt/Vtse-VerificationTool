@@ -23,14 +23,16 @@ public class GraphGenerator {
     Boolean debug;
     Boolean detail;
     Boolean isShowSyncNode;
+    Boolean isColored;
     public GraphGenerator(VtseCFG unfoldCFG, Map<String, String> listParameters) throws IOException {
         this.unfoldCFG =unfoldCFG;
         FileWriter fileWriter = new FileWriter("graph.dot");
         this.fileWriter = fileWriter;
-        this.listParameters =listParameters;
+        this.listParameters = listParameters;
         this.detail = true;
         this.debug = false;
         this.isShowSyncNode = true;
+        this.isColored = false;
     }
     public String getDetail(String label){
         String valueLabel = label;
@@ -58,6 +60,19 @@ public class GraphGenerator {
         this.fileWriter.write("\n");
         this.fileWriter.write("splines=ortho;");
         this.fileWriter.write("\n");
+    }
+    public void writeStartNode() throws IOException{
+        CFGNode start = this.unfoldCFG.getStart();
+        this.write("Start[label=\"Start\" shape=circle]");
+        this.write(";\n");
+        this.write("\"" + "Start" + "\"" + " -> " + "\"" + start.toString() + start.hashCode() + "\"");
+        this.write(";\n");
+        if(this.getColored()){
+            this.write("Start[label=\"Start\" shape=circle color=red]");
+            this.write(";\n");
+            this.write("\"" + "Start" + "\"" + " -> " + "\"" + start.toString() + start.hashCode() + "\"" + " [ color=\"red\"]");
+            this.write(";\n");
+        }
     }
     public void writeEnd() throws IOException{
         this.fileWriter.write("}");
@@ -121,25 +136,31 @@ public class GraphGenerator {
         this.write("[ label=\"" + path + "\" ]");
         this.write(";\n");
     }
-    public void fillColor(List<CFGNode> nodes, Boolean isClose) throws IOException {
-        if(!nodes.isEmpty()){
-            List<CFGNode> trimmedNodes = new ArrayList<>();
-            for (CFGNode node: nodes){
-                if(!(node instanceof EmptyNode) && !(node instanceof SyncNode)){
-                    trimmedNodes.add(node);
+    public void fillColor(List<CFGNode> nodes, Boolean isColored, Boolean isClose) throws IOException {
+        this.setColored(isColored);
+        this.writeStartNode();
+        if(isColored){
+            if(!nodes.isEmpty()){
+                List<CFGNode> trimmedNodes = new ArrayList<>();
+                if(this.isShowSyncNode){
+                    trimmedNodes = nodes;
+                } else {
+                    for (CFGNode node: nodes){
+                        if(!(node instanceof EmptyNode) && !(node instanceof SyncNode)){
+                            trimmedNodes.add(node);
+                        }
+                    }
                 }
-            }
-            for (CFGNode node: trimmedNodes){
-                if(!(node instanceof EmptyNode) && !(node instanceof SyncNode)) {
+                for (CFGNode node: trimmedNodes){
                     this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ color=\"red\"]");
                     this.write(";\n");
                 }
-            }
-            for(int i=0;i<trimmedNodes.size()-1;i++){
-                CFGNode a = trimmedNodes.get(i);
-                CFGNode b = trimmedNodes.get(i+1);
-                this.write("\"" + a.toString() + a.hashCode() + "\"" + " -> " + "\"" + b.toString() + b.hashCode() + "\"" + " [ color=\"red\"]" );
-                this.write(";\n");
+                for(int i=0;i<trimmedNodes.size()-1;i++){
+                    CFGNode a = trimmedNodes.get(i);
+                    CFGNode b = trimmedNodes.get(i+1);
+                    this.write("\"" + a.toString() + a.hashCode() + "\"" + " -> " + "\"" + b.toString() + b.hashCode() + "\"" + " [ color=\"red\"]" );
+                    this.write(";\n");
+                }
             }
         }
         if(isClose){
@@ -149,6 +170,7 @@ public class GraphGenerator {
     public void printGraph(Boolean isClose) throws IOException {
         CFGNode start = this.unfoldCFG.getStart();
         this.writeBegin();
+        this.writeStartNode();
         this.print(start, null);
         if(isClose){
             this.writeEnd();
@@ -161,7 +183,6 @@ public class GraphGenerator {
         }
         return nextNode;
     }
-
 
     public CFGNode printIfNode(CFGNode startNode) throws IOException {
         DecisionNode decisionNode;
@@ -188,6 +209,9 @@ public class GraphGenerator {
                 System.out.println("\"" + decisionNode.toString() + "\"" + "->" + "\"" + thenNode.toString() + "\"");
             }
         }
+        this.print(thenNode, endOfThen);
+        this.print(endOfThen, endConditionNode);
+
         if(this.isShowSyncNode){
             if( elseNode != null){
 //        if( elseNode != null && !(elseNode instanceof EmptyNode)){
@@ -213,8 +237,6 @@ public class GraphGenerator {
             }
         }
 
-        this.print(thenNode, endOfThen);
-        this.print(endOfThen, endConditionNode);
         return endConditionNode;
     }
 
@@ -306,5 +328,13 @@ public class GraphGenerator {
 
     public void setShowSyncNode(Boolean showSyncNode) {
         isShowSyncNode = showSyncNode;
+    }
+
+    public Boolean getColored() {
+        return isColored;
+    }
+
+    public void setColored(Boolean colored) {
+        isColored = colored;
     }
 }
