@@ -83,7 +83,7 @@ public class Test {
 			File file = new File("./graph.dot");
 			InputStream dot = new FileInputStream(file);
 			MutableGraph g = new Parser().read(dot);
-			Graphviz.fromGraph(g).totalMemory(20000000).width(500).render(Format.PNG).toFile(new File("./a1.png"));
+			Graphviz.fromGraph(g).width(500).render(Format.PNG).toFile(new File("./a1.png"));
 		} catch(Exception e){
             System.out.println(e.toString());
 		}

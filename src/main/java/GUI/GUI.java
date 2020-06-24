@@ -22,6 +22,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -51,6 +53,9 @@ public class GUI extends JFrame{
     private JLabel labelSelectFunction;
     private List<String> counterExample;
     private DefaultListModel<String> modelCounterExample;
+    private int imageWidth;
+    private int imageHeight;
+    private BufferedImage image;
 
     public GUI(){
         super("EDT gui");
@@ -62,6 +67,8 @@ public class GUI extends JFrame{
         this.counterExample = new ArrayList<>();
         this.modelCounterExample = new DefaultListModel<>();
         this.listCounterExample.setModel(modelCounterExample);
+        this.imageWidth = 500;
+        this.imageHeight = 700;
         buttonGenerate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,6 +100,32 @@ public class GUI extends JFrame{
                 }
             }
         });
+        imageLabel.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+//                if (e.isAltDown()) {
+                int oldWidth = getImageWidth();
+                int oldHeight= getImageHeight();
+                int newWidth = oldWidth;
+                int newHeight= oldHeight;
+                double amount = Math.pow(1.05, e.getScrollAmount());
+                if (e.getWheelRotation() > 0) {
+                    newWidth = (int)(oldWidth * amount);
+                    newHeight= (int)(oldHeight* amount);
+                } else {
+                    newWidth = (int)(oldWidth / amount);
+                    newHeight= (int)(oldHeight/ amount);
+                }
+                setImageWidth(newWidth);
+                setImageHeight(newHeight);
+                showImage();
+//                } else {
+//                    // if alt isn't down then propagate event to scrollPane
+////                    JScrollPane scrollPane = getPanelScrollPane();
+//                    imagePanel.getParent().dispatchEvent(e);
+//                }
+            }
+        });
     }
     public void takeCodeClick(ActionEvent e) throws IOException {
         String text = this.textCodeArea.getText();
@@ -114,14 +147,17 @@ public class GUI extends JFrame{
         generate(tempfile, isShowSyncNode, isShowDetail, nLoops, functionStr);
         File imgFile = new File("./a1.png");
         BufferedImage img = ImageIO.read(imgFile);
-        img = ImageResizer.resize(img, 300);
-        imageLabel.setIcon(new ImageIcon(img));
+        this.setImage(img);
+        showImage();
     }
     public void generate(File tempfile, Boolean isShowSyncNode, Boolean isShowDetail, int nLoops, String functionStr) throws IOException {
         ASTFactory ast = new ASTFactory(tempfile.getAbsolutePath());
         IASTFunctionDefinition main_func;
         VtseCFG cfg;
-        if(IsNumberic.isNumberic(functionStr)){
+        if(functionStr.equals("")){
+            main_func = ast.getFunction(0);
+            cfg = new VtseCFG(ast.getFunction(0), ast);
+        } else if(IsNumberic.isNumberic(functionStr)){
             int functionIndex = Integer.parseInt(functionStr) - 1;
             main_func = ast.getFunction(functionIndex);
             cfg = new VtseCFG(ast.getFunction(functionIndex), ast);
@@ -146,16 +182,12 @@ public class GUI extends JFrame{
         graphGenerator.setShowSyncNode(isShowSyncNode);
         graphGenerator.setDetail(isShowDetail);
         graphGenerator.printGraph(false);
-        if(vr.getStatus() == VerificationReport.ALWAYS_TRUE){
-            graphGenerator.fillColor(nodes, false, true);
-        } else {
-            graphGenerator.fillColor(nodes, true, true);
-        }
+        graphGenerator.fillColor(nodes, !vr.getStatus().equals(VerificationReport.ALWAYS_TRUE), true);
         try {
             File file = new File("./graph.dot");
             InputStream dot = new FileInputStream(file);
             MutableGraph g = new Parser().read(dot);
-            Graphviz.fromGraph(g).width(700).render(Format.PNG).toFile(new File("./a1.png"));
+            Graphviz.fromGraph(g).width(1000).render(Format.PNG).toFile(new File("./a1.png"));
         } catch(Exception exception){
             System.out.println(exception.toString());
         }
@@ -163,7 +195,7 @@ public class GUI extends JFrame{
     }
     public void printCounterExample(VerificationReport vr){
         modelCounterExample.removeAllElements();
-        if(vr.getStatus() == VerificationReport.ALWAYS_TRUE){
+        if(vr.getStatus().equals(VerificationReport.ALWAYS_TRUE)){
             modelCounterExample.addElement("Chua tim thay tham so khong thoa man voi bieu thuc dieu kien cua nguoi dung!");
         } else {
             modelCounterExample.addElement("Chuong trinh khong thoa man bieu thuc dieu kien cua nguoi dung!");
@@ -179,6 +211,15 @@ public class GUI extends JFrame{
             }
         }
     }
+    public void showImage(){
+        try{
+            BufferedImage img = this.getImage();
+            img = ImageResizer.resize(img, this.getImageWidth(), this.getImageHeight(), true);
+            imageLabel.setIcon(new ImageIcon(img));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         GUI gui = new GUI();
         gui.setVisible(true);
@@ -186,5 +227,29 @@ public class GUI extends JFrame{
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+    }
+
+    public int getImageWidth() {
+        return imageWidth;
+    }
+
+    public void setImageWidth(int imageWidth) {
+        this.imageWidth = imageWidth;
+    }
+
+    public int getImageHeight() {
+        return imageHeight;
+    }
+
+    public void setImageHeight(int imageHeight) {
+        this.imageHeight = imageHeight;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
     }
 }
