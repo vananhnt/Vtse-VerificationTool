@@ -55,9 +55,9 @@ public class Test {
 ////		FileVerification fileVerification = new FileVerification();
 //		fileVerification.verify(new File("./src/main/resources/benchmark/example/example_7.c"), FunctionVerification.UNFOLD_MODE);
 		ASTFactory ast = new ASTFactory("./src/main/resources/benchmark/example/graph.c");
-		IASTFunctionDefinition main_func = ast.getFunction(0);
+		IASTFunctionDefinition main_func = ast.getFunction(1);
 		System.out.println(main_func.toString());
-		VtseCFG cfg = new VtseCFG(ast.getFunction(0), ast);
+		VtseCFG cfg = new VtseCFG(ast.getFunction(1), ast);
 		cfg.unfold(1);
 		cfg.index();
 //		String pre_condition = "a = 5";
@@ -83,7 +83,7 @@ public class Test {
 			File file = new File("./graph.dot");
 			InputStream dot = new FileInputStream(file);
 			MutableGraph g = new Parser().read(dot);
-			Graphviz.fromGraph(g).width(500).render(Format.PNG).toFile(new File("./a1.png"));
+			Graphviz.fromGraph(g).totalMemory(20000000).width(500).render(Format.PNG).toFile(new File("./a1.png"));
 		} catch(Exception e){
             System.out.println(e.toString());
 		}

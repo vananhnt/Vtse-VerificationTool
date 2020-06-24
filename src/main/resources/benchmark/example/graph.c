@@ -7,7 +7,7 @@
 //    }
 //    return result;
 //}
-
+//
 //int relu(int a){
 //    if (a < 0) {
 //        a = 0;
@@ -15,16 +15,29 @@
 //    return a;
 //}
 
-int main(int n, int m){
+
+int absolute(int a){
     int result = 0;
-    for(int i=0;i<n;i++){
-        if(result < 10){
-            result = result + i;
-        }
+    for(int i=0;i<10;i++){
+        result = result + i;
     }
     return result;
 }
 
+
+int main(int n, int m){
+    int result = n-m;
+    result = absolute(result);
+    return result;
+}
+//int multival_1(int x){
+//    int y = x;
+//    while(x < 1000){
+//        x = x + 1;
+//        y = y + 1;
+//    }
+//    return y;
+//}
 //int swap(int a, int b){
 //    a = a + b;
 //    b = a - b;

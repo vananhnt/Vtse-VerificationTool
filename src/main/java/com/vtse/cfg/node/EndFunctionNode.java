@@ -24,4 +24,12 @@ public class EndFunctionNode extends CFGNode {
     public void printNode() {
         System.out.println("}  <--" + FunctionHelper.getFunctionName(func));
     }
+
+    public IASTFunctionDefinition getFunc() {
+        return func;
+    }
+
+    public void setFunc(IASTFunctionDefinition func) {
+        this.func = func;
+    }
 }

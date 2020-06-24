@@ -137,17 +137,28 @@ public class ASTFactory {
     /**
      * functionDef
      */
+//    public IASTFunctionDefinition getFunction(int index) {
+////		int count = 0;
+//        IASTFunctionDefinition funcDef = null;
+//        IASTDeclaration[] declarations = translationUnit.getDeclarations();
+//        for (IASTDeclaration d : declarations) {
+//            if (d instanceof IASTFunctionDefinition) {
+//                funcDef = (IASTFunctionDefinition) d;
+//                break;
+//            }
+//        }
+//        return funcDef;
+//    }
     public IASTFunctionDefinition getFunction(int index) {
-//		int count = 0;
-        IASTFunctionDefinition funcDef = null;
-        IASTDeclaration[] declarations = translationUnit.getDeclarations();
-        for (IASTDeclaration d : declarations) {
-            if (d instanceof IASTFunctionDefinition) {
-                funcDef = (IASTFunctionDefinition) d;
-                break;
-            }
+        ArrayList<IASTFunctionDefinition> funcList = getListFunction();
+        if(index < funcList.size()){
+            return funcList.get(index);
         }
-        return funcDef;
+        //Bao loi neu khong tim duoc function
+
+        System.err.println("Index " + index + " out of bound of size " + funcList.size());
+        System.exit(1);
+        return null;
     }
 
     public IASTFunctionDefinition getFunction(String name) {
@@ -171,7 +182,6 @@ public class ASTFactory {
         System.exit(1);
         return null;
     }
-
     public IASTFunctionDefinition getMain() {
         return FunctionHelper.getFunction(this.getListFunction(), "main");
     }

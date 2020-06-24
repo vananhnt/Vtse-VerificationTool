@@ -20,4 +20,12 @@ public class BeginFunctionNode extends CFGNode {
     public void printNode() {
         System.out.println(getName() + " {");
     }
+
+    public IASTFunctionDefinition getFuncDefinition() {
+        return funcDefinition;
+    }
+
+    public void setFuncDefinition(IASTFunctionDefinition funcDefinition) {
+        this.funcDefinition = funcDefinition;
+    }
 }

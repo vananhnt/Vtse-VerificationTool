@@ -1,110 +1,119 @@
 strict digraph {
-splines=ortho;
 Start[label="Start" shape=circle];
-"Start" -> "int result_main_-1 389809954";
-"int result_main_-1 389809954" -> "(result_main_0 = 0)316919580";
-"int result_main_-1 389809954" [ label="int result_main_-1 " shape=rectangle];
-"(result_main_0 = 0)316919580" [ label="(result_main_0 = 0)
-(0 = 0)" shape=rectangle];
-"(result_main_0 = 0)316919580" -> "1894581220";
-"(result_main_0 = 0)316919580" [ label="(result_main_0 = 0)
-(0 = 0)" shape=rectangle];
-"1894581220" [ label="BeginForNode" shape=rectangle];
-"1894581220" -> "int i_main_-1  = 01396344128";
-"1894581220" [ label="BeginForNode" shape=rectangle];
-"int i_main_-1  = 01396344128" [ label="int i_main_-1  = 0
-int 0  = 0" shape=rectangle];
-"int i_main_-1  = 01396344128" -> "(i_main_-1 < n_main_0)608738578";
-"int i_main_-1  = 01396344128" [ label="int i_main_-1  = 0
-int 0  = 0" shape=rectangle];
-"(i_main_-1 < n_main_0)608738578" [ label="(i_main_-1 < n_main_0)
-(0 < 2)" shape=rectangle];
-"(i_main_-1 < n_main_0)608738578" [ shape=diamond ];
-"(i_main_-1 < n_main_0)608738578" -> "685714856"[ label="then" ];
-"685714856" -> "(result_main_0 < 10)817232244";
-"685714856" [ label="BeginIfNode" shape=rectangle];
-"(result_main_0 < 10)817232244" [ label="(result_main_0 < 10)
-(0 < 10)" shape=rectangle];
-"(result_main_0 < 10)817232244" [ shape=diamond ];
-"(result_main_0 < 10)817232244" -> "(result_main_1 = (result_main_0 + i_main_-1))925006503"[ label="then" ];
-"(result_main_1 = (result_main_0 + i_main_-1))925006503" -> "1474482524";
-"(result_main_1 = (result_main_0 + i_main_-1))925006503" [ label="(result_main_1 = (result_main_0 + i_main_-1))
-(0 = (0 + 0))" shape=rectangle];
-"1474482524" [ label="EndConditionNode" shape=rectangle];
-"(result_main_0 < 10)817232244" -> "109118565"[ label="else" ];
-"109118565" -> "(result_main_1 = result_main_0)434123672";
-"109118565" [ label="EmptyNode" shape=rectangle];
-"(result_main_1 = result_main_0)434123672" [ label="(result_main_1 = result_main_0)
-(0 = 0)" shape=rectangle];
-"(result_main_1 = result_main_0)434123672" -> "1474482524";
-"(result_main_1 = result_main_0)434123672" [ label="(result_main_1 = result_main_0)
-(0 = 0)" shape=rectangle];
-"1474482524" [ label="EndConditionNode" shape=rectangle];
-"1474482524" -> "(i_main_0 = (i_main_-1 + 1))1026790721";
-"1474482524" [ label="EndConditionNode" shape=rectangle];
-"(i_main_0 = (i_main_-1 + 1))1026790721" [ label="(i_main_0 = (i_main_-1 + 1))
-(1 = (0 + 1))" shape=rectangle];
-"(i_main_0 = (i_main_-1 + 1))1026790721" -> "2082134922";
-"(i_main_0 = (i_main_-1 + 1))1026790721" [ label="(i_main_0 = (i_main_-1 + 1))
-(1 = (0 + 1))" shape=rectangle];
-"2082134922" [ label="EndConditionNode" shape=rectangle];
-"(i_main_-1 < n_main_0)608738578" -> "1916160576"[ label="else" ];
-"1916160576" -> "(result_main_1 = result_main_0)1792199533";
-"1916160576" [ label="EmptyNode" shape=rectangle];
-"(result_main_1 = result_main_0)1792199533" [ label="(result_main_1 = result_main_0)
-(0 = 0)" shape=rectangle];
-"(result_main_1 = result_main_0)1792199533" -> "(i_main_0 = i_main_-1)1265292011";
-"(result_main_1 = result_main_0)1792199533" [ label="(result_main_1 = result_main_0)
-(0 = 0)" shape=rectangle];
-"(i_main_0 = i_main_-1)1265292011" [ label="(i_main_0 = i_main_-1)
-(1 = 0)" shape=rectangle];
-"(i_main_0 = i_main_-1)1265292011" -> "2082134922";
-"(i_main_0 = i_main_-1)1265292011" [ label="(i_main_0 = i_main_-1)
-(1 = 0)" shape=rectangle];
-"2082134922" [ label="EndConditionNode" shape=rectangle];
-"2082134922" -> "(i_main_1 >= n_main_1)1636206215";
-"2082134922" [ label="EndConditionNode" shape=rectangle];
-"(i_main_1 >= n_main_1)1636206215" [ label="(i_main_1 >= n_main_1)
-(2 >= 0)" shape=rectangle];
-"(i_main_1 >= n_main_1)1636206215" -> "(return_main_0 = result_main_1)555922621";
-"(i_main_1 >= n_main_1)1636206215" [ label="(i_main_1 >= n_main_1)
-(2 >= 0)" shape=rectangle];
-"(return_main_0 = result_main_1)555922621" [ label="(return_main_0 = result_main_1)
-(1 = 0)" shape=rectangle];
-"(return_main_0 = result_main_1)555922621" -> "1574410839";
-"(return_main_0 = result_main_1)555922621" [ label="(return_main_0 = result_main_1)
-(1 = 0)" shape=rectangle];
-"1574410839" [ label="" shape=rectangle];
-"1574410839" [ label= "End" shape=circle];
+"Start" -> "int result_main_-1 403663089";
+"int result_main_-1 403663089" -> "(result_main_0 = (n_main_0 - m_main_0))1129521834";
+"int result_main_-1 403663089" [ label="int result_main_-1 " shape=rectangle];
+"(result_main_0 = (n_main_0 - m_main_0))1129521834" [ label="(result_main_0 = (n_main_0 - m_main_0))" shape=rectangle];
+"(result_main_0 = (n_main_0 - m_main_0))1129521834" -> "1096203803";
+"(result_main_0 = (n_main_0 - m_main_0))1129521834" [ label="(result_main_0 = (n_main_0 - m_main_0))" shape=rectangle];
+"1096203803" [ label="" shape=rectangle];
+"1096203803" [ label= "Begin function absolute" shape=oval];
+"1096203803" -> "(a_absolute_1 = result_main_0)887253891";
+"1096203803" [ label="" shape=rectangle];
+"1096203803" [ label= "Begin function absolute" shape=oval];
+"(a_absolute_1 = result_main_0)887253891" [ label="(a_absolute_1 = result_main_0)" shape=rectangle];
+"(a_absolute_1 = result_main_0)887253891" -> "int result_absolute_0 1464456462";
+"(a_absolute_1 = result_main_0)887253891" [ label="(a_absolute_1 = result_main_0)" shape=rectangle];
+"int result_absolute_0 1464456462" [ label="int result_absolute_0 " shape=rectangle];
+"int result_absolute_0 1464456462" -> "(result_absolute_1 = 0)232123199";
+"int result_absolute_0 1464456462" [ label="int result_absolute_0 " shape=rectangle];
+"(result_absolute_1 = 0)232123199" [ label="(result_absolute_1 = 0)" shape=rectangle];
+"(result_absolute_1 = 0)232123199" -> "2038905592";
+"(result_absolute_1 = 0)232123199" [ label="(result_absolute_1 = 0)" shape=rectangle];
+"2038905592" [ label="BeginForNode" shape=rectangle];
+"2038905592" -> "int i_absolute_0  = 01587476536";
+"2038905592" [ label="BeginForNode" shape=rectangle];
+"int i_absolute_0  = 01587476536" [ label="int i_absolute_0  = 0" shape=rectangle];
+"int i_absolute_0  = 01587476536" -> "(i_absolute_0 < 10)1197909824";
+"int i_absolute_0  = 01587476536" [ label="int i_absolute_0  = 0" shape=rectangle];
+"(i_absolute_0 < 10)1197909824" [ label="(i_absolute_0 < 10)" shape=rectangle];
+"(i_absolute_0 < 10)1197909824" [ shape=diamond ];
+"(i_absolute_0 < 10)1197909824" -> "(result_absolute_2 = (result_absolute_1 + i_absolute_0))1707614336"[ label="then" ];
+"(result_absolute_2 = (result_absolute_1 + i_absolute_0))1707614336" -> "(i_absolute_1 = (i_absolute_0 + 1))634951227";
+"(result_absolute_2 = (result_absolute_1 + i_absolute_0))1707614336" [ label="(result_absolute_2 = (result_absolute_1 + i_absolute_0))" shape=rectangle];
+"(i_absolute_1 = (i_absolute_0 + 1))634951227" [ label="(i_absolute_1 = (i_absolute_0 + 1))" shape=rectangle];
+"(i_absolute_1 = (i_absolute_0 + 1))634951227" -> "(i_absolute_1 < 10)212788608";
+"(i_absolute_1 = (i_absolute_0 + 1))634951227" [ label="(i_absolute_1 = (i_absolute_0 + 1))" shape=rectangle];
+"(i_absolute_1 < 10)212788608" [ label="(i_absolute_1 < 10)" shape=rectangle];
+"(i_absolute_1 < 10)212788608" [ shape=diamond ];
+"(i_absolute_1 < 10)212788608" -> "(result_absolute_3 = (result_absolute_2 + i_absolute_1))2113933298"[ label="then" ];
+"(result_absolute_3 = (result_absolute_2 + i_absolute_1))2113933298" -> "(i_absolute_2 = (i_absolute_1 + 1))1516825746";
+"(result_absolute_3 = (result_absolute_2 + i_absolute_1))2113933298" [ label="(result_absolute_3 = (result_absolute_2 + i_absolute_1))" shape=rectangle];
+"(i_absolute_2 = (i_absolute_1 + 1))1516825746" [ label="(i_absolute_2 = (i_absolute_1 + 1))" shape=rectangle];
+"(i_absolute_2 = (i_absolute_1 + 1))1516825746" -> "996200618";
+"(i_absolute_2 = (i_absolute_1 + 1))1516825746" [ label="(i_absolute_2 = (i_absolute_1 + 1))" shape=rectangle];
+"996200618" [ label="EndConditionNode" shape=rectangle];
+"(i_absolute_1 < 10)212788608" -> "996200618"[ label="else" ];
+"(i_absolute_0 < 10)1197909824" -> "996200618"[ label="else" ];
+"996200618" -> "(i_absolute_3 >= 10)1075421347";
+"996200618" [ label="EndConditionNode" shape=rectangle];
+"(i_absolute_3 >= 10)1075421347" [ label="(i_absolute_3 >= 10)" shape=rectangle];
+"(i_absolute_3 >= 10)1075421347" -> "(return_absolute_0 = result_absolute_3)1041778893";
+"(i_absolute_3 >= 10)1075421347" [ label="(i_absolute_3 >= 10)" shape=rectangle];
+"(return_absolute_0 = result_absolute_3)1041778893" [ label="(return_absolute_0 = result_absolute_3)" shape=rectangle];
+"(return_absolute_0 = result_absolute_3)1041778893" -> "(absolute_result_1 = return_absolute_0)596197344";
+"(return_absolute_0 = result_absolute_3)1041778893" [ label="(return_absolute_0 = result_absolute_3)" shape=rectangle];
+"(absolute_result_1 = return_absolute_0)596197344" [ label="(absolute_result_1 = return_absolute_0)" shape=rectangle];
+"(absolute_result_1 = return_absolute_0)596197344" -> "517033659";
+"(absolute_result_1 = return_absolute_0)596197344" [ label="(absolute_result_1 = return_absolute_0)" shape=rectangle];
+"517033659" [ label="" shape=rectangle];
+"517033659" [ label= "End function absolute" shape=oval];
+"517033659" -> "(result_main_1 = absolute_result_1)323021178";
+"517033659" [ label="" shape=rectangle];
+"517033659" [ label= "End function absolute" shape=oval];
+"(result_main_1 = absolute_result_1)323021178" [ label="(result_main_1 = absolute_result_1)" shape=rectangle];
+"(result_main_1 = absolute_result_1)323021178" -> "(return_main_0 = result_main_1)1877116415";
+"(result_main_1 = absolute_result_1)323021178" [ label="(result_main_1 = absolute_result_1)" shape=rectangle];
+"(return_main_0 = result_main_1)1877116415" [ label="(return_main_0 = result_main_1)" shape=rectangle];
+"(return_main_0 = result_main_1)1877116415" -> "92193244";
+"(return_main_0 = result_main_1)1877116415" [ label="(return_main_0 = result_main_1)" shape=rectangle];
+"92193244" [ label="" shape=rectangle];
+"92193244" [ label= "End" shape=circle];
 Start[label="Start" shape=circle];
-"Start" -> "int result_main_-1 389809954";
+"Start" -> "int result_main_-1 403663089";
 Start[label="Start" shape=circle color=red];
-"Start" -> "int result_main_-1 389809954" [ color="red"];
-"int result_main_-1 389809954" [ color="red"];
-"(result_main_0 = 0)316919580" [ color="red"];
-"1894581220" [ color="red"];
-"int i_main_-1  = 01396344128" [ color="red"];
-"(i_main_-1 < n_main_0)608738578" [ color="red"];
-"685714856" [ color="red"];
-"(result_main_0 < 10)817232244" [ color="red"];
-"(result_main_1 = (result_main_0 + i_main_-1))925006503" [ color="red"];
-"1474482524" [ color="red"];
-"(i_main_0 = (i_main_-1 + 1))1026790721" [ color="red"];
-"2082134922" [ color="red"];
-"(i_main_1 >= n_main_1)1636206215" [ color="red"];
-"(return_main_0 = result_main_1)555922621" [ color="red"];
-"1574410839" [ color="red"];
-"int result_main_-1 389809954" -> "(result_main_0 = 0)316919580" [ color="red"];
-"(result_main_0 = 0)316919580" -> "1894581220" [ color="red"];
-"1894581220" -> "int i_main_-1  = 01396344128" [ color="red"];
-"int i_main_-1  = 01396344128" -> "(i_main_-1 < n_main_0)608738578" [ color="red"];
-"(i_main_-1 < n_main_0)608738578" -> "685714856" [ color="red"];
-"685714856" -> "(result_main_0 < 10)817232244" [ color="red"];
-"(result_main_0 < 10)817232244" -> "(result_main_1 = (result_main_0 + i_main_-1))925006503" [ color="red"];
-"(result_main_1 = (result_main_0 + i_main_-1))925006503" -> "1474482524" [ color="red"];
-"1474482524" -> "(i_main_0 = (i_main_-1 + 1))1026790721" [ color="red"];
-"(i_main_0 = (i_main_-1 + 1))1026790721" -> "2082134922" [ color="red"];
-"2082134922" -> "(i_main_1 >= n_main_1)1636206215" [ color="red"];
-"(i_main_1 >= n_main_1)1636206215" -> "(return_main_0 = result_main_1)555922621" [ color="red"];
-"(return_main_0 = result_main_1)555922621" -> "1574410839" [ color="red"];
+"Start" -> "int result_main_-1 403663089" [ color="red"];
+"int result_main_-1 403663089" [ color="red"];
+"(result_main_0 = (n_main_0 - m_main_0))1129521834" [ color="red"];
+"1096203803" [ color="red"];
+"(a_absolute_1 = result_main_0)887253891" [ color="red"];
+"int result_absolute_0 1464456462" [ color="red"];
+"(result_absolute_1 = 0)232123199" [ color="red"];
+"2038905592" [ color="red"];
+"int i_absolute_0  = 01587476536" [ color="red"];
+"(i_absolute_0 < 10)1197909824" [ color="red"];
+"(result_absolute_2 = (result_absolute_1 + i_absolute_0))1707614336" [ color="red"];
+"(i_absolute_1 = (i_absolute_0 + 1))634951227" [ color="red"];
+"(i_absolute_1 < 10)212788608" [ color="red"];
+"(result_absolute_3 = (result_absolute_2 + i_absolute_1))2113933298" [ color="red"];
+"(i_absolute_2 = (i_absolute_1 + 1))1516825746" [ color="red"];
+"996200618" [ color="red"];
+"(i_absolute_3 >= 10)1075421347" [ color="red"];
+"(return_absolute_0 = result_absolute_3)1041778893" [ color="red"];
+"(absolute_result_1 = return_absolute_0)596197344" [ color="red"];
+"517033659" [ color="red"];
+"(result_main_1 = absolute_result_1)323021178" [ color="red"];
+"(return_main_0 = result_main_1)1877116415" [ color="red"];
+"92193244" [ color="red"];
+"int result_main_-1 403663089" -> "(result_main_0 = (n_main_0 - m_main_0))1129521834" [ color="red"];
+"(result_main_0 = (n_main_0 - m_main_0))1129521834" -> "1096203803" [ color="red"];
+"1096203803" -> "(a_absolute_1 = result_main_0)887253891" [ color="red"];
+"(a_absolute_1 = result_main_0)887253891" -> "int result_absolute_0 1464456462" [ color="red"];
+"int result_absolute_0 1464456462" -> "(result_absolute_1 = 0)232123199" [ color="red"];
+"(result_absolute_1 = 0)232123199" -> "2038905592" [ color="red"];
+"2038905592" -> "int i_absolute_0  = 01587476536" [ color="red"];
+"int i_absolute_0  = 01587476536" -> "(i_absolute_0 < 10)1197909824" [ color="red"];
+"(i_absolute_0 < 10)1197909824" -> "(result_absolute_2 = (result_absolute_1 + i_absolute_0))1707614336" [ color="red"];
+"(result_absolute_2 = (result_absolute_1 + i_absolute_0))1707614336" -> "(i_absolute_1 = (i_absolute_0 + 1))634951227" [ color="red"];
+"(i_absolute_1 = (i_absolute_0 + 1))634951227" -> "(i_absolute_1 < 10)212788608" [ color="red"];
+"(i_absolute_1 < 10)212788608" -> "(result_absolute_3 = (result_absolute_2 + i_absolute_1))2113933298" [ color="red"];
+"(result_absolute_3 = (result_absolute_2 + i_absolute_1))2113933298" -> "(i_absolute_2 = (i_absolute_1 + 1))1516825746" [ color="red"];
+"(i_absolute_2 = (i_absolute_1 + 1))1516825746" -> "996200618" [ color="red"];
+"996200618" -> "(i_absolute_3 >= 10)1075421347" [ color="red"];
+"(i_absolute_3 >= 10)1075421347" -> "(return_absolute_0 = result_absolute_3)1041778893" [ color="red"];
+"(return_absolute_0 = result_absolute_3)1041778893" -> "(absolute_result_1 = return_absolute_0)596197344" [ color="red"];
+"(absolute_result_1 = return_absolute_0)596197344" -> "517033659" [ color="red"];
+"517033659" -> "(result_main_1 = absolute_result_1)323021178" [ color="red"];
+"(result_main_1 = absolute_result_1)323021178" -> "(return_main_0 = result_main_1)1877116415" [ color="red"];
+"(return_main_0 = result_main_1)1877116415" -> "92193244" [ color="red"];
 }

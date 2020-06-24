@@ -58,8 +58,8 @@ public class GraphGenerator {
         this.fileWriter.write("strict digraph");
         this.fileWriter.write(" {");
         this.fileWriter.write("\n");
-        this.fileWriter.write("splines=ortho;");
-        this.fileWriter.write("\n");
+//        this.fileWriter.write("splines=ortho;");
+//        this.fileWriter.write("\n");
     }
     public void writeStartNode() throws IOException{
         CFGNode start = this.unfoldCFG.getStart();
@@ -111,7 +111,18 @@ public class GraphGenerator {
             this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ shape=diamond ]");
             this.write(";\n");
         } else if (node instanceof EndFunctionNode){
-            this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label= \"End\" shape=circle]");
+            //not end of program, just end of a function called by main function
+            if (node.getNext() != null){
+                label = ((EndFunctionNode) node).getFunc().getDeclarator().getName().toString();
+                this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label= \"" + "End function "+ label + "\" shape=oval]");
+                this.write(";\n");
+            } else {
+                this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label= \"End\" shape=circle]");
+                this.write(";\n");
+            }
+        } else if (node instanceof BeginFunctionNode){
+            label = ((BeginFunctionNode) node).getFuncDefinition().getDeclarator().getName().toString();
+            this.write("\"" + node.toString() + node.hashCode() + "\"" + " [ label= \"" + "Begin function "+ label + "\" shape=oval]");
             this.write(";\n");
         }
     }
