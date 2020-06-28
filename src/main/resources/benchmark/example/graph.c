@@ -1,12 +1,12 @@
-//int dis (int a, int b) {
-//    float result = 0;
-//    if (a > b) {
-//        result = a - b;
-//    } else {
-//        result = b - a;
-//    }
-//    return result;
-//}
+int dis (int a, int b) {
+    float result = 0;
+    if (a > b) {
+        result = a - b;
+    } else {
+        result = b - a;
+    }
+    return result;
+}
 //
 //int relu(int a){
 //    if (a < 0) {
@@ -14,7 +14,6 @@
 //    }
 //    return a;
 //}
-
 
 int absolute(int a){
     int result = 0;

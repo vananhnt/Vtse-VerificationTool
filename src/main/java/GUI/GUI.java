@@ -19,11 +19,10 @@ import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
@@ -51,11 +50,17 @@ public class GUI extends JFrame{
     private JScrollPane imagePanel;
     private JTextField textSelectFunction;
     private JLabel labelSelectFunction;
+    private JSpinner spinnerPathIndex;
+    private JButton buttonReset;
+    private JLabel labelPathIndex;
     private List<String> counterExample;
     private DefaultListModel<String> modelCounterExample;
     private int imageWidth;
     private int imageHeight;
     private BufferedImage image;
+    private GraphGenerator graphGenerator;
+    private List<List<CFGNode>> paths;
+    private List<VerificationReport> vrs;
 
     public GUI(){
         super("EDT gui");
@@ -69,6 +74,9 @@ public class GUI extends JFrame{
         this.listCounterExample.setModel(modelCounterExample);
         this.imageWidth = 500;
         this.imageHeight = 700;
+        this.graphGenerator = null;
+        this.paths = new ArrayList<>();
+        this.vrs = new ArrayList<>();
         buttonGenerate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,8 +91,16 @@ public class GUI extends JFrame{
         checkBoxSync.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Boolean isShowSyncNode = checkBoxSync.isSelected();
+                Boolean isShowDetail = checkBoxDetail.isSelected();
+                int index = (Integer) spinnerPathIndex.getValue();
                 try {
-                    takeCodeClick(e);
+                    printGraph(isShowSyncNode, isShowDetail, index);
+                    printCounterExample(index);
+                    File imgFile = new File("./a1.png");
+                    BufferedImage img = ImageIO.read(imgFile);
+                    setImage(img);
+                    showImage();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
@@ -93,8 +109,16 @@ public class GUI extends JFrame{
         checkBoxDetail.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Boolean isShowSyncNode = checkBoxSync.isSelected();
+                Boolean isShowDetail = checkBoxDetail.isSelected();
+                int index = (Integer) spinnerPathIndex.getValue();
                 try {
-                    takeCodeClick(e);
+                    printGraph(isShowSyncNode, isShowDetail, index);
+                    printCounterExample(index);
+                    File imgFile = new File("./a1.png");
+                    BufferedImage img = ImageIO.read(imgFile);
+                    setImage(img);
+                    showImage();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
@@ -108,7 +132,7 @@ public class GUI extends JFrame{
                 int oldHeight= getImageHeight();
                 int newWidth = oldWidth;
                 int newHeight= oldHeight;
-                double amount = Math.pow(1.05, e.getScrollAmount());
+                double amount = Math.pow(1.01, e.getScrollAmount());
                 if (e.getWheelRotation() > 0) {
                     newWidth = (int)(oldWidth * amount);
                     newHeight= (int)(oldHeight* amount);
@@ -124,6 +148,62 @@ public class GUI extends JFrame{
 ////                    JScrollPane scrollPane = getPanelScrollPane();
 //                    imagePanel.getParent().dispatchEvent(e);
 //                }
+            }
+        });
+
+        buttonReset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                spinnerPathIndex.setValue(0);
+                Boolean isShowSyncNode = checkBoxSync.isSelected();
+                Boolean isShowDetail = checkBoxDetail.isSelected();
+                try {
+                    printGraph(isShowSyncNode, isShowDetail, 0);
+                    printCounterExample(0);
+                    File imgFile = new File("./a1.png");
+                    BufferedImage img = ImageIO.read(imgFile);
+                    setImage(img);
+                    showImage();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+            }
+        });
+
+        spinnerPathIndex.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int index = (Integer) spinnerPathIndex.getValue();
+                Boolean isShowSyncNode = checkBoxSync.isSelected();
+                Boolean isShowDetail = checkBoxDetail.isSelected();
+                try {
+                    printGraph(isShowSyncNode, isShowDetail, index);
+                    printCounterExample(index);
+                    File imgFile = new File("./a1.png");
+                    BufferedImage img = ImageIO.read(imgFile);
+                    setImage(img);
+                    showImage();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
+        imageLabel.addComponentListener(new ComponentAdapter() {
+        });
+        imageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if(e.getClickCount() == 2){
+                    File image = new File("./a1.png");
+                    Desktop dt = Desktop.getDesktop();
+                    try {
+                        dt.open(image);
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
             }
         });
     }
@@ -144,13 +224,17 @@ public class GUI extends JFrame{
             nLoopsStr = "2";
         }
         int nLoops = Integer.parseInt(nLoopsStr);
-        generate(tempfile, isShowSyncNode, isShowDetail, nLoops, functionStr);
+        generate(tempfile, nLoops, functionStr);
+        this.spinnerPathIndex.setModel(new SpinnerNumberModel(0,0,this.getVrs().size()-1,1));
+        Integer index = (Integer)this.spinnerPathIndex.getValue();
+        printGraph(isShowSyncNode, isShowDetail, index);
+        this.printCounterExample(index);
         File imgFile = new File("./a1.png");
         BufferedImage img = ImageIO.read(imgFile);
         this.setImage(img);
         showImage();
     }
-    public void generate(File tempfile, Boolean isShowSyncNode, Boolean isShowDetail, int nLoops, String functionStr) throws IOException {
+    public void generate(File tempfile, int nLoops, String functionStr) throws IOException {
         ASTFactory ast = new ASTFactory(tempfile.getAbsolutePath());
         IASTFunctionDefinition main_func;
         VtseCFG cfg;
@@ -174,15 +258,27 @@ public class GUI extends JFrame{
         File smtFile = File.createTempFile("temp", ".txt");
         System.out.println(smtFile.getAbsolutePath());
         VerificationReport vr = FunctionVerification.verify(ast, main_func, pre_condition, post_condition, nLoops, mode, smtFile);
-        PathExecutionVisualize pathExecutionVisualize = new PathExecutionVisualize(cfg, vr);
-        List<CFGNode> nodes = pathExecutionVisualize.findPathToFail();
+        this.setPaths(new ArrayList<>());
+        this.setVrs(new ArrayList<>());
+        this.getPaths().add(new ArrayList<>());
+        this.getVrs().add(vr);
+        if(vr.getStatus().equals(VerificationReport.FALSE)){
+            PathExecutionVisualize pathExecutionVisualize = new PathExecutionVisualize(cfg, vr);
+            pathExecutionVisualize.findPathsToFail(pre_condition, post_condition);
+            this.getPaths().addAll(pathExecutionVisualize.getListPaths());
+            this.getVrs().addAll(pathExecutionVisualize.getListvr());
+        }
         AddMoreInformation addMoreInformation = new AddMoreInformation(cfg, vr);
         Map<String, String> listParameters = addMoreInformation.parseParameters();
-        GraphGenerator graphGenerator = new GraphGenerator(cfg, listParameters);
+        this.setGraphGenerator(new GraphGenerator(cfg, listParameters));
+    }
+    public void printGraph(Boolean isShowSyncNode, Boolean isShowDetail, int index) throws IOException {
+        List<CFGNode> nodes = this.getPaths().get(index);
+        VerificationReport vr = this.getVrs().get(index);
         graphGenerator.setShowSyncNode(isShowSyncNode);
         graphGenerator.setDetail(isShowDetail);
         graphGenerator.printGraph(false);
-        graphGenerator.fillColor(nodes, !vr.getStatus().equals(VerificationReport.ALWAYS_TRUE), true);
+        graphGenerator.fillColor(nodes, index != 0, true);
         try {
             File file = new File("./graph.dot");
             InputStream dot = new FileInputStream(file);
@@ -191,23 +287,30 @@ public class GUI extends JFrame{
         } catch(Exception exception){
             System.out.println(exception.toString());
         }
-        this.printCounterExample(vr);
     }
-    public void printCounterExample(VerificationReport vr){
+    public void printCounterExample(int index){
+        VerificationReport vr = this.getVrs().get(0);
+        VerificationReport thisVr = this.getVrs().get(index);
+        int numOfFailPath = this.getVrs().size() - 1;
         modelCounterExample.removeAllElements();
         if(vr.getStatus().equals(VerificationReport.ALWAYS_TRUE)){
             modelCounterExample.addElement("Chua tim thay tham so khong thoa man voi bieu thuc dieu kien cua nguoi dung!");
         } else {
             modelCounterExample.addElement("Chuong trinh khong thoa man bieu thuc dieu kien cua nguoi dung!");
-            modelCounterExample.addElement("Counter example: ");
-        }
-        if(vr.getParameters() != null) {
-            for (DefineFun param : vr.getParameters()) {
-                String paramString = param.getName() + " = " + param.getValue();
-                modelCounterExample.addElement(paramString);
+            modelCounterExample.addElement("Tim thay " + numOfFailPath + " duong thuc thi khong thoa man");
+            if(index != 0){
+                modelCounterExample.addElement("Phan vi du cho duong thuc thi sai " + index + ": ");
             }
-            if (vr.getRet() != null) {
-                modelCounterExample.addElement(vr.getRet().getExpression());
+        }
+        if(index != 0){
+            if(thisVr.getParameters() != null) {
+                for (DefineFun param : thisVr.getParameters()) {
+                    String paramString = param.getName() + " = " + param.getValue();
+                    modelCounterExample.addElement(paramString);
+                }
+                if (thisVr.getRet() != null) {
+                    modelCounterExample.addElement(thisVr.getRet().getExpression());
+                }
             }
         }
     }
@@ -251,5 +354,29 @@ public class GUI extends JFrame{
 
     public void setImage(BufferedImage image) {
         this.image = image;
+    }
+
+    public GraphGenerator getGraphGenerator() {
+        return graphGenerator;
+    }
+
+    public void setGraphGenerator(GraphGenerator graphGenerator) {
+        this.graphGenerator = graphGenerator;
+    }
+
+    public List<List<CFGNode>> getPaths() {
+        return paths;
+    }
+
+    public void setPaths(List<List<CFGNode>> paths) {
+        this.paths = paths;
+    }
+
+    public List<VerificationReport> getVrs() {
+        return vrs;
+    }
+
+    public void setVrs(List<VerificationReport> vrs) {
+        this.vrs = vrs;
     }
 }

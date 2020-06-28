@@ -26,6 +26,7 @@
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.25</version>
                 <executions>
                     <!-- Command-line exe -->
                     <execution>
@@ -37,7 +38,7 @@
                         <configuration>
                             <headerType>console</headerType>
                             <outfile>target/importer.exe</outfile>
-                            <jar>target/${artifactId}-${version}.jar</jar> <!-- 'shaded' is the value set on shadedClassifierName above -->
+                            <jar>target/${project.artifactId}-${project.version}.jar</jar> <!-- 'shaded' is the value set on shadedClassifierName above -->
                             <classPath>
                                 <mainClass>${mainClass}</mainClass>
                             </classPath>
@@ -54,6 +55,12 @@
     </build>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.eclipse.core/runtime -->
+        <dependency>
+            <groupId>org.eclipse.core</groupId>
+            <artifactId>runtime</artifactId>
+            <version>3.10.0-v20140318-2214</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/net.sourceforge.jexcelapi/jxl -->
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>

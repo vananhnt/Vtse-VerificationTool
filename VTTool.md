@@ -1,1 +1,0 @@
-https://www.java.com/en/download/windows-64bit.jsp

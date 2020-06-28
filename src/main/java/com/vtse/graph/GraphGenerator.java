@@ -26,8 +26,6 @@ public class GraphGenerator {
     Boolean isColored;
     public GraphGenerator(VtseCFG unfoldCFG, Map<String, String> listParameters) throws IOException {
         this.unfoldCFG =unfoldCFG;
-        FileWriter fileWriter = new FileWriter("graph.dot");
-        this.fileWriter = fileWriter;
         this.listParameters = listParameters;
         this.detail = true;
         this.debug = false;
@@ -55,6 +53,8 @@ public class GraphGenerator {
         }
     }
     public void writeBegin() throws IOException {
+        FileWriter fileWriter = new FileWriter("graph.dot");
+        this.setFileWriter(fileWriter);
         this.fileWriter.write("strict digraph");
         this.fileWriter.write(" {");
         this.fileWriter.write("\n");
@@ -181,6 +181,7 @@ public class GraphGenerator {
     public void printGraph(Boolean isClose) throws IOException {
         CFGNode start = this.unfoldCFG.getStart();
         this.writeBegin();
+        this.setColored(false);
         this.writeStartNode();
         this.print(start, null);
         if(isClose){
@@ -347,5 +348,13 @@ public class GraphGenerator {
 
     public void setColored(Boolean colored) {
         isColored = colored;
+    }
+
+    public FileWriter getFileWriter() {
+        return fileWriter;
+    }
+
+    public void setFileWriter(FileWriter fileWriter) {
+        this.fileWriter = fileWriter;
     }
 }
