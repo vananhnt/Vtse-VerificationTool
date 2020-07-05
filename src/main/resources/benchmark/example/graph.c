@@ -15,7 +15,7 @@ int dis (int a, int b) {
 //    return a;
 //}
 
-int absolute(int a){
+int sum(int a){
     int result = 0;
     for(int i=0;i<10;i++){
         result = result + i;
@@ -29,14 +29,14 @@ int main(int n, int m){
     result = absolute(result);
     return result;
 }
-//int multival_1(int x){
-//    int y = x;
-//    while(x < 1000){
-//        x = x + 1;
-//        y = y + 1;
-//    }
-//    return y;
-//}
+int multival_1(int x){
+    int y = x;
+    while(x < 1000){
+        x = x + 1;
+        y = y + 1;
+    }
+    return y;
+}
 //int swap(int a, int b){
 //    a = a + b;
 //    b = a - b;

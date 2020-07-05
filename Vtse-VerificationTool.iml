@@ -10,18 +10,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="eclipse-equinox-common-3.5.0" level="project" />
-    <orderEntry type="library" name="invagen" level="project" />
-    <orderEntry type="library" name="jxl" level="project" />
-    <orderEntry type="library" name="kryo-2.21" level="project" />
-    <orderEntry type="library" name="kryo-4.0.0" level="project" />
-    <orderEntry type="library" name="objenesis-1.2" level="project" />
-    <orderEntry type="library" name="openjfx-11.0.2_windows-x64_bin-sdk" level="project" />
-    <orderEntry type="library" name="org.eclipse.cdt.codan.core_2.0.0.201109151620" level="project" />
-    <orderEntry type="library" name="org.eclipse.cdt.core_5.6.0.201402142303" level="project" />
-    <orderEntry type="library" name="rsyntaxtextarea" level="project" />
-    <orderEntry type="library" name="SizeOf" level="project" />
-    <orderEntry type="library" name="org.eclipse.cdt.core_5.6.0.2014021423031" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.core:runtime:3.10.0-v20140318-2214" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:osgi:3.10.0-v20140606-1445" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.equinox:common:3.6.200-v20130402-1505" level="project" />
@@ -84,5 +72,17 @@
     <orderEntry type="library" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: classworlds:classworlds:1.1-alpha-2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-descriptor:2.2.1" level="project" />
+    <orderEntry type="library" name="eclipse-equinox-common-3.5.0" level="project" />
+    <orderEntry type="library" name="invagen" level="project" />
+    <orderEntry type="library" name="jxl" level="project" />
+    <orderEntry type="library" name="kryo-2.21" level="project" />
+    <orderEntry type="library" name="kryo-4.0.0" level="project" />
+    <orderEntry type="library" name="objenesis-1.2" level="project" />
+    <orderEntry type="library" name="openjfx-11.0.2_windows-x64_bin-sdk" level="project" />
+    <orderEntry type="library" name="org.eclipse.cdt.codan.core_2.0.0.201109151620" level="project" />
+    <orderEntry type="library" name="org.eclipse.cdt.core_5.6.0.201402142303" level="project" />
+    <orderEntry type="library" name="rsyntaxtextarea" level="project" />
+    <orderEntry type="library" name="SizeOf" level="project" />
+    <orderEntry type="library" name="slf4j-api-1.7.9" level="project" />
   </component>
 </module>

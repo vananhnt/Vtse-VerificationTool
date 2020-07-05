@@ -47,12 +47,13 @@ public class GUI extends JFrame{
     private JList listCounterExample;
     private JTextField textLoopCount;
     private JLabel labelLoopCount;
-    private JScrollPane imagePanel;
     private JTextField textSelectFunction;
     private JLabel labelSelectFunction;
     private JSpinner spinnerPathIndex;
     private JButton buttonReset;
     private JLabel labelPathIndex;
+    private JPanel panelResult;
+    private JScrollPane imagePanel;
     private List<String> counterExample;
     private DefaultListModel<String> modelCounterExample;
     private int imageWidth;
@@ -63,7 +64,7 @@ public class GUI extends JFrame{
     private List<VerificationReport> vrs;
 
     public GUI(){
-        super("EDT gui");
+        super("VTTool");
         this.setPreferredSize(new Dimension(700, 700));
         this.setContentPane(this.panelEDT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,7 +133,7 @@ public class GUI extends JFrame{
                 int oldHeight= getImageHeight();
                 int newWidth = oldWidth;
                 int newHeight= oldHeight;
-                double amount = Math.pow(1.01, e.getScrollAmount());
+                double amount = Math.pow(1.005, e.getScrollAmount());
                 if (e.getWheelRotation() > 0) {
                     newWidth = (int)(oldWidth * amount);
                     newHeight= (int)(oldHeight* amount);
