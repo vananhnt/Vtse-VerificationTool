@@ -3,7 +3,7 @@ Verification Tool using Symbolic Execution to verify some features of C/C++ prog
 
 ## Getting Started
 
-To use invariant, pull from "invariant-new" branch
+To use invariant, pull from master or "invariant-new" branch
 ```
 git clone "https://github.com/vananhnt/Vtse-VerificationTool.git"
 git checkout "invariant-new"
