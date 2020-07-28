@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>cggmp2005_variant_true</Method>
-        <PreCondition></PreCondition>
-        <PostCondition>return = 0</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

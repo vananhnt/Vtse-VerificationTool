@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>Mono1_2_true</Method>
-        <LoopCount>100000000</LoopCount>
-        <PreCondition></PreCondition>
-        <PostCondition>return = 100000000</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>phases_2_1_false</Method>
-        <LoopCount>100</LoopCount>
-        <PreCondition></PreCondition>
-        <PostCondition>return != 0</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

@@ -1,7 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>cggmp2005</Method>
-        <PreCondition></PreCondition>
-        <PostCondition>return = 6</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

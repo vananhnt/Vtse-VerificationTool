@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>inv_square_false_unreach_call</Method>
-        <PreCondition>(IN >= -0.1)^(IN<= 0.1)
-        </PreCondition>
-        <PostCondition>(return != 0)</PostCondition>
-    </AssertionMethod>
-</AssertionFile>

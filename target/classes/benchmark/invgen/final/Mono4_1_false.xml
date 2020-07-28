@@ -1,8 +1,0 @@
-<AssertionFile>
-    <AssertionMethod>
-        <Method>Mono4_1_false</Method>
-        <LoopCount>1000000</LoopCount>
-        <PreCondition></PreCondition>
-        <PostCondition>(return > 0) or (return < 0)</PostCondition>
-    </AssertionMethod>
-</AssertionFile>
