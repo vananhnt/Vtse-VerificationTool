@@ -178,7 +178,7 @@ algebraic procedure foliation(s,c,z);
    if r > n then
       rerror(eds,000,"Not enough coordinates in foliation");
    if r neq length z then
-      rerror(eds,000,"Wrong number of invariant labels in foliation");
+      rerror(eds,000,"Wrong number of java.invariant labels in foliation");
    if r = n then
    << g := for a:=1:r collect part(c,a) = part(z,a);
       lisp edsdebug("Intermediate result",g,'prefix);

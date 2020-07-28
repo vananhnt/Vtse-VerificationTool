@@ -194,7 +194,7 @@ begin
                       if car el1 = 'equal then caddr el1
                                           else el1
 	                           else el1             ,b1);
- % b1 is the list of expressions in SQ-form to be invariant  
+ % b1 is the list of expressions in SQ-form to be java.invariant
  % These are all equations and rhs's of assignments. Strictly speaking,
  % after a fix of redundand functions the new system need not 
  % reduce to exactly the same system but only an equivalent one
@@ -210,12 +210,12 @@ begin
  % i.e. which is not a so far unevaluated original function.
  %
  % flstart is the list of eligible functions that 
- %         turn up in the invariant expressions including the
+ %         turn up in the java.invariant expressions including the
  %         duplicates of these functions
  % fldrop is the list of eligible functions which do not
- %         turn up in invariant expressions and thus can be dropped
+ %         turn up in java.invariant expressions and thus can be dropped
  % fldupli is a list of all new duplicate-functions, fldupli2 is a copy
- % b2      is a duplicate of the list of invariant expressions b1
+ % b2      is a duplicate of the list of java.invariant expressions b1
  % fl      is the list of all functions (potentially dropable + their new copy)
  % corres  is a list of correspondences of functions and their dupl.
 

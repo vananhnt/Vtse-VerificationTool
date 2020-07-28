@@ -1,0 +1,7 @@
+<AssertionFile>
+    <AssertionMethod>
+        <Method>css2003</Method>
+        <PreCondition></PreCondition>
+        <PostCondition>return >= 1 ^ return <= 2</PostCondition>
+    </AssertionMethod>
+</AssertionFile>

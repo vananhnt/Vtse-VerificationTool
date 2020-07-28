@@ -164,10 +164,10 @@ odesolve(x*y*df(y,x,2) + x*df(y,x)^2 + y*df(y,x) = 0, y, x, explicit);
 % (39) Factoring differential operator
 odesolve(df(y,x,2)^2 - 2df(y,x)*df(y,x,2) + 2y*df(y,x) - y^2 = 0, y, x);
 
-% (40) Scale invariant (fails with algint option)
+% (40) Scale java.invariant (fails with algint option)
 odesolve(x^2*df(y,x,2) + 3x*df(y,x) = 1/(y^3*x^4), y, x);
 
-% Revised scale-invariant example (hangs with algint option):
+% Revised scale-java.invariant example (hangs with algint option):
 ode := x^2*df(y,x,2) + 3x*df(y,x) + 2*y = 1/(y^3*x^4);
 % Choose full (explicit and expanded) solution:
 odesolve(ode, y, x, full);              % or "explicit, expand"

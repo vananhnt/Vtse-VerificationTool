@@ -28,7 +28,7 @@ module odenonn$  % Special form nonlinear ODEs of order > 1
 
 % Trivial order reduction.
 % Special cases of Lie symmetry, namely
-%    autonomous, equidimensional and scale invariant equations.
+%    autonomous, equidimensional and scale java.invariant equations.
 % Simplification of arbitrary constants.
 
 % TO DO:
@@ -177,7 +177,7 @@ algebraic procedure odesolve!-shift(ode, y, x);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Autonomous, equidimensional and scale-invariant ODEs
+% Autonomous, equidimensional and scale-java.invariant ODEs
 % ====================================================
 
 algebraic procedure odesolve!-autonomous(ode, y, x);
@@ -225,14 +225,14 @@ algebraic procedure odesolve!-autonomous(ode, y, x);
    end$
 
 algebraic procedure odesolve!-scaleinv(ode, y, x);
-   %% If ODE is scale invariant, i.e. invariant under x -> a x, y ->
+   %% If ODE is scale java.invariant, i.e. java.invariant under x -> a x, y ->
    %% a^p y, then transform it to an equidimensional-in-x ODE and try
    %% to solve it.  If p = 0 then it is already equidimensional-in-x
    %% as a special case.  Returns a solution or nil if this method
    %% does not lead to a solution.  PROBABLY NOT USEFUL FOR LINEAR
    %% ODES.
    begin scalar u, p, ode1, pow, !*allfac;
-      traceode1 "Testing whether ODE is scale invariant or ",
+      traceode1 "Testing whether ODE is scale java.invariant or ",
          "equidimensional in the independent variable ", x, " ...";
       u := gensym();  p := gensym();
       ode1 := (ode where df(y,x,~n) => mkid(u,n)*x^(p-n),
@@ -250,7 +250,7 @@ algebraic procedure odesolve!-scaleinv(ode, y, x);
             if pow then << pow := solve(pow, p);  n_parts := 0 >>
          >>;
          if n_parts then
-            %% Scale invariant for ANY p =>
+            %% Scale java.invariant for ANY p =>
             %% equidimensional in both x and y
             return pow := {p=0};
          ode1 := (ode1 - part1)/part1;
@@ -259,24 +259,24 @@ algebraic procedure odesolve!-scaleinv(ode, y, x);
                not(sub(first pow, ode1) freeof x)) do
                   pow := rest pow
       end;
-      if pow = {} then return;          % not scale invariant
+      if pow = {} then return;          % not scale java.invariant
       if not(p := rhs first pow) then
-         %% Scale invariant for p=0 =>
+         %% Scale java.invariant for p=0 =>
          %% equidimensional in x ...
          return odesolve!-scaleinv!-equidim!-x(ode, y, x);
-      %% ode is scale invariant (with p neq 0)
+      %% ode is scale java.invariant (with p neq 0)
       symbolic depend1(u, x, t);
       ode := sub(y = x^p*u, ode);
-      traceode "This ODE is scale invariant -- applying ", y => x^p*u,
+      traceode "This ODE is scale java.invariant -- applying ", y => x^p*u,
          " to transform to the simpler ODE: ", ode = 0;
       ode := odesolve!-scaleinv!-equidim!-x(ode, u, x);
       symbolic depend1(u, x, nil);
       if ode then return sub(u = y/x^p, ode);
-      traceode "Cannot solve transformed scale invariant ODE!"
+      traceode "Cannot solve transformed scale java.invariant ODE!"
    end$
 
 algebraic procedure odesolve!-scaleinv!-equidim!-x(ode, y, x);
-   %% ODE is equidimensional in x, i.e. invariant under x -> ax, so
+   %% ODE is equidimensional in x, i.e. java.invariant under x -> ax, so
    %% transform it to an autonomous ODE and try to solve it.  (This
    %% includes "reduced" Euler equations as a special case.  Could
    %% ignore terms independent of y in testing equidimensionality; if
@@ -308,7 +308,7 @@ algebraic procedure odesolve!-scaleinv!-equidim!-x(ode, y, x);
    end$
 
 algebraic procedure odesolve!-equidim!-y(ode, y, x);
-   %% If ODE is equidimensional in y, i.e. invariant under y -> ay,
+   %% If ODE is equidimensional in y, i.e. java.invariant under y -> ay,
    %% then simplify the ODE and try to solve the result.  Returns a
    %% solution or nil if this method does not lead to a solution.  Do
    %% not apply to a linear ODE, which is trivially equidimensional in

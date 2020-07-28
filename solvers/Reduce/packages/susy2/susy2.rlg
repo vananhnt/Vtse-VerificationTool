@@ -2654,7 +2654,7 @@ clear xxx;
 
 
 
-% 17.) Projection onto invariant subspace;
+% 17.) Projection onto java.invariant subspace;
 
 xxx:=
 w_comb({{f,1,b}},2,a,b)*d(1)+
@@ -8228,7 +8228,7 @@ vira := a(2)*bos(f,3,0)
 
 
 % we make additional assumption that our Poisson tensor vira should be O(2)
-% invariant under the change of susy derivatives;
+% java.invariant under the change of susy derivatives;
 
 dad:=odwa(vira)-vira;
 
@@ -8324,7 +8324,7 @@ vira := (2*a(2)*bos(f,3,0)
 
          +2*a(1)*(d(1)*der(1)*der(2)))/2
 
-% we check wheather it is really O(2) invariant;
+% we check wheather it is really O(2) java.invariant;
 vira-odwa(vira);
 
 

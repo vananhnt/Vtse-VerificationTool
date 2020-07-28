@@ -2,8 +2,8 @@ load_package z3;
 
 lisp;
 
-cfg := z3_mk_config()$
-ctx := z3_mk_context cfg$
+java.cfg := z3_mk_config()$
+ctx := z3_mk_context java.cfg$
 slv := z3_mk_simple_solver ctx$
 
 % unsat example
@@ -96,6 +96,6 @@ ast := z3_form2ast(ctx, '(impl false (not (equal (minus x) 0))));
 z3_prin2_ast(ctx, ast);
 
 z3_del_context ctx$
-z3_del_config cfg$
+z3_del_config java.cfg$
 
 end;  % of file

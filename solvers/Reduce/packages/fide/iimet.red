@@ -1950,11 +1950,11 @@ begin
         if numberp v then v
           else if x:=atsoc(v,u) then cdr x
           else v
-      else if flagp(car v,'app) then sublap1(u,v)
+      else if flagp(car v,'java.app) then sublap1(u,v)
       else (sublap(u,car v) . sublap(u,cdr v))
 end$
 
-flag('(u f v w x g),'app)$
+flag('(u f v w x g),'java.app)$
 
 procedure sublap1(u,v)$
 begin

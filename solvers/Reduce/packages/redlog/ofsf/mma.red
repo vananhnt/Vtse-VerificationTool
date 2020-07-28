@@ -41,7 +41,7 @@ global '(mma_call!*);
 global '(mma_awk!*);
 
 % This module automatically checks for executable
-% /Applications/Mathematica.app/Contents/MacOS/MathKernel or
+% /Applications/Mathematica.java.app/Contents/MacOS/MathKernel or
 % /usr/local/bin/math, which are the common names for text-based Mathematica on
 % OSX and Linux, repectively. This can be overridden with an environment
 % variable MATHEMATICA. Note that at least on OSX, MathKernel must be called
@@ -178,8 +178,8 @@ asserted procedure mma_run(fn1: String, fn2: String);
    begin scalar vb, tm, call, mma;
       mma := getenv("MATHEMATICA");
       if not mma then
-	 if system "test -x /Applications/Mathematica.app/Contents/MacOS/MathKernel" = 0 then
-	    mma := "/Applications/Mathematica.app/Contents/MacOS/MathKernel"  % Mac OSX
+	 if system "test -x /Applications/Mathematica.java.app/Contents/MacOS/MathKernel" = 0 then
+	    mma := "/Applications/Mathematica.java.app/Contents/MacOS/MathKernel"  % Mac OSX
 	 else if system "test -x /usr/local/bin/math" = 0 then
 	    mma := "/usr/local/bin/math"  % Linux
 	 else
